@@ -1,2 +1,3 @@
 *.sublime*
 README.md
+bower_components/
