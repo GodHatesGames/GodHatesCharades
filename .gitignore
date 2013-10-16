@@ -1,0 +1,4 @@
+*.sublime-workspace
+config.js
+bower_components/
+node_modules/
