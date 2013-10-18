@@ -52,7 +52,7 @@ define([
 			// Return a simple API : model or collection.
 			return {
 				model: Card,
-				collection: Cardes
+				collection: Cards
 			};
 
 		}]);

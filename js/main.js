@@ -5,10 +5,15 @@ require( [
 	'app',
 	'routes',
 	'router',
+	'vn/ParseServices',
+	'vn/_ParseObjects',
+	'vn/ParseQueryAngular',
 	'cp/textarea-noreturn',
 	'cp/nav',
 	'cp/vote',
-	'cp/submit'
+	'cp/submit',
+	'dt/Card',
+	'dt/Suggestion'
 	], 
 	function(angular, Parse, _, app) {
 		'use strict';

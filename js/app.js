@@ -12,8 +12,9 @@ define([
 		Parse.initialize(CONFIG.PARSE_APP_ID, CONFIG.PARSE_JS_KEY);
 		// Hexahedrone
 		var app = angular.module('app', ['ng', 
-											'ui.router', 'ParseServices', 
-											'ExternalDataServices', 
+											'ui.router',
+											'ParseServices',
+											'ExternalDataServices',
 											'ngGrid',
 											'textareaNoreturn'
 										]);
