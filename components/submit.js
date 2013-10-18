@@ -4,7 +4,7 @@ define([
 	], 
 	function(angular, app) {
 
-		app.directive('submit', [function() {
+		app.directive('submit', ['SuggestionService', function(SuggestionService) {
 			return {
 				restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 				templateUrl: 'components/submit.html',
@@ -13,9 +13,6 @@ define([
 					type: '=type'
 				},
 				link: function($scope, $element, attr) {
-					$scope.text = '';
-					$scope.maxChars = 75;
-
 					$scope.$watch('text', $scope.onTextChange);
 				},
 				controller: function($scope, $element) {
@@ -36,6 +33,9 @@ define([
 						'slashing tires.'
 					];
 
+					$scope.text = '';
+					$scope.maxChars = 75;
+					$scope.success = false;
 					var halfMax = $scope.maxChars / 2;
 
 					var rand = Math.floor(Math.random() * 5);
@@ -52,7 +52,7 @@ define([
 							$scope.text = '';
 					}
 					$scope.characterCount = function() {
-						if($scope.text) {
+						if($scope.text !== undefined) {
 							if($scope.text.length < halfMax)
 								return 'alert-success';
 							if($scope.text.length < $scope.maxChars)
@@ -61,6 +61,19 @@ define([
 								return 'alert-danger';
 						}
 					};
+
+					$scope.submit = function() {
+						var suggestions = new SuggestionService.collection()
+						var promise = suggestions.addSuggestion($scope.text, $scope.type);
+						promise.then(function() {
+							$scope.success = true;
+						});
+					}
+
+					$scope.reset = function() {
+						$scope.text = '';
+						$scope.success = false;
+					}
 				}
 			}
 		}]);
