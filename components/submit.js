@@ -35,6 +35,7 @@ define([
 
 					$scope.text = '';
 					$scope.maxChars = 75;
+					$scope.success = false;
 					var halfMax = $scope.maxChars / 2;
 
 					var rand = Math.floor(Math.random() * 5);
@@ -60,6 +61,19 @@ define([
 								return 'alert-danger';
 						}
 					};
+
+					$scope.submit = function() {
+						var suggestions = new SuggestionService.collection()
+						var promise = suggestions.addSuggestion($scope.text, $scope.type);
+						promise.then(function() {
+							$scope.success = true;
+						});
+					}
+
+					$scope.reset = function() {
+						$scope.text = '';
+						$scope.success = false;
+					}
 				}
 			}
 		}]);

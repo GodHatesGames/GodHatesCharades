@@ -29,11 +29,13 @@ define([
 				comparator: function(model) {
 					return -model.createdAt.getTime();
 				},
-				addSuggestion: function() {
+				addSuggestion: function(text, type) {
 			 		// save request_id to Parse
 			 		var _this = this;
 
 					var suggestion = new Suggestion;
+					suggestion.setText(text);
+					suggestion.setType(type);
 
 					// use the extended Parse SDK to perform a save and return the promised object back into the Angular world
 					return suggestion.saveParse().then(function(data){
