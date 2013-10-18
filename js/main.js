@@ -5,6 +5,7 @@ require( [
 	'app',
 	'routes',
 	'router',
+	'cp/textarea-noreturn',
 	'cp/nav',
 	'cp/vote',
 	'cp/submit'

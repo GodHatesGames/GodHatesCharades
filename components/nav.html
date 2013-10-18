@@ -2,14 +2,14 @@
 	<div class="navbar-header">
 		<a class="navbar-brand" ui-sref='home'>God Hates Charades</a>
 	</div>
-	<ul class="nav navbar-nav">
+	<ul class="nav navbar-nav navbar-right">
 		<li ng-hide="isHome">
 			<a ui-sref='home'>Home</a>
 		</li>
-		<li>
+		<li ng-class="{ active: $state.includes('submit') }">
 			<a ui-sref='submit'>Submit a new card</a>
 		</li>
-		<li>
+		<li ng-class="{ active: $state.includes('vote') }">
 			<a ui-sref='vote'>Vote on new cards</a>
 		</li>
 	</ul>
