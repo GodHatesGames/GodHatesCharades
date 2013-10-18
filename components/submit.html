@@ -1,3 +1,24 @@
-<div>
-	submit here
-</div>
+<form class="submitForm">
+	<h4>{{displayType}}</h4>
+	<div class="card">
+		<!-- <input type="text" 
+				ng-model="text" 
+				placeholder="{{example}}" /> -->
+		<textarea ng-model="text"
+					class="editable"
+					placeholder="{{example}}"
+					maxlength="75"
+					required
+					textarea-noreturn>
+		</textarea>
+		<!-- <div contentEditable="true"
+				class="editable" 
+				ng-model="text"
+				></div> -->
+	</div>
+	<div class="alert" ng-class="characterCount()">{{text.length}} / {{maxChars}} Characters</div>
+	<button type="submit" 
+			class="btn btn-success submitBtn">
+		Submit new {{displayType}}
+	</button>
+</form>
