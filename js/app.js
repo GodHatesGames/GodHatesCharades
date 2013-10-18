@@ -9,8 +9,10 @@ define([
 	], 
 	function (angular, Parse, _, ParseServices, _ParseObjects, ParseQueryAngular) {
 
+		// Parse Init
 		Parse.initialize(CONFIG.PARSE_APP_ID, CONFIG.PARSE_JS_KEY);
-		// Hexahedrone
+
+		// Angular Init
 		var app = angular.module('app', ['ng', 
 											'ui.router',
 											'ParseServices',
