@@ -27,7 +27,7 @@ define([
 					];
 					var randomEvents = [
 						'sexting orphans.',
-						'being accidentally racist.',
+						'being an accidental racist.',
 						'worshiping Satan.',
 						'selling drugs to the pope.',
 						'slashing tires.'
@@ -41,10 +41,10 @@ define([
 					var rand = Math.floor(Math.random() * 5);
 					if($scope.type === TYPE_PERSON) {
 						$scope.example = randomPeople[rand];
-						$scope.displayType = 'Person';
+						$scope.displayType = 'Character';
 					} else if($scope.type === TYPE_THING) {
 						$scope.example = randomEvents[rand];
-						$scope.displayType = 'Event';
+						$scope.displayType = 'Scenario';
 					}
 
 					$scope.onTextChange = function(newValue, oldValue) {

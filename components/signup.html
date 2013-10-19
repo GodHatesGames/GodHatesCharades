@@ -1,0 +1,32 @@
+<form ng-submit="signup"
+		class="signup">
+	<div class="form-group">
+		<label for="signupName">Name or Nickname</label>
+		<input type="text"
+				class="form-control"
+				id="signupName"
+				placeholder="PlainJane"
+				required />
+		<span class="help-block">Other people will see this on your entries.</span>
+	</div>
+	<div class="form-group">
+		<label for="signupEmail">Email</label>
+		<input type="email"
+				class="form-control"
+				id="signupEmail"
+				placeholder="janedoe@gmail.com"
+				required />
+		<span class="help-block">Just for logging in. Never shared, never sold.</span>
+	</div>
+	<div class="form-group">
+		<label for="signupPassword">Password</label>
+		<input type="password" 
+				class="form-control" 
+				id="signupPassword" 
+				placeholder="donthackmebro"
+				required />
+		<span class="help-block">Always use protection!</span>
+	</div>
+	<button type="submit"
+			class="btn btn-success">Signup!</button>
+</form>

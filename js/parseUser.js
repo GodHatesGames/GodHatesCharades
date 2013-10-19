@@ -9,12 +9,15 @@ define([
 			var user = {
 				loggedin: false,
 				dataloaded: false,
-				data: {},
+				isAnon: isAnon,
+				isReal: isReal,
+				data: null,
 				createAnonUser: createAnonUser,
 				connect: connect,
 				logout: logout
 			}
 
+			// check login status
 			var currentUser = Parse.User.current();
 			if (currentUser) {
 				console.log('logged in', currentUser);
@@ -79,6 +82,26 @@ define([
 				setTimeout(function(){
 					window.location.reload();
 				}, 1000);
+			}
+
+			// returns true if current user is not Anonymous
+			function isReal() {
+				if(!user.loggedin)
+					return false;
+				else
+					return user.data !== null && user.data.attributes.email !== undefined;
+			}
+
+			// returns true if current user is Anonymous
+			function isAnon() {
+				if(!user.loggedin)
+					return true;
+				else if(user.data === null)
+					return true;
+				else if(user.data.attributes.email === undefined)
+					return true;
+				else
+					return false;
 			}
 
 			return user;
