@@ -58,28 +58,7 @@ body {
 /* Basic Grid Style */
 
 .gridStyle {
-	height: 1000px;
+	height: 10000px;
 	text-align: center;
 }
 
-.ngGrid {
-	background-color: #000;
-}
-
-.ngTopPanel {
-	background-color: #333;
-}
-
-.ngRow.odd {
-	background-color: #666;
-}
-.ngRow.even {
-	background-color: #999;
-}
-.ngRow.selected {
-	background-color: #AAA;
-}
-
-.ngVerticalBarVisible {
-	width: 0;
-}

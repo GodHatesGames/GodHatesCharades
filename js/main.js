@@ -14,6 +14,7 @@ require( [
 	'cp/login',
 	'cp/signup',
 	'cp/vote',
+	'cp/suggestions',
 	'cp/submit',
 	'dt/Card',
 	'dt/Suggestion'
