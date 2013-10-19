@@ -1,10 +1,11 @@
-<form ng-submit="signup"
+<form ng-submit="signup()"
 		class="signup">
 	<div class="form-group">
 		<label for="signupName">Name or Nickname</label>
 		<input type="text"
 				class="form-control"
 				id="signupName"
+				ng-model="name"
 				placeholder="PlainJane"
 				required />
 		<span class="help-block">Other people will see this on your entries.</span>
@@ -14,6 +15,7 @@
 		<input type="email"
 				class="form-control"
 				id="signupEmail"
+				ng-model="email"
 				placeholder="janedoe@gmail.com"
 				required />
 		<span class="help-block">Just for logging in. Never shared, never sold.</span>
@@ -22,7 +24,8 @@
 		<label for="signupPassword">Password</label>
 		<input type="password" 
 				class="form-control" 
-				id="signupPassword" 
+				id="signupPassword"
+				ng-model="password"
 				placeholder="donthackmebro"
 				required />
 		<span class="help-block">Always use protection!</span>

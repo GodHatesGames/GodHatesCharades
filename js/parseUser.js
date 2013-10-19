@@ -14,7 +14,9 @@ define([
 				data: null,
 				createAnonUser: createAnonUser,
 				connect: connect,
-				logout: logout
+				logout: logout,
+				signup: signup,
+				save: save
 			}
 
 			// check login status
@@ -30,13 +32,7 @@ define([
 
 			function createAnonUser() {
 				console.log('creating anon user');
-				var user = new Parse.User();
-				user.set('username', randString());
-				user.set('password', randString());
-				user.signUp(null, {
-					success: onUserConnected,
-					error: onUserError
-				});
+				return signup(randString(), randString());
 
 				function randString() {
 					// copy pasta'd from: http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
@@ -82,6 +78,32 @@ define([
 				setTimeout(function(){
 					window.location.reload();
 				}, 1000);
+			}
+
+			function signup(username, password, email) {
+				var user = new Parse.User();
+				user.set('username', username);
+				user.set('password', password);
+				if(email)
+					user.set('email', email);
+				 
+				return user.signUp(null, {
+					success: onUserConnected,
+					error: onUserError
+				});
+			}
+
+			function save() {
+				return user.data.save({
+					success: function(user) {
+						console.log('saved!');
+						user.data = user;
+						$rootScope.$apply();
+					},
+					error: function(user, error) {
+						console.log('could note save:', error);
+					}
+				})
 			}
 
 			// returns true if current user is not Anonymous
