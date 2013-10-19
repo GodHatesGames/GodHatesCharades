@@ -10,7 +10,11 @@ require( [
 	'vn/ParseQueryAngular',
 	'cp/textarea-noreturn',
 	'cp/nav',
+	'cp/userinfo',
+	'cp/login',
+	'cp/signup',
 	'cp/vote',
+	'cp/suggestions',
 	'cp/submit',
 	'dt/Card',
 	'dt/Suggestion'

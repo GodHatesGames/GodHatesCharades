@@ -36,11 +36,10 @@ define([
 								$stateParams,
 								parseUser
 					) {
-						console.log('running app');
+
+						// create parse user to be used for suggestions and voting
 						if(Parse.User.current() === null)
-						{
 							parseUser.createAnonUser();
-						}
 
 						function randString() {
 							// copy pasta'd from: http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript

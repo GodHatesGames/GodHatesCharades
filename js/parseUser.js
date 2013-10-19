@@ -9,12 +9,17 @@ define([
 			var user = {
 				loggedin: false,
 				dataloaded: false,
-				data: {},
+				isAnon: isAnon,
+				isReal: isReal,
+				data: null,
 				createAnonUser: createAnonUser,
 				connect: connect,
-				logout: logout
+				logout: logout,
+				signup: signup,
+				save: save
 			}
 
+			// check login status
 			var currentUser = Parse.User.current();
 			if (currentUser) {
 				console.log('logged in', currentUser);
@@ -27,13 +32,7 @@ define([
 
 			function createAnonUser() {
 				console.log('creating anon user');
-				var user = new Parse.User();
-				user.set('username', randString());
-				user.set('password', randString());
-				user.signUp(null, {
-					success: onUserConnected,
-					error: onUserError
-				});
+				return signup(randString(), randString());
 
 				function randString() {
 					// copy pasta'd from: http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
@@ -79,6 +78,52 @@ define([
 				setTimeout(function(){
 					window.location.reload();
 				}, 1000);
+			}
+
+			function signup(username, password, email) {
+				var user = new Parse.User();
+				user.set('username', username);
+				user.set('password', password);
+				if(email)
+					user.set('email', email);
+				 
+				return user.signUp(null, {
+					success: onUserConnected,
+					error: onUserError
+				});
+			}
+
+			function save() {
+				return user.data.save({
+					success: function(user) {
+						console.log('saved!');
+						user.data = user;
+						$rootScope.$apply();
+					},
+					error: function(user, error) {
+						console.log('could note save:', error);
+					}
+				})
+			}
+
+			// returns true if current user is not Anonymous
+			function isReal() {
+				if(!user.loggedin)
+					return false;
+				else
+					return user.data !== null && user.data.attributes.email !== undefined;
+			}
+
+			// returns true if current user is Anonymous
+			function isAnon() {
+				if(!user.loggedin)
+					return true;
+				else if(user.data === null)
+					return true;
+				else if(user.data.attributes.email === undefined)
+					return true;
+				else
+					return false;
 			}
 
 			return user;
