@@ -19,6 +19,10 @@ define([
 					this.set('type',type);
 					return this;
 				},
+				setOwner: function(owner) {
+					this.set('owner',owner);
+					return this;
+				},
 				parseDestroy:function(){
 					return ParseQueryAngular(this,{functionToCall:"destroy"});
 				}
@@ -29,13 +33,14 @@ define([
 				comparator: function(model) {
 					return -model.createdAt.getTime();
 				},
-				addSuggestion: function(text, type) {
+				addSuggestion: function(text, type, owner) {
 			 		// save request_id to Parse
 			 		var _this = this;
 
 					var suggestion = new Suggestion;
 					suggestion.setText(text);
 					suggestion.setType(type);
+					suggestion.setOwner(owner);
 
 					// use the extended Parse SDK to perform a save and return the promised object back into the Angular world
 					return suggestion.saveParse().then(function(data){

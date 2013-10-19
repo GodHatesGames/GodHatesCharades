@@ -4,7 +4,7 @@ define([
 	], 
 	function(angular, app) {
 
-		app.directive('submit', ['SuggestionService', function(SuggestionService) {
+		app.directive('submit', ['SuggestionService', 'parseUser', function(SuggestionService, parseUser) {
 			return {
 				restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 				templateUrl: 'components/submit.html',
@@ -64,7 +64,7 @@ define([
 
 					$scope.submit = function() {
 						var suggestions = new SuggestionService.collection()
-						var promise = suggestions.addSuggestion($scope.text, $scope.type);
+						var promise = suggestions.addSuggestion($scope.text, $scope.type, parseUser.data);
 						promise.then(function() {
 							$scope.success = true;
 						});
