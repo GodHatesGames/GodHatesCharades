@@ -9,6 +9,7 @@ define([
 				restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 				templateUrl: 'components/login.html',
 				replace: true,
+				scope: true,
 				link: function($scope, $element) {
 					
 				},
