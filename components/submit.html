@@ -28,10 +28,13 @@
 	<div class="submitForm"
 			ng-show="success">
 			<div class="card submitted">
-				<h4>Thanks for the submission! Your card will be up soon.</h4>
-				<p>Want to people to know how brilliant you are? Signup and we'll credit your name or nickname on the card!</p>
+				<h5>Thanks for the submission{{displayName()}}! Your card will be up soon.</h5>
+				<p ng-hide="parseUser.loggedin">
+					Want to people to know how brilliant you are? Signup and we'll credit your name or nickname on the card!
+				</p>
 				<a ui-sref="login"
-					class="btn btn-success">
+					class="btn btn-success"
+					ng-hide="parseUser.loggedin">
 					Signup Now
 				</a>
 			</div>

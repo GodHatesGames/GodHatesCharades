@@ -36,6 +36,11 @@ define([
 					$scope.text = '';
 					$scope.maxChars = 75;
 					$scope.success = false;
+					$scope.parseUser = parseUser;
+					$scope.displayName = function() {
+						return ' ' + parseUser.data.get('name');
+					}
+
 					var halfMax = $scope.maxChars / 2;
 
 					var rand = Math.floor(Math.random() * 5);
