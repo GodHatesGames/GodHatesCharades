@@ -1,8 +1,8 @@
 <div>
+	<h4>{{displayType}}</h4>
 	<form class="submitForm"
 			ng-submit="submit()"
 			ng-hide="success">
-		<h4>{{displayType}}</h4>
 		<div class="card">
 			<!-- <input type="text" 
 					ng-model="text" 
@@ -27,11 +27,18 @@
 	</form>
 	<div class="submitForm"
 			ng-show="success">
-		<p>Thanks for the submission!</p>
+			<div class="card submitted">
+				<h4>Thanks for the submission! Your card will be up soon.</h4>
+				<p>Want to people to know how brilliant you are? Signup and we'll credit your name or nickname on the card!</p>
+				<a ui-sref="login"
+					class="btn btn-success">
+					Signup Now
+				</a>
+			</div>
 
-		<button ng-click="reset()"
-				class="btn btn-success">
-			Create a new Card
-		</button>
+			<button ng-click="reset()"
+					class="btn btn-info">
+				Create a new Card
+			</button>
 	</div>
 </div>

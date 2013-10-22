@@ -27,7 +27,7 @@
 	background-color: black;
 }
 
-#submitView .zeroCard .card .editable{
+#submitView .zeroCard .card .editable, #submitView .zeroCard .card {
 	color: white;
 }
 
@@ -40,6 +40,6 @@
 	background-color: white;
 }
 
-#submitView .oneCard .card .editable{
+#submitView .oneCard .card .editable, #submitView .oneCard .card {
 	color: black;
 }
