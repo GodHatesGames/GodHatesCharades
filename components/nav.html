@@ -12,7 +12,8 @@
 		<li ng-class="{ active: $state.includes('vote') }">
 			<a ui-sref='vote'>Vote on cards</a>
 		</li>
-		<li ng-class="{ active: $state.includes('suggestions') }">
+		<li ng-show="isAdmin()"
+			ng-class="{ active: $state.includes('suggestions') }">
 			<a ui-sref='suggestions'>Suggestions List</a>
 		</li>
 	</ul>
