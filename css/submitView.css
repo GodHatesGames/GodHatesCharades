@@ -14,32 +14,4 @@
 }
 
 #submitView .cards {
-	width: 530px;
-	margin: 30px auto 0 auto;
-}
-
-/* Person Card */
-#submitView .zeroCard {
-	float: left;
-}
-
-#submitView .zeroCard .card {
-	background-color: black;
-}
-
-#submitView .zeroCard .card .editable, #submitView .zeroCard .card {
-	color: white;
-}
-
-/* Event Card */
-#submitView .oneCard {
-	float: right;
-}
-
-#submitView .oneCard .card {
-	background-color: white;
-}
-
-#submitView .oneCard .card .editable, #submitView .oneCard .card {
-	color: black;
 }

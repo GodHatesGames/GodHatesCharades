@@ -1,3 +1,28 @@
 <div>
-	vote here
+	<link rel="stylesheet" 
+			type="text/css" 
+			href="components/vote.css">
+
+	<div class="alert alert-info" 
+			ng-show="loading">
+		Loading...</div
+	>
+	<div class="zeroCardContainer row"
+			ng-hide="loading">
+		<div ng-repeat="(index, suggestion) in zeroCards | limitTo:3"
+			class="card col-md-4">
+				<div class="cardContent">
+					{{suggestion.attributes.text}}
+				</div>
+		</div>
+	</div>
+	<div class="oneCardContainer row"
+			ng-hide="loading">
+		<div ng-repeat="(index, suggestion) in oneCards | limitTo:3"
+			class="card col-md-4">
+				<div class="cardContent">
+					{{suggestion.attributes.text}}
+				</div>
+		</div>
+	</div>
 </div>

@@ -9,6 +9,44 @@ body {
 	padding-right: 15px;
 }
 
+.card {
+	position: relative;	/*relative size hack*/
+	border: 1px solid #DDD;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.card:before {
+	/*relative size hack*/
+	content: "";
+	display: block;
+	padding-top: 150%;
+}
+
+.cardContent {
+	position:  absolute;
+	top: 45%;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+.zeroCardContainer .card {
+	background-color: black;
+}
+
+.zeroCardContainer .card .editable, .zeroCardContainer .card {
+	color: white;
+}
+
+.oneCardContainer .card {
+	background-color: white;
+}
+
+.oneCardContainer .card .editable, .oneCardContainer .card {
+	color: black;
+}
+
 /* Customize container */
 @media (min-width: 768px) {
 	.container {
