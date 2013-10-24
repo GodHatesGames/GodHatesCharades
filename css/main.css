@@ -21,14 +21,18 @@ body {
 	content: "";
 	display: block;
 	padding-top: 150%;
+	/* END relative size hack*/
 }
 
 .cardContent {
+	/* relative size hack*/
 	position:  absolute;
 	top: 45%;
 	left: 0;
 	bottom: 0;
 	right: 0;
+	/* END relative size hack*/
+	padding: 5%;
 }
 
 .zeroCardContainer .card {

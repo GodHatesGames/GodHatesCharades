@@ -10,18 +10,23 @@
 	<div class="zeroCardContainer row"
 			ng-hide="loading">
 		<div ng-repeat="(index, suggestion) in zeroCards | limitTo:3"
-			class="card col-md-4">
-				<div class="cardContent">
-					{{suggestion.attributes.text}}
+				class="col-md-4">
+				<div class="card">
+					<div class="cardContent">
+						{{suggestion.attributes.text}}
+					</div>
 				</div>
 		</div>
 	</div>
+	<hr/>
 	<div class="oneCardContainer row"
 			ng-hide="loading">
 		<div ng-repeat="(index, suggestion) in oneCards | limitTo:3"
-			class="card col-md-4">
-				<div class="cardContent">
-					{{suggestion.attributes.text}}
+				class="col-md-4">
+				<div class="card">
+					<div class="cardContent">
+						{{suggestion.attributes.text}}
+					</div>
 				</div>
 		</div>
 	</div>

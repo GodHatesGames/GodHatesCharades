@@ -13,5 +13,6 @@
 	}
 }
 
-#submitView .cards {
+#submitView .card {
+	margin-bottom: 15px;
 }
