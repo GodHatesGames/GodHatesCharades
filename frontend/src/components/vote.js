@@ -47,6 +47,10 @@ define([
 							return 'scenario';
 					}
 
+					$scope.selectPair = function(index) {
+						console.log('selected:', index);
+					}
+
 				}
 			}
 		}]);
