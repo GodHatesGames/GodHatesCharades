@@ -13,43 +13,38 @@ define([
 
 				},
 				controller: function($scope, $element) {
-					$scope.zeroCards = [];
-					var zeroLoaded = false;
-					$scope.oneCards = [];
-					var oneLoaded = false;
+					$scope.pairLimit = 2;
 					$scope.loading = true;
-					loadCards(0);
-					loadCards(1);
+					$scope.suggestionPairs = [];
+					$scope.suggestionIndex = 0;
+					loadSuggestionPairs();
 
-					function loadCards(type) {
-						var SuggestionObject = Parse.Object.extend("Suggestion");
-						var query = new Parse.Query(SuggestionObject);
-						query.limit(100);
-						query.equalTo('type', type);
-						query.ascending('updatedAt');
-						// query.skip($scope.getSkip());
-						query.find({
-							success: onSuggestionsLoaded
+					function loadSuggestionPairs() {
+						Parse.Cloud.run('getRandomSuggestionPairs', {
+							skip: 0
+						}, {
+							success: onSuggestionPairsLoaded,
+							error: onSuggestionPairsError
 						});
 					}
 
-					function onSuggestionsLoaded(suggestions) {
-						if(suggestions.length > 0) {
-							switch(suggestions[0].get('type')) {
-								case 0 :
-									$scope.zeroCards = suggestions;
-									zeroLoaded = true;
-									break;
-								case 1 :
-									$scope.oneCards = suggestions;
-									oneLoaded = true;
-							}
-							if(zeroLoaded && oneLoaded)
-								$scope.loading = false;
-							$scope.$digest();
-						} else {
-							console.log('couldn\'t find any suggestions');
-						}
+					function onSuggestionPairsLoaded(suggestionPairs) {
+						$scope.suggestionPairs = suggestionPairs;
+						$scope.loading = false;
+						$scope.suggestionIndex = 0;
+						$scope.$digest();
+					}
+
+					function onSuggestionPairsError(error) {
+						console.log('couldn\'t find any pairs:', error);
+					}
+
+					$scope.typeClass = function(suggestion) {
+						var type = suggestion.get('type');
+						if(type === 0)
+							return 'character';
+						else
+							return 'scenario';
 					}
 
 				}

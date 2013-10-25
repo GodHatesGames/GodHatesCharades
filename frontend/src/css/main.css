@@ -35,19 +35,19 @@ body {
 	padding: 5%;
 }
 
-.zeroCardContainer .card {
+.card.character {
 	background-color: black;
 }
 
-.zeroCardContainer .card .editable, .zeroCardContainer .card {
+.card.character .editable, .card.character {
 	color: white;
 }
 
-.oneCardContainer .card {
+.card.scenario {
 	background-color: white;
 }
 
-.oneCardContainer .card .editable, .oneCardContainer .card {
+.card.scenario .editable, .card.scenario {
 	color: black;
 }
 

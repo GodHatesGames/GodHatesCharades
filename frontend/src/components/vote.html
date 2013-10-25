@@ -6,27 +6,19 @@
 	<div class="alert alert-info" 
 			ng-show="loading">
 		Loading...</div>
+
+	<!-- Repeat Pairs -->
 	<div class="zeroCardContainer row"
+			ng-repeat="(index, pair) in suggestionPairs | limitTo:pairLimit"
 			ng-hide="loading">
-		<div ng-repeat="(index, suggestion) in zeroCards | limitTo:3"
-				class="col-md-4">
-				<div class="card">
-					<div class="cardContent">
-						{{suggestion.attributes.text}}
-					</div>
-				</div>
+		<!-- Repeat suggestions in pairs -->
+		<div class="card col-md-6"
+				ng-class="typeClass(suggestion)"
+				ng-repeat="(index, suggestion) in pair">
+			<div class="cardContent">
+				{{suggestion.attributes.text}}
+			</div>
 		</div>
-	</div>
-	<hr/>
-	<div class="oneCardContainer row"
-			ng-hide="loading">
-		<div ng-repeat="(index, suggestion) in oneCards | limitTo:3"
-				class="col-md-4">
-				<div class="card">
-					<div class="cardContent">
-						{{suggestion.attributes.text}}
-					</div>
-				</div>
-		</div>
+		<hr/>
 	</div>
 </div>

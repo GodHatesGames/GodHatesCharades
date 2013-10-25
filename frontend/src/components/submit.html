@@ -1,7 +1,8 @@
 <div>
 	<link rel="stylesheet" type="text/css" href="components/submit.css">
-	<h4>{{displayType}}</h4>
-	<div class="card">
+	<h4>{{typeDisplay}}</h4>
+	<div class="card"
+			ng-class="typeClass">
 		<form class="submitForm cardContent"
 				ng-submit="submit()"
 				ng-hide="success">
@@ -24,11 +25,12 @@
 	<div class="alert" ng-class="characterCount()">{{text.length}} / {{maxChars}} Characters</div>
 	<button type="submit" 
 			class="btn btn-success submitBtn">
-		Submit new {{displayType}}
+		Submit new {{typeDisplay}}
 	</button>
 	<div class="submitForm"
 			ng-show="success">
-			<div class="card submitted">
+			<div class="card submitted"
+					ng-class="typeClass">
 				<h5>Thanks for the submission{{displayName()}}! Your card will be up soon.</h5>
 				<p ng-hide="parseUser.loggedin">
 					Want to people to know how brilliant you are? Signup and we'll credit your name or nickname on the card!

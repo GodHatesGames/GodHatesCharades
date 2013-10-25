@@ -1,4 +1,3 @@
-.zeroCardContainer, .oneCardContainer {
-	list-style: none;
+.suggestionPair {
 	margin-bottom: 15px;
 }
