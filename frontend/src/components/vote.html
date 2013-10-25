@@ -9,7 +9,7 @@
 
 	<!-- Repeat Pairs -->
 	<div class="cardContainer row"
-			ng-repeat="(index, pair) in suggestionPairs | limitTo:pairLimit"
+			ng-repeat="(index, pair) in suggestionPairs"
 			ng-hide="loading"
 			ng-click="selectPair(index)">
 		<!-- Repeat suggestions in pairs -->
