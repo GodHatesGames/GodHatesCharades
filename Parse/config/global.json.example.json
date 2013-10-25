@@ -1,0 +1,11 @@
+{
+    "applications": {
+        "GodHatesCharades": {
+            "applicationId": "XXX", 
+            "masterKey": "XXX"
+        }, 
+        "_default": {
+            "link": "GodHatesCharades"
+        }
+    }
+}
