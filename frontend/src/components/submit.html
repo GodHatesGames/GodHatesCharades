@@ -1,32 +1,33 @@
 <div>
 	<link rel="stylesheet" type="text/css" href="components/submit.css">
 	<h4>{{typeDisplay}}</h4>
-	<div class="card"
-			ng-class="typeClass">
-		<form class="submitForm cardContent"
-				ng-submit="submit()"
-				ng-hide="success">
-				<!-- <input type="text" 
-						ng-model="text" 
-						placeholder="{{example}}" /> -->
-				<textarea ng-model="text"
-							class="editable"
-							placeholder="{{example}}"
-							maxlength="75"
-							required
-							textarea-noreturn>
-				</textarea>
-				<!-- <div contentEditable="true"
-						class="editable" 
-						ng-model="text"
-						></div> -->
-		</form>
+	<div ng-hide="success">
+		<div class="card"
+				ng-class="typeClass">
+			<div class="submitForm cardContent">
+					<!-- <input type="text" 
+							ng-model="text" 
+							placeholder="{{example}}" /> -->
+					<textarea ng-model="text"
+								class="editable"
+								placeholder="{{example}}"
+								maxlength="75"
+								required
+								textarea-noreturn>
+					</textarea>
+					<!-- <div contentEditable="true"
+							class="editable" 
+							ng-model="text"
+							></div> -->
+			</div>
+		</div>
+		<div class="alert" ng-class="characterCount()">{{text.length}} / {{maxChars}} Characters</div>
+		<button type="submit" 
+				class="btn btn-success submitBtn"
+				ng-click="submit()">
+			Submit new {{typeDisplay}}
+		</button>
 	</div>
-	<div class="alert" ng-class="characterCount()">{{text.length}} / {{maxChars}} Characters</div>
-	<button type="submit" 
-			class="btn btn-success submitBtn">
-		Submit new {{typeDisplay}}
-	</button>
 	<div class="submitForm"
 			ng-show="success">
 			<div class="card submitted"
