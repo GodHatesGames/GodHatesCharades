@@ -33,14 +33,21 @@ body {
 	right: 0;
 	/* END relative size hack*/
 	padding: 5%;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .card.character {
-	background-color: black;
+	background-color: white;
 }
 
 .card.character .editable, .card.character {
-	color: white;
+	color: black;
+	font-weight: bold;
 }
 
 .card.scenario {
