@@ -25,12 +25,16 @@ define([
 					function loadSuggestionPairs(skip) {
 						$scope.loading = true;
 						
-						Parse.Cloud.run('getRandomSuggestionPairs', {
-							skip: skip
-						}, {
-							success: onSuggestionPairsLoaded,
-							error: onSuggestionPairsError
-						});
+						Parse.Cloud.run(
+							'getRandomSuggestionPairs',
+							{
+								'skip': skip
+							}, 
+							{
+								success: onSuggestionPairsLoaded,
+								error: onSuggestionPairsError
+							}
+						);
 					}
 
 					function onSuggestionPairsLoaded(suggestionPairs) {
@@ -59,6 +63,34 @@ define([
 						}
 					};
 
+					function votePair(pair) {
+						var pairIds = {};
+
+						_.each(pair, function(suggestion, index) {
+							pairIds[index] = suggestion.id;
+						});
+
+						console.log('pairIds:', pairIds);
+						Parse.Cloud.run(
+							'votePair',
+							{
+								'pair': pairIds
+							},
+							{
+								success: onPairVoted,
+								error: onPairVoteError
+							}
+						);
+					}
+
+					function onPairVoted(message) {
+						console.log('vote success:', message);
+					}
+
+					function onPairVoteError(error) {
+						console.log('error voting on pair:', error);
+					}
+
 					// Public Methods
 
 					$scope.typeClass = function(suggestion) {
@@ -76,8 +108,11 @@ define([
 						}
 					};
 
-					$scope.selectPair = function(index) {
-						console.log('selected:', index);
+					$scope.selectPair = function(selectedIndex) {
+						console.log('selected:', selectedIndex);
+						votePair($scope.suggestionPairs[selectedIndex]);
+
+						// update current index
 						$scope.pairIndex += $scope.pairLimit;
 					};
 

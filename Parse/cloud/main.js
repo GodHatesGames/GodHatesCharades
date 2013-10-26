@@ -1,6 +1,6 @@
+var _ = require('underscore');
 
 // Use Parse.Cloud.define to define as many cloud functions as you want.
-// For example:
 Parse.Cloud.define("getRandomSuggestionPairs", function(request, response) {
 	var SuggestionObject = Parse.Object.extend("Suggestion");
 	var SUGGESTION_COUNT = 25;
@@ -49,4 +49,35 @@ Parse.Cloud.define("getRandomSuggestionPairs", function(request, response) {
 		response.success(suggestionPairs);
 	}
 
+});
+
+
+Parse.Cloud.define("votePair", function(request, response) {
+	var VoteObject = Parse.Object.extend("Vote");
+	var SuggestionObject = Parse.Object.extend("Suggestion");
+
+	if(!request.params.pair) {
+		response.error('must send pair');
+	} else {
+		var saveCount = 0;
+		_.each(request.params.pair, function(suggestion, index, pairs) {
+			saveCount++;
+			var newVote = new VoteObject();
+			var opposite = pairs[index == 0 ? 1 : 0];
+			newVote.set('owner', Parse.User.current());
+			newVote.set('parent', suggestion);
+			newVote.set('pair', opposite);
+			newVote.save({
+				success: onSuccess
+			});
+
+
+		});
+	}
+
+	function onSuccess(obj) {
+		saveCount--;
+		if(saveCount === 0)
+			response.success('votes saved');
+	}
 });
