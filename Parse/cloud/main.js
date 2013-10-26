@@ -55,23 +55,31 @@ Parse.Cloud.define("getRandomSuggestionPairs", function(request, response) {
 Parse.Cloud.define("votePair", function(request, response) {
 	var VoteObject = Parse.Object.extend("Vote");
 	var SuggestionObject = Parse.Object.extend("Suggestion");
+	var saveCount = 0;
 
 	if(!request.params.pair) {
 		response.error('must send pair');
 	} else {
-		var saveCount = 0;
-		_.each(request.params.pair, function(suggestion, index, pairs) {
+		_.each(request.params.pair, function(suggestionId, index, pairs) {
 			saveCount++;
 			var newVote = new VoteObject();
 			var opposite = pairs[index == 0 ? 1 : 0];
 			newVote.set('owner', Parse.User.current());
-			newVote.set('parent', suggestion);
+			newVote.set('parent', suggestionId);
 			newVote.set('pair', opposite);
 			newVote.save({
-				success: onSuccess
+				success: function(vote) {
+					var suggestionObj = new SuggestionObject();
+					suggestionObj.id = suggestionId;
+					var relation = suggestionObj.relation("votes");
+					relation.add(vote);
+					suggestionObj.save({
+						success: onSuccess,
+						error: onError
+					})
+				},
+				error: onError
 			});
-
-
 		});
 	}
 
@@ -79,5 +87,9 @@ Parse.Cloud.define("votePair", function(request, response) {
 		saveCount--;
 		if(saveCount === 0)
 			response.success('votes saved');
+	}
+
+	function onError(obj, error) {
+		response.error(error);
 	}
 });
