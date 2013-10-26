@@ -93,3 +93,11 @@ Parse.Cloud.define("votePair", function(request, response) {
 		response.error(error);
 	}
 });
+
+Parse.Cloud.beforeSave("Suggestion", function(request, response) {
+	if(request.object.isNew()) {
+		request.object.set("backgroundUpdatedAt", new Date());
+		request.object.set("totalVotes", 0);
+	}
+	response.success();  
+});
