@@ -36,15 +36,24 @@ define([
 					$scope.text = '';
 					$scope.maxChars = 75;
 					$scope.success = false;
+					$scope.parseUser = parseUser;
+					$scope.typeDisplay = '';
+					$scope.typeClass = '';
+					$scope.displayName = function() {
+						return ' ' + parseUser.data.get('name');
+					}
+
 					var halfMax = $scope.maxChars / 2;
 
 					var rand = Math.floor(Math.random() * 5);
 					if($scope.type === TYPE_PERSON) {
 						$scope.example = randomPeople[rand];
-						$scope.displayType = 'Character';
+						$scope.typeDisplay = 'Character';
+						$scope.typeClass = 'character';
 					} else if($scope.type === TYPE_THING) {
 						$scope.example = randomEvents[rand];
-						$scope.displayType = 'Scenario';
+						$scope.typeDisplay = 'Scenario';
+						$scope.typeClass = 'scenario';
 					}
 
 					$scope.onTextChange = function(newValue, oldValue) {

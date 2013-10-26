@@ -9,6 +9,7 @@ define([
 			var user = {
 				loggedin: false,
 				dataloaded: false,
+				isAdmin: isAdmin,
 				isAnon: isAnon,
 				isReal: isReal,
 				data: null,
@@ -122,6 +123,13 @@ define([
 					return true;
 				else if(user.data.attributes.email === undefined)
 					return true;
+				else
+					return false;
+			}
+
+			function isAdmin() {
+				if(user.loggedin)
+					return Boolean(user.data.get('admin'));
 				else
 					return false;
 			}

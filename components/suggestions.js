@@ -87,10 +87,11 @@ define([
 					$scope.loadSuggestions = function (pageSize, page, filter) {
 						if(filter && filter.length > 0) {
 							var filteredList = [];
+							var filterText = filter.toLowerCase();
 							for(var suggestionId in $scope.allSuggestions) {
 								suggestion = $scope.allSuggestions[suggestionId];
 								text = suggestion.get('text').toLowerCase();
-								if(text.indexOf(filter) > -1) {
+								if(text.indexOf(filterText) > -1) {
 									filteredList.push(suggestion);
 								}
 							}

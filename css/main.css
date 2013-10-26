@@ -9,6 +9,55 @@ body {
 	padding-right: 15px;
 }
 
+.card {
+	position: relative;	/*relative size hack*/
+	border: 1px solid #DDD;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.card:before {
+	/*relative size hack*/
+	content: "";
+	display: block;
+	padding-top: 150%;
+	/* END relative size hack*/
+}
+
+.cardContent {
+	/* relative size hack*/
+	position:  absolute;
+	top: 45%;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	/* END relative size hack*/
+	padding: 5%;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.card.character {
+	background-color: white;
+}
+
+.card.character .editable, .card.character {
+	color: black;
+	font-weight: bold;
+}
+
+.card.scenario {
+	background-color: white;
+}
+
+.card.scenario .editable, .card.scenario {
+	color: black;
+}
+
 /* Customize container */
 @media (min-width: 768px) {
 	.container {
@@ -62,3 +111,6 @@ body {
 	text-align: center;
 }
 
+.clear {
+	clear: both;
+}
