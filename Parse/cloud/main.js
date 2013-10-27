@@ -57,10 +57,8 @@ Parse.Cloud.define('votePair', function(request, response) {
 	var SuggestionObject = Parse.Object.extend('Suggestion');
 	var saveCount = 0;
 
-	if(!request.params.pair) {
-		response.error('must send pair');
-	} else {
-		_.each(request.params.pair, function(suggestionId, index, pairs) {
+	if(request.params.chosenPair) {
+		_.each(request.params.chosenPair, function(suggestionId, index, pairs) {
 			saveCount++;
 			var newVote = new VoteObject();
 			var opposite = pairs[index == 0 ? 1 : 0];
@@ -82,6 +80,59 @@ Parse.Cloud.define('votePair', function(request, response) {
 				error: onError
 			});
 		});
+	}
+
+	if(request.params.skippedPair) {
+
+		_.each(request.params.skippedPair, function(suggestionId, index, pairs) {
+			saveCount++;
+			var suggestionObj = new SuggestionObject();
+			suggestionObj.id = suggestionId;
+			suggestionObj.increment('skipped', 1);
+			suggestionObj.save({
+				success: onSuccess,
+				error: onError
+			})
+		});
+	}
+
+	if(saveCount === 0) {
+		response.error('no data sent');
+	}
+
+	function onSuccess(obj) {
+		saveCount--;
+		if(saveCount === 0)
+			response.success('votes saved');
+	}
+
+	function onError(obj, error) {
+		response.error(error);
+	}
+});
+
+Parse.Cloud.define('skipSuggestions', function(request, response) {
+	var SuggestionObject = Parse.Object.extend('Suggestion');
+	var saveCount = 0;
+
+	if(request.params.skippedIds) {
+
+		_.each(request.params.skippedIds, function(suggestionId, index, pairs) {
+			console.log('suggestionId:', suggestionId);
+			saveCount++;
+			var suggestionObj = new SuggestionObject();
+			suggestionObj.id = suggestionId;
+			suggestionObj.increment('skipped', 1);
+			suggestionObj.save({
+				success: onSuccess,
+				error: onError
+			})
+		});
+	}
+	console.log('saveCount:', saveCount);
+
+	if(saveCount === 0) {
+		response.error('no data sent');
 	}
 
 	function onSuccess(obj) {
