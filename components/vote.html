@@ -7,6 +7,15 @@
 			ng-show="loading">
 		Loading...</div>
 
+	<!-- Skip button -->
+	<button ng-click="skipBoth()"
+			ng-hide="loading"
+			class="btn btn-warning skip">
+		These both suck
+	</button>
+
+	<hr/>
+
 	<!-- Repeat Pairs -->
 	<div class="cardContainer row"
 			ng-repeat="(index, pair) in suggestionPairs"

@@ -63,24 +63,8 @@ define([
 						}
 					};
 
-					function votePair(pair) {
-						var pairIds = {};
+					function skipPair() {
 
-						_.each(pair, function(suggestion, index) {
-							pairIds[index] = suggestion.id;
-						});
-
-						console.log('pairIds:', pairIds);
-						Parse.Cloud.run(
-							'votePair',
-							{
-								'pair': pairIds
-							},
-							{
-								success: onPairVoted,
-								error: onPairVoteError
-							}
-						);
 					}
 
 					function onPairVoted(message) {
@@ -110,11 +94,60 @@ define([
 
 					$scope.selectPair = function(selectedIndex) {
 						console.log('selected:', selectedIndex);
-						votePair($scope.suggestionPairs[selectedIndex]);
+						var opposite = selectedIndex == 0 ? 1 : 0;
+						var chosenPair = $scope.suggestionPairs[selectedIndex];
+						var skippedPair = $scope.suggestionPairs[opposite];
+						var chosenPairIds = {};
+						var skippedPairIds = {};
+
+						_.each(chosenPair, function(suggestion, index) {
+							chosenPairIds[index] = suggestion.id;
+						});
+
+						_.each(skippedPair, function(suggestion, index) {
+							skippedPairIds[index] = suggestion.id;
+						});
+
+						console.log('chosenPairIds:', chosenPairIds);
+						Parse.Cloud.run(
+							'votePair',
+							{
+								'chosenPair': chosenPairIds,
+								'skippedPair': skippedPairIds
+							},
+							{
+								success: onPairVoted,
+								error: onPairVoteError
+							}
+						);
 
 						// update current index
 						$scope.pairIndex += $scope.pairLimit;
 					};
+
+					$scope.skipBoth = function() {
+						var skippedIds = [];
+						_.each($scope.suggestionPairs, function(pair, index) {
+							_.each(pair, function(suggestion, index) {
+								if(suggestion.id)
+									skippedIds.push(suggestion.id);
+							});
+						});
+
+						Parse.Cloud.run(
+							'skipSuggestions',
+							{
+								'skippedIds': skippedIds
+							},
+							{
+								success: onPairVoted,
+								error: onPairVoteError
+							}
+						);
+
+						// update current index
+						$scope.pairIndex += $scope.pairLimit;
+					}
 
 					// init
 					loadSuggestionPairs();
