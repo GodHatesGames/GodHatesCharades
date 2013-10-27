@@ -42,7 +42,8 @@ body {
 }
 
 .card.character {
-	background-color: white;
+	background-color: #FCF9C5;
+	border-color: #E9E6B7;
 }
 
 .card.character .editable, .card.character {
@@ -51,11 +52,25 @@ body {
 }
 
 .card.scenario {
-	background-color: white;
+	background-color: #FCEAC5;
+	border-color: #E6D6B6;
 }
 
 .card.scenario .editable, .card.scenario {
 	color: black;
+}
+
+.card .editable::-webkit-input-placeholder { /* WebKit browsers */
+    color: rgba(0, 0, 0, 0.5);
+}
+.card .editable:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: rgba(0, 0, 0, 0.5);
+}
+.card .editable::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: rgba(0, 0, 0, 0.5);
+}
+.card .editable:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: rgba(0, 0, 0, 0.5);
 }
 
 /* Customize container */

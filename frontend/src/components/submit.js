@@ -48,13 +48,12 @@ define([
 					var rand = Math.floor(Math.random() * 5);
 					if($scope.type === TYPE_PERSON) {
 						$scope.example = randomPeople[rand];
-						$scope.typeDisplay = 'Character';
-						$scope.typeClass = 'character';
 					} else if($scope.type === TYPE_THING) {
 						$scope.example = randomEvents[rand];
-						$scope.typeDisplay = 'Scenario';
-						$scope.typeClass = 'scenario';
 					}
+					
+					$scope.typeDisplay = SuggestionService.getTypeDisplay($scope.type);
+					$scope.typeClass = SuggestionService.getTypeClass($scope.type);
 
 					$scope.onTextChange = function(newValue, oldValue) {
 						if(newValue === undefined || newValue === null)
