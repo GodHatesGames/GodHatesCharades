@@ -1,8 +1,8 @@
 var _ = require('underscore');
 
 // Use Parse.Cloud.define to define as many cloud functions as you want.
-Parse.Cloud.define("getRandomSuggestionPairs", function(request, response) {
-	var SuggestionObject = Parse.Object.extend("Suggestion");
+Parse.Cloud.define('getRandomSuggestionPairs', function(request, response) {
+	var SuggestionObject = Parse.Object.extend('Suggestion');
 	var SUGGESTION_COUNT = 25;
 	var zeroSuggestions = [];
 	var zeroLoaded = false;
@@ -52,9 +52,9 @@ Parse.Cloud.define("getRandomSuggestionPairs", function(request, response) {
 });
 
 
-Parse.Cloud.define("votePair", function(request, response) {
-	var VoteObject = Parse.Object.extend("Vote");
-	var SuggestionObject = Parse.Object.extend("Suggestion");
+Parse.Cloud.define('votePair', function(request, response) {
+	var VoteObject = Parse.Object.extend('Vote');
+	var SuggestionObject = Parse.Object.extend('Suggestion');
 	var saveCount = 0;
 
 	if(!request.params.pair) {
@@ -71,7 +71,8 @@ Parse.Cloud.define("votePair", function(request, response) {
 				success: function(vote) {
 					var suggestionObj = new SuggestionObject();
 					suggestionObj.id = suggestionId;
-					var relation = suggestionObj.relation("votes");
+					suggestionObj.increment('totalVotes', 1);
+					var relation = suggestionObj.relation('votes');
 					relation.add(vote);
 					suggestionObj.save({
 						success: onSuccess,
@@ -94,10 +95,55 @@ Parse.Cloud.define("votePair", function(request, response) {
 	}
 });
 
-Parse.Cloud.beforeSave("Suggestion", function(request, response) {
+Parse.Cloud.beforeSave('Suggestion', function(request, response) {
 	if(request.object.isNew()) {
-		request.object.set("backgroundUpdatedAt", new Date());
-		request.object.set("totalVotes", 0);
+		request.object.set('backgroundUpdatedAt', new Date());
+		request.object.set('totalVotes', 0);
 	}
-	response.success();  
+	response.success();
 });
+
+/*Parse.Cloud.job('voteCount', function(request, status) {
+	// Set up to modify user data
+	Parse.Cloud.useMasterKey();
+	var counter = 0;
+	// Query for all suggestions
+	var SuggestionObject = Parse.Object.extend('Suggestion');
+	var VoteObject = Parse.Object.extend('Vote');
+	var suggestionQuery = new Parse.Query(SuggestionObject);
+	suggestionQuery.equalTo('approved', true);
+	suggestionQuery.exists('card');
+	// query.include('votes');
+	return suggestionQuery.each(function(suggestion) {
+
+		var relation, promise, query;
+		// Update to plan value passed in
+		// user.set('plan', request.params.plan);
+		if (counter % 100 === 0) {
+			// Set the  job's progress status
+			status.message(counter + ' votes processed.');
+		}
+		counter += 1;
+
+		relation = suggestion.relation('votes');
+		query = relation.query();
+		query.greaterThan('updatedAt', suggestion.get('backgroundUpdatedAt'));
+		promise = query.find({
+			success: function(votes) {
+				suggestion.increment('totalVotes', votes.length);
+				promise.resolve();
+			}, 
+			error: function(error) {
+				console.log('error fetching:', error);
+				promise.resolve();
+			}
+		});
+		return promise;
+	}).then(function() {
+		// Set the job's success status
+		status.success('Migration completed successfully.');
+	}, function(error) {
+		// Set the job's error status
+		status.error('Uh oh, something went wrong.');
+	});
+});*/
