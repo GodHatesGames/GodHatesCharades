@@ -9,7 +9,8 @@
 			ng-hide="loading">
 		<!-- Repeat suggestions in pairs -->
 		<div class="col-md-6 col-sm-6 col-xs-6"
-				ng-repeat="(index, suggestion) in suggestions">
+				ng-repeat="(index, suggestion) in suggestions"
+				ng-init="totalVotes = getTotalVotes(suggestion)">
 			<div class="card"
 					ng-class="getTypeClass(suggestion)">
 				<div class="cardContent">
@@ -17,9 +18,17 @@
 				</div>
 			</div>
 			<div class="well">
-				<p>Votes: {{suggestion.get('totalVotes') | number}}</p>
-				<p>Submitter: {{suggestion.get('owner').get('name')}}</p>
-				<p>Type: {{getTypeDisplay(suggestion)}}</p>
+				<p>
+					{{getTypeDisplay(suggestion)}} Card<br>
+					<ng-pluralize
+						count="totalVotes"
+						when="{'0': 'No votes.',
+								'one': '1 pity vote',
+								'other': '{{totalVotes}} votes'}">
+					</ng-pluralize>
+					<br>
+					Submitted by <b>{{suggestion.get('owner').get('name')}}</b>
+				</p>
 			</div>
 		</div>
 	</div>

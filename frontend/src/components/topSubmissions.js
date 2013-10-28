@@ -4,7 +4,7 @@ define([
 	], 
 	function(angular, app) {
 
-		app.directive('topSubmissions', ['SuggestionService', function(SuggestionService) {
+		app.directive('topSubmissions', ['SuggestionService', '$filter', function(SuggestionService, $filter) {
 			return {
 				restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 				templateUrl: 'components/topSubmissions.html',
@@ -14,7 +14,7 @@ define([
 				},
 				controller: function($scope, $element) {
 					// public vars
-					$scope.pageSize = 100;
+					$scope.pageSize = 50;
 					$scope.loading = true;
 					$scope.suggestions = [];
 					$scope.pairIndex = 0;
@@ -53,6 +53,11 @@ define([
 					$scope.getTypeClass = function(suggestion) {
 						return SuggestionService.getTypeClass(suggestion.get('type'));
 					};
+
+					$scope.getTotalVotes = function(suggestion) {
+						var totalVotes = suggestion.get('totalVotes');
+						return totalVotes ? totalVotes : 0;
+					}
 
 					// init
 					loadSuggestions();
