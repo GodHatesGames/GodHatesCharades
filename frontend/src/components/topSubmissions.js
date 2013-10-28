@@ -59,6 +59,18 @@ define([
 						return totalVotes ? totalVotes : 0;
 					}
 
+					$scope.getTotalSkips = function(suggestion) {
+						var totalSkips = suggestion.get('skipped');
+						return totalSkips ? totalSkips : 0;
+					}
+
+					$scope.getKDR = function(kills, deaths) {
+						if(deaths === 0)
+							return '∞';
+						else
+							return kills / deaths;
+					}
+
 					// init
 					loadSuggestions();
 
