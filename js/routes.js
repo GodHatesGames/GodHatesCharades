@@ -39,6 +39,10 @@ define([
 			url: "/suggestions",
 			templateUrl: "views/suggestionsView.html"
 		});
+		$stateProvider.state('top', {
+			url: "/top",
+			templateUrl: "views/topView.html"
+		});
 	}]);
 
 });

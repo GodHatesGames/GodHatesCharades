@@ -7,10 +7,13 @@
 			<a ui-sref='home'>Home</a>
 		</li>
 		<li ng-class="{ active: $state.includes('submit') }">
-			<a ui-sref='submit'>Submit card</a>
+			<a ui-sref='submit'>Submit</a>
 		</li>
 		<li ng-class="{ active: $state.includes('vote') }">
-			<a ui-sref='vote'>Vote on cards</a>
+			<a ui-sref='vote'>Vote</a>
+		</li>
+		<li ng-class="{ active: $state.includes('top') }">
+			<a ui-sref='top'>Top submissions</a>
 		</li>
 		<li ng-show="isAdmin()"
 			ng-class="{ active: $state.includes('suggestions') }">

@@ -4,10 +4,10 @@ define([
 	function(angular) {
 
 		// reference the module we declared earlier
-		angular.module('ExternalDataServices')
+		var externalDataService = angular.module('ExternalDataServices');
 
 		// add a factory
-		.factory('SuggestionService', ['ParseQueryAngular', function(ParseQueryAngular) {
+		externalDataService.factory('SuggestionService', ['ParseQueryAngular', function(ParseQueryAngular) {
 
 			var Suggestion = Parse.Object.extendAngular({
 				className:"Suggestion",
@@ -37,7 +37,7 @@ define([
 			 		// save request_id to Parse
 			 		var _this = this;
 
-					var suggestion = new Suggestion;
+					var suggestion = new Suggestion();
 					suggestion.setText(text);
 					suggestion.setType(type);
 					suggestion.setOwner(owner);
@@ -56,12 +56,37 @@ define([
 			 	}
 			});
 
+			var TYPE_DISPLAY_CHARACTER = "Character";
+			var TYPE_DISPLAY_SCENARIO = "Scenario";
+			var TYPE_CLASS_CHARACTER = "character";
+			var TYPE_CLASS_SCENARIO = "scenario";
+			function getTypeDisplay(type) {
+				switch(type) {
+					case 0 :
+						return TYPE_DISPLAY_CHARACTER;
+					case 1 :
+						return TYPE_DISPLAY_SCENARIO;
+				}
+			}
+
+			function getTypeClass(type) {
+				switch(type) {
+					case 0 :
+						return TYPE_CLASS_CHARACTER;
+					case 1 :
+						return TYPE_CLASS_SCENARIO;
+				}
+			}
+
 			// Return a simple API : model or collection.
 			return {
 				model: Suggestion,
-				collection: Suggestions
+				collection: Suggestions,
+				getTypeDisplay: getTypeDisplay,
+				getTypeClass: getTypeClass
 			};
 
 		}]);
+
 	}
 );
