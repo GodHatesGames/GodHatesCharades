@@ -76,6 +76,7 @@ define([
 				Parse.User.logOut();
 				user.loggedin = false;
 				$location.path('/');
+				// TODO find a better solution for this
 				setTimeout(function(){
 					window.location.reload();
 				}, 1000);

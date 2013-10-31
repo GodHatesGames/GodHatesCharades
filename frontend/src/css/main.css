@@ -4,6 +4,10 @@ body {
 	padding-bottom: 20px;
 }
 
+.dropdown a {
+	cursor: pointer;
+}
+
 .footer {
 	padding-left: 15px;
 	padding-right: 15px;

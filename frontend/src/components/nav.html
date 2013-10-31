@@ -3,6 +3,8 @@
 		<a class="navbar-brand" ui-sref='home'>God Hates Charades</a>
 	</div>
 	<ul class="nav navbar-nav navbar-right">
+	
+		<!-- universal nav -->
 		<li ng-hide="isHome">
 			<a ui-sref='home'>Home</a>
 		</li>
@@ -15,6 +17,8 @@
 		<li ng-class="{ active: $state.includes('top') }">
 			<a ui-sref='top'>Top submissions</a>
 		</li>
+
+		<!-- user stuff -->
 		<li ng-class="{ active: $state.includes('login') }">
 			<a ui-sref='login'
 				ng-show="parseUser.isAnon()">
@@ -23,7 +27,8 @@
 		</li>
 		<li class="dropdown"
 			ng-hide="parseUser.isAnon()">
-			<a class="dropdown-toggle" data-toggle="dropdown">
+			<a class="dropdown-toggle" 
+				data-toggle="dropdown">
 				{{parseUser.data.attributes.name}}
 				<b class="caret"></b>
 			</a>
@@ -34,14 +39,23 @@
 						My Profile
 					</a>
 				</li>
-				<li role="presentation" class="divider"></li>
-				<li role="presentation" class="dropdown-header">Admin</li>
-				<li ng-class="{ active: $state.includes('suggestions') }">
+				<!-- Admin section -->
+				<li role="presentation" 
+					class="divider"
+					ng-show="parseUser.isAdmin()"></li>
+				<li role="presentation" 
+					class="dropdown-header"
+					ng-show="parseUser.isAdmin()">
+					Admin
+				</li>
+				<li ng-class="{ active: $state.includes('suggestions') }"
+					ng-show="parseUser.isAdmin()">
 					<a ui-sref='suggestions'>Suggestions List</a>
 				</li>
 				<li role="presentation" class="divider"></li>
+				<!-- logout -->
 				<li>
-					<a ng-click="parseUser.logout()" href="#">Logout</a>
+					<a ng-click="parseUser.logout()">Logout</a>
 				</li>
 			</ul>
 		</li>
