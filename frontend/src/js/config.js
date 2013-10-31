@@ -22,7 +22,8 @@ require.config({
 		'underscore': '../bower/underscore/underscore',
 		'router': '../bower/angular-ui-router/angular-ui-router.min',
 		'grid': '../bower/ng-grid/ng-grid.min',
-		'parse': 'vendor/parse-1.2.12.min'
+		'parse': 'vendor/parse-1.2.12.min',
+		'angular-bootstrap': '../bower/angular-bootstrap/ui-bootstrap-tpls'
 	},
 	shim: {
 		'angular': {
@@ -45,6 +46,9 @@ require.config({
 		},
 		'grid': {
 			deps: ['angular', 'jquery']
+		},
+		'angular-bootstrap': {
+			deps: ['angular']
 		}
 	},
 	priority: [

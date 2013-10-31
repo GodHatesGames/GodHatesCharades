@@ -11,7 +11,7 @@ define([
 				replace: true,
 				scope: true,
 				controller: function($scope, $element) {
-					$scope.isAdmin = parseUser.isAdmin;
+					$scope.parseUser = parseUser;
 				}
 			}
 		}]);

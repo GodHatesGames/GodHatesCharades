@@ -21,9 +21,10 @@
     "angular-ui-router": "~0.2.0",
     "ng-grid": "~2.0.7",
     "jquery": "~2.0.3",
-    "requirejs": "~2.1.8"
+    "requirejs": "~2.1.8",
+    "angular-bootstrap": "~0.6.0"
   },
-  "install" : {
+  "install": {
     "path": "bower",
     "sources": {
       "underscore": "bower_components/underscore/underscore.js"

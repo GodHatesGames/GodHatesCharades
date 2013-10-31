@@ -5,6 +5,7 @@ require( [
 	'app',
 	'routes',
 	'router',
+	'angular-bootstrap',
 	'vn/ParseServices',
 	'vn/_ParseObjects',
 	'vn/ParseQueryAngular',
