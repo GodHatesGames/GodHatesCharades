@@ -17,6 +17,7 @@ require( [
 	'cp/vote',
 	'cp/suggestions',
 	'cp/topSubmissions',
+	'cp/userSubmissions',
 	'cp/submit',
 	'dt/Card',
 	'dt/Suggestion'

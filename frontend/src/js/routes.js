@@ -35,6 +35,13 @@ define([
 			url: "/login",
 			templateUrl: "views/loginView.html"
 		});
+		$stateProvider.state('profile', {
+			url: "/profile",
+			templateUrl: "views/profileView.html",
+			resolve: {
+				parseUser: "parseUser"
+			}
+		});
 		$stateProvider.state('suggestions', {
 			url: "/suggestions",
 			templateUrl: "views/suggestionsView.html"
