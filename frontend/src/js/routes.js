@@ -37,9 +37,14 @@ define([
 		});
 		$stateProvider.state('profile', {
 			url: "/profile",
-			templateUrl: "views/profileView.html",
-			resolve: {
-				parseUser: "parseUser"
+			templateUrl: "views/profileView.html"
+		});
+		$stateProvider.state('profile.public', {
+			url: "/:userid",
+			templateUrl: "views/publicProfileView.html",
+			controller: function ($stateParams) {
+				// If we got here from a url of /contacts/42
+				expect($stateParams).toBe({contactId: "7gc8f3NCnP"});
 			}
 		});
 		$stateProvider.state('suggestions', {
