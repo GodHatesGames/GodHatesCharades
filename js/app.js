@@ -20,7 +20,8 @@ define([
 											'ExternalDataServices',
 											'ngGrid',
 											'textareaNoreturn',
-											'parse.user'
+											'parse.user',
+											'ui.bootstrap'
 										]);
 		console.log('starting app')
 		app.run(['ParseSDK', 

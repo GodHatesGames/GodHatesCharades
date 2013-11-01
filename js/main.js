@@ -5,6 +5,7 @@ require( [
 	'app',
 	'routes',
 	'router',
+	'angular-bootstrap',
 	'vn/ParseServices',
 	'vn/_ParseObjects',
 	'vn/ParseQueryAngular',
@@ -16,6 +17,7 @@ require( [
 	'cp/vote',
 	'cp/suggestions',
 	'cp/topSubmissions',
+	'cp/userSubmissions',
 	'cp/submit',
 	'dt/Card',
 	'dt/Suggestion'

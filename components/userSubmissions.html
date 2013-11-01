@@ -4,8 +4,7 @@
 		Loading...
 	</div>
 
-	<!-- Repeat Pairs -->
-	<div class="cardContainer"
+	<div class="cardContainer row"
 			ng-hide="loading">
 		<!-- Repeat suggestions in pairs -->
 		<div class="col-md-6 col-sm-6 col-xs-6"
@@ -36,7 +35,7 @@
 					<br>
 					{{getKDR(totalVotes, totalSkips)}} KDR
 					<br>
-					Submitted by <a ui-sref="user({userid: suggestion.get('owner').id})"><b>{{suggestion.get('owner').get('name')}}</b></a>
+					Submitted by <b>{{suggestion.get('owner').get('name')}}</b>
 				</p>
 			</div>
 		</div>

@@ -1,8 +1,9 @@
 <div class="userinfo">
-	<p class="form-control-static">{{parseUser.data.attributes.email}}</p>
-	<p class="form-control-static">{{parseUser.data.attributes.name}}</p>
-	<button class="btn btn-info"
-			ng-click="parseUser.logout()">
-		Log out
-	</button>
+	<div ng-hide="loading || error">
+		<p class="form-control-static">{{user.attributes.name}}</p>
+		<p class="form-control-static">{{user.attributes.email}}</p>
+	</div>
+	<div ng-show="error">
+		<p>Damn, this user could not be found.</p>
+	</div>
 </div>

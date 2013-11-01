@@ -35,6 +35,14 @@ define([
 			url: "/login",
 			templateUrl: "views/loginView.html"
 		});
+		$stateProvider.state('user', {
+			url: "/user/:userid",
+			templateUrl: "views/publicProfileView.html",
+		controller: function ($scope, $stateParams) {
+			// If we got here from a url of /contacts/42
+			$scope.userid = $stateParams.userid;
+		}
+		});
 		$stateProvider.state('suggestions', {
 			url: "/suggestions",
 			templateUrl: "views/suggestionsView.html"
