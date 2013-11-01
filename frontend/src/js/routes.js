@@ -35,17 +35,13 @@ define([
 			url: "/login",
 			templateUrl: "views/loginView.html"
 		});
-		$stateProvider.state('profile', {
-			url: "/profile",
-			templateUrl: "views/profileView.html"
-		});
-		$stateProvider.state('profile.public', {
-			url: "/:userid",
+		$stateProvider.state('user', {
+			url: "/user/:userid",
 			templateUrl: "views/publicProfileView.html",
-			controller: function ($stateParams) {
-				// If we got here from a url of /contacts/42
-				expect($stateParams).toBe({contactId: "7gc8f3NCnP"});
-			}
+		controller: function ($scope, $stateParams) {
+			// If we got here from a url of /contacts/42
+			$scope.userid = $stateParams.userid;
+		}
 		});
 		$stateProvider.state('suggestions', {
 			url: "/suggestions",

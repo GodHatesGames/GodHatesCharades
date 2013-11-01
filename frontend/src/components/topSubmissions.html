@@ -36,7 +36,7 @@
 					<br>
 					{{getKDR(totalVotes, totalSkips)}} KDR
 					<br>
-					Submitted by <b>{{suggestion.get('owner').get('name')}}</b>
+					Submitted by <a ui-sref="user({userid: suggestion.get('owner').id})"><b>{{suggestion.get('owner').get('name')}}</b></a>
 				</p>
 			</div>
 		</div>
