@@ -18,6 +18,8 @@ body {
 	border: 1px solid #DDD;
 	border-radius: 5px;
 	text-align: center;
+	max-width: 200px;
+	margin: 0 auto;
 }
 
 .card:before {
@@ -75,6 +77,11 @@ body {
 }
 .card .editable:-ms-input-placeholder { /* Internet Explorer 10+ */
     color: rgba(0, 0, 0, 0.5);
+}
+
+.cardInfo {
+	max-width: 200px;
+	margin: 0 auto;
 }
 
 /* Customize container */
