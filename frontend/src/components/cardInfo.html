@@ -1,0 +1,22 @@
+<div class="well">
+	<p>
+		{{cardService.getTypeDisplay(card)}} Card<br>
+		<ng-pluralize
+			count="totalVotes"
+			when="{'0': 'No votes.',
+					'one': '1 pity vote',
+					'other': '{{totalVotes}} votes'}">
+		</ng-pluralize>
+		<br>
+		<ng-pluralize
+			count="totalSkips"
+			when="{'0': 'No skips.',
+					'one': '1 measly skip',
+					'other': '{{totalVotes}} skips'}">
+		</ng-pluralize>
+		<br>
+		{{cardService.getKDR(totalVotes, totalSkips)}} KDR
+		<br>
+		Submitted by <a ui-sref="user({userid: card.get('owner').id})"><b>{{card.get('owner').get('name')}}</b></a>
+	</p>
+</div>

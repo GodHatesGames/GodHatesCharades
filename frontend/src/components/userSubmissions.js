@@ -4,7 +4,7 @@ define([
 	], 
 	function(angular, app) {
 
-		app.directive('userSubmissions', ['SuggestionService', '$filter', function(SuggestionService, $filter) {
+		app.directive('userSubmissions', ['$filter', 'cardService', function($filter, cardService) {
 			return {
 				restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 				templateUrl: 'components/userSubmissions.html',
@@ -42,6 +42,7 @@ define([
 					}
 
 					function onSuggestionsLoaded(suggestions) {
+						cardService.cache(suggestions);
 						$scope.suggestions = $scope.suggestions.concat(suggestions);
 						$scope.loading = false;
 						$scope.$digest();
@@ -49,31 +50,6 @@ define([
 
 					function onSuggestionsError(error) {
 						console.log('couldn\'t find any pairs:', error);
-					}
-
-					$scope.getTypeDisplay = function(suggestion) {
-						return SuggestionService.getTypeDisplay(suggestion.get('type'));
-					};
-
-					$scope.getTypeClass = function(suggestion) {
-						return SuggestionService.getTypeClass(suggestion.get('type'));
-					};
-
-					$scope.getTotalVotes = function(suggestion) {
-						var totalVotes = suggestion.get('totalVotes');
-						return totalVotes ? totalVotes : 0;
-					}
-
-					$scope.getTotalSkips = function(suggestion) {
-						var totalSkips = suggestion.get('skipped');
-						return totalSkips ? totalSkips : 0;
-					}
-
-					$scope.getKDR = function(kills, deaths) {
-						if(deaths === 0)
-							return '∞';
-						else
-							return kills / deaths;
 					}
 
 					// init
