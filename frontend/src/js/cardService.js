@@ -70,13 +70,20 @@ define([
 				})
 			}
 
-			function getCard(cardId) {
+			function getCard(cardId, successCallback, errorCallback) {
 				var currentCache = cardsById[cardId];
-				if(currentCache)
-					return currentCache;
-				else {
-					console.log('TODO: Fetch card from server');
-					return null;
+				if(currentCache && successCallback) {
+					successCallback(currentCache);
+				} else if(successCallback && errorCallback){
+					// console.log('TODO: Fetch card from server');
+					var Suggestion = Parse.Object.extend("Suggestion");
+					var query = new Parse.Query(Suggestion);
+					query.get(cardId, {
+						success: successCallback,
+						error: errorCallback
+					});
+				} else {
+					console.log('must provide success and error callbacks');
 				}
 			}
 

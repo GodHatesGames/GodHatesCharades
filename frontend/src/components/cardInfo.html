@@ -1,6 +1,6 @@
 <div class="well">
 	<p>
-		{{cardService.getTypeDisplay(card)}} Card<br>
+		{{typeDisplay}} Card<br>
 		<ng-pluralize
 			count="totalVotes"
 			when="{'0': 'No votes.',
@@ -15,8 +15,10 @@
 					'other': '{{totalVotes}} skips'}">
 		</ng-pluralize>
 		<br>
-		{{cardService.getKDR(totalVotes, totalSkips)}} KDR
+		{{kdr}} KDR
 		<br>
-		Submitted by <a ui-sref="user({userid: card.get('owner').id})"><b>{{card.get('owner').get('name')}}</b></a>
+		Submitted by <a ui-sref="user({userid: cardOwnerId})"><b>{{cardOwnerName}}</b></a>
+		<br>
+		<a ui-sref="card({cardid: id})">More stats</a>
 	</p>
 </div>

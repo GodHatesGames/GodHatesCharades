@@ -4,7 +4,7 @@ define([
 	], 
 	function(angular, app) {
 
-		app.directive('card', ['parseUser', 'cardService', function(parseUser, cardService) {
+		app.directive('card', ['parseUser', 'cardService', '$rootScope', function(parseUser, cardService, $rootScope) {
 			return {
 				restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 				templateUrl: 'components/card.html',
@@ -13,10 +13,19 @@ define([
 					id: '=id'
 				},
 				controller: function($scope, $element) {
-					$scope.cardService = cardService;
-					var card = cardService.getCard($scope.id);
-					if(card)
+					$scope.typeClass = "";
+					cardService.getCard($scope.id, onSuccess, onError);
+
+					function onSuccess(card) {
 						$scope.card = card;
+						$scope.typeClass = cardService.getTypeClass(card);
+						if(!$rootScope.$$phase)
+							$scope.$digest();
+					}
+
+					function onError(error) {
+						console.log('error fetching card:', error);
+					}
 				}
 			}
 		}]);
