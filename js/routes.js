@@ -38,10 +38,16 @@ define([
 		$stateProvider.state('user', {
 			url: "/user/:userid",
 			templateUrl: "views/publicProfileView.html",
-		controller: function ($scope, $stateParams) {
-			// If we got here from a url of /contacts/42
-			$scope.userid = $stateParams.userid;
-		}
+			controller: function ($scope, $stateParams) {
+				$scope.userid = $stateParams.userid;
+			}
+		});
+		$stateProvider.state('card', {
+			url: "/card/:cardid",
+			templateUrl: "views/cardView.html",
+			controller: function ($scope, $stateParams) {
+				$scope.cardid = $stateParams.cardid;
+			}
 		});
 		$stateProvider.state('suggestions', {
 			url: "/suggestions",
