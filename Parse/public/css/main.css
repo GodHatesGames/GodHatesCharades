@@ -1,0 +1,137 @@
+/* Space out content a bit */
+body {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.dropdown a {
+	cursor: pointer;
+}
+
+.footer {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.card {
+	position: relative;	/*relative size hack*/
+	border: 1px solid #DDD;
+	border-radius: 5px;
+	text-align: center;
+	max-width: 200px;
+	margin: 0 auto;
+}
+
+.card:before {
+	/*relative size hack*/
+	content: "";
+	display: block;
+	padding-top: 150%;
+	/* END relative size hack*/
+}
+
+.cardContent {
+	/* relative size hack*/
+	position:  absolute;
+	top: 45%;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	/* END relative size hack*/
+	padding: 5%;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.card.character {
+	background-color: #FCF9C5;
+	border-color: #E9E6B7;
+}
+
+.card.character .editable, .card.character {
+	color: black;
+	font-weight: bold;
+}
+
+.card.scenario {
+	background-color: #FCEAC5;
+	border-color: #E6D6B6;
+}
+
+.card.scenario .editable, .card.scenario {
+	color: black;
+}
+
+.card .editable::-webkit-input-placeholder { /* WebKit browsers */
+    color: rgba(0, 0, 0, 0.5);
+}
+.card .editable:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: rgba(0, 0, 0, 0.5);
+}
+.card .editable::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: rgba(0, 0, 0, 0.5);
+}
+.card .editable:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.cardInfo {
+	max-width: 200px;
+	margin: 0 auto;
+}
+
+/* Customize container */
+.container-narrow > hr {
+	margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+	text-align: center;
+	border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+	font-size: 21px;
+	padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+.marketing {
+	margin: 40px 0;
+}
+.marketing p + h4 {
+	margin-top: 28px;
+}
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+	/* Remove the bottom border on the jumbotron for visual effect */
+	.jumbotron {
+		border-bottom: 0;
+	}
+
+}
+
+/* Responsive: less than tablets */
+@media (max-width: 767px) {
+
+	.navbar-nav {
+		margin: 0;
+	}
+}
+
+
+/* Basic Grid Style */
+
+.gridStyle {
+	height: 500px;
+	text-align: center;
+}
+
+.clear {
+	clear: both;
+}

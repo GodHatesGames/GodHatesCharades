@@ -1,0 +1,29 @@
+<div id="loginView">
+	<!-- <link rel="stylesheet" type="text/css" href="css/loginView.css"> -->
+	<div class="row">
+		<!-- left side -->
+		<h3 class="col-sm-6">Create a new account</h3>
+
+		<!-- right side -->
+		<h3 class="col-sm-6"
+				ng-hide="parseUser.isReal()">
+			Login
+		</h3>
+		<h3 class="col-sm-6"
+			ng-show="parseUser.isReal()">
+			You're logged in
+		</h3>
+	</div>
+	<div class="row">
+		<!-- left side -->
+		<signup class="col-sm-6"></signup>
+
+		<!-- right side -->
+		<login class="col-sm-6"
+				ng-hide="parseUser.isReal()">
+		</login>
+		<userinfo class="col-sm-6"
+					ng-show="parseUser.isReal()">
+		</userinfo>
+	</div>
+</div>

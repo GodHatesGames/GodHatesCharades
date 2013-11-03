@@ -1,0 +1,51 @@
+<div>
+	<link rel="stylesheet" type="text/css" href="components/submit.css">
+	<h4>{{typeDisplay}}</h4>
+	<div ng-hide="success">
+		<div class="card"
+				ng-class="typeClass">
+			<div class="submitForm cardContent">
+					<!-- <input type="text" 
+							ng-model="text" 
+							placeholder="{{example}}" /> -->
+					<textarea ng-model="text"
+								class="editable"
+								placeholder="{{example}}"
+								maxlength="75"
+								required
+								textarea-noreturn>
+					</textarea>
+					<!-- <div contentEditable="true"
+							class="editable" 
+							ng-model="text"
+							></div> -->
+			</div>
+		</div>
+		<div class="alert" ng-class="characterCount()">{{text.length}} / {{maxChars}} Characters</div>
+		<button type="submit" 
+				class="btn btn-success submitBtn"
+				ng-click="submit()">
+			Submit new {{typeDisplay}}
+		</button>
+	</div>
+	<div class="submitForm"
+			ng-show="success">
+			<div class="card submitted"
+					ng-class="typeClass">
+				<h5>Thanks for the submission{{displayName()}}! Your card will be up soon.</h5>
+				<p ng-hide="parseUser.loggedin">
+					Want to people to know how brilliant you are? Signup and we'll credit your name or nickname on the card!
+				</p>
+				<a ui-sref="login"
+					class="btn btn-success"
+					ng-hide="parseUser.loggedin">
+					Signup Now
+				</a>
+			</div>
+
+			<button ng-click="reset()"
+					class="btn btn-info">
+				Create a new Card
+			</button>
+	</div>
+</div>
