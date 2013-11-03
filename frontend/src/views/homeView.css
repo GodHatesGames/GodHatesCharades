@@ -8,6 +8,7 @@
 
 #homeView .thumbnail {
 	background-size: cover;
+	background-position: center center;
 	height: 250px;
 }
 
