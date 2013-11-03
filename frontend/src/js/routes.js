@@ -15,7 +15,7 @@ define([
 
 		$stateProvider.state('home', {
 			url: "/",
-			templateUrl: "views/home.html",
+			templateUrl: "views/homeView.html",
 			onEnter: function($rootScope) {
 				$rootScope.isHome = true;
 			},
