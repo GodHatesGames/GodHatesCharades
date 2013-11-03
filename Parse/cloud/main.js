@@ -16,6 +16,8 @@ Parse.Cloud.define('getRandomSuggestionPairs', function(request, response) {
 		query.limit(SUGGESTION_COUNT);
 		query.equalTo('type', type);
 		query.ascending('updatedAt');
+		query.equalTo('approved', true);
+		query.doesNotExist('card');
 		if(request.params.skip)
 			query.skip(request.params.skip);
 		query.find({
