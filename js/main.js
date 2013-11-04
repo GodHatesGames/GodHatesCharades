@@ -7,9 +7,6 @@ require( [
 	'router',
 	'cardService',
 	'angular-bootstrap',
-	'vn/ParseServices',
-	'vn/_ParseObjects',
-	'vn/ParseQueryAngular',
 	'cp/textarea-noreturn',
 	'cp/card',
 	'cp/cardInfo',
@@ -22,9 +19,7 @@ require( [
 	'cp/moderator',
 	'cp/topSubmissions',
 	'cp/userSubmissions',
-	'cp/submit',
-	'dt/Card',
-	'dt/Suggestion'
+	'cp/submit'
 	], 
 	function(angular, Parse, _, app) {
 		'use strict';

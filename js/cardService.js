@@ -7,7 +7,9 @@ define([
 			var cardService = {
 				cache: cache,
 				getTypeDisplay: getTypeDisplay,
+				getTypeDisplayByType: getTypeDisplayByType,
 				getTypeClass: getTypeClass,
+				getTypeClassByType: getTypeClassByType,
 				getTotalVotes: getTotalVotes,
 				getTotalSkips: getTotalSkips,
 				getKDR: getKDR,
@@ -23,6 +25,10 @@ define([
 
 			function getTypeDisplay(card) {
 				var type = card.get('type');
+				return getTypeDisplayByType(type);
+			};
+
+			function getTypeDisplayByType(type) {
 				switch(type) {
 					case 0 :
 						return TYPE_DISPLAY_CHARACTER;
@@ -33,6 +39,10 @@ define([
 
 			function getTypeClass(card) {
 				var type = card.get('type');
+				getTypeClassByType(type);
+			};
+
+			function getTypeClassByType(type) {
 				switch(type) {
 					case 0 :
 						return TYPE_CLASS_CHARACTER;

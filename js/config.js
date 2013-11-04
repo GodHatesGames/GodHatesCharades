@@ -15,7 +15,6 @@ require.config({
 		'vn': 'vendor',
 		'bw': '../bower',
 		'cp': '../components',
-		'dt': '../data',
 		'gm': '../game',
 		'angular': '../bower/angular/angular',
 		'jquery': '../bower/jquery/jquery',

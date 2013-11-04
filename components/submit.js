@@ -4,7 +4,7 @@ define([
 	], 
 	function(angular, app) {
 
-		app.directive('submit', ['SuggestionService', 'parseUser', function(SuggestionService, parseUser) {
+		app.directive('submit', ['cardService', 'parseUser', function(cardService, parseUser) {
 			return {
 				restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 				templateUrl: 'components/submit.html',
@@ -52,8 +52,8 @@ define([
 						$scope.example = randomEvents[rand];
 					}
 					
-					$scope.typeDisplay = SuggestionService.getTypeDisplay($scope.type);
-					$scope.typeClass = SuggestionService.getTypeClass($scope.type);
+					$scope.typeDisplay = cardService.getTypeDisplayByType($scope.type);
+					$scope.typeClass = cardService.getTypeClassByType($scope.type);
 
 					$scope.onTextChange = function(newValue, oldValue) {
 						if(newValue === undefined || newValue === null)
@@ -71,11 +71,20 @@ define([
 					};
 
 					$scope.submit = function() {
-						var suggestions = new SuggestionService.collection()
-						var promise = suggestions.addSuggestion($scope.text, $scope.type, parseUser.data);
-						promise.then(function() {
-							$scope.success = true;
-						});
+						var Suggestion = Parse.Object.extend("Suggestion");
+						var suggestion = new Suggestion();
+						suggestion.set('text', $scope.text);
+						suggestion.set('type', $scope.type);
+						suggestion.set('owner', parseUser.data);
+						suggestion.save({
+							success: function(suggestion) {
+								$scope.success = true;
+								$scope.$digest();
+							},
+							error: function(suggestion, error) {
+								console.log('error:', error.message);
+							}
+						})
 					}
 
 					$scope.reset = function() {
