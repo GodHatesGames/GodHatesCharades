@@ -15,7 +15,7 @@ define([
 
 		$stateProvider.state('home', {
 			url: "/",
-			templateUrl: "views/home.html",
+			templateUrl: "views/homeView.html",
 			onEnter: function($rootScope) {
 				$rootScope.isHome = true;
 			},
@@ -52,6 +52,10 @@ define([
 		$stateProvider.state('suggestions', {
 			url: "/suggestions",
 			templateUrl: "views/suggestionsView.html"
+		});
+		$stateProvider.state('moderation', {
+			url: "/moderation",
+			templateUrl: "views/moderationView.html"
 		});
 		$stateProvider.state('top', {
 			url: "/top",
