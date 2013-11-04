@@ -10,11 +10,21 @@ define([
 				templateUrl: 'components/card.html',
 				replace: true,
 				scope: {
-					id: '=id'
+					id: '=id',
+					updatable: '=updatable'
 				},
 				controller: function($scope, $element) {
 					$scope.typeClass = "";
 					cardService.getCard($scope.id, onSuccess, onError);
+
+					if($scope.updatable == true) {
+						$scope.$watch('id', function(newValue, oldVlue) {
+							if(newValue) {
+								console.log('id changed to:', newValue);
+								cardService.getCard($scope.id, onSuccess, onError);
+							}
+						})
+					}
 
 					function onSuccess(card) {
 						$scope.card = card;

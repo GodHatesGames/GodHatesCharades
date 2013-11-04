@@ -16,7 +16,8 @@ Parse.Cloud.define('getRandomSuggestionPairs', function(request, response) {
 		query.limit(SUGGESTION_COUNT);
 		query.equalTo('type', type);
 		query.ascending('updatedAt');
-		query.equalTo('approved', true);
+		query.equalTo('moderated', true);
+		query.equalTo('rejected', false);
 		query.doesNotExist('card');
 		if(request.params.skip)
 			query.skip(request.params.skip);
@@ -49,6 +50,29 @@ Parse.Cloud.define('getRandomSuggestionPairs', function(request, response) {
 		}
 
 		response.success(suggestionPairs);
+	}
+
+});
+
+// Use Parse.Cloud.define to define as many cloud functions as you want.
+Parse.Cloud.define('getUnmoderatedSuggestions', function(request, response) {
+	var SuggestionObject = Parse.Object.extend('Suggestion');
+	
+	var query = new Parse.Query(SuggestionObject);
+	query.limit(1000);
+	query.notEqualTo('rejected', true);
+	query.notEqualTo('moderated', true);
+	query.find({
+		success: onSuccess,
+		error: onError
+	});
+
+	function onSuccess(suggestions) {
+		response.success(suggestions);
+	}
+
+	function onError(suggestions, error) {
+		response.error(error);
 	}
 
 });
