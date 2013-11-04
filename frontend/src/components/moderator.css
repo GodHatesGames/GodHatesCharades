@@ -8,3 +8,9 @@
 .moderator .card {
 	margin-bottom: 15px;
 }
+
+.moderator form {
+	text-align: left;
+	width: 100px;
+	margin: 0 auto;
+}

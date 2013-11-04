@@ -10,14 +10,13 @@ define([
 				templateUrl: 'components/moderator.html',
 				replace: true,
 				scope: true,
-				link: function($scope, $element) {
-				},
 				controller: function($scope, $element) {
 					// public vars
 					var suggestions = [];
 					$scope.index = 0;
 					$scope.loading = true;
 					$scope.suggestion = null;
+					$scope.legalMod = '';
 					
 					Parse.Cloud.run(
 						'getUnmoderatedSuggestions',
@@ -70,6 +69,15 @@ define([
 
 						loadNext();
 					}
+
+					// Watch
+					$scope.$watch('legalMod', function(newValue, oldValue, scope) {
+						if($scope.suggestion) {
+							var currentText = $scope.suggestion.get('text');
+							var sansLegal = currentText.replace(/ (®|©|™)/, '');
+							$scope.suggestion.set('text', sansLegal + ' ' + $scope.legalMod);
+						}
+					});
 
 				}
 			}
