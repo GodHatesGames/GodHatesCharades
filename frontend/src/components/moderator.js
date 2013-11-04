@@ -34,12 +34,14 @@ define([
 						cardService.cache(suggestions);
 						$scope.loading = false;
 						$scope.suggestion = suggestions[$scope.index];
+						$scope.suggestionText = $scope.suggestion.get('text');
 						$scope.$digest();
 					}
 
 					function loadNext() {
 						$scope.index++;
 						$scope.suggestion = suggestions[$scope.index];
+						$scope.suggestionText = $scope.suggestion.get('text');
 						$compile($element);
 					}
 
@@ -57,6 +59,7 @@ define([
 					$scope.approve = function() {
 						$scope.suggestion.set('moderated', true);
 						$scope.suggestion.set('rejected', false);
+						$scope.suggestion.set('text', $scope.suggestionText);
 						$scope.suggestion.save();
 
 						loadNext();
@@ -73,9 +76,8 @@ define([
 					// Watch
 					$scope.$watch('legalMod', function(newValue, oldValue, scope) {
 						if($scope.suggestion) {
-							var currentText = $scope.suggestion.get('text');
-							var sansLegal = currentText.replace(/ (®|©|™)/, '');
-							$scope.suggestion.set('text', sansLegal + ' ' + $scope.legalMod);
+							var sansLegal = $scope.suggestionText.replace(/ (®|©|™)/, '');
+							$scope.suggestionText = sansLegal + ' ' + $scope.legalMod;
 						}
 					});
 

@@ -44,14 +44,18 @@
 					</div>
 				</div>
 			</div>
+			<div class="form-group">
+				<label for="suggestionText">New Text</label>
+				<input type="text" class="form-control" id="suggestionText" ng-model="suggestionText">
+			</div>
 		</form>
 		<button class="btn btn-success"
 				ng-click="approve()">
-			Lulz
+			Approve &amp; Save
 		</button>
 		<button class="btn btn-danger"
 				ng-click="disapprove()">
-			Lame
+			Disapprove
 		</button>
 		<button ng-click="skip()"
 				class="btn btn-warning skip">
