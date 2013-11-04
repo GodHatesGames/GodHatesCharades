@@ -45,8 +45,22 @@ define([
 		$stateProvider.state('card', {
 			url: "/card/:cardid",
 			templateUrl: "views/cardView.html",
-			controller: function ($scope, $stateParams) {
+			controller: function ($scope, $stateParams, $location) {
 				$scope.cardid = $stateParams.cardid;
+
+				// DISQUS
+				/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+				var disqus_shortname = 'godhatescharades'; // required: replace example with your forum shortname
+				var disqus_url = $location.absUrl();
+				var disqus_identifier = $stateParams.cardid;
+				// console.log('url:', disqus_url);
+
+				/* * * DON'T EDIT BELOW THIS LINE * * */
+				(function() {
+					var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+					dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+					(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+				})();
 			}
 		});
 		$stateProvider.state('suggestions', {

@@ -23,7 +23,15 @@ define([
 											'parse.user',
 											'ui.bootstrap'
 										]);
-		console.log('starting app')
+		console.log('starting app');
+
+		app.config(['$locationProvider', 
+			function($locationProvider){
+				$locationProvider.html5Mode(false);
+				$locationProvider.hashPrefix('!');
+			}
+		]);
+
 		app.run(['ParseSDK', 
 					'ExtendParseSDK', 
 					'$rootScope', 
