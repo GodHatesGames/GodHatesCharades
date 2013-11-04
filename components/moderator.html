@@ -16,6 +16,35 @@
 			ng-hide="loading">
 		<card id="suggestion.id"
 				updatable="true"></card>
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+				<div class="row">
+					<div class="radio col-md-3">
+						<label>
+							<input class="legal" type="radio" ng-model="legalMod" value="">
+						</label>
+					</div>
+					<div class="radio col-md-3">
+						<label>
+							<input class="legal" type="radio" ng-model="legalMod" value="©">
+							&copy;
+						</label>
+					</div>
+					<div class="radio col-md-3">
+						<label>
+							<input class="legal" type="radio" ng-model="legalMod" value="™">
+							&trade;
+						</label>
+					</div>
+					<div class="radio col-md-3">
+						<label>
+							<input class="legal" type="radio" ng-model="legalMod" value="®">
+							&reg;
+						</label>
+					</div>
+				</div>
+			</div>
+		</form>
 		<button class="btn btn-success"
 				ng-click="approve()">
 			Lulz
