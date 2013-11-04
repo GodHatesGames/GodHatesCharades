@@ -2,13 +2,10 @@ define([
 	'angular',
 	'parse',
 	'underscore',
-	'vn/ParseServices',
-	'vn/_ParseObjects',
-	'vn/ParseQueryAngular',
 	'parseUser',
 	'grid'
 	], 
-	function (angular, Parse, _, ParseServices, _ParseObjects, ParseQueryAngular) {
+	function (angular, Parse, _) {
 
 		// Parse Init
 		Parse.initialize(CONFIG.PARSE_APP_ID, CONFIG.PARSE_JS_KEY);
@@ -16,8 +13,6 @@ define([
 		// Angular Init
 		var app = angular.module('app', ['ng', 
 											'ui.router',
-											'ParseServices',
-											'ExternalDataServices',
 											'ngGrid',
 											'textareaNoreturn',
 											'parse.user',
@@ -32,15 +27,11 @@ define([
 			}
 		]);
 
-		app.run(['ParseSDK', 
-					'ExtendParseSDK', 
-					'$rootScope', 
+		app.run(['$rootScope', 
 					'$state', 
 					'$stateParams', 
 					'parseUser', 
-					function(ParseSDK, 
-								ExtendParseSDK, 
-								$rootScope,   
+					function($rootScope,   
 								$state,   
 								$stateParams,
 								parseUser

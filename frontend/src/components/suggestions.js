@@ -1,11 +1,10 @@
 define([
 	'angular',
-	'app',
-	'dt/Suggestion'
+	'app'
 	], 
 	function(angular, app) {
 
-		app.directive('suggestions', ['$compile', 'SuggestionService', function($compile, SuggestionService) {
+		app.directive('suggestions', ['$compile', function($compile) {
 			return {
 				restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 				templateUrl: 'components/suggestions.html',
