@@ -1,21 +1,21 @@
-#homeView h4, #homeView h2 {
+#rulesView h4 {
 	text-align: center;
 }
 
-#homeView .thumbnail {
+#rulesView .thumbnail {
 	background-size: cover;
 	background-position: center center;
 	height: 250px;
 }
 
-#homeView .thumbnail.actor {
+#rulesView .thumbnail.actor {
 	background-image: url(http://placehold.it/250x250);
 }
 
-#homeView .thumbnail.guesser {
+#rulesView .thumbnail.guesser {
 	background-image: url(http://placehold.it/250x250);
 }
 
-#homeView .thumbnail.god {
+#rulesView .thumbnail.god {
 	background-image: url(http://placehold.it/250x250);
 }

@@ -8,6 +8,9 @@
 		<li ng-hide="isHome">
 			<a ui-sref='home'>Home</a>
 		</li>
+		<li ng-class="{ active: $state.includes('rules') }">
+			<a ui-sref='rules'>Rules</a>
+		</li>
 		<li ng-class="{ active: $state.includes('submit') }">
 			<a ui-sref='submit'>Submit</a>
 		</li>

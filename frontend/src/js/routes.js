@@ -67,6 +67,10 @@ define([
 			url: "/suggestions",
 			templateUrl: "views/suggestionsView.html"
 		});
+		$stateProvider.state('rules', {
+			url: "/rules",
+			templateUrl: "views/rulesView.html"
+		});
 		$stateProvider.state('moderation', {
 			url: "/moderation",
 			templateUrl: "views/moderationView.html"
