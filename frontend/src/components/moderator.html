@@ -7,13 +7,17 @@
 			ng-show="loading">
 		Loading...</div>
 
+	<div class="alert alert-info" 
+			ng-show="allApproved && !loading">
+		Thats all folks... dont you have something better you could be doing?</div>
+
 	<!-- Skip button -->
 
 	<hr/>
 
 	<!-- Repeat suggestions in pairs -->
 	<div class="cardContainer"
-			ng-hide="loading">
+			ng-hide="loading || allApproved">
 		<card id="suggestion.id"
 				updatable="true"></card>
 		<form class="form-horizontal" role="form">

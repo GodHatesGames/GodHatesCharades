@@ -17,6 +17,7 @@ define([
 					$scope.loading = true;
 					$scope.suggestion = null;
 					$scope.legalMod = '';
+					$scope.allApproved = false;
 					
 					Parse.Cloud.run(
 						'getUnmoderatedSuggestions',
@@ -30,11 +31,16 @@ define([
 					// Private methods
 
 					function onSuggestionsLoaded(newSuggestions) {
-						suggestions = newSuggestions;
-						cardService.cache(suggestions);
+						if(newSuggestions.length > 0) {
+							suggestions = newSuggestions;
+							cardService.cache(suggestions);
+							$scope.suggestion = suggestions[$scope.index];
+							$scope.suggestionText = $scope.suggestion.get('text');
+							$scope.allApproved = false;
+						} else {
+							$scope.allApproved = true;
+						}
 						$scope.loading = false;
-						$scope.suggestion = suggestions[$scope.index];
-						$scope.suggestionText = $scope.suggestion.get('text');
 						$scope.$digest();
 					}
 
