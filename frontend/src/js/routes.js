@@ -45,8 +45,41 @@ define([
 		$stateProvider.state('card', {
 			url: "/card/:cardid",
 			templateUrl: "views/cardView.html",
-			controller: function ($scope, $stateParams, $location) {
+			resolve: {
+				bitly: function($stateParams, $location, $q, $timeout, $rootScope) {
+					var voteId = $stateParams.voteid;
+					var longUrl = 'http://godhatescharades.com/#!/card/' + $stateParams.cardid;
+					var deferred = $q.defer();
+
+					var params = {
+						access_token: '9635aa9298c0745e2afbed732ebab820ad0b699d',
+						longUrl: longUrl
+					};
+					
+					$.ajax({
+						type: 'GET',
+						url: 'https://api-ssl.bitly.com/v3/shorten',
+						async: false,
+						contentType: "application/json",
+						dataType: 'jsonp',
+						data: params
+					}).then(function(data) {
+						var url = data.data.url;
+						deferred.resolve(url);
+						$rootScope.$digest();
+						return data;
+					}, function(data) {
+						console.log('error getting bitly link');
+						deferred.resolve(longUrl);
+						$rootScope.$digest();
+					});
+
+					return deferred.promise;
+				}
+			},
+			controller: function (bitly, $scope, $stateParams, $location, $window) {
 				$scope.cardid = $stateParams.cardid;
+				$scope.bitly = bitly;
 
 				// DISQUS
 				/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -61,6 +94,16 @@ define([
 					dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
 					(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 				})();
+				/* END DISQUS */
+
+				/* ADD THIS */
+				$window.addthis_share = {
+					url: bitly,
+					title: 'Help me support my charity:'
+				};
+
+				jQuery('body').append($('<script>var addthis_config = {"data_track_addressbar":true};</script><script src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527852867cd289ce"></script>'));
+				/* END ADD THIS */
 			}
 		});
 		$stateProvider.state('suggestions', {
