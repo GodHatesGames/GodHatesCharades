@@ -1,0 +1,16 @@
+.moderator {
+}
+
+.moderator .cardContainer {
+	text-align: center;
+}
+
+.moderator .card {
+	margin-bottom: 15px;
+}
+
+.moderator form {
+	text-align: left;
+	width: 170px;
+	margin: 0 auto;
+}

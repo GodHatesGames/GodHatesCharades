@@ -1,0 +1,39 @@
+<div class="topSubmissions">
+
+	<!-- Repeat Pairs -->
+	<div class="cardContainer"
+			infinite-scroll="loadSuggestions()"
+			infinite-scroll-disabled="loading"
+			infinite-scroll-immediate-check="true">
+			<!-- Repeat suggestions in pairs -->
+			<table class="table table-bordered">
+				<tr>
+					<th>#</th>
+					<th>Text</th>
+					<th>Votes</th>
+					<th>Skips</th>
+					<th>Submitter</th>
+				</tr>
+				<tr ng-repeat="(index, suggestion) in suggestions">
+					<td ng-bind="index + 1"></td>
+					<!-- Text -->
+					<td ng-bind="suggestion.attributes.text"></td>
+					<!-- Votes -->
+					<td ng-bind="suggestion.attributes.totalVotes | number" 
+						ng-show="suggestion.attributes.totalVotes"></td>
+					<td ng-hide="suggestion.attributes.totalVotes">0</td>
+					<!-- Skips -->
+					<td ng-bind="suggestion.attributes.skipped | number" 
+						ng-show="suggestion.attributes.skipped"></td>
+					<td ng-hide="suggestion.attributes.skipped">0</td>
+					<!-- Submitter -->
+					<td ng-bind="suggestion.attributes.owner.attributes.name"></td>
+				</tr>
+			</table>
+	</div>
+
+	<div class="loading alert alert-info" 
+			ng-show="loading">
+		Loading...
+	</div>
+</div>

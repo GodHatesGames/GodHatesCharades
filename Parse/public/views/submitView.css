@@ -1,0 +1,18 @@
+#submitView {
+	text-align: center;
+}
+
+#submitView .submitForm:not(:last-child) {
+	margin-right: 15px;
+}
+
+@media (max-width: 525px) {
+	#submitView .submitForm {
+		margin-right: 0 !important;
+		margin-bottom: 15px;
+	}
+}
+
+#submitView .card {
+	margin-bottom: 15px;
+}

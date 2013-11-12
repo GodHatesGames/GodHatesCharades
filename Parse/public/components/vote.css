@@ -1,0 +1,26 @@
+.vote .suggestionPair {
+	margin-bottom: 15px;
+}
+
+.vote .cardContainer {
+	cursor: pointer;
+}
+
+.vote .cardContainer .card {
+	-webkit-transition: all 0.25s ease;
+}
+
+
+.vote .cardContainer:hover .card {
+	-webkit-transform: scale(1.05, 1.05);
+}
+
+.vote .separator {
+	text-align: center;
+	margin: 25px 0;
+	font-weight: bold;
+}
+
+.vote .skip {
+	margin-top: 15px;
+}
