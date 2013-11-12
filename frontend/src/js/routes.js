@@ -33,7 +33,13 @@ define([
 		});
 		$stateProvider.state('login', {
 			url: "/login",
-			templateUrl: "views/loginView.html"
+			templateUrl: "views/loginView.html",
+			resolve: {
+				parseUser: 'parseUser'
+			},
+			controller: function(parseUser, $scope) {
+				$scope.parseUser = parseUser;
+			}
 		});
 		$stateProvider.state('user', {
 			url: "/user/:userid",

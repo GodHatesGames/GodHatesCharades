@@ -20,8 +20,8 @@ define([
 					$scope.login = function() {
 						console.log('logging in:', $scope.email, $scope.password);
 						var promise = parseUser.connect($scope.email, $scope.password);
-						promise.then(function() {
-							$state.go('profile', {
+						promise.then(function(user) {
+							$state.go('user', {
 								userid: user.id
 							});
 						});
