@@ -15,13 +15,15 @@ define([
 				},
 				controller: function($scope, $element) {
 					$scope.typeClass = "";
-					cardService.getCard($scope.id, onSuccess, onError);
+					var promise = cardService.getCard($scope.id);
+					promise.then(onSuccess, onError);
 
 					if($scope.updatable == true) {
 						$scope.$watch('id', function(newValue, oldVlue) {
 							if(newValue) {
 								console.log('id changed to:', newValue);
-								cardService.getCard($scope.id, onSuccess, onError);
+								var promise = cardService.getCard($scope.id);
+								promise.then(onSuccess, onError);
 							}
 						})
 					}

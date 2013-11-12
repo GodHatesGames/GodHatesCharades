@@ -3,7 +3,7 @@ define([
 	], 
 	function(app) {
 
-		app.service('cardService', [function() {
+		app.service('cardService', ['$q', '$rootScope',function($q, $rootScope) {
 			var cardService = {
 				cache: cache,
 				getTypeDisplay: getTypeDisplay,
@@ -80,20 +80,22 @@ define([
 				})
 			}
 
-			function getCard(cardId, successCallback, errorCallback) {
+			function getCard(cardId) {
+				var returnVal;
 				var currentCache = cardsById[cardId];
-				if(currentCache && successCallback) {
-					successCallback(currentCache);
-				} else if(successCallback && errorCallback){
+				if(currentCache) {
+					return $q.when(currentCache);
+				} else {
+					var defer = $q.defer();
 					// console.log('TODO: Fetch card from server');
 					var Suggestion = Parse.Object.extend("Suggestion");
 					var query = new Parse.Query(Suggestion);
-					query.get(cardId, {
-						success: successCallback,
-						error: errorCallback
-					});
-				} else {
-					console.log('must provide success and error callbacks');
+					var promise = query.get(cardId);
+					promise.then(function(card) {
+						defer.resolve(card);
+						$rootScope.$digest();
+					})
+					return defer.promise;
 				}
 			}
 

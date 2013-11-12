@@ -33,7 +33,7 @@ define([
 
 			function createAnonUser() {
 				console.log('creating anon user');
-				return signup(randString(), randString());
+				return signup(randString(), randString(), null, 'Anonymous');
 
 				function randString() {
 					// copy pasta'd from: http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
@@ -82,13 +82,15 @@ define([
 				}, 1000);
 			}
 
-			function signup(username, password, email) {
+			function signup(username, password, email, name) {
 				var user = new Parse.User();
 				user.set('username', username);
 				user.set('password', password);
 				if(email)
 					user.set('email', email);
-				 
+				if(name)
+					user.set('name', name);
+
 				return user.signUp(null, {
 					success: onUserConnected,
 					error: onUserError

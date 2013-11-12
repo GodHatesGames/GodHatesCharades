@@ -108,6 +108,10 @@ body {
 	margin-top: 28px;
 }
 
+.topSubmissions {
+	height: 100%;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
 	/* Remove the bottom border on the jumbotron for visual effect */

@@ -19,7 +19,8 @@ define([
 					$scope.kdr = 0;
 					$scope.cardOwnerName = "";
 					$scope.cardOwnerId = "";
-					cardService.getCard($scope.id, onSuccess, onError);
+					var promise = cardService.getCard($scope.id);
+					promise.then(onSuccess, onError);
 
 					function onSuccess(card) {
 						$scope.card = card;

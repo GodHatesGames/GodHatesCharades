@@ -13,16 +13,21 @@ define([
 				link: function($scope, $element) {
 					
 				},
-				controller: function($scope, $element) {
+				controller: function($scope, $element, $state) {
 					$scope.email = '';
 					$scope.password = '';
 
 					$scope.login = function() {
 						console.log('logging in:', $scope.email, $scope.password);
-						parseUser.connect($scope.email, $scope.password);
-					}
+						var promise = parseUser.connect($scope.email, $scope.password);
+						promise.then(function(user) {
+							$state.go('user', {
+								userid: user.id
+							});
+						});
+					};
 				}
-			}
+			};
 		}]);
 	}
 );

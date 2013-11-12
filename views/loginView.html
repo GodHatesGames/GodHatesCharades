@@ -1,29 +1,35 @@
 <div id="loginView">
 	<link rel="stylesheet" type="text/css" href="views/loginView.css">
-	<div class="row">
-		<!-- left side -->
-		<h3 class="col-sm-6">Create a new account</h3>
+	<span ng-hide="parseUser.isReal()">
+		<div class="row">
+			<!-- left side -->
+			<h3 class="col-sm-6">
+				Create a new account
+			</h3>
 
-		<!-- right side -->
-		<h3 class="col-sm-6"
-				ng-hide="parseUser.isReal()">
-			Login
-		</h3>
-		<h3 class="col-sm-6"
-			ng-show="parseUser.isReal()">
-			You're logged in
-		</h3>
-	</div>
-	<div class="row">
-		<!-- left side -->
-		<signup class="col-sm-6"></signup>
+			<!-- right side -->
+			<h3 class="col-sm-6">
+				Login
+			</h3>
+		</div>
+		<div class="row">
+			<!-- left side -->
+			<signup class="col-sm-6"></signup>
 
-		<!-- right side -->
-		<login class="col-sm-6"
-				ng-hide="parseUser.isReal()">
-		</login>
-		<userinfo class="col-sm-6"
-					ng-show="parseUser.isReal()">
-		</userinfo>
-	</div>
+			<!-- right side -->
+			<login class="col-sm-6"></login>
+		</div>
+	</span>
+	<span ng-show="parseUser.isReal()">
+		<div class="row">
+			<h3 class="col-sm-6">
+				You're logged in
+			</h3>
+		</div>
+		<div class="row">
+			<userinfo class="col-sm-12"
+						userid="parseUser.data.id">
+			</userinfo>
+		</div>
+	</span>
 </div>
