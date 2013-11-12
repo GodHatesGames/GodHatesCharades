@@ -1,17 +1,21 @@
-<div>
-	<div class="alert alert-info" 
-			ng-show="loading">
-		Loading...
-	</div>
+<div class="topSubmissions">
 
 	<!-- Repeat Pairs -->
-	<div class="cardContainer row"
-			ng-hide="loading">
-		<!-- Repeat suggestions in pairs -->
-		<div class="col-md-6 col-sm-6 col-xs-6"
-				ng-repeat="(index, suggestion) in suggestions">
-			<card id="suggestion.id"></card>
-			<card-info id="suggestion.id"></card-info>
-		</div>
+	<div class="cardContainer"
+			infinite-scroll="loadSuggestions()"
+			infinite-scroll-disabled="loading"
+			infinite-scroll-immediate-check="true">
+			<!-- Repeat suggestions in pairs -->
+			<div ng-repeat="(index, suggestion) in suggestions">
+				<!-- <br> -->
+				<suggestion-row id="suggestion.id"></suggestion-row>
+				<!-- <card id="suggestion.id"></card> -->
+				<!-- <card-info id="suggestion.id"></card-info> -->
+			</div>
+	</div>
+
+	<div class="loading alert alert-info" 
+			ng-show="loading">
+		Loading...
 	</div>
 </div>

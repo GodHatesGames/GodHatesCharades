@@ -16,16 +16,20 @@
   ],
   "dependencies": {
     "underscore": "~1.5.2",
-    "angular": "~1.0.8",
+    "angular": "~1.2.0",
     "bootstrap": "~3.0.0",
     "angular-ui-router": "~0.2.0",
     "ng-grid": "~2.0.7",
     "jquery": "~2.0.3",
     "requirejs": "~2.1.8",
-    "angular-bootstrap": "~0.6.0"
+    "angular-bootstrap": "~0.6.0",
+    "ngInfiniteScroll": "~1.0.0"
   },
   "install": {
     "path": "bower",
+    "ignore": [
+      "bootstrap"
+    ],
     "sources": {
       "underscore": "bower_components/underscore/underscore.js"
     }

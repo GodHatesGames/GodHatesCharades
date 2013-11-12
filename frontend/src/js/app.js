@@ -14,6 +14,7 @@ define([
 		var app = angular.module('app', ['ng', 
 											'ui.router',
 											'ngGrid',
+											'infinite-scroll',
 											'textareaNoreturn',
 											'parse.user',
 											'ui.bootstrap'

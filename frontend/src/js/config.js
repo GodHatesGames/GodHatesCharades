@@ -22,11 +22,13 @@ require.config({
 		'router': '../bower/angular-ui-router/angular-ui-router.min',
 		'grid': '../bower/ng-grid/ng-grid.min',
 		'parse': 'vendor/parse-1.2.12.min',
-		'angular-bootstrap': '../bower/angular-bootstrap/ui-bootstrap-tpls'
+		'angular-bootstrap': '../bower/angular-bootstrap/ui-bootstrap-tpls',
+		'ng-infinite-scroll': '../bower/ngInfiniteScroll/ng-infinite-scroll'
 	},
 	shim: {
 		'angular': {
-			exports: 'angular'
+			exports: 'angular',
+			deps: ['jquery']
 		},
 		'underscore': {
 			exports: '_'
@@ -41,13 +43,16 @@ require.config({
 			exports: 'Phaser'
 		},
 		'jquery': {
-			exports: 'jQuery'
+			exports: '$'
 		},
 		'grid': {
 			deps: ['angular', 'jquery']
 		},
 		'angular-bootstrap': {
 			deps: ['angular']
+		},
+		'ng-infinite-scroll': {
+			deps: ['angular', 'jquery']
 		}
 	},
 	priority: [
