@@ -12,12 +12,22 @@
 					<th>Text</th>
 					<th>Votes</th>
 					<th>Skips</th>
+					<th>Submitter</th>
 				</tr>
 				<tr ng-repeat="(index, suggestion) in suggestions">
-					<td ng-bind="index"></td>
+					<td ng-bind="index + 1"></td>
+					<!-- Text -->
 					<td ng-bind="suggestion.attributes.text"></td>
-					<td ng-bind="suggestion.attributes.totalVotes | number"></td>
-					<td ng-bind="suggestion.attributes.skipped | number">0</td>
+					<!-- Votes -->
+					<td ng-bind="suggestion.attributes.totalVotes | number" 
+						ng-show="suggestion.attributes.totalVotes"></td>
+					<td ng-hide="suggestion.attributes.totalVotes">0</td>
+					<!-- Skips -->
+					<td ng-bind="suggestion.attributes.skipped | number" 
+						ng-show="suggestion.attributes.skipped"></td>
+					<td ng-hide="suggestion.attributes.skipped">0</td>
+					<!-- Submitter -->
+					<td ng-bind="suggestion.attributes.owner.attributes.name"></td>
 				</tr>
 			</table>
 	</div>
