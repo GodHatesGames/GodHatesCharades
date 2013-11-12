@@ -84,8 +84,7 @@ define([
 				var returnVal;
 				var currentCache = cardsById[cardId];
 				if(currentCache) {
-					console.log('return cache');
-					return $q.when(cachedData);
+					return $q.when(currentCache);
 				} else {
 					var defer = $q.defer();
 					// console.log('TODO: Fetch card from server');

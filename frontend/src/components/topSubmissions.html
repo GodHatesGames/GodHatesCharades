@@ -6,12 +6,20 @@
 			infinite-scroll-disabled="loading"
 			infinite-scroll-immediate-check="true">
 			<!-- Repeat suggestions in pairs -->
-			<div ng-repeat="(index, suggestion) in suggestions">
-				<!-- <br> -->
-				<suggestion-row id="suggestion.id"></suggestion-row>
-				<!-- <card id="suggestion.id"></card> -->
-				<!-- <card-info id="suggestion.id"></card-info> -->
-			</div>
+			<table class="table table-bordered">
+				<tr>
+					<th>#</th>
+					<th>Text</th>
+					<th>Votes</th>
+					<th>Skips</th>
+				</tr>
+				<tr ng-repeat="(index, suggestion) in suggestions">
+					<td ng-bind="index"></td>
+					<td ng-bind="suggestion.attributes.text"></td>
+					<td ng-bind="suggestion.attributes.totalVotes | number"></td>
+					<td ng-bind="suggestion.attributes.skipped | number">0</td>
+				</tr>
+			</table>
 	</div>
 
 	<div class="loading alert alert-info" 

@@ -4,7 +4,7 @@ define([
 	], 
 	function(angular, app) {
 
-		app.directive('suggestionRow', ['parseUser', 'cardService', '$rootScope', '$q', function(parseUser, cardService, $rootScope, $q) {
+		app.directive('suggestionRow', ['parseUser', 'cardService', '$rootScope', function(parseUser, cardService, $rootScope) {
 			return {
 				restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 				templateUrl: 'components/suggestionRow.html',
@@ -15,18 +15,12 @@ define([
 				controller: function($scope, $element) {
 					$scope.typeClass = "";
 					$scope.data;
-					var cachedData = ;
-					// console.log('cachedData:', cachedData);
 					var promise = cardService.getCard($scope.id);
-					// console.log('promise:', promise);
 					promise.then(onSuccess, onError);
 
 					function onSuccess(suggestion) {
-						console.log('successs');
 						$scope.data = suggestion;
 						$scope.typeClass = cardService.getTypeClass(suggestion);
-						if(!$rootScope.$$phase)
-							$scope.$digest();
 					}
 
 					function onError(error) {
