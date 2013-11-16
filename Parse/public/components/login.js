@@ -1,7 +1,7 @@
 define([
 	'angular',
 	'app'
-	], 
+	],
 	function(angular, app) {
 
 		app.directive('login', ['parseUser', function(parseUser) {

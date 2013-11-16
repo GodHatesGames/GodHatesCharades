@@ -1,24 +1,72 @@
+.cardsContainer {
+	width: 100%;
+	box-sizing: border-box;
+}
+
 .vote .suggestionPair {
 	margin-bottom: 15px;
 }
 
-.vote .cardContainer {
+.vote .pairContainer {
 	cursor: pointer;
+	position: relative;
+	width: 50%;
+	display: inline-block;
 }
 
-.vote .cardContainer .card {
+.vote .pairContainer .card {
 	-webkit-transition: all 0.25s ease;
+	-moz-transition: all 0.25s ease;
+	-o-transition: all 0.25s ease;
+	transition: all 0.25s ease;
+	width: 50%;
+	display: inline-block;
+	max-width: inherit;
 }
 
+.vote .pairContainer .card.character {
+	-webkit-transform: scale(0.9, 0.9) translateX(5px);
+}
 
-.vote .cardContainer:hover .card {
-	-webkit-transform: scale(1.05, 1.05);
+.vote .pairContainer .card.scenario {
+	-webkit-transform: scale(0.9, 0.9) translateX(-5px);
+}
+
+.vote .card.character {
+	z-index: 9;
+}
+
+.vote .card.scenario {
+	z-index: 10;
+}
+
+.vote .pairContainer:hover .card.character {
+	-webkit-transform: scale(0.97, 0.97) rotate(-8deg) translateX(15px);
+}
+
+.vote .pairContainer:hover .card.scenario {
+	-webkit-transform: scale(1, 1) rotate(6deg) translateX(-15px);
+}
+
+.vote .pairContainer:hover .card {
+	box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
 .vote .separator {
-	text-align: center;
-	margin: 25px 0;
 	font-weight: bold;
+	position: absolute;
+	left: 95%;
+	top: 43%;
+	z-index: 99;
+	width: 50px;
+	height: 50px;
+	background: white;
+	border-radius: 50px;
+	text-align: center;
+	line-height: 50px;
+	box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
+	color: #5A4040;
+	box-sizing: border-box;
 }
 
 .vote .skip {

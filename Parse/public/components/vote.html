@@ -17,25 +17,23 @@
 	<hr/>
 
 	<!-- Repeat Pairs -->
-	<div class="cardContainer row"
-			ng-repeat="(index, pair) in suggestionPairs"
-			ng-hide="loading"
-			ng-click="selectPair(index)">
-		<!-- Repeat suggestions in pairs -->
-		<div class="col-md-6 col-sm-6 col-xs-6"
-				ng-repeat="(index, suggestion) in pair">
-			<div class="card"
-					ng-class="typeClass(suggestion)">
-				<div class="cardContent">
-					{{suggestion.attributes.text}}
+	<div class="cardsContainer">
+		<div class="pairContainer"
+				ng-repeat="(index, pair) in suggestionPairs"
+				ng-hide="loading"
+				ng-click="selectPair(index)">
+			<!-- Repeat suggestions in pairs -->
+				<div class="card"
+						ng-repeat="(index, suggestion) in pair"
+						ng-class="typeClass(suggestion)">
+					<div class="cardContent">
+						{{suggestion.attributes.text}}
+					</div>
 				</div>
+			<div class="separator" 
+					ng-hide="$last">
+				VS
 			</div>
-		</div>
-		<div class="clear"></div>
-		<div class="separator" 
-				ng-hide="$last"
-				>
-			- VS -
 		</div>
 	</div>
 </div>
