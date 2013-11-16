@@ -3,6 +3,33 @@ body {
 	padding-top: 20px;
 	padding-bottom: 20px;
 	overflow-y: scroll;
+	background-color: #F4EBDC;
+}
+
+.logoContainer {
+	text-align: center;
+}
+
+.nav a {
+	color: #5A4040;
+}
+
+.nav > li {
+	padding: 2.5px 0;
+}
+
+.nav > li > a:hover {
+	background-color: #000;
+	color: white;
+}
+
+.nav > li.active > a, .nav > li.active > a:hover, .nav .open > a, .nav .open > a:hover {
+	background-color: #000;
+	color: white;
+}
+
+.logo {
+	margin: 0 auto;
 }
 
 .dropdown a {
@@ -16,7 +43,7 @@ body {
 
 .card {
 	position: relative;	/*relative size hack*/
-	border: 1px solid #DDD;
+	/*border: 1px solid #DDD;*/
 	border-radius: 5px;
 	text-align: center;
 	max-width: 200px;
@@ -49,8 +76,7 @@ body {
 }
 
 .card.character {
-	background-color: #FCF9C5;
-	border-color: #E9E6B7;
+	background-color: #FF6857;
 }
 
 .card.character .editable, .card.character {
@@ -59,8 +85,7 @@ body {
 }
 
 .card.scenario {
-	background-color: #FCEAC5;
-	border-color: #E6D6B6;
+	background-color: #61CACE;
 }
 
 .card.scenario .editable, .card.scenario {
