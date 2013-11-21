@@ -21,11 +21,14 @@ define([
 				getUserById: getUserById
 			}
 
+			var cache = {};
+
 			// check login status
 			var currentUser = Parse.User.current();
 			if (currentUser) {
 				console.log('logged in', currentUser);
 				user.data = currentUser;
+				cache[user.data.id] = user.data;
 				user.loggedin = true;
 			} else {
 				console.log('not logged in');
@@ -140,11 +143,11 @@ define([
 
 			function getUserById(id) {
 				var deffered = $q.defer();
-				if(user.data && 
-					!user.isAnon() && 
-					id === user.data.id) {
-					deffered.resolve(user.data);
+				if(cache[id]) {
+					console.log('delivering cached user');
+					deffered.resolve(cache[id]);
 				} else {
+					console.log('fetching user');
 					// $scope.loading = true;
 					var query = new Parse.Query(Parse.User);
 					query.get(id, {
@@ -156,6 +159,7 @@ define([
 				return deffered.promise;
 
 				function onUserFound(user) {
+					cache[user.id] = user;
 					deffered.resolve(user);
 				}
 

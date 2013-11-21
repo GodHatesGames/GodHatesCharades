@@ -26,12 +26,10 @@ define([
 
 					function onUserFound(user) {
 						$scope.user = user;
-						// $scope.$digest();
 					}
 
 					function onUserError(error) {
 						$scope.error = true;
-						// $scope.$digest();
 					}
 
 					function loadSuggestions() {
