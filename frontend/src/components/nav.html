@@ -15,12 +15,6 @@
 	</li>
 
 	<!-- user stuff -->
-	<li ng-class="{ active: $state.includes('login') }"
-		ng-show="parseUser.isAnon()">
-		<a ui-sref='login'>
-			Login
-		</a>
-	</li>
 	<li class="dropdown"
 		ng-hide="parseUser.isAnon()">
 		<a class="dropdown-toggle" 
@@ -58,5 +52,13 @@
 				<a ng-click="parseUser.logout()">Logout</a>
 			</li>
 		</ul>
+	</li>
+	
+	<li class="login" 
+		ng-class="{ active: $state.includes('login') }"
+		ng-show="parseUser.isAnon()">
+		<a ui-sref='login'>
+			Login
+		</a>
 	</li>
 </ul>

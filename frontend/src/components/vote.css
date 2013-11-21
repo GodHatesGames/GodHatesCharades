@@ -21,7 +21,6 @@
 	transition: all 0.25s ease;
 	width: 50%;
 	display: inline-block;
-	max-width: inherit;
 }
 
 .vote .pairContainer .card.character {

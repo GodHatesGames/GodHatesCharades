@@ -1,5 +1,6 @@
 #homeView h4, #homeView h2 {
 	text-align: center;
+	font-family: 'Mimbie';
 }
 
 #homeView .thumbnail {
@@ -18,4 +19,10 @@
 
 #homeView .thumbnail.god {
 	background-image: url(http://placehold.it/250x250);
+}
+
+#homeView p {
+	font-family: 'Helvetica';
+}
+#homeView p b {
 }
