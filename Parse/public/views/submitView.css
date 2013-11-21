@@ -13,6 +13,7 @@
 	}
 }
 
-#submitView .card {
-	margin-bottom: 15px;
+#submitView .cardContainer {
+	max-width: 200px;
+	margin: 0 auto;
 }

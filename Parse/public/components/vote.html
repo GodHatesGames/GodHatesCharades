@@ -7,15 +7,6 @@
 			ng-show="loading">
 		Loading...</div>
 
-	<!-- Skip button -->
-	<button ng-click="skipBoth()"
-			ng-hide="loading"
-			class="btn btn-warning skip">
-		These both suck
-	</button>
-
-	<hr/>
-
 	<!-- Repeat Pairs -->
 	<div class="cardsContainer">
 		<div class="pairContainer"
@@ -36,4 +27,11 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- Skip button -->
+	<button ng-click="skipBoth()"
+			ng-hide="loading"
+			class="btn skip">
+		These aren't funny
+	</button>
 </div>
