@@ -4,7 +4,7 @@ define([
 	], 
 	function(angular, app) {
 
-		app.directive('userSubmissions', ['$filter', 'cardService', function($filter, cardService) {
+		app.directive('userSubmissions', ['$filter', 'cardService', 'parseUser', function($filter, cardService, parseUser) {
 			return {
 				restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 				templateUrl: 'components/userSubmissions.html',
@@ -23,6 +23,16 @@ define([
 					$scope.pairIndex = 0;
 
 					// Private methods
+
+					function onUserFound(user) {
+						$scope.user = user;
+						// $scope.$digest();
+					}
+
+					function onUserError(error) {
+						$scope.error = true;
+						// $scope.$digest();
+					}
 
 					function loadSuggestions() {
 						$scope.loading = true;
@@ -54,6 +64,9 @@ define([
 
 					// init
 					loadSuggestions();
+
+					var promise = parseUser.getUserById($scope.userid);
+					promise.then(onUserFound, onUserError);
 
 				}
 			}

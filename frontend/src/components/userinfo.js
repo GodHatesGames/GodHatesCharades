@@ -18,27 +18,17 @@ define([
 					if($scope.userid === undefined)
 						console.log('userid not provided');
 
-					if(parseUser.data && 
-						!parseUser.isAnon() && 
-						$scope.userid === parseUser.data.id) {
-						$scope.user = parseUser.data;
-					} else {
-						// $scope.loading = true;
-						var query = new Parse.Query(Parse.User);
-						query.get($scope.userid, {
-							success: onUserFound,
-							error: onUserError
-						});
-					}
+					var promise = parseUser.getUserById($scope.userid);
+					promise.then(onUserFound, onUserError);
 
 					function onUserFound(user) {
 						$scope.user = user;
-						$scope.$digest();
+						// $scope.$digest();
 					}
 
-					function onUserError(user, error) {
+					function onUserError(error) {
 						$scope.error = true;
-						$scope.$digest();
+						// $scope.$digest();
 					}
 				}
 			}

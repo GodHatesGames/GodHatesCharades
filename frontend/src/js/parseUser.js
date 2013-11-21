@@ -17,7 +17,8 @@ define([
 				connect: connect,
 				logout: logout,
 				signup: signup,
-				save: save
+				save: save,
+				getUserById: getUserById
 			}
 
 			// check login status
@@ -98,16 +99,16 @@ define([
 			}
 
 			function save() {
-				return user.data.save({
-					success: function(user) {
+				var promise = user.data.save();
+				promise.then(function(user) {
 						console.log('saved!');
 						user.data = user;
 						$rootScope.$apply();
-					},
-					error: function(user, error) {
+					}, function(user, error) {
 						console.log('could note save:', error);
 					}
-				})
+				);
+				return promise;
 			}
 
 			// returns true if current user is not Anonymous
@@ -135,6 +136,32 @@ define([
 					return Boolean(user.data.get('admin'));
 				else
 					return false;
+			}
+
+			function getUserById(id) {
+				var deffered = $q.defer();
+				if(user.data && 
+					!user.isAnon() && 
+					id === user.data.id) {
+					deffered.resolve(user.data);
+				} else {
+					// $scope.loading = true;
+					var query = new Parse.Query(Parse.User);
+					query.get(id, {
+						success: onUserFound,
+						error: onUserError
+					});
+				}
+
+				return deffered.promise;
+
+				function onUserFound(user) {
+					deffered.resolve(user);
+				}
+
+				function onUserError(user, error) {
+					deffered.reject(error);
+				}
 			}
 
 			return user;
