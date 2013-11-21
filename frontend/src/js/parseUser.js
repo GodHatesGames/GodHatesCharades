@@ -22,6 +22,7 @@ define([
 			}
 
 			var cache = {};
+			var fetching = {};
 
 			// check login status
 			var currentUser = Parse.User.current();
@@ -143,7 +144,10 @@ define([
 
 			function getUserById(id) {
 				var deffered = $q.defer();
-				if(cache[id]) {
+				if(fetching[id]) {
+					console.log('returning existing promise');
+					return fetching[id];
+				} else if(cache[id]) {
 					console.log('delivering cached user');
 					deffered.resolve(cache[id]);
 				} else {
@@ -154,16 +158,19 @@ define([
 						success: onUserFound,
 						error: onUserError
 					});
+					fetching[id] = deffered.promise;
 				}
 
 				return deffered.promise;
 
 				function onUserFound(user) {
+					delete fetching[id];
 					cache[user.id] = user;
 					deffered.resolve(user);
 				}
 
 				function onUserError(user, error) {
+					delete fetching[id];
 					deffered.reject(error);
 				}
 			}
