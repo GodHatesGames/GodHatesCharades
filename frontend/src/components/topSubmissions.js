@@ -26,16 +26,17 @@ define([
 						if(!$scope.loading && !$scope.allLoaded) {
 							$scope.loading = true;
 							
-							var SuggestionObject = Parse.Object.extend("Suggestion");
-							var query = new Parse.Query(SuggestionObject);
-							query.descending('totalVotes');
-							query.limit($scope.pageSize);
-							query.include('owner');
-							query.skip($scope.skipIndex);
-							query.find({
-								success: onSuggestionsLoaded,
-								error: onSuggestionsError
-							});
+							Parse.Cloud.run(
+								'topSubmissionsByTotalVotes',
+								{
+									pageSize: $scope.pageSize,
+									skipIndex: $scope.skipIndex
+								}, 
+								{
+									success: onSuggestionsLoaded,
+									error: onSuggestionsError
+								}
+							);
 						}
 					}
 

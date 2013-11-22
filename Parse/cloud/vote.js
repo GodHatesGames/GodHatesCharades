@@ -1,4 +1,5 @@
 var _ = require('underscore');
+var userUtils = require('cloud/userUtils.js');
 
 exports.getRandomSuggestionPairs = getRandomSuggestionPairs;
 exports.skipSuggestions = skipSuggestions;
@@ -6,6 +7,7 @@ exports.votePair = votePair;
 
 // Use Parse.Cloud.define to define as many cloud functions as you want.
 function getRandomSuggestionPairs(request, response) {
+	Parse.Cloud.useMasterKey();
 	var SuggestionObject = Parse.Object.extend('Suggestion');
 	var SUGGESTION_COUNT = 25;
 	var zeroSuggestions = [];
@@ -22,6 +24,7 @@ function getRandomSuggestionPairs(request, response) {
 		query.ascending('updatedAt');
 		query.equalTo('moderated', true);
 		query.equalTo('rejected', false);
+		query.include('owner');
 		query.doesNotExist('card');
 		if(request.params.skip)
 			query.skip(request.params.skip);
@@ -46,9 +49,17 @@ function getRandomSuggestionPairs(request, response) {
 	function onSuggestionsLoaded() {
 		var suggestionPairs = [];
 		for(var i = 0; i < SUGGESTION_COUNT; i++) {
+			var zeroSuggestion = zeroSuggestions[i];
+			var oneSuggestion = oneSuggestions[i];
+
+			// remove private data
+			userUtils.stripPrivateData(zeroSuggestion.attributes.owner);
+			userUtils.stripPrivateData(oneSuggestion.attributes.owner);
+
+			//save pair
 			var pair = {
-				0: zeroSuggestions[i],
-				1: oneSuggestions[i]
+				0: zeroSuggestion,
+				1: oneSuggestion
 			}
 			suggestionPairs.push(pair);
 		}

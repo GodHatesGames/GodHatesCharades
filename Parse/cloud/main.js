@@ -1,6 +1,7 @@
 var _ = require('underscore');
 var admin = require('cloud/admin.js');
 var vote = require('cloud/vote.js');
+var leaderboard = require('cloud/leaderboard.js');
 
 // Admin
 Parse.Cloud.define('getUnmoderatedSuggestions', admin.getUnmoderatedSuggestions);
@@ -9,6 +10,10 @@ Parse.Cloud.define('getUnmoderatedSuggestions', admin.getUnmoderatedSuggestions)
 Parse.Cloud.define('getRandomSuggestionPairs', vote.getRandomSuggestionPairs);
 Parse.Cloud.define('skipSuggestions', vote.skipSuggestions);
 Parse.Cloud.define('votePair', vote.votePair);
+
+// Leaderboard
+Parse.Cloud.define('topSubmissionsByTotalVotes', leaderboard.topSubmissionsByTotalVotes);
+
 
 Parse.Cloud.beforeSave('Suggestion', function(request, response) {
 	if(request.object.isNew()) {
