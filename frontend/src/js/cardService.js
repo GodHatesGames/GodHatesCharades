@@ -43,7 +43,6 @@ define([
 			};
 
 			function getTypeClassByType(type) {
-				console.log('type:', type);
 				switch(type) {
 					case 0 :
 						return TYPE_CLASS_CHARACTER;
