@@ -16,7 +16,7 @@
 			<!-- Repeat suggestions in pairs -->
 				<div class="card"
 						ng-repeat="(index, suggestion) in pair"
-						ng-class="typeClass(suggestion)">
+						ng-class="cardService.getTypeClass(suggestion)">
 					<div class="cardContent">
 						{{suggestion.attributes.text}}
 					</div>

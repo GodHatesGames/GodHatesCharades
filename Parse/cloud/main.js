@@ -1,4 +1,8 @@
 var _ = require('underscore');
+var admin = require('cloud/admin.js');
+
+// Admin
+Parse.Cloud.define('getUnmoderatedSuggestions', admin.getUnmoderatedSuggestions);
 
 // Use Parse.Cloud.define to define as many cloud functions as you want.
 Parse.Cloud.define('getRandomSuggestionPairs', function(request, response) {
@@ -50,29 +54,6 @@ Parse.Cloud.define('getRandomSuggestionPairs', function(request, response) {
 		}
 
 		response.success(suggestionPairs);
-	}
-
-});
-
-// Use Parse.Cloud.define to define as many cloud functions as you want.
-Parse.Cloud.define('getUnmoderatedSuggestions', function(request, response) {
-	var SuggestionObject = Parse.Object.extend('Suggestion');
-	
-	var query = new Parse.Query(SuggestionObject);
-	query.limit(1000);
-	query.notEqualTo('rejected', true);
-	query.notEqualTo('moderated', true);
-	query.find({
-		success: onSuccess,
-		error: onError
-	});
-
-	function onSuccess(suggestions) {
-		response.success(suggestions);
-	}
-
-	function onError(suggestions, error) {
-		response.error(error);
 	}
 
 });

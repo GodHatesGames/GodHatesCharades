@@ -4,7 +4,7 @@ define([
 	], 
 	function(angular, app) {
 
-		app.directive('vote', [function() {
+		app.directive('vote', ['cardService', function(cardService) {
 			return {
 				restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 				templateUrl: 'components/vote.html',
@@ -14,6 +14,7 @@ define([
 				},
 				controller: function($scope, $element) {
 					// public vars
+					$scope.cardService = cardService;
 					$scope.pairLimit = 2;
 					$scope.loading = true;
 					$scope.suggestionPairs = [];
@@ -76,15 +77,6 @@ define([
 					}
 
 					// Public Methods
-
-					$scope.typeClass = function(suggestion) {
-						var type = suggestion.get('type');
-						if(type === 0) {
-							return 'character';
-						} else {
-							return 'scenario';
-						}
-					};
 
 					$scope.onPairIndexChanged = function(newValue, oldValue) {
 						if($scope.suggestionPairSrc.length > 0) {
