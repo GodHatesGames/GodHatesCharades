@@ -36,3 +36,5 @@ function topSubmissionsByTotalVotes(request, response) {
 	}
 
 }
+
+// function topSubmissions

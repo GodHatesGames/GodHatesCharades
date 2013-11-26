@@ -4,7 +4,7 @@ define([
 	], 
 	function(angular, app) {
 
-		app.directive('topSubmissions', ['cardService', '$filter', function(cardService, $filter) {
+		app.directive('topSubmissions', ['cardService', '$filter', '$state', function(cardService, $filter, $state) {
 			return {
 				restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 				templateUrl: 'components/topSubmissions.html',
@@ -23,20 +23,30 @@ define([
 					// Private methods
 
 					$scope.loadSuggestions = function() {
+						console.log($state.current.name);
 						if(!$scope.loading && !$scope.allLoaded) {
+							var options = {
+								pageSize: $scope.pageSize,
+								skipIndex: $scope.skipIndex
+							};
+							var callbacks = {
+								success: onSuggestionsLoaded,
+								error: onSuggestionsError
+							};
 							$scope.loading = true;
-							
-							Parse.Cloud.run(
-								'topSubmissionsByTotalVotes',
-								{
-									pageSize: $scope.pageSize,
-									skipIndex: $scope.skipIndex
-								}, 
-								{
-									success: onSuggestionsLoaded,
-									error: onSuggestionsError
-								}
-							);
+
+							switch($state.current.name) {
+								case "top.controversial" :
+									Parse.Cloud.run('topSubmissionsByTotalVotes', options, callbacks);
+									break;
+								case "top.worst":
+									Parse.Cloud.run('topSubmissionsByTotalVotes', options, callbacks);
+									break;
+								case "top.best":
+								default :
+									Parse.Cloud.run('topSubmissionsByTotalVotes', options, callbacks);
+									break;
+							}
 						}
 					}
 

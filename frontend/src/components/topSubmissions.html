@@ -1,12 +1,22 @@
 <div class="topSubmissions">
-
+	<ul class="nav nav-pills">
+		<li ng-class="{ active: $state.includes('top.best') }">
+			<a ui-sref="top.best">Best</a>
+		</li>
+		<li ng-class="{ active: $state.includes('top.worst') }">
+			<a ui-sref="top.worst">Worst</a>
+		</li>
+		<li ng-class="{ active: $state.includes('top.controversial') }">
+			<a ui-sref="top.controversial">Controversial</a>
+		</li>
+	</ul>
 	<!-- Repeat Pairs -->
 	<div class="cardContainer"
 			infinite-scroll="loadSuggestions()"
 			infinite-scroll-disabled="loading"
 			infinite-scroll-immediate-check="true">
 			<!-- Repeat suggestions in pairs -->
-			<table class="table table-bordered">
+			<table class="table table-bordered table-striped">
 				<tr>
 					<th>#</th>
 					<th>Text</th>
@@ -19,12 +29,14 @@
 					<!-- Text -->
 					<td ng-bind="suggestion.attributes.text"></td>
 					<!-- Votes -->
-					<td ng-bind="suggestion.attributes.totalVotes | number" 
-						ng-show="suggestion.attributes.totalVotes"></td>
+					<td ng-show="suggestion.attributes.totalVotes">
+						{{suggestion.attributes.totalVotes | number}}
+					</td>
 					<td ng-hide="suggestion.attributes.totalVotes">0</td>
 					<!-- Skips -->
-					<td ng-bind="suggestion.attributes.skipped | number" 
-						ng-show="suggestion.attributes.skipped"></td>
+					<td ng-show="suggestion.attributes.skipped">
+						{{suggestion.attributes.skipped | number}}
+					</td>
 					<td ng-hide="suggestion.attributes.skipped">0</td>
 					<!-- Submitter -->
 					<td ng-bind="suggestion.attributes.owner.attributes.name"></td>
