@@ -14,6 +14,7 @@ define([
 				},
 				controller: function($scope, $element) {
 					// public vars
+					$scope.cardService = cardService;
 					$scope.pageSize = 50;
 					$scope.loading = false;
 					$scope.suggestions = [];

@@ -1,5 +1,5 @@
 <div class="topSubmissions">
-	<ul class="nav nav-pills">
+	<ul class="nav nav-pills subnav">
 		<li ng-class="{ active: $state.includes('top.best') }">
 			<a ui-sref="top.best">
 				Best
@@ -19,7 +19,7 @@
 	<div infinite-scroll="loadSuggestions()"
 			infinite-scroll-disabled="loading"
 			infinite-scroll-immediate-check="true">
-			<table class="table table-striped">
+			<table class="table">
 				<tr>
 					<th>Rank</th>
 					<th>Text</th>
@@ -27,7 +27,8 @@
 					<th>Skips</th>
 					<th>Submitter</th>
 				</tr>
-				<tr ng-repeat="(index, suggestion) in suggestions">
+				<tr ng-repeat="(index, suggestion) in suggestions"
+					ng-class="cardService.getTypeClass(suggestion)">
 					<td ng-bind="index + 1"></td>
 					<!-- Text -->
 					<td ng-bind="suggestion.attributes.text"></td>
@@ -42,7 +43,11 @@
 					</td>
 					<td ng-hide="suggestion.attributes.skipped">0</td>
 					<!-- Submitter -->
-					<td ng-bind="suggestion.attributes.owner.attributes.name"></td>
+					<td>
+						<a ui-sref="user({userid: suggestion.attributes.owner.id})">
+							{{suggestion.attributes.owner.attributes.name}}
+						</a>
+					</td>
 				</tr>
 			</table>
 	</div>
