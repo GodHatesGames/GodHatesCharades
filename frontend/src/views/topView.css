@@ -1,3 +1,3 @@
-#topView {
-	
+#topView table td, #topView table th {
+	border: none;
 }
