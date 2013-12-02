@@ -1,27 +1,25 @@
 <div class="topSubmissions">
 	<ul class="nav nav-pills subnav">
-		<li ng-class="{ active: $state.includes('top.best') }">
-			<a ui-sref="top.best"
-			   ng-click="reloadSuggestions()">
-				Best
+		<li ng-class="{ active: tab == 'best' }">
+			<a ng-click="reloadSuggestions('best')">
+				Hall of Fame
 			</a>
 		</li>
-		<li ng-class="{ active: $state.includes('top.worst') }">
-			<a ui-sref="top.worst"
-			   ng-click="reloadSuggestions()">
-				Worst
+		<li ng-class="{ active: tab == 'worst' }">
+			<a ng-click="reloadSuggestions('worst')">
+				Hall of Shame
 			</a>
 		</li>
-		<!-- <li ng-class="{ active: $state.includes('top.controversial') }">
-			<a ui-sref="top.controversial"
-			   ng-click="reloadSuggestions()">
+		<!-- <li ng-class="{ active: tab == 'worst' }">
+			<a ng-click="reloadSuggestions('controversial')">
 				Controversial
 			</a>
 		</li> -->
 	</ul>
-	<div infinite-scroll="loadSuggestions()"
-			infinite-scroll-disabled="loading"
-			infinite-scroll-immediate-check="true">
+	<div class="suggestionList" 
+		 infinite-scroll="loadSuggestions()"
+		 infinite-scroll-disabled="loading"
+		 infinite-scroll-immediate-check="true">
 			<table class="table">
 				<tr>
 					<th>Rank</th>

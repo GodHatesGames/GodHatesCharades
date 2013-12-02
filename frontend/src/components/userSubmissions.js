@@ -18,10 +18,13 @@ define([
 				controller: function($scope, $element) {
 					// public vars
 					$scope.pageSize = 50;
-					$scope.loading = true;
+					$scope.loading = false;
 					$scope.suggestions = [];
-					$scope.pairIndex = 0;
-
+					$scope.skipIndex = 0; //TODO: make private
+					$scope.allLoaded = false;
+					$scope.loadSuggestions = loadSuggestions;
+					$scope.reloadSuggestions = reloadSuggestions;
+					$scope.tab = 'best';
 					// Private methods
 
 					function onUserFound(user) {
@@ -32,27 +35,40 @@ define([
 						$scope.error = true;
 					}
 
-					function loadSuggestions() {
-						$scope.loading = true;
+					function reloadSuggestions(tab) {
+						$scope.tab = tab;
+						$scope.suggestions = [];
+						$scope.skipIndex = 0;
+						$scope.loadSuggestions();
+					}
 
-						var Suggestion = Parse.Object.extend("Suggestion");
-						var owner = new Parse.User();
-						owner.id = $scope.userid;
-						var query = new Parse.Query(Suggestion);
-						query.descending('totalVotes');
-						query.equalTo("owner", owner);
-						query.include('owner');
-						query.find({
-							success: onSuggestionsLoaded,
-							error: onSuggestionsError
-						});
-						
+					function loadSuggestions() {
+						if(!$scope.loading && !$scope.allLoaded) {
+							$scope.loading = true;
+
+							var Suggestion = Parse.Object.extend('Suggestion');
+							var owner = new Parse.User();
+							owner.id = $scope.userid;
+							var query = new Parse.Query(Suggestion);
+							query.descending('totalVotes');
+							query.equalTo('owner', owner);
+							query.include('owner');
+							query.skip($scope.skipIndex);
+							query.find({
+								success: onSuggestionsLoaded,
+								error: onSuggestionsError
+							});
+						}
 					}
 
 					function onSuggestionsLoaded(suggestions) {
+						if(suggestions.length < $scope.pageSize) {
+							$scope.allLoaded = true;
+						}
 						cardService.cache(suggestions);
 						$scope.suggestions = $scope.suggestions.concat(suggestions);
 						$scope.loading = false;
+						$scope.skipIndex += suggestions.length;
 						$scope.$digest();
 					}
 

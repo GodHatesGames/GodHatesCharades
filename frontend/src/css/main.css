@@ -75,6 +75,7 @@ h3 {
 	color: #000;
 	font-size: 20px;
 	font-family: 'Mimbie';
+	-webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
 }
 
 #mainNav > li {
@@ -132,7 +133,12 @@ h3 {
 
 .nav .dropdown.open a {
 	color: white;
-	background-color: #FF6857;
+	background-color: #FF6857;     
+}
+
+.nav .dropdown .dropdown-toggle:hover .caret {
+	border-top-color: white;
+	border-bottom-color: white;
 }
 
 .nav .dropdown .dropdown-toggle .caret {
@@ -153,6 +159,7 @@ h3 {
 	color: white;
 	border-radius: 0;
 	width: 100%;
+	box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
 .nav .dropdown-menu a {
@@ -284,6 +291,28 @@ h3 {
 
 .topSubmissions {
 	height: 100%;
+}
+
+.suggestionList > table > tr > th  {
+    border-top: none;
+}
+.suggestionList > table > tbody > tr > td, .suggestionList > table > tbody > tr > th {
+	text-align: center;
+	border-color: #F4EBDC;
+	background: white;
+}
+
+.suggestionList > table > tbody > tr {
+	border: 0px solid white;
+	border-left-width: 3px;
+}
+
+.suggestionList > table > tbody > tr.scenario {
+	border-left-color:#61CACE;
+}
+
+.suggestionList > table > tbody > tr.character {
+	border-left-color:#FF6857;
 }
 
 /* Responsive: Portrait tablets and up */

@@ -128,15 +128,6 @@ define([
 			url: "/top",
 			templateUrl: "views/topView.html"
 		});
-		$stateProvider.state('top.best', {
-			url: "/best"
-		});
-		$stateProvider.state('top.worst', {
-			url: "/worst"
-		});
-		$stateProvider.state('top.controversial', {
-			url: "/controversial"
-		});
 	}]);
 
 });

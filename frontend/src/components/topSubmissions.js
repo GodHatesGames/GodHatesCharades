@@ -18,13 +18,16 @@ define([
 					$scope.pageSize = 50;
 					$scope.loading = false;
 					$scope.suggestions = [];
-					$scope.skipIndex = 0;
+					$scope.skipIndex = 0; //TODO: make private
 					$scope.allLoaded = false;
+					$scope.tab = 'best';
 
 					// Private methods
 
-					$scope.reloadSuggestions = function() {
+					$scope.reloadSuggestions = function(tab) {
+						$scope.tab = tab;
 						$scope.suggestions = [];
+						$scope.skipIndex = 0;
 						$scope.loadSuggestions();
 					}
 
@@ -33,26 +36,14 @@ define([
 						if(!$scope.loading && !$scope.allLoaded) {
 							var options = {
 								pageSize: $scope.pageSize,
-								skipIndex: $scope.skipIndex
+								skipIndex: $scope.skipIndex,
+								type: $scope.tab
 							};
 							var callbacks = {
 								success: onSuggestionsLoaded,
 								error: onSuggestionsError
 							};
 							$scope.loading = true;
-
-							switch($state.current.name) {
-								case 'top.controversial' :
-									options.type = 'controversial';
-									break;
-								case 'top.worst':
-									options.type = 'worst';
-									break;
-								case 'top.best':
-								default :
-									options.type = 'best';
-									break;
-							}
 							Parse.Cloud.run('topSubmissions', options, callbacks);
 						}
 					}
