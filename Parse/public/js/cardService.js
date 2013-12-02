@@ -39,7 +39,7 @@ define([
 
 			function getTypeClass(card) {
 				var type = card.get('type');
-				getTypeClassByType(type);
+				return getTypeClassByType(type);
 			};
 
 			function getTypeClassByType(type) {
@@ -90,6 +90,7 @@ define([
 					// console.log('TODO: Fetch card from server');
 					var Suggestion = Parse.Object.extend("Suggestion");
 					var query = new Parse.Query(Suggestion);
+					// query.include("owner");
 					var promise = query.get(cardId);
 					promise.then(function(card) {
 						defer.resolve(card);

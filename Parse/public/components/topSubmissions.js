@@ -4,7 +4,7 @@ define([
 	], 
 	function(angular, app) {
 
-		app.directive('topSubmissions', ['cardService', '$filter', function(cardService, $filter) {
+		app.directive('topSubmissions', ['cardService', '$filter', '$state', function(cardService, $filter, $state) {
 			return {
 				restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 				templateUrl: 'components/topSubmissions.html',
@@ -14,28 +14,37 @@ define([
 				},
 				controller: function($scope, $element) {
 					// public vars
+					$scope.cardService = cardService;
 					$scope.pageSize = 50;
 					$scope.loading = false;
 					$scope.suggestions = [];
-					$scope.skipIndex = 0;
+					$scope.skipIndex = 0; //TODO: make private
 					$scope.allLoaded = false;
+					$scope.tab = 'best';
 
 					// Private methods
 
+					$scope.reloadSuggestions = function(tab) {
+						$scope.tab = tab;
+						$scope.suggestions = [];
+						$scope.skipIndex = 0;
+						$scope.loadSuggestions();
+					}
+
 					$scope.loadSuggestions = function() {
+						console.log($state.current.name);
 						if(!$scope.loading && !$scope.allLoaded) {
-							$scope.loading = true;
-							
-							var SuggestionObject = Parse.Object.extend("Suggestion");
-							var query = new Parse.Query(SuggestionObject);
-							query.descending('totalVotes');
-							query.limit($scope.pageSize);
-							query.include('owner');
-							query.skip($scope.skipIndex);
-							query.find({
+							var options = {
+								pageSize: $scope.pageSize,
+								skipIndex: $scope.skipIndex,
+								type: $scope.tab
+							};
+							var callbacks = {
 								success: onSuggestionsLoaded,
 								error: onSuggestionsError
-							});
+							};
+							$scope.loading = true;
+							Parse.Cloud.run('topSubmissions', options, callbacks);
 						}
 					}
 

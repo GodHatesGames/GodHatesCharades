@@ -1,33 +1,57 @@
 <div class="topSubmissions">
-
-	<!-- Repeat Pairs -->
-	<div class="cardContainer"
-			infinite-scroll="loadSuggestions()"
-			infinite-scroll-disabled="loading"
-			infinite-scroll-immediate-check="true">
-			<!-- Repeat suggestions in pairs -->
-			<table class="table table-bordered">
+	<ul class="nav nav-pills subnav">
+		<li ng-class="{ active: tab == 'best' }">
+			<a ng-click="reloadSuggestions('best')">
+				Hall of Fame
+			</a>
+		</li>
+		<li ng-class="{ active: tab == 'worst' }">
+			<a ng-click="reloadSuggestions('worst')">
+				Hall of Shame
+			</a>
+		</li>
+		<!-- <li ng-class="{ active: tab == 'worst' }">
+			<a ng-click="reloadSuggestions('controversial')">
+				Controversial
+			</a>
+		</li> -->
+	</ul>
+	<div class="suggestionList" 
+		 infinite-scroll="loadSuggestions()"
+		 infinite-scroll-disabled="loading"
+		 infinite-scroll-immediate-check="true">
+			<table class="table">
 				<tr>
-					<th>#</th>
-					<th>Text</th>
+					<th>Rank</th>
+					<th>Suggestion</th>
 					<th>Votes</th>
 					<th>Skips</th>
+					<th>Viewed</th>
 					<th>Submitter</th>
 				</tr>
-				<tr ng-repeat="(index, suggestion) in suggestions">
+				<tr ng-repeat="(index, suggestion) in suggestions"
+					ng-class="cardService.getTypeClass(suggestion)">
 					<td ng-bind="index + 1"></td>
 					<!-- Text -->
 					<td ng-bind="suggestion.attributes.text"></td>
 					<!-- Votes -->
-					<td ng-bind="suggestion.attributes.totalVotes | number" 
-						ng-show="suggestion.attributes.totalVotes"></td>
+					<td ng-show="suggestion.attributes.totalVotes">
+						{{suggestion.attributes.totalVotes | number}}
+					</td>
 					<td ng-hide="suggestion.attributes.totalVotes">0</td>
 					<!-- Skips -->
-					<td ng-bind="suggestion.attributes.skipped | number" 
-						ng-show="suggestion.attributes.skipped"></td>
+					<td ng-show="suggestion.attributes.skipped">
+						{{suggestion.attributes.skipped | number}}
+					</td>
 					<td ng-hide="suggestion.attributes.skipped">0</td>
+					<!-- Views -->
+					<td ng-bind="suggestion.attributes.skipped + suggestion.attributes.totalVotes"></td>
 					<!-- Submitter -->
-					<td ng-bind="suggestion.attributes.owner.attributes.name"></td>
+					<td>
+						<a ui-sref="user({userid: suggestion.attributes.owner.id})">
+							{{suggestion.attributes.owner.attributes.name}}
+						</a>
+					</td>
 				</tr>
 			</table>
 	</div>

@@ -18,55 +18,58 @@ define([
 				controller: function($scope, $element) {
 					// public vars
 					$scope.pageSize = 50;
-					$scope.loading = true;
+					$scope.loading = false;
 					$scope.suggestions = [];
-					$scope.pairIndex = 0;
-
+					$scope.skipIndex = 0; //TODO: make private
+					$scope.allLoaded = false;
+					$scope.loadSuggestions = loadSuggestions;
+					$scope.reloadSuggestions = reloadSuggestions;
+					$scope.tab = 'best';
 					// Private methods
 
-					function onUserFound(user) {
-						$scope.user = user;
-						// $scope.$digest();
-					}
-
-					function onUserError(error) {
-						$scope.error = true;
-						// $scope.$digest();
+					function reloadSuggestions(tab) {
+						$scope.tab = tab;
+						$scope.suggestions = [];
+						$scope.skipIndex = 0;
+						$scope.loadSuggestions();
 					}
 
 					function loadSuggestions() {
-						$scope.loading = true;
-
-						var Suggestion = Parse.Object.extend("Suggestion");
-						var owner = new Parse.User();
-						owner.id = $scope.userid;
-						var query = new Parse.Query(Suggestion);
-						query.descending('totalVotes');
-						query.equalTo("owner", owner);
-						query.include('owner');
-						query.find({
-							success: onSuggestionsLoaded,
-							error: onSuggestionsError
-						});
-						
+						if(!$scope.loading && !$scope.allLoaded) {
+							$scope.loading = true;
+							var options = {
+								userid: $scope.userid,
+								skipIndex: $scope.skipIndex,
+								type: $scope.tab
+							};
+							var callbacks = {
+								success: onProfileLoaded,
+								error: onProfileError
+							};
+							$scope.loading = true;
+							Parse.Cloud.run('getProfile', options, callbacks);
+						}
 					}
 
-					function onSuggestionsLoaded(suggestions) {
-						cardService.cache(suggestions);
-						$scope.suggestions = $scope.suggestions.concat(suggestions);
+					function onProfileLoaded(profile) {
+						if(profile.suggestions.length < $scope.pageSize) {
+							$scope.allLoaded = true;
+						}
+						cardService.cache(profile.suggestions);
+						parseUser.cacheUser(profile.user);
+						$scope.user = profile.user;
+						$scope.suggestions = $scope.suggestions.concat(profile.suggestions);
 						$scope.loading = false;
+						$scope.skipIndex += profile.suggestions.length;
 						$scope.$digest();
 					}
 
-					function onSuggestionsError(error) {
+					function onProfileError(error) {
 						console.log('couldn\'t find any pairs:', error);
 					}
 
 					// init
 					loadSuggestions();
-
-					var promise = parseUser.getUserById($scope.userid);
-					promise.then(onUserFound, onUserError);
 
 				}
 			}
