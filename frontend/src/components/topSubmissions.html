@@ -1,20 +1,23 @@
 <div class="topSubmissions">
 	<ul class="nav nav-pills subnav">
 		<li ng-class="{ active: $state.includes('top.best') }">
-			<a ui-sref="top.best">
+			<a ui-sref="top.best"
+			   ng-click="reloadSuggestions()">
 				Best
 			</a>
 		</li>
 		<li ng-class="{ active: $state.includes('top.worst') }">
-			<a ui-sref="top.worst">
+			<a ui-sref="top.worst"
+			   ng-click="reloadSuggestions()">
 				Worst
 			</a>
 		</li>
-		<li ng-class="{ active: $state.includes('top.controversial') }">
-			<a ui-sref="top.controversial">
+		<!-- <li ng-class="{ active: $state.includes('top.controversial') }">
+			<a ui-sref="top.controversial"
+			   ng-click="reloadSuggestions()">
 				Controversial
 			</a>
-		</li>
+		</li> -->
 	</ul>
 	<div infinite-scroll="loadSuggestions()"
 			infinite-scroll-disabled="loading"
@@ -22,9 +25,10 @@
 			<table class="table">
 				<tr>
 					<th>Rank</th>
-					<th>Text</th>
+					<th>Suggestion</th>
 					<th>Votes</th>
 					<th>Skips</th>
+					<th>Viewed</th>
 					<th>Submitter</th>
 				</tr>
 				<tr ng-repeat="(index, suggestion) in suggestions"
@@ -42,6 +46,8 @@
 						{{suggestion.attributes.skipped | number}}
 					</td>
 					<td ng-hide="suggestion.attributes.skipped">0</td>
+					<!-- Views -->
+					<td ng-bind="suggestion.attributes.skipped + suggestion.attributes.totalVotes"></td>
 					<!-- Submitter -->
 					<td>
 						<a ui-sref="user({userid: suggestion.attributes.owner.id})">

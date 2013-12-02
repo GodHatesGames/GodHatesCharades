@@ -23,6 +23,11 @@ define([
 
 					// Private methods
 
+					$scope.reloadSuggestions = function() {
+						$scope.suggestions = [];
+						$scope.loadSuggestions();
+					}
+
 					$scope.loadSuggestions = function() {
 						console.log($state.current.name);
 						if(!$scope.loading && !$scope.allLoaded) {
@@ -37,17 +42,18 @@ define([
 							$scope.loading = true;
 
 							switch($state.current.name) {
-								case "top.controversial" :
-									Parse.Cloud.run('topSubmissionsByTotalVotes', options, callbacks);
+								case 'top.controversial' :
+									options.type = 'controversial';
 									break;
-								case "top.worst":
-									Parse.Cloud.run('topSubmissionsByTotalVotes', options, callbacks);
+								case 'top.worst':
+									options.type = 'worst';
 									break;
-								case "top.best":
+								case 'top.best':
 								default :
-									Parse.Cloud.run('topSubmissionsByTotalVotes', options, callbacks);
+									options.type = 'best';
 									break;
 							}
+							Parse.Cloud.run('topSubmissions', options, callbacks);
 						}
 					}
 
