@@ -18,7 +18,8 @@ define([
 				logout: logout,
 				signup: signup,
 				save: save,
-				getUserById: getUserById
+				getUserById: getUserById,
+				cacheUser: cacheUser
 			}
 
 			var cache = {};
@@ -173,6 +174,10 @@ define([
 					delete fetching[id];
 					deffered.reject(error);
 				}
+			}
+
+			function cacheUser(user) {
+				cache[user.id] = user;
 			}
 
 			return user;

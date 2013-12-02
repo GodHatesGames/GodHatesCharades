@@ -83,8 +83,13 @@ h3 {
 	border-radius: 0;
 }
 
+.nav li {
+	cursor: pointer;
+}
+
 .nav-pills li + li {
 	margin: 0;
+	cursor: pointer;
 }
 
 .nav > li > a:hover {

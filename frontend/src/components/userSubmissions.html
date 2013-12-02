@@ -1,23 +1,6 @@
 <div>
-	<h3>Submissions from {{user.attributes.name}}</h3>
+	<h3>Submissions from {{user.attributes.name || '...'}}</h3>
 
-	<ul class="nav nav-pills subnav">
-		<li ng-class="{ active: tab == 'best' }">
-			<a ng-click="reloadSuggestions('best')">
-				Best
-			</a>
-		</li>
-		<li ng-class="{ active: tab == 'worst' }">
-			<a ng-click="reloadSuggestions('worst')">
-				Worst
-			</a>
-		</li>
-		<!-- <li ng-class="{ active: tab == 'worst' }">
-			<a ng-click="reloadSuggestions('controversial')">
-				Controversial
-			</a>
-		</li> -->
-	</ul>
 	<div class="suggestionList" 
 		 infinite-scroll="loadSuggestions()"
 		 infinite-scroll-disabled="loading"
@@ -57,7 +40,8 @@
 				</tr>
 			</table>
 	</div>
-	<div class="alert alert-info" 
+
+	<div class="loading alert alert-info" 
 			ng-show="loading">
 		Loading...
 	</div>

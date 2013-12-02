@@ -2,9 +2,13 @@ var _ = require('underscore');
 var admin = require('cloud/admin.js');
 var vote = require('cloud/vote.js');
 var leaderboard = require('cloud/leaderboard.js');
+var user = require('cloud/user.js');
 
 // Admin
 Parse.Cloud.define('getUnmoderatedSuggestions', admin.getUnmoderatedSuggestions);
+
+// Profile
+Parse.Cloud.define('getProfile', user.getProfile);
 
 // Vote
 Parse.Cloud.define('getRandomSuggestionPairs', vote.getRandomSuggestionPairs);
