@@ -12,7 +12,6 @@
 					<th>Votes</th>
 					<th>Skips</th>
 					<th>Viewed</th>
-					<th>Submitter</th>
 				</tr>
 				<tr ng-repeat="(index, suggestion) in suggestions"
 					ng-class="cardService.getTypeClass(suggestion)">
@@ -31,12 +30,6 @@
 					<td ng-hide="suggestion.attributes.skipped">0</td>
 					<!-- Views -->
 					<td ng-bind="suggestion.attributes.skipped + suggestion.attributes.totalVotes"></td>
-					<!-- Submitter -->
-					<td>
-						<a ui-sref="user({userid: suggestion.attributes.owner.id})">
-							{{suggestion.attributes.owner.attributes.name}}
-						</a>
-					</td>
 				</tr>
 			</table>
 	</div>
