@@ -16,7 +16,7 @@ define([
 					// public vars
 					$scope.cardService = cardService;
 					$scope.pageSize = 50;
-					$scope.loading = true;
+					$scope.loading = false;
 					$scope.suggestions = [];
 					$scope.skipIndex = 0; //TODO: make private
 					$scope.allLoaded = false;

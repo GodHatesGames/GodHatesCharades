@@ -39,10 +39,6 @@
 				ng-show="parseUser.isAdmin()">
 				Admin
 			</li>
-			<li ng-class="{ active: $state.includes('suggestions') }"
-				ng-show="parseUser.isAdmin()">
-				<a ui-sref='suggestions'>Suggestions List</a>
-			</li>
 			<li ng-class="{ active: $state.includes('moderation') }"
 				ng-show="parseUser.isAdmin()">
 				<a ui-sref='moderation'>Moderation</a>

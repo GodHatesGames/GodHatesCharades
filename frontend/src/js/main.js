@@ -16,8 +16,6 @@ require( [
 	'cp/login',
 	'cp/signup',
 	'cp/vote',
-	'cp/suggestions',
-	'cp/suggestionRow',
 	'cp/moderator',
 	'cp/topSubmissions',
 	'cp/userSubmissions',
