@@ -1,5 +1,6 @@
 <div class="topSubmissions">
-	<ul class="nav nav-pills subnav">
+	<ul class="nav nav-pills subnav"
+		ng-hide="loading">
 		<li ng-class="{ active: tab == 'best' }">
 			<a ng-click="reloadSuggestions('best')">
 				Hall of Fame
@@ -16,7 +17,8 @@
 			</a>
 		</li> -->
 	</ul>
-	<div class="suggestionList" 
+	<div class="suggestionList"
+		 ng-hide="loading"
 		 infinite-scroll="loadSuggestions()"
 		 infinite-scroll-disabled="loading"
 		 infinite-scroll-immediate-check="true">
@@ -56,7 +58,7 @@
 			</table>
 	</div>
 
-	<div class="loading alert alert-info" 
+	<div class="loading" 
 			ng-show="loading">
 		Loading...
 	</div>

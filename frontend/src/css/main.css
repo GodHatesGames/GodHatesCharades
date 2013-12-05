@@ -341,6 +341,14 @@ h3 {
 }
 
 
+.loading {
+	background: black;
+	padding: 15px;
+	color: white;
+	text-align: center;
+	margin: 20px 0;
+}
+
 /* Basic Grid Style */
 
 .gridStyle {
