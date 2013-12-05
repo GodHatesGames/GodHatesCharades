@@ -176,8 +176,14 @@ define([
 				}
 			}
 
-			function cacheUser(user) {
-				cache[user.id] = user;
+			function cacheUser(userToCache) {
+				if(userToCache) {
+					// dont override current user
+					if(userToCache.id !== user.data.id)
+						cache[userToCache.id] = userToCache;
+				} else {
+					console.log('must provide user to cache');
+				}
 			}
 
 			return user;

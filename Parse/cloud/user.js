@@ -14,6 +14,7 @@ function getProfile(request, response) {
 	query.descending('totalVotes');
 	query.equalTo('owner', owner);
 	query.include('owner');
+	query.limit(request.params.pageSize);
 	query.skip(request.params.skipIndex);
 	query.find({
 		success: onSuggestionsLoaded,
@@ -21,10 +22,10 @@ function getProfile(request, response) {
 	});
 
 	function onSuggestionsLoaded(suggestions) {
+		var profile = {};
 		if(suggestions.length > 0) {
-			var suggestionPairs = [];
 			var suggestion;
-			var owner = suggestions[0].get('owner');
+			profile.owner = suggestions[0].get('owner');
 			console.log(suggestions);
 			console.log('owner');
 			console.log(owner);
@@ -35,10 +36,9 @@ function getProfile(request, response) {
 			}
 		}
 
-		response.success({
-			user: owner,
-			suggestions: suggestions
-		});
+		profile.suggestions = suggestions;
+
+		response.success(profile);
 	}
 
 	function onSuggestionsError(error) {

@@ -12,9 +12,9 @@
 					<th>Votes</th>
 					<th>Skips</th>
 					<th>Viewed</th>
+					<th>Type</th>
 				</tr>
-				<tr ng-repeat="(index, suggestion) in suggestions"
-					ng-class="cardService.getTypeClass(suggestion)">
+				<tr ng-repeat="(index, suggestion) in suggestions">
 					<td ng-bind="index + 1"></td>
 					<!-- Text -->
 					<td ng-bind="suggestion.attributes.text"></td>
@@ -30,6 +30,8 @@
 					<td ng-hide="suggestion.attributes.skipped">0</td>
 					<!-- Views -->
 					<td ng-bind="suggestion.attributes.skipped + suggestion.attributes.totalVotes"></td>
+					<!-- Type -->
+					<td ng-class="cardService.getTypeClass(suggestion)"></td>
 				</tr>
 			</table>
 	</div>

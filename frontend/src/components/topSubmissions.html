@@ -30,9 +30,9 @@
 					<th>Skips</th>
 					<th>Viewed</th>
 					<th>Submitter</th>
+					<th>Type</th>
 				</tr>
-				<tr ng-repeat="(index, suggestion) in suggestions"
-					ng-class="cardService.getTypeClass(suggestion)">
+				<tr ng-repeat="(index, suggestion) in suggestions">
 					<td ng-bind="index + 1"></td>
 					<!-- Text -->
 					<td ng-bind="suggestion.attributes.text"></td>
@@ -54,6 +54,8 @@
 							{{suggestion.attributes.owner.attributes.name}}
 						</a>
 					</td>
+					<!-- Type -->
+					<td ng-class="cardService.getTypeClass(suggestion)"></td>
 				</tr>
 			</table>
 	</div>
