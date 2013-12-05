@@ -2,6 +2,7 @@
 	<h3>Submissions from {{user.attributes.name || '...'}}</h3>
 
 	<div class="suggestionList" 
+		 ng-hide="loading && skipIndex == 0"
 		 infinite-scroll="loadSuggestions()"
 		 infinite-scroll-disabled="loading"
 		 infinite-scroll-immediate-check="true">

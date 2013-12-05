@@ -1,6 +1,7 @@
 #homeView h4, #homeView h2 {
 	text-align: center;
 	font-family: 'Mimbie';
+	font-weight: bold;
 }
 
 #homeView .thumbnail {
