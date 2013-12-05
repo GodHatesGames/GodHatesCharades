@@ -87,6 +87,10 @@ h3 {
 	cursor: pointer;
 }
 
+.nav li a {
+	border-radius: 0;
+}
+
 .nav-pills li + li {
 	margin: 0;
 	cursor: pointer;
