@@ -87,6 +87,10 @@ h3 {
 	cursor: pointer;
 }
 
+.nav li a {
+	border-radius: 0;
+}
+
 .nav-pills li + li {
 	margin: 0;
 	cursor: pointer;
@@ -305,19 +309,24 @@ h3 {
 	text-align: center;
 	border-color: #F4EBDC;
 	background: white;
+	padding-top: 15px;
+	padding-bottom: 15px;
 }
 
-.suggestionList > table > tbody > tr {
-	border: 0px solid white;
-	border-left-width: 3px;
+.suggestionList > table > tbody > tr > td.scenario {
+	background-color: #61CACE;
+	background-image: url(../img/scenario.png);
+	background-size: 34px 33px;
+	background-repeat: no-repeat;
+	background-position: center 50%;
 }
 
-.suggestionList > table > tbody > tr.scenario {
-	border-left-color:#61CACE;
-}
-
-.suggestionList > table > tbody > tr.character {
-	border-left-color:#FF6857;
+.suggestionList > table > tbody > tr > td.character {
+	background-color: #FF6857;
+	background-image: url(../img/character.png);
+	background-size: 30px 34px;
+	background-repeat: no-repeat;
+	background-position: center 50%;
 }
 
 /* Responsive: Portrait tablets and up */
@@ -336,6 +345,14 @@ h3 {
 	}
 }
 
+
+.loading {
+	background: black;
+	padding: 15px;
+	color: white;
+	text-align: center;
+	margin: 20px 0;
+}
 
 /* Basic Grid Style */
 

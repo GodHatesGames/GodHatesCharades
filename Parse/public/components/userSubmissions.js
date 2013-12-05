@@ -17,6 +17,7 @@ define([
 				},
 				controller: function($scope, $element) {
 					// public vars
+					$scope.cardService = cardService;
 					$scope.pageSize = 50;
 					$scope.loading = false;
 					$scope.suggestions = [];
@@ -40,6 +41,7 @@ define([
 							var options = {
 								userid: $scope.userid,
 								skipIndex: $scope.skipIndex,
+								pageSize: $scope.pageSize,
 								type: $scope.tab
 							};
 							var callbacks = {
@@ -56,8 +58,8 @@ define([
 							$scope.allLoaded = true;
 						}
 						cardService.cache(profile.suggestions);
-						parseUser.cacheUser(profile.user);
-						$scope.user = profile.user;
+						parseUser.cacheUser(profile.owner);
+						$scope.user = profile.owner;
 						$scope.suggestions = $scope.suggestions.concat(profile.suggestions);
 						$scope.loading = false;
 						$scope.skipIndex += profile.suggestions.length;

@@ -1,5 +1,6 @@
 <div class="topSubmissions">
-	<ul class="nav nav-pills subnav">
+	<ul class="nav nav-pills subnav"
+		ng-hide="loading && skipIndex == 0">
 		<li ng-class="{ active: tab == 'best' }">
 			<a ng-click="reloadSuggestions('best')">
 				Hall of Fame
@@ -16,7 +17,8 @@
 			</a>
 		</li> -->
 	</ul>
-	<div class="suggestionList" 
+	<div class="suggestionList"
+		 ng-hide="loading && skipIndex == 0"
 		 infinite-scroll="loadSuggestions()"
 		 infinite-scroll-disabled="loading"
 		 infinite-scroll-immediate-check="true">
@@ -28,9 +30,9 @@
 					<th>Skips</th>
 					<th>Viewed</th>
 					<th>Submitter</th>
+					<th>Type</th>
 				</tr>
-				<tr ng-repeat="(index, suggestion) in suggestions"
-					ng-class="cardService.getTypeClass(suggestion)">
+				<tr ng-repeat="(index, suggestion) in suggestions">
 					<td ng-bind="index + 1"></td>
 					<!-- Text -->
 					<td ng-bind="suggestion.attributes.text"></td>
@@ -52,11 +54,13 @@
 							{{suggestion.attributes.owner.attributes.name}}
 						</a>
 					</td>
+					<!-- Type -->
+					<td ng-class="cardService.getTypeClass(suggestion)"></td>
 				</tr>
 			</table>
 	</div>
 
-	<div class="loading alert alert-info" 
+	<div class="loading" 
 			ng-show="loading">
 		Loading...
 	</div>

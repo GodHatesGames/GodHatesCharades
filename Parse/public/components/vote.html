@@ -3,7 +3,7 @@
 			type="text/css" 
 			href="components/vote.css">
 
-	<div class="alert alert-info" 
+	<div class="loading" 
 			ng-show="loading">
 		Loading...</div>
 
@@ -29,6 +29,8 @@
 	</div>
 
 	<!-- Skip button -->
+
+	<p ng-hide="loading">...or let us know if both suck.</p>
 	<button ng-click="skipBoth()"
 			ng-hide="loading"
 			class="btn skip">
