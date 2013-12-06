@@ -377,3 +377,20 @@ h3 {
 .clear {
 	clear: both;
 }
+
+.btn {
+	margin: 15px auto auto auto;
+	display: block;
+	border: none;
+	border-radius: 0;
+	background-color: black;
+	color: white;
+	letter-spacing: 1px;
+	font-family: 'Mimbie';
+	font-size: 22px;
+}
+
+.btn:hover {
+	background-color: white;
+	color: black;
+}

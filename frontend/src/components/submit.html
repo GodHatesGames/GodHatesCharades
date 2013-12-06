@@ -22,11 +22,13 @@
 							></div> -->
 			</div>
 		</div>
-		<div class="alert" ng-class="characterCount()">{{text.length}} / {{maxChars}} Characters</div>
+		<div class="alert" ng-class="characterCount()">
+			{{text.length}} / {{maxChars}} Characters
+		</div>
 		<button type="submit" 
-				class="btn btn-success submitBtn"
+				class="btn btn-success submit"
 				ng-click="submit()">
-			Submit new {{typeDisplay}}
+			Submit {{typeDisplay}}
 		</button>
 	</div>
 	<div class="submitForm"

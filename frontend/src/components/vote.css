@@ -68,20 +68,3 @@
 	box-sizing: border-box;
 	margin-left: -25px;
 }
-
-.vote .skip {
-	margin: 15px auto auto auto;
-	display: block;
-	border: none;
-	border-radius: 0;
-	background-color: black;
-	color: white;
-	letter-spacing: 1px;
-	font-family: 'Mimbie';
-	font-size: 22px;
-}
-
-.vote .skip:hover {
-	background-color: white;
-	color: black;
-}
