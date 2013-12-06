@@ -264,6 +264,7 @@ h3 {
 
 .card.scenario .editable, .card.scenario {
 	color: black;
+	font-weight: normal;
 }
 
 .card .editable::-webkit-input-placeholder { /* WebKit browsers */
