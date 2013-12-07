@@ -19,7 +19,8 @@ Parse.Cloud.define('votePair', vote.votePair);
 Parse.Cloud.define('topSubmissions', leaderboard.topSubmissions);
 
 // Background Jobs
-Parse.Cloud.job('kdrCount', leaderboard.kdrCount);
+Parse.Cloud.job('calculateStats', leaderboard.calculateStats);
+Parse.Cloud.job('testStats', leaderboard.testStats);
 
 
 Parse.Cloud.beforeSave('Suggestion', function(request, response) {
