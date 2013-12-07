@@ -257,7 +257,7 @@ h3 {
 .card.scenario {
 	background-color: #61CACE;
 	background-image: url(../img/scenario.png);
-	background-size: 125px 126px;
+	background-size: 105px 106px;
 	background-repeat: no-repeat;
 	background-position: center 25%;
 }
@@ -355,6 +355,17 @@ h3 {
 	}
 }
 
+
+@media (max-width: 641px) {
+	.card.scenario {
+		background-size: 80px 80px;
+	}
+
+	.card.character {
+		background-size: 73px 92px;
+	}
+}
+
 .suggestionList table {
 	margin-bottom: 0;
 }
@@ -394,4 +405,8 @@ h3 {
 .btn:hover {
 	background-color: white;
 	color: black;
+}
+
+.btn:disabled {
+	background-color: black;
 }
