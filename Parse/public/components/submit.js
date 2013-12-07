@@ -71,20 +71,22 @@ define([
 					};
 
 					$scope.submit = function() {
-						var Suggestion = Parse.Object.extend("Suggestion");
-						var suggestion = new Suggestion();
-						suggestion.set('text', $scope.text);
-						suggestion.set('type', $scope.type);
-						suggestion.set('owner', parseUser.data);
-						suggestion.save({
-							success: function(suggestion) {
-								$scope.success = true;
-								$scope.$digest();
-							},
-							error: function(suggestion, error) {
-								console.log('error:', error.message);
-							}
-						})
+						if($scope.text.length > 0) {
+							var Suggestion = Parse.Object.extend("Suggestion");
+							var suggestion = new Suggestion();
+							suggestion.set('text', $scope.text);
+							suggestion.set('type', $scope.type);
+							suggestion.set('owner', parseUser.data);
+							suggestion.save({
+								success: function(suggestion) {
+									$scope.success = true;
+									$scope.$digest();
+								},
+								error: function(suggestion, error) {
+									console.log('error:', error.message);
+								}
+							});
+						}
 					}
 
 					$scope.reset = function() {

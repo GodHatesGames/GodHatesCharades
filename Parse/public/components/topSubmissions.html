@@ -1,6 +1,5 @@
 <div class="topSubmissions">
-	<ul class="nav nav-pills subnav"
-		ng-hide="loading && skipIndex == 0">
+	<ul class="nav nav-pills subnav">
 		<li ng-class="{ active: tab == 'best' }">
 			<a ng-click="reloadSuggestions('best')">
 				Hall of Fame
@@ -11,11 +10,11 @@
 				Hall of Shame
 			</a>
 		</li>
-		<!-- <li ng-class="{ active: tab == 'worst' }">
+		<li ng-class="{ active: tab == 'controversial' }">
 			<a ng-click="reloadSuggestions('controversial')">
 				Controversial
 			</a>
-		</li> -->
+		</li>
 	</ul>
 	<div class="suggestionList"
 		 ng-hide="loading && skipIndex == 0"

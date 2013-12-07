@@ -43,12 +43,14 @@ h2 {
 	text-align: center;
 	border-bottom: 1px dotted black;
 	padding-bottom: 7px;
+	margin-bottom: 30px;
 }
 
 h3 {
 	font-size: 26px;
 	font-family: 'Mimbie';
 	text-align: center;
+	margin-bottom: 20px;
 }
 
 .logoContainer {
@@ -69,6 +71,10 @@ h3 {
 
 .logoContainer img {
 	width: 100%;
+}
+
+#mainNav {
+	margin-bottom: 40px;
 }
 
 .nav a {
@@ -115,12 +121,12 @@ h3 {
 	color: white;
 }
 
-.nav > li.active:nth-child(odd) > a {
+.subnav > li.active:nth-child(odd) > a {
 	border-bottom: 3px solid #D5584A;
 	padding-bottom: 7px;
 }
 
-.nav > li.active:nth-child(even) > a {
+.subnav > li.active:nth-child(even) > a {
 	border-bottom: 3px solid #53B1B4;
 	padding-bottom: 7px;
 }
@@ -196,7 +202,9 @@ h3 {
 .footer {
 	padding-left: 15px;
 	padding-right: 15px;
-	font-size: 18px;
+	font-size: 13px;
+	border-top: 1px dotted black;
+	padding-top: 20px;
 }
 
 .card {
@@ -230,6 +238,7 @@ h3 {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	font-size: 18px;
 }
 
 .card.character {
@@ -248,13 +257,14 @@ h3 {
 .card.scenario {
 	background-color: #61CACE;
 	background-image: url(../img/scenario.png);
-	background-size: 125px 126px;
+	background-size: 105px 106px;
 	background-repeat: no-repeat;
 	background-position: center 25%;
 }
 
 .card.scenario .editable, .card.scenario {
 	color: black;
+	font-weight: normal;
 }
 
 .card .editable::-webkit-input-placeholder { /* WebKit browsers */
@@ -346,12 +356,27 @@ h3 {
 }
 
 
+@media (max-width: 568px) {
+	.card.scenario {
+		background-size: 80px 80px;
+	}
+
+	.card.character {
+		background-size: 73px 92px;
+	}
+}
+
+.suggestionList table {
+	margin-bottom: 0;
+}
+
+
 .loading {
 	background: black;
 	padding: 15px;
 	color: white;
 	text-align: center;
-	margin: 20px 0;
+	margin: 0 0 20px 0;
 }
 
 /* Basic Grid Style */
@@ -363,4 +388,25 @@ h3 {
 
 .clear {
 	clear: both;
+}
+
+.btn {
+	margin: 15px auto auto auto;
+	display: block;
+	border: none;
+	border-radius: 0;
+	background-color: black;
+	color: white;
+	letter-spacing: 1px;
+	font-family: 'Mimbie';
+	font-size: 22px;
+}
+
+.btn:hover {
+	background-color: white;
+	color: black;
+}
+
+.btn:disabled {
+	background-color: black;
 }

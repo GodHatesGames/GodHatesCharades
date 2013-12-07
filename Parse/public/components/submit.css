@@ -2,8 +2,12 @@
 	top: 0;
 }
 
+.submitted .cardContent {
+	padding-top: 100%;
+}
+
 .card {
-	margin-bottom: 10px;
+	margin-bottom: 0;
 }
 
 .card .editable {
@@ -17,9 +21,27 @@
 	font-size: 18px;
 	font-weight: bold;
 	text-align: center;
+	overflow: hidden;
 }
 
 .card.submitted {
-	padding: 25px;
 	font-size: 12px;
+}
+
+.alert {
+	color: black;
+	border: none;
+	border-radius: 0;
+	padding-top: 20px;
+	margin: -5px auto 0 auto;
+	background: transparent;
+}
+
+.alert.alert-warning {
+	font-weight: bold;
+}
+
+.alert.alert-danger {
+	font-weight: bold;
+	color: #BB0000;
 }

@@ -15,7 +15,7 @@ define([
 				controller: function($scope, $element) {
 					// public vars
 					$scope.cardService = cardService;
-					$scope.pageSize = 50;
+					$scope.pageSize = 51;
 					$scope.loading = false;
 					$scope.suggestions = [];
 					$scope.skipIndex = 0; //TODO: make private

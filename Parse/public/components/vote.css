@@ -39,23 +39,11 @@
 	z-index: 10;
 }
 
-.vote .pairContainer:hover .card.character {
-	-webkit-transform: scale(0.97, 0.97) rotate(-8deg) translateX(15px);
-}
-
-.vote .pairContainer:hover .card.scenario {
-	-webkit-transform: scale(1, 1) rotate(6deg) translateX(-15px);
-}
-
-.vote .pairContainer:hover .card {
-	box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
-}
-
 .vote .separator {
 	font-weight: bold;
 	position: absolute;
-	left: 95%;
-	top: 43%;
+	left: 100%;
+	top: 50%;
 	z-index: 99;
 	width: 50px;
 	height: 50px;
@@ -66,21 +54,50 @@
 	box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
 	color: #5A4040;
 	box-sizing: border-box;
+	margin-left: -25px;
+	margin-top: -25px;
 }
 
-.vote .skip {
-	margin: 15px auto auto auto;
-	display: block;
-	border: none;
-	border-radius: 0;
-	background-color: black;
-	color: white;
-	letter-spacing: 1px;
-	font-family: 'Mimbie';
-	font-size: 22px;
+/* Max iPhone 5+ Horizontal  */
+@media (max-width: 568px) {
+	.cardContent {
+		font-size: 10px;
+	}
 }
 
-.vote .skip:hover {
-	background-color: red;
-	color: black;
+/* Max iPhone 5+ Vertical  */
+@media (max-width: 567px) {
+	.vote .pairContainer {
+		width: 100%;
+		display: block;
+	}
+
+	.vote .separator {
+		left: 50%;
+		top: 100%;
+	}
+	.cardContent {
+		font-size: 13px;
+	}
+}
+
+/* Min iPhone 5+ Horizontal  */
+@media (min-width: 569px) {
+	.cardContent {
+		font-size: 18px;
+	}
+}
+
+@media (min-width: 569px) {
+	.vote .pairContainer:hover .card {
+		box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
+	}
+
+	.vote .pairContainer:hover .card.character {
+		-webkit-transform: scale(0.97, 0.97) rotate(-8deg) translateX(15px);
+	}
+
+	.vote .pairContainer:hover .card.scenario {
+		-webkit-transform: scale(1, 1) rotate(6deg) translateX(-15px);
+	}
 }
