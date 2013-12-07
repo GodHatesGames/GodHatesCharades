@@ -1,5 +1,6 @@
 var _ = require('underscore');
 var userUtils = require('cloud/userUtils.js');
+var MAX_FETCH = 100;
 
 exports.topSubmissions = topSubmissions;
 exports.calculateStats = calculateStats;
@@ -14,7 +15,8 @@ function topSubmissions(request, response) {
 
 	switch(request.params.type) {
 		case 'controversial' :
-			query.ascending('controversy');
+			query.exists('controversy');
+			query.ascending('controversy,-skipped,-totalVotes');
 			break;
 		case 'worst' :
 			// only grab if kdr has been evaluated
@@ -29,17 +31,24 @@ function topSubmissions(request, response) {
 			break;
 	}
 	// extra protection with max of 100 items
-	query.limit(Math.min(request.params.pageSize, 100));
-	// include owner so we can display their details
-	query.include('owner');
-	// only use approved suggestions
-	query.equalTo('moderated', true);
-	query.equalTo('rejected', false);
-	query.skip(request.params.skipIndex);
-	query.find({
-		success: onSuggestionsLoaded,
-		error: onSuggestionsError
-	});
+	var itemsRemaining = MAX_FETCH - request.params.skipIndex;
+	if(itemsRemaining <= 0) {
+		response.success([]);
+	} else {
+		var pageSize = Math.min(request.params.pageSize, itemsRemaining);
+		var skipIndex = request.params.skipIndex;
+		query.limit(pageSize);
+		query.skip(skipIndex);
+		// include owner so we can display their details
+		query.include('owner');
+		// only use approved suggestions
+		query.equalTo('moderated', true);
+		query.equalTo('rejected', false);
+		query.find({
+			success: onSuggestionsLoaded,
+			error: onSuggestionsError
+		});
+	}
 
 	function onSuggestionsLoaded(suggestions) {
 		var suggestionPairs = [];
@@ -55,7 +64,6 @@ function topSubmissions(request, response) {
 	function onSuggestionsError(error) {
 		response.reject(error);
 	}
-
 }
 
 function killDeathRatio(status) {

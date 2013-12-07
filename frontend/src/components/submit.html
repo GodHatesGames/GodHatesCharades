@@ -1,8 +1,7 @@
 <div>
-	<link rel="stylesheet" type="text/css" href="components/submit.css">
 	<h4>{{typeDisplay}}</h4>
-	<div ng-hide="success"
-		 class="cardContainer">
+	<div class="cardContainer"
+		 ng-hide="success">
 		<div class="card"
 				ng-class="typeClass">
 			<div class="submitForm cardContent">
@@ -31,19 +30,21 @@
 			Submit {{typeDisplay}}
 		</button>
 	</div>
-	<div class="submitForm"
+	<div class="cardContainer"
 			ng-show="success">
 			<div class="card submitted"
-					ng-class="typeClass">
-				<h5>Thanks for the submission{{displayName()}}! Your card will be up soon.</h5>
-				<p ng-hide="parseUser.loggedin">
-					Want to people to know how brilliant you are? Signup and we'll credit your name or nickname on the card!
-				</p>
+				 ng-class="typeClass">
+				<div class="cardContent">
+					<h5>Thanks for the submission<b>{{displayName()}}</b>! Your card will be up soon.</h5>
+					<p ng-hide="parseUser.loggedin">
+						Want to people to know how brilliant you are? Signup and we'll credit your name or nickname on the card!
+					</p>
 				<a ui-sref="login"
-					class="btn btn-success"
-					ng-hide="parseUser.loggedin">
+				   class="btn btn-success"
+				   ng-hide="parseUser.loggedin">
 					Signup Now
 				</a>
+				</div>
 			</div>
 
 			<button ng-click="reset()"
