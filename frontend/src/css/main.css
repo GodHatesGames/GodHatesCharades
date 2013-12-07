@@ -356,7 +356,7 @@ h3 {
 }
 
 
-@media (max-width: 641px) {
+@media (max-width: 568px) {
 	.card.scenario {
 		background-size: 80px 80px;
 	}

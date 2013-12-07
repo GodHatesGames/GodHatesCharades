@@ -58,6 +58,13 @@
 	margin-top: -25px;
 }
 
+/* Max iPhone 5+ Horizontal  */
+@media (max-width: 568px) {
+	.cardContent {
+		font-size: 10px;
+	}
+}
+
 /* Max iPhone 5+ Vertical  */
 @media (max-width: 567px) {
 	.vote .pairContainer {
@@ -70,14 +77,14 @@
 		top: 100%;
 	}
 	.cardContent {
-		font-size: 14px;
+		font-size: 13px;
 	}
 }
 
 /* Min iPhone 5+ Horizontal  */
-@media (min-width: 568px) {
+@media (min-width: 569px) {
 	.cardContent {
-		font-size: 8px;
+		font-size: 18px;
 	}
 }
 
