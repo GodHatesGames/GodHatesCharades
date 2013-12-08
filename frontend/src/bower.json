@@ -23,13 +23,11 @@
     "jquery": "~2.0.3",
     "requirejs": "~2.1.8",
     "angular-bootstrap": "~0.6.0",
-    "ngInfiniteScroll": "~1.0.0"
+    "ngInfiniteScroll": "~1.0.0",
+    "angular-timer": "~1.0.7"
   },
   "install": {
     "path": "bower",
-    "ignore": [
-      "bootstrap"
-    ],
     "sources": {
       "underscore": "bower_components/underscore/underscore.js"
     }
