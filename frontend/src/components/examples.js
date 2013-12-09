@@ -60,14 +60,14 @@ define([
 							currentIndex++;
 							$scope.$digest();
 							updateLater(); // schedule another update
-						}, 4000);
+						}, 5000);
 					}
 
 					// Public Methods
 					$scope.cardClass = function(index) {
-						if(index < currentIndex)
+						if(index + 1 < currentIndex)
 							return 'exampleBehind';
-						else if(currentIndex === index)
+						else if(index === currentIndex || index === currentIndex - 1)
 							return 'exampleActive';
 						else
 							return 'exampleStaging'
