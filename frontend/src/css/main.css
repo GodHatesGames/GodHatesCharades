@@ -27,14 +27,23 @@
 @font-face {font-family: 'Mimbie';src: url('../fonts/28FE86_0_0.eot');src: url('../fonts/28FE86_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/28FE86_0_0.woff') format('woff'),url('../fonts/28FE86_0_0.ttf') format('truetype'),url('../fonts/28FE86_0_0.svg#wf') format('svg');}
 @font-face {font-family: 'Mimbie-WebIconsWords';src: url('../fonts/28FE86_1_0.eot');src: url('../fonts/28FE86_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/28FE86_1_0.woff') format('woff'),url('../fonts/28FE86_1_0.ttf') format('truetype'),url('../fonts/28FE86_1_0.svg#wf') format('svg');}
 
+html {
+	height: 100%;
+}
 
 /* Space out content a bit */
 body {
+	height: 100%;
+	overflow-y: scroll;
+	background-color: #FF6857;
+	font-family: 'Helvetica';
+}
+
+body > .container {
+	background-color: #F4EBDC;
+	min-height: 100%;
 	padding-top: 20px;
 	padding-bottom: 20px;
-	overflow-y: scroll;
-	background-color: #F4EBDC;
-	font-family: 'Helvetica';
 }
 
 h2 {

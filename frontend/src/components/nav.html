@@ -1,5 +1,6 @@
 <ul class="nav nav-pills nav-justified"
-	id="mainNav">
+	id="mainNav"
+	ng-show="ks2013.done() || parseUser.isBetaUser()">
 
 	<!-- universal nav -->
 	<li ng-class="{ active: $state.includes('rules') }">
