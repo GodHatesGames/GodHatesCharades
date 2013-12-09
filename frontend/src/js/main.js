@@ -21,6 +21,7 @@ require( [
 	'cp/moderator',
 	'cp/topSubmissions',
 	'cp/userSubmissions',
+	'cp/examples',
 	'cp/submit'
 	], 
 	function(angular, Parse, _, app) {
