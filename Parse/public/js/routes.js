@@ -8,7 +8,8 @@ define([
 	return app.config([
 		'$stateProvider',
 		'$urlRouterProvider',
-		function($stateProvider, $urlRouterProvider) {
+		function($stateProvider,
+				 $urlRouterProvider) {
 
 		// For any unmatched url, redirect to /state1
 		$urlRouterProvider.otherwise("/");
@@ -16,6 +17,9 @@ define([
 		$stateProvider.state('home', {
 			url: "/",
 			templateUrl: "views/homeView.html",
+			controller: function($scope, campaignService) {
+				$scope.kickstarter = campaignService.campaignsById['ks2013'];
+			},
 			onEnter: function($rootScope) {
 				$rootScope.isHome = true;
 			},

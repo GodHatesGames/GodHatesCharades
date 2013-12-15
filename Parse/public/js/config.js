@@ -22,6 +22,7 @@ require.config({
 		'router': '../bower/angular-ui-router/angular-ui-router.min',
 		'grid': '../bower/ng-grid/ng-grid.min',
 		'parse': 'vendor/parse-1.2.12.min',
+		'angular-timer': '../bower/angular-timer/angular-timer',
 		'angular-bootstrap': '../bower/angular-bootstrap/ui-bootstrap-tpls',
 		'ng-infinite-scroll': '../bower/ngInfiniteScroll/ng-infinite-scroll'
 	},
@@ -47,6 +48,9 @@ require.config({
 		},
 		'grid': {
 			deps: ['angular', 'jquery']
+		},
+		'angular-timer': {
+			deps: ['angular']
 		},
 		'angular-bootstrap': {
 			deps: ['angular']

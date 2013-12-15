@@ -12,6 +12,7 @@ define([
 				isAdmin: isAdmin,
 				isAnon: isAnon,
 				isReal: isReal,
+				isBetaUser: isBetaUser,
 				data: null,
 				createAnonUser: createAnonUser,
 				connect: connect,
@@ -139,6 +140,13 @@ define([
 			function isAdmin() {
 				if(user.loggedin)
 					return Boolean(user.data.get('admin'));
+				else
+					return false;
+			}
+
+			function isBetaUser() {
+				if(user.loggedin)
+					return Boolean(user.data.get('beta'));
 				else
 					return false;
 			}

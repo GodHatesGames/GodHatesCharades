@@ -1,7 +1,17 @@
 #homeView h4, #homeView h2 {
 	text-align: center;
-	font-family: 'Mimbie';
-	font-weight: bold;
+}
+
+#homeView h4 {
+	font-size: 30px;
+}
+
+#homeView h4 b {
+	font-size: 90px;
+}
+
+#homeView .row {
+	padding: 20px 0;
 }
 
 #homeView .thumbnail {
@@ -26,4 +36,34 @@
 	font-family: 'Helvetica';
 }
 #homeView p b {
+}
+
+#mc_embed_signup {
+	text-align: center;
+}
+
+#kickstarter {
+	text-align: center;
+}
+
+#homeView .cardTypeLeft, #homeView .cardTypeRight {
+	font-size: 24px;
+	font-family: 'Mimbie';
+	padding-top: 130px;
+}
+
+#homeView .cardTypeLeft {
+	text-align: right;
+	right: -50px;
+}
+
+#homeView .cardTypeRight {
+	text-align: left;
+	left: -45px;
+}
+
+#homeView .cardTypeLeft b, #homeView .cardTypeRight b {
+	font-size: 44px;
+	font-weight: normal;
+	vertical-align: -8px;
 }

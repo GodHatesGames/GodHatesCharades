@@ -17,7 +17,8 @@ define([
 											'infinite-scroll',
 											'textareaNoreturn',
 											'parse.user',
-											'ui.bootstrap'
+											'ui.bootstrap',
+											'timer'
 										]);
 		console.log('starting app');
 

@@ -6,8 +6,10 @@ require( [
 	'routes',
 	'router',
 	'cardService',
+	'campaignService',
 	'angular-bootstrap',
 	'ng-infinite-scroll',
+	'angular-timer',
 	'cp/textarea-noreturn',
 	'cp/card',
 	'cp/cardInfo',
@@ -19,6 +21,7 @@ require( [
 	'cp/moderator',
 	'cp/topSubmissions',
 	'cp/userSubmissions',
+	'cp/examples',
 	'cp/submit'
 	], 
 	function(angular, Parse, _, app) {

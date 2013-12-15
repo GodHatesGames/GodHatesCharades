@@ -1,0 +1,38 @@
+<div class="examplesContainer"
+	 ng-class="{'loading': loading}">
+	 <!-- Character -->
+	<div class="characters"
+		 ng-hide="loading">
+		<div class="card character"
+			 ng-class="cardClass(index)"
+			 ng-repeat="(index, suggestion) in characters">
+			<div class="cardContent">
+				{{suggestion.attributes.text}}
+			</div>
+		</div>
+	</div>
+	<!-- Scenario -->
+	<div class="scenarios"
+		 ng-hide="loading">
+		<div class="card scenario"
+			 ng-class="cardClass(index)"
+			 ng-repeat="(index, suggestion) in scenarios">
+			<div class="cardContent">
+				{{suggestion.attributes.text}}
+			</div>
+		</div>
+	</div>
+	<!-- loading -->
+	<div ng-show="loading">
+		<div class="characters">
+			<div class="card character">
+				<div class="cardContent"> </div>
+			</div>
+		</div>
+		<div class="scenarios">
+			<div class="card scenario">
+				<div class="cardContent"> </div>
+			</div>
+		</div>
+	</div>
+</div>
