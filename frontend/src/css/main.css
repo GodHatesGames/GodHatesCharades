@@ -84,7 +84,7 @@ h5 {
 	transition: all .3s ease-out;
 }
 
-.logoContainer:not(.home) {
+.logoContainer.away {
 	width: 130px;
 }
 

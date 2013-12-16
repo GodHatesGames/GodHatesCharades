@@ -19,12 +19,6 @@ define([
 			templateUrl: "views/homeView.html",
 			controller: function($scope, campaignService) {
 				$scope.kickstarter = campaignService.campaignsById['ks2013'];
-			},
-			onEnter: function($rootScope) {
-				$rootScope.isHome = true;
-			},
-			onExit: function($rootScope) {
-				$rootScope.isHome = false;
 			}
 		});
 		$stateProvider.state('submit', {
