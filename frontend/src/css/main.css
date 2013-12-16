@@ -50,9 +50,10 @@ h2 {
 	font-size: 32px;
 	font-family: 'Mimbie';
 	text-align: center;
-	border-bottom: 1px dotted black;
+	/*border-bottom: 1px dotted black;*/
 	padding-bottom: 7px;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
+	line-height: 42px;
 }
 
 h3 {
@@ -61,6 +62,7 @@ h3 {
 	text-align: center;
 	margin-bottom: 10px;
 	line-height: 32px;
+	margin-top: 0;
 }
 
 h4 {
@@ -71,6 +73,11 @@ h4 {
 h5 {
 	text-align: center;
 	font-size: 18px;
+	line-height: 22px;
+}
+
+hr {
+	border-top: 1px dotted black;
 }
 
 .logoContainer {
@@ -222,7 +229,6 @@ h5 {
 	padding-left: 15px;
 	padding-right: 15px;
 	font-size: 13px;
-	border-top: 1px dotted black;
 	padding-top: 20px;
 }
 
@@ -314,11 +320,6 @@ h5 {
 .cardInfo {
 	max-width: 200px;
 	margin: 0 auto;
-}
-
-/* Customize container */
-.container-narrow > hr {
-	margin: 30px 0;
 }
 
 /* Main marketing message and sign up button */
