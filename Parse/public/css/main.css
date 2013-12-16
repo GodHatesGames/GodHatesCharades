@@ -68,10 +68,14 @@ h4 {
 	font-family: 'Mimbie';
 }
 
+h5 {
+	text-align: center;
+	font-size: 18px;
+}
+
 .logoContainer {
 	text-align: center;
-	max-width: 246px;
-	width: 100%;
+	width: 246px;
 	margin: 0 auto;
 	-webkit-transition: all .3s ease-out;
 	-moz-transition: all .3s ease-out;
@@ -80,7 +84,7 @@ h4 {
 	transition: all .3s ease-out;
 }
 
-.logoContainer:not(.home) {
+.logoContainer.away {
 	width: 130px;
 }
 
@@ -256,10 +260,22 @@ h4 {
 	font-size: 18px;
 }
 
+@media (max-width: 400px) {
+	.cardContent {
+		font-size: 16px;
+	}
+}
+
+@media (max-width: 320px) {
+	.cardContent {
+		font-size: 13px;
+	}
+}
+
 .card.character {
 	background-color: #FF6857;
 	background-image: url(../img/character.png);
-	background-size: 103px 132px;
+	background-size: 50%;
 	background-repeat: no-repeat;
 	background-position: center 25%;
 }
@@ -272,7 +288,7 @@ h4 {
 .card.scenario {
 	background-color: #61CACE;
 	background-image: url(../img/scenario.png);
-	background-size: 105px 106px;
+	background-size: 50%;
 	background-repeat: no-repeat;
 	background-position: center 25%;
 }
@@ -371,7 +387,7 @@ h4 {
 }
 
 
-@media (max-width: 568px) {
+/*@media (max-width: 400px) {
 	.card.scenario {
 		background-size: 80px 80px;
 	}
@@ -379,7 +395,11 @@ h4 {
 	.card.character {
 		background-size: 73px 92px;
 	}
-}
+
+	.card .cardContent{
+		font-size: 15px;
+	}
+}*/
 
 .suggestionList table {
 	margin-bottom: 0;

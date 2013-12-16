@@ -13,17 +13,16 @@ define([
 				},
 				controller: function($scope, $element) {
 					// private vars
-					var currentIndex = 0;
+					var currentIndex = 1;
 					var timeoutId;
 
 					// public vars
 					$scope.loading = false;
-					$scope.characters = [];
-					$scope.scenarios = [];
+					$scope.characters = [{}];
+					$scope.scenarios = [{}];
 
 					// init
 					loadExamples();
-					updateLater();
 
 					// Private methods
 
@@ -46,6 +45,8 @@ define([
 						$scope.loading = false;
 						$scope.characters = $scope.characters.concat(examples['zero']);
 						$scope.scenarios = $scope.scenarios.concat(examples['one']);
+						if(!timeoutId)
+							updateLater();
 						$scope.$digest();
 					}
 

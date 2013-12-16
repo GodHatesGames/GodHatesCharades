@@ -43,6 +43,9 @@ define([
 						if(Parse.User.current() === null)
 							parseUser.createAnonUser();
 
+						// Default away value
+						$rootScope.isAway = false;
+
 						function randString() {
 							// copy pasta'd from: http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
 							return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -72,6 +75,10 @@ define([
 						$rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
 							$rootScope.unsetLoading();
 							$rootScope.contentLoaded = true;
+							if(to.name === 'home')
+								$rootScope.isAway = false;
+							else
+								$rootScope.isAway = true;
 						});
 					}
 		]);
