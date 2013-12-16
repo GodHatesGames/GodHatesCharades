@@ -68,10 +68,14 @@ h4 {
 	font-family: 'Mimbie';
 }
 
+h5 {
+	text-align: center;
+	font-size: 18px;
+}
+
 .logoContainer {
 	text-align: center;
-	max-width: 246px;
-	width: 100%;
+	width: 246px;
 	margin: 0 auto;
 	-webkit-transition: all .3s ease-out;
 	-moz-transition: all .3s ease-out;
