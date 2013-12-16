@@ -16,6 +16,7 @@
 
 #homeView .row {
 	padding: 20px 0;
+	overflow: hidden;
 }
 
 #homeView .thumbnail {
@@ -60,7 +61,6 @@
 #kickstarter .timerNumber {
 	font-family: 'Mimbie';
 	font-size: 75px;
-
 	text-indent: 4px;
 	line-height: 80px;
 }
@@ -68,7 +68,6 @@
 #kickstarter .timerText {
 	font-family: 'Mimbie';
 	font-size: 25px;
-
 }
 
 #kickstarter .btn {
@@ -104,4 +103,34 @@
 	font-size: 44px;
 	font-weight: normal;
 	vertical-align: -8px;
+}
+
+#homeView .examplesContainer {
+	margin-top: 40px;
+	padding-bottom: 40px;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+#homeView .rules {
+	background: black;
+	color: white;
+}
+
+@media (max-width: 767px) {
+	#homeView .rules > div:not(:first-child) {
+		padding-top: 30px;
+	}
+
+	#kickstarter .timerNumber {
+		font-size: 63px;
+		line-height: 65px;
+	
+}
+
+	#kickstarter .timerText {
+		font-size: 18px;
+	}
+
+
 }
