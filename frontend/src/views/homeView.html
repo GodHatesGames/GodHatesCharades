@@ -4,6 +4,17 @@
 	<h2>A game where you act out the<br>vile and dispicable inside all of us.</h2>
 
 	<div class="row">
+		<span ng-show="kickstarter.done()">
+			<h3>Are you as excited as us?!</h3>
+			<p>Our kickstarter launched and we need your support the most!</p>
+			<div ng-show="kickstarter.done()">
+				<a href="http://www.kickstarter.com"
+				   target="_blank">Back us</a>
+			</div>
+		</span>
+	</div>
+
+	<div class="row">
 		<div class="cardTypeLeft col-md-3">Character <b>&#x203A;</b></div>
 		<examples class="col-md-6"></examples>
 		<div class="cardTypeRight col-md-3"><b>&#x2039;</b> Scenario</div>
@@ -43,14 +54,6 @@
 					   interval="1000" >
 					{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.
 				</timer>
-			</span>
-			<span ng-show="kickstarter.done()">
-				<h3>Are you as excited as us?!</h3>
-				<p>Our kickstarter launched and we need your support the most!</p>
-				<div ng-show="kickstarter.done()">
-					<a href="http://www.kickstarter.com"
-					   target="_blank">Back us</a>
-				</div>
 			</span>
 		</div>
 
