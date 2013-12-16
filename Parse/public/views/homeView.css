@@ -39,7 +39,8 @@
 
 #homeView p {
 	font-family: 'Helvetica';
-	font-size: 20px;
+	font-size: 16px;
+	padding: 0 30px;
 }
 #homeView p b {
 }
@@ -56,6 +57,7 @@
 
 #kickstarter h3 {
 	margin-top: 0;
+	margin-bottom: 20px;
 }
 
 #kickstarter .timerNumber {
@@ -63,6 +65,7 @@
 	font-size: 75px;
 	text-indent: 4px;
 	line-height: 80px;
+	font-weight: bold;
 }
 
 #kickstarter .timerText {
@@ -113,8 +116,7 @@
 }
 
 #homeView .rules {
-	background: black;
-	color: white;
+	color: black;
 }
 
 @media (max-width: 767px) {
