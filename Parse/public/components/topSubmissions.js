@@ -28,6 +28,7 @@ define([
 						$scope.tab = tab;
 						$scope.suggestions = [];
 						$scope.skipIndex = 0;
+						$scope.allLoaded = false;
 						$scope.loadSuggestions();
 					}
 
