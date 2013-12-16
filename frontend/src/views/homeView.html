@@ -1,9 +1,17 @@
 <div id="homeView">
 	<link rel="stylesheet" type="text/css" href="views/homeView.css">
 	<link rel="stylesheet" type="text/css" href="components/examples.css">
-	<h2>A game where you act out the<br>vile and dispicable inside all of us.</h2>
 
-	<div class="row">
+	<div class="row" id="kickstarter">
+		<!-- Kickstarter -->
+		<span ng-hide="kickstarter.done()">
+			<h3>We need your help</h3>
+			<p>The Kickstarter is coming soon. You can help us now by signing up to be notified.</p>
+			<timer countdown="kickstarter.deadline() / 1000" 
+				   interval="1000" >
+				{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.
+			</timer>
+		</span>
 		<span ng-show="kickstarter.done()">
 			<h3>Are you as excited as us?!</h3>
 			<p>Our kickstarter launched and we need your support the most!</p>
@@ -13,6 +21,8 @@
 			</div>
 		</span>
 	</div>
+	
+	<h2>A game where you act out the<br>vile and despicable inside all of us.</h2>
 
 	<div class="row">
 		<div class="cardTypeLeft col-md-3">Character <b>&#x203A;</b></div>
@@ -44,18 +54,6 @@
 	</div>
 	
 	<div class="row">
-		<!-- Kickstarter -->
-		<div id="kickstarter"
-			 class="col-sm-6 col-md-6">
-			<span ng-hide="kickstarter.done()">
-				<h3>We need your help</h3>
-				<p>The Kickstarter is coming soon. You can help us now by signing up to be notified.</p>
-				<timer countdown="kickstarter.deadline() / 1000" 
-					   interval="1000" >
-					{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.
-				</timer>
-			</span>
-		</div>
 
 		<!-- Begin MailChimp Signup Form -->
 		<div id="mc_embed_signup"
