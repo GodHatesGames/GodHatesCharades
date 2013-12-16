@@ -59,7 +59,8 @@ h3 {
 	font-size: 26px;
 	font-family: 'Mimbie';
 	text-align: center;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
+	line-height: 32px;
 }
 
 h4 {
@@ -423,4 +424,18 @@ h4 {
 
 .btn:disabled {
 	background-color: black;
+}
+
+.btn.btn-inverted {
+	background-color: white;
+	color: black;
+}
+
+.btn.btn-inverted:hover {
+	background-color: black;
+	color: white;
+}
+
+.btn.btn-inverted:disabled {
+	background-color: white;
 }

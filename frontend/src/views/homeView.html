@@ -5,23 +5,38 @@
 	<div class="row" id="kickstarter">
 		<!-- Kickstarter -->
 		<span ng-hide="kickstarter.done()">
-			<h3>We need your help</h3>
-			<p>The Kickstarter is coming soon. You can help us now by signing up to be notified.</p>
+			<h3>Our <span class="kickstarter">Kickstarter</span> is coming soon!</h3>
+			<!-- <p>. You can help us now by signing up to be notified.</p> -->
 			<timer countdown="kickstarter.deadline() / 1000" 
-				   interval="1000" >
-				{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.
+				   interval="1000"
+				   class="row">
+				<div class="col-xs-3 col-sm-offset-2 col-sm-2 col-md-offset-2 col-md-2">
+					<div class="timerNumber">{{days}}</div>
+					<div class="timerText">days</div>
+				</div>
+				<div class="col-xs-3 col-sm-2 col-md-2">
+					<div class="timerNumber">{{hours}}</div>
+					<div class="timerText">hours</div>
+				</div>
+				<div class="col-xs-3 col-sm-2 col-md-2">
+					<div class="timerNumber">{{minutes}}</div>
+					<div class="timerText">minutes</div>
+				</div>
+				<div class="col-xs-3 col-sm-2 col-md-2">
+					<div class="timerNumber">{{seconds}}</div>
+					<div class="timerText">seconds</div>
+				</div>
 			</timer>
 		</span>
 		<span ng-show="kickstarter.done()">
 			<h3>Are you as excited as us?!</h3>
 			<p>Our kickstarter launched and we need your support the most!</p>
-			<div ng-show="kickstarter.done()">
-				<a href="http://www.kickstarter.com"
-				   target="_blank">Back us</a>
-			</div>
+			<a href="http://www.kickstarter.com"
+			   class="btn btn-inverted" 
+			   target="_blank">Back us</a>
 		</span>
 	</div>
-	
+
 	<h2>A game where you act out the<br>vile and despicable inside all of us.</h2>
 
 	<div class="row">
@@ -57,7 +72,7 @@
 
 		<!-- Begin MailChimp Signup Form -->
 		<div id="mc_embed_signup"
-			 class="col-sm-6 col-md-6">
+			 class="">
 			<form action="http://godhatescharades.us3.list-manage.com/subscribe/post?u=88c52ae3a3f740d6ede2fcc05&amp;id=b6575d0e61" 
 				  method="post" 
 				  id="mc-embedded-subscribe-form" 

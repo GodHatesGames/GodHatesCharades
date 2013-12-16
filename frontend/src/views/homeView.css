@@ -2,6 +2,10 @@
 	text-align: center;
 }
 
+#homeView h2 {
+	margin-top: 40px;
+}
+
 #homeView h4 {
 	font-size: 30px;
 }
@@ -34,6 +38,7 @@
 
 #homeView p {
 	font-family: 'Helvetica';
+	font-size: 20px;
 }
 #homeView p b {
 }
@@ -44,6 +49,39 @@
 
 #kickstarter {
 	text-align: center;
+	background-color: black;
+	color: white;
+}
+
+#kickstarter h3 {
+	margin-top: 0;
+}
+
+#kickstarter .timerNumber {
+	font-family: 'Mimbie';
+	font-size: 75px;
+
+	text-indent: 4px;
+	line-height: 80px;
+}
+
+#kickstarter .timerText {
+	font-family: 'Mimbie';
+	font-size: 25px;
+
+}
+
+#kickstarter .btn {
+	width: 25%;
+	margin: 0 auto;
+}
+
+#kickstarter .btn:hover {
+	background-color: #73CE00;
+}
+
+#kickstarter .kickstarter {
+	color: #73CE00;
 }
 
 #homeView .cardTypeLeft, #homeView .cardTypeRight {
