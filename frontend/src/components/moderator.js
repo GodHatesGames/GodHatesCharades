@@ -45,10 +45,14 @@ define([
 					}
 
 					function loadNext() {
-						$scope.index++;
-						$scope.suggestion = suggestions[$scope.index];
-						$scope.suggestionText = $scope.suggestion.get('text');
-						$compile($element);
+						if($scope.index + 1 < suggestions.length) {
+							$scope.index++;
+							$scope.suggestion = suggestions[$scope.index];
+							$scope.suggestionText = $scope.suggestion.get('text');
+							$compile($element);
+						} else {
+							$scope.allApproved = true;
+						}
 					}
 
 					function onSuggestionsError(error) {

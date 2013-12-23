@@ -11,13 +11,13 @@
 			ng-show="allApproved && !loading">
 		Thats all folks... dont you have something better you could be doing?</div>
 
-	<!-- Skip button -->
-
-	<hr/>
+	<p ng-show="!allApproved && !loading">Try not to fuck this up</p>
 
 	<!-- One suggestion at a time -->
 	<div class="cardContainer"
 			ng-hide="loading || allApproved">
+
+		<hr/>
 		<card id="suggestion.id"
 				updatable="true"></card>
 		<form class="form-horizontal" role="form">
@@ -65,7 +65,6 @@
 				class="btn btn-warning skip">
 			Ask me later
 		</button>
-		<hr />
 	</div>
 
 
