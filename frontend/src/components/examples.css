@@ -80,13 +80,13 @@
 
 /* Even */
 .examplesContainer .character.exampleActive:nth-child(even) {
-	-webkit-transform: scale(0.97, 0.97) rotateZ(1deg);
+	-webkit-transform: scale(0.97, 0.97) rotateZ(-3deg);
 	z-index: 10;
 	box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
 .examplesContainer .scenario.exampleActive:nth-child(even) {
-	-webkit-transform: scale(0.97, 0.97) rotateZ(-1deg);
+	-webkit-transform: scale(0.97, 0.97) rotateZ(2deg);
 	z-index: 10;
 	box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
 }
