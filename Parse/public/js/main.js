@@ -22,7 +22,8 @@ require( [
 	'cp/topSubmissions',
 	'cp/userSubmissions',
 	'cp/examples',
-	'cp/submit'
+	'cp/submit',
+	'cp/printer'
 	], 
 	function(angular, Parse, _, app) {
 		'use strict';

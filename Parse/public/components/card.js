@@ -15,8 +15,10 @@ define([
 				},
 				controller: function($scope, $element) {
 					$scope.typeClass = "";
-					var promise = cardService.getCard($scope.id);
-					promise.then(onSuccess, onError);
+					if($scope.id) {
+						var promise = cardService.getCard($scope.id);
+						promise.then(onSuccess, onError);
+					}
 
 					if($scope.updatable == true) {
 						$scope.$watch('id', function(newValue, oldVlue) {

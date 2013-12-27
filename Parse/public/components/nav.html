@@ -32,6 +32,7 @@
 					My Profile
 				</a>
 			</li>
+
 			<!-- Admin section -->
 			<li role="presentation" 
 				class="divider"
@@ -43,8 +44,13 @@
 			</li>
 			<li ng-class="{ active: $state.includes('moderation') }"
 				ng-show="parseUser.isAdmin()">
-				<a ui-sref='moderation'>Moderation</a>
+				<a ui-sref='admin.moderation'>Moderation</a>
 			</li>
+			<li ng-class="{ active: $state.includes('print') }"
+				ng-show="parseUser.isAdmin()">
+				<a ui-sref='admin.print'>Print</a>
+			</li>
+
 			<li role="presentation" class="divider"></li>
 			<!-- logout -->
 			<li>

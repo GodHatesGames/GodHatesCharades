@@ -80,6 +80,14 @@ hr {
 	border-top: 1px dotted black;
 }
 
+@media all {
+	.page-break	{ display: none; }
+}
+
+@media print {
+	.page-break	{ display: block; page-break-after: always; }
+}
+
 .logoContainer {
 	text-align: center;
 	width: 246px;
@@ -279,11 +287,11 @@ hr {
 }
 
 .card.character {
-	background-color: #FF6857;
-	background-image: url(../img/character.png);
-	background-size: 50%;
-	background-repeat: no-repeat;
-	background-position: center 25%;
+	background-color: #FF6857 !important;
+	background-image: url(../img/character.png) !important;
+	background-size: 50% !important;
+	background-repeat: no-repeat !important;
+	background-position: center 25% !important;
 }
 
 .card.character .editable, .card.character {
@@ -292,11 +300,11 @@ hr {
 }
 
 .card.scenario {
-	background-color: #61CACE;
-	background-image: url(../img/scenario.png);
-	background-size: 50%;
-	background-repeat: no-repeat;
-	background-position: center 25%;
+	background-color: #61CACE !important;
+	background-image: url(../img/scenario.png) !important;
+	background-size: 50% !important;
+	background-repeat: no-repeat !important;
+	background-position: center 25% !important;
 }
 
 .card.scenario .editable, .card.scenario {
@@ -345,7 +353,7 @@ hr {
 }
 
 .suggestionList > table > tr > th  {
-    border-top: none;
+	border-top: none;
 }
 .suggestionList > table > tbody > tr > td, .suggestionList > table > tbody > tr > th {
 	text-align: center;

@@ -8,16 +8,22 @@
 		Loading...</div>
 
 	<div class="alert alert-info" 
-			ng-show="allApproved && !loading">
-		Thats all folks... dont you have something better you could be doing?</div>
+			ng-show="allApproved && !loading && !errorMessage">
+		Thats all folks... dont you have something better you could be doing?
+	</div>
 
-	<!-- Skip button -->
+	<div class="alert alert-danger" 
+			ng-show="errorMessage">
+		Uh oh! {{errorMessage}}
+	</div>
 
-	<hr/>
+	<p ng-show="!allApproved && !loading">Try not to fuck this up</p>
 
 	<!-- One suggestion at a time -->
 	<div class="cardContainer"
-			ng-hide="loading || allApproved">
+			ng-hide="loading || allApproved || !suggestion">
+
+		<hr/>
 		<card id="suggestion.id"
 				updatable="true"></card>
 		<form class="form-horizontal" role="form">
@@ -65,7 +71,6 @@
 				class="btn btn-warning skip">
 			Ask me later
 		</button>
-		<hr />
 	</div>
 
 
