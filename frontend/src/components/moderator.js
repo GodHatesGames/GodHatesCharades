@@ -18,6 +18,7 @@ define([
 					$scope.suggestion = null;
 					$scope.legalMod = '';
 					$scope.allApproved = false;
+					$scope.errorMessage;
 					
 					Parse.Cloud.run(
 						'getUnmoderatedSuggestions',
@@ -56,7 +57,12 @@ define([
 					}
 
 					function onSuggestionsError(error) {
+						$scope.loading = false;
+						$scope.allApproved = true;
+						$scope.errorMessage = error.message;
 						console.log('couldn\'t find any unapproved suggestions:', error);
+						
+						$scope.$digest();
 					}
 
 					// Public Methods

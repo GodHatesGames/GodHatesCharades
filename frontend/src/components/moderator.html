@@ -8,14 +8,19 @@
 		Loading...</div>
 
 	<div class="alert alert-info" 
-			ng-show="allApproved && !loading">
+			ng-show="allApproved && !loading"
+			ng-hide="errorMessage">
 		Thats all folks... dont you have something better you could be doing?</div>
+	<div class="alert alert-danger" 
+			ng-show="errorMessage">
+		Uh oh! {{errorMessage}}
+	</div>
 
 	<p ng-show="!allApproved && !loading">Try not to fuck this up</p>
 
 	<!-- One suggestion at a time -->
 	<div class="cardContainer"
-			ng-hide="loading || allApproved">
+			ng-hide="loading || allApproved || !suggestion">
 
 		<hr/>
 		<card id="suggestion.id"

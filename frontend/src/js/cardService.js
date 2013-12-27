@@ -81,6 +81,7 @@ define([
 			}
 
 			function getCard(cardId) {
+				console.log('getCard:', cardId);
 				var returnVal;
 				var currentCache = cardsById[cardId];
 				if(currentCache) {
