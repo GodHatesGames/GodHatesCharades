@@ -1,0 +1,34 @@
+<div class="printer">
+	<link rel="stylesheet" 
+			type="text/css" 
+			href="components/printer.css">
+
+	<div class="alert alert-info" 
+			ng-show="loading">
+		Loading, this may take a while...</div>
+
+	<div class="alert alert-success" 
+			ng-show="!loading && !errorMessage">
+		{{suggestions.length}} cards loaded, start printing!
+	</div>
+
+	<div class="alert alert-danger" 
+			ng-show="errorMessage">
+		Uh oh! {{errorMessage}}
+	</div>
+
+	<!-- One suggestion at a time -->
+	<div class="cardContainer"
+			ng-hide="loading || allApproved || !suggestions">
+
+		<div class="card page-break"
+			 ng-repeat="(index, suggestion) in suggestions | orderBy:'attributes.type'"
+			 ng-class="cardService.getTypeClass(suggestion)">
+			<div class="cardContent">
+				{{suggestion.attributes.text}}
+			</div>
+		</div>
+	</div>
+
+
+</div>

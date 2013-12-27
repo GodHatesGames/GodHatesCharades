@@ -7,6 +7,7 @@ var user = require('cloud/user.js');
 
 // Admin
 Parse.Cloud.define('getUnmoderatedSuggestions', admin.getUnmoderatedSuggestions);
+Parse.Cloud.define('getAllSuggestions', admin.getAllSuggestions);
 
 // Profile
 Parse.Cloud.define('getProfile', user.getProfile);

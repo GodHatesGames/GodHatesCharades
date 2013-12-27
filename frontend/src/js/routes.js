@@ -118,6 +118,12 @@ define([
 			url: '/rules',
 			templateUrl: 'views/rulesView.html'
 		});
+		$stateProvider.state('top', {
+			url: '/top',
+			templateUrl: 'views/topView.html'
+		});
+		
+		// Admin
 		$stateProvider.state('admin', {
 			url: '/admin',
 			abstract: true,
@@ -127,9 +133,9 @@ define([
 			url: '/moderation',
 			templateUrl: 'views/moderationView.html'
 		});
-		$stateProvider.state('top', {
-			url: '/top',
-			templateUrl: 'views/topView.html'
+		$stateProvider.state('admin.print', {
+			url: '/print',
+			templateUrl: 'views/printView.html'
 		});
 	}]);
 
