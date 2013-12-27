@@ -8,9 +8,10 @@
 		Loading...</div>
 
 	<div class="alert alert-info" 
-			ng-show="allApproved && !loading"
-			ng-hide="errorMessage">
-		Thats all folks... dont you have something better you could be doing?</div>
+			ng-show="allApproved && !loading && !errorMessage">
+		Thats all folks... dont you have something better you could be doing?
+	</div>
+
 	<div class="alert alert-danger" 
 			ng-show="errorMessage">
 		Uh oh! {{errorMessage}}
