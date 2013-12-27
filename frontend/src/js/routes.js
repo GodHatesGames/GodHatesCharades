@@ -118,7 +118,12 @@ define([
 			url: '/rules',
 			templateUrl: 'views/rulesView.html'
 		});
-		$stateProvider.state('moderation', {
+		$stateProvider.state('admin', {
+			url: '/admin',
+			abstract: true,
+			template: '<ui-view></ui-view>'
+		});
+		$stateProvider.state('admin.moderation', {
 			url: '/moderation',
 			templateUrl: 'views/moderationView.html'
 		});
