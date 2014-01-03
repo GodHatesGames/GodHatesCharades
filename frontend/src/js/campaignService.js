@@ -12,7 +12,7 @@ define([
 						},
 						deadline: function getDeadline() {
 							// 1388534400000: Jan 1 2014 GMT
-							return (1388534400000 - new Date().getTime());
+							return (1391197789000 - new Date().getTime());
 						}
 					}
 				}
