@@ -1,0 +1,14 @@
+@media print {
+	.printer .alert {
+		display: none;
+	}
+	
+	.card {
+		-webkit-print-color-adjust: exact;
+		width: 200px;
+		height: 300px;
+		display: inline-block;
+		margin: 0 0 -5px 0;
+		border-radius: 0;
+	}
+}
