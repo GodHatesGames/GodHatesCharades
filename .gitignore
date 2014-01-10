@@ -5,3 +5,4 @@ node_modules/
 Parse/config/global.json
 npm-debug.log
 Parse/public/js/config.js
+frontend/src/js/config.js
