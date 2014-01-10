@@ -62,7 +62,7 @@ h3 {
 	text-align: center;
 	margin-bottom: 10px;
 	line-height: 32px;
-	margin-top: 0;
+	margin-top: d;
 }
 
 h4 {
@@ -444,6 +444,7 @@ hr {
 	letter-spacing: 1px;
 	font-family: 'Mimbie';
 	font-size: 22px;
+	padding-left: 15px;
 }
 
 .btn:hover {

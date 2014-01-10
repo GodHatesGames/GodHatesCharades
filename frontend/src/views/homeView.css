@@ -47,6 +47,49 @@
 
 #mc_embed_signup {
 	text-align: center;
+	background: black;
+	line-height: 20px;
+	color: white;
+	padding-top: 0 !important;
+}
+
+#mc_embed_signup h3 {
+	display: inline-block;
+	margin: 0 20px 0 0;
+	line-height: 44px;
+}
+
+#mc-embedded-subscribe-form {
+	width: 300px;
+	display: inline-block;
+	position: relative;
+	top: -7px;
+}
+
+#mc-embedded-subscribe-form .email {
+	text-indent: 5px;
+	height: 43px;
+	line-height: 34px;
+	font-weight: bold;
+}
+
+
+@media (max-width: 767px) {
+	#mc-embedded-subscribe-form .form-group {
+		display: inline-block;
+		margin-bottom: 0;
+		vertical-align: middle;
+	}
+
+	#mc_embed_signup h3 {
+		margin-bottom: 10px;
+	}
+}
+
+#mc-embedded-subscribe {
+	margin: 0;
+	display: inline-block;
+	background: #FF6751;
 }
 
 #kickstarter {
