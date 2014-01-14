@@ -36,6 +36,8 @@ body {
 	height: 100%;
 	overflow-y: scroll;
 	background-color: #FF6857;
+	background-image: url(../img/facePattern.png);
+	background-size: 300px;
 	font-family: 'Helvetica';
 }
 
