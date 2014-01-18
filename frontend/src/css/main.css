@@ -23,9 +23,6 @@
 
 
 /* @import must be at top of file, otherwise CSS will not work */
-@import url("//hello.myfonts.net/count/28fe86");
-@font-face {font-family: 'Mimbie';src: url('../fonts/28FE86_0_0.eot');src: url('../fonts/28FE86_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/28FE86_0_0.woff') format('woff'),url('../fonts/28FE86_0_0.ttf') format('truetype'),url('../fonts/28FE86_0_0.svg#wf') format('svg');}
-@font-face {font-family: 'Mimbie-WebIconsWords';src: url('../fonts/28FE86_1_0.eot');src: url('../fonts/28FE86_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/28FE86_1_0.woff') format('woff'),url('../fonts/28FE86_1_0.ttf') format('truetype'),url('../fonts/28FE86_1_0.svg#wf') format('svg');}
 @font-face{ 
 	font-family: 'GodHatesCharades';
 	src: url('../fonts/GodHatesCharades.eot');
