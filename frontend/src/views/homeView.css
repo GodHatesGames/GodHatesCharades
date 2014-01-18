@@ -3,7 +3,8 @@
 }
 
 #homeView h2 {
-	margin-top: 40px;
+	max-width: 640px;
+	margin: 40px auto 0 auto;
 }
 
 #homeView h4 {
@@ -11,7 +12,7 @@
 }
 
 #homeView h4 b {
-	font-size: 90px;
+	font-size: 52px;
 }
 
 #homeView .row {
@@ -60,7 +61,7 @@
 }
 
 #mc-embedded-subscribe-form {
-	width: 300px;
+	width: 320px;
 	display: inline-block;
 	position: relative;
 	top: -7px;
@@ -104,7 +105,7 @@
 }
 
 #kickstarter .timerNumber {
-	font-family: 'Mimbie';
+	font-family: 'GodHatesCharades';
 	font-size: 75px;
 	text-indent: 4px;
 	line-height: 80px;
@@ -112,8 +113,9 @@
 }
 
 #kickstarter .timerText {
-	font-family: 'Mimbie';
-	font-size: 25px;
+	font-family: 'GodHatesCharades';
+	font-size: 19px;
+	text-transform: uppercase;
 }
 
 #kickstarter .btn {
@@ -174,7 +176,7 @@
 }
 
 	#kickstarter .timerText {
-		font-size: 18px;
+		font-size: 15px;
 	}
 
 

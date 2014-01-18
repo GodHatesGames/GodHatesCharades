@@ -26,6 +26,14 @@
 @import url("//hello.myfonts.net/count/28fe86");
 @font-face {font-family: 'Mimbie';src: url('../fonts/28FE86_0_0.eot');src: url('../fonts/28FE86_0_0.eot?#iefix') format('embedded-opentype'),url('../fonts/28FE86_0_0.woff') format('woff'),url('../fonts/28FE86_0_0.ttf') format('truetype'),url('../fonts/28FE86_0_0.svg#wf') format('svg');}
 @font-face {font-family: 'Mimbie-WebIconsWords';src: url('../fonts/28FE86_1_0.eot');src: url('../fonts/28FE86_1_0.eot?#iefix') format('embedded-opentype'),url('../fonts/28FE86_1_0.woff') format('woff'),url('../fonts/28FE86_1_0.ttf') format('truetype'),url('../fonts/28FE86_1_0.svg#wf') format('svg');}
+@font-face{ 
+	font-family: 'GodHatesCharades';
+	src: url('../fonts/GodHatesCharades.eot');
+	src: url('../fonts/GodHatesCharades.eot?#iefix') format('embedded-opentype'),
+	     url('../fonts/GodHatesCharades.woff') format('woff'),
+	     url('../fonts/GodHatesCharades.ttf') format('truetype'),
+	     url('../fonts/GodHatesCharades.svg#webfont') format('svg');
+}
 
 html {
 	height: 100%;
@@ -50,7 +58,8 @@ body > .container {
 
 h2 {
 	font-size: 32px;
-	font-family: 'Mimbie';
+	font-family: 'GodHatesCharades';
+	text-transform: uppercase;
 	text-align: center;
 	/*border-bottom: 1px dotted black;*/
 	padding-bottom: 7px;
@@ -59,17 +68,19 @@ h2 {
 }
 
 h3 {
-	font-size: 26px;
-	font-family: 'Mimbie';
+	font-size: 23px;
+	font-family: 'GodHatesCharades';
 	text-align: center;
 	margin-bottom: 10px;
+	
 	line-height: 32px;
-	margin-top: d;
+	text-transform: uppercase;
 }
 
 h4 {
 	font-weight: normal;
-	font-family: 'Mimbie';
+	font-family: 'GodHatesCharades';
+	text-transform: uppercase;
 }
 
 h5 {
@@ -116,8 +127,9 @@ hr {
 .nav a {
 	color: #000;
 	font-size: 20px;
-	font-family: 'Mimbie';
+	font-family: 'GodHatesCharades';
 	-webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
+	text-transform: uppercase;
 }
 
 #mainNav > li {
@@ -444,9 +456,11 @@ hr {
 	background-color: black;
 	color: white;
 	letter-spacing: 1px;
-	font-family: 'Mimbie';
-	font-size: 22px;
+	font-family: 'GodHatesCharades';
+	text-transform: uppercase;
+	font-size: 20px;
 	padding-left: 15px;
+	padding-top: 10px;
 }
 
 .btn:hover {
