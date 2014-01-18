@@ -18,7 +18,7 @@
     "underscore": "~1.5.2",
     "angular": "~1.2.0",
     "bootstrap": "~3.0.0",
-    "angular-ui-router": "~0.2.0",
+    "angular-ui-router": "#0.2.8-bowratic-tedium",
     "jquery": "~2.0.3",
     "angular-bootstrap": "~0.6.0",
     "ngInfiniteScroll": "~1.0.0",

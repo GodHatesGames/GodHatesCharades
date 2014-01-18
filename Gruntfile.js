@@ -1,3 +1,4 @@
+'use strict';
 module.exports = function(grunt) {
 
 	// Project configuration.
@@ -19,7 +20,7 @@ module.exports = function(grunt) {
 						PORT: 3000
 					}
 				}
-			}, 
+			},
 			dev: {
 				options: {
 					file: 'api/server.js',
@@ -39,7 +40,7 @@ module.exports = function(grunt) {
 			},
 			distFrontend: {
 				files: ['frontend/**/*.js', 'frontend/**/*.css', 'frontend/**/*.html'],
-				tasks: ['distBuildFrontend', 'mobileBuildFrontend']
+				tasks: ['distBuildFrontend']
 			}
 		},
 		concurrent: {
@@ -201,7 +202,7 @@ module.exports = function(grunt) {
 		'prepareApi',
 		'clean:distApi',
 		'copy:distApi'
-	]);	
+	]);
 
 	grunt.registerTask('prodBuildApi', [
 		'prepareApi',

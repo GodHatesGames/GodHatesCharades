@@ -2,7 +2,7 @@ var express = require('express');
 var path = require('path');
 
 var port = process.env.PORT || 3000;
-var files = process.env.FILES || '../../frontend/src';
+var files = process.env.FILES || '../frontend';
 
 var server = express(); // better instead
 
