@@ -153,6 +153,21 @@ module.exports = function(grunt) {
 			options: {
 				keepSpecialComments: 0
 			}
+		},
+		filerev: {
+			options: {
+				encoding: 'utf8',
+				algorithm: 'md5',
+				length: 8
+			},
+			css: {
+				src: '.tmp/stage/frontend/css/style.css'
+			},
+			js: {
+				src: [
+					'.tmp/stage/frontend/js/app.js'
+				]
+			}
 		}
 	});
 
@@ -167,6 +182,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-nodemon');
 	grunt.loadNpmTasks('grunt-concurrent');
+	grunt.loadNpmTasks('grunt-filerev');
 
 	grunt.registerTask('prod', [
 		'prodBuildApi',
@@ -217,6 +233,7 @@ module.exports = function(grunt) {
 		'concat',
 		'uglify',
 		'cssmin',
+		'filerev',
 		'usemin',
 		'clean:distFrontend',
 		'copy:distFrontend'
