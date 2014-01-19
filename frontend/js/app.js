@@ -7,7 +7,6 @@ var app = angular.module('app', ['ng',
 									'infinite-scroll',
 									'textareaNoreturn',
 									'parse.user',
-									'ui.bootstrap',
 									'timer'
 								]);
 console.log('starting app');

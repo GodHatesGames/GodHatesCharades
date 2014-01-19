@@ -146,7 +146,9 @@ module.exports = function(grunt) {
 		},
 		uglify: {
 			options: {
-				mangle: false
+				mangle: false,
+				compress: false,
+				beautify: true
 			}
 		},
 		cssmin: {
@@ -169,15 +171,20 @@ module.exports = function(grunt) {
 				]
 			}
 		},
-		htmlmin: {
-			collapseBooleanAttributes: true,
-			collapseWhitespace: true,
-			removeAttributeQuotes: true,
-			removeComments: true, // Only if you don't use comment directives!
-			removeEmptyAttributes: true,
-			removeRedundantAttributes: true,
-			removeScriptTypeAttributes: true,
-			removeStyleLinkTypeAttributes: true
+		ngtemplates: {
+			app: {
+				cwd: '.tmp/stage/frontend',
+				src: [
+					'components/**.html',
+					'views/**.html',
+				],
+				dest: '.tmp/stage/frontend/js/templates.js',
+				options: {
+					htmlmin: {
+						collapseBooleanAttributes: true
+					}
+				}
+			}
 		}
 	});
 
@@ -193,6 +200,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-nodemon');
 	grunt.loadNpmTasks('grunt-concurrent');
 	grunt.loadNpmTasks('grunt-filerev');
+	grunt.loadNpmTasks('grunt-angular-templates');
 
 	grunt.registerTask('prod', [
 		'prodBuildApi',
@@ -239,6 +247,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('distBuildFrontend', [
 		'prepareFrontend',
 		'copy:distConfigFrontend',
+		'ngtemplates',
 		'useminPrepare',
 		'concat',
 		'uglify',
@@ -252,6 +261,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('prodBuildFrontend', [
 		'prepareFrontend',
 		'copy:prodConfigFrontend',
+		'ngtemplates',
 		'useminPrepare',
 		'concat',
 		'uglify',

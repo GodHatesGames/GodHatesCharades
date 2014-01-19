@@ -1,16 +1,16 @@
-.cardContent {
+.submit .cardContent {
 	top: 0;
 }
 
-.submitted .cardContent {
+.submit .submitted .cardContent {
 	padding-top: 100%;
 }
 
-.card {
+.submit .card {
 	margin-bottom: 0;
 }
 
-.card .editable {
+.submit .card .editable {
 	border: none;
 	width: 100%;
 	height: 100%;
@@ -24,11 +24,11 @@
 	overflow: hidden;
 }
 
-.card.submitted {
+.submit .card.submitted {
 	font-size: 12px;
 }
 
-.alert {
+.submit .alert {
 	color: black;
 	border: none;
 	border-radius: 0;
@@ -37,11 +37,11 @@
 	background: transparent;
 }
 
-.alert.alert-warning {
+.submit .alert.alert-warning {
 	font-weight: bold;
 }
 
-.alert.alert-danger {
+.submit .alert.alert-danger {
 	font-weight: bold;
 	color: #BB0000;
 }
