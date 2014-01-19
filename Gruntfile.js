@@ -133,7 +133,14 @@ module.exports = function(grunt) {
 					{
 						expand: true,
 						cwd: '.tmp/stage/frontend/',
-						src: ['**'],
+						src: [
+							'js/app.*.js',
+							'css/style.*.css',
+							'img/**',
+							'fonts/**',
+							'index.html',
+							'*.*'
+						],
 						dest: 'dist/frontend/'
 					}
 				]
@@ -146,9 +153,7 @@ module.exports = function(grunt) {
 		},
 		uglify: {
 			options: {
-				mangle: false,
-				compress: false,
-				beautify: true
+				mangle: false
 			}
 		},
 		cssmin: {
@@ -181,7 +186,14 @@ module.exports = function(grunt) {
 				dest: '.tmp/stage/frontend/js/templates.js',
 				options: {
 					htmlmin: {
-						collapseBooleanAttributes: true
+						collapseBooleanAttributes: true,
+						collapseWhitespace: true,
+						removeAttributeQuotes: true,
+						removeComments: true, // Only if you don't use comment directives!
+						removeEmptyAttributes: true,
+						removeRedundantAttributes: true,
+						removeScriptTypeAttributes: true,
+						removeStyleLinkTypeAttributes: true
 					}
 				}
 			}
