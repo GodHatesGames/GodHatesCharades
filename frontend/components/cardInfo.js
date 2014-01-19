@@ -1,4 +1,4 @@
-app.directive('cardInfo', ['parseUser', 'cardService', '$rootScope', function(parseUser, cardService, $rootScope) {
+app.directive('cardInfo', function(parseUser, cardService, $rootScope) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/cardInfo.html',
@@ -33,4 +33,4 @@ app.directive('cardInfo', ['parseUser', 'cardService', '$rootScope', function(pa
 			}
 		}
 	}
-}]);
+});

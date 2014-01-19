@@ -1,4 +1,4 @@
-app.service('cardService', ['$q', '$rootScope',function($q, $rootScope) {
+app.service('cardService', function($q, $rootScope) {
 	var cardService = {
 		cache: cache,
 		getTypeDisplay: getTypeDisplay,
@@ -97,4 +97,4 @@ app.service('cardService', ['$q', '$rootScope',function($q, $rootScope) {
 	}
 
 	return cardService;
-}]);
+});

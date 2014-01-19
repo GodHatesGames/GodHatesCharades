@@ -1,4 +1,4 @@
-app.directive('moderator', ['cardService', '$compile', function(cardService, $compile) {
+app.directive('moderator', function(cardService, $compile) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/moderator.html',
@@ -93,4 +93,4 @@ app.directive('moderator', ['cardService', '$compile', function(cardService, $co
 
 		}
 	}
-}]);
+});

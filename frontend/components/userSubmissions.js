@@ -1,4 +1,4 @@
-app.directive('userSubmissions', ['$filter', 'cardService', 'parseUser', function($filter, cardService, parseUser) {
+app.directive('userSubmissions', function($filter, cardService, parseUser) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/userSubmissions.html',
@@ -69,4 +69,4 @@ app.directive('userSubmissions', ['$filter', 'cardService', 'parseUser', functio
 
 		}
 	}
-}]);
+});

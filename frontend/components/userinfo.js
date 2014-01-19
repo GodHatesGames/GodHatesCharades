@@ -1,4 +1,4 @@
-app.directive('userinfo', ['parseUser', function(parseUser) {
+app.directive('userinfo', function(parseUser) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/userinfo.html',
@@ -24,4 +24,4 @@ app.directive('userinfo', ['parseUser', function(parseUser) {
 			}
 		}
 	}
-}]);
+});

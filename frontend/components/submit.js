@@ -1,4 +1,4 @@
-app.directive('submit', ['cardService', 'parseUser', function(cardService, parseUser) {
+app.directive('submit', function(cardService, parseUser) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/submit.html',
@@ -89,4 +89,4 @@ app.directive('submit', ['cardService', 'parseUser', function(cardService, parse
 			}
 		}
 	}
-}]);
+});

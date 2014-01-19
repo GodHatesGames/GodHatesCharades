@@ -12,18 +12,13 @@ var app = angular.module('app', ['ng',
 								]);
 console.log('starting app');
 
-app.config(['$locationProvider', 
-	function($locationProvider){
+app.config(function($locationProvider){
 		$locationProvider.html5Mode(false);
 		$locationProvider.hashPrefix('!');
 	}
-]);
+);
 
-app.run(['$rootScope', 
-			'$state', 
-			'$stateParams', 
-			'parseUser', 
-			function($rootScope,   
+app.run(function($rootScope,   
 						$state,   
 						$stateParams,
 						parseUser
@@ -71,4 +66,4 @@ app.run(['$rootScope',
 						$rootScope.isAway = true;
 				});
 			}
-]);
+);

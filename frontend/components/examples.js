@@ -1,4 +1,4 @@
-app.directive('examples', ['cardService', '$timeout', function(cardService, $timeout) {
+app.directive('examples', function(cardService, $timeout) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/examples.html',
@@ -83,4 +83,4 @@ app.directive('examples', ['cardService', '$timeout', function(cardService, $tim
 			}
 		}
 	}
-}]);
+});

@@ -1,4 +1,4 @@
-app.directive('nav', ['parseUser', 'campaignService', function(parseUser, campaignService) {
+app.directive('nav', function(parseUser, campaignService) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/nav.html',
@@ -9,4 +9,4 @@ app.directive('nav', ['parseUser', 'campaignService', function(parseUser, campai
 			$scope.kickstarter = true;
 		}
 	}
-}]);
+});

@@ -1,4 +1,4 @@
-app.directive('vote', ['cardService', function(cardService) {
+app.directive('vote', function(cardService) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/vote.html',
@@ -140,4 +140,4 @@ app.directive('vote', ['cardService', function(cardService) {
 
 		}
 	}
-}]);
+});

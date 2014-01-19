@@ -60,8 +60,7 @@ module.exports = function(grunt) {
 		clean: {
 			distApi: 'dist/api',
 			distFrontend: 'dist/frontend',
-			stageApi: '.tmp/stage/api',
-			stageFrontend: '.tmp/stage/frontend'
+			stage: '.tmp'
 		},
 		useminPrepare: {
 			html: '.tmp/stage/frontend/index.html',
@@ -153,7 +152,7 @@ module.exports = function(grunt) {
 		},
 		uglify: {
 			options: {
-				mangle: false
+				mangle: true
 			}
 		},
 		cssmin: {
@@ -197,6 +196,12 @@ module.exports = function(grunt) {
 					}
 				}
 			}
+		},
+		ngmin: {
+			app: {
+				src: '.tmp/concat/js/app.js',
+				dest: '.tmp/concat/js/app.js'
+			}
 		}
 	});
 
@@ -213,8 +218,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-concurrent');
 	grunt.loadNpmTasks('grunt-filerev');
 	grunt.loadNpmTasks('grunt-angular-templates');
+	grunt.loadNpmTasks('grunt-ngmin');
 
 	grunt.registerTask('prod', [
+		'clean:stage',
 		'prodBuildApi',
 		'prodBuildFrontend'
 	]);
@@ -224,6 +231,7 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('dist', [
+		'clean:stage',
 		'distBuildApi',
 		'distBuildFrontend',
 		'concurrent:dist'
@@ -235,12 +243,10 @@ module.exports = function(grunt) {
 	// ]);
 
 	grunt.registerTask('prepareApi', [
-		'clean:stageApi',
 		'copy:stageApi'
 	]);
 	grunt.registerTask('prepareFrontend', [
 		'bower',
-		'clean:stageFrontend',
 		'copy:stageFrontend'
 	]);
 
@@ -262,6 +268,7 @@ module.exports = function(grunt) {
 		'ngtemplates',
 		'useminPrepare',
 		'concat',
+		'ngmin',
 		'uglify',
 		'cssmin',
 		'filerev',
@@ -276,8 +283,10 @@ module.exports = function(grunt) {
 		'ngtemplates',
 		'useminPrepare',
 		'concat',
+		'ngmin',
 		'uglify',
 		'cssmin',
+		'filerev',
 		'usemin',
 		'clean:distFrontend',
 		'copy:distFrontend'

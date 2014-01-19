@@ -1,4 +1,4 @@
-app.directive('topSubmissions', ['cardService', '$filter', '$state', function(cardService, $filter, $state) {
+app.directive('topSubmissions', function(cardService, $filter, $state) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/topSubmissions.html',
@@ -63,4 +63,4 @@ app.directive('topSubmissions', ['cardService', '$filter', '$state', function(ca
 
 		}
 	}
-}]);
+});

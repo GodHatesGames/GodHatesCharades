@@ -1,4 +1,4 @@
-app.directive('login', ['parseUser', function(parseUser) {
+app.directive('login', function(parseUser) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/login.html',
@@ -22,4 +22,4 @@ app.directive('login', ['parseUser', function(parseUser) {
 			};
 		}
 	};
-}]);
+});

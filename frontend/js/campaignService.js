@@ -1,4 +1,4 @@
-app.service('campaignService', [function() {
+app.service('campaignService', function() {
 	var campaignService = {
 		campaignsById: {
 			ks2013: {
@@ -14,4 +14,4 @@ app.service('campaignService', [function() {
 	}
 
 	return campaignService;
-}]);
+});

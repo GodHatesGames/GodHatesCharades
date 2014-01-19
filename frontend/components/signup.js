@@ -1,4 +1,4 @@
-app.directive('signup', ['parseUser', function(parseUser) {
+app.directive('signup', function(parseUser) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/signup.html',
@@ -29,4 +29,4 @@ app.directive('signup', ['parseUser', function(parseUser) {
 			}
 		}
 	}
-}]);
+});

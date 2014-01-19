@@ -1,4 +1,4 @@
-app.directive('printer', ['cardService', '$compile', function(cardService, $compile) {
+app.directive('printer', function(cardService, $compile) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/printer.html',
@@ -41,4 +41,4 @@ app.directive('printer', ['cardService', '$compile', function(cardService, $comp
 			// Watch
 		}
 	}
-}]);
+});
