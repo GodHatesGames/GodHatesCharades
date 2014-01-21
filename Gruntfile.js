@@ -86,7 +86,7 @@ module.exports = function(grunt) {
 						expand: true,
 						cwd: 'frontend/',
 						// Match all files except alt-config files
-						src: ['**', '!js/config_*.js'],
+						src: ['**', '!js/config**'],
 						dest: '.tmp/stage/frontend/'
 					}
 				]
