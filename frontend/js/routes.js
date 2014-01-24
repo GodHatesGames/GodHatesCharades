@@ -1,3 +1,4 @@
+'use strict';
 app.config(function($stateProvider,
 			 $urlRouterProvider) {
 
@@ -89,8 +90,27 @@ app.config(function($stateProvider,
 		url: '/moderation',
 		templateUrl: 'views/moderationView.html'
 	});
-	$stateProvider.state('admin.print', {
-		url: '/print',
-		templateUrl: 'views/printView.html'
+	$stateProvider.state('admin.export', {
+		url: '/export',
+		templateUrl: 'views/exportView.html',
+		resolve: {
+			allSuggestions: function($q) {
+				var deferred = $q.defer();
+				Parse.Cloud.run(
+					'getAllSuggestions',
+					{},
+					{
+						success: function(suggestions) {
+							deferred.resolve(suggestions);
+						},
+						error: function(err) {
+							deferred.reject(err);
+						}
+					}
+				);
+				return deferred.promise;
+			}
+		},
+		controller: 'exportView'
 	});
 });

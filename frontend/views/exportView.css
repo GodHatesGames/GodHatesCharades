@@ -1,5 +1,5 @@
 @media print {
-	#mainNav, .logoContainer, .footer, #printView h2, #printView hr{
+	#mainNav, .logoContainer, .footer, #exportView h2, #exportView hr{
 		display: none;
 	}
 	@page {

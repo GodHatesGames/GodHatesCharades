@@ -8,6 +8,8 @@ var app = angular.module('app', ['ng',
 									'infinite-scroll',
 									'textareaNoreturn',
 									'parse.user',
+									'ngSanitize',
+									'ngCsv',
 									'timer'
 								]);
 console.log('starting app');
@@ -53,17 +55,17 @@ app.run(function($rootScope,
 				$rootScope.isViewLoading = false;
 
 				$rootScope.$on('$stateChangeStart', function(ev, to, toParams, from, fromParams) {
-					// $rootScope.setBigLoading();
+					$rootScope.setLoading();
 					$rootScope.contentLoaded = false;
+					if(to.name === 'home')
+						$rootScope.isAway = false;
+					else
+						$rootScope.isAway = true;
 				})
 
 				$rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
 					$rootScope.unsetLoading();
 					$rootScope.contentLoaded = true;
-					if(to.name === 'home')
-						$rootScope.isAway = false;
-					else
-						$rootScope.isAway = true;
 				});
 			}
 );

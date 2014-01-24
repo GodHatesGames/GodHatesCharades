@@ -1,27 +1,3 @@
-/* @license
- * MyFonts Webfont Build ID 2686598, 2013-11-12T01:45:11-0500
- * 
- * The fonts listed in this notice are subject to the End User License
- * Agreement(s) entered into by the website owner. All other parties are 
- * explicitly restricted from using the Licensed Webfonts(s).
- * 
- * You may obtain a valid license at the URLs below.
- * 
- * Webfont: Mimbie by Cultivated Mind
- * URL: http://www.myfonts.com/fonts/cultivated-mind/mimbie/regular/
- * Licensed pageviews: 20,000
- * 
- * Webfont: Mimbie Web Icons & Words by Cultivated Mind
- * URL: http://www.myfonts.com/fonts/cultivated-mind/mimbie/web-icons/
- * Licensed pageviews: Unlimited
- * 
- * 
- * License: http://www.myfonts.com/viewlicense?type=web&buildid=2686598
- * Webfonts copyright: Copyright (c) 2013 by Cultivated Mind Type Foundry. All rights reserved.
- * 
- */
-
-
 /* @import must be at top of file, otherwise CSS will not work */
 @font-face{ 
 	font-family: 'GodHatesCharades';
@@ -243,6 +219,29 @@ hr {
 
 .dropdown a {
 	cursor: pointer;
+}
+
+.viewLoader {
+	height: 0;
+	opacity: 0;
+	position: relative;
+	top: -30px;
+	-webkit-transition: opacity .5s ease-out;
+	-moz-transition: opacity .5s ease-out;
+	-o-transition: opacity .5s ease-out;
+	-ms-transition: opacity .5s ease-out;
+	transition: opacity .5s ease-out;
+}
+
+.viewLoader.loading {
+	opacity: 1;
+}
+
+.viewLoader p {
+	text-align: center;
+	background-color: black;
+	color: white;
+	padding: 10px;
 }
 
 .footer {

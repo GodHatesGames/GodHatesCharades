@@ -45,9 +45,9 @@
 				ng-show="parseUser.isAdmin()">
 				<a ui-sref='admin.moderation'>Moderation</a>
 			</li>
-			<li ng-class="{ active: $state.includes('print') }"
+			<li ng-class="{ active: $state.includes('export') }"
 				ng-show="parseUser.isAdmin()">
-				<a ui-sref='admin.print'>Print</a>
+				<a ui-sref='admin.export'>Export</a>
 			</li>
 
 			<li role="presentation" class="divider"></li>

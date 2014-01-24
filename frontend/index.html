@@ -11,21 +11,21 @@
 		<title>God Hates Charades</title>
 
 		<!-- build:css css/style.css -->
-		<link href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-		<link href="css/main.css">
-		<link href="views/homeView.css">
-		<link href="views/submitView.css">
-		<link href="views/loginView.css">
-		<link href="views/moderationView.css">
-		<link href="views/printView.css">
-		<link href="views/voteView.css">
-		<link href="views/topView.css">
-		<link href="views/rulesView.css">
-		<link href="components/examples.css">
-		<link href="components/submit.css">
-		<link href="components/vote.css">
-		<link href="components/printer.css">
-		<link href="components/moderator.css">
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="views/homeView.css">
+		<link rel="stylesheet" href="views/submitView.css">
+		<link rel="stylesheet" href="views/loginView.css">
+		<link rel="stylesheet" href="views/moderationView.css">
+		<link rel="stylesheet" href="views/exportView.css">
+		<link rel="stylesheet" href="views/voteView.css">
+		<link rel="stylesheet" href="views/topView.css">
+		<link rel="stylesheet" href="views/rulesView.css">
+		<link rel="stylesheet" href="components/examples.css">
+		<link rel="stylesheet" href="components/submit.css">
+		<link rel="stylesheet" href="components/vote.css">
+		<link rel="stylesheet" href="components/printer.css">
+		<link rel="stylesheet" href="components/moderator.css">
 		<!-- endbuild -->
 	</head>
 	<body>
@@ -37,7 +37,10 @@
 				</a>
 			</div>
 			<nav></nav>
-			
+			<div class="viewLoader"
+				 ng-class="{loading: isViewLoading}">
+				 <p>Loading...</p>
+			</div>
 			<div ui-view></div>
 
 			<hr/>
@@ -54,6 +57,8 @@
 		<script src="bower_components/angular-timer/dist/angular-timer.min.js"></script>
 		<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 		<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+		<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+		<script src="bower_components/ng-csv/build/ng-csv.js"></script>
 		<script src="js/vendor/parse-1.2.16.min.js"></script>
 		<script src="js/config.js"></script>
 		<script src="js/app.js"></script>
@@ -65,6 +70,7 @@
 		<script src="views/cardView.js"></script>
 		<script src="views/homeView.js"></script>
 		<script src="views/loginView.js"></script>
+		<script src="views/exportView.js"></script>
 		<script src="views/publicProfileView.js"></script>
 		<script src="components/textarea-noreturn.js"></script>
 		<script src="components/card.js"></script>
@@ -80,6 +86,7 @@
 		<script src="components/examples.js"></script>
 		<script src="components/submit.js"></script>
 		<script src="components/printer.js"></script>
+		<script src="components/downloader.js"></script>
 		<script src="js/main.js"></script>
 		<!-- endbuild -->
 
