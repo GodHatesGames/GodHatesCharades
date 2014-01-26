@@ -94,7 +94,7 @@ app.config(function($stateProvider,
 		url: '/export',
 		templateUrl: 'views/exportView.html',
 		resolve: {
-			allSuggestions: function($q) {
+			allSuggestions: ['$q', function($q) {
 				var deferred = $q.defer();
 				Parse.Cloud.run(
 					'getAllSuggestions',
@@ -109,7 +109,7 @@ app.config(function($stateProvider,
 					}
 				);
 				return deferred.promise;
-			}
+			}]
 		},
 		controller: 'exportView'
 	});
