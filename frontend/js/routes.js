@@ -102,6 +102,10 @@ app.config(function($stateProvider,
 	$stateProvider.state('admin.sets', {
 		url: '/sets',
 		templateUrl: 'views/setsView.html',
+		resolve: {
+			allSuggestions: 'getAllSuggestions',
+			allSets: 'getAllSets'
+		},
 		controller: 'setsView'
 	});
 });

@@ -1,5 +1,5 @@
 'use strict';
-app.service('getAllSuggestions', function($q, Restangular) {
+app.service('getAllSuggestions', function($q) {
 	var getAllSuggestions = {
 		data: {},
 		reload: loadData

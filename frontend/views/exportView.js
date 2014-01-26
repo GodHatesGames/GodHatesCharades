@@ -1,4 +1,4 @@
 'use strict';
-app.controller('exportView', function(getAllSuggestions, $scope) {
+app.controller('exportView', function(allSuggestions, $scope) {
 	$scope.suggestions = allSuggestions.data;
 });
