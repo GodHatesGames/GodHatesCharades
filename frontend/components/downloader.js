@@ -1,18 +1,21 @@
 'use strict';
-app.directive('downloader', function(cardService, $compile) {
+app.directive('downloader', function(cardService) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/downloader.html',
 		replace: true,
 		scope: true,
-		controller: function($scope, $element) {
+		controller: function($scope) {
 			// public vars
 			$scope.cardService = cardService;
 			var csvData = [];
 			var item;
 			_.each($scope.suggestions, function(value, key) {
+				var text = value.attributes.text;
+				// fix bad qoutes and escape them too
+				text = text.replace(/[”“"’]/g, '\'');
 				item = {
-					'text': value.attributes.text,
+					'text': text,
 					'type': value.attributes.type,
 					'totalVotes': value.attributes.totalVotes,
 					'skipped': value.attributes.skipped,
