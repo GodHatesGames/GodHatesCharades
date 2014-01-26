@@ -59,6 +59,10 @@
 				ng-show="parseUser.isAdmin()">
 				<a ui-sref='admin.export'>Export</a>
 			</li>
+			<li ng-class="{ active: $state.includes('sets') }"
+				ng-show="parseUser.isAdmin()">
+				<a ui-sref='admin.sets'>Set Builder</a>
+			</li>
 
 			<li role="presentation" class="divider"></li>
 			<!-- logout -->

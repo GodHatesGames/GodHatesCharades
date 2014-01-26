@@ -78,6 +78,11 @@ hr {
 	text-align: center;
 	width: 246px;
 	margin: 0 auto 10px auto;
+	-webkit-transition: all .3s ease-out;
+	-moz-transition: all .3s ease-out;
+	-o-transition: all .3s ease-out;
+	-ms-transition: all .3s ease-out;
+	transition: all .3s ease-out;
 }
 
 .logoContainer.away {

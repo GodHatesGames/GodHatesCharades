@@ -94,23 +94,14 @@ app.config(function($stateProvider,
 		url: '/export',
 		templateUrl: 'views/exportView.html',
 		resolve: {
-			allSuggestions: function($q) {
-				var deferred = $q.defer();
-				Parse.Cloud.run(
-					'getAllSuggestions',
-					{},
-					{
-						success: function(suggestions) {
-							deferred.resolve(suggestions);
-						},
-						error: function(err) {
-							deferred.reject(err);
-						}
-					}
-				);
-				return deferred.promise;
-			}
+			allSuggestions: 'getAllSuggestions'
 		},
 		controller: 'exportView'
+	});
+
+	$stateProvider.state('admin.sets', {
+		url: '/sets',
+		templateUrl: 'views/setsView.html',
+		controller: 'setsView'
 	});
 });
