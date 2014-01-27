@@ -41,7 +41,9 @@
 				 ng-class="{loading: isViewLoading}">
 				 <p>Loading...</p>
 			</div>
-			<ui-view autoscroll='false'></ui-view>
+			<ui-view autoscroll='false'
+					 class="row">
+			 </ui-view>
 
 			<hr/>
 			<div class="footer">
@@ -72,6 +74,7 @@
 		<script src="views/exportView.js"></script>
 		<script src="views/publicProfileView.js"></script>
 		<script src="views/setsView.js"></script>
+		<script src="views/setsCreateView.js"></script>
 		<script src="services/getAllSuggestions.js"></script>
 		<script src="services/getAllSets.js"></script>
 		<script src="components/textarea-noreturn.js"></script>

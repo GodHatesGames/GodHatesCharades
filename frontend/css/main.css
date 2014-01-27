@@ -66,6 +66,16 @@ hr {
 	border-top: 1px dotted black;
 }
 
+a.list-group-special, a.list-group-special:visited {
+	background-color: black;
+	color: white;
+}
+
+a.list-group-special:hover {
+	background-color: #FF6751;
+	color: white;
+}
+
 @media all {
 	.page-break	{ display: none; }
 }
@@ -94,7 +104,7 @@ hr {
 }
 
 #mainNav {
-	margin-bottom: 40px;
+	/* margin-bottom: 40px; */
 	margin-top: 20px;
 	min-height: 1px;
 }

@@ -1,6 +1,4 @@
 'use strict';
-app.controller('setsView', function(allSuggestions, allSets) {
-	return {
-		
-	};
+app.controller('setsView', function(allSets, $scope) {
+	$scope.sets = allSets.data;
 });

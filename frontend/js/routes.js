@@ -103,9 +103,14 @@ app.config(function($stateProvider,
 		url: '/sets',
 		templateUrl: 'views/setsView.html',
 		resolve: {
-			allSuggestions: 'getAllSuggestions',
 			allSets: 'getAllSets'
 		},
 		controller: 'setsView'
+	});
+
+	$stateProvider.state('admin.sets.create', {
+		url: '/create',
+		templateUrl: 'views/setsCreateView.html',
+		controller: 'setsCreateView'
 	});
 });
