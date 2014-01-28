@@ -457,7 +457,7 @@ a.list-group-special:hover {
 }
 
 .btn {
-	margin: 15px auto auto auto;
+	margin: auto auto auto auto;
 	display: block;
 	border: none;
 	border-radius: 0;
@@ -492,4 +492,8 @@ a.list-group-special:hover {
 
 .btn.btn-inverted:disabled {
 	background-color: white;
+}
+
+.btn.btn-danger {
+	background-color: #FF6751;
 }

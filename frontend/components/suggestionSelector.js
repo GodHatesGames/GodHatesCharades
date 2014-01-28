@@ -31,7 +31,8 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 				console.log($state.current.name);
 				if(!$scope.loading && !$scope.allLoaded) {
 					var options = {
-						skipIndex: $scope.skipIndex
+						skipIndex: $scope.skipIndex,
+						pageSize: $scope.pageSize
 					};
 					var callbacks = {
 						success: onSuggestionsLoaded,

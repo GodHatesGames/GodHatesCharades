@@ -1,3 +1,4 @@
+'use strict';
 var userUtils = require('cloud/userUtils.js');
 
 exports.getUnmoderatedSuggestions = getUnmoderatedSuggestions;
@@ -47,7 +48,7 @@ function getUnmoderatedSuggestions(request, response) {
 }
 
 function getAllSuggestions(request, response) {
-	var queryLimit = 1000;
+	var queryLimit = request.params.pageSize ? request.params.pageSize : 1000;
 	var allSuggestions = [];
 	console.log('request.user.id:' + request.user.id);
 	if(request.user) {
@@ -141,7 +142,6 @@ function getAllSets(request, response) {
 
 function getCardsForSet(request, response) {
 	Parse.Cloud.useMasterKey();
-	var cards = [];
 	var setId = request.params.id;
 	console.log('request.user.id:' + request.user.id);
 	if(request.user) {

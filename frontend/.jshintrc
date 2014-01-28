@@ -6,7 +6,9 @@
 	"devel": true,
 	"esnext": true,
 	"globals": {
-		"app": false
+		"app": false,
+		"_": false,
+		"Parse": false
 	},
 	"globalstrict": true,
 	"quotmark": true,

@@ -1,13 +1,16 @@
 'use strict';
 app.controller('setsDetailView', function(sets, $scope, $state, $stateParams, cardService) {
 	$scope.saving = false;
+	$scope.cardsLoading = true;
 	$scope.cardService = cardService;
 	$scope.set = sets.byId[$stateParams.id];
+	$scope.setItems =[];
 	$scope.$on('suggestionAdded', onSuggestionAdded);
 	console.log('set:', $scope.set);
 
 	sets.getCardsForSet($scope.set)
 	.then(function (setItems) {
+		$scope.cardsLoading = false;
 		$scope.setItems = setItems;
 	});
 
@@ -26,6 +29,6 @@ app.controller('setsDetailView', function(sets, $scope, $state, $stateParams, ca
 	};
 
 	function onSuggestionAdded(suggestion) {
-		
+
 	}
 });

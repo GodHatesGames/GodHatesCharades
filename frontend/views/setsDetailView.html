@@ -1,14 +1,10 @@
+<h3>{{set.attributes.name}}</h3>
+<div class="btn btn-warning"
+	 ng-click="ilikedanger = true"
+	 ng-hide="ilikedanger">
+	Danger Zone
+</div>
 <div class="col-sm-6 col-md-6 col-lg-6">
-	<div class="loadingAlert"
-		 ng-show="saving">
-		Saving...
-	</div>
-	<h3>{{set.attributes.name}}</h3>
-	<div class="btn btn-warning"
-		 ng-click="ilikedanger = true"
-		 ng-hide="ilikedanger">
-		Danger Zone
-	</div>
 	<div ng-show="ilikedanger">
 		<h4>Danger Zone</h4>
 		<a ng-click="ilikedanger = false"
@@ -17,8 +13,17 @@
 			Delete Set
 		</button>
 	</div>
-	<h4>Cards</h4>
-	<div class="cardList">
+	<h4>Cards: {{setItems.length}}</h4>
+	<div class="loadingAlert"
+		 ng-show="saving">
+		Saving...
+	</div>
+	<div class="loadingAlert"
+		 ng-show="cardsLoading">
+		Loading...
+	</div>
+	<div class="cardList"
+		 ng-hide="cardsLoading">
 		<table class="table">
 			<tr>
 				<th>Remove</th>
@@ -30,7 +35,7 @@
 				<td>
 					<a ng-click="removeSetItem(setItem)"
 					   class="btn btn-danger">
-						X
+						Del
 					</a>
 				</td>
 							<!-- Text -->
