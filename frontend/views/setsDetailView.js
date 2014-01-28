@@ -3,6 +3,7 @@ app.controller('setsDetailView', function(sets, $scope, $state, $stateParams, ca
 	$scope.saving = false;
 	$scope.cardService = cardService;
 	$scope.set = sets.byId[$stateParams.id];
+	$scope.$on('suggestionAdded', onSuggestionAdded);
 	console.log('set:', $scope.set);
 
 	sets.getCardsForSet($scope.set)
@@ -23,4 +24,8 @@ app.controller('setsDetailView', function(sets, $scope, $state, $stateParams, ca
 			console.log('err saving set:', err);
 		});
 	};
+
+	function onSuggestionAdded(suggestion) {
+		
+	}
 });

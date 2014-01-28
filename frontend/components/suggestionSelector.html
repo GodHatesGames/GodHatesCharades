@@ -1,0 +1,33 @@
+<div class="topSubmissions">
+	<div>Suggestions Loaded: {{suggestions.length}}</div>
+	<div class="cardList"
+		 ng-hide="loading && skipIndex == 0"
+		 infinite-scroll="loadSuggestions()"
+		 infinite-scroll-disabled="loading"
+		 infinite-scroll-immediate-check="true">
+			<table class="table">
+				<tr>
+					<th>Add</th>
+					<th>Suggestion</th>
+					<th>Type</th>
+				</tr>
+				<tr ng-repeat="(index, suggestion) in suggestions">
+					<!-- Add button -->
+					<td>
+						<a ng-click="addSuggestion(suggestion)" class="btn btn-success">
+							Add
+						</a>
+					</td>
+					<!-- Text -->
+					<td ng-bind="suggestion.attributes.text"></td>
+					<!-- Type -->
+					<td ng-class="cardService.getTypeClass(suggestion)"></td>
+				</tr>
+			</table>
+	</div>
+
+	<div class="loadingAlert" 
+			ng-show="loading">
+		Loading...
+	</div>
+</div>

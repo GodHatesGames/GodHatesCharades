@@ -67,6 +67,8 @@ function getAllSuggestions(request, response) {
 			query.limit(queryLimit);
 			query.equalTo('rejected', false);
 			query.equalTo('moderated', true);
+			if(request.params.skipIndex)
+				query.skip(request.params.skipIndex);
 			query.find({
 				success: onSuccess,
 				error: onError
