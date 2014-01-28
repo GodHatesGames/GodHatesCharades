@@ -103,7 +103,7 @@ app.config(function($stateProvider,
 		url: '/sets',
 		templateUrl: 'views/setsView.html',
 		resolve: {
-			allSets: 'getAllSets'
+			sets: 'sets'
 		},
 		controller: 'setsView'
 	});
@@ -112,5 +112,14 @@ app.config(function($stateProvider,
 		url: '/create',
 		templateUrl: 'views/setsCreateView.html',
 		controller: 'setsCreateView'
+	});
+
+	$stateProvider.state('admin.sets.detail', {
+		url: '/detail/:id',
+		templateUrl: 'views/setsDetailView.html',
+		resolve: {
+			sets: 'sets'
+		},
+		controller: 'setsDetailView'
 	});
 });

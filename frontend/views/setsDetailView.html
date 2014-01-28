@@ -1,0 +1,36 @@
+<div class="loadingAlert"
+	 ng-show="saving">
+	Saving...
+</div>
+<h3>{{set.attributes.name}}</h3>
+<div class="btn btn-warning"
+	 ng-click="ilikedanger = true"
+	 ng-hide="ilikedanger">
+	Danger Zone
+</div>
+<div ng-show="ilikedanger">
+	<h4>Danger Zone</h4>
+	<a ng-click="ilikedanger = false"
+	   class="pull-right">Hide</a>
+	<button ng-click="deleteSet()">
+		Delete Set
+	</button>
+</div>
+<h4>Cards</h4>
+<div class="cardList">
+	<table class="table">
+		<tr>
+			<th>Remove</th>
+			<th>Suggestion</th>
+			<th>Type</th>
+		</tr>
+		<tr ng-repeat="(index, setItem) in setItems"
+			ng-init="card = setItem.attributes.card">
+			<td ng-click="removeSetItem(setItem)">X</td>
+						<!-- Text -->
+			<td ng-bind="card.attributes.text"></td>
+			<!-- Type -->
+			<td ng-class="cardService.getTypeClass(card)"></td>
+		</tr>
+	</table>
+</div>

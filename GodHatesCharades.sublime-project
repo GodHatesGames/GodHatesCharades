@@ -6,7 +6,9 @@
 			"path": ".",
 			"folder_exclude_patterns": [
 				"node_modules",
-				"Parse/public/"
+				"Parse/public/",
+				"dist",
+				".tmp"
 			]
 		}
 	]

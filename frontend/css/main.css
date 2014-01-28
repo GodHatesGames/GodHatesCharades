@@ -374,10 +374,10 @@ a.list-group-special:hover {
 	height: 100%;
 }
 
-.suggestionList > table > tr > th  {
+.cardList > table > tr > th  {
 	border-top: none;
 }
-.suggestionList > table > tbody > tr > td, .suggestionList > table > tbody > tr > th {
+.cardList > table > tbody > tr > td, .cardList > table > tbody > tr > th {
 	text-align: center;
 	border-color: #F4EBDC;
 	background: white;
@@ -385,7 +385,7 @@ a.list-group-special:hover {
 	padding-bottom: 15px;
 }
 
-.suggestionList > table > tbody > tr > td.scenario {
+.cardList > table > tbody > tr > td.scenario {
 	background-color: #61CACE;
 	background-image: url(../img/scenario.png);
 	background-size: 34px 33px;
@@ -393,7 +393,7 @@ a.list-group-special:hover {
 	background-position: center 50%;
 }
 
-.suggestionList > table > tbody > tr > td.character {
+.cardList > table > tbody > tr > td.character {
 	background-color: #FF6857;
 	background-image: url(../img/character.png);
 	background-size: 30px 34px;
@@ -432,7 +432,7 @@ a.list-group-special:hover {
 	}
 }*/
 
-.suggestionList table {
+.cardList table {
 	margin-bottom: 0;
 }
 

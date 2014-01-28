@@ -1,21 +1,88 @@
 'use strict';
-app.service('getAllSets', function($q) {
-	var allSets = {
+app.service('sets', function($q, $rootScope) {
+	// console.log('instantiate sets');
+	var sets = {
 		data: [],
-		reload: loadData
+		reload: loadData,
+		byId: {},
+		deleteSet: deleteSet,
+		getCardsForSet: getCardsForSet
 	};
 
 	function loadData(scope) {
+		console.log('sets loadData');
 		var deferred = $q.defer();
-		var Set = Parse.Object.extend('Set');
-		var query = new Parse.Query(Set);
-		var promise = query.find();
-		promise.then(function(sets) {
-			allSets.data = _.extend(allSets.data, sets);
-			deferred.resolve(allSets);
-			if(scope)
-				scope.$digest();
+		Parse.Cloud.run(
+			'getAllSets',
+			{},
+			{
+				success: function(setData) {
+					// save data
+					sets.data = setData;
+					//index by id
+					sets.byId = {};
+					_.each(setData, function(set, index, list) {
+						sets.byId[set.id] = set;
+					});
+					// resolve deffered
+					deferred.resolve(sets);
+					// digest if scope is passed in
+					if(scope) {
+						scope.$digest();
+					} else {
+						$rootScope.$digest();
+					}
+				},
+				error: function(err) {
+					deferred.reject(err);
+					// if (scope)
+					// 	scope.$digest();
+				}
+			}
+		);
+		return deferred.promise;
+	}
+
+	function deleteSet(set) {
+		var deferred = $q.defer();
+		
+		set.destroy()
+		.then(function success() {
+			console.log('set deleted');
+			return loadData();
+		},
+		function error(err) {
+			console.log('err deleting set:', err);
+		})
+		.then(function success() {
+			deferred.resolve();
+		},
+		function error(err) {
+			deferred.reject(err);
 		});
+
+		return deferred.promise;
+	}
+
+	function getCardsForSet(set) {
+		console.log('sets getCardsForSet');
+		var deferred = $q.defer();
+		Parse.Cloud.run(
+			'getCardsForSet',
+			{
+				id: set.id
+			},
+			{
+				success: function(cards) {
+					deferred.resolve(cards);
+				},
+				error: function(err) {
+					deferred.reject(err);
+					// if (scope)
+					// 	scope.$digest();
+				}
+			}
+		);
 		return deferred.promise;
 	}
 
