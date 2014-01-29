@@ -4,15 +4,15 @@
 	 ng-hide="ilikedanger">
 	Danger Zone
 </div>
+<div ng-show="ilikedanger">
+	<h4>Danger Zone</h4>
+	<a ng-click="ilikedanger = false"
+	   class="pull-right">Hide</a>
+	<button ng-click="deleteSet()">
+		Delete Set
+	</button>
+</div>
 <div class="col-sm-6 col-md-6 col-lg-6">
-	<div ng-show="ilikedanger">
-		<h4>Danger Zone</h4>
-		<a ng-click="ilikedanger = false"
-		   class="pull-right">Hide</a>
-		<button ng-click="deleteSet()">
-			Delete Set
-		</button>
-	</div>
 	<h4>Cards: {{setItems.length}}</h4>
 	<div class="loadingAlert"
 		 ng-show="saving">
