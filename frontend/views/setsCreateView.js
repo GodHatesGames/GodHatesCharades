@@ -10,7 +10,8 @@ app.controller('setsCreateView', function($scope, $state) {
 		})
 		.then(function success(newSet) {
 			console.log('newSet saved');
-			$scope.sets.push(newSet);
+			$scope.sets.data.push(newSet);
+			$scope.sets.byId[newSet.id] = newSet;
 			$state.go('admin.sets');
 		},
 		function error(err) {
