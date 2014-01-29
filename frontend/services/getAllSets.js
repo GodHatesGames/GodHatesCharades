@@ -6,7 +6,8 @@ app.service('sets', function($q, $rootScope) {
 		reload: loadData,
 		byId: {},
 		deleteSet: deleteSet,
-		getCardsForSet: getCardsForSet
+		getCardsForSet: getCardsForSet,
+		addCardToSet: addCardToSet
 	};
 
 	function loadData(scope) {
@@ -80,6 +81,32 @@ app.service('sets', function($q, $rootScope) {
 					deferred.reject(err);
 					// if (scope)
 					// 	scope.$digest();
+				}
+			}
+		);
+		return deferred.promise;
+	}
+
+	function addCardToSet(card, set) {
+		var deferred = $q.defer();
+		Parse.Cloud.run(
+			'addCardToSet',
+			{
+				card: card.id,
+				set: set.id
+			},
+			{
+				success: function(setItem) {
+					// update data
+
+					// sets.data = setItem;
+					//index by id
+					// sets.byId[setItem.id] = setItem;
+					// resolve deffered
+					deferred.resolve(setItem);
+				},
+				error: function(err) {
+					deferred.reject(err);
 				}
 			}
 		);

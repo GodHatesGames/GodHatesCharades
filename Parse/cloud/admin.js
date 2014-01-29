@@ -5,6 +5,7 @@ exports.getUnmoderatedSuggestions = getUnmoderatedSuggestions;
 exports.getAllSuggestions = getAllSuggestions;
 exports.getAllSets = getAllSets;
 exports.getCardsForSet = getCardsForSet;
+exports.addCardToSet = addCardToSet;
 
 function getUnmoderatedSuggestions(request, response) {
 	console.log('request.user.id:' + request.user.id);
@@ -48,7 +49,8 @@ function getUnmoderatedSuggestions(request, response) {
 }
 
 function getAllSuggestions(request, response) {
-	var queryLimit = request.params.pageSize ? request.params.pageSize : 1000;
+	console.log('getAllSuggestions');
+	var queryLimit = 1000;
 	var allSuggestions = [];
 	console.log('request.user.id:' + request.user.id);
 	if(request.user) {
@@ -141,6 +143,7 @@ function getAllSets(request, response) {
 }
 
 function getCardsForSet(request, response) {
+	console.log('getCardsForSet');
 	Parse.Cloud.useMasterKey();
 	var setId = request.params.id;
 	console.log('request.user.id:' + request.user.id);
@@ -179,6 +182,58 @@ function getCardsForSet(request, response) {
 
 	function onError(error) {
 		console.log('getAllSets Error');
+		response.error(error);
+	}
+
+}
+
+function addCardToSet(request, response) {
+	console.log('addCardToSet');
+	Parse.Cloud.useMasterKey();
+	var cardId = request.params.card;
+	var setId = request.params.set;
+	console.log('request.user.id:' + request.user.id);
+	if(request.user) {
+		userUtils.isUserAdmin(request.user.id)
+			.then(saveData, onError);
+	} else {
+		onError();
+	}
+
+	function saveData(isAdmin) {
+		console.log('addCardToSet saveData');
+		if(isAdmin) {
+			console.log('user is admin');
+			// mock suggestion
+			var SuggestionObject = Parse.Object.extend('Suggestion');
+			var suggestion = new SuggestionObject();
+			suggestion.id = cardId;
+			// mock set
+			var SetObject = Parse.Object.extend('Set');
+			var set = new SetObject();
+			set.id = setId;
+			// create new setitem and add setitem to set
+			var SetItemObject = Parse.Object.extend('SetItem');
+			var newSetItem = new SetItemObject();
+			newSetItem.set('card', suggestion);
+			newSetItem.set('owner', set);
+			newSetItem.save({
+				success: onSuccess,
+				error: onError
+			});
+		} else {
+			console.log('user is not admin');
+			onError('You need to be an admin to access this page.');
+		}
+	}
+
+	function onSuccess(setItem) {
+		console.log('addCardToSet saveData success');
+		response.success(setItem);
+	}
+
+	function onError(error) {
+		console.log('addCardToSet saveData Error');
 		response.error(error);
 	}
 

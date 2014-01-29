@@ -10,15 +10,13 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 		controller: function($scope, $element) {
 			// public vars
 			$scope.cardService = cardService;
-			$scope.pageSize = 51;
 			$scope.loading = false;
 			$scope.suggestions = [];
 			$scope.skipIndex = 0; //TODO: make private
 			$scope.allLoaded = false;
 			$scope.tab = 'best';
 
-			// Private methods
-
+			// Public methods
 			$scope.reloadSuggestions = function(tab) {
 				$scope.tab = tab;
 				$scope.suggestions = [];
@@ -31,8 +29,7 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 				console.log($state.current.name);
 				if(!$scope.loading && !$scope.allLoaded) {
 					var options = {
-						skipIndex: $scope.skipIndex,
-						pageSize: $scope.pageSize
+						skipIndex: $scope.skipIndex
 					};
 					var callbacks = {
 						success: onSuggestionsLoaded,
@@ -43,10 +40,15 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 				}
 			};
 
+			$scope.selectSuggestion = function(suggestion) {
+				console.log('selectSuggestion');
+				$scope.$emit('suggestionAdded', suggestion);
+			};
+
+			// Private methods
+
 			function onSuggestionsLoaded(suggestions) {
-				if(suggestions.length < $scope.pageSize) {
-					$scope.allLoaded = true;
-				}
+				$scope.allLoaded = true;
 				cardService.cache(suggestions);
 				$scope.suggestions = $scope.suggestions.concat(suggestions);
 				$scope.skipIndex += suggestions.length;

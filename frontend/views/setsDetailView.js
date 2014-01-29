@@ -28,7 +28,12 @@ app.controller('setsDetailView', function(sets, $scope, $state, $stateParams, ca
 		});
 	};
 
-	function onSuggestionAdded(suggestion) {
-
+	function onSuggestionAdded(event, suggestion) {
+		sets.addCardToSet(suggestion, $scope.set).
+		then(function onSuccess(newSetItem) {
+			// force the card data to avoid a reload
+			newSetItem.attributes.card = suggestion;
+			$scope.setItems.unshift(newSetItem);
+		});
 	}
 });
