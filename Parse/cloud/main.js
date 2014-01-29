@@ -11,6 +11,7 @@ Parse.Cloud.define('getAllSuggestions', admin.getAllSuggestions);
 Parse.Cloud.define('getAllSets', admin.getAllSets);
 Parse.Cloud.define('getCardsForSet', admin.getCardsForSet);
 Parse.Cloud.define('addCardToSet', admin.addCardToSet);
+Parse.Cloud.define('removeSetItem', admin.removeSetItem);
 
 // Profile
 Parse.Cloud.define('getProfile', user.getProfile);
