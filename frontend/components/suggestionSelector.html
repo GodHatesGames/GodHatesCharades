@@ -12,7 +12,7 @@
 					<th>Suggestion</th>
 					<th>Type</th>
 				</tr>
-				<tr ng-repeat="(index, suggestion) in suggestions | property:'attributes.text':search">
+				<tr ng-repeat="(index, suggestion) in suggestions | property:'attributes.text':search | orderBy:['attributes.type', 'attributes.text']">
 					<!-- Add button -->
 					<td>
 						<a ng-click="selectSuggestion(suggestion)"

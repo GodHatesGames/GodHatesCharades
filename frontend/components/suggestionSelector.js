@@ -88,6 +88,7 @@ app.filter('property', function() {
 			return array;
 		
 		var properties = parseString(propertyString);
+		var target = target.toLowerCase();
 
 		return _.filter(array, function(item){
 			return getValue(item, properties).toLowerCase().indexOf(target) > -1;
