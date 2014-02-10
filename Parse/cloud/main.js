@@ -1,9 +1,11 @@
-var _ = require('underscore');
+'use strict';
+// var _ = require('underscore');
 var admin = require('cloud/admin.js');
 var vote = require('cloud/vote.js');
 var cardUtils = require('cloud/cardUtils.js');
 var leaderboard = require('cloud/leaderboard.js');
 var user = require('cloud/user.js');
+var pair = require('cloud/pair.js');
 
 // Admin
 Parse.Cloud.define('getUnmoderatedSuggestions', admin.getUnmoderatedSuggestions);
@@ -23,6 +25,11 @@ Parse.Cloud.define('votePair', vote.votePair);
 
 // Leaderboard
 Parse.Cloud.define('topSubmissions', leaderboard.topSubmissions);
+
+//Pair
+Parse.Cloud.define('recordChosenAndSkipped', pair.recordChosenAndSkipped);
+Parse.Cloud.define('recordGuessed', pair.recordGuessed);
+Parse.Cloud.define('recordStumped', pair.recordStumped);
 
 // Misc
 Parse.Cloud.define('examples', cardUtils.examples);
