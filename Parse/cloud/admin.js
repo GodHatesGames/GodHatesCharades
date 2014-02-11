@@ -7,6 +7,7 @@ exports.getAllSets = getAllSets;
 exports.getCardsForSet = getCardsForSet;
 exports.addCardToSet = addCardToSet;
 exports.removeSetItem = removeSetItem;
+exports.createSet = createSet;
 
 function getUnmoderatedSuggestions(request, response) {
 	console.log('request.user.id:' + request.user.id);
@@ -277,6 +278,47 @@ function removeSetItem(request, response) {
 
 	function onError(error) {
 		console.log('removeSetItem destroyItem Error');
+		response.error(error);
+	}
+
+}
+
+function createSet(request, response) {
+	console.log('createSet');
+	Parse.Cloud.useMasterKey();
+	console.log('request.user.id:' + request.user.id);
+	if(request.user) {
+		userUtils.isUserAdmin(request.user.id)
+			.then(createNewSet, onError);
+	} else {
+		onError();
+	}
+
+	function createNewSet(isAdmin) {
+		console.log('createSet createNewSet');
+		if(isAdmin) {
+			console.log('user is admin');
+			var Set = Parse.Object.extend('Set');
+			var newSet = new Set();
+			newSet.save({
+				name: request.params.name
+			}, {
+				success: onSuccess,
+				error: onError
+			});
+		} else {
+			console.log('user is not admin');
+			onError('You need to be an admin to access this page.');
+		}
+	}
+
+	function onSuccess(newSet) {
+		console.log('createSet createNewSet success');
+		response.success(newSet);
+	}
+
+	function onError(error) {
+		console.log('createSet createNewSet Error');
 		response.error(error);
 	}
 

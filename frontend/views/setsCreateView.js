@@ -3,19 +3,29 @@ app.controller('setsCreateView', function($scope, $state) {
 	$scope.saving = false;
 	$scope.createSet = function() {
 		$scope.saving = true;
-		var Set = Parse.Object.extend('Set');
-		var newSet = new Set();
-		newSet.save({
-			name: $scope.name
-		})
-		.then(function success(newSet) {
-			console.log('newSet saved');
+
+		Parse.Cloud.run(
+			'createSet',
+			{
+				name: $scope.name
+			},
+			{
+				success: onSuggestionsLoaded,
+				error: onSuggestionsError
+			}
+		);
+
+		function onSuggestionsLoaded(newSet) {
+			console.log('newSet created');
 			$scope.sets.data.push(newSet);
 			$scope.sets.byId[newSet.id] = newSet;
 			$state.go('admin.sets');
-		},
-		function error(err) {
-			console.log('err saving set:', err);
-		});
+			$scope.saving = false;
+		}
+
+		function onSuggestionsError(err) {
+			console.log('err creating set:', err);
+			$scope.saving = false;
+		}
 	};
 });

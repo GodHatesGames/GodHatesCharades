@@ -14,6 +14,7 @@ Parse.Cloud.define('getAllSets', admin.getAllSets);
 Parse.Cloud.define('getCardsForSet', admin.getCardsForSet);
 Parse.Cloud.define('addCardToSet', admin.addCardToSet);
 Parse.Cloud.define('removeSetItem', admin.removeSetItem);
+Parse.Cloud.define('createSet', admin.createSet);
 
 // Profile
 Parse.Cloud.define('getProfile', user.getProfile);
@@ -26,7 +27,7 @@ Parse.Cloud.define('votePair', vote.votePair);
 // Leaderboard
 Parse.Cloud.define('topSubmissions', leaderboard.topSubmissions);
 
-//Pair
+// Pair
 Parse.Cloud.define('recordChosenAndSkipped', pair.recordChosenAndSkipped);
 Parse.Cloud.define('recordGuessed', pair.recordGuessed);
 Parse.Cloud.define('recordStumped', pair.recordStumped);
