@@ -28,12 +28,12 @@
 					<td>
 						<a ng-click="editing = true"
 						   class="btn btn-danger"
-						   ng-hide="editing">
+						   ng-hide="newText != suggestion.attributes.text">
 							Edit
 						</a>
 						<a ng-click="saveSuggestion(this, suggestion, newText)"
 						   class="btn btn-danger"
-						   ng-show="editing">
+						   ng-show="newText != suggestion.attributes.text">
 							Save
 						</a>
 					</td>
@@ -45,6 +45,7 @@
 						<form ng-submit="saveSuggestion(this, suggestion, newText)">
 							<input type="text"
 								   ng-model="newText"
+								   class="form-control"
 								   />
 						</form>
 					</td>

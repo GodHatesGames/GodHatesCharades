@@ -61,6 +61,8 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 							error: onSuggestionError
 						}
 					);
+				} else {
+					isolateScope.editing = false;
 				}
 
 				function onSuggestionSaved (savedSuggestion) {
