@@ -6,11 +6,13 @@
 </div>
 <div ng-show="ilikedanger">
 	<h4>Danger Zone</h4>
-	<a ng-click="ilikedanger = false"
-	   class="pull-right">Hide</a>
-	<button ng-click="deleteSet()">
+	<button ng-click="ilikedanger = false"
+	   class="btn btn-success pull-right">Hide</button>
+	<button class="btn btn-danger" 
+			ng-click="deleteSet()">
 		Delete Set
 	</button>
+	<hr>
 </div>
 <div class="col-sm-6 col-md-6 col-lg-6">
 	<h4>Cards: {{setItems.length}}</h4>

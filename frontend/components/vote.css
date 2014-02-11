@@ -58,6 +58,10 @@
 	margin-top: -25px;
 }
 
+.vote .skip {
+	margin: 0 auto;
+}
+
 /* Max iPhone 5+ Horizontal  */
 @media (max-width: 568px) {
 	.cardContent {
