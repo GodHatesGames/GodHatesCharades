@@ -1,4 +1,4 @@
-<div class="topSubmissions">
+<div class="suggestionSelector">
 	<h4>Suggestions: {{suggestions.length}}</h4>
 	<div class="cardList"
 		 ng-hide="loading && skipIndex == 0"
@@ -18,14 +18,14 @@
 				<tr ng-repeat="(index, suggestion) in suggestions | property:'attributes.text':searchSelector | orderBy:['attributes.type', 'attributes.text']"
 					ng-init="newText = suggestion.attributes.text">
 					<!-- Add button -->
-					<td>
+					<td class="tableButton">
 						<a ng-click="selectSuggestion(suggestion)"
 						   class="btn btn-success">
 							+
 						</a>
 					</td>
 					<!-- Edit Button -->
-					<td>
+					<td class="tableButton">
 						<a ng-click="editing = true"
 						   class="btn btn-danger"
 						   ng-hide="newText != suggestion.attributes.text">

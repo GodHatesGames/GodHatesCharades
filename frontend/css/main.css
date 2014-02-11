@@ -401,6 +401,10 @@ a.list-group-special:hover {
 	background-position: center 50%;
 }
 
+.cardList td.tableButton {
+	padding: 0;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
 	/* Remove the bottom border on the jumbotron for visual effect */

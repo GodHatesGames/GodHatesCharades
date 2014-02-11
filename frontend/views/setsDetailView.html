@@ -38,7 +38,7 @@
 			<tr ng-repeat="(index, setItem) in setItems | property:'attributes.card.attributes.text':searchDetail | orderBy:['attributes.card.attributes.type', 'attributes.card.attributes.text']"
 				ng-init="card = setItem.attributes.card">
 				<!-- Delete Button -->
-				<td>
+				<td class="tableButton">
 					<a ng-click="removeSetItem(setItem)"
 					   class="btn btn-danger">
 						-
