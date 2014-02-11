@@ -8,6 +8,7 @@ exports.recordStumped = recordStumped;
 exports.recordChosenAndSkipped = recordChosenAndSkipped;
 
 function recordGuessed (request, response) {
+	Parse.Cloud.useMasterKey();
 	var guessedActor = new SuggestionObject();
 	guessedActor.id = request.params.guessedActor;
 	var guessedScenario = new SuggestionObject();
@@ -34,6 +35,7 @@ function recordGuessed (request, response) {
 }
 
 function recordStumped (request, response) {
+	Parse.Cloud.useMasterKey();
 	var stumpedActor = new SuggestionObject();
 	stumpedActor.id = request.params.stumpedActor;
 	var stumpedScenario = new SuggestionObject();
@@ -60,6 +62,7 @@ function recordStumped (request, response) {
 }
 
 function recordChosenAndSkipped (request, response) {
+	Parse.Cloud.useMasterKey();
 	var chosenActor = new SuggestionObject();
 	chosenActor.id = request.params.chosenActor;
 	var chosenScenario = new SuggestionObject();
