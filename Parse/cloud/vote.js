@@ -71,6 +71,7 @@ function getRandomSuggestionPairs(request, response) {
 
 
 function votePair(request, response) {
+	Parse.Cloud.useMasterKey();
 	var VoteObject = Parse.Object.extend('Vote');
 	var SuggestionObject = Parse.Object.extend('Suggestion');
 	var saveCount = 0;
@@ -130,6 +131,7 @@ function votePair(request, response) {
 }
 
 function skipSuggestions(request, response) {
+	Parse.Cloud.useMasterKey();
 	var SuggestionObject = Parse.Object.extend('Suggestion');
 	var saveCount = 0;
 
