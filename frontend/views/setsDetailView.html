@@ -24,21 +24,33 @@
 	</div>
 	<div class="cardList"
 		 ng-hide="cardsLoading">
+		<input ng-model="searchDetail"
+			   placeholder="search here"
+			   class="form-control">
 		<table class="table">
 			<tr>
 				<th>Remove</th>
+				<th>Edit</th>
 				<th>Suggestion</th>
 				<th>Type</th>
 			</tr>
-			<tr ng-repeat="(index, setItem) in setItems"
+			<tr ng-repeat="(index, setItem) in setItems | property:'attributes.card.attributes.text':searchDetail | orderBy:['attributes.card.attributes.type', 'attributes.card.attributes.text']"
 				ng-init="card = setItem.attributes.card">
+				<!-- Delete Button -->
 				<td>
 					<a ng-click="removeSetItem(setItem)"
 					   class="btn btn-danger">
-						Del
+						-
 					</a>
 				</td>
-							<!-- Text -->
+				<!-- Edit Button -->
+				<td>
+					<a ng-click="removeSetItem(setItem)"
+					   class="btn btn-danger">
+						Edit
+					</a>
+				</td>
+				<!-- Text -->
 				<td ng-bind="card.attributes.text"></td>
 				<!-- Type -->
 				<td ng-class="cardService.getTypeClass(card)"></td>

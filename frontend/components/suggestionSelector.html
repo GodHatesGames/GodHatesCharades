@@ -5,19 +5,21 @@
 		 infinite-scroll="loadSuggestions()"
 		 infinite-scroll-disabled="loading"
 		 infinite-scroll-immediate-check="true">
-			<input ng-model="search" placeholder="search here dummy">
+		<input ng-model="searchSelector"
+			   placeholder="search here"
+			   class="form-control">
 			<table class="table">
 				<tr>
 					<th>Add</th>
 					<th>Suggestion</th>
 					<th>Type</th>
 				</tr>
-				<tr ng-repeat="(index, suggestion) in suggestions | property:'attributes.text':search | orderBy:['attributes.type', 'attributes.text']">
+				<tr ng-repeat="(index, suggestion) in suggestions | property:'attributes.text':searchSelector | orderBy:['attributes.type', 'attributes.text']">
 					<!-- Add button -->
 					<td>
 						<a ng-click="selectSuggestion(suggestion)"
 						   class="btn btn-success">
-							Add
+							+
 						</a>
 					</td>
 					<!-- Text -->
