@@ -4,6 +4,7 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/suggestionSelector.html',
 		replace: true,
+		scope: true,
 		link: function($scope, $element) {
 			// $scope.$watch('pairIndex', $scope.onPairIndexChanged);
 		},
@@ -43,6 +44,39 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 			$scope.selectSuggestion = function(suggestion) {
 				console.log('selectSuggestion');
 				$scope.$emit('suggestionAdded', suggestion);
+			};
+
+			$scope.saveSuggestion = function(isolateScope, suggestion, newText) {
+				if (newText != suggestion.get('text')) {
+					$scope.saving = true;
+					isolateScope.editing = true;
+					Parse.Cloud.run(
+						'updateSuggestionText',
+						{
+							'suggestionId': suggestion.id,
+							'text': newText
+						},
+						{
+							success: onSuggestionSaved,
+							error: onSuggestionError
+						}
+					);
+				}
+
+				function onSuggestionSaved (savedSuggestion) {
+					console.log('suggestion saved');
+					suggestion.set('text', newText);
+					$scope.saving = false;
+					isolateScope.editing = false;
+					$scope.$digest();
+				}
+
+				function onSuggestionError (error) {
+					console.error('error saving suggestion:', error);
+					$scope.saving = false;
+					isolateScope.editing = false;
+					$scope.$digest();
+				}
 			};
 
 			// Private methods

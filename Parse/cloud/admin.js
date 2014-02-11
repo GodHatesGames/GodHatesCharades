@@ -8,6 +8,7 @@ exports.getCardsForSet = getCardsForSet;
 exports.addCardToSet = addCardToSet;
 exports.removeSetItem = removeSetItem;
 exports.createSet = createSet;
+exports.updateSuggestionText = updateSuggestionText;
 
 function getUnmoderatedSuggestions(request, response) {
 	console.log('request.user.id:' + request.user.id);
@@ -319,6 +320,49 @@ function createSet(request, response) {
 
 	function onError(error) {
 		console.log('createSet createNewSet Error');
+		response.error(error);
+	}
+
+}
+
+function updateSuggestionText(request, response) {
+	console.log('updateSuggestionText');
+	Parse.Cloud.useMasterKey();
+	if(request.user) {
+		userUtils.isUserAdmin(request.user.id)
+			.then(saveData, onError);
+	} else {
+		onError();
+	}
+
+	function saveData(isAdmin) {
+		console.log('updateSuggestionText saveData');
+		if(isAdmin) {
+			console.log('user is admin');
+			var suggestionId = request.params.suggestionId;
+			var newText = request.params.text;
+			// mock suggestion
+			var SuggestionObject = Parse.Object.extend('Suggestion');
+			var suggestion = new SuggestionObject();
+			suggestion.id = suggestionId;
+			suggestion.set('text', newText);
+			suggestion.save({
+				success: onSuccess,
+				error: onError
+			});
+		} else {
+			console.log('user is not admin');
+			onError('You need to be an admin to access this page.');
+		}
+	}
+
+	function onSuccess(suggestion) {
+		console.log('updateSuggestionText saveData success');
+		response.success(suggestion);
+	}
+
+	function onError(error) {
+		console.log('updateSuggestionText saveData Error');
 		response.error(error);
 	}
 

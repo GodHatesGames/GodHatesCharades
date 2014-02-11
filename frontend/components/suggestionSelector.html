@@ -11,10 +11,12 @@
 			<table class="table table-striped">
 				<tr>
 					<th>Add</th>
+					<th>Edit</th>
 					<th>Suggestion</th>
 					<th>Type</th>
 				</tr>
-				<tr ng-repeat="(index, suggestion) in suggestions | property:'attributes.text':searchSelector | orderBy:['attributes.type', 'attributes.text']">
+				<tr ng-repeat="(index, suggestion) in suggestions | property:'attributes.text':searchSelector | orderBy:['attributes.type', 'attributes.text']"
+					ng-init="newText = suggestion.attributes.text">
 					<!-- Add button -->
 					<td>
 						<a ng-click="selectSuggestion(suggestion)"
@@ -22,8 +24,30 @@
 							+
 						</a>
 					</td>
+					<!-- Edit Button -->
+					<td>
+						<a ng-click="editing = true"
+						   class="btn btn-danger"
+						   ng-hide="editing">
+							Edit
+						</a>
+						<a ng-click="saveSuggestion(this, suggestion, newText)"
+						   class="btn btn-danger"
+						   ng-show="editing">
+							Save
+						</a>
+					</td>
 					<!-- Text -->
-					<td ng-bind="suggestion.attributes.text"></td>
+					<td ng-bind="suggestion.attributes.text"
+						ng-hide="editing">
+					</td>
+					<td ng-show="editing">
+						<form ng-submit="saveSuggestion(this, suggestion, newText)">
+							<input type="text"
+								   ng-model="newText"
+								   />
+						</form>
+					</td>
 					<!-- Type -->
 					<td ng-class="cardService.getTypeClass(suggestion)"></td>
 				</tr>
