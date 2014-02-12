@@ -23,7 +23,6 @@ Parse.Cloud.define('getProfile', user.getProfile);
 // Vote
 Parse.Cloud.define('getRandomSuggestionPairs', vote.getRandomSuggestionPairs);
 Parse.Cloud.define('skipSuggestions', vote.skipSuggestions);
-Parse.Cloud.define('votePair', vote.votePair);
 
 // Leaderboard
 Parse.Cloud.define('topSubmissions', leaderboard.topSubmissions);

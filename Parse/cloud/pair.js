@@ -107,7 +107,11 @@ function recordChosenAndSkipped (request, response) {
 	}, onErr);
 
 	function onErr(err) {
-		console.error('recordChosenAndSkipped save error ' + err.code + ' : ' + err.message);
+		if (err.code) {
+			console.error('recordChosenAndSkipped save error ' + err.code + ' : ' + err.message);
+		} else {
+			console.error('recordChosenAndSkipped save error ' + err);
+		}
 		response.error(err);
 	}
 }

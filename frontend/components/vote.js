@@ -1,4 +1,5 @@
-app.directive('vote', function(cardService) {
+'use strict';
+app.directive('vote', function(cardService, cloudUtils) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/vote.html',
@@ -24,7 +25,7 @@ app.directive('vote', function(cardService) {
 					'getRandomSuggestionPairs',
 					{
 						'skip': skip
-					}, 
+					},
 					{
 						success: onSuggestionPairsLoaded,
 						error: onSuggestionPairsError
@@ -56,10 +57,6 @@ app.directive('vote', function(cardService) {
 					if(!$scope.loading)
 						loadSuggestionPairs($scope.pairIndex);
 				}
-			};
-
-			function skipPair() {
-
 			}
 
 			function onPairVoted(message) {
@@ -80,27 +77,18 @@ app.directive('vote', function(cardService) {
 
 			$scope.selectPair = function(selectedIndex) {
 				console.log('selected:', selectedIndex);
-				var opposite = selectedIndex == 0 ? 1 : 0;
+				var opposite = selectedIndex === 0 ? 1 : 0;
 				var chosenPair = $scope.suggestionPairs[selectedIndex];
 				var skippedPair = $scope.suggestionPairs[opposite];
-				var chosenPairIds = {};
-				var skippedPairIds = {};
-
-				_.each(chosenPair, function(suggestion, index) {
-					chosenPairIds[index] = suggestion.id;
-				});
-
-				_.each(skippedPair, function(suggestion, index) {
-					skippedPairIds[index] = suggestion.id;
-				});
-
-				console.log('chosenPairIds:', chosenPairIds);
+				var params = {
+						'chosenActor': chosenPair[0].id,
+						'chosenScenario': chosenPair[1].id,
+						'skippedActor': skippedPair[0].id,
+						'skippedScenario': skippedPair[1].id
+				};
 				Parse.Cloud.run(
-					'votePair',
-					{
-						'chosenPair': chosenPairIds,
-						'skippedPair': skippedPairIds
-					},
+					'recordChosenAndSkipped',
+					cloudUtils.getDefaultParams(params),
 					{
 						success: onPairVoted,
 						error: onPairVoteError
@@ -133,11 +121,11 @@ app.directive('vote', function(cardService) {
 
 				// update current index
 				$scope.pairIndex += $scope.pairLimit;
-			}
+			};
 
 			// init
 			loadSuggestionPairs();
 
 		}
-	}
+	};
 });
