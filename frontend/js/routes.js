@@ -35,7 +35,7 @@ app.config(function($stateProvider,
 		url: '/card/:cardid',
 		templateUrl: 'views/cardView.html',
 		resolve: {
-			bitly: ['$stateParams', '$location', '$q', '$timeout', '$rootScope', function($stateParams, $location, $q, $timeout, $rootScope) {
+			bitly: ['$stateParams', '$location', '$q', '$timeout', '$rootScope', '$http', function($stateParams, $location, $q, $timeout, $rootScope, $http) {
 				var longUrl = 'http://godhatescharades.com/#!/card/' + $stateParams.cardid;
 				var deferred = $q.defer();
 
@@ -44,14 +44,7 @@ app.config(function($stateProvider,
 					longUrl: longUrl
 				};
 				
-				$.ajax({
-					type: 'GET',
-					url: 'https://api-ssl.bitly.com/v3/shorten',
-					async: false,
-					contentType: 'application/json',
-					dataType: 'jsonp',
-					data: params
-				}).then(function(data) {
+				$http.post('https://api-ssl.bitly.com/v3/shorten', params).then(function(data) {
 					var url = data.data.url;
 					deferred.resolve(url);
 					$rootScope.$digest();
