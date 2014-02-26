@@ -72,7 +72,8 @@ app.service('sets', function($q, $rootScope) {
 		Parse.Cloud.run(
 			'getCardsForSet',
 			{
-				id: set.id
+				id: set.id,
+				includeOwner: true
 			},
 			{
 				success: function(cards) {

@@ -1,3 +1,4 @@
+'use strict';
 app.directive('examples', function(cardService, $timeout) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
@@ -26,7 +27,9 @@ app.directive('examples', function(cardService, $timeout) {
 					
 					Parse.Cloud.run(
 						'examples',
-						{},
+						{
+							id: CONFIG.EXAMPLE_SET_ID
+						},
 						{
 							success: onExamplesLoaded,
 							error: onExamplesError
@@ -37,13 +40,12 @@ app.directive('examples', function(cardService, $timeout) {
 
 			function onExamplesLoaded(examples) {
 				$scope.loading = false;
-				$scope.characters = $scope.characters.concat(examples['zero']);
-				$scope.scenarios = $scope.scenarios.concat(examples['one']);
+				$scope.characters = $scope.characters.concat(examples.zero);
+				$scope.scenarios = $scope.scenarios.concat(examples.one);
 				if(!laterTimeoutId)
 					updateSoonerThanLater();
 				//force update now
 				$scope.$digest();
-				$scope.$apply()
 			}
 
 			function onExamplesError(error) {
@@ -80,7 +82,7 @@ app.directive('examples', function(cardService, $timeout) {
 					return 'exampleStaging';
 				else
 					return 'exampleActive';
-			}
+			};
 		}
-	}
+	};
 });

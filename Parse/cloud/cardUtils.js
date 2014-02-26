@@ -1,66 +1,39 @@
+'use strict';
 var _ = require('underscore');
 var userUtils = require('cloud/userUtils.js');
 
 exports.examples = examples;
+exports.getCardsForSet = getCardsForSet;
 
 // Use Parse.Cloud.define to define as many cloud functions as you want.
 function examples(request, response) {
 	Parse.Cloud.useMasterKey();
-	var SuggestionObject = Parse.Object.extend('Suggestion');
-	var SUGGESTION_COUNT = 25;
-	var zeroSuggestions = [];
-	var zeroLoaded = false;
-	var oneSuggestions = [];
-	var oneLoaded = false;
-	loadSuggestionSet(0);
-	loadSuggestionSet(1);
+	var setId = request.params.id;
+	loadSetItems();
 
-	function loadSuggestionSet(type) {
-		var query = new Parse.Query(SuggestionObject);
-		query.limit(SUGGESTION_COUNT);
-		query.equalTo('type', type);
-		query.equalTo('moderated', true);
-		query.equalTo('rejected', false);
-		// only grab if kdr has been evaluated
-		query.exists('kdr');
-		query.descending('kdr,-totalVotes,-skipped');
-		query.include('owner');
-		query.doesNotExist('card');
+	function loadSetItems() {
+		var query = buildCardsForSetQuery(setId);
+		query.include('card.owner');
 		query.find({
-			success: function onSuggestionSetLoaded(suggestionSet) {
-				switch(type) {
-					case 0 :
-						zeroSuggestions = suggestionSet;
-						zeroLoaded = true;
-						break;
-					case 1 :
-						oneSuggestions = suggestionSet;
-						oneLoaded = true;
-						break;
-				}
-				if(zeroLoaded && oneLoaded)
-					onSuggestionsLoaded();
-			}
+			success: onSuggestionsLoaded,
+			error: onError
 		});
 	}
 
-	function onSuggestionsLoaded() {
-		var suggestionPairs = [];
-		for(var i = 0; i < SUGGESTION_COUNT; i++) {
-			var zeroSuggestion = zeroSuggestions[i];
-			var oneSuggestion = oneSuggestions[i];
+	function onSuggestionsLoaded(setItems) {
+		var card;
+		var zeroSuggestions = [];
+		var oneSuggestions = [];
 
-			// remove private data
-			userUtils.stripPrivateData(zeroSuggestion.attributes.owner);
-			userUtils.stripPrivateData(oneSuggestion.attributes.owner);
-
-			//save pair
-			// var pair = {
-			// 	0: zeroSuggestion,
-			// 	1: oneSuggestion
-			// }
-			// suggestionPairs.push(pair);
-		}
+		_.each(setItems, function stripData(item) {
+			card = item.attributes.card;
+			userUtils.stripPrivateData(card.attributes.owner);
+			if (card.attributes.type === 0) {
+				zeroSuggestions.push(card);
+			} else {
+				oneSuggestions.push(card);
+			}
+		});
 
 		response.success({
 			zero: zeroSuggestions,
@@ -68,4 +41,56 @@ function examples(request, response) {
 		});
 	}
 
+	function onError(error) {
+		console.log('examples Error');
+		response.error(error);
+	}
+
+}
+
+function getCardsForSet(request, response) {
+	console.log('getCardsForSet');
+		Parse.Cloud.useMasterKey();
+	var setId = request.params.id;
+	var includeOwner = request.params.includeOwner;
+
+	if(setId !== undefined) {
+		console.log('getCardsForSet fetchData');
+		var query = buildCardsForSetQuery(setId);
+		if(includeOwner === true) {
+			query.include('card.owner');
+		}
+		query.find({
+			success: onSuccess,
+			error: onError
+		});
+	} else {
+		response.error('you must pass a set id to get');
+	}
+
+	function onSuccess(setItems) {
+		console.log('setItems found:' + setItems.length);
+		var card;
+		_.each(setItems, function(item) {
+			card = item.attributes.card;
+			userUtils.stripPrivateData(card.attributes.owner);
+		});
+		response.success(setItems);
+	}
+
+	function onError(error) {
+		console.log('getAllSets Error');
+		response.error(error);
+	}
+
+}
+
+function buildCardsForSetQuery(id) {
+	var SetObject = Parse.Object.extend('Set');
+	var mockSet = new SetObject();
+	mockSet.id = id;
+	var SetItemObject = Parse.Object.extend('SetItem');
+	var query = new Parse.Query(SetItemObject);
+	query.equalTo('owner', mockSet);
+	return query;
 }

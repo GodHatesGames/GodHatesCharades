@@ -4,7 +4,6 @@ var userUtils = require('cloud/userUtils.js');
 exports.getUnmoderatedSuggestions = getUnmoderatedSuggestions;
 exports.getAllSuggestions = getAllSuggestions;
 exports.getAllSets = getAllSets;
-exports.getCardsForSet = getCardsForSet;
 exports.addCardToSet = addCardToSet;
 exports.removeSetItem = removeSetItem;
 exports.createSet = createSet;
@@ -137,51 +136,6 @@ function getAllSets(request, response) {
 		if(sets.length > 0)
 			allSets = allSets.concat(sets);
 		response.success(allSets);
-	}
-
-	function onError(error) {
-		console.log('getAllSets Error');
-		response.error(error);
-	}
-
-}
-
-function getCardsForSet(request, response) {
-	console.log('getCardsForSet');
-	Parse.Cloud.useMasterKey();
-	var setId = request.params.id;
-	console.log('request.user.id:' + request.user.id);
-	if(request.user) {
-		userUtils.isUserAdmin(request.user.id)
-			.then(fetchData, onError);
-	} else {
-		onError();
-	}
-
-	function fetchData(isAdmin) {
-		console.log('getCardsForSet fetchData');
-		if(isAdmin) {
-			console.log('user is admin');
-			var SetObject = Parse.Object.extend('Set');
-			var mockSet = new SetObject();
-			mockSet.id = setId;
-			var SetItemObject = Parse.Object.extend('SetItem');
-			var query = new Parse.Query(SetItemObject);
-			query.equalTo('owner', mockSet);
-			query.include('card.owner');
-			query.find({
-				success: onSuccess,
-				error: onError
-			});
-		} else {
-			console.log('user is not admin');
-			onError('You need to be an admin to access this page.');
-		}
-	}
-
-	function onSuccess(setItems) {
-		console.log('setItems found:' + setItems.length);
-		response.success(setItems);
 	}
 
 	function onError(error) {

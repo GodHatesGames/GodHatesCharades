@@ -11,7 +11,6 @@ var pair = require('cloud/pair.js');
 Parse.Cloud.define('getUnmoderatedSuggestions', admin.getUnmoderatedSuggestions);
 Parse.Cloud.define('getAllSuggestions', admin.getAllSuggestions);
 Parse.Cloud.define('getAllSets', admin.getAllSets);
-Parse.Cloud.define('getCardsForSet', admin.getCardsForSet);
 Parse.Cloud.define('addCardToSet', admin.addCardToSet);
 Parse.Cloud.define('removeSetItem', admin.removeSetItem);
 Parse.Cloud.define('createSet', admin.createSet);
@@ -32,8 +31,9 @@ Parse.Cloud.define('recordChosenAndSkipped', pair.recordChosenAndSkipped);
 Parse.Cloud.define('recordGuessed', pair.recordGuessed);
 Parse.Cloud.define('recordStumped', pair.recordStumped);
 
-// Misc
+// Card Utils
 Parse.Cloud.define('examples', cardUtils.examples);
+Parse.Cloud.define('getCardsForSet', cardUtils.getCardsForSet);
 
 // Background Jobs
 Parse.Cloud.job('calculateStats', leaderboard.calculateStats);

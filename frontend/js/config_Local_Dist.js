@@ -3,5 +3,6 @@ var CONFIG = {
 	PARSE_APP_ID: 'GvWVZYlfePPR74oSKdDgftmBKzj3lsprcNlgiy4Z',
 	PARSE_JS_KEY: 'gQeODbEWxHlZVulVVT5EKwP8wRXI4SvX2tlcaCyV',
 	APP_VERSION: '0.0.3',
+	EXAMPLE_SET_ID: 'm0zujLxAuH',
 	APP_PLATFORM: 'site_dist'
-}
+};

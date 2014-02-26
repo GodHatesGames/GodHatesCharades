@@ -8,7 +8,8 @@
 	"globals": {
 		"app": false,
 		"_": false,
-		"Parse": false
+		"Parse": false,
+		"CONFIG": false
 	},
 	"globalstrict": true,
 	"quotmark": true,
