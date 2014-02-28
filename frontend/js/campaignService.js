@@ -7,7 +7,7 @@ app.service('campaignService', function() {
 				},
 				deadline: function getDeadline() {
 					// 1388534400000: Jan 1 2014 GMT
-					return (1396310400000 - new Date().getTime());
+					return Math.floor((1396310400000 - new Date().getTime()) / 1000);
 				}
 			}
 		}
