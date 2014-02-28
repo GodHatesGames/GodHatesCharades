@@ -59,6 +59,8 @@ function getCardsForSet(request, response) {
 		var query = buildCardsForSetQuery(setId);
 		if(includeOwner === true) {
 			query.include('card.owner');
+		} else {
+			query.include('card');
 		}
 		query.find({
 			success: onSuccess,
