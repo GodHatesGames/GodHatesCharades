@@ -74,6 +74,16 @@ function recordChosenAndSkipped (request, response) {
 	var appVersion = request.params.appVersion;
 	var appPlatform = request.params.appPlatform;
 
+	// save stats, but dont wait around for em
+	chosenActor.increment('totalVotes');
+	chosenActor.save();
+	chosenScenario.increment('totalVotes');
+	chosenScenario.save();
+	skippedActor.increment('skipped');
+	skippedActor.save();
+	skippedScenario.increment('skipped');
+	skippedScenario.save();
+
 	//find chosen pair
 	getPair(chosenActor, chosenScenario, appVersion, appPlatform)
 	.then(function success(chosenPair) {
