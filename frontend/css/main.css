@@ -109,12 +109,13 @@ a.list-group-special:hover {
 	min-height: 1px;
 }
 
-.nav a {
+.nav > li > a {
 	color: #000;
 	font-size: 20px;
 	font-family: 'GodHatesCharades';
 	-webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none;
 	text-transform: uppercase;
+	padding-bottom: 4px;
 }
 
 #mainNav > li {
@@ -154,14 +155,19 @@ a.list-group-special:hover {
 	color: white;
 }
 
+.subnav li a {
+	padding-bottom: 7px;
+}
+.subnav li.active a {
+	padding-bottom: 4px;
+}
+
 .subnav > li.active:nth-child(odd) > a {
 	border-bottom: 3px solid #D5584A;
-	padding-bottom: 7px;
 }
 
 .subnav > li.active:nth-child(even) > a {
 	border-bottom: 3px solid #53B1B4;
-	padding-bottom: 7px;
 }
 
 .nav > li:nth-child(even) > a {
