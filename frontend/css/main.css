@@ -227,6 +227,8 @@ a.list-group-special:hover {
 
 .nav .dropdown-menu .dropdown-header {
 	color: white;
+	font-weight: bold;
+	cursor: default;
 }
 
 
