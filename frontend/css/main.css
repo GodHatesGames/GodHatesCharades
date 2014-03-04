@@ -58,6 +58,7 @@ h5 {
 	text-align: center;
 	font-size: 18px;
 	line-height: 22px;
+	font-weight: normal;
 }
 
 hr {
@@ -116,23 +117,11 @@ a.list-group-special:hover {
 	cursor: pointer;
 }
 
-.nav > li > a:hover {
-	background-color: #000;
-	color: white;
-}
-
-.nav > li:nth-child(even) > a:hover, 
-.nav > li.active:nth-child(even) > a {
-	background-color: #61CACE;
-	color: white;
-}
-
-.nav > li:nth-child(odd) > a:hover, 
-.nav > li.active:nth-child(odd) > a, 
-.nav > li.login a:hover, 
-.nav > li.login.active a {
-	background-color: #FF6857;
-	color: white;
+.nav > li > a:hover, 
+.nav > li.active > a,
+.nav > li.active > a:hover {
+	color: black;
+	background-color: transparent;
 }
 
 .subnav li a {
@@ -218,7 +207,7 @@ a.list-group-special:hover {
 
 .logo-img {
 	position: relative;
-	bottom: 90px;
+	bottom: 320%;
 	width: 100%;
 }
 
@@ -250,8 +239,12 @@ a.list-group-special:hover {
 	padding: 10px;
 }
 
-.content > div {
+.content {
 	background-color: #F4EBDC;
+	padding-top: 125px;
+}
+
+.content > div {
 }
 
 .footer {
@@ -285,7 +278,7 @@ a.list-group-special:hover {
 	bottom: 0;
 	right: 0;
 	/* END relative size hack*/
-	padding: 5%;
+	padding: 6%;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-khtml-user-select: none;

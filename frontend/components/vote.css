@@ -88,8 +88,11 @@
 /* Min iPhone 5+ Horizontal  */
 @media (min-width: 569px) {
 	.cardContent {
-		font-size: 18px;
-	}
+		font-size: 16px;
+	
+		font-family: 'GodHatesCharades';
+		text-transform: uppercase;
+}
 }
 
 @media (min-width: 569px) {
