@@ -1,82 +1,100 @@
-<ul class="nav nav-pills nav-justified"
-	id="mainNav">
+<div id="mainNav">
+	<ul class="nav nav-pills nav-justified nav-left">
 
-	<!-- universal nav -->
-	<li>
-		<a ui-sref="home">Home</a>
-	</li>
-	<li>
-		<a href="blog">Blog</a>
-	</li>
+		<!-- universal nav -->
+		<li>
+			<a ui-sref="home">Home</a>
+		</li>
 
-	<li ng-class="{ active: $state.includes('rules') }"
-		ng-show="parseUser.isBetaUser()">
-		<a ui-sref='rules'>Rules</a>
-	</li>
-	<li ng-class="{ active: $state.includes('submit') }"
-		ng-show="parseUser.isBetaUser()">
-		<a ui-sref='submit'>Submit</a>
-	</li>
-	<li ng-class="{ active: $state.includes('vote') }"
-		ng-show="parseUser.isBetaUser()">
-		<a ui-sref='vote'>Vote</a>
-	</li>
-	<li ng-class="{ active: $state.includes('top') }"
-		ng-show="parseUser.isBetaUser()">
-		<a ui-sref='top'>Leaderboard</a>
-	</li>
+		<li>
+			<a href="#getit">Get It!</a>
+		</li>
 
-	<!-- user stuff -->
-	<li class="dropdown"
-		ng-hide="parseUser.isAnon()">
-		<a class="dropdown-toggle" 
-			data-toggle="dropdown">
-			{{parseUser.data.attributes.name}}
-			<b class="caret"></b>
-		</a>
-		<ul class="dropdown-menu">
-			<li>
-				<a ui-sref='user({userid: parseUser.data.id})'
-					ng-class="{ active: $state.includes('profile') }">
-					My Profile
-				</a>
-			</li>
+		<li>
+			<a href="blog">Blog</a>
+		</li>
 
-			<!-- Admin section -->
-			<li role="presentation" 
-				class="divider"
-				ng-show="parseUser.isAdmin()"></li>
-			<li role="presentation" 
-				class="dropdown-header"
-				ng-show="parseUser.isAdmin()">
-				ADMIN
-			</li>
-			<li ng-class="{ active: $state.includes('moderation') }"
-				ng-show="parseUser.isAdmin()">
-				<a ui-sref='admin.moderation'>Moderation</a>
-			</li>
-			<li ng-class="{ active: $state.includes('export') }"
-				ng-show="parseUser.isAdmin()">
-				<a ui-sref='admin.export'>Export</a>
-			</li>
-			<li ng-class="{ active: $state.includes('sets') }"
-				ng-show="parseUser.isAdmin()">
-				<a ui-sref='admin.sets'>Set Builder</a>
-			</li>
+	</ul>
 
-			<li role="presentation" class="divider"></li>
-			<!-- logout -->
-			<li>
-				<a ng-click="parseUser.logout()">Logout</a>
-			</li>
-		</ul>
-	</li>
-	
-	<li class="login" 
-		ng-class="{ active: $state.includes('login') }"
-		ng-show="parseUser.isAnon() && parseUser.isBetaUser()">
-		<a ui-sref='login'>
-			Login
-		</a>
-	</li>
-</ul>
+	<a ui-sref="home"
+	   class="nav-logo">
+		<img src="img/logo.png"
+			 alt="God Hates Charades"
+			 class="logo-img">
+	</a>
+
+		<!-- <li ng-class="{ active: $state.includes('rules') }"
+			ng-show="parseUser.isBetaUser()">
+			<a ui-sref='rules'>Rules</a>
+		</li> -->
+
+	<ul class="nav nav-pills nav-justified nav-right">
+
+		<li ng-class="{ active: $state.includes('submit') }"
+			ng-show="parseUser.isBetaUser()">
+			<a ui-sref='submit'>Create</a>
+		</li>
+		<li ng-class="{ active: $state.includes('vote') }"
+			ng-show="parseUser.isBetaUser()">
+			<a ui-sref='vote'>Vote</a>
+		</li>
+		<!-- <li ng-class="{ active: $state.includes('top') }"
+			ng-show="parseUser.isBetaUser()">
+			<a ui-sref='top'>Leaderboard</a>
+		</li> -->
+
+		<!-- user stuff -->
+		<li class="dropdown"
+			ng-hide="parseUser.isAnon()">
+			<a class="dropdown-toggle" 
+				data-toggle="dropdown">
+				{{parseUser.data.attributes.name}}
+				<b class="caret"></b>
+			</a>
+			<ul class="dropdown-menu">
+				<li>
+					<a ui-sref='user({userid: parseUser.data.id})'
+						ng-class="{ active: $state.includes('profile') }">
+						My Profile
+					</a>
+				</li>
+
+				<!-- Admin section -->
+				<li role="presentation" 
+					class="divider"
+					ng-show="parseUser.isAdmin()"></li>
+				<li role="presentation" 
+					class="dropdown-header"
+					ng-show="parseUser.isAdmin()">
+					ADMIN
+				</li>
+				<li ng-class="{ active: $state.includes('moderation') }"
+					ng-show="parseUser.isAdmin()">
+					<a ui-sref='admin.moderation'>Moderation</a>
+				</li>
+				<li ng-class="{ active: $state.includes('export') }"
+					ng-show="parseUser.isAdmin()">
+					<a ui-sref='admin.export'>Export</a>
+				</li>
+				<li ng-class="{ active: $state.includes('sets') }"
+					ng-show="parseUser.isAdmin()">
+					<a ui-sref='admin.sets'>Set Builder</a>
+				</li>
+
+				<li role="presentation" class="divider"></li>
+				<!-- logout -->
+				<li>
+					<a ng-click="parseUser.logout()">Logout</a>
+				</li>
+			</ul>
+		</li>
+		
+		<li class="login" 
+			ng-class="{ active: $state.includes('login') }"
+			ng-show="parseUser.isAnon() && parseUser.isBetaUser()">
+			<a ui-sref='login'>
+				Login
+			</a>
+		</li>
+	</ul>
+</div>

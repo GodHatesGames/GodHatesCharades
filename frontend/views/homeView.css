@@ -1,3 +1,8 @@
+#homeView {
+	background-color: white;
+	padding-top: 55px;
+}
+
 #homeView h4, #homeView h2 {
 	text-align: center;
 }
@@ -51,7 +56,6 @@
 	background: black;
 	line-height: 20px;
 	color: white;
-	padding-top: 0 !important;
 }
 
 #mc_embed_signup h3 {
