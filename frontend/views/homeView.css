@@ -45,6 +45,11 @@
 	float: left;
 }
 
+#homeView section.ios .form-group {
+	width: 65%;
+	float: left;
+}
+
 /* End Sections*/
 
 /* Mailchimp signup form */
