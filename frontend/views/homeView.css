@@ -5,9 +5,8 @@
 }
 
 #homeView section.examples {
-	padding-top: 0;
-	padding-left: 197px;
-	padding-right: 197px;
+	width: 72%;
+	margin: 0 auto;
 }
 
 #homeView section.examples h2 {
@@ -23,14 +22,14 @@
 #homeView section.signup {
 	padding-left: 100px;
 	padding-right: 100px;
-	margin-left: -30px;
-	margin-right: -30px;
+	margin-left: -60px;
+	margin-right: -60px;
 }
 
 #homeView section.signup p {
 	width: 50%;
 	font-family: 'GodHatesCharades';
-	font-size: 29px;
+	font-size: 30px;
 	line-height: 34px;
 	margin: 0;
 	padding: 0;
@@ -48,6 +47,10 @@
 #homeView section.ios .form-group {
 	width: 65%;
 	float: left;
+}
+
+#homeView section.ios .screenshot {
+	max-width: 100%;
 }
 
 /* End Sections*/
