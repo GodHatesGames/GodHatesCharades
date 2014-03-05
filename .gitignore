@@ -8,3 +8,5 @@ Parse/public/js/config.js
 frontend/js/config.js
 dist/
 .tmp/
+# css is compiled via less
+frontend/css/
