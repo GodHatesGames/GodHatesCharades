@@ -59,8 +59,12 @@ module.exports = function(grunt) {
 				tasks: ['distBuildFrontend']
 			},
 			bootstrap: {
-				files: ['frontend/css/bootstrap-variables.less'],
+				files: ['frontend/less/bootstrap-variables.less'],
 				tasks: ['buildBootstrap']
+			},
+			main: {
+				files: ['frontend/less/main.less'],
+				tasks: ['less:main']
 			}
 		},
 		concurrent: {
@@ -71,7 +75,7 @@ module.exports = function(grunt) {
 				}
 			},
 			dev: {
-				tasks: ['nodemon:dev', 'watch:bootstrap'],
+				tasks: ['nodemon:dev', 'watch:bootstrap', 'watch:main'],
 				options: {
 					logConcurrentOutput: true
 				}
@@ -95,7 +99,7 @@ module.exports = function(grunt) {
 				files: [
 					{
 						expand: true,
-						cwd: 'frontend/css/',
+						cwd: 'frontend/less/',
 						src: 'bootstrap-variables.less',
 						dest: 'frontend/bower_components/bootstrap/less/',
 						rename: function(dest) {return dest + 'variables.less';}
@@ -239,8 +243,27 @@ module.exports = function(grunt) {
 		},
 		less: {
 			bootstrap: {
+				options: {
+					sourceMap: true,
+					sourceMapFilename: 'frontend/css/bootstrap.css.map', // where file is generated and located
+					sourceMapURL: '/css/bootstrap.css.map',
+					sourceMapBasepath: 'frontend',
+					sourceMapRootpath: '/'
+				},
 				files: {
 					'frontend/css/bootstrap.css': 'frontend/bower_components/bootstrap/less/bootstrap.less'
+				}
+			},
+			main: {
+				options: {
+					sourceMap: true,
+					sourceMapFilename: 'frontend/css/main.css.map',
+					sourceMapURL: '/css/main.css.map',
+					sourceMapBasepath: 'frontend',
+					sourceMapRootpath: '/'
+				},
+				files: {
+					'frontend/css/main.css': 'frontend/less/main.less'
 				}
 			}
 		}
@@ -254,6 +277,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('dev', [
 		'buildBootstrap',
+		'less:main',
 		'concurrent:dev'
 	]);
 
