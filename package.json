@@ -29,6 +29,7 @@
     "grunt-cli": "~0.1.11",
     "grunt-contrib-cssmin": "~0.7.0",
     "grunt-filerev": "~0.2.0",
-    "grunt-ngmin": "0.0.3"
+    "grunt-ngmin": "0.0.3",
+    "grunt-contrib-less": "^0.10.0"
   }
 }

@@ -1,6 +1,22 @@
 'use strict';
 module.exports = function(grunt) {
 
+	// Load the plugin that provides the 'uglify' task.
+	grunt.loadNpmTasks('grunt-usemin');
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-bower-task');
+	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-nodemon');
+	grunt.loadNpmTasks('grunt-concurrent');
+	grunt.loadNpmTasks('grunt-filerev');
+	grunt.loadNpmTasks('grunt-angular-templates');
+	grunt.loadNpmTasks('grunt-ngmin');
+	grunt.loadNpmTasks('grunt-contrib-less');
+
 	// Project configuration.
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
@@ -41,6 +57,10 @@ module.exports = function(grunt) {
 			distFrontend: {
 				files: ['frontend/**/*.js', 'frontend/**/*.css', 'frontend/**/*.html'],
 				tasks: ['distBuildFrontend']
+			},
+			bootstrap: {
+				files: ['frontend/css/bootstrap-variables.less'],
+				tasks: ['buildBootstrap']
 			}
 		},
 		concurrent: {
@@ -51,7 +71,7 @@ module.exports = function(grunt) {
 				}
 			},
 			dev: {
-				tasks: ['nodemon:dev'],
+				tasks: ['nodemon:dev', 'watch:bootstrap'],
 				options: {
 					logConcurrentOutput: true
 				}
@@ -60,7 +80,8 @@ module.exports = function(grunt) {
 		clean: {
 			distApi: 'dist/api',
 			distFrontend: 'dist/frontend',
-			stage: '.tmp'
+			stage: '.tmp',
+			bootstrap: 'frontend/bower_components/bootstrap/less/variables.less'
 		},
 		useminPrepare: {
 			html: '.tmp/stage/frontend/index.html',
@@ -69,6 +90,19 @@ module.exports = function(grunt) {
 			}
 		},
 		copy: {
+			// Bootstrap Less
+			bootstrap: {
+				files: [
+					{
+						expand: true,
+						cwd: 'frontend/css/',
+						src: 'bootstrap-variables.less',
+						dest: 'frontend/bower_components/bootstrap/less/',
+						rename: function(dest) {return dest + 'variables.less';}
+					}
+				]
+			},
+			// Stage
 			stageApi: {
 				files: [
 					{
@@ -202,23 +236,15 @@ module.exports = function(grunt) {
 				src: '.tmp/concat/js/app.js',
 				dest: '.tmp/concat/js/app.js'
 			}
+		},
+		less: {
+			bootstrap: {
+				files: {
+					'frontend/css/bootstrap.css': 'frontend/bower_components/bootstrap/less/bootstrap.less'
+				}
+			}
 		}
 	});
-
-	// Load the plugin that provides the "uglify" task.
-	grunt.loadNpmTasks('grunt-usemin');
-	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-copy');
-	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	grunt.loadNpmTasks('grunt-bower-task');
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-nodemon');
-	grunt.loadNpmTasks('grunt-concurrent');
-	grunt.loadNpmTasks('grunt-filerev');
-	grunt.loadNpmTasks('grunt-angular-templates');
-	grunt.loadNpmTasks('grunt-ngmin');
 
 	grunt.registerTask('prod', [
 		'clean:stage',
@@ -227,6 +253,7 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('dev', [
+		'buildBootstrap',
 		'concurrent:dev'
 	]);
 
@@ -241,6 +268,12 @@ module.exports = function(grunt) {
 	// 	'distBuildApi',
 	// 	'distBuildFrontend'
 	// ]);
+
+	grunt.registerTask('buildBootstrap', [
+		'clean:bootstrap',
+		'copy:bootstrap',
+		'less:bootstrap'
+	]);
 
 	grunt.registerTask('prepareApi', [
 		'copy:stageApi'
@@ -292,7 +325,7 @@ module.exports = function(grunt) {
 		'copy:distFrontend'
 	]);
 
-	function configRename(dest, src) {
+	function configRename(dest) {
 		return dest + 'config.js';
 	}
 
