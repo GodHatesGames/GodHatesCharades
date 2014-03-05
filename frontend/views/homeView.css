@@ -53,6 +53,17 @@
 	max-width: 100%;
 }
 
+#homeView section.ios h2 {
+	font-size: 55px;
+}
+
+#homeView section.ios h3 {
+	font-size: 40px;
+	margin-top: 10px;
+	margin-bottom: 40px;
+}
+
+
 /* End Sections*/
 
 /* Mailchimp signup form */
