@@ -68,14 +68,14 @@
 /* End Sections*/
 
 /* Mailchimp signup form */
-#mc_embed_signup {
+#email_signup {
 	text-align: center;
 	background: #54C2C8;
 	line-height: 20px;
 	color: white;
 }
 
-#mc_embed_signup h3 {
+#email_signup h3 {
 	line-height: 44px;
 	padding-top: 2px;
 	width: 50%;
@@ -107,7 +107,7 @@
 		vertical-align: middle;
 	}
 
-	#mc_embed_signup h3 {
+	#email_signup h3 {
 		margin-bottom: 10px;
 	}
 }
