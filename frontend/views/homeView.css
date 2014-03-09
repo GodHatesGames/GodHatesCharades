@@ -15,8 +15,9 @@
 }
 
 #homeView section.examples p {
-	font-size: 25px;
+	font-size: 18px;
 	text-align: center;
+	font-style: italic;
 }
 
 #homeView section.signup {
