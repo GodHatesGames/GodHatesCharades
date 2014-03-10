@@ -17,6 +17,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-ngmin');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-svgmin');
+	grunt.loadNpmTasks('grunt-contrib-imagemin');
 
 	// Project configuration.
 	grunt.initConfig({
@@ -125,7 +126,7 @@ module.exports = function(grunt) {
 						expand: true,
 						cwd: 'frontend/',
 						// Match all files except alt-config files and svg
-						src: ['**', '!js/config**', '!img/*.svg'],
+						src: ['**', '!js/config**', '!img'],
 						dest: '.tmp/stage/frontend/'
 					}
 				]
@@ -273,10 +274,22 @@ module.exports = function(grunt) {
 				files: [
 					{
 						expand: true,
-						cwd: 'frontend/img/',
+						cwd: 'frontend/img',
 						src: ['*.svg'],
 						dest: '.tmp/stage/frontend/img/',
 						ext: '.svg'
+					}
+				]
+			}
+		},
+		imagemin: {
+			stage: {
+				files: [
+					{
+						expand: true,
+						cwd: 'frontend/img',
+						src: ['**/*.{png,jpg,gif}'],
+						dest: '.tmp/stage/frontend/img/'
 					}
 				]
 			}
@@ -319,6 +332,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('prepareFrontend', [
 		'bower',
 		'copy:stageFrontend',
+		'imagemin:stage',
 		'svgmin:stage'
 	]);
 
