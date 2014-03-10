@@ -303,8 +303,7 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('dev', [
-		'buildBootstrap',
-		'less:main',
+		'buildDev',
 		'concurrent:dev'
 	]);
 
@@ -319,6 +318,11 @@ module.exports = function(grunt) {
 	// 	'distBuildApi',
 	// 	'distBuildFrontend'
 	// ]);
+
+	grunt.registerTask('buildDev', [
+		'buildBootstrap',
+		'less:main'
+	]);
 
 	grunt.registerTask('buildBootstrap', [
 		'clean:bootstrap',
