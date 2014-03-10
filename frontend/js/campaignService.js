@@ -9,9 +9,12 @@ app.service('campaignService', function() {
 					// 1388534400000: Jan 1 2014 GMT
 					return Math.floor((1396310400000 - new Date().getTime()) / 1000);
 				}
+			},
+			iPad2014: {
+				active: false
 			}
 		}
-	}
+	};
 
 	return campaignService;
 });

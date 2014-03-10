@@ -1,4 +1,5 @@
-app.directive('nav', function(parseUser, campaignService) {
+'use strict';
+app.directive('nav', function(parseUser, $uiViewScroll) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/nav.html',
@@ -6,7 +7,12 @@ app.directive('nav', function(parseUser, campaignService) {
 		scope: true,
 		controller: function($scope, $element) {
 			$scope.parseUser = parseUser;
-			$scope.kickstarter = true;
+
+			$scope.jumpToElement = function(id) {
+				// var selector = '#' + id;
+				var element = angular.element(document.getElementById(id));
+				$uiViewScroll(element);
+			};
 		}
-	}
+	};
 });
