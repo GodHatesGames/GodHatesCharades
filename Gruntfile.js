@@ -16,6 +16,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-angular-templates');
 	grunt.loadNpmTasks('grunt-ngmin');
 	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-svgmin');
 
 	// Project configuration.
 	grunt.initConfig({
@@ -123,8 +124,8 @@ module.exports = function(grunt) {
 					{
 						expand: true,
 						cwd: 'frontend/',
-						// Match all files except alt-config files
-						src: ['**', '!js/config**'],
+						// Match all files except alt-config files and svg
+						src: ['**', '!js/config**', '!img/*.svg'],
 						dest: '.tmp/stage/frontend/'
 					}
 				]
@@ -266,6 +267,19 @@ module.exports = function(grunt) {
 					'frontend/css/main.css': 'frontend/less/main.less'
 				}
 			}
+		},
+		svgmin: {
+			stage: {
+				files: [
+					{
+						expand: true,
+						cwd: 'frontend/img/',
+						src: ['*.svg'],
+						dest: '.tmp/stage/frontend/img/',
+						ext: '.svg'
+					}
+				]
+			}
 		}
 	});
 
@@ -304,7 +318,8 @@ module.exports = function(grunt) {
 	]);
 	grunt.registerTask('prepareFrontend', [
 		'bower',
-		'copy:stageFrontend'
+		'copy:stageFrontend',
+		'svgmin:stage'
 	]);
 
 	grunt.registerTask('distBuildApi', [

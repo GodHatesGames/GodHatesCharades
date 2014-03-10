@@ -30,6 +30,7 @@
     "grunt-contrib-cssmin": "~0.7.0",
     "grunt-filerev": "~0.2.0",
     "grunt-ngmin": "0.0.3",
-    "grunt-contrib-less": "^0.10.0"
+    "grunt-contrib-less": "^0.10.0",
+    "grunt-svgmin": "^0.4.0"
   }
 }
