@@ -10,8 +10,7 @@ var app = angular.module('app', ['ng',
 									'textareaNoreturn',
 									'parse.user',
 									'ngSanitize',
-									'ngCsv',
-									'timer'
+									'ngCsv'
 								]);
 console.log('starting app');
 
