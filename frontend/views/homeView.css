@@ -37,13 +37,41 @@
 	background-color: black;
 }
 
+#homeView section.tutorial .nextBtn, #homeView section.tutorial .prevBtn {
+	background-position-y: -70px;
+	color: white;
+	width: 98px;
+	position: absolute;
+	top: 210px;
+	text-align: center;
+	cursor: pointer;
+	font-family: 'GodHatesCharades';
+	font-size: 20px;
+	text-decoration: none;
+}
+
+#homeView section.tutorial .nextBtn img, #homeView section.tutorial .prevBtn img {
+	width: 100%;
+}
+
+#homeView section.tutorial .nextBtn img {
+	-webkit-transform: scaleX(-1);
+}
+
+#homeView section.tutorial .prevBtn {
+	left: 25px;
+}
+
+#homeView section.tutorial .nextBtn {
+	right: 25px;
+}
+
 #homeView section.tutorial .slide {
 	position: absolute;
 	top: 0;
 	left: 0;
 	height: 500px;
 	width: 100%;
-	/* float: left; */
 }
 
 #homeView section.tutorial .slide.prev {
