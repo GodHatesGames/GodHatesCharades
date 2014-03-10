@@ -2,12 +2,12 @@
 	<ul class="nav nav-pills nav-justified nav-left">
 
 		<!-- universal nav -->
-		<li>
+		<li ui-sref-active="active">
 			<a ui-sref="home">Home</a>
 		</li>
 
 		<li ng-show="parseUser.isBetaUser()">
-			<a ng-click="jumpToElement('email_signup')">
+			<a ng-click="jumpToElementInView('email_signup', 'home')">
 			   Get It!
 			</a>
 		</li>
@@ -38,7 +38,7 @@
 
 		<li ui-sref-active="active"
 			ng-show="parseUser.isBetaUser()">
-			<a ui-sref='submit'>Create</a>
+			<a ui-sref='top'>Cards</a>
 		</li>
 		<li ui-sref-active="active"
 			ng-show="parseUser.isBetaUser()">
