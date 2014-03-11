@@ -1,9 +1,10 @@
 #mainNav {
 	/* margin-bottom: 40px; */
-	margin-top: 95px;
+	margin-top: 105px;
 	min-height: 1px;
 	height: 45px;
 }
+
 .nav > li > a {
 	color: #000;
 	font-size: 20px;
@@ -94,14 +95,75 @@
 	height: 25px;
 	position: relative;
 }
+
 .logo-img {
-	/*background-image: url(../img/logo.png);*/
 	position: relative;
-	bottom: 90px;
-	/*width: 245px;
-	height: 242px;*/
+	bottom: 130px;
 }
 
 .dropdown a {
 	cursor: pointer;
+}
+
+@media (max-width: 767px) {
+	#mainNav.nobeta {
+		margin-top: -5px;
+		height: 65px;
+	}
+	#mainNav {
+		margin-top: -5px;
+		height: 165px;
+	}
+
+
+	#mainNav.nobeta .nav-left,
+	#mainNav.nobeta .nav-right {
+		width: 30%;
+	}
+
+	#mainNav.nobeta .nav-logo {
+		width: 40%;
+	}
+
+	.logo-img {
+		bottom: 20px;
+	}
+}
+
+@media (min-width: 768px) {
+	#mainNav.nobeta {
+		margin-top: -5px;
+		height: 65px;
+	}
+
+	.nobeta .logo-img {
+		bottom: 20px;
+	}
+}
+
+@media (max-width: 992px) {
+	#mainNav {
+		margin-top: 50px;
+	}
+
+	.logo-img {
+		bottom: 75px;
+	}
+}
+
+@media (min-width: 992px) and (max-width: 1200px) {
+
+	#mainNav {
+		margin-top: 81px;
+	}
+
+	.logo-img {
+		bottom: 110px;
+	}
+}
+
+@media (max-width: 1200px) {
+	.nav > li > a {
+		font-size: 18px;
+	}
 }
