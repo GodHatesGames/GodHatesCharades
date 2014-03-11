@@ -152,7 +152,7 @@
 	}
 
 	#mainNav.beta .logo-img {
-		bottom: -20px;
+		bottom: 20px;
 	}
 }
 
@@ -164,6 +164,12 @@
 
 	.logo-img {
 		bottom: 50px;
+	}
+	
+	/* beta */
+
+	#mainNav.beta .logo-img {
+		bottom: 0px;
 	}
 }
 
@@ -186,4 +192,11 @@
 		margin-top: 35px;
 		height: 40px;
 	}
+	
+	/* beta */
+
+	#mainNav.beta .logo-img {
+		bottom: -24px;
+	
+}
 }
