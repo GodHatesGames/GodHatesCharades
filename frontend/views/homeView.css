@@ -9,6 +9,8 @@
 }
 
 /* Sections */
+
+/* Section: Examples */
 #homeView section {
 	padding-top: 35px;
 	padding-bottom: 35px;
@@ -22,6 +24,8 @@
 #homeView section.examples h2 {
 	margin-top: 36px;
 	font-size: 38px;
+	max-width: 600px;
+	margin: 0 auto;
 }
 
 #homeView section.examples p {
@@ -29,6 +33,58 @@
 	text-align: center;
 	font-style: italic;
 }
+
+@media (max-width: 1200px) {
+	#homeView section.examples {
+		width: 95%;
+	}
+}
+
+@media (max-width: 992px) {
+	#homeView section.examples {
+		width: 95%;
+	}
+}
+
+@media (max-width: 767px) {
+	#homeView section.examples {
+		width: 100%;
+	}
+
+	#homeView section.examples h2 {
+		font-size: 32px;
+	
+		max-width: 500px;
+		margin: 0 auto;
+}
+}
+
+@media (max-width: 640px) {
+	#homeView section.examples {
+		width: 100%;
+	}
+
+	#homeView section.examples h2 {
+		font-size: 17px;
+	
+		line-height: 21px;
+	
+		max-width: 260px;
+		margin: 0 auto;
+}
+
+	#homeView section.examples p {
+		font-size: 12px;
+	
+		max-width: 250px;
+		margin: 0 auto;
+}
+}
+
+@media (max-width: 320px) {
+}
+
+/* Section: Tutorial */
 
 #homeView section.tutorial {
 	overflow: hidden;
@@ -143,6 +199,8 @@ only screen and (                min-resolution: 2dppx) {
 	}
 
 }
+
+/* Section: Signup */
 
 #homeView section.signup {
 	padding-left: 100px;
