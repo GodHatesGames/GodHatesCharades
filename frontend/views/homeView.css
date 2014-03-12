@@ -144,11 +144,11 @@
 }
 
 #homeView section.tutorial .prevBtn {
-	left: 25px;
+	left: 15px;
 }
 
 #homeView section.tutorial .nextBtn {
-	right: 25px;
+	right: 15px;
 }
 
 #homeView section.tutorial .slide {
@@ -225,6 +225,57 @@ only screen and (                min-resolution: 2dppx) {
 		background-image: url(../img/tutorial_4@2x.png);
 	}
 
+}
+
+@media (max-width: 1200px) {
+}
+
+@media (max-width: 992px) {
+	#homeView section.tutorial .slide .slide-content {
+		background-size: 50%;
+	}
+	#homeView section.tutorial {
+		height: 300px;
+	}
+}
+
+@media (max-width: 767px) {
+	#homeView section.tutorial {
+		height: 270px;
+	}
+}
+
+@media (max-width: 640px) {
+	#homeView section.tutorial .slide .slide-content {
+		background-size: 70%;
+	}
+
+	#homeView section.tutorial {
+		height: 280px;
+	}
+	
+	#homeView section.tutorial .nextBtn, #homeView section.tutorial .prevBtn {
+		width: 50px;
+	}
+}
+
+@media (max-width: 320px) {
+
+	#homeView section.tutorial .slide .slide-content {
+		background-size: 90%;
+	}
+	
+	#homeView section.tutorial {
+		height: 280px;
+	}
+	
+	#homeView section.tutorial .nextBtn, #homeView section.tutorial .prevBtn {
+		width: 40px;
+	
+		font-size: 13px;
+		top: 100%;
+		margin-top: -60px;
+}
 }
 
 /* Section: Signup */
