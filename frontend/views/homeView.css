@@ -280,12 +280,15 @@ only screen and (                min-resolution: 2dppx) {
 /* Section: Signup */
 
 #homeView section.signup {
-	padding-left: 100px;
-	padding-right: 100px;
+	padding-left: 60px;
+	padding-right: 60px;
+	text-align: center;
+	background: #54C2C8;
+	line-height: 20px;
+	color: white;
 }
 
 #homeView section.signup p {
-	width: 50%;
 	font-family: 'GodHatesCharades';
 	font-size: 28px;
 	line-height: 34px;
@@ -298,14 +301,35 @@ only screen and (                min-resolution: 2dppx) {
 }
 
 #homeView section.signup .form-group {
-	width: 65%;
 	float: left;
 }
 
-#homeView section.ios .form-group {
-	width: 65%;
+#mc-embedded-subscribe-form {
+	position: relative;
+	top: 12px;
+}
+
+#mc-embedded-subscribe-form .email {
+	text-indent: 15px;
+	height: 44px;
+	line-height: 44px;
+	font-weight: bold;
+	margin: 0;
+	border: 0;
+	width: 100%;
+	font-size: 22px;
+}
+
+#mc-embedded-subscribe {
+	margin: 0;
+	background: #FF6751;
+	/* position: relative; */
+	/* left: -4px; */
+	width: 35%;
 	float: left;
 }
+
+/* Section: iOS*/
 
 #homeView section.ios .screenshot {
 	max-width: 100%;
@@ -321,63 +345,41 @@ only screen and (                min-resolution: 2dppx) {
 	margin-bottom: 40px;
 }
 
-
-/* End Sections*/
-
-/* Mailchimp signup form */
-#email_signup {
-	text-align: center;
-	background: #54C2C8;
-	line-height: 20px;
-	color: white;
+@media (max-width: 1200px) {
 }
 
-#email_signup h3 {
-	line-height: 44px;
-	padding-top: 2px;
-	width: 50%;
-}
+@media (max-width: 992px) {
 
-#mc-embedded-subscribe-form {
-	width: 48%;
-	position: relative;
-	top: 12px;
-	float: right;
+	#homeView section.signup {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
 }
-
-#mc-embedded-subscribe-form .email {
-	text-indent: 15px;
-	height: 44px;
-	line-height: 44px;
-	font-weight: bold;
-	margin: 0;
-	border: 0;
-	width: 100%;
-	font-size: 22px;
-}
-
 
 @media (max-width: 767px) {
-	#mc-embedded-subscribe-form .form-group {
-		display: inline-block;
-		margin-bottom: 0;
-		vertical-align: middle;
-	}
 
-	#email_signup h3 {
-		margin-bottom: 10px;
+	.form-inline .form-group {
+		width: 55%;
+	}
+	#mc-embedded-subscribe {
+		width: 45%;
 	}
 }
 
-#mc-embedded-subscribe {
-	margin: 0;
-	background: #FF6751;
-	/* position: relative; */
-	/* left: -4px; */
-	width: 35%;
-	float: left;
+@media (max-width: 640px) {
+
+	#homeView section.signup {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+
+	.form-inline {
+		padding: 0;
+	}
 }
-/* End Mailchimp */
+
+
+/* End Sections*/
 
 #kickstarter {
 	text-align: center;

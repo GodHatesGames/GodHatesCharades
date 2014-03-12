@@ -42,12 +42,20 @@
 	<!-- Begin MailChimp Signup Form -->
 	<section id="email_signup"
 			 class="signup row">
+		<p ng-hide="kickstarter.done()"
+		   class="col-md-6">
+			SUBSCRIBE TO RECEIVE UPDATES + THE <b>PRINT ‘N PLAY</b> EDITION!
+		</p>
+		<p ng-show="kickstarter.done()"
+		   class="col-md-6">
+			Keep up to date with us!
+		</p>
 		<form action="http://godhatescharades.us3.list-manage.com/subscribe/post?u=88c52ae3a3f740d6ede2fcc05&amp;id=b6575d0e61" 
 			  method="post" 
 			  id="mc-embedded-subscribe-form" 
 			  name="mc-embedded-subscribe-form" 
 			  target="_blank" 
-			  class="form-inline" 
+			  class="form-inline col-xs-offset-0 col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-6" 
 			  novalidate>
 			<div class="form-group">
 				<label for="mce-EMAIL" 
@@ -69,12 +77,6 @@
 			<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
 			<div style="position: absolute; left: -5000px;"><input type="text" name="b_88c52ae3a3f740d6ede2fcc05_b6575d0e61" value=""></div>
 		</form>
-		<p ng-hide="kickstarter.done()">
-			SUBSCRIBE TO RECEIVE UPDATES + THE <b>PRINT ‘N PLAY</b> EDITION!
-		</p>
-		<p ng-show="kickstarter.done()">
-			Keep up to date with us!
-		</p>
 	</section>
 	<!--End mc_embed_signup-->
 
