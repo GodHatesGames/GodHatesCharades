@@ -32,7 +32,7 @@
 
 #homeView section.tutorial {
 	overflow: hidden;
-	height: 540px;
+	height: 600px;
 	position: relative;
 	background-color: black;
 	background-image: url(../img/chalk.jpg);
@@ -74,6 +74,11 @@
 	left: 0;
 	height: 100%;
 	width: 100%;
+	-webkit-transition: left .25s ease-out;
+	-moz-transition: left .25s ease-out;
+	-o-transition: left .25s ease-out;
+	-ms-transition: left .25s ease-out;
+	transition: left .25s ease-out;
 }
 
 #homeView section.tutorial .slide.prev {
@@ -86,7 +91,7 @@
 
 #homeView section.tutorial .slide .slide-content {
 	background-repeat: no-repeat;
-	background-position: 50%;
+	background-position: 50% 0;
 	background-size: initial;
 	width: 100%;
 	height: 100%;
@@ -94,22 +99,23 @@
 
 #homeView section.tutorial .slide-one .slide-content {
 	background-image: url(../img/tutorial_1.png);
-	background-size: 709px 428px;
+	background-size: 709px 600px;
 }
 
 #homeView section.tutorial .slide-two .slide-content {
 	background-image: url(../img/tutorial_2.png);
-	background-size: 799px 512px;
+	background-size: 739px 600px;
 }
 
 #homeView section.tutorial .slide-three .slide-content {
 	background-image: url(../img/tutorial_3.png);
-	background-size: 828px 467px;
+	background-size: 828px 600px;
+	background-position-x: 60%;
 }
 
 #homeView section.tutorial .slide-four .slide-content {
 	background-image: url(../img/tutorial_4.png);
-	background-size: 745px 418px;
+	background-size: 745px 600px;
 }
 
 @media
