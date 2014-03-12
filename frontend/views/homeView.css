@@ -302,6 +302,7 @@ only screen and (                min-resolution: 2dppx) {
 
 #homeView section.signup .form-group {
 	float: left;
+	width: 65%;
 }
 
 #mc-embedded-subscribe-form {
@@ -327,6 +328,7 @@ only screen and (                min-resolution: 2dppx) {
 	/* left: -4px; */
 	width: 35%;
 	float: left;
+	border-radius: 0;
 }
 
 /* Section: iOS*/
@@ -358,7 +360,7 @@ only screen and (                min-resolution: 2dppx) {
 
 @media (max-width: 767px) {
 
-	.form-inline .form-group {
+	#homeView section.signup .form-group {
 		width: 55%;
 	}
 	#mc-embedded-subscribe {
@@ -452,6 +454,7 @@ only screen and (                min-resolution: 2dppx) {
 }
 
 @media (max-width: 767px) {
+
 	#homeView .rules > div:not(:first-child) {
 		padding-top: 30px;
 	}
@@ -459,12 +462,16 @@ only screen and (                min-resolution: 2dppx) {
 	#kickstarter .timerNumber {
 		font-size: 63px;
 		line-height: 65px;
-	
-}
+	}
 
 	#kickstarter .timerText {
 		font-size: 15px;
 	}
+}
 
 
+@media (max-width: 767px) {
+	#homeView .examplesContainer {
+		height: 250px;
+	}
 }
