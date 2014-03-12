@@ -8,6 +8,43 @@
 	margin-right: -60px;
 }
 
+#homeView section {
+	overflow: hidden;
+}
+
+@media (max-width: 1200px) {
+}
+
+@media (max-width: 992px) {
+}
+
+@media (max-width: 767px) {
+}
+
+@media (max-width: 640px) {
+	#homeView {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+	#homeView .row {
+		margin-left: -10px;
+		margin-right: -10px;
+	}
+}
+
+@media (max-width: 320px) {
+	#homeView {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+
+	#homeView .row {
+		margin-left: -10px;
+		margin-right: -10px;
+	}
+}
+
 /* Sections */
 
 /* Section: Examples */
@@ -42,18 +79,42 @@
 }
 
 @media (max-width: 640px) {
+	#homeView section.examples {
+		margin-left: -10px;
+		margin-right: -10px;
+	}
+	#homeView section.examples .characters{
+		position: relative;
+		left: 12px;
+	}
+
+	#homeView section.examples .scenarios{
+		position: relative;
+		left: -12px;
+	}
+
 	#homeView section.examples h2 {
 		font-size: 17px;
 		line-height: 21px;
 		max-width: 260px;
 		margin: 0 auto;
+	}
+
+		#homeView section.examples p {
+			font-size: 12px;
+			max-width: 250px;
+			margin: 0 auto;
+	}
 }
 
-	#homeView section.examples p {
-		font-size: 12px;
-		max-width: 250px;
-		margin: 0 auto;
-}
+@media (max-width: 320px) {
+	#homeView section.examples .characters{
+		left: 0px;
+	}
+
+	#homeView section.examples .scenarios{
+		left: 0px;
+	}
 }
 
 @media (max-width: 320px) {

@@ -63,13 +63,6 @@
 	margin: 0 auto;
 }
 
-/* Max iPhone 5+ Horizontal  */
-@media (max-width: 568px) {
-	.cardContent {
-		font-size: 10px;
-	}
-}
-
 /* Max iPhone 5+ Vertical  */
 @media (max-width: 567px) {
 	.vote .pairContainer {
@@ -81,19 +74,6 @@
 		left: 50%;
 		top: 100%;
 	}
-	.cardContent {
-		font-size: 13px;
-	}
-}
-
-/* Min iPhone 5+ Horizontal  */
-@media (min-width: 569px) {
-	.cardContent {
-		font-size: 16px;
-	
-		font-family: 'GodHatesCharades';
-		text-transform: uppercase;
-}
 }
 
 @media (min-width: 569px) {
