@@ -247,7 +247,7 @@ only screen and (                min-resolution: 2dppx) {
 
 @media (max-width: 640px) {
 	#homeView section.tutorial .slide .slide-content {
-		background-size: 70%;
+		background-size: 60%;
 	}
 
 	#homeView section.tutorial {
@@ -259,7 +259,7 @@ only screen and (                min-resolution: 2dppx) {
 	}
 }
 
-@media (max-width: 320px) {
+@media (max-width: 350px) {
 
 	#homeView section.tutorial .slide .slide-content {
 		background-size: 90%;
@@ -271,11 +271,10 @@ only screen and (                min-resolution: 2dppx) {
 	
 	#homeView section.tutorial .nextBtn, #homeView section.tutorial .prevBtn {
 		width: 40px;
-	
 		font-size: 13px;
 		top: 100%;
 		margin-top: -60px;
-}
+	}
 }
 
 /* Section: Signup */
