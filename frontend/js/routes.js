@@ -87,6 +87,7 @@ app.config(function($stateProvider,
 		url: '/export',
 		templateUrl: 'views/exportView.html',
 		resolve: {
+			getAllSuggestions: 'getAllSuggestions',
 			sets: 'sets'
 		},
 		controller: 'exportView'

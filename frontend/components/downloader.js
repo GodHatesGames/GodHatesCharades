@@ -10,7 +10,7 @@ app.directive('downloader', function(cardService) {
 			$scope.cardService = cardService;
 			var csvData = [];
 			var item;
-			_.each($scope.suggestions, function(value, key) {
+			_.each($scope.allSuggestions, function(value, key) {
 				var text = value.attributes.text;
 				// fix bad qoutes and escape them too
 				text = text.replace(/[”“"’]/g, '\'');

@@ -12,7 +12,7 @@ app.service('getAllSuggestions', function($q) {
 			{},
 			{
 				success: function(suggestions) {
-					getAllSuggestions = _.extend(getAllSuggestions.data, suggestions);
+					_.extend(getAllSuggestions.data, suggestions);
 					deferred.resolve(getAllSuggestions);
 					// if (scope)
 					// 	scope.$digest();
