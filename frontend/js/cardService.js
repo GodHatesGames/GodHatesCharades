@@ -5,6 +5,8 @@ app.service('cardService', function($q, $rootScope) {
 		getTypeDisplayByType: getTypeDisplayByType,
 		getTypeClass: getTypeClass,
 		getTypeClassByType: getTypeClassByType,
+		getImageUrl: getImageUrl,
+		getImageByType: getImageByType,
 		getTotalVotes: getTotalVotes,
 		getTotalSkips: getTotalSkips,
 		getKDR: getKDR,
@@ -43,6 +45,20 @@ app.service('cardService', function($q, $rootScope) {
 				return TYPE_CLASS_CHARACTER;
 			case 1 :
 				return TYPE_CLASS_SCENARIO;
+		}
+	};
+
+	function getImageUrl(card) {
+		var type = card.get('type');
+		return getImageByType(type);
+	};
+
+	function getImageByType(type) {
+		switch(type) {
+			case 0 :
+				return 'img/actor_skull.svg';
+			case 1 :
+				return 'img/scenario_ball.svg';
 		}
 	};
 

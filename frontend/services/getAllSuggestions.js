@@ -1,5 +1,5 @@
 'use strict';
-app.service('getAllSuggestions', function($q) {
+app.service('getAllSuggestions', function($q, cardService) {
 	var getAllSuggestions = {
 		data: {},
 		reload: loadData
@@ -12,6 +12,7 @@ app.service('getAllSuggestions', function($q) {
 			{},
 			{
 				success: function(suggestions) {
+					cardService.cache(suggestions);
 					_.extend(getAllSuggestions.data, suggestions);
 					deferred.resolve(getAllSuggestions);
 					// if (scope)

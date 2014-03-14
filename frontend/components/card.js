@@ -8,7 +8,8 @@ app.directive('card', function(parseUser, cardService, $rootScope) {
 			updatable: '=updatable'
 		},
 		controller: function($scope, $element) {
-			$scope.typeClass = "";
+			$scope.typeClass = '';
+			$scope.imageUrl = '';
 			if($scope.id) {
 				var promise = cardService.getCard($scope.id);
 				promise.then(onSuccess, onError);
@@ -27,6 +28,7 @@ app.directive('card', function(parseUser, cardService, $rootScope) {
 			function onSuccess(card) {
 				$scope.card = card;
 				$scope.typeClass = cardService.getTypeClass(card);
+				$scope.imageUrl = cardService.getImageUrl(card);
 				if(!$rootScope.$$phase)
 					$scope.$digest();
 			}
