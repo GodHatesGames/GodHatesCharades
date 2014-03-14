@@ -1,5 +1,5 @@
 'use strict';
-app.directive('nav', function(parseUser, $uiViewScroll, $state) {
+app.directive('nav', function(parseUser, $uiViewScroll, $state, $timeout) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/nav.html',
@@ -21,6 +21,10 @@ app.directive('nav', function(parseUser, $uiViewScroll, $state) {
 					var element = angular.element(document.getElementById(id));
 					if (element.length > 0) {
 						$uiViewScroll(element);
+						element.addClass('animated rubberBand');
+						$timeout(function() {
+							element.removeClass('animated rubberBand');
+						}, 1000);
 					} else {
 						return false;
 					}
