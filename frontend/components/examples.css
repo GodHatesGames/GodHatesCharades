@@ -25,7 +25,7 @@
 	left: 200px;
 }
 */
-.examplesContainer .card {
+.examplesContainer .characterContainer, .examplesContainer .scenarioContainer {
 	width: 100%;
 	/* height: 100%; */
 	max-width: 200px;
@@ -33,26 +33,26 @@
 	/*box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);*/
 }
 
-.examplesContainer .characters .card, .examplesContainer .scenarios .card {
+.examplesContainer .characters .characterContainer, .examplesContainer .scenarios .scenarioContainer {
 	position: absolute;
 	top: 0;
 }
 
-.examplesContainer .characters .card {
+.examplesContainer .characters .characterContainer {
 	right: 10%;
 }
 
-.examplesContainer .scenarios .card {
+.examplesContainer .scenarios .scenarioContainer {
 	left: 10%;
 }
 
 @media (max-width: 320px) {
-	.examplesContainer .characters .card {
+	.examplesContainer .characters .characterContainer {
 		right: auto;
 		left: -4%;
 	}
 
-	.examplesContainer .scenarios .card {
+	.examplesContainer .scenarios .scenarioContainer {
 		left: auto;
 		right: -2%;
 	}
@@ -62,7 +62,7 @@
 	background-color: #333333;
 }
 
-.examplesContainer .card.character {
+.examplesContainer .characterContainer {
 	/*z-index: 9;*/
 	/*-webkit-transform: scale(0.97, 0.97) rotate(-8deg) translateX(15px);*/
 
@@ -73,68 +73,77 @@
 	transition: all .4s ease-in, z-index 0;
 }
 
-.examplesContainer .card.scenario {
+.examplesContainer .scenarioContainer {
 	-webkit-transition: all .4s ease-in 0.2s, z-index 0;
 }
 
 /* Even */
-.examplesContainer .character.exampleActive:nth-child(even) {
+.examplesContainer .characterContainer.exampleActive:nth-child(even) {
 	-webkit-transform: scale(0.97, 0.97) rotateZ(-3deg);
 	z-index: 10;
-	box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
-.examplesContainer .scenario.exampleActive:nth-child(even) {
+.examplesContainer .scenarioContainer.exampleActive:nth-child(even) {
 	-webkit-transform: scale(0.97, 0.97) rotateZ(2deg);
 	z-index: 10;
-	box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
 /* Odd */
-.examplesContainer .character.exampleActive:nth-child(odd) {
+.examplesContainer .characterContainer.exampleActive:nth-child(odd) {
 	-webkit-transform: scale(0.97, 0.97) rotateZ(-2deg);
 	z-index: 10;
+}
+
+.examplesContainer .scenarioContainer.exampleActive:nth-child(odd) {
+	-webkit-transform: scale(0.97, 0.97) rotateZ(3deg);
+	z-index: 10;
+}
+
+/* Active: Shadows*/
+
+.examplesContainer .characterContainer.exampleActive .card {
 	box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
-.examplesContainer .scenario.exampleActive:nth-child(odd) {
-	-webkit-transform: scale(0.97, 0.97) rotateZ(3deg);
-	z-index: 10;
+.examplesContainer .scenarioContainer.exampleActive .card {
 	box-shadow: 3px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
 /* Staging */
-.examplesContainer .character.exampleStaging {
+.examplesContainer .characterContainer.exampleStaging {
 	-webkit-transform: scale(1, 1) rotateZ(-2deg) translateZ(60px) translateY(10px) translateX(-260px);
 	z-index: 11;
 	box-shadow: 0px 0px 0 rgba(0, 0, 0, 0);
 }
 
-.examplesContainer .scenario.exampleStaging {
+.examplesContainer .scenarioContainer.exampleStaging {
 	-webkit-transform: scale(1, 1) rotateZ(1deg) translateY(10px) translateZ(80px) translateX(260px);
 	z-index: 11;
+}
+
+.examplesContainer .exampleStaging .card {
 	box-shadow: 0px 0px 0 rgba(0, 0, 0, 0);
 }
 
 @media (min-width: 568px) {
 	/* Active */
-	.examplesContainer .character.exampleActive:nth-child(odd) {
+	.examplesContainer .characterContainer.exampleActive:nth-child(odd) {
 		opacity: 1;
 		-webkit-transform: scale(0.97, 0.97) rotateZ(-8deg);
 	}
 
-	.examplesContainer .scenario.exampleActive:nth-child(odd) {
+	.examplesContainer .scenarioContainer.exampleActive:nth-child(odd) {
 		opacity: 1;
 		-webkit-transform: scale(0.97, 0.97) rotateZ(6deg);
 	}
 
 	/* Staging */
-	.examplesContainer .character.exampleStaging {
+	.examplesContainer .characterContainer.exampleStaging {
 		opacity: 0;
 		-webkit-transform: scale(1, 1) rotateZ(-2deg) translateZ(60px) translateY(10px) translateX(-100px);
 	}
 
-	.examplesContainer .scenario.exampleStaging {
+	.examplesContainer .scenarioContainer.exampleStaging {
 		opacity: 0;
 		-webkit-transform: scale(1, 1) rotateZ(1deg) translateY(10px) translateZ(80px) translateX(100px);
 	}

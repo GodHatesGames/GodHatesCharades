@@ -11,13 +11,10 @@
 				ng-hide="loading"
 				ng-click="selectPair(index)">
 			<!-- Repeat suggestions in pairs -->
-				<div class="card"
-						ng-repeat="(index, suggestion) in pair"
-						ng-class="cardService.getTypeClass(suggestion)">
-					<div class="cardContent">
-						{{suggestion.attributes.text}}
-					</div>
-				</div>
+				<card ng-repeat="(index, suggestion) in pair"
+					  id="suggestion.id">
+				</card>
+
 			<div class="separator" 
 					ng-hide="$last">
 				VS

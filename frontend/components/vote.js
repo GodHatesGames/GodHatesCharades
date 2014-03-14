@@ -34,6 +34,9 @@ app.directive('vote', function(cardService, cloudUtils) {
 			}
 
 			function onSuggestionPairsLoaded(suggestionPairs) {
+				_.each(suggestionPairs, function(pair, index) {
+					cardService.cache(pair);
+				});
 				$scope.suggestionPairSrc = $scope.suggestionPairSrc.concat(suggestionPairs);
 				$scope.loading = false;
 				updateSuggestionPairs();

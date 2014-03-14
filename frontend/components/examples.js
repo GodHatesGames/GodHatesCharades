@@ -13,8 +13,8 @@ app.directive('examples', function(cardService, $timeout) {
 
 			// public vars
 			$scope.loading = false;
-			$scope.characters = [{}];
-			$scope.scenarios = [{}];
+			$scope.characters = [];
+			$scope.scenarios = [];
 
 			// init
 			loadExamples();
@@ -39,11 +39,13 @@ app.directive('examples', function(cardService, $timeout) {
 			}
 
 			function onExamplesLoaded(examples) {
+				cardService.cache(examples.zero);
+				cardService.cache(examples.one);
 				$scope.loading = false;
 				$scope.characters = $scope.characters.concat(examples.zero);
 				$scope.scenarios = $scope.scenarios.concat(examples.one);
 				if(!laterTimeoutId)
-					updateSoonerThanLater();
+					updateLater();
 				//force update now
 				$scope.$digest();
 			}
