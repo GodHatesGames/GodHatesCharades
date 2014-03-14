@@ -6,7 +6,7 @@
 
 	<div class="alert alert-success" 
 			ng-show="!loading && !errorMessage">
-		{{suggestions.length}} cards loaded, start printing!
+		{{setItems.length}} cards loaded, start printing!
 	</div>
 
 	<div class="alert alert-danger" 
@@ -16,13 +16,14 @@
 
 	<!-- One suggestion at a time -->
 	<div class="cardContainer"
-			ng-hide="loading || allApproved || !suggestions">
+			ng-hide="loading || allApproved || !setItems">
 
 		<div class="card page-break"
-			 ng-repeat="(index, suggestion) in suggestions | orderBy:'attributes.type'"
-			 ng-class="cardService.getTypeClass(suggestion)">
+			 ng-repeat="(index, setItem) in setItems | orderBy:'attributes.card.attributes.type'"
+			 ng-class="cardService.getTypeClass(setItem.attributes.card)"
+			 ng-init="card = setItem.attributes.card">
 			<div class="cardContent">
-				{{suggestion.attributes.text}}
+				{{card.attributes.text}}
 			</div>
 		</div>
 	</div>
