@@ -1,3 +1,7 @@
+.csvExport .btn {
+	display: inline-block;
+}
+
 @media print {
 	#mainNav, .logoContainer, .footer, #exportView > *:not(.printer){
 		display: none;
@@ -11,6 +15,4 @@
 		padding: 0 !important;
 		width: 100% !important;
 	}
-
-
 }

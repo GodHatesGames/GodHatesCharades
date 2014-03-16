@@ -1,5 +1,7 @@
 <div class="csvExport">
-	<button type="button" 
+	<p>{{csvData.length}} suggestions loaded</p>
+	<button class="btn btn-success" 
+			type="button" 
 			ng-csv="csvData"
 			csv-header="csvHeaders"
 			filename="test.csv"
