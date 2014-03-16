@@ -4,9 +4,17 @@
 			ng-show="loading">
 		Loading, this may take a while...</div>
 
-	<div class="alert alert-success" 
+	<div class="doNotPrint" 
 			ng-show="!loading && !errorMessage">
-		{{setItems.length}} cards loaded, start printing!
+		{{setItems.length}} cards loaded
+		<button class="btn btn-info printButtons"
+				ng-click="printColor()">
+			Print Full Color
+		</button>
+		<button class="btn btn-info printButtons"
+				ng-click="printBlack()">
+			Print Black & White
+		</button>
 	</div>
 
 	<div class="alert alert-danger" 
@@ -15,7 +23,7 @@
 	</div>
 
 	<!-- One suggestion at a time -->
-	<div class="cardContainer colorless"
+	<div class="cardContainer"
 			ng-hide="loading || allApproved || !setItems">
 		
 		<div class="setItem page-break"

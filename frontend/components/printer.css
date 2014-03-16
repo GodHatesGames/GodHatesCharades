@@ -1,4 +1,11 @@
+.printer .printButtons {
+	margin-bottom: 5px;
+}
+
 @media print {
+	.printer .doNotPrint {
+		display: none;
+	}
 	.cardContainer {
 		text-align: center;
 	}
@@ -15,9 +22,15 @@
 		margin: 0 5px 0 0;
 	}
 
+	.card {
+		border-radius: 0;
+	}
+
+	/* Colorless */
+
 	.colorless .card {
 		background-color: white !important;
-		border: 1px solid black;
+		border: 1px solid #666666;
 	}
 
 	.colorless .card svg path {
