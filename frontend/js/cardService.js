@@ -92,7 +92,7 @@ app.service('cardService', function($q, $rootScope) {
 	}
 
 	function getCard(cardId) {
-		console.log('getCard:', cardId);
+		// console.log('getCard:', cardId);
 		var returnVal;
 		var currentCache = cardsById[cardId];
 		if(currentCache) {
