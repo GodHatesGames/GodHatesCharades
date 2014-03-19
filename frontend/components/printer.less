@@ -1,3 +1,5 @@
+@import "../less/colors";
+
 .printer .printButtons {
 	margin-bottom: 5px;
 }
@@ -6,7 +8,23 @@
 	display: none;
 }
 
+.card .domain {
+	display: none;
+}
+
 @media print {
+	.card .domain {
+		display: block;
+	}
+
+	.card.character .domain {
+		color: darken(@color-actor, 20%) !important;
+	}
+
+	.card.scenario .domain {
+		color: darken(@color-scenario, 20%) !important;
+	}
+
 	.printer .doPrint {
 		display: inherit;
 	}

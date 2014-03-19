@@ -70,8 +70,16 @@ module.exports = function(grunt) {
 				tasks: ['buildBootstrap']
 			},
 			main: {
-				files: ['frontend/less/main.less'],
+				files: [
+					'frontend/less/main.less'
+				],
 				tasks: ['less:main']
+			},
+			components: {
+				files: [
+					'frontend/components/*.less'
+				],
+				tasks: ['less:components']
 			}
 		},
 		concurrent: {
@@ -82,7 +90,7 @@ module.exports = function(grunt) {
 				}
 			},
 			dev: {
-				tasks: ['nodemon:dev', 'watch:bootstrap', 'watch:main'],
+				tasks: ['nodemon:dev', 'watch:bootstrap', 'watch:main', 'watch:components'],
 				options: {
 					logConcurrentOutput: true
 				}
@@ -272,6 +280,11 @@ module.exports = function(grunt) {
 				files: {
 					'frontend/css/main.css': 'frontend/less/main.less'
 				}
+			},
+			components: {
+				files: {
+					'frontend/css/components.css': 'frontend/components/*.less'
+				}
 			}
 		},
 		svgmin: {
@@ -326,7 +339,8 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('buildDev', [
 		'buildBootstrap',
-		'less:main'
+		'less:main',
+		'less:components'
 	]);
 
 	grunt.registerTask('buildBootstrap', [
@@ -343,7 +357,8 @@ module.exports = function(grunt) {
 		'copy:stageFrontend',
 		'imagemin:stage',
 		'svgmin:stage',
-		'less:main'
+		'less:main',
+		'less:components'
 	]);
 
 	grunt.registerTask('distBuildApi', [

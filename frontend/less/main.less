@@ -1,5 +1,5 @@
 /* @import must be at top of file, otherwise CSS will not work */
-@font-face{ 
+@font-face { 
 	font-family: 'GodHatesCharades';
 	src: url('../fonts/GodHatesCharades.eot');
 	src: url('../fonts/GodHatesCharades.eot?#iefix') format('embedded-opentype'),
@@ -7,6 +7,8 @@
 	     url('../fonts/GodHatesCharades.ttf') format('truetype'),
 	     url('../fonts/GodHatesCharades.svg#webfont') format('svg');
 }
+
+@import "colors";
 
 html {
 	height: 100%;
@@ -16,7 +18,7 @@ html {
 body {
 	height: 100%;
 	overflow-y: scroll;
-	background-color: #FF6857;
+	background-color: @color-actor;
 	background-image: url(../img/facePattern.png);
 	background-size: 300px;
 	font-family: 'Helvetica';
@@ -183,11 +185,11 @@ a.list-group-special:hover {
 }
 
 .card.character .domain {
-	color: #b74237 !important;
+	color: darken(@color-actor, 20%) !important;
 }
 
 .card.scenario .domain {
-	color: #41959a !important;
+	color: darken(@color-scenario, 20%) !important;
 }
 
 @media (max-width: 640px) {
@@ -203,7 +205,7 @@ a.list-group-special:hover {
 }
 
 .card.character {
-	background-color: #FF6857 !important;
+	background-color: @color-actor !important;
 	// background-image: url(../img/actor_skull.svg) !important;
 	// background-size: 50% !important;
 	// background-repeat: no-repeat !important;
@@ -216,7 +218,7 @@ a.list-group-special:hover {
 }
 
 .card.scenario {
-	background-color: #61CACE !important;
+	background-color: @color-scenario !important;
 	// background-image: url(../img/scenario_ball.svg) !important;
 	// background-size: 55% !important;
 	// background-repeat: no-repeat !important;
@@ -280,7 +282,7 @@ a.list-group-special:hover {
 }
 
 .cardList > table > tbody > tr > td.scenario {
-	background-color: #61CACE;
+	background-color: @color-scenario;
 	background-image: url(../img/scenario_ball.svg);
 	background-size: 34px 33px;
 	background-repeat: no-repeat;
@@ -288,7 +290,7 @@ a.list-group-special:hover {
 }
 
 .cardList > table > tbody > tr > td.character {
-	background-color: #FF6857;
+	background-color: @color-actor;
 	background-image: url(../img/actor_skull.svg);
 	background-size: 30px 34px;
 	background-repeat: no-repeat;

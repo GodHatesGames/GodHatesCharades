@@ -8,8 +8,7 @@
 				"node_modules",
 				"Parse/public",
 				"dist",
-				".tmp",
-				"frontend/css"
+				".tmp"
 			]
 		}
 	]
