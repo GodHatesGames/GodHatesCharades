@@ -1,9 +1,17 @@
 <div class="printer">
-
+	
+	<!-- Loading message -->
 	<div class="alert alert-info" 
 			ng-show="loading">
 		Loading, this may take a while...</div>
+	
+	<!-- Error message -->
+	<div class="alert alert-danger" 
+			ng-show="errorMessage">
+		Uh oh! {{errorMessage}}
+	</div>
 
+	<!-- Loaded message -->
 	<div class="doNotPrint" 
 			ng-show="!loading && !errorMessage">
 		{{setItems.length}} set items loaded
@@ -17,10 +25,19 @@
 		</button>
 	</div>
 
-	<div class="alert alert-danger" 
-			ng-show="errorMessage">
-		Uh oh! {{errorMessage}}
-	</div>
+	<!-- Print instructions -->
+	<!-- <div class="row doPrint">
+		<h2>Lets Print</h2>
+		<img src="img/logo.svg"
+			 alt="God Hates Charades"
+			 class="logo-img">
+		<ul>
+			<li class="checked">Download the pdf</li>
+			<li><b>Sneak into a nearby office building with at least {{guestimatePages()}} sheets of 8.5 x 11 inch paper.</b>
+				You can use the plain paper, but you have that friend... the one who reads backwards
+				through translucent paper. Grab 80lb paper or better, and don’t invite that guy next time.</li>
+		</ul>
+	</div> -->
 
 	<!-- One suggestion at a time -->
 	<div class="cardContainer"

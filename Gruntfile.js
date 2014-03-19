@@ -57,7 +57,12 @@ module.exports = function(grunt) {
 				tasks: ['distBuildApi']
 			},
 			distFrontend: {
-				files: ['frontend/**/*.js', 'frontend/**/*.css', 'frontend/**/*.html'],
+				files: [
+					'frontend/**/*.js',
+					'frontend/**/*.less',
+					'frontend/**/*.html',
+					'!frontend/bower_components/**'
+				],
 				tasks: ['distBuildFrontend']
 			},
 			bootstrap: {
@@ -337,7 +342,8 @@ module.exports = function(grunt) {
 		'bower',
 		'copy:stageFrontend',
 		'imagemin:stage',
-		'svgmin:stage'
+		'svgmin:stage',
+		'less:main'
 	]);
 
 	grunt.registerTask('distBuildApi', [

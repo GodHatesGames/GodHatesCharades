@@ -25,6 +25,14 @@ app.directive('printer', function(cardService, $compile, $window) {
 				print();
 			};
 
+			$scope.guestimatePages = function() {
+				//start with 2 for instructions
+				var guestimation = 2;
+				// ~9 cards per page
+				guestimation += Math.ceil($scope.setItems.length / 9);
+				return guestimation;
+			};
+
 			// Watch
 		}
 	};

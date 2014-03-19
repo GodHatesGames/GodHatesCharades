@@ -2,7 +2,15 @@
 	margin-bottom: 5px;
 }
 
+.printer .doPrint {
+	display: none;
+}
+
 @media print {
+	.printer .doPrint {
+		display: inherit;
+	}
+
 	.printer .doNotPrint {
 		display: none;
 	}
@@ -35,6 +43,6 @@
 
 	.colorless .card svg path {
 		fill: black;
-		fill-opacity : 0.3;
+		fill-opacity : 1;
 	}
 }
