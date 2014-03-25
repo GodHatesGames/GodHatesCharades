@@ -15,17 +15,21 @@ app.directive('signup', function(parseUser) {
 			$scope.signup = function() {
 				var promise = parseUser.signup($scope.email, $scope.password, $scope.email);
 				promise.then(onUserCreated);
-			}
+			};
 
 			function onUserCreated() {
 				parseUser.data.set('name', $scope.name);
 				var promise = parseUser.save();
-				promise.then(onSignedUp);
+				promise.then(onSignedUp, onSignupError);
 			}
 
 			function onSignedUp() {
 				console.log('signup success');
 				$scope.$digest();
+			}
+
+			function onSignupError() {
+				console.log('error signing up');
 			}
 		}
 	}

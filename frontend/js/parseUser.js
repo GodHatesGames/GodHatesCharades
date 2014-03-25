@@ -85,15 +85,15 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location) {
 	}
 
 	function signup(username, password, email, name) {
-		var user = new Parse.User();
-		user.set('username', username);
-		user.set('password', password);
+		var newUser = user.data ? user.data : new Parse.User();
+		newUser.set('username', username);
+		newUser.set('password', password);
 		if(email)
-			user.set('email', email);
+			newUser.set('email', email);
 		if(name)
-			user.set('name', name);
+			newUser.set('name', name);
 
-		return user.signUp(null, {
+		return newUser.signUp(null, {
 			success: onUserConnected,
 			error: onUserError
 		});
@@ -106,7 +106,7 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location) {
 				user.data = user;
 				$rootScope.$apply();
 			}, function(user, error) {
-				console.log('could note save:', error);
+				console.log('could not save:', error);
 			}
 		);
 		return promise;
