@@ -1,4 +1,14 @@
-<div id="publicProfileView" class="container">
+<div id="publicProfileView"
+	 class="container">
 	<!-- <link rel="stylesheet" type="text/css" href="css/profileView.css"> -->
-	<user-submissions userid="userid"></user-submissions>
+	<!-- non beta users -->
+	<div ng-show="currentUser && !betaUser">
+		New beta features coming soon
+	</div>
+
+	<!-- beta users -->
+	<div ng-hide="currentUser && !betaUser">
+		<user-submissions userid="userid">
+		</user-submissions>
+	</div>
 </div>

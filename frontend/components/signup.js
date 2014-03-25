@@ -1,4 +1,4 @@
-app.directive('signup', function(parseUser) {
+app.directive('signup', function(parseUser, $state) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/signup.html',
@@ -13,24 +13,18 @@ app.directive('signup', function(parseUser) {
 			$scope.password = '';
 
 			$scope.signup = function() {
-				var promise = parseUser.signup($scope.email, $scope.password, $scope.email);
-				promise.then(onUserCreated);
+				var promise = parseUser.signupAnonUser($scope.email, $scope.password, $scope.email, $scope.name);
+				promise.then(onSignedUp, onSignupError);
 			};
 
-			function onUserCreated() {
-				parseUser.data.set('name', $scope.name);
-				var promise = parseUser.save();
-				promise.then(onSignedUp, onSignupError);
-			}
-
-			function onSignedUp() {
+			function onSignedUp(user) {
 				console.log('signup success');
-				$scope.$digest();
+				$state.go('user', {userid: user.id});
 			}
 
 			function onSignupError() {
 				console.log('error signing up');
 			}
 		}
-	}
+	};
 });

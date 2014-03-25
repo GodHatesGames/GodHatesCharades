@@ -8,15 +8,16 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location) {
 		isAnon: isAnon,
 		isReal: isReal,
 		isBetaUser: isBetaUser,
+		isCurrentUser: isCurrentUser,
 		data: null,
 		createAnonUser: createAnonUser,
 		connect: connect,
 		logout: logout,
-		signup: signup,
+		signupAnonUser: signupAnonUser,
 		save: save,
 		getUserById: getUserById,
 		cacheUser: cacheUser
-	}
+	};
 
 	var cache = {};
 	var fetching = {};
@@ -35,7 +36,16 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location) {
 
 	function createAnonUser() {
 		console.log('creating anon user');
-		return signup(randString(), randString(), null, 'Anonymous');
+		
+		var newUser = new Parse.User();
+		newUser.set('username', randString());
+		newUser.set('password', randString());
+		newUser.set('name', 'Anonymous');
+
+		return newUser.signUp(null, {
+			success: onUserConnected,
+			error: onUserError
+		});
 
 		function randString() {
 			// copy pasta'd from: http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
@@ -84,16 +94,12 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location) {
 		}, 1000);
 	}
 
-	function signup(username, password, email, name) {
-		var newUser = user.data ? user.data : new Parse.User();
-		newUser.set('username', username);
-		newUser.set('password', password);
-		if(email)
-			newUser.set('email', email);
-		if(name)
-			newUser.set('name', name);
-
-		return newUser.signUp(null, {
+	function signupAnonUser(username, password, email, name) {
+		user.data.set('username', username);
+		user.data.set('password', password);
+		user.data.set('email', email);
+		user.data.set('name', name);
+		return user.data.save(null, {
 			success: onUserConnected,
 			error: onUserError
 		});
@@ -146,7 +152,21 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location) {
 			return false;
 	}
 
+	function isCurrentUser(userid) {
+		if (user.loggedin &&
+			userid === user.data.id) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	function getUserById(id) {
+		if (id === undefined || id === null) {
+			console.log('you must provide a userid');
+			return $q.reject();
+		}
+
 		var deffered = $q.defer();
 		if(fetching[id]) {
 			console.log('returning existing promise');

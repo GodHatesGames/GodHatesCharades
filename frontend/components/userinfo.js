@@ -9,11 +9,11 @@ app.directive('userinfo', function(parseUser) {
 		controller: function($scope, $element) {
 			$scope.error = false;
 			// $scope.loading = false;
-			if($scope.userid === undefined)
-				console.log('userid not provided');
 
-			var promise = parseUser.getUserById($scope.userid);
-			promise.then(onUserFound, onUserError);
+			if ($scope.userid) {
+				parseUser.getUserById($scope.userid)
+				.then(onUserFound, onUserError);
+			}
 
 			function onUserFound(user) {
 				$scope.user = user;
@@ -23,5 +23,5 @@ app.directive('userinfo', function(parseUser) {
 				$scope.error = true;
 			}
 		}
-	}
+	};
 });
