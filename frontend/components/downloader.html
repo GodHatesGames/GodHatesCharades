@@ -1,10 +1,19 @@
 <div class="csvExport">
-	<p>{{csvData.length}} suggestions loaded</p>
+	<p>{{allCsvData.length}} suggestions loaded</p>
 	<button class="btn btn-success" 
 			type="button" 
-			ng-csv="csvData"
+			ng-csv="allCsvData"
 			csv-header="csvHeaders"
-			filename="test.csv"
+			filename="GodHatesCharades.csv"
+			text-delimiter="&#34;"
+			field-separator=",">Export</button>
+
+	<p>{{setCsvData.length}} set items loaded</p>
+	<button class="btn btn-success" 
+			type="button" 
+			ng-csv="setCsvData"
+			csv-header="csvHeaders"
+			filename="GodHatesCharadesSet1.csv"
 			text-delimiter="&#34;"
 			field-separator=",">Export</button>
 </div>

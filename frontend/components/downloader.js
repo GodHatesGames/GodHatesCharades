@@ -8,7 +8,18 @@ app.directive('downloader', function(cardService) {
 		controller: function($scope) {
 			// public vars
 			$scope.cardService = cardService;
-			var csvData = [];
+			$scope.csvHeaders = [
+				'text',
+				'type',
+				'totalVotes',
+				'skipped',
+				'rejected',
+				'kdr',
+				'moderated'
+			];
+
+			// generate all cards CSV
+			var allCsvData = [];
 			var item;
 			_.each($scope.allSuggestions, function(value, key) {
 				var text = value.attributes.text;
@@ -23,18 +34,35 @@ app.directive('downloader', function(cardService) {
 					'kdr': value.attributes.kdr,
 					'moderated': value.attributes.moderated
 				};
-				csvData.push(item);
+				allCsvData.push(item);
 			});
-			$scope.csvHeaders = [
-				'text',
-				'type',
-				'totalVotes',
-				'skipped',
-				'rejected',
-				'kdr',
-				'moderated'
-			];
-			$scope.csvData = csvData;
+			$scope.allCsvData = allCsvData;
+
+
+			$scope.$watch('setItems', generateSetData);
+			
+			function generateSetData() {
+				// generate set cards CSV
+				var setCsvData = [];
+				var item;
+				_.each($scope.setItems, function(value, key) {
+					var card = value.get('card');
+					var text = card.get('text');
+					// fix bad qoutes and escape them too
+					text = text.replace(/[”“"’]/g, '\'');
+					item = {
+						'text': text,
+						'type': card.attributes.type,
+						'totalVotes': card.attributes.totalVotes,
+						'skipped': card.attributes.skipped,
+						'rejected': card.attributes.rejected,
+						'kdr': card.attributes.kdr,
+						'moderated': card.attributes.moderated
+					};
+					setCsvData.push(item);
+				});
+				$scope.setCsvData = setCsvData;
+			}
 
 			// Private methods
 
