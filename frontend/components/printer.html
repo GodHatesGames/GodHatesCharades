@@ -26,22 +26,106 @@
 	</div>
 
 	<!-- Print instructions -->
-	<!-- <div class="row doPrint">
-		<h2>Lets Print</h2>
-		<img src="img/logo.svg"
-			 alt="God Hates Charades"
-			 class="logo-img">
-		<ul>
-			<li class="checked">Download the pdf</li>
-			<li><b>Sneak into a nearby office building with at least {{guestimatePages()}} sheets of 8.5 x 11 inch paper.</b>
-				You can use the plain paper, but you have that friend... the one who reads backwards
-				through translucent paper. Grab 80lb paper or better, and don’t invite that guy next time.</li>
-		</ul>
-	</div> -->
-
+	<span class="page-break">
+		<div class="row doPrint">
+			<div class="printHeader">
+				<span class="title">LETS PRINT</span>
+				<img src="img/logo_bw.svg"
+					 alt="God Hates Charades"
+					 class="printLogo">
+			</div>
+		</div>
+		<div class="row doPrint printList">
+				<ul>
+					<li class="checked">
+						Download this pdf
+					</li>
+					<li>
+						<b>Sneak into a nearby office building with at least {{guestimatePages()}} sheets of 8.5 x 11 inch paper.</b>
+							You can use the plain paper, but you have that friend... the one who reads backwards
+							through translucent paper. Grab 80lb paper or better, and don’t invite that guy next time.
+					</li>
+					<li>
+						<b>Print this PDF making sure the Scale is 100% so you get the right size cards.</b> Dont take too long or
+						they’ll catch you. If they do, beg for forgiveness and offer to print them a copy too.
+					</li>
+					<li>
+						<b>Slice up the cards, for legal reasons we recommend safety scissors.</b> They wont cut your 80lb paper, and they
+						wont hurt your delicate digits.
+					</li>
+					<li>
+						<b>Keep 'em safe!</b> They’re poker card size, so grab a box of poker cards, toss them and write GOD HATES CHARADES
+						in sharpie. That’s what we’d do.
+					</li>
+				</ul>
+		</div>
+	</span>
+	<!-- Play Instructions -->
+	<span class="page-break">
+		<div class="row doPrint">
+			<div class="printHeader">
+				<span class="title">LETS PLAY</span>
+				<img src="img/logo_bw.svg"
+					 alt="God Hates Charades"
+					 class="printLogo">
+			</div>
+		</div>
+		<div class="row doPrint">
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<h3>What is this?</h3>
+					<p>
+						God Hates Charades is a game where players act out vile scenes in the form of <b>thirty seconds act outs.</b>
+					</p>
+					<p>
+						Players receive points when a guesser <b>guesses their scene</b>. And guessers receive points for <b>guessing</b>.
+					</p>
+					<p>
+						The first player to <b>seven points</b> wins.
+					</p>
+					<h3>What do I do when its my turn?</h3>
+					<p>
+						When it’s your turn you will be presented with two scenes. A scene is made up of two types of cards called an
+						<b>Actor</b> and <b>Scenario</b>. You will have fifteen seconds to pick your scene. Once you choose a scene you
+						will have thirty seconds to get the other players to guess your scene by acting it out. You may use speak, yell,
+						shout, or do whatever it takes to get people to guess the scene.
+					</p>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<h4>What are the rules on acting?</h4>
+					<p>
+						As the Acting  player you can talk during your act out. This is not charades, because charades is lame and god hates
+						it. You can also play multiple characters in the scene. Sometimes it’s necessary to construct an elaborate play
+						in order to get Guessers to understand tthe scene.
+					</p>
+					<p>
+						What you can’t do is say any of the words printed on either the character or scenario card. We also encourage you to
+						act. It’s not very much fun if you just intellectualize the game into a weird fucked up version of million dollar pyramid.
+					</p>
+					<p>The Acting player also gets to decide if the Guessing player is close enough to get points. We call this the “jist” rule.
+						More experienced players can be more strict as they learn the style of the game. If someone guesses your scene you get
+						a point! Hurrah!
+					</p>
+					<h4>What are the rules on guessing?</h4>
+					<p>
+						As the Guessing player you have two rule. Guess the scene and get a point. You must guess in the character scenario format.
+					</p>
+					<p>
+						A correct guess format would be:
+						<i>God gets fired from his job.</i>
+						<i>God gets fired.</i>
+						<i>God is fired.</i>
+					</p>
+					<p>
+						As an example a bad guess would be: 
+						<i>Fired God</i>
+						<i>God Fired</i>
+						or by guessing God and then waiting five minutes and shouting <i>Oh! He’s getting fired!</i>
+					</p>
+				</div>
+		</div>
+	</span>
 	<!-- One suggestion at a time -->
-	<div class="cardContainer"
-			ng-hide="loading || allApproved || !setItems">
+	<div class="cardContainer">
 		
 		<div class="setItem page-break"
 			 ng-repeat="(index, setItem) in setItems | orderBy:'attributes.card.attributes.type'"
@@ -50,6 +134,4 @@
 			<card id="card.id"></card>
 		</div>
 	</div>
-
-
 </div>

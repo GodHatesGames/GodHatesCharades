@@ -13,6 +13,84 @@
 }
 
 @media print {
+	.row {
+		margin: 0;
+	}
+
+	.doPrint {
+		padding-left: 45px;
+		padding-right: 45px;
+
+		.headerCol {
+			padding: 10px;
+		}
+
+		.printHeader {
+			margin: 0 auto;
+			text-align: center;
+			margin-top: 24px;
+		}
+
+		.printHeader .title {
+			font-size: 32px;
+			font-family: 'GodHatesCharades';
+			font-size: 59px;
+			vertical-align: -24px;
+			margin-right: 10px;
+		}
+
+		.printLogo {
+			width: 150px;
+		}
+
+		h3, h4 {
+			text-transform: none;
+			text-align: left;
+			font-family: 'Helvetica Neue';
+			margin-bottom: 5px;
+			font-weight: bold;
+		}
+
+		h3 {
+			font-size: 16px;
+		}
+
+		h4 {
+			font-size: 14px;
+		}
+
+		&.printList {
+			padding-left: 150px;
+			padding-right: 150px;
+		}
+
+		&.printList ul {
+			padding-left: 0;
+			list-style: none;
+		}
+
+		&.printList li {
+			position: relative;
+			padding-left: 0;
+			font-size: 22px;
+			margin-bottom: 10px;
+
+			&:before {
+				position: absolute;
+				// content: '\25A1';
+				content: '\2610';
+				font-size: 42px;
+				line-height: 19px;
+				position: absolute;
+				left: -40px;
+				top: 3px;
+			}
+			&.checked:before {
+				content: '\2611';
+			}
+		}
+	}
+
 	.card .domain {
 		display: block;
 	}
