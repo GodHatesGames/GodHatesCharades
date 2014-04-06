@@ -109,9 +109,12 @@
 		
 		<div class="setItem page-break"
 			 ng-repeat="(index, setItem) in setItems | orderBy:'attributes.card.attributes.type'"
-			 ng-class="cardService.getTypeClass(setItem.attributes.card)"
 			 ng-init="card = setItem.attributes.card">
 			<card id="card.id"></card>
+		</div>
+		<div class="setItem page-break"
+			 ng-repeat="extraItem in extraItems | orderBy:'type'">
+			<card blank-type="extraItem.type"></card>
 		</div>
 	</div>
 </div>

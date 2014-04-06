@@ -45,6 +45,9 @@ app.service('cardService', function($q, $rootScope) {
 				return TYPE_CLASS_CHARACTER;
 			case 1 :
 				return TYPE_CLASS_SCENARIO;
+			default :
+				console.log('unhandled card type:', type);
+				break;
 		}
 	};
 

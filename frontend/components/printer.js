@@ -8,6 +8,24 @@ app.directive('printer', function(cardService, $compile, $window) {
 		controller: function($scope, $element) {
 			// public vars
 			$scope.cardService = cardService;
+			$scope.extraItems = [];
+			var itemsPerPage = 9;
+
+			$scope.$watch('setItems', onSetItemsChanged);
+
+			function onSetItemsChanged(newValue) {
+				if($scope.extraItems.length > 0)
+					$scope.extraItems = [];
+				var extraCount = itemsPerPage - (newValue.length % itemsPerPage);
+				var newItem, itemType;
+				for(var i = 0; i < extraCount; i++) {
+					itemType = i % 2;
+					newItem = {
+						type: itemType
+					};
+					$scope.extraItems.push(newItem);
+				}
+			}
 
 			// Private methods
 			function print() {
@@ -28,10 +46,10 @@ app.directive('printer', function(cardService, $compile, $window) {
 			$scope.guestimatePages = function() {
 				//start with 2 for instructions
 				var guestimation = 2;
-				// ~9 cards per page
-				guestimation += Math.ceil($scope.setItems.length / 9);
+				guestimation += Math.ceil($scope.setItems.length / itemsPerPage);
 				return guestimation;
 			};
+
 
 			// Watch
 		}
