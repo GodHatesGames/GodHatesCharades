@@ -6,6 +6,10 @@ app.controller('setsDetailView', function(sets, $scope, $state, $stateParams, ca
 	$scope.set = sets.byId[$stateParams.id];
 	$scope.setItems =[];
 	$scope.setItemsByCardId = {};
+	$scope.setItemsByCardType = {
+		0: [],
+		1: []
+	};
 	$scope.$on('suggestionAdded', onSuggestionAdded);
 	console.log('set:', $scope.set);
 
@@ -15,7 +19,7 @@ app.controller('setsDetailView', function(sets, $scope, $state, $stateParams, ca
 		$scope.setItems = setItems;
 		$scope.setItemsByCardId = {};
 		_.each(setItems, function(value, index, list) {
-			$scope.setItemsByCardId[value.get('card').id] = value;
+			insertSetItem(value);
 		});
 	});
 
@@ -39,18 +43,29 @@ app.controller('setsDetailView', function(sets, $scope, $state, $stateParams, ca
 			//remove setItem from the list of setItems
 			var index = $scope.setItems.indexOf(setItem);
 			$scope.setItems.splice(index, 1);
-			delete $scope.setItemsByCardId[setItem.get('card').id];
+			var card = setItem.get('card');
+			delete $scope.setItemsByCardId[card.id];
+			var typeArr = $scope.setItemsByCardType[card.get('type')];
+			var typeIndex = typeArr.indexOf(setItem);
+			typeArr.splice(typeIndex, 1);
 		});
 	};
 
+	function insertSetItem(setItem) {
+		var card = setItem.get('card');
+		$scope.setItemsByCardId[card.id] = setItem;
+		var typeArr = $scope.setItemsByCardType[card.get('type')];
+		typeArr.push(setItem);
+	}
+
 	function onSuggestionAdded(event, suggestion) {
+		// if the card isn't already in the set, then created a new set item
 		if(!$scope.setItemsByCardId[suggestion.id]) {
 			sets.addCardToSet(suggestion, $scope.set).
 			then(function onSuccess(newSetItem) {
 				// force the card data to avoid a reload
 				newSetItem.attributes.card = suggestion;
-				$scope.setItems.unshift(newSetItem);
-				$scope.setItemsByCardId[suggestion.id] = newSetItem;
+				insertSetItem(newSetItem);
 			});
 		}
 	}
