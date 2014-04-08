@@ -27,7 +27,7 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 			};
 
 			$scope.loadSuggestions = function() {
-				console.log($state.current.name);
+				// console.log($state.current.name);
 				if(!$scope.loading && !$scope.allLoaded) {
 					var options = {
 						skipIndex: $scope.skipIndex

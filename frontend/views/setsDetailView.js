@@ -16,7 +16,6 @@ app.controller('setsDetailView', function(sets, $scope, $state, $stateParams, ca
 	sets.getCardsForSet($scope.set)
 	.then(function (setItems) {
 		$scope.cardsLoading = false;
-		$scope.setItems = setItems;
 		$scope.setItemsByCardId = {};
 		_.each(setItems, function(value, index, list) {
 			insertSetItem(value);
@@ -53,6 +52,7 @@ app.controller('setsDetailView', function(sets, $scope, $state, $stateParams, ca
 
 	function insertSetItem(setItem) {
 		var card = setItem.get('card');
+		$scope.setItems.push(setItem);
 		$scope.setItemsByCardId[card.id] = setItem;
 		var typeArr = $scope.setItemsByCardType[card.get('type')];
 		typeArr.push(setItem);
