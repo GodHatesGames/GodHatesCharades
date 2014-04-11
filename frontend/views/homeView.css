@@ -472,6 +472,6 @@ only screen and (                min-resolution: 2dppx) {
 
 @media (max-width: 767px) {
 	#homeView .examplesContainer {
-		height: 250px;
+		height: 310px;
 	}
 }
