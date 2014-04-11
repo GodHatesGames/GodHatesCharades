@@ -8,6 +8,16 @@ app.directive('nav', function(parseUser, $uiViewScroll, $state, $timeout) {
 		controller: function($scope, $element) {
 			$scope.parseUser = parseUser;
 
+			$scope.getIt = function() {
+				Leanplum.track('Clicked Get It in main nav');
+				$scope.jumpToElementInView('email_signup', 'home');
+			};
+
+			$scope.launchAd = function() {
+				Leanplum.track('Clicked SignUp ad');
+				$scope.jumpToElementInView('email_signup', 'home');
+			};
+
 			$scope.jumpToElementInView = function(id, location) {
 				// var selector = '#' + id;
 

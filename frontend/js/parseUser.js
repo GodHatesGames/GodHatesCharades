@@ -73,6 +73,9 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location) {
 
 		user.data = userData;
 		user.loggedin = true;
+		//track in leanplum
+		Leanplum.start(user.data.id);
+
 		$rootScope.$apply();
 	}
 

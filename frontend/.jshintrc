@@ -6,10 +6,12 @@
 	"devel": true,
 	"esnext": true,
 	"globals": {
-		"app": false,
+		"app": true,
+		"angular": false,
 		"_": false,
 		"Parse": false,
-		"CONFIG": false
+		"CONFIG": false,
+		"Leanplum": false
 	},
 	"globalstrict": true,
 	"quotmark": true,

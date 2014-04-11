@@ -1,5 +1,5 @@
 'use strict';
-app.controller('homeView', function($scope, campaignService) {
+app.controller('homeView', function($scope, campaignService, $http, $window) {
 	$scope.kickstarter = campaignService.campaignsById.ks2013;
 	$scope.ipad = campaignService.campaignsById.iPad2014;
 
@@ -23,6 +23,10 @@ app.controller('homeView', function($scope, campaignService) {
 	$scope.nextSlide = function() {
 		if ($scope.currentSlide < $scope.maxSlides)
 			$scope.currentSlide++;
+	};
+
+	$scope.submitEmail = function() {
+		Leanplum.track('Signed up for email updates');
 	};
 
 });

@@ -26,9 +26,18 @@ app.run(function($rootScope,
 						parseUser
 			) {
 
+				// setup LeanPlum
+				if (CONFIG.DEV) {
+					Leanplum.setAppIdForDevelopmentMode('w3SnCbOF375MvSbQgWsBcRTfAA2u0mz645nh3FnsVeY', 'dgfBZhe53x045oU6cYPY4E4rzPSmLDS5WaRuGcPdsjc');
+				} else {
+					Leanplum.setAppIdForProductionMode('w3SnCbOF375MvSbQgWsBcRTfAA2u0mz645nh3FnsVeY', 'SvChbjZFtSv8UZTJrGoBYVRjwpCyIA9GX4ntmLLUcMY');
+				}
+
 				// create parse user to be used for suggestions and voting
 				if(Parse.User.current() === null)
 					parseUser.createAnonUser();
+
+				Leanplum.start(parseUser.data.id);
 
 				// Default away value
 				$rootScope.isAway = false;
