@@ -14,7 +14,10 @@ app.directive('nav', function(parseUser, $uiViewScroll, $state, $timeout) {
 				// attempt to switch pages if needed, then jump
 				$state.go(location)
 				.then(function() {
-					jumpIfFound(id);
+					//wait for page to render
+					$timeout(function() {
+						jumpIfFound(id);
+					}, 300);
 				});
 
 				function jumpIfFound(id) {

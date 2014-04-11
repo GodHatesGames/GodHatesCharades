@@ -1,8 +1,27 @@
 #mainNav {
 	/* margin-bottom: 40px; */
-	margin-top: 105px;
+	margin-top: 125px;
 	min-height: 1px;
 	height: 45px;
+	position: relative;
+}
+
+.ad {
+	position: absolute;
+	right: 0;
+	top: -125px;
+	background-color: black;
+	color: white;
+	font-family: 'GodHatesCharades';
+	font-size: 20px;
+	text-transform: uppercase;
+	padding: 10px 25px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.ad b {
+	color: #FF6857;
 }
 
 .nav > li > a {
