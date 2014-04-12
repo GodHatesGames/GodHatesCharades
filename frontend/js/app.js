@@ -37,7 +37,10 @@ app.run(function($rootScope,
 				if(Parse.User.current() === null)
 					parseUser.createAnonUser();
 
-				Leanplum.start(parseUser.data.id);
+				if (parseUser.data) {
+					// only register if a user is available, otherwise parseUser will handle this, TODO: move to parseUser?
+					Leanplum.start(parseUser.data.id);
+				}
 
 				// Default away value
 				$rootScope.isAway = false;
