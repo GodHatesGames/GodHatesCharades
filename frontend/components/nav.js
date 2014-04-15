@@ -11,11 +11,13 @@ app.directive('nav', function(parseUser, $uiViewScroll, $state, $timeout) {
 			$scope.getIt = function() {
 				Leanplum.track('Clicked Get It in main nav');
 				$scope.jumpToElementInView('email_signup', 'home');
+				ga('send', 'event', 'click', 'signup', 'nav');
 			};
 
 			$scope.launchAd = function() {
 				Leanplum.track('Clicked SignUp ad');
 				$scope.jumpToElementInView('email_signup', 'home');
+				ga('send', 'event', 'click', 'signup', 'ad');
 			};
 
 			$scope.jumpToElementInView = function(id, location) {

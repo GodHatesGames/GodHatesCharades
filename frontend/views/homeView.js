@@ -27,6 +27,7 @@ app.controller('homeView', function($scope, campaignService, $http, $window) {
 
 	$scope.submitEmail = function() {
 		Leanplum.track('Signed up for email updates');
+		ga('send', 'event', 'signup', 'newsletter', 'mailchimp');
 	};
 
 });
