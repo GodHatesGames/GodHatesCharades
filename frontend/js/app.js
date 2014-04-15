@@ -23,8 +23,20 @@ app.config(function($locationProvider){
 app.run(function($rootScope,
 						$state,
 						$stateParams,
-						parseUser
+						parseUser,
+						$window
 			) {
+				if($window.location.search.length > 0) {
+					// grab hash and add if missing
+					var hashbang = $window.location.hash;
+					if(hashbang.length === 0)
+						hashbang = '#!/';
+					// rewrite url: localhost/?code=1234#!/ --> localhost/#!/?code=1234
+					$window.location = $window.location.origin +
+									$window.location.pathname +
+									hashbang +
+									$window.location.search;
+				}
 
 				// setup LeanPlum
 				if (CONFIG.DEV) {
