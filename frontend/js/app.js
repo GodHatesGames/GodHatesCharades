@@ -62,6 +62,7 @@ app.run(function($rootScope,
 					if(search.utm_source) {
 
 						var params = _.extend({
+							deviceId: localStorage.getItem('__leanplum_device_id'),
 							action: 'setTrafficSourceInfo',
 							trafficSource: {
 								publisherId: search.utm_source,
