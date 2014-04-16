@@ -97,6 +97,7 @@
 		<script src="js/main.js"></script>
 		<!-- endbuild -->
 
+		<!-- Google Analytics -->
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -107,5 +108,16 @@
 			ga('require', 'linkid', 'linkid.js');
 			ga('send', 'pageview');
 		</script>
+
+		<!-- Mailchimp Goal Tracking -->
+		<script type="text/javascript">
+			var $mcGoal = {'settings':{'uuid':'88c52ae3a3f740d6ede2fcc05','dc':'us3'}};
+			(function() {
+				 var sp = document.createElement('script'); sp.type = 'text/javascript'; sp.async = true; sp.defer = true;
+				sp.src = ('https:' == document.location.protocol ? 'https://s3.amazonaws.com/downloads.mailchimp.com' : 'http://downloads.mailchimp.com') + '/js/goal.min.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sp, s);
+			})(); 
+		</script>
+
 	</body>
 </html>
