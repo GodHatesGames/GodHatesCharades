@@ -5,5 +5,10 @@ var CONFIG = {
 	APP_VERSION: '0.0.3',
 	EXAMPLE_SET_ID: 'JkiS8vM1XW',
 	PRINT_SET_ID: 'JkiS8vM1XW',
-	APP_PLATFORM: 'site_prod'
+	APP_PLATFORM: 'site_prod',
+	LEANPLUM: {
+		appId: 'w3SnCbOF375MvSbQgWsBcRTfAA2u0mz645nh3FnsVeY',
+		clientKey: 'SvChbjZFtSv8UZTJrGoBYVRjwpCyIA9GX4ntmLLUcMY',
+		apiVersion: '1.0.6'
+	}
 };

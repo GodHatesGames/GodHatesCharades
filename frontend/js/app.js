@@ -10,6 +10,7 @@ var app = angular.module('app', ['ng',
 									'textareaNoreturn',
 									'parse.user',
 									'ngSanitize',
+									'restangular',
 									'ngCsv'
 								]);
 console.log('starting app');
@@ -24,7 +25,10 @@ app.run(function($rootScope,
 						$state,
 						$stateParams,
 						parseUser,
-						$window
+						$window,
+						Restangular,
+						$location,
+						$timeout
 			) {
 				if($window.location.search.length > 0) {
 					// grab hash and add if missing
@@ -40,9 +44,9 @@ app.run(function($rootScope,
 
 				// setup LeanPlum
 				if (CONFIG.DEV) {
-					Leanplum.setAppIdForDevelopmentMode('w3SnCbOF375MvSbQgWsBcRTfAA2u0mz645nh3FnsVeY', 'dgfBZhe53x045oU6cYPY4E4rzPSmLDS5WaRuGcPdsjc');
+					Leanplum.setAppIdForDevelopmentMode(CONFIG.LEANPLUM.appId, CONFIG.LEANPLUM.clientKey);
 				} else {
-					Leanplum.setAppIdForProductionMode('w3SnCbOF375MvSbQgWsBcRTfAA2u0mz645nh3FnsVeY', 'SvChbjZFtSv8UZTJrGoBYVRjwpCyIA9GX4ntmLLUcMY');
+					Leanplum.setAppIdForProductionMode(CONFIG.LEANPLUM.appId, CONFIG.LEANPLUM.clientKey);
 				}
 
 				// create parse user to be used for suggestions and voting
@@ -52,6 +56,25 @@ app.run(function($rootScope,
 				if (parseUser.data) {
 					// only register if a user is available, otherwise parseUser will handle this, TODO: move to parseUser?
 					Leanplum.start(parseUser.data.id);
+
+					// track campaign sources
+					var search = $location.search();
+					if(search.utm_source) {
+
+						var params = _.extend({
+							action: 'setTrafficSourceInfo',
+							trafficSource: {
+								publisherId: search.utm_source,
+								publisherName: search.utm_source,
+								publisherSubPublisher: search.utm_source,
+								publisherSubSite: search.utm_source,
+								publisherSubCampaign: search.utm_campaign,
+								publisherSubAdGroup: search.utm_medium,
+								publisherSubAd: search.utm_medium
+							}
+						}, CONFIG.LEANPLUM);
+						Restangular.oneUrl('api', 'https://www.leanplum.com/api').get(params);
+					}
 				}
 
 				// Default away value
