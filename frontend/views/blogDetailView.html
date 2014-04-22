@@ -4,7 +4,12 @@
 		Back
 	</a>
 </div>
-
 <div ng-bind-html="trust(body.asHtml())"
 	 class="post">
+</div>
+	
+<div class="details">
+	<p class="date">
+		<b>{{post.getDate('blog.date') | date:'MMMM d, yyyy'}}</b>
+	</p>
 </div>

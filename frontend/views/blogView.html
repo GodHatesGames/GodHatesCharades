@@ -3,11 +3,18 @@
 		<div ng-repeat="(key, post) in blogPosts"
 		     class="post" 
 		     ng-init="body = post.getStructuredText('blog.body')">
-			<a ui-sref="blog.detail({id: post.id})">
+			<!-- <a ui-sref="blog.detail({id: post.id})">
 				<h2 ng-bind-html="body.getTitle().text">
 				</h2>
-			</a>
-			<div ng-bind-html="body.getFirstParagraph().text">
+			</a> -->
+			<div ng-bind-html="trust(body.asHtml())">
+			</div>
+			<div class="details">
+				<b class="date">{{post.getDate('blog.date') | date:'MMMM d, yyyy'}}</b>
+				<a class="permalink"
+				   ui-sref="blog.detail({id: post.id})">
+					permalink
+				</a>
 			</div>
 		</div>
 	</ui-view>
