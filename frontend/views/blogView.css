@@ -1,0 +1,8 @@
+.blog h2 {
+	text-align: left;
+	color: black;
+}
+.blog .post {
+	margin: 20px 0 25px 0;
+	clear: both;
+}

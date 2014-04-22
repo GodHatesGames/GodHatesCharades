@@ -23,6 +23,7 @@
 		<link rel="stylesheet" href="views/topView.css">
 		<link rel="stylesheet" href="views/rulesView.css">
 		<link rel="stylesheet" href="views/setsView.css">
+		<link rel="stylesheet" href="views/blogView.css">
 		<link rel="stylesheet" href="components/nav.css">
 		<link rel="stylesheet" href="components/examples.css">
 		<link rel="stylesheet" href="components/submit.css">
@@ -38,8 +39,9 @@
 				 ng-class="{loading: isViewLoading}">
 				 <p>Loading...</p>
 			</div>
-			<div ui-view autoscroll='false'
-					 class="content">
+			<div ui-view
+			     autoscroll='false'
+			     class="content">
 			 </div>
 
 			<div class="footer">
@@ -57,6 +59,7 @@
 		<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 		<script src="bower_components/ng-csv/build/ng-csv.js"></script>
 		<script src="bower_components/restangular/src/restangular.js"></script>
+		<script src="bower_components/prismic.io/dist/prismic.io.js"></script>
 		<script src="js/vendor/parse-1.2.16.min.js"></script>
 		<script src="js/vendor/leanplum.js"></script>
 		<script src="js/config.js"></script>
@@ -73,9 +76,12 @@
 		<script src="views/setsView.js"></script>
 		<script src="views/setsCreateView.js"></script>
 		<script src="views/setsDetailView.js"></script>
+		<script src="views/blogView.js"></script>
+		<script src="views/blogDetailView.js"></script>
 		<script src="services/getAllSuggestions.js"></script>
 		<script src="services/getAllSets.js"></script>
 		<script src="services/cloudUtils.js"></script>
+		<script src="services/prismic.js"></script>
 		<script src="filters/property.js"></script>
 		<script src="components/textarea-noreturn.js"></script>
 		<script src="components/card.js"></script>

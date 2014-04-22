@@ -7,6 +7,7 @@ app.directive('nav', function(parseUser, $uiViewScroll, $state, $timeout) {
 		scope: true,
 		controller: function($scope, $element) {
 			$scope.parseUser = parseUser;
+			$scope.$state = $state;
 
 			$scope.getIt = function() {
 				Leanplum.track('Clicked Get It in main nav');

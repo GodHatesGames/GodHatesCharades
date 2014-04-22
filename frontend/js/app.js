@@ -108,7 +108,8 @@ app.run(function($rootScope,
 
 				$rootScope.$on('$stateChangeError', function (ev, to, toParams, from, fromParams, error) {
 					$rootScope.unsetLoading();
-					console.log('WHOOAAAATTT!!! ' + error);
+					console.log('Error transitioning to state', to.controller, error.message);
+					console.log(error.stack);
 				});
 			}
 );

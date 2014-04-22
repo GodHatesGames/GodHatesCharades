@@ -116,4 +116,32 @@ app.config(function($stateProvider,
 		},
 		controller: 'setsDetailView'
 	});
+
+	$stateProvider.state('blog', {
+		url: '/blog',
+		templateUrl: 'views/blogView.html',
+		resolve: {
+			posts: function(prismic) {
+				return prismic
+				.then(function(prismicApi) {
+					return prismicApi.getBlogPosts();
+				});
+			}
+		},
+		controller: 'blogView'
+	});
+
+	$stateProvider.state('blog.detail', {
+		url: '/:id',
+		templateUrl: 'views/blogDetailView.html',
+		resolve: {
+			post: function($stateParams, prismic) {
+				return prismic
+				.then(function(prismicApi) {
+					return prismicApi.getBlogPost($stateParams.id);
+				});
+			}
+		},
+		controller: 'blogDetailView'
+	});
 });

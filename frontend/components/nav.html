@@ -16,8 +16,9 @@
 			</a>
 		</li>
 
-		<li ng-show="parseUser.isBetaUser()">
-			<a href="/blog">Blog</a>
+		<li ng-show="parseUser.isBetaUser()"
+		    ui-sref-active="active">
+			<a ui-sref="blog">Blog</a>
 		</li>
 
 	</ul>
@@ -38,16 +39,17 @@
 
 	<ul class="nav nav-pills nav-justified nav-right">
 
-		<li ng-hide="parseUser.isBetaUser()">
-			<a href="/blog">Blog</a>
+		<li ng-hide="parseUser.isBetaUser()"
+		    ui-sref-active="active">
+			<a ui-sref="blog">Blog</a>
 		</li>
 
 		<li ui-sref-active="active"
-			ng-show="parseUser.isBetaUser()">
+		    ng-show="parseUser.isBetaUser()">
 			<a ui-sref='top'>Cards</a>
 		</li>
 		<li ui-sref-active="active"
-			ng-show="parseUser.isBetaUser()">
+		    ng-show="parseUser.isBetaUser()">
 			<a ui-sref='vote'>Vote</a>
 		</li>
 		<!-- <li ng-class="{ active: $state.includes('top') }"
@@ -57,9 +59,9 @@
 
 		<!-- user stuff -->
 		<li class="dropdown"
-			ng-hide="parseUser.isAnon()">
+		    ng-hide="parseUser.isAnon()">
 			<a class="dropdown-toggle" 
-				data-toggle="dropdown">
+			    data-toggle="dropdown">
 				{{parseUser.data.attributes.name}}
 				<b class="caret"></b>
 			</a>
@@ -72,23 +74,23 @@
 
 				<!-- Admin section -->
 				<li role="presentation" 
-					class="divider"
-					ng-show="parseUser.isAdmin()"></li>
+				    class="divider"
+				    ng-show="parseUser.isAdmin()"></li>
 				<li role="presentation" 
-					class="dropdown-header"
-					ng-show="parseUser.isAdmin()">
+				    class="dropdown-header"
+				    ng-show="parseUser.isAdmin()">
 					ADMIN
 				</li>
 				<li ui-sref-active="active"
-					ng-show="parseUser.isAdmin()">
+				    ng-show="parseUser.isAdmin()">
 					<a ui-sref='admin.moderation'>Moderation</a>
 				</li>
 				<li ui-sref-active="active"
-					ng-show="parseUser.isAdmin()">
+				    ng-show="parseUser.isAdmin()">
 					<a ui-sref='admin.export'>Export</a>
 				</li>
 				<li ui-sref-active="active"
-					ng-show="parseUser.isAdmin()">
+				    ng-show="parseUser.isAdmin()">
 					<a ui-sref='admin.sets'>Set Builder</a>
 				</li>
 
@@ -101,8 +103,8 @@
 		</li>
 		
 		<li class="login" 
-			ui-sref-active="active"
-			ng-show="parseUser.isAnon()">
+		    ui-sref-active="active"
+		    ng-show="parseUser.isAnon()">
 			<a ui-sref='login'>
 				Login
 			</a>

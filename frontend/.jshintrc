@@ -11,7 +11,8 @@
 		"_": false,
 		"Parse": false,
 		"CONFIG": false,
-		"Leanplum": false
+		"Leanplum": false,
+		"Prismic": false
 	},
 	"globalstrict": true,
 	"quotmark": true,

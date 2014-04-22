@@ -1,0 +1,14 @@
+<div id="blogView" class="container blog">
+	<ui-view autoscroll="false">
+		<div ng-repeat="(key, post) in blogPosts"
+		     class="post" 
+		     ng-init="body = post.getStructuredText('blog.body')">
+			<a ui-sref="blog.detail({id: post.id})">
+				<h2 ng-bind-html="body.getTitle().text">
+				</h2>
+			</a>
+			<div ng-bind-html="body.getFirstParagraph().text">
+			</div>
+		</div>
+	</ui-view>
+</div>
