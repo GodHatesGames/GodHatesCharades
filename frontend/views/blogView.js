@@ -1,6 +1,12 @@
 'use strict';
-app.controller('blogView', function(posts, $scope, prismic, $sce) {
+app.controller('blogView', function(posts, $scope, prismic, $sce, $filter) {
 	$scope.trust = $sce.trustAsHtml;
-	$scope.blogPosts = posts.results;
+	//reorder posts
+	$scope.blogPosts = $filter('orderBy')(posts.results, getPostDate, true);
 	$scope.linkResolver = prismic.linkResolver;
+
+	function getPostDate(post) {
+		var date = post.getDate('blog.date');
+		return date.getTime();
+	}
 });
