@@ -121,12 +121,12 @@ app.config(function($stateProvider,
 		url: '/blog',
 		templateUrl: 'views/blogView.html',
 		resolve: {
-			posts: function(prismic) {
+			posts: ['prismic', function(prismic) {
 				return prismic
 				.then(function(prismicApi) {
 					return prismicApi.getBlogPosts();
 				});
-			}
+			}]
 		},
 		controller: 'blogView'
 	});
@@ -135,12 +135,12 @@ app.config(function($stateProvider,
 		url: '/:id',
 		templateUrl: 'views/blogDetailView.html',
 		resolve: {
-			post: function($stateParams, prismic) {
+			post: ['$stateParams', 'prismic', function($stateParams, prismic) {
 				return prismic
 				.then(function(prismicApi) {
 					return prismicApi.getBlogPost($stateParams.id);
 				});
-			}
+			}]
 		},
 		controller: 'blogDetailView'
 	});
