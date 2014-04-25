@@ -7,6 +7,10 @@ app.controller('blogView', function(posts, $scope, prismic, $sce, $filter) {
 
 	function getPostDate(post) {
 		var date = post.getDate('blog.date');
-		return date.getTime();
+		if (date) {
+			return date.getTime();
+		} else {
+			return 0;
+		}
 	}
 });
