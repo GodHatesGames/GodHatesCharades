@@ -1,0 +1,472 @@
+#homeView {
+	padding-left: 60px;
+	padding-right: 60px;
+
+	.row {
+		margin-left: -60px;
+		margin-right: -60px;
+	}
+
+	section {
+		overflow: hidden;
+	}
+
+	@media (max-width: 640px) {
+		padding-left: 10px;
+		padding-right: 10px;
+
+		.row {
+			margin-left: -10px;
+			margin-right: -10px;
+		}
+	}
+
+	@media (max-width: 320px) {
+		padding-left: 10px;
+		padding-right: 10px;
+
+		.row {
+			margin-left: -10px;
+			margin-right: -10px;
+		}
+	}
+}
+
+/* Sections */
+
+/* Section: Examples */
+#homeView section {
+	padding-top: 35px;
+	padding-bottom: 35px;
+
+	&.examples {
+		margin: 0 auto;
+
+		h2 {
+			margin-top: 36px;
+			font-size: 38px;
+			max-width: 600px;
+			margin: 0 auto;
+		}
+
+		p {
+			font-size: 18px;
+			text-align: center;
+			font-style: italic;
+		}
+
+		.youtube {
+			padding: 0;
+		}
+
+		@media (max-width: 767px) {
+			h2 {
+				font-size: 32px;
+				max-width: 500px;
+				margin: 0 auto;
+			}
+		}
+
+		@media (max-width: 640px) {
+			margin-left: -10px;
+			margin-right: -10px;
+
+			.characters{
+				position: relative;
+				left: 12px;
+			}
+
+			.scenarios{
+				position: relative;
+				left: -12px;
+			}
+
+			h2 {
+				font-size: 17px;
+				line-height: 21px;
+				max-width: 260px;
+				margin: 0 auto;
+			}
+
+			p {
+				font-size: 12px;
+				max-width: 250px;
+				margin: 0 auto;
+			}
+		}
+
+		@media (max-width: 320px) {
+			.characters{
+				left: 0px;
+			}
+
+			.scenarios{
+				left: 0px;
+			}
+		}
+
+	/* end &.examples */
+	}
+
+
+	/* Section: Tutorial */
+
+	&.tutorial {
+		overflow: hidden;
+		height: 600px;
+		position: relative;
+		background-color: black;
+		background-image: url(../img/chalk.jpg);
+		padding: 0;
+
+		.nextBtn, .prevBtn {
+			color: white;
+			width: 98px;
+			position: absolute;
+			top: 50%;
+			text-align: center;
+			cursor: pointer;
+			font-family: 'GodHatesCharades';
+			font-size: 20px;
+			text-decoration: none;
+			margin-top: -35px;
+
+			img {
+				width: 100%;
+			}
+		}
+
+		.nextBtn {
+			right: 15px;
+
+			img {
+			-webkit-transform: scaleX(-1);
+			}
+		}
+
+		.prevBtn {
+			left: 15px;
+		}
+
+		.slide {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			-webkit-transition: left .25s ease-out;
+			-moz-transition: left .25s ease-out;
+			-o-transition: left .25s ease-out;
+			-ms-transition: left .25s ease-out;
+			transition: left .25s ease-out;
+
+			&.prev {
+				left: -100%;
+			}
+
+			&.next {
+				left: 100%;
+			}
+
+			.slide-content {
+				background-repeat: no-repeat;
+				background-position: 50% 0;
+				background-size: initial;
+				width: 100%;
+				height: 100%;
+			}
+
+			&.slide-one .slide-content {
+				background-image: url(../img/tutorial_1.png);
+				background-size: 709px 600px;
+			}
+
+			&.slide-two .slide-content {
+				background-image: url(../img/tutorial_2.png);
+				background-size: 739px 600px;
+			}
+
+			&.slide-three .slide-content {
+				background-image: url(../img/tutorial_3.png);
+				background-size: 828px 600px;
+			}
+
+			&.slide-four .slide-content {
+				background-image: url(../img/tutorial_4.png);
+				background-size: 745px 600px;
+			}
+		}
+
+
+		@media
+		only screen and (-webkit-min-device-pixel-ratio: 2),
+		only screen and (   min--moz-device-pixel-ratio: 2),
+		only screen and (     -o-min-device-pixel-ratio: 2/1),
+		only screen and (        min-device-pixel-ratio: 2),
+		only screen and (                min-resolution: 192dpi),
+		only screen and (                min-resolution: 2dppx) {
+
+			.slide-one .slide-content {
+				background-image: url(../img/tutorial_1@2x.png);
+			}
+
+			.slide-two .slide-content {
+				background-image: url(../img/tutorial_2@2x.png);
+			}
+
+			.slide-three .slide-content {
+				background-image: url(../img/tutorial_3@2x.png);
+			}
+
+			.slide-four .slide-content {
+				background-image: url(../img/tutorial_4@2x.png);
+			}
+
+		}
+	
+		@media (max-width: 1200px) {
+		}
+
+		@media (max-width: 992px) {
+			height: 300px;
+
+			.slide .slide-content {
+				background-size: 50%;
+			}
+		}
+
+		@media (max-width: 767px) {
+			height: 270px;
+		}
+
+		@media (max-width: 640px) {
+			height: 280px;
+
+			.slide .slide-content {
+				background-size: 60%;
+			}
+
+			.nextBtn, .prevBtn {
+				width: 50px;
+			}
+		}
+
+		@media (max-width: 350px) {
+			height: 280px;
+
+			.slide .slide-content {
+				background-size: 90%;
+			}
+			
+			.nextBtn, .prevBtn {
+				width: 40px;
+				font-size: 13px;
+				top: 100%;
+				margin-top: -60px;
+			}
+		}
+		
+	/* end &.tutorial */
+	}
+
+/* end #homeView section */
+}
+
+/* Section: Signup */
+
+#homeView section.signup {
+	padding-left: 60px;
+	padding-right: 60px;
+	text-align: center;
+	background: #54C2C8;
+	line-height: 20px;
+	color: white;
+}
+
+#homeView section.signup p {
+	font-family: 'GodHatesCharades';
+	font-size: 28px;
+	line-height: 34px;
+	margin: 0;
+	padding: 0;
+}
+
+#homeView section.signup b {
+	color: black;
+}
+
+#homeView section.signup .form-group {
+	float: left;
+	width: 65%;
+}
+
+#mc-embedded-subscribe-form {
+	position: relative;
+	top: 12px;
+}
+
+#mc-embedded-subscribe-form .email {
+	text-indent: 15px;
+	height: 44px;
+	line-height: 44px;
+	font-weight: bold;
+	margin: 0;
+	border: 0;
+	width: 100%;
+	font-size: 22px;
+}
+
+#mc-embedded-subscribe {
+	margin: 0;
+	background: #FF6751;
+	/* position: relative; */
+	/* left: -4px; */
+	width: 35%;
+	float: left;
+	border-radius: 0;
+}
+
+/* Section: iOS*/
+
+#homeView section.ios .screenshot {
+	max-width: 100%;
+}
+
+#homeView section.ios h2 {
+	font-size: 55px;
+}
+
+#homeView section.ios h3 {
+	font-size: 40px;
+	margin-top: 10px;
+	margin-bottom: 40px;
+}
+
+@media (max-width: 1200px) {
+}
+
+@media (max-width: 992px) {
+
+	#homeView section.signup {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
+
+@media (max-width: 767px) {
+
+	#homeView section.signup .form-group {
+		width: 55%;
+	}
+	#mc-embedded-subscribe {
+		width: 45%;
+	}
+}
+
+@media (max-width: 640px) {
+
+	#homeView section.signup {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+
+	.form-inline {
+		padding: 0;
+	}
+}
+
+
+/* End Sections*/
+
+#kickstarter {
+	text-align: center;
+	background-color: black;
+	color: white;
+}
+
+#kickstarter h3 {
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+#kickstarter .timerNumber {
+	font-family: 'GodHatesCharades';
+	font-size: 75px;
+	text-indent: 4px;
+	line-height: 80px;
+	font-weight: bold;
+}
+
+#kickstarter .timerText {
+	font-family: 'GodHatesCharades';
+	font-size: 19px;
+	text-transform: uppercase;
+}
+
+#kickstarter .btn {
+	width: 25%;
+	margin: 0 auto;
+}
+
+#kickstarter .btn:hover {
+	background-color: #73CE00;
+}
+
+#kickstarter .kickstarter {
+	color: #73CE00;
+}
+
+#homeView .cardTypeLeft, #homeView .cardTypeRight {
+	font-size: 24px;
+	font-family: 'Mimbie';
+	padding-top: 130px;
+}
+
+#homeView .cardTypeLeft {
+	text-align: right;
+	right: -50px;
+}
+
+#homeView .cardTypeRight {
+	text-align: left;
+	left: -45px;
+}
+
+#homeView .cardTypeLeft b, #homeView .cardTypeRight b {
+	font-size: 44px;
+	font-weight: normal;
+	vertical-align: -8px;
+}
+
+#homeView .examplesContainer {
+	padding-bottom: 40px;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+#homeView .rules {
+	color: black;
+}
+
+@media (max-width: 767px) {
+
+	#homeView .rules > div:not(:first-child) {
+		padding-top: 30px;
+	}
+
+	#kickstarter .timerNumber {
+		font-size: 63px;
+		line-height: 65px;
+	}
+
+	#kickstarter .timerText {
+		font-size: 15px;
+	}
+}
+
+
+@media (max-width: 767px) {
+	#homeView .examplesContainer {
+		height: 310px;
+	}
+}
