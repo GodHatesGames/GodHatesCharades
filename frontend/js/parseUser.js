@@ -1,7 +1,7 @@
 'use strict';
 var parseUser = angular.module('parse.user', []);
 
-parseUser.service('parseUser', function factory($rootScope, $q, $location) {
+parseUser.service('parseUser', function factory($rootScope, $q, $location, leanplum) {
 	var user = {
 		loggedin: false,
 		dataloaded: false,
@@ -30,9 +30,12 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location) {
 		user.data = currentUser;
 		cache[user.data.id] = user.data;
 		user.loggedin = true;
+		leanplum.startLeanPlum(user.data)
 	} else {
 		console.log('not logged in');
 		user.loggedin = false;
+		// create parse user to be used for suggestions and voting
+		createAnonUser();
 	}
 
 	function createAnonUser() {
@@ -75,7 +78,7 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location) {
 		user.data = userData;
 		user.loggedin = true;
 		//track in leanplum
-		Leanplum.start(user.data.id);
+		leanplum.startLeanPlum(user.data);
 
 		$rootScope.$apply();
 	}

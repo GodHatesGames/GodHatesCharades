@@ -1,10 +1,22 @@
 <div id="homeView" class="container">
 
-	<section class="examples">
+	<!-- Homepage control -->
+	<section class="examples"
+	         ng-show="leanplum.vars.homeLayout == 'default'">
 		<examples></examples>
 		<h2>Act out the vile and despicable inside all of us.</h2>
 		<p>A fast paced <b>acting</b> and <b>guessing</b> party game of crude humor and embarrassing scenarios.
 		</p>
+	</section>
+	<!-- Homepage variation 1 -->
+	<section class="examples"
+	         ng-show="leanplum.vars.homeLayout == 'new'">
+		<youtube id="leanplum.vars.homeVideo"
+		         class="col-xs-12 col-sm-12 col-md-6 col-lg-6"
+		         aspect-w="16"
+		         fluid="true"
+		         aspect-h="11">
+		</youtube>
 	</section>
 
 	<section class="tutorial row">

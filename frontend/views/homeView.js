@@ -1,7 +1,8 @@
 'use strict';
-app.controller('homeView', function($scope, campaignService, $http, $window) {
+app.controller('homeView', function($scope, campaignService, $http, $window, leanplum) {
 	$scope.kickstarter = campaignService.campaignsById.ks2013;
 	$scope.ipad = campaignService.campaignsById.iPad2014;
+	$scope.leanplum = leanplum;
 
 	$scope.currentSlide = 0;
 	$scope.maxSlides = 3;

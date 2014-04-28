@@ -22,94 +22,57 @@ app.config(function($locationProvider){
 );
 
 app.run(function($rootScope,
-						$state,
-						$stateParams,
-						parseUser,
-						$window,
-						Restangular,
-						$location,
-						$timeout
-			) {
-				if($window.location.search.length > 0) {
-					// grab hash and add if missing
-					var hashbang = $window.location.hash;
-					if(hashbang.length === 0)
-						hashbang = '#!/';
-					// rewrite url: localhost/?code=1234#!/ --> localhost/#!/?code=1234
-					$window.location = $window.location.origin +
-									$window.location.pathname +
-									hashbang +
-									$window.location.search;
-				}
+                 $state,
+                 $stateParams,
+                 parseUser,
+                 $window,
+                 $location,
+                 $timeout
+	) {
+		if($window.location.search.length > 0) {
+			// grab hash and add if missing
+			var hashbang = $window.location.hash;
+			if(hashbang.length === 0)
+				hashbang = '#!/';
+			// rewrite url: localhost/?code=1234#!/ --> localhost/#!/?code=1234
+			$window.location = $window.location.origin +
+							$window.location.pathname +
+							hashbang +
+							$window.location.search;
+		}
 
-				// setup LeanPlum
-				if (CONFIG.DEV) {
-					Leanplum.setAppIdForDevelopmentMode(CONFIG.LEANPLUM.appId, CONFIG.LEANPLUM.clientKey);
-				} else {
-					Leanplum.setAppIdForProductionMode(CONFIG.LEANPLUM.appId, CONFIG.LEANPLUM.clientKey);
-				}
+		// Default away value
+		$rootScope.isAway = false;
 
-				// create parse user to be used for suggestions and voting
-				if(Parse.User.current() === null)
-					parseUser.createAnonUser();
+		$rootScope.$state = $state;
+		$rootScope.$stateParams = $stateParams;
 
-				if (parseUser.data) {
-					// only register if a user is available, otherwise parseUser will handle this, TODO: move to parseUser?
-					Leanplum.start(parseUser.data.id);
+		// loading animation
+		$rootScope.setLoading = function() {
+			$rootScope.isViewLoading = true;
+		};
+		$rootScope.unsetLoading = function() {
+			$rootScope.isViewLoading = false;
+		};
 
-					// track campaign sources
-					var search = $location.search();
-					if(search.utm_source) {
+		$rootScope.isViewLoading = false;
 
-						var params = _.extend({
-							deviceId: localStorage.getItem('__leanplum_device_id'),
-							action: 'setTrafficSourceInfo',
-							trafficSource: {
-								publisherId: search.utm_source,
-								publisherName: search.utm_source,
-								publisherSubPublisher: search.utm_source,
-								publisherSubSite: search.utm_source,
-								publisherSubCampaign: search.utm_campaign,
-								publisherSubAdGroup: search.utm_medium,
-								publisherSubAd: search.utm_medium
-							}
-						}, CONFIG.LEANPLUM);
-						Restangular.oneUrl('api', 'https://www.leanplum.com/api').get(params);
-					}
-				}
-
-				// Default away value
+		$rootScope.$on('$stateChangeStart', function(ev, to, toParams, from, fromParams) {
+			$rootScope.setLoading();
+			if(to.name === 'home')
 				$rootScope.isAway = false;
+			else
+				$rootScope.isAway = true;
+		});
 
-				$rootScope.$state = $state;
-				$rootScope.$stateParams = $stateParams;
+		$rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+			$rootScope.unsetLoading();
+		});
 
-				// loading animation
-				$rootScope.setLoading = function() {
-					$rootScope.isViewLoading = true;
-				};
-				$rootScope.unsetLoading = function() {
-					$rootScope.isViewLoading = false;
-				};
-
-				$rootScope.isViewLoading = false;
-
-				$rootScope.$on('$stateChangeStart', function(ev, to, toParams, from, fromParams) {
-					$rootScope.setLoading();
-					if(to.name === 'home')
-						$rootScope.isAway = false;
-					else
-						$rootScope.isAway = true;
-				});
-
-				$rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
-					$rootScope.unsetLoading();
-				});
-
-				$rootScope.$on('$stateChangeError', function (ev, to, toParams, from, fromParams, error) {
-					$rootScope.unsetLoading();
-					console.log('Error transitioning to state', to.controller, error.message);
-					console.log(error.stack);
-				});
-			}
+		$rootScope.$on('$stateChangeError', function (ev, to, toParams, from, fromParams, error) {
+			$rootScope.unsetLoading();
+			console.log('Error transitioning to state', to.controller, error.message);
+			console.log(error.stack);
+		});
+	}
 );
