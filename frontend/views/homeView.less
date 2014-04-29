@@ -1,3 +1,43 @@
+.mailchimp {
+	position: relative;
+	top: 12px;
+}
+
+.mailchimp .email {
+	text-indent: 15px;
+	height: 44px;
+	line-height: 44px;
+	font-weight: bold;
+	margin: 0;
+	border: 0;
+	width: 100%;
+	font-size: 22px;
+}
+
+.mailchimp .submit {
+	margin: 0;
+	background: #FF6751;
+	width: 35%;
+	float: left;
+	border-radius: 0;
+}
+
+.mailchimp .form-group {
+	float: left;
+	width: 65%;
+}
+
+@media (max-width: 767px) {
+
+	.mailchimp .form-group {
+		width: 55%;
+	}
+	
+	.mailchimp .submit {
+		width: 45%;
+	}
+}
+
 #homeView {
 	padding-left: 60px;
 	padding-right: 60px;
@@ -55,10 +95,6 @@
 			font-style: italic;
 		}
 
-		.youtube {
-			padding: 0;
-		}
-
 		@media (max-width: 767px) {
 			h2 {
 				font-size: 32px;
@@ -106,6 +142,15 @@
 		}
 
 	/* end &.examples */
+	}
+
+	&.quickInfo {
+		.youtube {
+			padding: 0;
+		}
+		.mailchimp {
+			width: 100%;
+		}
 	}
 
 
@@ -295,37 +340,6 @@
 	color: black;
 }
 
-#homeView section.signup .form-group {
-	float: left;
-	width: 65%;
-}
-
-#mc-embedded-subscribe-form {
-	position: relative;
-	top: 12px;
-}
-
-#mc-embedded-subscribe-form .email {
-	text-indent: 15px;
-	height: 44px;
-	line-height: 44px;
-	font-weight: bold;
-	margin: 0;
-	border: 0;
-	width: 100%;
-	font-size: 22px;
-}
-
-#mc-embedded-subscribe {
-	margin: 0;
-	background: #FF6751;
-	/* position: relative; */
-	/* left: -4px; */
-	width: 35%;
-	float: left;
-	border-radius: 0;
-}
-
 /* Section: iOS*/
 
 #homeView section.ios .screenshot {
@@ -350,16 +364,6 @@
 	#homeView section.signup {
 		padding-left: 20px;
 		padding-right: 20px;
-	}
-}
-
-@media (max-width: 767px) {
-
-	#homeView section.signup .form-group {
-		width: 55%;
-	}
-	#mc-embedded-subscribe {
-		width: 45%;
 	}
 }
 

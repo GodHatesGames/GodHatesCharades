@@ -5,6 +5,8 @@ app.directive('examples', function(cardService, $timeout) {
 		templateUrl: 'components/examples.html',
 		replace: true,
 		link: function($scope, $element) {
+			// init
+			$scope.loadExamples();
 		},
 		controller: function($scope, $element) {
 			// private vars
@@ -16,12 +18,9 @@ app.directive('examples', function(cardService, $timeout) {
 			$scope.characters = [];
 			$scope.scenarios = [];
 
-			// init
-			loadExamples();
-
 			// Private methods
 
-			function loadExamples() {
+			$scope.loadExamples = function() {
 				if(!$scope.loading) {
 					$scope.loading = true;
 					
@@ -36,7 +35,7 @@ app.directive('examples', function(cardService, $timeout) {
 						}
 					);
 				}
-			}
+			};
 
 			function onExamplesLoaded(examples) {
 				cardService.cache(examples.zero);

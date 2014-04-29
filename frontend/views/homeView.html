@@ -1,23 +1,8 @@
 <div id="homeView" class="container">
 
 	<!-- Homepage control -->
-	<section class="examples"
-	         ng-show="leanplum.vars.homeLayout == 'default'">
-		<examples></examples>
-		<h2>Act out the vile and despicable inside all of us.</h2>
-		<p>A fast paced <b>acting</b> and <b>guessing</b> party game of crude humor and embarrassing scenarios.
-		</p>
-	</section>
-	<!-- Homepage variation 1 -->
-	<section class="examples"
-	         ng-show="leanplum.vars.homeLayout == 'new'">
-		<youtube id="leanplum.vars.homeVideo"
-		         class="youtube col-xs-12 col-sm-12 col-md-6 col-lg-6"
-		         aspect-w="16"
-		         fluid="true"
-		         aspect-h="11">
-		</youtube>
-	</section>
+	<span ng-include="mainLayout">
+	</span>
 
 	<section class="tutorial row">
 		<div class="slide slide-one"
@@ -57,34 +42,8 @@
 		<p class="col-md-6">
 			SUBSCRIBE TO RECEIVE UPDATES + THE <b>PRINT ‘N PLAY</b> EDITION!
 		</p>
-		<form action="http://godhatescharades.us3.list-manage.com/subscribe/post?u=88c52ae3a3f740d6ede2fcc05&amp;id=b6575d0e61"
-			  method="post"
-			  id="mc-embedded-subscribe-form"
-			  name="mc-embedded-subscribe-form"
-			  target="_blank"
-			  class="form-inline col-xs-offset-0 col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-6"
-			  novalidate
-			  action-form="submitEmail()">
-			<div class="form-group">
-				<label for="mce-EMAIL" 
-					   class="sr-only">
-					Email Address
-				</label>
-				<input type="email" 
-					   value="" 
-					   name="EMAIL" 
-					   class="required email" 
-					   id="mce-EMAIL" 
-					   placeholder="Enter email">
-			</div>
-			<input type="submit" 
-				   value="Subscribe" 
-				   name="subscribe" 
-				   id="mc-embedded-subscribe" 
-				   class="btn btn-success">
-			<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-			<div style="position: absolute; left: -5000px;"><input type="text" name="b_88c52ae3a3f740d6ede2fcc05_b6575d0e61" value=""></div>
-		</form>
+		<mailchimp class="form-inline col-xs-offset-0 col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-6">
+		</mailchimp>
 	</section>
 	<!--End mc_embed_signup-->
 
