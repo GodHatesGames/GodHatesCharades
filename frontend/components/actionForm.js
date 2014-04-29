@@ -14,6 +14,7 @@ app.directive('actionForm', function($timeout) {
 
 			function onSubmit() {
 				scope.$eval(attr.actionForm);
+				scope.$digest();
 			}
 		}
 	};
