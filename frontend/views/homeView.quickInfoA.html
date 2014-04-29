@@ -13,11 +13,12 @@
 			A fast paced <b>acting</b> and <b>guessing</b> party game of crude humor and embarrassing scenarios.
 		</p>
 		
-		<mailchimp class="form-inline">
+		<mailchimp class="form-inline"
+		           action-form="submitEmail()">
 		</mailchimp>
 		<h2>THEN</h2>
 		<a class="btn btn-success"
-		   ng-disabled="true">
+		   ng-disabled="!emailSubmitted">
 			DOWNLOAD
 		</a>
 	</div>

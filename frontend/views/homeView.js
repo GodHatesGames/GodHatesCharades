@@ -4,6 +4,7 @@ app.controller('homeView', function($scope, campaignService, $http, $window, lea
 	$scope.ipad = campaignService.campaignsById.iPad2014;
 	$scope.leanplum = leanplum;
 	$scope.mainLayout = undefined;
+	$scope.emailSubmitted = false;
 
 	$scope.$watch('leanplum.vars.homeLayout', function(newValue) {
 		if(newValue) {
@@ -34,6 +35,7 @@ app.controller('homeView', function($scope, campaignService, $http, $window, lea
 	};
 
 	$scope.submitEmail = function() {
+		$scope.emailSubmitted = true;
 		Leanplum.track('Signed up for email updates');
 		ga('send', 'event', 'signup', 'newsletter', 'mailchimp');
 	};

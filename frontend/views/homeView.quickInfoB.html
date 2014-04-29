@@ -13,11 +13,12 @@
 			Full of crude humor and embarrassing scenarios. Act out the vile and despicable inside all of us.
 		</p>
 		
-		<mailchimp class="form-inline">
+		<mailchimp class="form-inline"
+		           action-form="submitEmail()">
 		</mailchimp>
 
 		<a class="btn btn-success"
-		   ng-disabled="true">
+		   ng-disabled="!emailSubmitted">
 			DOWNLOAD
 		</a>
 		<p class="subscribe">
