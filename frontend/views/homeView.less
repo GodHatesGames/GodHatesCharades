@@ -1,12 +1,16 @@
+/* MailChimp */
+@mailchimp-height: 44;
 .mailchimp {
+	@offset: 12;
 	position: relative;
-	top: 12px;
+	top: unit(@offset, px);
+	height: unit(@mailchimp-height + @offset, px);
 }
 
 .mailchimp .email {
 	text-indent: 15px;
-	height: 44px;
-	line-height: 44px;
+	height: unit(@mailchimp-height, px);
+	line-height: unit(@mailchimp-height, px);
 	font-weight: bold;
 	margin: 0;
 	border: 0;
@@ -37,6 +41,7 @@
 		width: 45%;
 	}
 }
+/* End MailChimp */
 
 #homeView {
 	padding-left: 60px;
@@ -144,12 +149,17 @@
 	/* end &.examples */
 	}
 
-	&.quickInfo {
+	&.quickInfoA {
+		h2 {
+			font-size: 14px;
+		}
+
 		.youtube {
 			padding: 0;
 		}
 		.mailchimp {
 			width: 100%;
+			margin-bottom: 25px; 
 		}
 	}
 
