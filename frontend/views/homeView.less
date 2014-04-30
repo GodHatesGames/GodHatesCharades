@@ -151,7 +151,14 @@
 	/* end &.examples */
 	}
 
-	&.quickInfoA, &.quickInfoB {
+	&.videoUnlock, &.examplesUnlock {
+		@media (max-width: 640px) {
+			& > div {
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+
 		h2 {
 			font-size: 24px;
 			line-height: 27px;
@@ -161,6 +168,7 @@
 		.youtube {
 			padding: 0;
 		}
+		
 		.mailchimp {
 			width: 100%;
 			margin-bottom: 25px; 
@@ -295,7 +303,7 @@
 			height: 300px;
 
 			.slide .slide-content {
-				background-size: 50%;
+				background-size: 50% !important;
 			}
 		}
 
@@ -307,7 +315,7 @@
 			height: 280px;
 
 			.slide .slide-content {
-				background-size: 60%;
+				background-size: 60% !important;
 			}
 
 			.nextBtn, .prevBtn {
@@ -319,7 +327,7 @@
 			height: 280px;
 
 			.slide .slide-content {
-				background-size: 90%;
+				background-size: 90% !important;
 			}
 			
 			.nextBtn, .prevBtn {

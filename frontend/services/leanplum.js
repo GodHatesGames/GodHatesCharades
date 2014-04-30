@@ -46,8 +46,11 @@ app.service('leanplum', function($q, $location, Restangular, $rootScope) {
 	}
 
 	Leanplum.setVariables({
+		homeHeadline: 'Act out the vile and despicable inside all of us.',
+		homeSubtitle: 'A fast paced acting and guessing party game of crude humor and embarrassing scenarios.',
+		homeDownloadCopy: 'Download Print N\' Play PDF',
 		homeLayout: 'default',
-		homeVideo: '0Auj1VaisdY'
+		homeVideo: ''
 	});
 
 	return leanplumMethods;

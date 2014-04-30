@@ -1,7 +1,7 @@
 'use strict';
 app.directive('youtube', function($rootScope, $timeout) {
 	return {
-		restrict: 'E',
+		restrict: 'EA',
 		scope: {
 			videoId: '=id',
 			aspectW: '@aspectW',
@@ -32,7 +32,7 @@ app.directive('youtube', function($rootScope, $timeout) {
 			setIframe($scope.videoId);
 
 			function setIframe(videoId) {
-				if (videoId !== null && videoId !== undefined) {
+				if (videoId !== null && videoId !== undefined && videoId !== '') {
 					// clear old iframes
 					$element.empty();
 					//add new iframe
