@@ -34,10 +34,11 @@ app.controller('homeView', function($scope, campaignService, $http, $window, lea
 			$scope.currentSlide++;
 	};
 
-	$scope.submitEmail = function() {
+	$scope.submitEmail = function(fromLabel) {
 		$scope.emailSubmitted = true;
 		Leanplum.track('Signed up for email updates');
-		ga('send', 'event', 'signup', 'newsletter', 'mailchimp');
+		ga('send', 'event', 'signup', 'newsletter', fromLabel);
+		_pa.track('signup_newletter');
 	};
 
 });
