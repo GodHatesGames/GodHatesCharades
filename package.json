@@ -27,11 +27,11 @@
     "grunt-svgmin": "^0.4.0",
     "grunt-contrib-less": "^0.10.0",
     "grunt-contrib-imagemin": "v0.4.1",
+    "grunt-concurrent": "~0.4.2",
     "express": "~3.4.8"
   },
   "devDependencies": {
     "grunt-contrib-watch": "~0.5.3",
-    "grunt-nodemon": "~0.1.2",
-    "grunt-concurrent": "~0.4.2"
+    "grunt-nodemon": "~0.1.2"
   }
 }
