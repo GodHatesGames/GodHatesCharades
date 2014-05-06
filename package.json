@@ -4,7 +4,7 @@
   "build": 1,
   "scripts": {
     "start": "node dist/api/server.js",
-    "postinstall": ""
+    "postinstall": "./node_modules/grunt-cli/bin/grunt dist"
   },
   "engines": {
     "node": "0.10.x",
