@@ -1,28 +1,32 @@
 <div id="blogView" class="blog">
 	<ui-view autoscroll="false">
-		<div ng-repeat="(key, post) in blogPosts"
-		     class="post" 
-		     ng-init="body = post.getStructuredText('blog.body')">
-			<!-- <a ui-sref="blog.detail({id: post.id})">
-				<h2 ng-bind-html="body.getTitle().text">
-				</h2>
-			</a> -->
-			<!-- post main image -->
-			<div ng-init="mainImage = post.getImageView('blog.image', 'main')"
-			     ng-show="mainImage">
-				<img ng-src="{{mainImage.url}}">
+		<div class="postsContainer">
+			<div ng-repeat="(key, post) in blogPosts"
+			     class="post" 
+			     ng-init="body = post.getStructuredText('blog.body')">
+				<!-- <a ui-sref="blog.detail({id: post.id})">
+					<h2 ng-bind-html="body.getTitle().text">
+					</h2>
+				</a> -->
+				<!-- post main image -->
+				<div ng-init="mainImage = post.getImageView('blog.image', 'main')"
+				     ng-show="mainImage">
+					<img ng-src="{{mainImage.url}}">
+				</div>
+				<!-- post title + body -->
+				<div ng-if="body">
+					<div ng-bind-html="trust(body.asHtml())">
+					</div>
+				</div>
+				<div class="details">
+					<b class="date">{{post.getDate('blog.date') | date:'MMMM d, yyyy'}}</b>
+					<a class="permalink"
+					   ui-sref="blog.detail({id: post.id})">
+						permalink
+					</a>
+				</div>
+				<hr>
 			</div>
-			<!-- post title + body -->
-			<div ng-bind-html="trust(body.asHtml())">
-			</div>
-			<div class="details">
-				<b class="date">{{post.getDate('blog.date') | date:'MMMM d, yyyy'}}</b>
-				<a class="permalink"
-				   ui-sref="blog.detail({id: post.id})">
-					permalink
-				</a>
-			</div>
-			<hr>
-		</div>
+		</div class="postsContainer">
 	</ui-view>
 </div>
