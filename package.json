@@ -4,7 +4,7 @@
   "build": 1,
   "scripts": {
     "start": "node dist/api/server.js",
-    "postinstall": "bower install && ./node_modules/grunt-cli/bin/grunt dist"
+    "postinstall": "bower install && ./node_modules/grunt-cli/bin/grunt prod"
   },
   "engines": {
     "node": "0.10.x",
