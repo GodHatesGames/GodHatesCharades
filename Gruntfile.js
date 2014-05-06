@@ -326,7 +326,7 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('dev', [
-		'buildDev',
+		'buildCss',
 		'concurrent:dev'
 	]);
 
@@ -342,7 +342,7 @@ module.exports = function(grunt) {
 	// 	'distBuildFrontend'
 	// ]);
 
-	grunt.registerTask('buildDev', [
+	grunt.registerTask('buildCss', [
 		'buildBootstrap',
 		'less:main',
 		'less:components',
@@ -359,12 +359,10 @@ module.exports = function(grunt) {
 		'copy:stageApi'
 	]);
 	grunt.registerTask('prepareFrontend', [
+		'buildCss',
 		'copy:stageFrontend',
 		'imagemin:stage',
-		'svgmin:stage',
-		'less:main',
-		'less:components',
-		'less:views'
+		'svgmin:stage'
 	]);
 
 	grunt.registerTask('distBuildApi', [
