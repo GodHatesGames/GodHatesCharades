@@ -6,7 +6,6 @@ Parse.initialize(CONFIG.PARSE_APP_ID, CONFIG.PARSE_JS_KEY);
 var app = angular.module('app', ['ng',
 									'ui.router',
 									'ui.bootstrap',
-									'infinite-scroll',
 									'textareaNoreturn',
 									'parse.user',
 									'ngSanitize',

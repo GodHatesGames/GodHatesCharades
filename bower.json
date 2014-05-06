@@ -19,7 +19,6 @@
     "angular": "~1.2.0",
     "bootstrap": "~3.0.0",
     "angular-ui-router": "#0.2.8-bowratic-tedium",
-    "ngInfiniteScroll": "https://github.com/x1024/ngInfiniteScroll.git",
     "angular-bootstrap": "~0.10.0",
     "ng-csv": "~0.0.6",
     "animate.css": "~3.1.0",
