@@ -15,8 +15,8 @@
     "tests"
   ],
   "dependencies": {
-    "underscore": "~1.5.2",
-    "angular": "~1.2.0",
+    "underscore": "~1.6.0",
+    "angular": "~1.2.16",
     "bootstrap": "~3.0.0",
     "angular-ui-router": "~0.2.10",
     "angular-bootstrap": "~0.10.0",
