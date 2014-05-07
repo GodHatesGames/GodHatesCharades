@@ -10,7 +10,9 @@ var staticFilePath = path.join(__dirname, files);
 console.log('staticFilePath:', staticFilePath);
 
 var server = express(); // better instead
+server.engine('html', require('ejs').renderFile);
 server.set('views', staticFilePath);
+server.set('view engine', 'html');
 server.use(express.logger());
 server.use(express.bodyParser());
 
