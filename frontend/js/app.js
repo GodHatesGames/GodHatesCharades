@@ -15,7 +15,7 @@ var app = angular.module('app', ['ng',
 console.log('starting app');
 
 app.config(function($locationProvider){
-		$locationProvider.html5Mode(false);
+		$locationProvider.html5Mode(true);
 		$locationProvider.hashPrefix('!');
 	}
 );
@@ -28,18 +28,6 @@ app.run(function($rootScope,
                  $location,
                  $timeout
 	) {
-		if($window.location.search.length > 0) {
-			// grab hash and add if missing
-			var hashbang = $window.location.hash;
-			if(hashbang.length === 0)
-				hashbang = '#!/';
-			// rewrite url: localhost/?code=1234#!/ --> localhost/#!/?code=1234
-			$window.location = $window.location.origin +
-							$window.location.pathname +
-							hashbang +
-							$window.location.search;
-		}
-
 		// Default away value
 		$rootScope.isAway = false;
 
