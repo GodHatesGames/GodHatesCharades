@@ -29,8 +29,8 @@
     "grunt-concurrent": "~0.4.2",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-nodemon": "~0.1.2",
-    "express": "~3.4.8"
+    "express": "~3.4.8",
+    "ejs": "^1.0.0"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
