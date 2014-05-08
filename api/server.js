@@ -16,7 +16,6 @@ server.set('view engine', 'html');
 server.use(express.logger());
 server.use(express.bodyParser());
 
-server.use('/print', express.static(staticFilePath + '/print'));
 server.use(express.static(staticFilePath));
 server.get('/*', function(req, res) {
 	res.render('index');
