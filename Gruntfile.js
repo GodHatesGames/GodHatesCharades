@@ -138,7 +138,7 @@ module.exports = function(grunt) {
 					{
 						expand: true,
 						cwd: 'frontend/',
-						// Match all files except alt-config files and svg
+						// Match all files except alt-config files and img
 						src: ['**', '!js/config**', '!img'],
 						dest: '.tmp/stage/frontend/'
 					}
@@ -190,6 +190,7 @@ module.exports = function(grunt) {
 							'css/style.*.css',
 							'img/**',
 							'fonts/**',
+							'print/**',
 							'index.html',
 							'*.*'
 						],
