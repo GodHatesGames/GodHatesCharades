@@ -17,7 +17,7 @@ server.use(express.logger());
 server.use(express.bodyParser());
 
 server.use(express.static(staticFilePath));
-server.use('/print', express.static(staticFilePath));
+server.use('/print/*', express.static(staticFilePath));
 server.get('/*', function(req, res) {
 	res.render('index');
 });
