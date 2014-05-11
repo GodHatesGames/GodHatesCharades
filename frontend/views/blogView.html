@@ -21,7 +21,7 @@
 				<div class="details">
 					<b class="date">{{post.getDate('blog.date') | date:'MMMM d, yyyy'}}</b>
 					<a class="permalink"
-					   ui-sref="blog.detail({id: post.id})">
+					   ui-sref="blog.detail({id: post.id, slug: post.slug})">
 						permalink
 					</a>
 				</div>

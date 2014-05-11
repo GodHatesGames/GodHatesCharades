@@ -129,7 +129,7 @@ app.config(function($stateProvider,
 	});
 
 	$stateProvider.state('blog.detail', {
-		url: '/:id',
+		url: '/:id/:slug',
 		templateUrl: 'views/blogDetailView.html',
 		resolve: {
 			post: ['$stateParams', 'prismic', function($stateParams, prismic) {
