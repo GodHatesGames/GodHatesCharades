@@ -24,7 +24,8 @@
     "animate.css": "~3.1.0",
     "restangular": "~1.3.1",
     "angular-sanitize": "~1.2.16",
-    "prismic.io": "~1.0.10"
+    "prismic.io": "~1.0.10",
+    "ng_html_compile": "https://github.com/francisbouvier/ng_html_compile.git"
   },
   "resolutions": {
     "angular": ">=1.3"

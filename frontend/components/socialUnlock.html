@@ -1,0 +1,26 @@
+<div class="socialUnlock">
+	<img ng-src="{{imgUrl}}"
+	     ng-show="imgUrl"
+	     alt="{{title}}"
+	     class="pull-left">
+	<div class="title">{{title}}</div>
+
+	<!-- download reveal -->
+	<div class="download"
+	     ng-show="shared && downloadUrl">
+		<p>Thanks for sharing!</p>
+		<a ng-href="{{downloadUrl}}"
+		   class="btn btn-success"
+		   target="_blank">
+			Download it!
+		</a>
+	</div>
+	<div class="clearfix"></div>
+	<p ng-show="shared">Please keep spreading the word:</p>
+	<div class="addthis_toolbox addthis_default_style">
+		<a class="addthis_button_facebook_like"></a>
+		<a class="addthis_button_tweet"
+		   addthis:title="{{twitterMessage}}">
+		</a>
+	</div>
+</div>

@@ -1,6 +1,5 @@
 'use strict';
-app.controller('blogDetailView', function(post, $scope, $sce) {
-	$scope.trust = $sce.trustAsHtml;
+app.controller('blogDetailView', function(post, $scope, $sce, $compile) {
 	$scope.post = post;
-	$scope.body = post.getStructuredText('blog.body');
+	$scope.bodyHtml = post.getStructuredText('blog.body').asHtml();
 });

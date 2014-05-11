@@ -10,6 +10,7 @@ var app = angular.module('app', ['ng',
 									'parse.user',
 									'ngSanitize',
 									'restangular',
+									'ngHtmlCompile',
 									'ngCsv'
 								]);
 console.log('starting app');
