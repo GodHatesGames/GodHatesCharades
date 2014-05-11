@@ -122,10 +122,7 @@ app.config(function($stateProvider,
 		templateUrl: 'views/blogView.html',
 		resolve: {
 			posts: ['prismic', function(prismic) {
-				return prismic
-				.then(function(prismicApi) {
-					return prismicApi.getBlogPosts();
-				});
+				return prismic.getBlogPosts();
 			}]
 		},
 		controller: 'blogView'
@@ -136,10 +133,7 @@ app.config(function($stateProvider,
 		templateUrl: 'views/blogDetailView.html',
 		resolve: {
 			post: ['$stateParams', 'prismic', function($stateParams, prismic) {
-				return prismic
-				.then(function(prismicApi) {
-					return prismicApi.getBlogPost($stateParams.id);
-				});
+				return prismic.getDocumentById($stateParams.id);
 			}]
 		},
 		controller: 'blogDetailView'

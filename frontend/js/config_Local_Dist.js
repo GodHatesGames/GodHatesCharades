@@ -12,5 +12,8 @@ var CONFIG = {
 		appId: 'w3SnCbOF375MvSbQgWsBcRTfAA2u0mz645nh3FnsVeY',
 		clientKey: 'dgfBZhe53x045oU6cYPY4E4rzPSmLDS5WaRuGcPdsjc',
 		apiVersion: '1.0.6'
+	},
+	PRISMIC: {
+		API_ENDPOINT: 'https://godhatescharades.prismic.io/api'
 	}
 };

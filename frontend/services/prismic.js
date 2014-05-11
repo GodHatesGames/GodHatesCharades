@@ -1,65 +1,33 @@
 'use strict';
-app.service('prismic', function($q) {
-	var deferred = $q.defer();
+app.service('prismic', function(Prismic, $q) {
 	var cachedDocs = {};
 	var prismicMethods = {
 		getBlogPosts: _getBlogPosts,
-		getBlogPost: _getBlogPost,
+		getDocumentById: _getDocumentById,
 		linkResolver: _linkResolver
 	};
 	// console.log('instantiate sets');
-	var prismicApi;
-	Prismic.Api('https://godhatescharades.prismic.io/api', onApiConnected);
-
-	function onApiConnected(err, api) {
-		prismicApi = api;
-		deferred.resolve(prismicMethods);
-	}
+	// Prismic.Api('https://godhatescharades.prismic.io/api', onApiConnected);
 
 	function _getBlogPosts() {
-		var deferred = $q.defer();
-
-		// fetch all blog posts
-		prismicApi
-		.form('blog')
-		.ref(prismicApi.master())
-		.submit(function(err, documents) {
-			if(err) {
-				deferred.reject(err);
-				return;
-			}
-			// add docs to cache
-			_.each(documents.results, function(post, index) {
-				if(post.id)
-					cachedDocs[post.id] = post;
-			});
-			deferred.resolve(documents);
-		});
-
-		return deferred.promise;
+		// Prismic.bookmark(bookmarkString)
+		return Prismic.documentTypes('blog');
 	}
 
-	function _getBlogPost(id) {
-		var deferred = $q.defer();
+	function _getDocumentById(id) {
 		if (cachedDocs[id]) {
+			// return cached document data if needed
+			var deferred = $q.defer();
 			deferred.resolve(cachedDocs[id]);
+			return deferred.promise;
 		} else {
-			console.log('getBlogPost:', id);
-			prismicApi
-			.form('blog')
-			.query('[[:d = at(document.id, "' + id + '")]]')
-			.ref(prismicApi.master())
-			.submit(function(err, documents) {
-				if(err) {
-					deferred.reject(err);
-					return;
-				}
-				var post = documents.results[0];
-				cachedDocs[post.id] = post;
-				deferred.resolve(post);
+			return Prismic.document(id)
+			.then(function(document) {
+				// cache the document data
+				cachedDocs[document.id] = document;
+				return document;
 			});
 		}
-		return deferred.promise;
 	}
 
 	function _linkResolver(ctx, documentLink) {
@@ -72,5 +40,5 @@ app.service('prismic', function($q) {
 }
 
 
-	return deferred.promise;
+	return prismicMethods;
 });

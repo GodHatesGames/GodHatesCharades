@@ -11,13 +11,21 @@ var app = angular.module('app', ['ng',
 									'ngSanitize',
 									'restangular',
 									'ngHtmlCompile',
+									'prismic.io',
 									'ngCsv'
 								]);
 console.log('starting app');
 
-app.config(function($locationProvider){
+app.config(function($locationProvider, PrismicProvider){
 		$locationProvider.html5Mode(true);
 		$locationProvider.hashPrefix('!');
+
+		if (CONFIG.PRISMIC) {
+			PrismicProvider.setApiEndpoint(CONFIG.PRISMIC.API_ENDPOINT);
+		}
+	    PrismicProvider.setLinkResolver(function(ctx, doc) {
+	        return 'detail.html?id=' + doc.id + '&slug=' + doc.slug + ctx.maybeRefParam;
+	    });
 	}
 );
 
