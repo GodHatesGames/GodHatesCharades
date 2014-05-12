@@ -212,6 +212,18 @@ module.exports = function(grunt) {
 						dest: 'dist/frontend/'
 					}
 				]
+			},
+			// app files, node app files
+			app: {
+				files: [
+					{
+						// frontend
+						expand: true,
+						cwd: './',
+						src: ['package.json', 'Procfile'],
+						dest: 'dist/'
+					}
+				]
 			}
 		},
 		usemin: {
@@ -361,6 +373,7 @@ module.exports = function(grunt) {
 		'clean:stage',
 		'buildApi',
 		'prodBuildFrontend',
+		'copy:app',
 		'buildcontrol:prod'
 	]);
 
@@ -368,6 +381,7 @@ module.exports = function(grunt) {
 		'clean:stage',
 		'buildApi',
 		'distBuildFrontend',
+		'copy:app',
 		'buildcontrol:stage'
 	]);
 
