@@ -359,15 +359,15 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('deploy:prod', [
 		'clean:stage',
-		'prodBuildApi',
+		'buildApi',
 		'prodBuildFrontend',
-		'buildcontrol: prod'
+		'buildcontrol:prod'
 	]);
 
 	grunt.registerTask('deploy:stage', [
 		'clean:stage',
-		'prodBuildApi',
-		'prodBuildFrontend',
+		'buildApi',
+		'distBuildFrontend',
 		'buildcontrol:stage'
 	]);
 
@@ -378,7 +378,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('dist', [
 		'clean:stage',
-		'distBuildApi',
+		'buildApi',
 		'distBuildFrontend',
 		'concurrent:dist'
 	]);
@@ -402,9 +402,6 @@ module.exports = function(grunt) {
 		'less:bootstrap'
 	]);
 
-	grunt.registerTask('prepareApi', [
-		'copy:stageApi'
-	]);
 	grunt.registerTask('prepareFrontend', [
 		'buildCss',
 		'copy:stageFrontend',
@@ -412,14 +409,8 @@ module.exports = function(grunt) {
 		'svgmin:stage'
 	]);
 
-	grunt.registerTask('distBuildApi', [
-		'prepareApi',
-		'clean:distApi',
-		'copy:distApi'
-	]);
-
-	grunt.registerTask('prodBuildApi', [
-		'prepareApi',
+	grunt.registerTask('buildApi', [
+		'copy:stageApi',
 		'clean:distApi',
 		'copy:distApi'
 	]);
