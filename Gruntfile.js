@@ -367,6 +367,12 @@ module.exports = function(grunt) {
 					tag: pkg.version
 				}
 			}
+		},
+		bump: {
+			options: {
+				files: ['package.json'],
+				updateConfigs: ['pkg']
+			}
 		}
 	});
 
