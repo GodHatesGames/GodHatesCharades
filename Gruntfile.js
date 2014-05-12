@@ -18,6 +18,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-svgmin');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-build-control');
+	grunt.loadNpmTasks('grunt-bump');
 
 	// Project configuration.
 	var pkg = grunt.file.readJSON('package.json');
@@ -382,6 +383,7 @@ module.exports = function(grunt) {
 		'buildApi',
 		'distBuildFrontend',
 		'copy:app',
+		'bump:minor',
 		'buildcontrol:stage'
 	]);
 
