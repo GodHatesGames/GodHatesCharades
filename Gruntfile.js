@@ -18,7 +18,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-svgmin');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-build-control');
-	grunt.loadNpmTasks('grunt-bump');
 
 	// Project configuration.
 	var pkg = grunt.file.readJSON('package.json');
@@ -367,12 +366,6 @@ module.exports = function(grunt) {
 					tag: pkg.version
 				}
 			}
-		},
-		bump: {
-			options: {
-				files: ['package.json'],
-				updateConfigs: ['pkg']
-			}
 		}
 	});
 
@@ -385,7 +378,6 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('deploy:stage', [
-		'bump:build',
 		'clean:stage',
 		'buildApi',
 		'distBuildFrontend',
