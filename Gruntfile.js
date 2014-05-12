@@ -383,7 +383,7 @@ module.exports = function(grunt) {
 		'buildApi',
 		'distBuildFrontend',
 		'copy:app',
-		'bump:minor',
+		'bump:build',
 		'buildcontrol:stage'
 	]);
 
