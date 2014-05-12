@@ -379,11 +379,11 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('deploy:stage', [
+		'bump:build',
 		'clean:stage',
 		'buildApi',
 		'distBuildFrontend',
 		'copy:app',
-		'bump:build',
 		'buildcontrol:stage'
 	]);
 
