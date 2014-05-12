@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "build": 1,
   "scripts": {
-    "start": "node dist/api/server.js"
+    "start": "node api/server.js"
   },
   "engines": {
     "node": "0.10.x",
