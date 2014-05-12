@@ -343,14 +343,14 @@ module.exports = function(grunt) {
 			prod: {
 				options: {
 					remote: 'git@heroku.com:ghcprod.git',
-					branch: 'prod',
+					branch: 'master',
 					tag: pkg.version
 				}
 			},
 			stage: {
 				options: {
 					remote: 'git@heroku.com:ghcstage.git',
-					branch: 'stage',
+					branch: 'master',
 					tag: pkg.version
 				}
 			}
