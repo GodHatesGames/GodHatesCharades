@@ -17,10 +17,12 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-svgmin');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
+	grunt.loadNpmTasks('grunt-build-control');
 
 	// Project configuration.
+	var pkg = grunt.file.readJSON('package.json');
 	grunt.initConfig({
-		pkg: grunt.file.readJSON('package.json'),
+		pkg: pkg,
 		nodemon: {
 			dist: {
 				options: {
@@ -330,13 +332,43 @@ module.exports = function(grunt) {
 					}
 				]
 			}
+		},
+		buildcontrol: {
+			options: {
+				dir: 'dist',
+				commit: true,
+				push: true,
+				message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
+			},
+			prod: {
+				options: {
+					remote: 'git@heroku.com:ghcprod.git',
+					branch: 'master',
+					tag: pkg.version
+				}
+			},
+			stage: {
+				options: {
+					remote: 'git@heroku.com:ghcstage.git',
+					branch: 'stage',
+					tag: pkg.version
+				}
+			}
 		}
 	});
 
-	grunt.registerTask('prod', [
+	grunt.registerTask('deploy:prod', [
 		'clean:stage',
 		'prodBuildApi',
-		'prodBuildFrontend'
+		'prodBuildFrontend',
+		'buildcontrol: prod'
+	]);
+
+	grunt.registerTask('deploy:stage', [
+		'clean:stage',
+		'prodBuildApi',
+		'prodBuildFrontend',
+		'buildcontrol:stage'
 	]);
 
 	grunt.registerTask('dev', [
@@ -350,6 +382,7 @@ module.exports = function(grunt) {
 		'distBuildFrontend',
 		'concurrent:dist'
 	]);
+
 
 	// grunt.registerTask('build', [
 	// 	'distBuildApi',
