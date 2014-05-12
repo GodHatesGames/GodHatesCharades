@@ -139,8 +139,21 @@ module.exports = function(grunt) {
 						expand: true,
 						cwd: 'frontend/',
 						// Match all files except alt-config files and img
-						src: ['**', '!js/config**', '!img'],
+						src: ['**', '!robots_**', '!js/config**', '!img'],
 						dest: '.tmp/stage/frontend/'
+					}
+				]
+			},
+			// Robots copy
+			prodRobotsFrontend: {
+				files: [
+					{
+						// frontend
+						expand: true,
+						cwd: 'frontend/',
+						src: ['robots_Prod.txt'],
+						dest: '.tmp/stage/frontend/',
+						rename: robotsRename
 					}
 				]
 			},
@@ -396,6 +409,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('prodBuildFrontend', [
 		'prepareFrontend',
 		'copy:prodConfigFrontend',
+		'copy:prodRobotsFrontend',
 		'ngtemplates',
 		'useminPrepare',
 		'concat',
@@ -410,6 +424,10 @@ module.exports = function(grunt) {
 
 	function configRename(dest) {
 		return dest + 'config.js';
+	}
+
+	function robotsRename(dest) {
+		return dest + 'robots.txt';
 	}
 
 };
