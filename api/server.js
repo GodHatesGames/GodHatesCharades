@@ -12,6 +12,14 @@ var staticFilePath = path.join(__dirname, files);
 console.log('staticFilePath:', staticFilePath);
 
 var server = express(); // better instead
+// remove trailing slashes
+server.use(function(req, res, next) {
+	if(req.url.substr(-1) == '/' && req.url.length > 1)
+		res.redirect(301, req.url.slice(0, -1));
+	else
+		next();
+});
+// use prerender.io
 server.use(prerender.set('prerenderToken', process.env.PRERENDER_TOKEN));
 server.engine('html', require('ejs').renderFile);
 server.set('views', staticFilePath);
