@@ -64,7 +64,6 @@ app.run(function($rootScope,
 
 		$rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
 			$rootScope.unsetLoading();
-			window.prerenderReady = true;
 		});
 
 		$rootScope.$on('$stateChangeError', function (ev, to, toParams, from, fromParams, error) {
