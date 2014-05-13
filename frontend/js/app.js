@@ -1,4 +1,7 @@
 'use strict';
+// prerender.io init
+window.prerenderReady = false;
+
 // Parse Init
 Parse.initialize(CONFIG.PARSE_APP_ID, CONFIG.PARSE_JS_KEY);
 
@@ -63,6 +66,7 @@ app.run(function($rootScope,
 
 		$rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
 			$rootScope.unsetLoading();
+			window.prerenderReady = true;
 		});
 
 		$rootScope.$on('$stateChangeError', function (ev, to, toParams, from, fromParams, error) {
