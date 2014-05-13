@@ -12,6 +12,7 @@ var staticFilePath = path.join(__dirname, files);
 console.log('staticFilePath:', staticFilePath);
 
 var server = express(); // better instead
+console.log('env %j', process.env);
 server.use(prerender.set('prerenderToken', process.env.PRERENDER_TOKEN));
 server.engine('html', require('ejs').renderFile);
 server.set('views', staticFilePath);
