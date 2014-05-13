@@ -1,6 +1,4 @@
 'use strict';
-// prerender.io init
-window.prerenderReady = false;
 
 // Parse Init
 Parse.initialize(CONFIG.PARSE_APP_ID, CONFIG.PARSE_JS_KEY);
