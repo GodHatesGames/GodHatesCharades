@@ -2,6 +2,7 @@
 require('newrelic');
 var express = require('express');
 var path = require('path');
+var prerender = require('prerender-node');
 
 var port = process.env.PORT || 3000;
 var files = process.env.FILES || '../frontend';
@@ -11,6 +12,7 @@ var staticFilePath = path.join(__dirname, files);
 console.log('staticFilePath:', staticFilePath);
 
 var server = express(); // better instead
+server.use(prerender.set('prerenderToken', process.env.PRERENDER_TOKEN));
 server.engine('html', require('ejs').renderFile);
 server.set('views', staticFilePath);
 server.set('view engine', 'html');
