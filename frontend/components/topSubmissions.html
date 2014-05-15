@@ -28,12 +28,14 @@
 					<th>Submitter</th>
 					<th>Type</th>
 				</tr>
-				<tr ng-repeat="(index, suggestion) in suggestions">
+				<tr ng-repeat="(index, suggestion) in suggestions"
+				    class="suggestion" 
+				    ui-sref="card(cardService.getLink(suggestion))">
 					<td ng-bind="index + 1"></td>
 					<!-- Text -->
 					<td>
 						<a ng-bind="suggestion.attributes.text"
-						   ui-sref="card({cardid: suggestion.id, slug: cardService.getSlug(suggestion)})"></a>
+						   ui-sref="card(cardService.getLink(suggestion))"></a>
 					</td>
 					<!-- Votes -->
 					<td ng-show="suggestion.attributes.totalVotes">

@@ -11,7 +11,8 @@ app.service('cardService', function($q, $rootScope, Slug) {
 		getTotalSkips: getTotalSkips,
 		getKDR: getKDR,
 		getCard: getCard,
-		getSlug: getSlug
+		getSlug: getSlug,
+		getLink: getLink
 	}
 
 	var cardsById = {};
@@ -55,6 +56,13 @@ app.service('cardService', function($q, $rootScope, Slug) {
 	function getSlug(card) {
 		var text = card.get('text');
 		return Slug.slugify(text);
+	}
+
+	function getLink(card) {
+		return {
+			cardid: card.id,
+			slug: getSlug(card)
+		}
 	}
 
 	function getImageUrl(card) {
