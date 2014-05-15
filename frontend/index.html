@@ -2,15 +2,14 @@
 <html xmlns:fb="http://ogp.me/ns/fb#">
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-		<meta name="description" content="A game where you act out the vile and despicable inside all of us. Talk, shout, and say vile things in the form of 30 second act outs.">
-		<meta name="keywords" content="God Hates Charades, Games, Boardgames">
 		<meta name="fragment" content="!" />
 		<base href="/">
 		<meta charset="UTF-8">
 		<link rel="icon" href="favicon.ico?v=3" type="image/x-icon">
 		<link rel="shortcut icon" href="favicon.ico?v=3" type="image/x-icon">
 
-		<title>God Hates Charades</title>
+		<title ng-bind="($state.current.title ? $state.current.title + ' | ' : '') + 'God Hates Charades'"></title>
+		<meta name="description" ng-content="$state.current.description"/>
 
 		<!-- build:css css/style.css -->
 		<link rel="stylesheet" href="css/bootstrap.css">
@@ -106,6 +105,7 @@
 		<script src="components/youtube.js"></script>
 		<script src="components/mailchimp.js"></script>
 		<script src="components/socialUnlock.js"></script>
+		<script src="components/ngContent.js"></script>
 		<script src="js/routes.js"></script>
 		<script src="js/main.js"></script>
 		<!-- endbuild -->

@@ -12,6 +12,7 @@ var app = angular.module('app', ['ng',
 									'ngSanitize',
 									'restangular',
 									'ngHtmlCompile',
+									'ngContent',
 									'prismic.io',
 									'ngCsv'
 								]);
