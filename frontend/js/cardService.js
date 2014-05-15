@@ -1,4 +1,4 @@
-app.service('cardService', function($q, $rootScope) {
+app.service('cardService', function($q, $rootScope, Slug) {
 	var cardService = {
 		cache: cache,
 		getTypeDisplay: getTypeDisplay,
@@ -10,7 +10,8 @@ app.service('cardService', function($q, $rootScope) {
 		getTotalVotes: getTotalVotes,
 		getTotalSkips: getTotalSkips,
 		getKDR: getKDR,
-		getCard: getCard
+		getCard: getCard,
+		getSlug: getSlug
 	}
 
 	var cardsById = {};
@@ -23,7 +24,7 @@ app.service('cardService', function($q, $rootScope) {
 	function getTypeDisplay(card) {
 		var type = card.get('type');
 		return getTypeDisplayByType(type);
-	};
+	}
 
 	function getTypeDisplayByType(type) {
 		switch(type) {
@@ -32,12 +33,12 @@ app.service('cardService', function($q, $rootScope) {
 			case 1 :
 				return TYPE_DISPLAY_SCENARIO;
 		}
-	};
+	}
 
 	function getTypeClass(card) {
 		var type = card.get('type');
 		return getTypeClassByType(type);
-	};
+	}
 
 	function getTypeClassByType(type) {
 		switch(type) {
@@ -49,12 +50,17 @@ app.service('cardService', function($q, $rootScope) {
 				console.log('unhandled card type:', type);
 				break;
 		}
-	};
+	}
+
+	function getSlug(card) {
+		var text = card.get('text');
+		return Slug.slugify(text);
+	}
 
 	function getImageUrl(card) {
 		var type = card.get('type');
 		return getImageByType(type);
-	};
+	}
 
 	function getImageByType(type) {
 		switch(type) {
@@ -63,7 +69,7 @@ app.service('cardService', function($q, $rootScope) {
 			case 1 :
 				return 'img/scenario_ball.svg';
 		}
-	};
+	}
 
 	function getTotalVotes(card) {
 		var totalVotes = card.get('totalVotes');

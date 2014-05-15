@@ -14,6 +14,7 @@ var app = angular.module('app', ['ng',
 									'ngHtmlCompile',
 									'ngContent',
 									'prismic.io',
+									'slugifier',
 									'ngCsv'
 								]);
 console.log('starting app');

@@ -40,7 +40,7 @@ app.config(function($stateProvider,
 		controller: 'publicProfileView'
 	});
 	$stateProvider.state('card', {
-		url: '/card/:cardid',
+		url: '/card/:cardid/:slug',
 		templateUrl: 'views/cardView.html',
 		controller: 'cardView'
 	});
