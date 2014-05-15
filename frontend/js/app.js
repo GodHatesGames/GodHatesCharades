@@ -15,6 +15,7 @@ var app = angular.module('app', ['ng',
 									'ngContent',
 									'prismic.io',
 									'slugifier',
+									'disqusHere',
 									'ngCsv'
 								]);
 console.log('starting app');

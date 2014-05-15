@@ -27,7 +27,8 @@
     "prismic.io": "~1.0.10",
     "ng_html_compile": "https://github.com/francisbouvier/ng_html_compile.git",
     "angular-prismicio": "~0.1.0",
-    "angular-slugify": "~1.0.0"
+    "angular-slugify": "~1.0.0",
+    "disqus-here": "~0.0.3"
   },
   "resolutions": {
     "angular": ">=1.3"
