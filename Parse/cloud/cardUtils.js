@@ -4,6 +4,7 @@ var userUtils = require('cloud/userUtils.js');
 
 exports.examples = examples;
 exports.getCardsForSet = getCardsForSet;
+exports.getCardById = getCardById;
 
 // Use Parse.Cloud.define to define as many cloud functions as you want.
 function examples(request, response) {
@@ -95,4 +96,32 @@ function buildCardsForSetQuery(id) {
 	var query = new Parse.Query(SetItemObject);
 	query.equalTo('owner', mockSet);
 	return query;
+}
+
+function getCardById(request, response) {
+	Parse.Cloud.useMasterKey();
+	var cardId = request.params.id;
+	if(cardId !== undefined) {
+		console.log('getCardsForSet fetchData');
+		var SuggestionObject = Parse.Object.extend('Suggestion');
+		var query = new Parse.Query(SuggestionObject);
+		query.include('owner');
+		query.get(request.params.id, {
+			success: onSuccess,
+			error: onError
+		});
+	} else {
+		response.error('you must pass a set id to get');
+	}
+
+	function onSuccess(card) {
+		userUtils.stripPrivateData(card.attributes.owner);
+		response.success(card);
+	}
+
+	function onError(error) {
+		console.log('getCard Error');
+		response.error(error);
+	}
+
 }

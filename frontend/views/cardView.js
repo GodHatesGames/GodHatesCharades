@@ -1,6 +1,19 @@
-app.controller('cardView', function(bitly, $scope, $stateParams, $location, $window) {
+app.controller('cardView', function($scope, $state, $stateParams, $location, $window, cardService) {
 	$scope.cardid = $stateParams.cardid;
-	$scope.bitly = bitly;
+
+	var card = cardService.getCard($scope.cardid)
+	.then(function(card) {
+		//set meta title
+		$state.current.title = card.get('text');
+
+		// set meta description
+		$state.current.description = ['"',
+		                              card.get('text'),
+		                              '" is a ',
+		                              cardService.getTypeDisplay(card),
+		                              ' card submitted by ',
+		                              card.get('owner').get('name')].join('');
+	});
 
 	// DISQUS
 	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -18,13 +31,4 @@ app.controller('cardView', function(bitly, $scope, $stateParams, $location, $win
 		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 	})();
 	/* END DISQUS */
-
-	/* ADD THIS */
-	$window.addthis_share = {
-		url: bitly,
-		title: 'Help me support my charity:'
-	};
-
-	jQuery('body').append($('<script>var addthis_config = {"data_track_addressbar":true};</script><script src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-527852867cd289ce"></script>'));
-	/* END ADD THIS */
 })

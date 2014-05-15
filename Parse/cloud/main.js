@@ -35,6 +35,7 @@ Parse.Cloud.define('recordStumped', pair.recordStumped);
 // Card Utils
 Parse.Cloud.define('examples', cardUtils.examples);
 Parse.Cloud.define('getCardsForSet', cardUtils.getCardsForSet);
+Parse.Cloud.define('getCardById', cardUtils.getCardById);
 
 // Background Jobs
 Parse.Cloud.job('calculateStats', leaderboard.calculateStats);

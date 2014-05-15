@@ -101,17 +101,10 @@ app.service('cardService', function($q, $rootScope) {
 		if(currentCache) {
 			return $q.when(currentCache);
 		} else {
-			var defer = $q.defer();
-			// console.log('TODO: Fetch card from server');
-			var Suggestion = Parse.Object.extend("Suggestion");
-			var query = new Parse.Query(Suggestion);
-			// query.include("owner");
-			var promise = query.get(cardId);
-			promise.then(function(card) {
-				defer.resolve(card);
-				$rootScope.$digest();
-			})
-			return defer.promise;
+			var options = {
+				id: cardId
+			};
+			return Parse.Cloud.run('getCardById', options);
 		}
 	}
 
