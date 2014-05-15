@@ -1,5 +1,5 @@
 'use strict';
-app.controller('blogDetailView', function(post, $scope, $sce, $compile, $state) {
+app.controller('blogDetailView', function(post, $scope, $sce, $compile, $state, $location) {
 	$scope.post = post;
 
 	var structuredText = post.getStructuredText('blog.body');
@@ -12,4 +12,12 @@ app.controller('blogDetailView', function(post, $scope, $sce, $compile, $state) 
 	var shortlede = post.getText('blog.shortlede');
 	if (shortlede)
 		$state.current.description = shortlede;
+
+	var allowComments = post.get('blog.allow_comments');
+	$scope.disqus = {
+		shortname: 'godhatescharades',
+		id: post.id,
+		url: $location.absUrl(),
+		show: allowComments
+	};
 });

@@ -20,5 +20,5 @@ app.controller('cardView', function($scope, $state, $stateParams, $location, $wi
 		shortname: 'godhatescharades',
 		id: $stateParams.cardid,
 		url: $location.absUrl()
-	}
+	};
 })

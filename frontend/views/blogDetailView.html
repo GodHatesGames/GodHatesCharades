@@ -12,3 +12,11 @@
 		<b>{{post.getDate('blog.date') | date:'MMMM d, yyyy'}}</b>
 	</p>
 </div>
+<div class="well"
+     ng-show="disqus.show">
+	<disqus-here shortname="{{disqus.shortname}}"
+	             url="{{disqus.url}}"
+	             identifier="{{disqus.id}}"
+	             display-comments="disqus.show">
+	</disqus-here>
+</div>
