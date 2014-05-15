@@ -17,7 +17,7 @@ app.controller('blogDetailView', function(post, $scope, $sce, $compile, $state, 
 	$scope.disqus = {
 		shortname: 'godhatescharades',
 		id: post.id,
-		url: $location.absUrl(),
+		url: 'http://godhatescharades.com' + $location.url(),
 		show: allowComments
 	};
 });

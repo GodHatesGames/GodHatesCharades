@@ -19,6 +19,6 @@ app.controller('cardView', function($scope, $state, $stateParams, $location, $wi
 	$scope.disqus = {
 		shortname: 'godhatescharades',
 		id: $stateParams.cardid,
-		url: $location.absUrl()
+		url: 'http://godhatescharades.com' + $location.url()
 	};
 })
