@@ -11,7 +11,7 @@ app.service('campaignService', function() {
 				}
 			},
 			iPad2014: {
-				active: false
+				active: true
 			}
 		}
 	};
