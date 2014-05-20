@@ -31,6 +31,7 @@
 
 		.details {
 			padding-top: 10px;
+			padding-bottom: 10px;
 
 			.permalink {
 				float: right;
@@ -39,7 +40,12 @@
 		}
 	}
 
-	a:not(.btn) {
-		color: @color-actor;
+	a {
+		&:not(.btn) {
+			color: @color-actor;
+		}
+		&.title {
+			text-decoration: none;
+		}
 	}
 }

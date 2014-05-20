@@ -1,22 +1,26 @@
-<div class="nav">
+<!-- <div class="nav">
 	<a ui-sref="blog"
 	   class="btn btn-success pull-left">
 		Back
 	</a>
-</div>
-<div ng-html-compile="bodyHtml"
-	 class="post">
-</div>
-<div class="details">
-	<p class="date">
-		<b>{{post.getDate('blog.date') | date:'MMMM d, yyyy'}}</b>
-	</p>
-</div>
-<div class="well"
-     ng-show="disqus.show">
-	<disqus-here shortname="{{disqus.shortname}}"
-	             url="{{disqus.url}}"
-	             identifier="{{disqus.id}}"
-	             display-comments="disqus.show">
-	</disqus-here>
+</div> -->
+<div class="post">
+	<div ng-html-compile="bodyHtml"></div>
+	<div class="details">
+		<b class="date">
+			{{post.getDate('blog.date') | date:'MMMM d, yyyy'}}
+		</b>
+		<a class="permalink"
+		   ui-sref="blog">
+			Back to blog
+		</a>
+	</div>
+	<div class="well"
+	     ng-show="disqus.show">
+		<disqus-here shortname="{{disqus.shortname}}"
+		             url="{{disqus.url}}"
+		             identifier="{{disqus.id}}"
+		             display-comments="disqus.show">
+		</disqus-here>
+	</div>
 </div>

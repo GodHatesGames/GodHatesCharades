@@ -15,14 +15,19 @@
 				</div>
 				<!-- post title + body -->
 				<div ng-if="body">
-					<div ng-bind-html="trust(body.asHtml())">
+					<a ui-sref="blog.detail({id: post.id, slug: post.slug})"
+					   class="title">
+						<h2 ng-html-compile="body.getTitle().text">
+						</h2>
+					</a>
+					<div ng-html-compile="body.getFirstParagraph().text">
 					</div>
 				</div>
 				<div class="details">
 					<b class="date">{{post.getDate('blog.date') | date:'MMMM d, yyyy'}}</b>
 					<a class="permalink"
 					   ui-sref="blog.detail({id: post.id, slug: post.slug})">
-						permalink
+						Continue reading
 					</a>
 				</div>
 				<hr>
