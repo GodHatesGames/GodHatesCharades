@@ -1,16 +1,24 @@
 'use strict';
-app.controller('homeView', function($scope, campaignService, $http, $window, leanplum) {
+app.controller('homeView', function($scope, campaignService, $http, $window, leanplum, $stateParams) {
 	$scope.kickstarter = campaignService.campaignsById.ks2013;
 	$scope.ipad = campaignService.campaignsById.iPad2014;
 	$scope.leanplum = leanplum;
 	$scope.mainLayout = undefined;
 	$scope.emailSubmitted = false;
 
-	$scope.$watch('leanplum.vars.homeLayout', function(newValue) {
-		if(newValue) {
-			$scope.mainLayout = 'views/homeView.' + newValue + '.html';
-		}
-	});
+	if ($stateParams.vine) {
+		$scope.mainLayout = 'views/homeView.vineUnlock.html';
+		$scope.vineId = $stateParams.vine;
+	} else if($stateParams.youtube) {
+		$scope.mainLayout = 'views/homeView.videoUnlock.html';
+		$scope.youtubeId = $stateParams.youtube;
+	} else {
+		$scope.$watch('leanplum.vars.homeLayout', function(newValue) {
+			if(newValue) {
+				$scope.mainLayout = 'views/homeView.' + newValue + '.html';
+			}
+		});
+	}
 
 	$scope.currentSlide = 0;
 	$scope.maxSlides = 3;
