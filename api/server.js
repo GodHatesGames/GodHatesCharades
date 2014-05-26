@@ -33,5 +33,6 @@ server.get('/*', function(req, res) {
 });
 
 
-server.listen(port);
-console.log('GodHatesCharades is rusting on port', port);
+server.listen(port, function() {
+	console.log('GodHatesCharades is rusting on port', port);
+});
