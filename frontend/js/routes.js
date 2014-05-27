@@ -121,6 +121,7 @@ app.config(function($stateProvider,
 	});
 
 	$stateProvider.state('blog.detail', {
+		type: 'article',
 		url: '/:id/:slug',
 		templateUrl: 'views/blogDetailView.html',
 		resolve: {

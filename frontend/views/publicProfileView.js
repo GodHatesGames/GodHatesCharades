@@ -11,11 +11,10 @@ app.controller('publicProfileView', function($scope, $stateParams, parseUser, $s
 		var username = profile.owner.get('name');
 		
 		//set meta title
-		$state.current.title = username;
+		$state.current.title = [username, '\'s profile'].join('');;
 
 		// set meta description
-		$state.current.description = [username,
-		                              '\'s profile page'].join('');
+		$state.current.description = [username, '\'s public profile page'].join('');
 	}
 
 	function onProfileError(error) {
