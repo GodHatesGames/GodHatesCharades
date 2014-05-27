@@ -35,6 +35,7 @@ app.config(function($stateProvider,
 		controller: 'loginView'
 	});
 	$stateProvider.state('user', {
+		type: 'profile',
 		url: '/user/:userid',
 		templateUrl: 'views/publicProfileView.html',
 		controller: 'publicProfileView'
