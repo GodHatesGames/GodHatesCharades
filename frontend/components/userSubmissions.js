@@ -33,17 +33,13 @@ app.directive('userSubmissions', function($filter, cardService, parseUser) {
 				if(!$scope.loading && !$scope.allLoaded) {
 					$scope.loading = true;
 					var options = {
-						userid: $scope.userid,
 						skipIndex: $scope.skipIndex,
 						pageSize: $scope.pageSize,
 						type: $scope.tab
 					};
-					var callbacks = {
-						success: onProfileLoaded,
-						error: onProfileError
-					};
+					parseUser.getProfileById($scope.userid, options)
+					.then(onProfileLoaded, onProfileError);
 					$scope.loading = true;
-					Parse.Cloud.run('getProfile', options, callbacks);
 				}
 			}
 
@@ -51,13 +47,10 @@ app.directive('userSubmissions', function($filter, cardService, parseUser) {
 				if(profile.suggestions.length < $scope.pageSize) {
 					$scope.allLoaded = true;
 				}
-				cardService.cache(profile.suggestions);
-				parseUser.cacheUser(profile.owner);
 				$scope.user = profile.owner;
 				$scope.suggestions = $scope.suggestions.concat(profile.suggestions);
 				$scope.loading = false;
 				$scope.skipIndex += profile.suggestions.length;
-				$scope.$digest();
 			}
 
 			function onProfileError(error) {

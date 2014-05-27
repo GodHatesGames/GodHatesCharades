@@ -1,7 +1,7 @@
 'use strict';
 var parseUser = angular.module('parse.user', []);
 
-parseUser.service('parseUser', function factory($rootScope, $q, $location, leanplum) {
+parseUser.service('parseUser', function factory($rootScope, $q, $location, leanplum, cardService) {
 	var user = {
 		loggedin: false,
 		dataloaded: false,
@@ -16,12 +16,12 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 		logout: logout,
 		signupAnonUser: signupAnonUser,
 		save: save,
-		getUserById: getUserById,
-		cacheUser: cacheUser
+		getProfileById: getProfileById
 	};
 
 	var cache = {};
 	var fetching = {};
+	var profiles = {};
 
 	// check login status
 	var currentUser = Parse.User.current();
@@ -168,42 +168,53 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 		}
 	}
 
-	function getUserById(id) {
+	function getProfileById(id, options) {
 		if (id === undefined || id === null) {
 			console.log('you must provide a userid');
 			return $q.reject();
+		}
+
+		if (!options) {
+			options = {
+				userid: id
+			};
+		} else {
+			options.userid = id;
 		}
 
 		var deffered = $q.defer();
 		if(fetching[id]) {
 			console.log('returning existing promise');
 			return fetching[id];
-		} else if(cache[id]) {
+		} else if(profiles[id]) {
 			console.log('delivering cached user');
-			deffered.resolve(cache[id]);
+			deffered.resolve(profiles[id]);
 		} else {
 			console.log('fetching user');
 			// $scope.loading = true;
-			var query = new Parse.Query(Parse.User);
-			query.get(id, {
-				success: onUserFound,
-				error: onUserError
-			});
+			var callbacks = {
+				success: onProfileFound,
+				error: onProfileError
+			};
+			Parse.Cloud.run('getProfile', options, callbacks);
 			fetching[id] = deffered.promise;
 		}
 
 		return deffered.promise;
 
-		function onUserFound(user) {
+		function onProfileFound(profile) {
 			delete fetching[id];
-			cache[user.id] = user;
-			deffered.resolve(user);
+			var user = profile.owner;
+			profiles[user.id] = profile;
+			cardService.cache(profile.suggestions);
+			deffered.resolve(profile);
 		}
 
-		function onUserError(user, error) {
+		function onProfileError(user, error) {
 			delete fetching[id];
 			deffered.reject(error);
 		}
+
 	}
 
 	function cacheUser(userToCache) {
