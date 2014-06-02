@@ -1,4 +1,7 @@
 <section class="videoUnlock row">
+	<h1 class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		{{leanplum.vars.homeHeadline}}
+	</h1>
 	<div class="col-md-6 col-lg-6">
 	     <vine id="vineId || leanplum.vars.homeVideo"
 	              class="video col-xs-12 col-sm-12 col-md-12 col-lg-12"
@@ -8,22 +11,13 @@
 		</vine>
 	</div>
 	<div class="col-md-6 col-lg-6">
-		<h2>
-			{{leanplum.vars.homeHeadline}}
-		</h2>
-		<p>
-			{{leanplum.vars.homeSubtitle}}
-		</p>
-		
+		<h3 ng-bind-html="leanplum.vars.homeSubtitle"></h3>
+
+		<img src="img/printnplayAd.svg"
+			 alt="Print N' Play: Enter your email and we will send you a copy that you can print and play today!"
+			 class="img img-responsive">
 		<mailchimp class="form-inline"
 		           action-form="submitEmail('homepage_video_unlock')">
 		</mailchimp>
-		<h2>THEN</h2>
-		<a class="btn btn-success"
-		   href="http://bit.ly/1hQ71xl"
-		   target="_blank"
-		   ng-disabled="!emailSubmitted">
-			{{leanplum.vars.homeDownloadCopy}}
-		</a>
 	</div>
 </section>

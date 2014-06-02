@@ -5,11 +5,11 @@
 	<examples class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 	</examples>
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-		<h3>
-			{{leanplum.vars.homeSubtitle}}
-		</h3>
+		<h3 ng-bind-html="leanplum.vars.homeSubtitle"></h3>
 		
-		<h4>Enter your email and we'll send you the Print N' Play!</h4>
+		<img src="img/printnplayAd.svg"
+			 alt="Print N' Play: Enter your email and we will send you a copy that you can print and play today!"
+			 class="img img-responsive">
 		<mailchimp class="form-inline"
 		           action-form="submitEmail('homepage_examples_unlock')">
 		</mailchimp>
