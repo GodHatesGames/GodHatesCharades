@@ -1,23 +1,17 @@
 <section class="examplesUnlock">
+	<h1 class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		{{leanplum.vars.homeHeadline}}
+	</h1>
 	<examples class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 	</examples>
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-		<h2>
-			{{leanplum.vars.homeHeadline}}
-		</h2>
-		<p>
+		<h3>
 			{{leanplum.vars.homeSubtitle}}
-		</p>
+		</h3>
 		
+		<h4>Enter your email and we'll send you the Print N' Play!</h4>
 		<mailchimp class="form-inline"
 		           action-form="submitEmail('homepage_examples_unlock')">
 		</mailchimp>
-		<h2>THEN</h2>
-		<a class="btn btn-success"
-		   href="http://www.godhatescharades.com/print/GodHatesCharadesPrintNPlay_Beta.pdf"
-		   target="_blank"
-		   ng-disabled="!emailSubmitted">
-			{{leanplum.vars.homeDownloadCopy}}
-		</a>
 	</div>
 </section>
