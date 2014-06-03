@@ -17,7 +17,7 @@ app.service('cardService', function($q, $rootScope, Slug) {
 
 	var cardsById = {};
 
-	var TYPE_DISPLAY_CHARACTER = "Character";
+	var TYPE_DISPLAY_CHARACTER = "Actor";
 	var TYPE_DISPLAY_SCENARIO = "Scenario";
 	var TYPE_CLASS_CHARACTER = "character";
 	var TYPE_CLASS_SCENARIO = "scenario";
