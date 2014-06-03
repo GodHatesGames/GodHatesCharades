@@ -360,6 +360,45 @@
 	/* end &.tutorial */
 	}
 
+	/* Section: iOS*/
+	&.ios {
+		h2 {
+			font-size: 55px;
+			line-height: 50px;
+			margin-bottom: 0;
+		}
+
+		h3 {
+			font-size: 40px;
+			margin-top: 0;
+			margin-bottom: 40px;
+			line-height: 40px;
+		}
+
+		h4 {
+			text-align: left;
+		}
+
+		ul {
+			list-style: none;
+			padding-left: 0;
+			li {
+				font-size: 25px;
+				&:before{
+					content: '★';
+					margin-right: 6px;
+					color: black;
+				}
+			}
+		}
+
+		@media (max-width: 992px) {
+			.screenshot{
+				padding-top: 25px;
+			}
+		}
+	}
+
 /* end #homeView section */
 }
 
@@ -403,30 +442,6 @@
 
 	.form-inline {
 		padding: 0;
-	}
-}
-
-/* Section: iOS*/
-
-#homeView section.ios h2 {
-	font-size: 55px;
-	line-height: 50px;
-}
-
-#homeView section.ios h3 {
-	font-size: 40px;
-	margin-bottom: 40px;
-	line-height: 40px;
-}
-
-#homeView section.ios h4 {
-	text-align: left;
-}
-
-@media (max-width: 992px) {
-
-	#homeView section.ios .screenshot{
-		padding-top: 25px;
 	}
 }
 
