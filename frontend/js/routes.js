@@ -3,7 +3,14 @@ app.config(function($stateProvider,
 			 $urlRouterProvider) {
 
 	// For any unmatched url, redirect to /state1
-	$urlRouterProvider.otherwise('/');
+	$urlRouterProvider.otherwise('/404');
+
+	$stateProvider.state('404', {
+		url: '/404',
+		title: 'Page not Found',
+		templateUrl: 'views/404View.html',
+		controller: '404View'
+	});
 
 	$stateProvider.state('home', {
 		url: '/?vine&youtube',

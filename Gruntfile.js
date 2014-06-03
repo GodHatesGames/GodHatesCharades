@@ -18,6 +18,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-svgmin');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-build-control');
+	grunt.loadNpmTasks('grunt-autoprefixer');
 
 	// Project configuration.
 	var pkg = grunt.file.readJSON('package.json');
@@ -69,19 +70,19 @@ module.exports = function(grunt) {
 				files: [
 					'frontend/less/main.less'
 				],
-				tasks: ['less:main']
+				tasks: ['less:main', 'autoprefixer']
 			},
 			components: {
 				files: [
 					'frontend/components/*.less'
 				],
-				tasks: ['less:components']
+				tasks: ['less:components', 'autoprefixer']
 			},
 			views: {
 				files: [
 					'frontend/views/*.less'
 				],
-				tasks: ['less:views']
+				tasks: ['less:views', 'autoprefixer']
 			}
 		},
 		concurrent: {
@@ -320,6 +321,15 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		autoprefixer: {
+			options: {},
+			css: {
+				expand: true,
+				flatten: true,
+				src: 'frontend/css/*.css',
+				dest: 'frontend/css/'
+			}
+		},
 		svgmin: {
 			stage: {
 				files: [
@@ -407,7 +417,8 @@ module.exports = function(grunt) {
 		'buildBootstrap',
 		'less:main',
 		'less:components',
-		'less:views'
+		'less:views',
+		'autoprefixer'
 	]);
 
 	grunt.registerTask('buildBootstrap', [
