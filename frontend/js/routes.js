@@ -15,7 +15,7 @@ app.config(function($stateProvider,
 	$stateProvider.state('home', {
 		url: '/?vine&youtube',
 		title: 'Your favorite new party game',
-		description: 'A game where you act out the vile and despicable inside all of us. Talk, shout, and say vile things in the form of 30 second act outs.',
+		description: 'A game where you act out the vile and despicable inside all of us. Talk, shout, and say awful things in the form of 30 second act outs.',
 		templateUrl: 'views/homeView.html',
 		controller: 'homeView'
 	});
