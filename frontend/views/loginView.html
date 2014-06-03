@@ -20,15 +20,17 @@
 		</div>
 	</span>
 	<span ng-show="parseUser.isReal()">
-		<div class="row">
-			<h3 class="col-sm-6">
-				You're logged in
-			</h3>
-		</div>
-		<div class="row">
-			<userinfo class="col-sm-12"
-						userid="parseUser.data.id">
-			</userinfo>
-		</div>
+		<h3>
+			You're logged in
+		</h3>
+		<button class="btn btn-success"
+		        ui-sref="user({userid: parseUser.data.id})">
+			View Profile
+		</button>
+		<hr>
+		<button class="btn btn-success"
+		        ng-click="parseUser.logout()">
+			Logout
+		</button>
 	</span>
 </div>

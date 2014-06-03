@@ -127,17 +127,12 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 
 	// returns true if current user is not Anonymous
 	function isReal() {
-		if(!user.loggedin)
-			return false;
-		else
-			return user.data !== null && user.data.attributes.email !== undefined;
+		return !isAnon();
 	}
 
 	// returns true if current user is Anonymous
 	function isAnon() {
-		if(!user.loggedin)
-			return true;
-		else if(user.data === null)
+		if(user.data === null)
 			return true;
 		else if(user.data.attributes.email === undefined)
 			return true;

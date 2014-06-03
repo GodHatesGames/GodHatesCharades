@@ -11,15 +11,15 @@ app.directive('userinfo', function(parseUser) {
 			// $scope.loading = false;
 
 			if ($scope.userid) {
-				parseUser.getUserById($scope.userid)
-				.then(onUserFound, onUserError);
+				parseUser.getProfileById($scope.userid)
+				.then(onProfileFound, onProfileError);
 			}
 
-			function onUserFound(user) {
-				$scope.user = user;
+			function onProfileFound(profile) {
+				$scope.user = profile.owner;
 			}
 
-			function onUserError(error) {
+			function onProfileError(profile) {
 				$scope.error = true;
 			}
 		}
