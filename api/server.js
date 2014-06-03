@@ -28,9 +28,30 @@ server.use(express.logger());
 server.use(express.bodyParser());
 
 server.use(express.static(staticFilePath));
-server.get('/*', function(req, res) {
+
+// pass the frontend routes
+server.get('/home', showIndex);
+server.get('/submit', showIndex);
+server.get('/vote', showIndex);
+server.get('/login', showIndex);
+server.get('/user/*', showIndex);
+server.get('/card/*/*', showIndex);
+server.get('/top', showIndex);
+server.get('/admin/*', showIndex);
+server.get('/blog', showIndex);
+server.get('/blog/*/*', showIndex);
+
+// otherwise 404
+server.get('/*', show404);
+
+function showIndex(req, res) {
 	res.render('index');
-});
+}
+
+function show404(req, res) {
+	res.status(404);
+	showIndex(req, res);
+}
 
 
 server.listen(port, function() {
