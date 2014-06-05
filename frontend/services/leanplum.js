@@ -46,7 +46,7 @@ app.service('leanplum', function($q, $location, Restangular, $rootScope) {
 	}
 
 	Leanplum.setVariables({
-		homeHeadline: 'This Party Game makes your Friends funny.',
+		homeHeadline: 'The party game that makes your friends funny.',
 		homeSubtitle: 'God Hates Charades is full of pop culture and melt-your-face humor.',
 		homeDownloadCopy: 'Download Print N\' Play PDF',
 		homeLayout: 'default',

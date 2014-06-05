@@ -6,6 +6,16 @@
 		<!-- <h3 ng-bind-html="leanplum.vars.homeSubtitle"></h3> -->
 	</div>
 	<div class="col-md-6 col-lg-6">
+		<youtube id="youtubeId || leanplum.vars.homeVideo"
+		          class="video"
+		          thumb="'img/video_title.png'"
+		          fluid="true"
+		          aspect-w="16"
+		          autoplay="true"
+		          aspect-h="9">
+		</youtube>
+	</div>
+	<div class="col-md-6 col-lg-6">
 		
 		<!-- <h4>{{leanplum.vars.homeCTA}}</h4> -->
 
@@ -15,15 +25,5 @@
 		<mailchimp class="form-inline"
 		           action-form="submitEmail('homepage_video_unlock')">
 		</mailchimp>
-	</div>
-	<div class="col-md-6 col-lg-6">
-		<youtube id="youtubeId || leanplum.vars.homeVideo"
-		          class="video"
-		          thumb="'img/video_title.png'"
-		          fluid="true"
-		          aspect-w="16"
-		          autoplay="true"
-		          aspect-h="9">
-		</youtube>
 	</div>
 </section>
