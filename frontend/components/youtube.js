@@ -7,6 +7,8 @@ app.directive('youtube', function() {
 		link: function($scope, $element, $attr){
 			$attr.$observe('id', function(newValue) {
 				$scope.videoUrl = '//www.youtube.com/embed/' + $scope.$eval(newValue);
+				if (Boolean($attr.autoplay) === true)
+					$scope.videoUrl += '?autoplay=1'
 			})
 		}
 	}

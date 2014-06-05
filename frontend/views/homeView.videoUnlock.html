@@ -1,8 +1,10 @@
 <section class="videoUnlock row">
-	<div class="col-md-6 col-lg-6">
+	<div class="col-md-10 col-md-offset-1">
 		<h1>
 			{{leanplum.vars.homeHeadline}}
 		</h1>
+	</div>
+	<div class="col-md-offset-1 col-md-5 col-lg-5">
 		<h3 ng-bind-html="leanplum.vars.homeSubtitle"></h3>
 		
 		<!-- <h4>{{leanplum.vars.homeCTA}}</h4> -->
@@ -14,12 +16,14 @@
 		           action-form="submitEmail('homepage_video_unlock')">
 		</mailchimp>
 	</div>
-	<div class="col-md-6 col-lg-6">
+	<div class="col-md-5 col-lg-5">
 		<youtube id="youtubeId || leanplum.vars.homeVideo"
-		          class="video col-xs-12 col-sm-12 col-md-12 col-lg-12"
-		          aspect-w="16"
+		          class="video"
+		          thumb="'img/video_title.png'"
 		          fluid="true"
-		          aspect-h="11">
+		          aspect-w="16"
+		          autoplay="true"
+		          aspect-h="9">
 		</youtube>
 	</div>
 </section>
