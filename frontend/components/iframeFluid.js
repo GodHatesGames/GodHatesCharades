@@ -95,6 +95,10 @@ app.directive('iframeFluid', function($window) {
 					var iframe = $element.children();
 					iframe.attr('width', newWidth);
 					iframe.attr('height', newHeight);
+					if(thumb) {
+						thumb.css('width', newWidth + 'px');
+						thumb.css('height', newHeight + 'px');
+					}
 				}
 			}
 		}
