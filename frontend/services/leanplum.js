@@ -46,8 +46,8 @@ app.service('leanplum', function($q, $location, Restangular, $rootScope) {
 	}
 
 	Leanplum.setVariables({
-		homeHeadline: 'Act out the vile and despicable inside all of us.',
-		homeSubtitle: 'A fast paced <i>acting</i> and <i>guessing</i> party game of crude humor and embarrassing scenarios.',
+		homeHeadline: 'This Party Game makes your Friends funny.',
+		homeSubtitle: 'God Hates Charades is full of pop culture and melt-your-face humor.',
 		homeDownloadCopy: 'Download Print N\' Play PDF',
 		homeLayout: 'default',
 		homeVideo: ''

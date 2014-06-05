@@ -1,25 +1,25 @@
 <section class="videoUnlock row">
-	<h1 class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		{{leanplum.vars.homeHeadline}}
-	</h1>
 	<div class="col-md-6 col-lg-6">
-	     <youtube id="youtubeId || leanplum.vars.homeVideo"
-	              class="video col-xs-12 col-sm-12 col-md-12 col-lg-12"
-	              aspect-w="16"
-	              fluid="true"
-	              aspect-h="11">
-		</youtube>
-	</div>
-	<div class="col-md-6 col-lg-6">
+		<h1>
+			{{leanplum.vars.homeHeadline}}
+		</h1>
 		<h3 ng-bind-html="leanplum.vars.homeSubtitle"></h3>
 		
 		<!-- <h4>{{leanplum.vars.homeCTA}}</h4> -->
 
 		<img src="img/printnplayAd.svg"
-			 alt="Print N' Play: Enter your email and we will send you a copy that you can print and play today!"
-			 class="img img-responsive printnplay">
+		     alt="Print N' Play: Enter your email and we will send you a copy that you can print and play today!"
+		     class="img img-responsive printnplay">
 		<mailchimp class="form-inline"
 		           action-form="submitEmail('homepage_video_unlock')">
 		</mailchimp>
+	</div>
+	<div class="col-md-6 col-lg-6">
+		<youtube id="youtubeId || leanplum.vars.homeVideo"
+		          class="video col-xs-12 col-sm-12 col-md-12 col-lg-12"
+		          aspect-w="16"
+		          fluid="true"
+		          aspect-h="11">
+		</youtube>
 	</div>
 </section>
