@@ -19,6 +19,27 @@ app.config(function($stateProvider,
 		templateUrl: 'views/homeView.html',
 		controller: 'homeView'
 	});
+
+	$stateProvider.state('home.vineUnlock', {
+		templateUrl: 'views/homeView.vineUnlock.html'
+	});
+
+	$stateProvider.state('home.videoUnlock', {
+		templateUrl: 'views/homeView.videoUnlock.html'
+	});
+
+	$stateProvider.state('home.default', {
+		templateUrl: 'views/homeView.default.html'
+	});
+
+	$stateProvider.state('home.examples', {
+		templateUrl: 'views/homeView.examples.html'
+	});
+
+	$stateProvider.state('home.examplesUnlock', {
+		templateUrl: 'views/homeView.examplesUnlock.html'
+	});
+
 	$stateProvider.state('submit', {
 		url: '/submit',
 		title: 'Create: Suggest a new card',

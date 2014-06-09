@@ -1,5 +1,5 @@
 'use strict';
-app.controller('homeView', function($scope, campaignService, $http, $window, leanplum, $stateParams) {
+app.controller('homeView', function($scope, campaignService, $http, $window, leanplum, $stateParams, $state) {
 	$scope.kickstarter = campaignService.campaignsById.ks2013;
 	$scope.ipad = campaignService.campaignsById.iPad2014;
 	$scope.leanplum = leanplum;
@@ -7,15 +7,16 @@ app.controller('homeView', function($scope, campaignService, $http, $window, lea
 	$scope.emailSubmitted = false;
 
 	if ($stateParams.vine) {
-		$scope.mainLayout = 'views/homeView.vineUnlock.html';
 		$scope.vineId = $stateParams.vine;
+		$state.go('home.vineUnlock');
 	} else if($stateParams.youtube) {
-		$scope.mainLayout = 'views/homeView.videoUnlock.html';
 		$scope.youtubeId = $stateParams.youtube;
+		$state.go('home.videoUnlock');
 	} else {
 		$scope.$watch('leanplum.vars.homeLayout', function(newValue) {
 			if(newValue) {
 				$scope.mainLayout = 'views/homeView.' + newValue + '.html';
+				$state.go('home.' + newValue);
 			}
 		});
 	}
