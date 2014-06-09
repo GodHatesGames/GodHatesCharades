@@ -47,7 +47,6 @@
 #homeView {
 	padding-left: 60px;
 	padding-right: 60px;
-	padding-bottom: 0;
 
 	.row {
 		margin-left: -60px;
@@ -84,7 +83,10 @@
 /* Section: Examples */
 #homeView section {
 	padding-top: 35px;
-	padding-bottom: 35px;
+
+	&:not(:last-child) {
+		padding-bottom: 35px;
+	}
 
 	&.examples {
 		margin: 0 auto;
