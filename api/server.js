@@ -3,6 +3,7 @@ require('newrelic');
 var express = require('express');
 var path = require('path');
 var prerender = require('prerender-node');
+var mailchimp = require('./mailchimp');
 
 var port = process.env.PORT || 3000;
 var files = process.env.FILES || '../frontend';
@@ -28,6 +29,8 @@ server.use(express.logger());
 server.use(express.bodyParser());
 
 server.use(express.static(staticFilePath));
+
+server.post('/api/subscribe', mailchimp.subscribe);
 
 // pass the frontend routes
 server.get('/home', showIndex);

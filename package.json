@@ -13,7 +13,8 @@
     "express": "~3.4.8",
     "ejs": "^1.0.0",
     "newrelic": "^1.5.4",
-    "prerender-node": "^1.0.1"
+    "prerender-node": "^1.0.1",
+    "mailchimp-api": "^2.0.6"
   },
   "devDependencies": {
     "bower": "1.2.7",

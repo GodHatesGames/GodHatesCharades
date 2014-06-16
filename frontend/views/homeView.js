@@ -43,7 +43,8 @@ app.controller('homeView', function($scope, campaignService, $http, $window, lea
 			$scope.currentSlide++;
 	};
 
-	$scope.submitEmail = function(fromLabel) {
+	$scope.onEmailSubmitted = function(fromLabel) {
+		console.log('email submitted');
 		$scope.emailSubmitted = true;
 		Leanplum.track('Signed up for email updates');
 		ga('send', 'event', 'signup', 'newsletter', fromLabel);
