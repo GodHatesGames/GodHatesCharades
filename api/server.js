@@ -40,7 +40,7 @@ server.get('/top', showIndex);
 server.get('/admin/*', showIndex);
 server.get('/blog', showIndex);
 server.get('/blog/*/*', showIndex);
-// server.get('/mail/*', showIndex);
+server.get('/mail/*', showIndex);
 
 // otherwise 404
 server.get('/*', show404);
