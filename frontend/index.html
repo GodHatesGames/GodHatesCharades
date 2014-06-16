@@ -8,12 +8,12 @@
 		<link rel="icon" href="favicon.ico?v=3" type="image/x-icon">
 		<link rel="shortcut icon" href="favicon.ico?v=3" type="image/x-icon">
 
-		<title ng-bind="$state.current.title + ' | ' + 'God Hates Charades'"></title>
+		<title ng-bind="($state.current.title || $state.current.parent.title) + ' | ' + 'God Hates Charades'"></title>
 		<meta name="description" ng-content="$state.current.description"/>
 
 		<!-- Facebook OG Tags -->
 		<meta property="og:site_name" content="God Hates Charades" />
-		<meta property="og:title" ng-content="$state.current.title" />
+		<meta property="og:title" ng-content="$state.current.title || $state.current.parent.title" />
 		<meta property="og:description" ng-content="$state.current.description" />
 		<meta property="og:type" ng-content="$state.current.type" />
 		<meta property="og:url" ng-content="currentUrl" />
