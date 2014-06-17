@@ -3,9 +3,6 @@
 
 @mailchimp-height: 44;
 .mailchimp {
-	@offset: 12;
-	position: relative;
-	top: unit(@offset, px);
 }
 
 .mailchimp .email {
@@ -89,125 +86,130 @@
 
 	&.mainLayout {
 		padding-top: 15px;
-	}
 
-	.mainLayout .examples {
-		margin: 0 auto;
-
-		h2 {
-			margin-top: 36px;
-			font-size: 38px;
-			max-width: 600px;
+		.examples {
 			margin: 0 auto;
-		}
-
-		p {
-			font-size: 18px;
-			text-align: center;
-			font-style: italic;
-		}
-
-		@media (max-width: 767px) {
-			h2 {
-				font-size: 32px;
-				max-width: 500px;
-				margin: 0 auto;
-			}
-		}
-
-		@media (max-width: 640px) {
-			margin-left: -10px;
-			margin-right: -10px;
-
-			.characters{
-				position: relative;
-				left: 12px;
-			}
-
-			.scenarios{
-				position: relative;
-				left: -12px;
-			}
 
 			h2 {
-				font-size: 17px;
-				line-height: 21px;
-				max-width: 260px;
+				margin-top: 36px;
+				font-size: 38px;
+				max-width: 600px;
 				margin: 0 auto;
 			}
 
 			p {
-				font-size: 12px;
-				max-width: 250px;
-				margin: 0 auto;
-			}
-		}
-
-		@media (max-width: 320px) {
-			.characters{
-				left: 0px;
+				font-size: 18px;
+				text-align: center;
+				font-style: italic;
 			}
 
-			.scenarios{
-				left: 0px;
+			@media (max-width: 767px) {
+				h2 {
+					font-size: 32px;
+					max-width: 500px;
+					margin: 0 auto;
+				}
 			}
-		}
 
-	/* end &.examples */
-	}
+			@media (max-width: 640px) {
+				margin-left: -10px;
+				margin-right: -10px;
 
-	&.mainLayout .videoUnlock, &.mainLayout .examplesUnlock {
-		
-		@media (max-width: 640px) {
-			& > div {
-				padding-left: 0;
-				padding-right: 0;
+				.characters{
+					position: relative;
+					left: 12px;
+				}
+
+				.scenarios{
+					position: relative;
+					left: -12px;
+				}
+
+				h2 {
+					font-size: 17px;
+					line-height: 21px;
+					max-width: 260px;
+					margin: 0 auto;
+				}
+
+				p {
+					font-size: 12px;
+					max-width: 250px;
+					margin: 0 auto;
+				}
 			}
+
+			@media (max-width: 320px) {
+				.characters{
+					left: 0px;
+				}
+
+				.scenarios{
+					left: 0px;
+				}
+			}
+
+		/* end &.examples */
 		}
 
-		h3 {
-			margin-top: 0;
-			margin-bottom: 25px;
-		}
+	
 
-		h4 {
-			margin-top: 0;
-			margin-bottom: 0;
-			background-color: black;
-			color: white;
-			padding: 10px;
-		}
+		.videoUnlock, .examplesUnlock, .vineUnlock {
+			
+			@media (max-width: 640px) {
+				& > div {
+					padding-left: 0;
+					padding-right: 0;
+				}
+			}
 
-		.video {
-			display: block;
-			width: 100%;
-			border-radius: 23px;
-			overflow: hidden;
-			position: relative;
-		}
-
-		.video iframe {
-			display: block;
-		}
-		
-		.mailchimp {
-			width: 100%;
-			margin-bottom: 25px; 
-		}
-
-		p {
-			text-align: center;
-			padding-top: 10px;
-		}
-
-		@media (max-width: 640px) {
 			h3 {
-				margin-left: 15px;
-				margin-right: 15px;
+				margin-top: 0;
+				margin-bottom: 25px;
+			}
+
+			h4 {
+				margin-top: 0;
+				margin-bottom: 0;
+				background-color: black;
+				color: white;
+				padding: 10px;
+			}
+
+			.video {
+				display: block;
+				width: 100%;
+				border-radius: 23px;
+				overflow: hidden;
+				position: relative;
+			}
+
+			.video iframe {
+				display: block;
 			}
 
 			.printnplay {
-				margin: 0 15px;
+				margin: 0 0 15px 0;
+			}
+			
+			.mailchimp {
+				width: 100%;
+			}
+
+			p {
+				text-align: center;
+				padding-top: 10px;
+			}
+
+			@media (max-width: 640px) {
+				h3 {
+					margin-left: 15px;
+					margin-right: 15px;
+				}
+
+				.printnplay {
+					margin: 15px;
+				}
 			}
 		}
 	}

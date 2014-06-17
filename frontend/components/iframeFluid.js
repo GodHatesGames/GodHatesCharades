@@ -58,7 +58,10 @@ app.directive('iframeFluid', function($window) {
 			}
 
 			function setIframe(iframeUrl) {
-				if (thumbClicked && iframeUrl && iframeUrl !== '') {
+				if($scope.iframeThumb && !thumbClicked)
+					return;
+				
+				if (iframeUrl && iframeUrl !== '') {
 					// clear old iframes
 					$element.empty();
 					//add new iframe
