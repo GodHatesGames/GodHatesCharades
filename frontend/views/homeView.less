@@ -428,37 +428,44 @@
 	background: #54C2C8;
 	line-height: 20px;
 	color: white;
-}
 
-#homeView section.signup p {
-	font-family: 'GodHatesCharades';
-	font-size: 28px;
-	line-height: 34px;
-	margin: 0;
-	padding: 0;
-}
+	p {
+		font-family: 'GodHatesCharades';
+		font-size: 28px;
+		line-height: 34px;
+		margin: 0;
+		padding: 0;
+	}
 
-#homeView section.signup b {
-	color: black;
-}
+	b {
+		color: black;
+	}
 
-@media (max-width: 992px) {
+	.mailchimp {
+		top: 25px;
+	}
+	@media (max-width: 1200px) {
+		.mailchimp {
+			top: 42px;
+		}
+	}
 
-	#homeView section.signup {
+	@media (max-width: 992px) {
 		padding-left: 20px;
 		padding-right: 20px;
+
+		.mailchimp {
+			top: 0;
+		}
 	}
-}
 
-@media (max-width: 640px) {
-
-	#homeView section.signup {
+	@media (max-width: 640px) {
 		padding-left: 0px;
 		padding-right: 0px;
-	}
 
-	.form-inline {
-		padding: 0;
+		.form-inline {
+			padding: 0;
+		}
 	}
 }
 
