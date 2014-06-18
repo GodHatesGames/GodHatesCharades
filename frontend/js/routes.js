@@ -111,7 +111,9 @@ app.config(function($stateProvider,
 		templateUrl: 'views/exportView.html',
 		resolve: {
 			getAllSuggestions: 'getAllSuggestions',
-			sets: 'sets'
+			sets: function(sets) {
+				return sets.getAllSets();
+			}
 		},
 		controller: 'exportView'
 	});

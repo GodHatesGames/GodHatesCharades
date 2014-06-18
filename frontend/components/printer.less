@@ -1,16 +1,21 @@
 @import "../less/colors";
 
-.printer .printButtons {
-	margin-bottom: 5px;
+.printer {
+	.printButtons {
+		margin-bottom: 5px;
+		float: left;
+		margin-right: 5px;
+	}
+
+	.doPrint {
+		display: none;
+	}
+	
+	.card .domain {
+		display: none;
+	}
 }
 
-.printer .doPrint {
-	display: none;
-}
-
-.card .domain {
-	display: none;
-}
 
 @media print {
 	.row {

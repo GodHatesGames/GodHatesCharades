@@ -3,15 +3,16 @@ app.service('sets', function($q, $rootScope) {
 	// console.log('instantiate sets');
 	var sets = {
 		data: [],
-		reload: loadData,
+		getAllSets: getAllSets,
 		byId: {},
+		setItemsById: {},
 		deleteSet: deleteSet,
-		getCardsForSet: getCardsForSet,
+		getSetItemsForSet: getSetItemsForSet,
 		addCardToSet: addCardToSet,
 		removeSetItem: removeSetItem
 	};
 
-	function loadData(scope) {
+	function getAllSets(scope) {
 		console.log('sets loadData');
 		var deferred = $q.defer();
 		Parse.Cloud.run(
@@ -22,10 +23,7 @@ app.service('sets', function($q, $rootScope) {
 					// save data
 					sets.data = setData;
 					//index by id
-					sets.byId = {};
-					_.each(setData, function(set, index, list) {
-						sets.byId[set.id] = set;
-					});
+					sets.byId = _.indexBy(setData, 'id');
 					// resolve deffered
 					deferred.resolve(sets);
 					// digest if scope is passed in
@@ -66,27 +64,38 @@ app.service('sets', function($q, $rootScope) {
 		return deferred.promise;
 	}
 
-	function getCardsForSet(set) {
-		console.log('sets getCardsForSet');
-		var deferred = $q.defer();
-		Parse.Cloud.run(
-			'getCardsForSet',
-			{
-				id: set.id,
-				includeOwner: true
-			},
-			{
-				success: function(cards) {
-					deferred.resolve(cards);
+	var gettingSetItemsPromises = {};
+	function getSetItemsForSet(set) {
+		console.log('sets getSetItemsForSet');
+		if (gettingSetItemsPromises[set.id]) {
+			// return promise so we dont make the call twice
+			return gettingSetItemsPromises[set.id];
+		} else {
+			var deferred = $q.defer();
+			// save promise if needed
+			gettingSetItemsPromises[set.id] = deferred.promise;
+			Parse.Cloud.run(
+				'getCardsForSet',
+				{
+					id: set.id,
+					includeOwner: true
 				},
-				error: function(err) {
-					deferred.reject(err);
-					// if (scope)
-					// 	scope.$digest();
+				{
+					success: function(setItems) {
+						delete gettingSetItemsPromises[set.id];
+						sets.setItemsById[set.id] = setItems;
+						deferred.resolve(setItems);
+					},
+					error: function(err) {
+						delete gettingSetItemsPromises[set.id];
+						deferred.reject(err);
+						// if (scope)
+						// 	scope.$digest();
+					}
 				}
-			}
-		);
-		return deferred.promise;
+			);
+			return deferred.promise;
+		}
 	}
 
 	function addCardToSet(card, set) {
@@ -134,5 +143,5 @@ app.service('sets', function($q, $rootScope) {
 		return deferred.promise;
 	}
 
-	return loadData();
+	return sets;
 });

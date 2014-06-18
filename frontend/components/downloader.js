@@ -4,7 +4,9 @@ app.directive('downloader', function(cardService) {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/downloader.html',
 		replace: true,
-		scope: true,
+		scope: {
+			items: '=items'
+		},
 		controller: function($scope) {
 			// public vars
 			$scope.cardService = cardService;
@@ -19,49 +21,29 @@ app.directive('downloader', function(cardService) {
 			];
 
 			// generate all cards CSV
-			var allCsvData = [];
-			var item;
-			_.each($scope.allSuggestions, function(value, key) {
-				var text = value.attributes.text;
-				// fix bad qoutes and escape them too
-				text = text.replace(/[”“"’]/g, '\'');
-				item = {
-					'text': text,
-					'type': value.attributes.type,
-					'totalVotes': value.attributes.totalVotes,
-					'skipped': value.attributes.skipped,
-					'rejected': value.attributes.rejected,
-					'kdr': value.attributes.kdr,
-					'moderated': value.attributes.moderated
-				};
-				allCsvData.push(item);
-			});
-			$scope.allCsvData = allCsvData;
 
 
-			$scope.$watch('setItems', generateSetData);
+			$scope.$watch('items', generateSetData);
 			
-			function generateSetData() {
-				// generate set cards CSV
-				var setCsvData = [];
+			function generateSetData(newValue) {
+				var allCsvData = [];
 				var item;
-				_.each($scope.setItems, function(value, key) {
-					var card = value.get('card');
-					var text = card.get('text');
+				_.each(newValue, function(value, key) {
+					var text = value.attributes.text;
 					// fix bad qoutes and escape them too
 					text = text.replace(/[”“"’]/g, '\'');
 					item = {
 						'text': text,
-						'type': card.attributes.type,
-						'totalVotes': card.attributes.totalVotes,
-						'skipped': card.attributes.skipped,
-						'rejected': card.attributes.rejected,
-						'kdr': card.attributes.kdr,
-						'moderated': card.attributes.moderated
+						'type': value.attributes.type,
+						'totalVotes': value.attributes.totalVotes,
+						'skipped': value.attributes.skipped,
+						'rejected': value.attributes.rejected,
+						'kdr': value.attributes.kdr,
+						'moderated': value.attributes.moderated
 					};
-					setCsvData.push(item);
+					allCsvData.push(item);
 				});
-				$scope.setCsvData = setCsvData;
+				$scope.allCsvData = allCsvData;
 			}
 
 			// Private methods

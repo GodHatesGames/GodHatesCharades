@@ -1,5 +1,4 @@
 <div class="printer">
-	
 	<!-- Loading message -->
 	<div class="alert alert-info" 
 			ng-show="loading">
@@ -14,15 +13,40 @@
 	<!-- Loaded message -->
 	<div class="doNotPrint" 
 			ng-show="!loading && !errorMessage">
-		{{setItems.length}} set items loaded
-		<button class="btn btn-info printButtons"
-				ng-click="printColor()">
-			Print Full Color
-		</button>
-		<button class="btn btn-info printButtons"
-				ng-click="printBlack()">
-			Print Black & White
-		</button>
+
+		<table class="table table-striped">
+			<tr>
+				<th>Set Name</th>
+				<th>Items</th>
+				<th>Color</th>
+				<th>B&W</th>
+				<th>CSV</th>
+			</tr>
+			<tr ng-repeat="(index, set) in loadedSets | property:'attributes.name' | orderBy:['attributes.name']">
+				<!-- Text -->
+				<td ng-bind="set.attributes.name"></td>
+				<!-- Text -->
+				<td ng-bind="getCardCount(set)"></td>
+				<!-- Color Button -->
+				<td class="tableButton">
+					<button class="btn btn-info printButtons"
+							ng-click="printColor(set)">
+						Print Full Color
+					</button>
+				</td>
+				<!-- B&W Button -->
+				<td class="tableButton">
+					<button class="btn btn-info printButtons"
+							ng-click="printBlack(set)">
+						Print Black & White
+					</button>
+				</td>
+				<!-- B&W Button -->
+				<td class="tableButton">
+					<downloader items="cardsBySet[set.id]"></downloader>
+				</td>
+			</tr>
+		</table>
 	</div>
 
 	<!-- Print instructions -->

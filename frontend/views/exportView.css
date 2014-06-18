@@ -2,6 +2,10 @@
 	display: inline-block;
 }
 
+#exportView h3 {
+	text-align: left;
+}
+
 @media print {
 	#mainNav, .logoContainer, .footer, #exportView > *:not(.printer){
 		display: none;
