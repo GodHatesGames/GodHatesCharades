@@ -34,74 +34,21 @@
 					 alt="God Hates Charades"
 					 class="printLogo">
 			</div>
-		</div>
-		<div class="row doPrint printList">
-				<ul>
-					<li class="checked">
-						Download this pdf.
-					</li>
-					<li>
-						<b>Sneak into a nearby office building with at least {{guestimatePages()}} sheets of 8.5 x 11 inch paper.</b>
-							You can use the plain paper, but you have that friend... the one who reads backwards 
-							through translucent paper. Grab 80lb paper or better, and don’t invite that guy next time.
-					</li>
-					<li>
-						<b>Print this PDF making sure the Scale is 100% so you get the right size cards.</b> Dont take too long or 
-						they’ll catch you. If they do, beg for forgiveness and offer to print them a copy too.
-					</li>
-					<li>
-						<b>Slice up the cards, for legal reasons we recommend safety scissors.</b> They wont cut your 80lb paper, and they 
-						wont hurt your delicate digits.
-					</li>
-					<li>
-						<b>Keep 'em safe!</b> They’re poker card size, so grab a box of poker cards, toss them and write GOD HATES CHARADES 
-						in sharpie. That’s what we’d do.
-					</li>
-				</ul>
+			<div ng-html-compile="instructionsHtml"
+			     class="instructions col-xs-8 col-xs-offset-2"></div>
 		</div>
 	</span>
 	<!-- Play Instructions -->
 	<span class="page-break">
-		<div class="row doPrint">
+		<div class="row">
 			<div class="printHeader">
 				<span class="title">LETS PLAY</span>
 				<img src="img/logo_bw.svg"
 					 alt="God Hates Charades"
 					 class="printLogo">
 			</div>
-		</div>
-		<div class="row doPrint">
-				<div class="col-xs-6 col-sm-6 col-md-6">
-					<h3>What is this?</h3>
-					<p>
-						God Hates Charades is a game where players act out vile scenes in the form of <b>thirty seconds act outs.</b>
-					</p>
-					<p>
-						Players receive points when a guesser <b>guesses their scene</b>. And guessers receive points for <b>guessing</b>.
-					</p>
-					<p>
-						The first player to <b>seven points</b> wins.
-					</p>
-					<h3>What do I do when its my turn?</h3>
-					<p>
-						When it’s your turn, draw two <b>Actor</b> and <b>Scenario</b> cards. Now combine an <b>Actor</b> and <b>Scenario</b> card to make a 
-						<b>Scene</b>.  You will have fifteen seconds to pick your <b>Scene</b>.  Discard the <b>Actor</b> and <b>Scenario</b> card that you 
-						<i>didn’t</i> choose.
-					</p>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6">
-					<h3>What are the rules?</h3>
-					<p>
-						The only rule is you can’t say anything printed on your <b>Actor</b> or <b>Scenario</b> card. 
-					</p>
-					<p>
-						If someone guesses the <b>Scene</b>, you score a point by keeping the <b>Actor</b> card. 
-						You give them the <b>Scenario</b> card because they guessed correctly.
-					</p>
-					<p>
-						If time runs out. Discard both of the cards in your hand. Nobody gets points. God wins.
-					</p>
-				</div>
+			<div ng-html-compile="rulesHtml"
+			     class="rules col-xs-8 col-xs-offset-2"></div>
 		</div>
 	</span>
 	<!-- One suggestion at a time -->

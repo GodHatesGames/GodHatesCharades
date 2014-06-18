@@ -12,6 +12,10 @@ var CONFIG = {
 		apiVersion: '1.0.6'
 	},
 	PRISMIC: {
-		API_ENDPOINT: 'https://godhatescharades.prismic.io/api'
+		API_ENDPOINT: 'https://godhatescharades.prismic.io/api',
+		DOCS: {
+			PRINT_RULES: 'U59QxSkAADUAzG7c',
+			PRINT_INSTRUCTIONS: 'U6DYyy8AACoA3W1e'
+		}
 	}
 };

@@ -1,5 +1,5 @@
 'use strict';
-app.directive('printer', function(cardService, $compile, $window) {
+app.directive('printer', function(cardService, $compile, $window, prismic) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/printer.html',
@@ -9,7 +9,23 @@ app.directive('printer', function(cardService, $compile, $window) {
 			// public vars
 			$scope.cardService = cardService;
 			$scope.extraItems = [];
+			$scope.rulesHtml = null;
+			$scope.instructionsHtml = null;
 			var itemsPerPage = 9;
+
+			prismic.getDocumentById(CONFIG.PRISMIC.DOCS.PRINT_RULES)
+			.then(function onRulesLoaded(rules) {
+				var structuredText = rules.getStructuredText('doc.content');
+				$scope.rulesHtml = structuredText.asHtml();
+			});
+
+			prismic.getDocumentById(CONFIG.PRISMIC.DOCS.PRINT_INSTRUCTIONS)
+			.then(function onInstructionsLoaded(instructions) {
+				var structuredText = instructions.getStructuredText('doc.content');
+				$scope.instructionsHtml = structuredText.asHtml();
+			});
+
+			
 
 			$scope.$watch('setItems', onSetItemsChanged);
 
@@ -44,8 +60,8 @@ app.directive('printer', function(cardService, $compile, $window) {
 			};
 
 			$scope.guestimatePages = function() {
-				//start with 2 for instructions
-				var guestimation = 2;
+				//start with 3 for instructions
+				var guestimation = 3;
 				guestimation += Math.ceil($scope.setItems.length / itemsPerPage);
 				return guestimation;
 			};
