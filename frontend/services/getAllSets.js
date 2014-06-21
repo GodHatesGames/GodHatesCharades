@@ -25,7 +25,7 @@ app.service('sets', function($q, $rootScope) {
 					//index by id
 					sets.byId = _.indexBy(setData, 'id');
 					// resolve deffered
-					deferred.resolve(sets);
+					deferred.resolve(setData);
 					// digest if scope is passed in
 					if(scope) {
 						scope.$digest();
