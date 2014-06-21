@@ -111,9 +111,9 @@ app.config(function($stateProvider,
 		templateUrl: 'views/exportView.html',
 		resolve: {
 			getAllSuggestions: 'getAllSuggestions',
-			allSets: function(sets) {
+			allSets: ['sets', function(sets) {
 				return sets.getAllSets();
-			}
+			}]
 		},
 		controller: 'exportView'
 	});
@@ -123,9 +123,9 @@ app.config(function($stateProvider,
 		title: 'Sets',
 		templateUrl: 'views/setsView.html',
 		resolve: {
-			allSets: function(sets) {
+			allSets: ['sets', function(sets) {
 				return sets.getAllSets();
-			}
+			}]
 		},
 		controller: 'setsView'
 	});
@@ -142,9 +142,9 @@ app.config(function($stateProvider,
 		title: 'Set Details',
 		templateUrl: 'views/setsDetailView.html',
 		resolve: {
-			allSets: function(sets) {
+			allSets: ['sets', function(sets) {
 				return sets.getAllSets();
-			}
+			}]
 		},
 		controller: 'setsDetailView'
 	});
