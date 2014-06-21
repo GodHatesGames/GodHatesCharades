@@ -1,5 +1,5 @@
 'use strict';
-app.controller('setsDetailView', function(sets, $scope, $state, $stateParams, cardService) {
+app.controller('setsDetailView', function(allSets, $scope, $state, $stateParams, cardService, sets) {
 	$scope.saving = false;
 	$scope.cardsLoading = true;
 	$scope.cardService = cardService;
@@ -13,7 +13,7 @@ app.controller('setsDetailView', function(sets, $scope, $state, $stateParams, ca
 	$scope.$on('suggestionAdded', onSuggestionAdded);
 	console.log('set:', $scope.set);
 
-	sets.getCardsForSet($scope.set)
+	sets.getSetItemsForSet($scope.set)
 	.then(function (setItems) {
 		$scope.cardsLoading = false;
 		$scope.setItemsByCardId = {};

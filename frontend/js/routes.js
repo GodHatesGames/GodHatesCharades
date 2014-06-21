@@ -111,7 +111,7 @@ app.config(function($stateProvider,
 		templateUrl: 'views/exportView.html',
 		resolve: {
 			getAllSuggestions: 'getAllSuggestions',
-			sets: function(sets) {
+			allSets: function(sets) {
 				return sets.getAllSets();
 			}
 		},
@@ -123,14 +123,16 @@ app.config(function($stateProvider,
 		title: 'Sets',
 		templateUrl: 'views/setsView.html',
 		resolve: {
-			sets: 'sets'
+			allSets: function(sets) {
+				return sets.getAllSets();
+			}
 		},
 		controller: 'setsView'
 	});
 
 	$stateProvider.state('admin.sets.create', {
 		url: '/create',
-		title: 'Sets: Create a set',
+		title: 'allSets: Create a set',
 		templateUrl: 'views/setsCreateView.html',
 		controller: 'setsCreateView'
 	});
@@ -140,7 +142,9 @@ app.config(function($stateProvider,
 		title: 'Set Details',
 		templateUrl: 'views/setsDetailView.html',
 		resolve: {
-			sets: 'sets'
+			allSets: function(sets) {
+				return sets.getAllSets();
+			}
 		},
 		controller: 'setsDetailView'
 	});
