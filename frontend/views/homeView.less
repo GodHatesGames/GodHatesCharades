@@ -28,6 +28,19 @@
 	width: 65%;
 }
 
+.video {
+	display: block;
+	width: 100%;
+	border-radius: 23px;
+	overflow: hidden;
+	position: relative;
+	-webkit-transform: translate3d(0, 0, 0); /* Keeps video from disappearing on chrome... */
+}
+
+.video iframe {
+	display: block;
+}
+
 @media (max-width: 767px) {
 
 	.mailchimp .form-group {
@@ -176,18 +189,6 @@
 				padding: 10px;
 			}
 
-			.video {
-				display: block;
-				width: 100%;
-				border-radius: 23px;
-				overflow: hidden;
-				position: relative;
-			}
-
-			.video iframe {
-				display: block;
-			}
-
 			.printnplay {
 				margin: 0 0 15px 0;
 			}
@@ -283,21 +284,29 @@
 			}
 
 			&.slide-one .slide-content {
+				padding: 5% 15% 0 15%;
+
+				h1 {
+					color: white;
+				}
+			}
+
+			&.slide-two .slide-content {
 				background-image: url(../img/tutorial_1.png);
 				background-size: 709px 600px;
 			}
 
-			&.slide-two .slide-content {
+			&.slide-three .slide-content {
 				background-image: url(../img/tutorial_2.png);
 				background-size: 739px 600px;
 			}
 
-			&.slide-three .slide-content {
+			&.slide-four .slide-content {
 				background-image: url(../img/tutorial_3.png);
 				background-size: 828px 600px;
 			}
 
-			&.slide-four .slide-content {
+			&.slide-five .slide-content {
 				background-image: url(../img/tutorial_4.png);
 				background-size: 745px 600px;
 			}
@@ -312,19 +321,19 @@
 		only screen and (                min-resolution: 192dpi),
 		only screen and (                min-resolution: 2dppx) {
 
-			.slide-one .slide-content {
+			.slide-two .slide-content {
 				background-image: url(../img/tutorial_1@2x.png);
 			}
 
-			.slide-two .slide-content {
+			.slide-three .slide-content {
 				background-image: url(../img/tutorial_2@2x.png);
 			}
 
-			.slide-three .slide-content {
+			.slide-four .slide-content {
 				background-image: url(../img/tutorial_3@2x.png);
 			}
 
-			.slide-four .slide-content {
+			.slide-five .slide-content {
 				background-image: url(../img/tutorial_4@2x.png);
 			}
 
