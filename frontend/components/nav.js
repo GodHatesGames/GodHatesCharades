@@ -26,13 +26,17 @@ app.directive('nav', function(parseUser, $uiViewScroll, $state, $timeout) {
 				// var selector = '#' + id;
 
 				// attempt to switch pages if needed, then jump
-				$state.go(location)
-				.then(function() {
-					//wait for page to render
-					$timeout(function() {
-						jumpIfFound(id);
-					}, 300);
-				});
+				if(!$state.includes(location)) {
+					$state.go(location)
+					.then(function jumpLater() {
+						//wait for page to render
+						$timeout(function() {
+							jumpIfFound(id);
+						}, 300);
+					});
+				} else {
+					jumpIfFound(id);
+				}
 
 				function jumpIfFound(id) {
 					var element = angular.element(document.getElementById(id));
