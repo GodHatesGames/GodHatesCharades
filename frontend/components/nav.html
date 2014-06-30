@@ -10,10 +10,8 @@
 			<a ui-sref="home">Home</a>
 		</li>
 
-		<li>
-			<a ng-click="getIt()">
-			   Get It!
-			</a>
+		<li ui-sref-active="active">
+			<a ui-sref='top'>Top Cards</a>
 		</li>
 
 		<li ng-show="parseUser.isBetaUser()"
@@ -39,23 +37,14 @@
 
 	<ul class="nav nav-pills nav-justified nav-right">
 
+		<li ui-sref-active="active">
+			<a ui-sref='vote'>Vote</a>
+		</li>
+
 		<li ng-hide="parseUser.isBetaUser()"
 		    ui-sref-active="active">
 			<a ui-sref="blog">Blog</a>
 		</li>
-
-		<li ui-sref-active="active"
-		    ng-show="parseUser.isBetaUser()">
-			<a ui-sref='top'>Cards</a>
-		</li>
-		<li ui-sref-active="active"
-		    ng-show="parseUser.isBetaUser()">
-			<a ui-sref='vote'>Vote</a>
-		</li>
-		<!-- <li ng-class="{ active: $state.includes('top') }"
-			ng-show="parseUser.isBetaUser()">
-			<a ui-sref='top'>Leaderboard</a>
-		</li> -->
 
 		<!-- user stuff -->
 		<li class="dropdown"
@@ -105,12 +94,12 @@
 			</ul>
 		</li>
 		
-		<li class="login" 
+		<!-- <li class="login" 
 		    ui-sref-active="active"
 		    ng-show="parseUser.isAnon()">
 			<a ui-sref='login'>
 				Login
 			</a>
-		</li>
+		</li> -->
 	</ul>
 </div>
