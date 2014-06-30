@@ -1,0 +1,92 @@
+.vote {
+	.cardsContainer {
+		width: 90%;
+		box-sizing: border-box;
+		margin: 0 auto;
+	}
+
+	.suggestionPair {
+		margin-bottom: 15px;
+	}
+
+	.pairContainer {
+		cursor: pointer;
+		position: relative;
+		width: 50%;
+		display: inline-block;
+
+		.card {
+			-webkit-transition: all 0.25s ease;
+			-moz-transition: all 0.25s ease;
+			-o-transition: all 0.25s ease;
+			transition: all 0.25s ease;
+			width: 50%;
+			display: inline-block;
+
+			&.character {
+				-webkit-transform: scale(0.9, 0.9) translateX(5px);
+				z-index: 9;
+			}
+
+			&.scenario {
+				-webkit-transform: scale(0.9, 0.9) translateX(-5px);
+				z-index: 10;
+			}
+		}
+	}
+	.separator {
+		font-weight: bold;
+		position: absolute;
+		left: 100%;
+		top: 50%;
+		z-index: 99;
+		width: 50px;
+		height: 50px;
+		background: white;
+		border-radius: 50px;
+		text-align: center;
+		line-height: 50px;
+		box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
+		color: #5A4040;
+		box-sizing: border-box;
+		margin-left: -25px;
+		margin-top: -25px;
+	}
+
+	.skip {
+		margin: 0 auto;
+	}
+}
+
+/* Max iPhone 5+ Vertical  */
+@media (max-width: 567px) {
+	.vote {
+		.pairContainer {
+			width: 100%;
+			display: block;
+		}
+
+		.separator {
+			left: 50%;
+			top: 100%;
+		}
+	}
+}
+
+@media (min-width: 569px) {
+	.vote {
+		.pairContainer:hover {
+			.card {
+				box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
+
+				&.character {
+					-webkit-transform: scale(0.97, 0.97) rotate(-8deg) translateX(15px);
+				}
+
+				&.scenario {
+					-webkit-transform: scale(1, 1) rotate(6deg) translateX(-15px);
+				}
+			}
+		}
+	}
+}
