@@ -100,6 +100,9 @@ app.directive('vote', function(cardService, cloudUtils) {
 
 				// update current index
 				$scope.pairIndex += $scope.pairLimit;
+
+				// Track
+				ga('send', 'event', 'vote', 'pair');
 			};
 
 			$scope.skipBoth = function() {
@@ -124,6 +127,9 @@ app.directive('vote', function(cardService, cloudUtils) {
 
 				// update current index
 				$scope.pairIndex += $scope.pairLimit;
+
+				// Track
+				ga('send', 'event', 'vote', 'skip');
 			};
 
 			// init
