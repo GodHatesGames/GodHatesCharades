@@ -29,8 +29,7 @@
     "angular-prismicio": "~0.1.0",
     "angular-slugify": "~1.0.0",
     "disqus-here": "~0.0.3",
-    "angular-animate": "~1.2.18",
-    "ng-Fx": "~0.4.1"
+    "angular-animate": "~1.2.18"
   },
   "resolutions": {
     "angular": ">=1.2"

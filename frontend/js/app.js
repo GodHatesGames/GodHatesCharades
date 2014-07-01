@@ -6,7 +6,6 @@ Parse.initialize(CONFIG.PARSE_APP_ID, CONFIG.PARSE_JS_KEY);
 // Angular Init
 var app = angular.module('app', ['ng',
 									'ngAnimate',
-									'fx.animations',
 									'ui.router',
 									'ui.bootstrap',
 									'textareaNoreturn',
