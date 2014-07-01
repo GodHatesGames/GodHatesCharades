@@ -1,5 +1,5 @@
 'use strict';
-app.directive('vote', function(cardService, cloudUtils) {
+app.directive('vote', function(cardService, cloudUtils, $timeout) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/vote.html',
@@ -84,10 +84,10 @@ app.directive('vote', function(cardService, cloudUtils) {
 				var chosenPair = $scope.suggestionPairs[selectedIndex];
 				var skippedPair = $scope.suggestionPairs[opposite];
 				var params = {
-						'chosenActor': chosenPair[0].id,
-						'chosenScenario': chosenPair[1].id,
-						'skippedActor': skippedPair[0].id,
-						'skippedScenario': skippedPair[1].id
+						chosenActor: chosenPair[0].id,
+						chosenScenario: chosenPair[1].id,
+						skippedActor: skippedPair[0].id,
+						skippedScenario: skippedPair[1].id
 				};
 				Parse.Cloud.run(
 					'recordChosenAndSkipped',
@@ -99,7 +99,12 @@ app.directive('vote', function(cardService, cloudUtils) {
 				);
 
 				// update current index
-				$scope.pairIndex += $scope.pairLimit;
+
+				// start animation
+				dropCard(document.getElementById(params.skippedActor));
+				dropCard(document.getElementById(params.skippedScenario));
+				// showoffCard(document.getElementById(params.chosenActor));
+				// showoffCard(document.getElementById(params.chosenScenario));
 
 				// Track
 				ga('send', 'event', 'vote', 'pair');
@@ -131,6 +136,36 @@ app.directive('vote', function(cardService, cloudUtils) {
 				// Track
 				ga('send', 'event', 'vote', 'skip');
 			};
+
+			function showoffCard(card) {
+				TweenMax.to(card, 0.5, {
+					rotation: Math.floor((Math.random() * 100) - 50),
+					startAt: {
+						opacity: 0.75
+					},
+					onComplete: onCardsDropped
+				});
+			}
+
+			function dropCard(card) {
+				TweenMax.to(card, 0.5, {
+					opacity: 0,
+					y: 600,
+					rotation: Math.floor((Math.random() * 100) - 50),
+					startAt: {
+						opacity: 0.75
+					},
+					onComplete: onCardsDropped
+				});
+			}
+
+			function onCardsDropped(event) {
+				$scope.pairIndex += $scope.pairLimit;
+				// delay to allow animation to settle visually
+				$timeout(function() {
+					$scope.$digest();
+				}, 100);
+			}
 
 			// init
 			loadSuggestionPairs();

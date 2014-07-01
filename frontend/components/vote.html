@@ -1,24 +1,24 @@
 <div class="vote">
 
 	<div class="loadingAlert" 
-			ng-show="loading">
+	     ng-show="loading">
 		Loading...</div>
 
 	<!-- Repeat Pairs -->
 	<div class="cardsContainer">
 		<div class="pairContainer"
-				ng-repeat="(index, pair) in suggestionPairs"
-				ng-hide="loading"
-				ng-click="selectPair(index)">
+		     ng-repeat="(index, pair) in suggestionPairs"
+		     ng-hide="loading"
+		     ng-click="selectPair(index)">
 			<!-- Repeat suggestions in pairs -->
 				<card ng-repeat="(index, suggestion) in pair"
-					  id="suggestion.id">
+				      card-id="suggestion.id">
 				</card>
 
-			<div class="separator" 
-					ng-hide="$last">
-				VS
-			</div>
+		</div>
+		<div class="separator" 
+		     ng-hide="loading">
+			VS
 		</div>
 	</div>
 
@@ -26,8 +26,8 @@
 
 	<p ng-hide="loading">...or let us know if both suck.</p>
 	<button ng-click="skipBoth()"
-			ng-hide="loading"
-			class="btn skip">
+	        ng-hide="loading"
+	        class="btn skip">
 		These aren't funny
 	</button>
 </div>

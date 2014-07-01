@@ -5,7 +5,7 @@ app.directive('card', function(parseUser, cardService, $rootScope) {
 		templateUrl: 'components/card.html',
 		replace: true,
 		scope: {
-			id: '=id',
+			id: '=cardId',
 			updatable: '=updatable',
 			blankType: '=blankType'
 		},

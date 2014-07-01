@@ -15,7 +15,19 @@
 		width: 50%;
 		display: inline-block;
 
+
+		&.ng-enter {
+			-webkit-transition: 1s linear opacity; /* Chrome */
+			transition: 1s linear opacity;
+			opacity: 0;
+		}
+		 
+		&.ng-enter.ng-enter-active {
+			opacity: 1;
+		}
+
 		.card {
+			opacity: 0;
 			-webkit-transition: all 0.25s ease;
 			-moz-transition: all 0.25s ease;
 			-o-transition: all 0.25s ease;
@@ -24,11 +36,13 @@
 			display: inline-block;
 
 			&.character {
+				opacity: 1;
 				-webkit-transform: scale(0.9, 0.9) translateX(5px);
 				z-index: 9;
 			}
 
 			&.scenario {
+				opacity: 1;
 				-webkit-transform: scale(0.9, 0.9) translateX(-5px);
 				z-index: 10;
 			}
@@ -37,7 +51,7 @@
 	.separator {
 		font-weight: bold;
 		position: absolute;
-		left: 100%;
+		left: 50%;
 		top: 50%;
 		z-index: 99;
 		width: 50px;
@@ -50,7 +64,7 @@
 		color: #5A4040;
 		box-sizing: border-box;
 		margin-left: -25px;
-		margin-top: -25px;
+		margin-top: -50px;
 	}
 
 	.skip {

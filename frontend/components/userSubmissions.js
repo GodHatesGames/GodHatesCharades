@@ -7,7 +7,7 @@ app.directive('userSubmissions', function($filter, cardService, parseUser) {
 			userid: '=userid'
 		},
 		link: function($scope, $element) {
-			$scope.$watch('pairIndex', $scope.onPairIndexChanged);
+			// $scope.$watch('pairIndex', $scope.onPairIndexChanged);
 		},
 		controller: function($scope, $element) {
 			// public vars
