@@ -8,6 +8,7 @@
 	<div class="cardsContainer">
 		<div class="pairContainer"
 		     ng-repeat="(index, pair) in suggestionPairs"
+		     ng-class-even="'right'"
 		     ng-hide="loading"
 		     ng-click="selectPair(index)">
 			<!-- Repeat suggestions in pairs -->

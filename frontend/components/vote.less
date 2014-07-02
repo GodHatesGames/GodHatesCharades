@@ -3,68 +3,80 @@
 		width: 90%;
 		box-sizing: border-box;
 		margin: 0 auto;
-	}
-
-	.suggestionPair {
-		margin-bottom: 15px;
-	}
-
-	.pairContainer {
-		cursor: pointer;
+		height: 350px;
 		position: relative;
-		width: 50%;
-		display: inline-block;
 
-
-		&.ng-enter {
-			-webkit-transition: 1s linear opacity; /* Chrome */
-			transition: 1s linear opacity;
-			opacity: 0;
-		}
-		 
-		&.ng-enter.ng-enter-active {
-			opacity: 1;
-		}
-
-		.card {
-			opacity: 0;
-			-webkit-transition: all 0.25s ease;
-			-moz-transition: all 0.25s ease;
-			-o-transition: all 0.25s ease;
-			transition: all 0.25s ease;
+		.pairContainer {
+			cursor: pointer;
+			position: absolute;
 			width: 50%;
 			display: inline-block;
+			opacity: 1;
 
-			&.character {
-				opacity: 1;
-				-webkit-transform: scale(0.9, 0.9) translateX(5px);
-				z-index: 9;
+			&.right {
+				left: 50%;
 			}
 
-			&.scenario {
+			@delay-time: 1s;
+			@enter-time: 1s;
+			@leave-time: 1s;
+			&.ng-enter {
+				-webkit-transition: opacity @enter-time linear @delay-time; /* Chrome */
+				transition: opacity @enter-time linear @delay-time;
+				opacity: 0;
+			}
+			 
+			&.ng-enter.ng-enter-active {
 				opacity: 1;
-				-webkit-transform: scale(0.9, 0.9) translateX(-5px);
-				z-index: 10;
+			}
+
+			&.ng-leave {
+				-webkit-transition: @leave-time linear opacity; /* Chrome */
+				transition: @leave-time linear opacity;
+				opacity: 1;
+			}
+
+			&.ng-leave.ng-leave-active {
+				opacity: 0;
+			}
+
+			.card {
+				-webkit-transition: all 0.25s ease;
+				-moz-transition: all 0.25s ease;
+				-o-transition: all 0.25s ease;
+				transition: all 0.25s ease;
+				width: 50%;
+				display: inline-block;
+
+				&.character {
+					-webkit-transform: scale(0.9, 0.9) translateX(5px);
+					z-index: 9;
+				}
+
+				&.scenario {
+					-webkit-transform: scale(0.9, 0.9) translateX(-5px);
+					z-index: 10;
+				}
 			}
 		}
-	}
-	.separator {
-		font-weight: bold;
-		position: absolute;
-		left: 50%;
-		top: 50%;
-		z-index: 99;
-		width: 50px;
-		height: 50px;
-		background: white;
-		border-radius: 50px;
-		text-align: center;
-		line-height: 50px;
-		box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
-		color: #5A4040;
-		box-sizing: border-box;
-		margin-left: -25px;
-		margin-top: -50px;
+		.separator {
+			font-weight: bold;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			z-index: 99;
+			width: 50px;
+			height: 50px;
+			background: white;
+			border-radius: 50px;
+			text-align: center;
+			line-height: 50px;
+			box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
+			color: #5A4040;
+			box-sizing: border-box;
+			margin-left: -25px;
+			margin-top: -50px;
+		}
 	}
 
 	.skip {

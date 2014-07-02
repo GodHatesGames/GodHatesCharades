@@ -99,10 +99,11 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 				);
 
 				// update current index
+				$scope.pairIndex += $scope.pairLimit;
 
 				// start animation
-				dropCard(document.getElementById(params.skippedActor));
-				dropCard(document.getElementById(params.skippedScenario));
+				// dropCard(document.getElementById(params.skippedActor));
+				// dropCard(document.getElementById(params.skippedScenario));
 				// showoffCard(document.getElementById(params.chosenActor));
 				// showoffCard(document.getElementById(params.chosenScenario));
 
