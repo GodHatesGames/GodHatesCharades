@@ -86,7 +86,10 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 				}
 			};
 
-			$scope.selectPair = function(selectedIndex) {
+			$scope.selectPair = function($event, selectedIndex) {
+				// add class to the chosen pair
+				angular.element($event.currentTarget).addClass('chosen');
+
 				console.log('selected:', selectedIndex);
 				var opposite = selectedIndex === 0 ? 1 : 0;
 				var chosenPair = $scope.suggestionPairs[selectedIndex];

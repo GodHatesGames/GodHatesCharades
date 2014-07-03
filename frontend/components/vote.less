@@ -7,9 +7,10 @@
 		position: relative;
 		
 
-		@delay-time: 1s;
-		@fade-time: 0.75s;
-		@fall-time: 1s;
+		@enter-time: 0.75s;
+		@leave-time: 2s;
+		@delay-time: @leave-time;
+		@short-leave-time: 0.5s;
 		.pairContainer {
 			cursor: pointer;
 			position: absolute;
@@ -22,7 +23,7 @@
 				left: 50%;
 			}
 			&.ng-enter {
-				transition: opacity @fade-time ease-out;
+				transition: opacity @enter-time ease-out;
 				opacity: 0;
 			}
 			 
@@ -35,16 +36,27 @@
 			}
 
 			&.ng-leave {
-				transition: opacity @fade-time ease-out;
+				transition: top @leave-time, opacity @short-leave-time ease-out, transform @short-leave-time ease, left @short-leave-time ease;
 			}
 
 			&.ng-leave.ng-leave-active {
-				opacity: 0;
+				
+				&.chosen {
+					z-index: 100;
+					animation: waitthenfade @leave-time;
+					transform: scale(1.1, 1.1);
+					left: 25%;
+				}
 
-				.card {
-					transition: transform @fall-time ease;
+				&:not(.chosen) {
+					opacity: 0;
 					transform: translateY(600px);
 				}
+			}
+
+			@-webkit-keyframes waitthenfade {
+				75% { opacity: 1; }
+				100% { opacity: 0; }
 			}
 
 			.card {
@@ -105,7 +117,7 @@
 
 @media (min-width: 569px) {
 	.vote {
-		.pairContainer:hover {
+		.pairContainer:hover, .pairContainer.chosen {
 			.card {
 				box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
 
