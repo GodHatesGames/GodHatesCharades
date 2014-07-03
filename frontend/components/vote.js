@@ -62,10 +62,7 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 				/* slice extracts up to but not including end */
 				var newPairs = $scope.suggestionPairSrc.slice(start, end);
 				if(newPairs.length === $scope.pairLimit) {
-					$scope.suggestionPairs.length = 0;
-					_.each(newPairs, function(pair, index) {
-						$scope.suggestionPairs.push(pair);
-					});
+					$scope.suggestionPairs = newPairs;
 				} else {
 					console.log('load again');
 					if(!$scope.loading)
