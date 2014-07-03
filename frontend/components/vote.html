@@ -9,7 +9,7 @@
 		<div class="pairContainer"
 		     ng-repeat="(index, pair) in suggestionPairs"
 		     ng-class-even="'right'"
-		     ng-hide="loading"
+		     ng-class="{firstSet: pair.first}"
 		     ng-click="selectPair(index)">
 			<!-- Repeat suggestions in pairs -->
 				<card ng-repeat="(index, suggestion) in pair"

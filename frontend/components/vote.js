@@ -37,6 +37,14 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 				_.each(suggestionPairs, function(pair, index) {
 					cardService.cache(pair);
 				});
+				if($scope.suggestionPairSrc.length === 0) {
+					var descriptor = {
+						value: true,
+						enumerable: false
+					};
+					Object.defineProperty(suggestionPairs[0], 'first', descriptor);
+					Object.defineProperty(suggestionPairs[1], 'first', descriptor);
+				}
 				$scope.suggestionPairSrc = $scope.suggestionPairSrc.concat(suggestionPairs);
 				$scope.loading = false;
 				updateSuggestionPairs();
@@ -53,9 +61,12 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 				console.log('index range:', start, end - 1);
 				/* slice extracts up to but not including end */
 				var newPairs = $scope.suggestionPairSrc.slice(start, end);
-				if(newPairs.length === $scope.pairLimit)
-					$scope.suggestionPairs = newPairs;
-				 else {
+				if(newPairs.length === $scope.pairLimit) {
+					$scope.suggestionPairs.length = 0;
+					_.each(newPairs, function(pair, index) {
+						$scope.suggestionPairs.push(pair);
+					});
+				} else {
 					console.log('load again');
 					if(!$scope.loading)
 						loadSuggestionPairs($scope.pairIndex);

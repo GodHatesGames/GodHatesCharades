@@ -5,35 +5,37 @@
 		margin: 0 auto;
 		height: 350px;
 		position: relative;
+		
 
+		@delay-time: 1s;
+		@fade-time: 1s;
 		.pairContainer {
 			cursor: pointer;
 			position: absolute;
+			top: 0;
+			left: 0;
 			width: 50%;
-			display: inline-block;
-			opacity: 1;
+			-webkit-transition: opacity @fade-time linear; /* Chrome */
+			transition: opacity @fade-time linear;
+			// opacity: 1;
 
 			&.right {
 				left: 50%;
 			}
-
-			@delay-time: 1s;
-			@enter-time: 1s;
-			@leave-time: 1s;
 			&.ng-enter {
-				-webkit-transition: opacity @enter-time linear @delay-time; /* Chrome */
-				transition: opacity @enter-time linear @delay-time;
 				opacity: 0;
 			}
 			 
 			&.ng-enter.ng-enter-active {
 				opacity: 1;
 			}
+			 
+			&.ng-enter.ng-enter-active:not(.firstSet) {
+				-webkit-transition-delay: @delay-time;
+				transition-delay: @delay-time;
+			}
 
 			&.ng-leave {
-				-webkit-transition: @leave-time linear opacity; /* Chrome */
-				transition: @leave-time linear opacity;
-				opacity: 1;
 			}
 
 			&.ng-leave.ng-leave-active {
