@@ -62,8 +62,20 @@
 					opacity: 0;
 					top: 600px;
 
-					&.right {
+					.card:first-child {
+						transform: rotate(-6deg);
+					}
+					.card:last-child {
+						transform: rotate(-3deg);
+					}
 
+					&.right {
+						.card:first-child {
+							transform: rotate(6deg);
+						}
+						.card:last-child {
+							transform: rotate(3deg);
+						}
 					}
 				}
 			}
