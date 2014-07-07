@@ -1,6 +1,8 @@
 'use strict';
 app.service('leanplum', function($q, $location, Restangular, $rootScope) {
 	var leanplumVars = {};
+	var leanplumFetched = false;
+	var leanplumDeffered;
 	var leanplumMethods = {
 		startLeanPlum: _startLeanPlum,
 		vars: leanplumVars
@@ -8,32 +10,43 @@ app.service('leanplum', function($q, $location, Restangular, $rootScope) {
 
 	// private methods
 	function _startLeanPlum(userId) {
-		console.log('start LeanPlum');
-		Leanplum.start(userId, _onStarted);
+		if(!leanplumFetched && !leanplumDeffered) {
+			leanplumDeffered = $q.defer();
 
-		// track campaign sources
-		var search = $location.search();
-		if(search.utm_source) {
+			console.log('start LeanPlum');
+			Leanplum.start(userId, _onStarted);
 
-			var params = _.extend({
-				deviceId: localStorage.getItem('__leanplum_device_id'),
-				action: 'setTrafficSourceInfo',
-				trafficSource: {
-					publisherId: search.utm_source,
-					publisherName: search.utm_source,
-					publisherSubPublisher: search.utm_source,
-					publisherSubSite: search.utm_source,
-					publisherSubCampaign: search.utm_campaign,
-					publisherSubAdGroup: search.utm_medium,
-					publisherSubAd: search.utm_medium
-				}
-			}, CONFIG.LEANPLUM);
-			Restangular.oneUrl('api', 'https://www.leanplum.com/api').get(params);
+			// track campaign sources
+			var search = $location.search();
+			if(search.utm_source) {
+
+				var params = _.extend({
+					deviceId: localStorage.getItem('__leanplum_device_id'),
+					action: 'setTrafficSourceInfo',
+					trafficSource: {
+						publisherId: search.utm_source,
+						publisherName: search.utm_source,
+						publisherSubPublisher: search.utm_source,
+						publisherSubSite: search.utm_source,
+						publisherSubCampaign: search.utm_campaign,
+						publisherSubAdGroup: search.utm_medium,
+						publisherSubAd: search.utm_medium
+					}
+				}, CONFIG.LEANPLUM);
+				Restangular.oneUrl('api', 'https://www.leanplum.com/api').get(params);
+			}
+			return leanplumDeffered.promise;
+		} else {
+			return $q.when(leanplumMethods);
 		}
+
 	}
 
 	function _onStarted() {
 		console.log('leanplum started');
+		leanplumDeffered.resolve(leanplumMethods);
+		leanplumDeffered = null;
+		leanplumFetched = true;
 		leanplumVars = _.extend(leanplumVars, Leanplum.getVariables());
 		$rootScope.$digest();
 	}

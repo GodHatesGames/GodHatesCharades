@@ -12,39 +12,12 @@ app.config(function($stateProvider,
 		controller: '404View'
 	});
 
-	var homeState = {
+	$stateProvider.state('home', {
 		url: '/?vine&youtube',
 		title: 'Your favorite new party game',
 		description: 'A game where you act out the vile and despicable inside all of us. Talk, shout, and say awful things in the form of 30 second act outs.',
 		templateUrl: 'views/homeView.html',
 		controller: 'homeView'
-	};
-
-	$stateProvider.state('home', homeState);
-
-	$stateProvider.state('home.vineUnlock', {
-		parent: homeState,
-		templateUrl: 'views/homeView.vineUnlock.html'
-	});
-
-	$stateProvider.state('home.videoUnlock', {
-		parent: homeState,
-		templateUrl: 'views/homeView.videoUnlock.html'
-	});
-
-	$stateProvider.state('home.default', {
-		parent: homeState,
-		templateUrl: 'views/homeView.default.html'
-	});
-
-	$stateProvider.state('home.examples', {
-		parent: homeState,
-		templateUrl: 'views/homeView.examples.html'
-	});
-
-	$stateProvider.state('home.examplesUnlock', {
-		parent: homeState,
-		templateUrl: 'views/homeView.examplesUnlock.html'
 	});
 
 	$stateProvider.state('submit', {
