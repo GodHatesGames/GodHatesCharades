@@ -30,7 +30,8 @@ app.config(function($stateProvider,
 		url: '/vote',
 		title: 'Vote: Help us choose new cards',
 		description: 'Vote on cards submitted by other players to help us choose the best ones.',
-		templateUrl: 'views/voteView.html'
+		templateUrl: 'views/voteView.html',
+		controller: 'voteView'
 	});
 	$stateProvider.state('login', {
 		url: '/login',

@@ -2,6 +2,36 @@
      class="container">
 	<h2>Pick your favorite pair</h2>
 	<p>We need your help picking the funniest cards for the game. <br>Pick the set most likely to make your friends cry with laughter or shame their parents when you post the video.(hint, hint)</p>
-	<hr>
 	<vote></vote>
+	<hr>
+
+	<div>
+		<div class="col-md-12">
+			<h1>
+				{{leanplum.vars.homeHeadline}}
+			</h1>
+			<!-- <h3 ng-bind-html="leanplum.vars.homeSubtitle"></h3> -->
+		</div>
+		<div class="col-md-6 col-lg-6">
+			<youtube id="'mLwIEl59DKg'"
+			         class="video"
+			         thumb="'img/video_title.png'"
+			         fluid="true"
+			         aspect-w="16"
+			         autoplay="true"
+			         aspect-h="9">
+			</youtube>
+		</div>
+		<div class="col-md-6 col-lg-6">
+			
+			<!-- <h4>{{leanplum.vars.homeCTA}}</h4> -->
+
+			<img src="img/printnplayAd.svg"
+			     alt="Print N' Play: Enter your email and we will send you a copy that you can print and play today!"
+			     class="img img-responsive printnplay">
+			<mailchimp on-success="onEmailSubmitted"
+			           location="homepage_video_unlock">
+			</mailchimp>
+		</div>
+	</div>
 </div>
