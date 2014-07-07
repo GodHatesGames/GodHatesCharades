@@ -9,11 +9,6 @@ app.directive('nav', function(parseUser, $uiViewScroll, $state, $timeout) {
 			$scope.parseUser = parseUser;
 			$scope.$state = $state;
 
-			$scope.getIt = function() {
-				$scope.jumpToElementInView('email_signup', 'home');
-				ga('send', 'event', 'signup', 'click', 'nav');
-			};
-
 			$scope.launchAd = function() {
 				// $scope.jumpToElementInView('email_signup', 'home');
 				// ga('send', 'event', 'signup', 'click', 'nav_ad');
