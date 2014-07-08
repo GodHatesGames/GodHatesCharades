@@ -4,10 +4,10 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/vote.html',
 		replace: true,
-		link: function($scope, $element) {
-			$scope.$watch('pairIndex', $scope.onPairIndexChanged);
-		},
 		controller: function($scope, $element) {
+			// Watches
+			$scope.$watch('pairIndex', _onPairIndexChanged);
+
 			// public vars
 			$scope.cardService = cardService;
 			$scope.pairLimit = 2;
@@ -16,9 +16,14 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 			$scope.suggestionPairSrc = [];
 			$scope.pairIndex = 0;
 
+			// Public Methods
+			$scope.skipBoth = _skipBoth;
+			$scope.selectPair = _selectPair;
+			$scope.onPairIndexChanged = _onPairIndexChanged;
+
 			// Private methods
 
-			function loadSuggestionPairs(skip) {
+			function _loadSuggestionPairs(skip) {
 				$scope.loading = true;
 				
 				Parse.Cloud.run(
@@ -27,13 +32,13 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 						'skip': skip
 					},
 					{
-						success: onSuggestionPairsLoaded,
-						error: onSuggestionPairsError
+						success: _onSuggestionPairsLoaded,
+						error: _onSuggestionPairsError
 					}
 				);
 			}
 
-			function onSuggestionPairsLoaded(suggestionPairs) {
+			function _onSuggestionPairsLoaded(suggestionPairs) {
 				_.each(suggestionPairs, function(pair, index) {
 					cardService.cache(pair);
 				});
@@ -47,15 +52,15 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 				}
 				$scope.suggestionPairSrc = $scope.suggestionPairSrc.concat(suggestionPairs);
 				$scope.loading = false;
-				updateSuggestionPairs();
+				_updateSuggestionPairs();
 				$scope.$digest();
 			}
 
-			function onSuggestionPairsError(error) {
+			function _onSuggestionPairsError(error) {
 				console.log('couldn\'t find any pairs:', error);
 			}
 
-			function updateSuggestionPairs() {
+			function _updateSuggestionPairs() {
 				var start = $scope.pairIndex;
 				var end = $scope.pairIndex + $scope.pairLimit;
 				console.log('index range:', start, end - 1);
@@ -66,27 +71,25 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 				} else {
 					console.log('load again');
 					if(!$scope.loading)
-						loadSuggestionPairs($scope.pairIndex);
+						_loadSuggestionPairs($scope.pairIndex);
 				}
 			}
 
-			function onPairVoted(message) {
+			function _onPairVoted(message) {
 				console.log('vote success:', message);
 			}
 
-			function onPairVoteError(error) {
+			function _onPairVoteError(error) {
 				console.log('error voting on pair:', error);
 			}
 
-			// Public Methods
-
-			$scope.onPairIndexChanged = function(newValue, oldValue) {
+			function _onPairIndexChanged(newValue, oldValue) {
 				if($scope.suggestionPairSrc.length > 0) {
-					updateSuggestionPairs();
+					_updateSuggestionPairs();
 				}
 			};
 
-			$scope.selectPair = function($event, selectedIndex) {
+			function _selectPair($event, selectedIndex) {
 				// add class to the chosen pair
 				angular.element($event.currentTarget).addClass('chosen');
 
@@ -104,25 +107,19 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 					'recordChosenAndSkipped',
 					cloudUtils.getDefaultParams(params),
 					{
-						success: onPairVoted,
-						error: onPairVoteError
+						success: _onPairVoted,
+						error: _onPairVoteError
 					}
 				);
 
 				// update current index
 				$scope.pairIndex += $scope.pairLimit;
 
-				// start animation
-				// dropCard(document.getElementById(params.skippedActor));
-				// dropCard(document.getElementById(params.skippedScenario));
-				// showoffCard(document.getElementById(params.chosenActor));
-				// showoffCard(document.getElementById(params.chosenScenario));
-
 				// Track
 				ga('send', 'event', 'vote', 'pair');
 			};
 
-			$scope.skipBoth = function() {
+			function _skipBoth() {
 				var skippedIds = [];
 				_.each($scope.suggestionPairs, function(pair, index) {
 					_.each(pair, function(suggestion, index) {
@@ -137,8 +134,8 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 						'skippedIds': skippedIds
 					},
 					{
-						success: onPairVoted,
-						error: onPairVoteError
+						success: _onPairVoted,
+						error: _onPairVoteError
 					}
 				);
 
@@ -149,38 +146,8 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 				ga('send', 'event', 'vote', 'skip');
 			};
 
-			function showoffCard(card) {
-				TweenMax.to(card, 0.5, {
-					rotation: Math.floor((Math.random() * 100) - 50),
-					startAt: {
-						opacity: 0.75
-					},
-					onComplete: onCardsDropped
-				});
-			}
-
-			function dropCard(card) {
-				TweenMax.to(card, 0.5, {
-					opacity: 0,
-					y: 600,
-					rotation: Math.floor((Math.random() * 100) - 50),
-					startAt: {
-						opacity: 0.75
-					},
-					onComplete: onCardsDropped
-				});
-			}
-
-			function onCardsDropped(event) {
-				$scope.pairIndex += $scope.pairLimit;
-				// delay to allow animation to settle visually
-				$timeout(function() {
-					$scope.$digest();
-				}, 100);
-			}
-
 			// init
-			loadSuggestionPairs();
+			_loadSuggestionPairs();
 
 		}
 	};
