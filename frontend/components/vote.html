@@ -4,17 +4,24 @@
 	     ng-show="loading">
 		Loading...</div>
 
-	<!-- AddThis Button BEGIN -->
-	<div class="socialPrompt"
-	     ng-class="{active: pairIndex > 1}">
-		We need your help putting our game in the cloud!
-		<div class="addthis_toolbox addthis_default_style pull-right">
-			<a class="addthis_button_facebook_like"
-			   fb:like:layout="button_count"></a>
-			<a class="addthis_button_tweet"></a>
+	<div class="row">
+		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
+			<div class="socialPrompt row"
+			     ng-class="{active: pairIndex > 1}">
+				<div class="promptBlock col-xs-8 col-sm-9 col-md-10">
+					We need your help putting our game in the cloud!
+				</div>
+
+				<!-- AddThis Button BEGIN -->
+				<div class="addthis_toolbox addthis_default_style">
+					<a class="addthis_button_facebook_like"
+					   fb:like:layout="button_count"></a>
+					<a class="addthis_button_tweet"></a>
+				</div>
+				<!-- AddThis Button END -->
+			</div>
 		</div>
 	</div>
-	<!-- AddThis Button END -->
 
 	<!-- Repeat Pairs -->
 	<div class="cardsContainer">

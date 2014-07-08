@@ -127,41 +127,46 @@
 	}
 
 	.socialPrompt {
-		max-width: 660px;
-		border-radius: 5px;
-		margin-left: auto;
-		margin-right: auto;
-		background: #5FC99A;
-		margin-bottom: 0;
-		font-size: 15px;
-		font-family: 'GodHatesCharades';
-		text-transform: uppercase;
-		color: white;
-		overflow: hidden;
 		height: 0;
 		transition: all 0.5s ease;
-		padding-top: 0;
-		padding-right: 0;
-		padding-bottom: 0;
-		padding-left: 25px;
 		opacity: 0;
+		background-color: #5FC99A;
+		border-radius: 5px;
 		background-image: url(../img/god_03_zps53cb184f.gif);
 		background-size: 160px 121px;
 		background-repeat: no-repeat;
-		background-position: 95%;
+		background-position: right;
 		position: relative;
 
 		&.active {
 			opacity: 1;
-			padding-top: 45px;
-			padding-bottom: 45px;
 			height: auto;
 			margin-bottom: 15px;
 		}
 
+		.promptBlock, .shareBlock {
+			padding-top: 50px;
+			padding-bottom: 50px;
+		}
+
+		.promptBlock {
+			font-size: 18px;
+			font-family: 'GodHatesCharades';
+			text-transform: uppercase;
+			color: white;
+			padding-left: 20px;
+		}
+
+		.shareBlock {
+			position: relative;
+			padding-right: 0;
+			padding-left: 0;
+
+		}
+
 		.addthis_toolbox {
 			position: absolute;
-			bottom: 10px;
+			bottom: 15px;
 			right: 0;
 		}
 	}
@@ -185,7 +190,9 @@
 @media (max-width: 620px) {
 	.vote {
 		.socialPrompt {
-			padding-right: 200px;
+			.promptBlock {
+				font-size: 15px;
+			}
 		}
 	}
 }
