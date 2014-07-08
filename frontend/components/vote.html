@@ -7,7 +7,16 @@
 	<div class="row">
 		<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
 			<div class="socialPrompt row"
-			     ng-class="{active: pairIndex > 1}">
+				collapse="pairIndex < 6 || hidePrompt">
+				<!-- pairs increment by 2 each time, so 6 is 3 clicks -->
+
+				<button type="button"
+				        class="close"
+				        ng-click="hidePrompt = true">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+
 				<div class="promptBlock col-xs-8 col-sm-9 col-md-10">
 					We need your help putting our game in the cloud!
 				</div>

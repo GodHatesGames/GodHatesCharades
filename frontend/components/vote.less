@@ -125,11 +125,9 @@
 	.skip {
 		margin: 0 auto;
 	}
-
+	
 	.socialPrompt {
-		height: 0;
-		transition: all 0.5s ease;
-		opacity: 0;
+		transition: all 0.5s ease 0.5s;
 		background-color: #5FC99A;
 		border-radius: 5px;
 		background-image: url(../img/god_03_zps53cb184f.gif);
@@ -137,9 +135,9 @@
 		background-repeat: no-repeat;
 		background-position: right;
 		position: relative;
+		overflow: hidden;
 
 		&.active {
-			opacity: 1;
 			height: auto;
 			margin-bottom: 15px;
 		}
@@ -168,6 +166,11 @@
 			position: absolute;
 			bottom: 15px;
 			right: 0;
+		}
+
+		.close {
+			margin-top: 5px;
+			margin-right: 10px;
 		}
 	}
 }
