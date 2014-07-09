@@ -9,7 +9,7 @@
 		width: 90%;
 		box-sizing: border-box;
 		margin: 0 auto;
-		height: 300px;
+		height: 350px;
 		position: relative;
 		
 		.pairContainer {
@@ -117,6 +117,22 @@
 	}
 }
 
+@media (max-width: 1200px) {
+	.vote {
+		.cardsContainer {
+			height: 300px;
+		}
+	}
+}
+
+@media (max-width: 991px) {
+	.vote {
+		.cardsContainer {
+			height: 225px;
+		}
+	}
+}
+
 @media (max-width: 620px) {
 	.vote {
 		.cardsContainer {
@@ -132,17 +148,6 @@
 					top: 0;
 					left: 0;
 				}
-
-				// Entrance animations for both pairs
-				&.ng-enter {
-					transition: opacity @enter-time ease-out;
-					opacity: 0;
-				}
-				 
-				&.ng-enter.ng-enter-active {
-					opacity: 1;
-				}
-				
 			}
 		}
 		.socialPrompt {
@@ -153,90 +158,105 @@
 	}
 }
 
-@media (min-width: 569px) {
+// card animations
+@media (min-width: 621px) {
 	.vote {
-		.pairContainer:hover, .pairContainer.chosen {
-			.card {
-				box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
+		.pairContainer {
 
-				&.character {
-					transform: scale(0.97, 0.97) rotate(-8deg) translateX(15px);
+			&.chosen {
+				.card {
+					box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
+
+					&.character {
+						transform: scale(0.97, 0.97) rotate(-8deg) translateX(15px);
+					}
+
+					&.scenario {
+						transform: scale(1, 1) rotate(6deg) translateX(-15px);
+					}
+				}
+			}
+
+			// Entrance animations for both pairs
+			&.ng-enter {
+				transition: opacity @enter-time ease-out;
+				opacity: 0;
+			}
+			 
+			&.ng-enter.ng-enter-active {
+				opacity: 1;
+			}
+			
+			// Delay the entrance for all except the first set
+			// Delay allows time for the previous pairs to exit
+			&.ng-enter.ng-enter-active:not(.firstSet) {
+				transition-delay: @delay-time;
+			}
+
+			// Exit animations
+			// (at least one animation must use the full leave-time)
+			&.ng-leave {
+				transition: top @leave-time,
+				            opacity @short-leave-time ease-out,
+				            transform @short-leave-time ease,
+				            left @short-leave-time ease;
+			}
+
+			&.ng-leave.ng-leave-active {
+				
+				&.chosen {
+					z-index: 100;
+					animation: waitthenfade @leave-time;
+					transform: scale(1.1, 1.1);
+					left: 25%;
 				}
 
-				&.scenario {
-					transform: scale(1, 1) rotate(6deg) translateX(-15px);
+				&:not(.chosen) {
+					opacity: 0;
+					top: 600px;
+
+					.card:first-child {
+						transform: rotate(-6deg);
+					}
+					.card:last-child {
+						transform: rotate(-3deg);
+					}
+
+					&.right {
+						.card:first-child {
+							transform: rotate(6deg);
+						}
+						.card:last-child {
+							transform: rotate(3deg);
+						}
+					}
 				}
+			}
+
+			// Allows the chosen pair to center before fading out
+			@-webkit-keyframes waitthenfade {
+				50% { opacity: 1; }
+				100% { opacity: 0; }
 			}
 		}
 	}
 }
 
-@media (min-width: 621px) {
+
+@media (min-width: 1025px) {
 	.vote {
-		.cardsContainer {
-			height: 225px;
+		.pairContainer {
+			&:hover {
+				.card {
+					box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
 
-			.pairContainer {
-				// Entrance animations for both pairs
-				&.ng-enter {
-					transition: opacity @enter-time ease-out;
-					opacity: 0;
-				}
-				 
-				&.ng-enter.ng-enter-active {
-					opacity: 1;
-				}
-				
-				// Delay the entrance for all except the first set
-				// Delay allows time for the previous pairs to exit
-				&.ng-enter.ng-enter-active:not(.firstSet) {
-					transition-delay: @delay-time;
-				}
-
-				// Exit animations
-				// (at least one animation must use the full leave-time)
-				&.ng-leave {
-					transition: top @leave-time,
-					            opacity @short-leave-time ease-out,
-					            transform @short-leave-time ease,
-					            left @short-leave-time ease;
-				}
-
-				&.ng-leave.ng-leave-active {
-					
-					&.chosen {
-						z-index: 100;
-						animation: waitthenfade @leave-time;
-						transform: scale(1.1, 1.1);
-						left: 25%;
+					&.character {
+						transform: scale(0.97, 0.97) rotate(-8deg) translateX(15px);
 					}
 
-					&:not(.chosen) {
-						opacity: 0;
-						top: 600px;
-
-						.card:first-child {
-							transform: rotate(-6deg);
-						}
-						.card:last-child {
-							transform: rotate(-3deg);
-						}
-
-						&.right {
-							.card:first-child {
-								transform: rotate(6deg);
-							}
-							.card:last-child {
-								transform: rotate(3deg);
-							}
-						}
+					&.scenario {
+						transform: scale(1, 1) rotate(6deg) translateX(-15px);
 					}
-				}
-
-				// Allows the chosen pair to center before fading out
-				@-webkit-keyframes waitthenfade {
-					50% { opacity: 1; }
-					100% { opacity: 0; }
 				}
 			}
 		}
