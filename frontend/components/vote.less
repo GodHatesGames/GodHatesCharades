@@ -159,6 +159,20 @@
 }
 
 // card animations
+
+.vote {
+	.pairContainer {
+		// Entrance animations for both pairs
+		&.ng-enter {
+			transition: opacity @enter-time ease-out;
+			opacity: 0;
+		}
+		 
+		&.ng-enter.ng-enter-active {
+			opacity: 1;
+		}
+	}
+}
 @media (min-width: 621px) {
 	.vote {
 		.pairContainer {
@@ -177,16 +191,6 @@
 				}
 			}
 
-			// Entrance animations for both pairs
-			&.ng-enter {
-				transition: opacity @enter-time ease-out;
-				opacity: 0;
-			}
-			 
-			&.ng-enter.ng-enter-active {
-				opacity: 1;
-			}
-			
 			// Delay the entrance for all except the first set
 			// Delay allows time for the previous pairs to exit
 			&.ng-enter.ng-enter-active:not(.firstSet) {
