@@ -11,7 +11,7 @@ exports.updateSuggestionText = updateSuggestionText;
 exports.getCard = getCard;
 
 function getUnmoderatedSuggestions(request, response) {
-	console.log('request.user.id:' + request.user.id);
+	// console.log('request.user.id:' + request.user.id);
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
 			.then(fetchData, onError);
@@ -20,10 +20,10 @@ function getUnmoderatedSuggestions(request, response) {
 	}
 
 	function fetchData(isAdmin) {
-		console.log('fetchData, isAdmin:');
-		console.log(isAdmin);
+		// console.log('fetchData, isAdmin:');
+		// console.log(isAdmin);
 		if(isAdmin) {
-			console.log('user is admin');
+			// console.log('user is admin');
 			var SuggestionObject = Parse.Object.extend('Suggestion');
 			var query = new Parse.Query(SuggestionObject);
 			query.limit(1000);
@@ -40,7 +40,7 @@ function getUnmoderatedSuggestions(request, response) {
 	}
 
 	function onSuccess(suggestions) {
-		console.log('getUnmoderatedSuggestions Success');
+		// console.log('getUnmoderatedSuggestions Success');
 		response.success(suggestions);
 	}
 
@@ -52,10 +52,10 @@ function getUnmoderatedSuggestions(request, response) {
 }
 
 function getAllSuggestions(request, response) {
-	console.log('getAllSuggestions');
+	// console.log('getAllSuggestions');
 	var queryLimit = 1000;
 	var allSuggestions = [];
-	console.log('request.user.id:' + request.user.id);
+	// console.log('request.user.id:' + request.user.id);
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
 			.then(fetchData, onError);
@@ -64,8 +64,8 @@ function getAllSuggestions(request, response) {
 	}
 
 	function fetchData(isAdmin) {
-		console.log('fetchData, isAdmin:');
-		console.log(isAdmin);
+		// console.log('fetchData, isAdmin:');
+		// console.log(isAdmin);
 		if(isAdmin) {
 			console.log('user is admin');
 			var SuggestionObject = Parse.Object.extend('Suggestion');
@@ -91,10 +91,10 @@ function getAllSuggestions(request, response) {
 			allSuggestions = allSuggestions.concat(suggestions);
 
 		if(suggestions.length < queryLimit) {
-			console.log('found suggetions: ' + allSuggestions.length);
+			// console.log('found suggetions: ' + allSuggestions.length);
 			response.success(allSuggestions);
 		} else {
-			console.log('fetching more suggestions');
+			// console.log('fetching more suggestions');
 			fetchData(true, allSuggestions.length);
 		}
 	}
@@ -108,7 +108,7 @@ function getAllSuggestions(request, response) {
 
 function getAllSets(request, response) {
 	var allSets = [];
-	console.log('request.user.id:' + request.user.id);
+	// console.log('request.user.id:' + request.user.id);
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
 			.then(fetchData, onError);
@@ -117,10 +117,10 @@ function getAllSets(request, response) {
 	}
 
 	function fetchData(isAdmin) {
-		console.log('fetchData, isAdmin:');
-		console.log(isAdmin);
+		// console.log('fetchData, isAdmin:');
+		// console.log(isAdmin);
 		if(isAdmin) {
-			console.log('user is admin');
+			// console.log('user is admin');
 			var SetObject = Parse.Object.extend('Set');
 			var query = new Parse.Query(SetObject);
 			query.find({
@@ -151,7 +151,7 @@ function addCardToSet(request, response) {
 	Parse.Cloud.useMasterKey();
 	var cardId = request.params.card;
 	var setId = request.params.set;
-	console.log('request.user.id:' + request.user.id);
+	// console.log('request.user.id:' + request.user.id);
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
 			.then(saveData, onError);
@@ -160,9 +160,9 @@ function addCardToSet(request, response) {
 	}
 
 	function saveData(isAdmin) {
-		console.log('addCardToSet saveData');
+		// console.log('addCardToSet saveData');
 		if(isAdmin) {
-			console.log('user is admin');
+			// console.log('user is admin');
 			// mock suggestion
 			var SuggestionObject = Parse.Object.extend('Suggestion');
 			var suggestion = new SuggestionObject();
@@ -187,7 +187,7 @@ function addCardToSet(request, response) {
 	}
 
 	function onSuccess(setItem) {
-		console.log('addCardToSet saveData success');
+		// console.log('addCardToSet saveData success');
 		response.success(setItem);
 	}
 
@@ -199,9 +199,9 @@ function addCardToSet(request, response) {
 }
 
 function removeSetItem(request, response) {
-	console.log('removeSetItem');
+	// console.log('removeSetItem');
 	Parse.Cloud.useMasterKey();
-	console.log('request.user.id:' + request.user.id);
+	// console.log('request.user.id:' + request.user.id);
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
 			.then(destroyItem, onError);
@@ -210,9 +210,9 @@ function removeSetItem(request, response) {
 	}
 
 	function destroyItem(isAdmin) {
-		console.log('removeSetItem destroyItem');
+		// console.log('removeSetItem destroyItem');
 		if(isAdmin) {
-			console.log('user is admin');
+			// console.log('user is admin');
 			// create new setitem and add setitem to set
 			var SetItemObject = Parse.Object.extend('SetItem');
 			var itemToDelete = new SetItemObject();
@@ -228,7 +228,7 @@ function removeSetItem(request, response) {
 	}
 
 	function onSuccess(setItem) {
-		console.log('removeSetItem destroyItem success');
+		// console.log('removeSetItem destroyItem success');
 		response.success(setItem);
 	}
 
@@ -240,9 +240,9 @@ function removeSetItem(request, response) {
 }
 
 function createSet(request, response) {
-	console.log('createSet');
+	// console.log('createSet');
 	Parse.Cloud.useMasterKey();
-	console.log('request.user.id:' + request.user.id);
+	// console.log('request.user.id:' + request.user.id);
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
 			.then(createNewSet, onError);
@@ -251,9 +251,9 @@ function createSet(request, response) {
 	}
 
 	function createNewSet(isAdmin) {
-		console.log('createSet createNewSet');
+		// console.log('createSet createNewSet');
 		if(isAdmin) {
-			console.log('user is admin');
+			// console.log('user is admin');
 			var Set = Parse.Object.extend('Set');
 			var newSet = new Set();
 			newSet.save({
@@ -269,7 +269,7 @@ function createSet(request, response) {
 	}
 
 	function onSuccess(newSet) {
-		console.log('createSet createNewSet success');
+		// console.log('createSet createNewSet success');
 		response.success(newSet);
 	}
 
@@ -281,7 +281,7 @@ function createSet(request, response) {
 }
 
 function updateSuggestionText(request, response) {
-	console.log('updateSuggestionText');
+	// console.log('updateSuggestionText');
 	Parse.Cloud.useMasterKey();
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
@@ -291,9 +291,9 @@ function updateSuggestionText(request, response) {
 	}
 
 	function saveData(isAdmin) {
-		console.log('updateSuggestionText saveData');
+		// console.log('updateSuggestionText saveData');
 		if(isAdmin) {
-			console.log('user is admin');
+			// console.log('user is admin');
 			var suggestionId = request.params.suggestionId;
 			var newText = request.params.text;
 			// mock suggestion
@@ -312,7 +312,7 @@ function updateSuggestionText(request, response) {
 	}
 
 	function onSuccess(suggestion) {
-		console.log('updateSuggestionText saveData success');
+		// console.log('updateSuggestionText saveData success');
 		response.success(suggestion);
 	}
 
@@ -336,7 +336,7 @@ function getCard(request, response) {
 	function fetchData(isAdmin) {
 		if(isAdmin) {
 			if(setId !== undefined) {
-				console.log('getCardsForSet fetchData');
+				// console.log('getCardsForSet fetchData');
 				var SuggestionObject = Parse.Object.extend('Suggestion');
 				var query = new Parse.Query(SuggestionObject);
 				query.include('owner');

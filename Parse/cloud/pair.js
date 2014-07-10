@@ -101,7 +101,7 @@ function recordChosenAndSkipped (request, response) {
 		return getPair(skippedActor, skippedScenario, appVersion, appPlatform);
 	}, onErr)
 	.then(function success(skippedPair) {
-		console.log('skipped pair found:', skippedPair);
+		// console.log('skipped pair found:', skippedPair);
 
 		// create new obj if needed
 		if (!skippedPair)

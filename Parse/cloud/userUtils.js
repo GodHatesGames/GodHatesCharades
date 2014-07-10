@@ -9,7 +9,7 @@ function stripPrivateData(parseUser) {
 	delete parseUser.attributes.admin;
 	delete parseUser.createdAt;
 	delete parseUser.updatedAt;
-	console.log(parseUser);
+	// console.log(parseUser);
 }
 
 // method should not be exposed to raw requests

@@ -26,9 +26,9 @@ function getProfile(request, response) {
 		if(suggestions.length > 0) {
 			var suggestion;
 			profile.owner = suggestions[0].get('owner');
-			console.log(suggestions);
-			console.log('owner');
-			console.log(owner);
+			// console.log(suggestions);
+			// console.log('owner');
+			// console.log(owner);
 			userUtils.stripPrivateData(owner);
 			for(var i = 0; i < suggestions.length; i++) {
 				suggestion = suggestions[i];

@@ -50,13 +50,13 @@ function examples(request, response) {
 }
 
 function getCardsForSet(request, response) {
-	console.log('getCardsForSet');
+	// console.log('getCardsForSet');
 		Parse.Cloud.useMasterKey();
 	var setId = request.params.id;
 	var includeOwner = request.params.includeOwner;
 
 	if(setId !== undefined) {
-		console.log('getCardsForSet fetchData');
+		// console.log('getCardsForSet fetchData');
 		var query = buildCardsForSetQuery(setId);
 		if(includeOwner === true) {
 			query.include('card.owner');
@@ -72,7 +72,7 @@ function getCardsForSet(request, response) {
 	}
 
 	function onSuccess(setItems) {
-		console.log('setItems found:' + setItems.length);
+		// console.log('setItems found:' + setItems.length);
 		var card;
 		_.each(setItems, function(item) {
 			card = item.attributes.card;
@@ -102,7 +102,7 @@ function getCardById(request, response) {
 	Parse.Cloud.useMasterKey();
 	var cardId = request.params.id;
 	if(cardId !== undefined) {
-		console.log('getCardsForSet fetchData');
+		// console.log('getCardsForSet fetchData');
 		var SuggestionObject = Parse.Object.extend('Suggestion');
 		var query = new Parse.Query(SuggestionObject);
 		query.include('owner');

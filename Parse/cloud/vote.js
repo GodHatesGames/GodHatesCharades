@@ -76,7 +76,7 @@ function skipSuggestions(request, response) {
 	if(request.params.skippedIds) {
 
 		_.each(request.params.skippedIds, function(suggestionId, index, pairs) {
-			console.log('suggestionId:', suggestionId);
+			// console.log('suggestionId:', suggestionId);
 			saveCount++;
 			var suggestionObj = new SuggestionObject();
 			suggestionObj.id = suggestionId;
@@ -87,7 +87,7 @@ function skipSuggestions(request, response) {
 			})
 		});
 	}
-	console.log('saveCount:', saveCount);
+	// console.log('saveCount:', saveCount);
 
 	if(saveCount === 0) {
 		response.error('no data sent');
