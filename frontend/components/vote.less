@@ -1,3 +1,5 @@
+@import "../less/colors";
+
 @enter-time: 0.75s;
 @leave-time: 1.2s;
 @delay-time: 0.5s;
@@ -50,12 +52,12 @@
 			z-index: 99;
 			width: @separator-size;
 			height: @separator-size;
-			background: white;
+			background-color: @color-actor;
 			border-radius: @separator-size;
 			text-align: center;
 			line-height: @separator-size;
-			box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
-			color: #5A4040;
+			box-shadow: -2px 3px 0 rgba(0, 0, 0, 0.1);
+			color: white;
 			box-sizing: border-box;
 			margin-left: -(@separator-size / 2);
 			margin-top: -(@separator-size / 2);
@@ -179,7 +181,6 @@
 
 			&.chosen {
 				.card {
-					box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
 
 					&.character {
 						transform: scale(0.97, 0.97) rotate(-8deg) translateX(15px);
@@ -252,7 +253,6 @@
 		.pairContainer {
 			&:hover {
 				.card {
-					box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
 
 					&.character {
 						transform: scale(0.97, 0.97) rotate(-8deg) translateX(15px);

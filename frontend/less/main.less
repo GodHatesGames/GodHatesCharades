@@ -154,6 +154,7 @@ a.list-group-special:hover {
 	border-radius: 5px;
 	text-align: center;
 	margin: 0 auto;
+	box-shadow: -2px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
 .card:before {
@@ -171,6 +172,9 @@ a.list-group-special:hover {
 	top: 10%;
 	left: 50%;
 	margin-left: -25%;
+	path {
+		fill: #000000;
+	}
 }
 
 .cardContent {
@@ -191,7 +195,7 @@ a.list-group-special:hover {
 	font-size: 15px;
 	font-family: 'GodHatesCharades';
 	text-transform: uppercase;
-	color: white !important;
+	color: black !important;
 }
 
 .card .domain {
@@ -231,7 +235,7 @@ a.list-group-special:hover {
 }
 
 .card.character {
-	background-color: @color-actor !important;
+	background-color: white !important;
 	// background-image: url(../img/actor_skull.svg) !important;
 	// background-size: 50% !important;
 	// background-repeat: no-repeat !important;
@@ -244,7 +248,7 @@ a.list-group-special:hover {
 }
 
 .card.scenario {
-	background-color: @color-scenario !important;
+	background-color: white !important;
 	// background-image: url(../img/scenario_ball.svg) !important;
 	// background-size: 55% !important;
 	// background-repeat: no-repeat !important;
