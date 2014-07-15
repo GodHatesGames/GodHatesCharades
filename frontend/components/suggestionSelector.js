@@ -37,7 +37,7 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 						error: onSuggestionsError
 					};
 					$scope.loading = true;
-					Parse.Cloud.run('getAllSuggestions', options, callbacks);
+					Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getAllSuggestions', options, callbacks);
 				}
 			};
 
@@ -51,7 +51,7 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 					$scope.saving = true;
 					isolateScope.editing = true;
 					Parse.Cloud.run(
-						'updateSuggestionText',
+						CONFIG.PARSE_VERSION + 'updateSuggestionText',
 						{
 							'suggestionId': suggestion.id,
 							'text': newText

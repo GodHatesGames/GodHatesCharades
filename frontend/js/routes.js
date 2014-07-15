@@ -54,6 +54,11 @@ app.config(function($stateProvider,
 		templateUrl: 'views/cardView.html',
 		controller: 'cardView'
 	});
+	$stateProvider.state('pair', {
+		url: '/pair/:pairid/:slug',
+		templateUrl: 'views/pairView.html',
+		controller: 'pairView'
+	});
 	$stateProvider.state('rules', {
 		url: '/rules',
 		title: 'Rules: Detailed for the game',

@@ -17,11 +17,12 @@ var app = angular.module('app', ['ng',
                                  'prismic.io',
                                  'slugifier',
                                  'disqusHere',
+                                 'angular-data.DSCacheFactory',
                                  'ngCsv'
                                 ]);
 console.log('starting app');
 
-app.config(function($locationProvider, PrismicProvider){
+app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider){
 		$locationProvider.html5Mode(true);
 		$locationProvider.hashPrefix('!');
 
@@ -30,6 +31,11 @@ app.config(function($locationProvider, PrismicProvider){
 		}
 		PrismicProvider.setLinkResolver(function(ctx, doc) {
 			return 'detail.html?id=' + doc.id + '&slug=' + doc.slug + ctx.maybeRefParam;
+		});
+
+		DSCacheFactoryProvider.setCacheDefaults({
+			storageMode: 'localStorage',
+			capacity: 1000
 		});
 	}
 );

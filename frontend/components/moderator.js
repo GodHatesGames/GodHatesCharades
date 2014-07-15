@@ -15,7 +15,7 @@ app.directive('moderator', function(cardService, $compile) {
 			$scope.errorMessage;
 			
 			Parse.Cloud.run(
-				'getUnmoderatedSuggestions',
+				CONFIG.PARSE_VERSION + 'getUnmoderatedSuggestions',
 				{}, 
 				{
 					success: onSuggestionsLoaded,

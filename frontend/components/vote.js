@@ -27,7 +27,7 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 				$scope.loading = true;
 				
 				Parse.Cloud.run(
-					'getRandomSuggestionPairs',
+					CONFIG.PARSE_VERSION + 'getRandomSuggestionPairs',
 					{
 						'skip': skip
 					},
@@ -40,7 +40,7 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 
 			function _onSuggestionPairsLoaded(suggestionPairs) {
 				_.each(suggestionPairs, function(pair, index) {
-					cardService.cache(pair);
+					cardService.cache(_.values(pair));
 				});
 				if($scope.suggestionPairSrc.length === 0) {
 					var descriptor = {
@@ -104,7 +104,7 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 						skippedScenario: skippedPair[1].id
 				};
 				Parse.Cloud.run(
-					'recordChosenAndSkipped',
+					CONFIG.PARSE_VERSION + 'recordChosenAndSkipped',
 					cloudUtils.getDefaultParams(params),
 					{
 						success: _onPairVoted,
@@ -129,7 +129,7 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 				});
 
 				Parse.Cloud.run(
-					'skipSuggestions',
+					CONFIG.PARSE_VERSION + 'skipSuggestions',
 					{
 						'skippedIds': skippedIds
 					},

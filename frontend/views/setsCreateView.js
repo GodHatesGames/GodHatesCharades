@@ -5,7 +5,7 @@ app.controller('setsCreateView', function($scope, $state) {
 		$scope.saving = true;
 
 		Parse.Cloud.run(
-			'createSet',
+			CONFIG.PARSE_VERSION + 'createSet',
 			{
 				name: $scope.name
 			},

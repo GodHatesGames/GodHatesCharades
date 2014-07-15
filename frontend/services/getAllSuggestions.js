@@ -8,7 +8,7 @@ app.service('getAllSuggestions', function($q, cardService) {
 	function loadData(scope) {
 		var deferred = $q.defer();
 		Parse.Cloud.run(
-			'getAllSuggestions',
+			CONFIG.PARSE_VERSION + 'getAllSuggestions',
 			{},
 			{
 				success: function(suggestions) {

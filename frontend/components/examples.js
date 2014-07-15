@@ -25,7 +25,7 @@ app.directive('examples', function(cardService, $timeout) {
 					$scope.loading = true;
 					
 					Parse.Cloud.run(
-						'examples',
+						CONFIG.PARSE_VERSION + 'examples',
 						{
 							id: CONFIG.EXAMPLE_SET_ID
 						},

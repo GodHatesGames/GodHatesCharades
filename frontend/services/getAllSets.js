@@ -16,7 +16,7 @@ app.service('sets', function($q, $rootScope) {
 		console.log('sets loadData');
 		var deferred = $q.defer();
 		Parse.Cloud.run(
-			'getAllSets',
+			CONFIG.PARSE_VERSION + 'getAllSets',
 			{},
 			{
 				success: function(setData) {
@@ -75,7 +75,7 @@ app.service('sets', function($q, $rootScope) {
 			// save promise if needed
 			gettingSetItemsPromises[set.id] = deferred.promise;
 			Parse.Cloud.run(
-				'getCardsForSet',
+				CONFIG.PARSE_VERSION + 'getCardsForSet',
 				{
 					id: set.id,
 					includeOwner: true
@@ -101,7 +101,7 @@ app.service('sets', function($q, $rootScope) {
 	function addCardToSet(card, set) {
 		var deferred = $q.defer();
 		Parse.Cloud.run(
-			'addCardToSet',
+			CONFIG.PARSE_VERSION + 'addCardToSet',
 			{
 				card: card.id,
 				set: set.id
@@ -127,7 +127,7 @@ app.service('sets', function($q, $rootScope) {
 	function removeSetItem(setItem) {
 		var deferred = $q.defer();
 		Parse.Cloud.run(
-			'removeSetItem',
+			CONFIG.PARSE_VERSION + 'removeSetItem',
 			{
 				id: setItem.id
 			},

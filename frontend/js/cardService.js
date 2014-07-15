@@ -1,4 +1,4 @@
-app.service('cardService', function($q, $rootScope, Slug) {
+app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory) {
 	var cardService = {
 		cache: cache,
 		getTypeDisplay: getTypeDisplay,
@@ -15,7 +15,8 @@ app.service('cardService', function($q, $rootScope, Slug) {
 		getLink: getLink
 	}
 
-	var cardsById = {};
+	var cardCache = DSCacheFactory('cards');
+	var Suggestion = Parse.Object.extend('Suggestion');
 
 	var TYPE_DISPLAY_CHARACTER = "Actor";
 	var TYPE_DISPLAY_SCENARIO = "Scenario";
@@ -97,28 +98,31 @@ app.service('cardService', function($q, $rootScope, Slug) {
 	}
 
 	function cache(cards) {
-		_.each(cards, function(element, index, list) {
-			var currentCache = cardsById[element.id];
-			if(currentCache) {
-				if(element.updatedAt > currentCache.updatedAt)
-					cardsById[element.id] = element;
-			} else {
-				cardsById[element.id] = element;
-			}
-		})
+		if(_.isArray(cards)) {
+			_.each(cards, function(element) {
+				updateCache(element);
+			});
+		} else {
+			updateCache(cards);
+		}
+	}
+
+	function updateCache(updatedItem) {
+		cardCache.put(updatedItem.id, updatedItem);
 	}
 
 	function getCard(cardId) {
 		// console.log('getCard:', cardId);
 		var returnVal;
-		var currentCache = cardsById[cardId];
+		var currentCache = cardCache.get(cardId);
 		if(currentCache) {
-			return $q.when(currentCache);
+			var parseSuggestion = new Suggestion(currentCache);
+			return $q.when(parseSuggestion);
 		} else {
 			var options = {
 				id: cardId
 			};
-			return Parse.Cloud.run('getCardById', options);
+			return Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getCardById', options);
 		}
 	}
 

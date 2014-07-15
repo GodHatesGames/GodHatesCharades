@@ -191,7 +191,7 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 				success: onProfileFound,
 				error: onProfileError
 			};
-			Parse.Cloud.run('getProfile', options, callbacks);
+			Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getProfile', options, callbacks);
 			fetching[id] = deffered.promise;
 		}
 
