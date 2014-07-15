@@ -16,8 +16,8 @@ app.controller('pairView', function($scope, $state, $stateParams, $location, $wi
 		// set meta description
 		$state.current.description = ['"',
 		                              $state.current.title,
-		                              '"',
-		                              'is a pair of cards that might be added to God Hates Charades'].join('');
+		                              '" ',
+		                              'is a pair of cards that might be added to God Hates Charades.'].join('');
 
 
 		if(!$rootScope.$$phase)
