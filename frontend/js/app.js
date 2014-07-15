@@ -35,7 +35,7 @@ app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider){
 
 		DSCacheFactoryProvider.setCacheDefaults({
 			storageMode: 'localStorage',
-			capacity: 1000
+			capacity: 100
 		});
 	}
 );

@@ -1,17 +1,27 @@
-app.controller('pairView', function($scope, $state, $stateParams, $location, $window, pairService) {
+app.controller('pairView', function($scope, $state, $stateParams, $location, $window, pairService, $rootScope) {
 	$scope.pairId = $stateParams.pairid;
 
 	var card = pairService.getPairById($scope.pairId)
 	.then(function(pair) {
-		$scope.actor = pair.get('actor');
-		$scope.scenario = pair.get('scenario');
+		$scope.pair = pair;
+		var actor = pair.get('actor');
+		var scenario = pair.get('scenario');
+		$scope.actorId = actor.id;
+		$scope.scenarioId = scenario.id;
 
 		//set meta title
-		$state.current.title = [$scope.actor.get('text'),
-		                        $scope.scenario.get('scenario')].join(' ');
+		$state.current.title = [actor.get('text'),
+		                        scenario.get('text')].join(' ');
 
 		// set meta description
-		$state.current.description = ['this is a pair'].join('');
+		$state.current.description = ['"',
+		                              $state.current.title,
+		                              '"',
+		                              'is a pair of cards that might be added to God Hates Charades'].join('');
+
+
+		if(!$rootScope.$$phase)
+			$scope.$digest();
 	});
 
 	// DISQUS

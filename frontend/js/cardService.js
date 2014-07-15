@@ -16,6 +16,7 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory) {
 	}
 
 	var cardCache = DSCacheFactory('cards');
+	var cardPromises = {};
 	var Suggestion = Parse.Object.extend('Suggestion');
 
 	var TYPE_DISPLAY_CHARACTER = "Actor";
@@ -112,18 +113,27 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory) {
 	}
 
 	function getCard(cardId) {
-		// console.log('getCard:', cardId);
-		var returnVal;
-		var currentCache = cardCache.get(cardId);
-		if(currentCache) {
-			var parseSuggestion = new Suggestion(currentCache);
-			return $q.when(parseSuggestion);
+		if(cardPromises[cardId]) {
+			return cardPromises[cardId];
 		} else {
-			var options = {
-				id: cardId
-			};
-			return Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getCardById', options);
+			var currentCache = cardCache.get(cardId);
+			if(currentCache) {
+				var parseSuggestion = new Suggestion(currentCache);
+				return $q.when(parseSuggestion);
+			} else {
+				var options = {
+					id: cardId
+				};
+				cardPromises[cardId] = Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getCardById', options)
+				.then(onCardFetched);
+				return cardPromises[cardId];
+			}
 		}
+	}
+
+	function onCardFetched(card) {
+		delete cardPromises[card.id];
+		return card;
 	}
 
 	return cardService;

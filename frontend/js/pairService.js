@@ -1,9 +1,11 @@
 app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory) {
 	var pairService = {
+		getSlug: getSlug,
 		getPairById: getPairById
 	}
 
 	var pairCache = DSCacheFactory('pairs');
+	var pairPromises = {};
 	var Pair = Parse.Object.extend('Pair');
 
 	function cache(pairToCache) {
@@ -14,33 +16,50 @@ app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory)
 
 
 	function getPairById(pairId) {
-		console.log('getPairById:', pairId);
-		var returnVal;
-		var currentCache = pairCache.get(pairId);
-		if(currentCache) {
-			var parsePair = new Pair(currentCache);
-			var actorData = parsePair.get('actor');
-			if(actorData.objectId) {
-				var cachedActor = cardService.getCard(actorData.objectId);
-				parsePair.set('actor', cachedActor);
-			}
-			var scenarioData = parsePair.get('scenario');
-			if(scenarioData.objectId) {
-				var cachedScenario = cardService.getCard(scenarioData.objectId);
-				parsePair.set('scenario', cachedScenario);
-			}
-
-			return $q.when(parsePair);
+		if(pairPromises[pairId]) {
+			return pairPromises[pairId];
 		} else {
-			var options = {
-				id: pairId
-			};
-			return Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getPairById', options)
-			.then(function(pair) {
-				cache(pair);
-				return pair;
-			});
+			console.log('getPairById:', pairId);
+			var returnVal;
+			var currentCache = pairCache.get(pairId);
+			if(currentCache) {
+				var parsePair = new Pair(currentCache);
+				var actorData = parsePair.get('actor');
+				var scenarioData = parsePair.get('scenario');
+
+				var actorPromise = cardService.getCard(actorData.id);
+				var scenarioPromise = cardService.getCard(scenarioData.id);
+
+				var pairPromise = $q.all([actorPromise, scenarioPromise])
+				.then(function(results) {
+					parsePair.attributes.actor = results[0];
+					parsePair.attributes.scenario = results[1];
+					return parsePair;
+				});
+
+				return pairPromise;
+			} else {
+				var options = {
+					id: pairId
+				};
+				pairPromises[pairId] = Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getPairById', options)
+				.then(onPairFetched);
+
+				return pairPromises[pairId];
+			}
 		}
+	}
+
+	function onPairFetched(pair) {
+		delete pairPromises[pairId];
+		cache(pair);
+		return pair;
+	}
+
+	function getSlug(pair) {
+		var text = [pair.get('actor').get('text'),
+		            pair.get('scenario').get('text')].join(' ');
+		return Slug.slugify(text);
 	}
 
 	return pairService;

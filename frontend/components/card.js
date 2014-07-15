@@ -5,15 +5,15 @@ app.directive('card', function(parseUser, cardService, $rootScope) {
 		templateUrl: 'components/card.html',
 		replace: true,
 		scope: {
-			id: '=cardId',
+			cardId: '=cardId',
 			updatable: '=updatable',
 			blankType: '=blankType'
 		},
 		controller: function($scope, $element) {
 			$scope.typeClass = '';
 			$scope.imageUrl = '';
-			if($scope.id) {
-				var promise = cardService.getCard($scope.id);
+			if($scope.cardId) {
+				var promise = cardService.getCard($scope.cardId);
 				promise.then(onSuccess, onError);
 			} else if($scope.blankType !== undefined && $scope.blankType !== null) {
 				$scope.typeClass = cardService.getTypeClassByType($scope.blankType);
@@ -21,10 +21,10 @@ app.directive('card', function(parseUser, cardService, $rootScope) {
 			}
 
 			if($scope.updatable === true) {
-				$scope.$watch('id', function(newValue, oldVlue) {
+				$scope.$watch('cardId', function(newValue, oldValue) {
 					if(newValue) {
-						console.log('id changed to:', newValue);
-						var promise = cardService.getCard($scope.id);
+						console.log('id changed to:', newValue, 'from', oldValue);
+						var promise = cardService.getCard($scope.cardId);
 						promise.then(onSuccess, onError);
 					}
 				});
@@ -34,8 +34,6 @@ app.directive('card', function(parseUser, cardService, $rootScope) {
 				$scope.card = card;
 				$scope.typeClass = cardService.getTypeClass(card);
 				$scope.imageUrl = cardService.getImageUrl(card);
-				if(!$rootScope.$$phase)
-					$scope.$digest();
 			}
 
 			function onError(error) {

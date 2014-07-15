@@ -1,0 +1,31 @@
+<div class="pairInfo">
+	<br>
+	
+	<!-- Always show this -->
+	<ng-pluralize count="(pair.attributes.displayed) || 0"
+	              when="{'0': 'Nobody has seen this pair...',
+	                     'one': 'This pair was voted on once,',
+	                     'other': 'This pair was voted on {{pair.attributes.displayed}} times,'}">
+	</ng-pluralize>
+
+	<!-- Show if displayed and chosen are the same -->
+	<ng-pluralize ng-show="pair.attributes.displayed == pair.attributes.chosen"
+	              count="(pair.attributes.chosen) || 0"
+	              when="{'one': 'and they thought it was funny.',
+	                     'other': 'and they all thought it was funny.'}">
+	</ng-pluralize>
+
+	<!-- Show if displayed and chosen are not the same -->
+	<ng-pluralize ng-show="pair.attributes.displayed != pair.attributes.chosen"
+	              count="(pair.attributes.chosen) || 0"
+	              when="{'0': 'nobody thought it was funny.',
+	                     'one': 'and they thought it was funny.',
+	                     'other': '{{pair.attributes.chosen}} people thought it was funny.'}">
+	</ng-pluralize>
+	<ng-pluralize ng-show="pair.attributes.displayed != pair.attributes.chosen"
+	              count="(pair.attributes.skipped) || 0"
+	              when="{'0': 'Nobody disliked it.',
+	                     'one': 'One person thought it was a dumb joke.',
+	                     'other': '{{pair.attributes.skipped}} people thought it wasn\'t funny at all.'}">
+	</ng-pluralize>
+</div>
