@@ -25,8 +25,8 @@
 					<th>Votes</th>
 					<th>Skips</th>
 					<th>Viewed</th>
-					<th>KDR</th>
-					<th>Cont</th>
+					<th ng-show="parseUser.isAdmin()">KDR</th>
+					<th ng-show="parseUser.isAdmin()">Cont</th>
 					<th>Submitter</th>
 					<th>Type</th>
 				</tr>
@@ -52,9 +52,11 @@
 					<!-- Views -->
 					<td ng-bind="suggestion.attributes.skipped + suggestion.attributes.totalVotes"></td>
 					<!-- kdr -->
-					<td ng-bind="suggestion.attributes.kdr | number:1"></td>
+					<td ng-bind="suggestion.attributes.kdr | number:1"
+					    ng-show="parseUser.isAdmin()"></td>
 					<!-- controversy -->
-					<td ng-bind="suggestion.attributes.controversy"></td>
+					<td ng-bind="suggestion.attributes.controversy"
+					    ng-show="parseUser.isAdmin()"></td>
 					<!-- Submitter -->
 					<td>
 						<a ui-sref="user({userid: suggestion.attributes.owner.id})">

@@ -1,4 +1,4 @@
-app.directive('topSubmissions', function(cardService, $filter, $state) {
+app.directive('topSubmissions', function(cardService, $filter, $state, parseUser) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/topSubmissions.html',
@@ -14,6 +14,7 @@ app.directive('topSubmissions', function(cardService, $filter, $state) {
 			$scope.suggestions = [];
 			$scope.skipIndex = 0; //TODO: make private
 			$scope.allLoaded = false;
+			$scope.parseUser = parseUser;
 			$scope.tab = 'best';
 
 			// Private methods

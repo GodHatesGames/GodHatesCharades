@@ -17,17 +17,20 @@ function topSubmissions(request, response) {
 		case 'controversial' :
 			query.exists('controversy');
 			query.ascending('controversy,-skipped,-totalVotes');
+			query.greaterThan('totalVotes', 50);
 			break;
 		case 'worst' :
 			// only grab if kdr has been evaluated
 			query.exists('kdr');
 			query.ascending('kdr,-skipped,totalVotes');
+			query.greaterThan('skipped', 100);
 			break;
 		case 'best' :
 		default :
 			// only grab if kdr has been evaluated
 			query.exists('kdr');
 			query.descending('kdr,-totalVotes,-skipped');
+			query.greaterThan('totalVotes', 100);
 			break;
 	}
 	// extra protection with max of 100 items
@@ -44,6 +47,7 @@ function topSubmissions(request, response) {
 		// only use approved suggestions
 		query.equalTo('moderated', true);
 		query.equalTo('rejected', false);
+		// only use suggestions that have been seen a lot
 		query.find({
 			success: onSuggestionsLoaded,
 			error: onSuggestionsError
@@ -69,7 +73,7 @@ function topSubmissions(request, response) {
 function killDeathRatio(status) {
 	// to allow fetching owners
 	Parse.Cloud.useMasterKey();
-	
+
 	console.log('kdr started');
 	var counter = 0;
 
