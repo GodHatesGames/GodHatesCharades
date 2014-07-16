@@ -153,12 +153,12 @@ function controversyValue(status) {
 
 	}).then(function() {
 		// Set the job's success status
-		var message = 'controversyValue completed successfully.', counter, 'suggestions updated.';
+		var message = 'controversyValue completed successfully.' + counter + 'suggestions updated.';
 		console.log(message);
 		status.message(message);
 	}, function(error) {
 		// Set the job's error status
-		var message = 'error: controversyValue failed. ' + error;
+		var message = 'error: controversyValue failed. ' + JSON.stringify(error);
 		console.log(message);
 		status.message(message);
 	});
