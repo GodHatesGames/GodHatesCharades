@@ -25,6 +25,8 @@
 					<th>Votes</th>
 					<th>Skips</th>
 					<th>Viewed</th>
+					<th>KDR</th>
+					<th>Cont</th>
 					<th>Submitter</th>
 					<th>Type</th>
 				</tr>
@@ -49,6 +51,10 @@
 					<td ng-hide="suggestion.attributes.skipped">0</td>
 					<!-- Views -->
 					<td ng-bind="suggestion.attributes.skipped + suggestion.attributes.totalVotes"></td>
+					<!-- kdr -->
+					<td ng-bind="suggestion.attributes.kdr | number:1"></td>
+					<!-- controversy -->
+					<td ng-bind="suggestion.attributes.controversy"></td>
 					<!-- Submitter -->
 					<td>
 						<a ui-sref="user({userid: suggestion.attributes.owner.id})">
