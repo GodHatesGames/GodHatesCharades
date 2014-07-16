@@ -113,6 +113,9 @@ function killDeathRatio(status) {
 }
 
 function controversyValue(status) {
+	// to allow fetching owners
+	Parse.Cloud.useMasterKey();
+
 	console.log('controversy started');
 
 	var counter = 0;
@@ -123,7 +126,7 @@ function controversyValue(status) {
 	suggestionQuery.equalTo('moderated', true);
 	suggestionQuery.equalTo('rejected', false);
 	return suggestionQuery.each(function(suggestion) {
-		console.log('processing suggestion:', suggestion.id);
+		// console.log('processing suggestion:', suggestion.id);
 		// Update to plan value passed in
 		// user.set('plan', request.params.plan);
 
@@ -137,7 +140,9 @@ function controversyValue(status) {
 			success: function(savedSuggestion) {
 				if (counter % 50 === 0) {
 					// Set the  job's progress status
-					status.message('controversyValue: ' + counter + ' suggestions processed.');
+					var message = 'controversyValue: ' + counter + ' suggestions processed.';
+					console.log(message);
+					status.message(message);
 				}
 				counter += 1;
 			},
@@ -148,12 +153,14 @@ function controversyValue(status) {
 
 	}).then(function() {
 		// Set the job's success status
-		status.message('controversyValue completed successfully.', counter, 'suggestions updated.');
-		console.log('controversyValue completed successfully.', counter, 'suggestions updated.');
+		var message = 'controversyValue completed successfully.', counter, 'suggestions updated.';
+		console.log(message);
+		status.message(message);
 	}, function(error) {
 		// Set the job's error status
-		console.log('error: controversyValue failed.');
-		status.message('error: controversyValue failed.');
+		var message = 'error: controversyValue failed. ' + error;
+		console.log(message);
+		status.message(message);
 	});
 }
 
