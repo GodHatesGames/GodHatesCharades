@@ -156,6 +156,7 @@ function controversyValue(status) {
 		var message = 'controversyValue completed successfully.' + counter + 'suggestions updated.';
 		console.log(message);
 		status.message(message);
+		return message;
 	}, function(error) {
 		// Set the job's error status
 		var message = 'error: controversyValue failed. ' + JSON.stringify(error);
@@ -167,9 +168,9 @@ function controversyValue(status) {
 function testStats(request, status) {
 	var promise = controversyValue(status);
 	// fin
-	promise.then(function() {
+	promise.then(function(results) {
 		// Set the job's success status
-		status.success('testStats completed successfully.');
+		status.success('testStats completed successfully.' + results);
 	}, function(error) {
 		// Set the job's error status
 		status.error('testStats failed:' + JSON.stringify(error));
