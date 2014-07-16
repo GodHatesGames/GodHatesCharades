@@ -21,7 +21,7 @@ function topSubmissions(request, response) {
 		case 'worst' :
 			// only grab if kdr has been evaluated
 			query.exists('kdr');
-			query.ascending('kdr,-skipped,-totalVotes');
+			query.ascending('kdr,-skipped,totalVotes');
 			break;
 		case 'best' :
 		default :
@@ -67,6 +67,9 @@ function topSubmissions(request, response) {
 }
 
 function killDeathRatio(status) {
+	// to allow fetching owners
+	Parse.Cloud.useMasterKey();
+	
 	console.log('kdr started');
 	var counter = 0;
 
@@ -108,7 +111,7 @@ function killDeathRatio(status) {
 	}, function(error) {
 		// Set the job's error status
 		status.message('error: killDeathRatio failed.');
-		console.log('error: killDeathRatio failed', JSON.stringify(error));
+		console.log('error: killDeathRatio failed' + JSON.stringify(error));
 	});
 }
 
@@ -166,7 +169,7 @@ function controversyValue(status) {
 }
 
 function testStats(request, status) {
-	var promise = controversyValue(status);
+	var promise = killDeathRatio(status);
 	// fin
 	promise.then(function(results) {
 		// Set the job's success status
