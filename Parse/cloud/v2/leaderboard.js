@@ -75,49 +75,65 @@ function killDeathRatio(status) {
 	Parse.Cloud.useMasterKey();
 
 	console.log('kdr started');
+	var promises = [];
 	var counter = 0;
+	var limit = 300;
 
 	// Query for all suggestions
 	var PairObject = Parse.Object.extend('Pair');
 	var query = new Parse.Query(PairObject);
 	query.descending('displayed');
-	query.limit(300);
-	return query.each(function(pair) {
+	query.limit(limit);
+	return query.find()
+	.then(function(pairs) {
+		console.log(pairs.length + ' found');
+		_.each(pairs, function(pair) {
+			// Update to plan value passed in
+			// user.set('plan', request.params.plan);
 
-		// Update to plan value passed in
-		// user.set('plan', request.params.plan);
+			var chosen = pair.get('chosen');
+			if(!chosen) chosen = 1;
+			var skipped = pair.get('skipped');
+			if(!skipped) skipped = 1;
 
-		var chosen = pair.get('chosen');
-		if(!chosen) chosen = 1;
-		var skipped = pair.get('skipped');
-		if(!skipped) skipped = 1;
-
-		var kdr = chosen / skipped;
-		pair.set('kdr', kdr);
-		return pair.save({
-			success: function(savedPair) {
-				console.log('kdr saved');
-				if (counter % 50 === 0) {
-					// Set the  job's progress status
-					status.message('killDeathRatio: ' + counter + ' pairs processed.');
-					console.log('killDeathRatio: ' + counter + ' pairs processed.');
+			var kdr = chosen / skipped;
+			pair.set('kdr', kdr);
+			var savePromise = pair.save(null, {
+				success: function(savedPair) {
+					// console.log('kdr saved');
+					if (counter % 10 === 0) {
+						// Set the  job's progress status
+						status.message('killDeathRatio: ' + counter + ' pairs processed.');
+						console.log('killDeathRatio: ' + counter + ' pairs processed.');
+					}
+					counter += 1;
+					if(counter === limit)
+						finishedSavingKdr();
+				},
+				error: function(error) {
+					console.log('error fetching pair:', error);
+					errorSavingKdr(error);
 				}
-				counter += 1;
-			},
-			error: function(error) {
-				console.log('error fetching pair:', error);
-			}
+			});
+			promises.push(savePromise);
 		});
+		return Parse.Promise.when(promises)
+		.then(finishedSavingKdr, errorSavingKdr);
+	});
 
-	}).then(function() {
+
+	function finishedSavingKdr() {
 		// Set the job's success status
-		status.message('killDeathRatio completed successfully.', counter, 'pairs updated.');
-		console.log('killDeathRatio completed successfully.', counter, 'pairs updated.');
-	}, function(error) {
+		status.message('killDeathRatio completed successfully. ' + counter + 'pairs updated.');
+		console.log('killDeathRatio completed successfully. ' + counter + 'pairs updated.');
+		promise.resolve();
+	}
+
+	function errorSavingKdr(error) {
 		// Set the job's error status
 		status.message('error: killDeathRatio failed.');
 		console.log('error: killDeathRatio failed' + JSON.stringify(error));
-	});
+	}
 }
 
 function controversyValue(status) {
@@ -144,7 +160,7 @@ function controversyValue(status) {
 
 		var controversy = Math.abs(Math.abs(totalVotes) - Math.abs(totalSkips));
 		suggestion.set('controversy', controversy);
-		return suggestion.save({
+		return suggestion.save(null, {
 			success: function(savedSuggestion) {
 				if (counter % 50 === 0) {
 					// Set the  job's progress status
