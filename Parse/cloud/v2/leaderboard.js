@@ -78,40 +78,41 @@ function killDeathRatio(status) {
 	var counter = 0;
 
 	// Query for all suggestions
-	var SuggestionObject = Parse.Object.extend('Suggestion');
-	var suggestionQuery = new Parse.Query(SuggestionObject);
-	suggestionQuery.equalTo('moderated', true);
-	suggestionQuery.equalTo('rejected', false);
-	return suggestionQuery.each(function(suggestion) {
+	var PairObject = Parse.Object.extend('Pair');
+	var query = new Parse.Query(PairObject);
+	query.descending('displayed');
+	query.limit(300);
+	return query.each(function(pair) {
 
 		// Update to plan value passed in
 		// user.set('plan', request.params.plan);
 
-		var totalVotes = suggestion.get('totalVotes');
-		var totalSkips = suggestion.get('skipped');
-		if(totalSkips === 0) totalSkips = 1;
+		var chosen = pair.get('chosen');
+		if(!chosen) chosen = 1;
+		var skipped = pair.get('skipped');
+		if(!skipped) skipped = 1;
 
-		var kdr = totalVotes / totalSkips;
-		suggestion.set('kdr', kdr);
-		return suggestion.save({
-			success: function(savedSuggestion) {
+		var kdr = chosen / skipped;
+		pair.set('kdr', kdr);
+		return pair.save({
+			success: function(savedPair) {
 				console.log('kdr saved');
 				if (counter % 50 === 0) {
 					// Set the  job's progress status
-					status.message('killDeathRatio: ' + counter + ' suggestions processed.');
-					console.log('killDeathRatio: ' + counter + ' suggestions processed.');
+					status.message('killDeathRatio: ' + counter + ' pairs processed.');
+					console.log('killDeathRatio: ' + counter + ' pairs processed.');
 				}
 				counter += 1;
 			},
 			error: function(error) {
-				console.log('error fetching suggestion:', error);
+				console.log('error fetching pair:', error);
 			}
 		});
 
 	}).then(function() {
 		// Set the job's success status
-		status.message('killDeathRatio completed successfully.', counter, 'suggestions updated.');
-		console.log('killDeathRatio completed successfully.', counter, 'suggestions updated.');
+		status.message('killDeathRatio completed successfully.', counter, 'pairs updated.');
+		console.log('killDeathRatio completed successfully.', counter, 'pairs updated.');
 	}, function(error) {
 		// Set the job's error status
 		status.message('error: killDeathRatio failed.');
