@@ -94,4 +94,3 @@ Parse.Cloud.define('v2_getCardById', v2.cardUtils.getCardById);
 
 // Background Jobs
 Parse.Cloud.job('v2_calculateStats', v2.leaderboard.calculateStats);
-Parse.Cloud.job('v2_testStats', v2.leaderboard.testStats);
