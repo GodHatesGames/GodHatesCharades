@@ -1,6 +1,6 @@
 var _ = require('underscore');
 var userUtils = require('cloud/v2/userUtils.js');
-var MAX_FETCH = 100;
+var MAX_FETCH = 300;
 
 exports.topPairs = topPairs;
 exports.calculateStats = calculateStats;
@@ -12,23 +12,9 @@ function topPairs(request, response) {
 	var PairObject = Parse.Object.extend('Pair');
 	var query = new Parse.Query(PairObject);
 
-	switch(request.params.type) {
-		case 'controversial' :
-			query.exists('controversy');
-			query.ascending('controversy,-skipped,-chosen');
-			break;
-		case 'worst' :
-			// only grab if kdr has been evaluated
-			query.exists('kdr');
-			query.ascending('kdr,-skipped,chosen');
-			break;
-		case 'best' :
-		default :
-			// only grab if kdr has been evaluated
-			query.exists('kdr');
-			query.descending('kdr,-chosen,-skipped');
-			break;
-	}
+	query.exists('controversy');
+	query.exists('kdr');
+
 	// extra protection with max of 100 items
 	var itemsRemaining = MAX_FETCH - request.params.skipIndex;
 	if(itemsRemaining <= 0) {

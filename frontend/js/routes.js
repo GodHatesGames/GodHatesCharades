@@ -69,7 +69,8 @@ app.config(function($stateProvider,
 		url: '/top',
 		title: 'Top Cards: Favorites chosen by the community',
 		description: 'Want to see everyone\'s favorite cards? See the most popular and the most controversial.',
-		templateUrl: 'views/topView.html'
+		templateUrl: 'views/topView.html',
+		controller: 'topView'
 	});
 	
 	// Admin

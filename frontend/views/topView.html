@@ -1,9 +1,57 @@
 <div id="topView" class="container">
-	<h2>Top Submissions</h2>
-	<hr>
-	<p>
-		These are the best of the best so far! If you dont agree <a ui-sref="vote">start voting</a>!
-	</p>
-	
-	<top-submissions></top-submissions>
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h2>Top Submissions</h2>
+			<p class="promptBlock">
+				These are the best of the best so far! If you dont agree <a ui-sref="vote">start voting</a>!
+			</p>
+			<ul class="nav nav-pills subnav">
+				<li ng-class="{ active: tab == 'best' }">
+					<a ng-click="reloadPairs('best')">
+						Hall of Fame
+					</a>
+				</li>
+				<li ng-class="{ active: tab == 'worst' }">
+					<a ng-click="reloadPairs('worst')">
+						Hall of Shame
+					</a>
+				</li>
+				<li ng-class="{ active: tab == 'controversial' }">
+					<a ng-click="reloadPairs('controversial')">
+						Controversial
+					</a>
+				</li>
+			</ul>
+			<div class="loadingAlert" 
+					ng-show="loading">
+				Loading...
+			</div>
+		</div>
+	</div>
+	<div class="cardList"
+		 ng-hide="loading && skipIndex == 0">
+		<div class="row pair"
+			 ng-repeat="(index, pair) in pairs | orderBy:sortPredicates[tab] | limitTo: 25">
+			<div class="col-md-offset-1 col-md-3"
+			     ui-sref="pair(pairService.getLink(pair))">
+				<card card-id="pair.attributes.actor.id"
+				      updatable="true"></card>
+			</div>
+			<div class="col-md-3">
+				<card card-id="pair.attributes.scenario.id"
+				      updatable="true"></card>
+			</div>
+			<div class="col-md-4">
+				<pair-info id="pair.id"></pair-info>
+				<div>Displayed: {{pair.get('displayed')}}</div>
+				<div>Votes: {{pair.get('chosen')}}</div>
+				<div>Skipped: {{pair.get('skipped')}}</div>
+				<div>Controversy: {{pair.get('controversy')}}</div>
+				<div>KDR: {{pair.get('kdr') | number:2}}</div>
+				<a ui-sref="pair(pairService.getLink(pair))">
+					Discuss it!
+				</a>
+			</div>
+		</div>
+	</div>
 </div>

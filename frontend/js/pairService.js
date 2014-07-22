@@ -20,7 +20,7 @@ app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory,
 		if(pairPromises[pairId]) {
 			return pairPromises[pairId];
 		} else {
-			console.log('getPairById:', pairId);
+			// console.log('getPairById:', pairId);
 			var returnVal;
 			var currentCache = pairCache.get(pairId);
 			if(currentCache) {
@@ -52,7 +52,7 @@ app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory,
 	}
 
 	function onPairFetched(pair) {
-		delete pairPromises[pairId];
+		delete pairPromises[pair.id];
 		cache(pair);
 		return pair;
 	}

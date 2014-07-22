@@ -154,7 +154,6 @@ a.list-group-special:hover {
 	border-radius: 5px;
 	text-align: center;
 	margin: 0 auto;
-	box-shadow: -2px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
 .card:before {
@@ -234,25 +233,14 @@ a.list-group-special:hover {
 	}
 }
 
-.card.character {
+.card.character, .card.scenario {
 	background-color: white !important;
-	// background-image: url(../img/actor_skull.svg) !important;
-	// background-size: 50% !important;
-	// background-repeat: no-repeat !important;
-	// background-position: center 25% !important;
+	box-shadow: -2px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
 .card.character .editable, .card.character {
 	color: black;
 	font-weight: normal;
-}
-
-.card.scenario {
-	background-color: white !important;
-	// background-image: url(../img/scenario_ball.svg) !important;
-	// background-size: 55% !important;
-	// background-repeat: no-repeat !important;
-	// background-position: center 25% !important;
 }
 
 .card.scenario .editable, .card.scenario {
@@ -366,6 +354,18 @@ a.list-group-special:hover {
 	margin-bottom: 0;
 }
 
+.pair {
+	.card {
+		&.character {
+			transform: scale(0.97, 0.97) rotate(-8deg) translateX(15px);
+		}
+
+		&.scenario {
+			transform: scale(1, 1) rotate(6deg) translateX(-15px);
+		}
+	}
+}
+
 
 .loadingAlert {
 	background: black;
@@ -448,9 +448,26 @@ a.list-group-special:hover {
 
 /* subnavs */
 
-.nav.subnav > li > a {
-	color: grey;
-	text-shadow: none;
+.nav.subnav {
+	border-bottom: 1px solid black;
+	
+	& > li {
+		& > a {
+			color: grey;
+			text-shadow: none;
+			padding-bottom: 8px;
+		}
+
+		&.active > a {
+			color: white;
+			background-color: black;
+
+			&:hover {
+				color: white;
+				background-color: black;
+			}
+		}
+	}
 }
 
 @media (max-width: 1200px) {

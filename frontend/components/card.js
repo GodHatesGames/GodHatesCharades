@@ -23,7 +23,7 @@ app.directive('card', function(parseUser, cardService, $rootScope) {
 			if($scope.updatable === true) {
 				$scope.$watch('cardId', function(newValue, oldValue) {
 					if(newValue) {
-						console.log('id changed to:', newValue, 'from', oldValue);
+						// console.log('id changed to:', newValue, 'from', oldValue);
 						var promise = cardService.getCard($scope.cardId);
 						promise.then(onSuccess, onError);
 					}
@@ -34,6 +34,9 @@ app.directive('card', function(parseUser, cardService, $rootScope) {
 				$scope.card = card;
 				$scope.typeClass = cardService.getTypeClass(card);
 				$scope.imageUrl = cardService.getImageUrl(card);
+
+				if(!$rootScope.$$phase)
+					$scope.$digest();
 			}
 
 			function onError(error) {
