@@ -7,8 +7,25 @@ app.directive('pairInfo', function(parseUser, pairService, $rootScope) {
 			id: '=id'
 		},
 		controller: function($scope, $element) {
-			var promise = pairService.getPairById($scope.id);
-			promise.then(onSuccess, onError);
+			$scope.alwaysShow = {'0': 'Nobody has seen this pair...',
+			                     'one': 'This pair was voted on once,',
+			                     'other': 'This pair was voted on {{pair.attributes.displayed}} times,'
+			                    };
+
+			$scope.onlyFunny = {'one': 'and they thought it was funny.',
+			                    'other': 'and they all thought it was funny.'
+			                   };
+
+			$scope.mixedBag = {'0': 'nobody thought it was funny.',
+			                    'one': 'and they thought it was funny.',
+			                    'other': '{{pair.attributes.chosen}} people thought it was funny.'
+			                   };
+			$scope.$watch('id', onIdChanged);
+
+			function onIdChanged(newValue) {
+				pairService.getPairById(newValue)
+				.then(onSuccess, onError);
+			}
 
 			function onSuccess(pair) {
 				$scope.pair = pair;
