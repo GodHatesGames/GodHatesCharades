@@ -1,4 +1,4 @@
-app.directive('topSubmissions', function(cardService, $filter, $state, parseUser) {
+app.directive('topSubmissions', function(pairService, $filter, $state, parseUser) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/topSubmissions.html',
@@ -8,10 +8,10 @@ app.directive('topSubmissions', function(cardService, $filter, $state, parseUser
 		},
 		controller: function($scope, $element) {
 			// public vars
-			$scope.cardService = cardService;
+			$scope.pairService = pairService;
 			$scope.pageSize = 51;
 			$scope.loading = false;
-			$scope.suggestions = [];
+			$scope.pairs = [];
 			$scope.skipIndex = 0; //TODO: make private
 			$scope.allLoaded = false;
 			$scope.parseUser = parseUser;
@@ -19,15 +19,15 @@ app.directive('topSubmissions', function(cardService, $filter, $state, parseUser
 
 			// Private methods
 
-			$scope.reloadSuggestions = function(tab) {
+			$scope.reloadPairs = function(tab) {
 				$scope.tab = tab;
-				$scope.suggestions = [];
+				$scope.pairs = [];
 				$scope.skipIndex = 0;
 				$scope.allLoaded = false;
-				$scope.loadSuggestions();
+				$scope.loadPairs();
 			}
 
-			$scope.loadSuggestions = function() {
+			$scope.loadPairs = function() {
 				console.log($state.current.name);
 				if(!$scope.loading && !$scope.allLoaded) {
 					var options = {
@@ -36,31 +36,30 @@ app.directive('topSubmissions', function(cardService, $filter, $state, parseUser
 						type: $scope.tab
 					};
 					var callbacks = {
-						success: onSuggestionsLoaded,
-						error: onSuggestionsError
+						success: onPairsLoaded,
+						error: onPairsError
 					};
 					$scope.loading = true;
-					Parse.Cloud.run(CONFIG.PARSE_VERSION + 'topSubmissions', options, callbacks);
+					Parse.Cloud.run(CONFIG.PARSE_VERSION + 'topPairs', options, callbacks);
 				}
 			}
 
-			function onSuggestionsLoaded(suggestions) {
-				if(suggestions.length < $scope.pageSize) {
+			function onPairsLoaded(pairs) {
+				if(pairs.length < $scope.pageSize) {
 					$scope.allLoaded = true;
 				}
-				cardService.cache(suggestions);
-				$scope.suggestions = $scope.suggestions.concat(suggestions);
-				$scope.skipIndex += suggestions.length;
+				$scope.pairs = $scope.pairs.concat(pairs);
+				$scope.skipIndex += pairs.length;
 				$scope.loading = false;
 				$scope.$digest();
 			}
 
-			function onSuggestionsError(error) {
+			function onPairsError(error) {
 				console.log('couldn\'t find any pairs:', error);
 			}
 
 			// // init
-			$scope.loadSuggestions();
+			$scope.loadPairs();
 
 		}
 	}

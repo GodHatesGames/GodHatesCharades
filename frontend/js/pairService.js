@@ -1,7 +1,8 @@
-app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory) {
+app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory, Slug) {
 	var pairService = {
-		getSlug: getSlug,
-		getPairById: getPairById
+		getLink: _getLink,
+		getSlug: _getSlug,
+		getPairById: _getPairById
 	}
 
 	var pairCache = DSCacheFactory('pairs');
@@ -15,7 +16,7 @@ app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory)
 	}
 
 
-	function getPairById(pairId) {
+	function _getPairById(pairId) {
 		if(pairPromises[pairId]) {
 			return pairPromises[pairId];
 		} else {
@@ -56,10 +57,17 @@ app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory)
 		return pair;
 	}
 
-	function getSlug(pair) {
+	function _getSlug(pair) {
 		var text = [pair.get('actor').get('text'),
 		            pair.get('scenario').get('text')].join(' ');
 		return Slug.slugify(text);
+	}
+
+	function _getLink(pair) {
+		return {
+			pairid: pair.id,
+			slug: _getSlug(pair)
+		}
 	}
 
 	return pairService;

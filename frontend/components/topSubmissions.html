@@ -1,17 +1,17 @@
 <div class="topSubmissions">
 	<ul class="nav nav-pills subnav">
 		<li ng-class="{ active: tab == 'best' }">
-			<a ng-click="reloadSuggestions('best')">
+			<a ng-click="reloadPairs('best')">
 				Hall of Fame
 			</a>
 		</li>
 		<li ng-class="{ active: tab == 'worst' }">
-			<a ng-click="reloadSuggestions('worst')">
+			<a ng-click="reloadPairs('worst')">
 				Hall of Shame
 			</a>
 		</li>
 		<li ng-class="{ active: tab == 'controversial' }">
-			<a ng-click="reloadSuggestions('controversial')">
+			<a ng-click="reloadPairs('controversial')">
 				Controversial
 			</a>
 		</li>
@@ -21,7 +21,7 @@
 			<table class="table">
 				<tr>
 					<th>Rank</th>
-					<th>Suggestion</th>
+					<th>Pair</th>
 					<th>Votes</th>
 					<th>Skips</th>
 					<th>Viewed</th>
@@ -30,41 +30,41 @@
 					<th>Submitter</th>
 					<th>Type</th>
 				</tr>
-				<tr ng-repeat="(index, suggestion) in suggestions"
-				    class="suggestion" 
-				    ui-sref="card(cardService.getLink(suggestion))">
+				<tr ng-repeat="(index, pair) in pairs"
+				    class="pair" 
+				    ui-sref="pair(pairService.getLink(pair))">
 					<td ng-bind="index + 1"></td>
 					<!-- Text -->
 					<td>
-						<a ng-bind="suggestion.attributes.text"
-						   ui-sref="card(cardService.getLink(suggestion))"></a>
+						<a ng-bind="pair.attributes.text"
+						   ui-sref="pair(pairService.getLink(pair))"></a>
 					</td>
 					<!-- Votes -->
-					<td ng-show="suggestion.attributes.totalVotes">
-						{{suggestion.attributes.totalVotes | number}}
+					<td ng-show="pair.attributes.chosen">
+						{{pair.attributes.chosen | number}}
 					</td>
-					<td ng-hide="suggestion.attributes.totalVotes">0</td>
+					<td ng-hide="pair.attributes.chosen">0</td>
 					<!-- Skips -->
-					<td ng-show="suggestion.attributes.skipped">
-						{{suggestion.attributes.skipped | number}}
+					<td ng-show="pair.attributes.skipped">
+						{{pair.attributes.skipped | number}}
 					</td>
-					<td ng-hide="suggestion.attributes.skipped">0</td>
+					<td ng-hide="pair.attributes.skipped">0</td>
 					<!-- Views -->
-					<td ng-bind="suggestion.attributes.skipped + suggestion.attributes.totalVotes"></td>
+					<td ng-bind="pair.attributes.skipped + pair.attributes.chosen"></td>
 					<!-- kdr -->
-					<td ng-bind="suggestion.attributes.kdr | number:1"
+					<td ng-bind="pair.attributes.kdr | number:1"
 					    ng-show="parseUser.isAdmin()"></td>
 					<!-- controversy -->
-					<td ng-bind="suggestion.attributes.controversy"
+					<td ng-bind="pair.attributes.controversy"
 					    ng-show="parseUser.isAdmin()"></td>
 					<!-- Submitter -->
 					<td>
-						<a ui-sref="user({userid: suggestion.attributes.owner.id})">
-							{{suggestion.attributes.owner.attributes.name}}
+						<a ui-sref="user({userid: pair.attributes.owner.id})">
+							{{pair.attributes.owner.attributes.name}}
 						</a>
 					</td>
 					<!-- Type -->
-					<td ng-class="cardService.getTypeClass(suggestion)"></td>
+					<td ng-class="pairService.getTypeClass(pair)"></td>
 				</tr>
 			</table>
 	</div>

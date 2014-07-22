@@ -2,34 +2,31 @@ var _ = require('underscore');
 var userUtils = require('cloud/v2/userUtils.js');
 var MAX_FETCH = 100;
 
-exports.topSubmissions = topSubmissions;
+exports.topPairs = topPairs;
 exports.calculateStats = calculateStats;
 
-function topSubmissions(request, response) {
+function topPairs(request, response) {
 	// to allow fetching owners
 	Parse.Cloud.useMasterKey();
 
-	var SuggestionObject = Parse.Object.extend('Suggestion');
-	var query = new Parse.Query(SuggestionObject);
+	var PairObject = Parse.Object.extend('Pair');
+	var query = new Parse.Query(PairObject);
 
 	switch(request.params.type) {
 		case 'controversial' :
 			query.exists('controversy');
-			query.ascending('controversy,-skipped,-totalVotes');
-			query.greaterThan('totalVotes', 50);
+			query.ascending('controversy,-skipped,-chosen');
 			break;
 		case 'worst' :
 			// only grab if kdr has been evaluated
 			query.exists('kdr');
-			query.ascending('kdr,-skipped,totalVotes');
-			query.greaterThan('skipped', 100);
+			query.ascending('kdr,-skipped,chosen');
 			break;
 		case 'best' :
 		default :
 			// only grab if kdr has been evaluated
 			query.exists('kdr');
-			query.descending('kdr,-totalVotes,-skipped');
-			query.greaterThan('totalVotes', 100);
+			query.descending('kdr,-chosen,-skipped');
 			break;
 	}
 	// extra protection with max of 100 items
@@ -42,29 +39,27 @@ function topSubmissions(request, response) {
 		query.limit(pageSize);
 		query.skip(skipIndex);
 		// include owner so we can display their details
-		query.include('owner');
-		// only use approved suggestions
-		query.equalTo('moderated', true);
-		query.equalTo('rejected', false);
-		// only use suggestions that have been seen a lot
+		query.include('actor.owner');
+		query.include('scenario.owner');
+		// only use pairs that have been seen a lot
 		query.find({
-			success: onSuggestionsLoaded,
-			error: onSuggestionsError
+			success: onPairsLoaded,
+			error: onPairsError
 		});
 	}
 
-	function onSuggestionsLoaded(suggestions) {
-		var suggestionPairs = [];
-		var suggestion;
-		for(var i = 0; i < suggestions.length; i++) {
-			suggestion = suggestions[i];
-			userUtils.stripPrivateData(suggestion.attributes.owner);
+	function onPairsLoaded(pairs) {
+		var pair;
+		for(var i = 0; i < pairs.length; i++) {
+			pair = pairs[i];
+			userUtils.stripPrivateData(pair.attributes.actor.attributes.owner);
+			userUtils.stripPrivateData(pair.attributes.scenario.attributes.owner);
 		}
 
-		response.success(suggestions);
+		response.success(pairs);
 	}
 
-	function onSuggestionsError(error) {
+	function onPairsError(error) {
 		response.reject(error);
 	}
 }
@@ -78,7 +73,7 @@ function calculateStats(request, status) {
 	var counter = 0;
 	var limit = 300;
 
-	// Query for all suggestions
+	// Query for all pairs
 	var PairObject = Parse.Object.extend('Pair');
 	var query = new Parse.Query(PairObject);
 	query.descending('displayed');

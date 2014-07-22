@@ -79,7 +79,7 @@ Parse.Cloud.define('v2_getRandomSuggestionPairs', v2.vote.getRandomSuggestionPai
 Parse.Cloud.define('v2_skipSuggestions', v2.vote.skipSuggestions);
 
 // Leaderboard
-Parse.Cloud.define('v2_topSubmissions', v2.leaderboard.topSubmissions);
+Parse.Cloud.define('v2_topPairs', v2.leaderboard.topPairs);
 
 // Pair
 Parse.Cloud.define('v2_recordChosenAndSkipped', v2.pair.recordChosenAndSkipped);
