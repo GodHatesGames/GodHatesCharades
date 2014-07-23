@@ -1,0 +1,86 @@
+.ribbon-container {
+	.ribbon {
+		@font-size: 25px;
+		@ribbon-height: 25px;
+		@ribbon-tail-width: 20px;
+		@ribbon-tail-offset: @ribbon-tail-width + 10;
+		@ribbon-shadow-size: 15px;
+
+		font-size: @ribbon-height !important;
+		/* This ribbon is based on a 16px font side and a 24px vertical rhythm. I've used em's to position each element for scalability. If you want to use a different font size you may have to play with the position of the ribbon elements */
+
+		width: 50%;
+		position: relative;
+		color: #fff;
+		text-align: center;
+		padding: round(@font-size / 2) @ribbon-tail-offset; /* Adjust to suit */
+		z-index: 1;
+
+		&:before, &:after {
+			content: "";
+			position: absolute;
+			display: block;
+			bottom: -@ribbon-shadow-size;
+			border-width: @ribbon-height;
+			border-style: solid;
+			z-index: -1;
+		}
+		&:before {
+			left: -@ribbon-tail-offset;
+			border-right-width: @ribbon-tail-width;
+		}
+		&:after {
+			right: -@ribbon-tail-offset;
+			border-left-width: @ribbon-tail-width;
+		}
+		
+		.ribbon-content {
+			&:before, &:after {
+				content: "";
+				position: absolute;
+				display: block;
+				border-style: solid;
+				border-right-color: transparent;
+				border-bottom-color: transparent;
+				border-left-color: transparent;
+				bottom: -@ribbon-shadow-size;
+			}
+			&:before {
+				left: 0;
+				border-width: @ribbon-shadow-size 0 0 @ribbon-shadow-size;
+			}
+			&:after {
+				right: 0;
+				border-width: @ribbon-shadow-size @ribbon-shadow-size 0 0;
+			}
+		}
+
+	}
+	.ribbon-colors();
+}
+
+.ribbon-colors(@base-color: #CCC) {
+	@tail-color: darken(@base-color, 10%);
+	@shadow-color: darken(@base-color, 20%);
+	.ribbon {
+		background: @base-color;
+
+		&:before, &:after {
+			border-color: @tail-color;
+		}
+
+		&:before {
+			border-left-color: transparent;
+		}
+
+		&:after {
+			border-right-color: transparent;
+		}
+		
+		.ribbon-content {
+			&:before, &:after {
+				border-top-color: @shadow-color;
+			}
+		}
+	}
+}

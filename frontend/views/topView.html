@@ -29,9 +29,13 @@
 	<div class="cardList"
 		 ng-hide="loading && skipIndex == 0">
 		<div class="row pair"
-			 ng-repeat="(index, pair) in pairs | orderBy:sortPredicates[tab] | limitTo: 25">
-			<div class="col-md-offset-1 col-md-3"
-			     ui-sref="pair(pairService.getLink(pair))">
+		     ui-sref="pair(pairService.getLink(pair))"
+		     ng-repeat="(index, pair) in pairs | orderBy:sortPredicates[tab] | limitTo: 25">
+
+			<ribbon message="index + 1"
+			        class="ribbon-gold">
+			</ribbon>
+			<div class="col-md-offset-3 col-md-3">
 				<card card-id="pair.attributes.actor.id"
 				      updatable="true"></card>
 			</div>
@@ -39,7 +43,7 @@
 				<card card-id="pair.attributes.scenario.id"
 				      updatable="true"></card>
 			</div>
-			<div class="col-md-4">
+			<!-- <div class="col-md-4">
 				<pair-info id="pair.id"></pair-info>
 				<div>Displayed: {{pair.get('displayed')}}</div>
 				<div>Votes: {{pair.get('chosen')}}</div>
@@ -49,7 +53,7 @@
 				<a ui-sref="pair(pairService.getLink(pair))">
 					Discuss it!
 				</a>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>
