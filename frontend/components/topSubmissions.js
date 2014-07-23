@@ -40,7 +40,7 @@ app.directive('topSubmissions', function(cardService, $filter, $state, parseUser
 						error: onSuggestionsError
 					};
 					$scope.loading = true;
-					Parse.Cloud.run(CONFIG.PARSE_VERSION + 'topSubmissions', options, callbacks);
+					Parse.Cloud.run('topSubmissions', options, callbacks);
 				}
 			}
 

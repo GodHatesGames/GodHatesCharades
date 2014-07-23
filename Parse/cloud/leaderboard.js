@@ -17,17 +17,20 @@ function topSubmissions(request, response) {
 		case 'controversial' :
 			query.exists('controversy');
 			query.ascending('controversy,-skipped,-totalVotes');
+			query.greaterThan('totalVotes', 50);
 			break;
 		case 'worst' :
 			// only grab if kdr has been evaluated
 			query.exists('kdr');
-			query.ascending('kdr,-skipped,-totalVotes');
+			query.ascending('kdr,-skipped,totalVotes');
+			query.greaterThan('skipped', 100);
 			break;
 		case 'best' :
 		default :
 			// only grab if kdr has been evaluated
 			query.exists('kdr');
 			query.descending('kdr,-totalVotes,-skipped');
+			query.greaterThan('totalVotes', 100);
 			break;
 	}
 	// extra protection with max of 100 items
@@ -44,6 +47,7 @@ function topSubmissions(request, response) {
 		// only use approved suggestions
 		query.equalTo('moderated', true);
 		query.equalTo('rejected', false);
+		// only use suggestions that have been seen a lot
 		query.find({
 			success: onSuggestionsLoaded,
 			error: onSuggestionsError
@@ -67,6 +71,9 @@ function topSubmissions(request, response) {
 }
 
 function killDeathRatio(status) {
+	// to allow fetching owners
+	Parse.Cloud.useMasterKey();
+
 	console.log('kdr started');
 	var counter = 0;
 
@@ -108,11 +115,14 @@ function killDeathRatio(status) {
 	}, function(error) {
 		// Set the job's error status
 		status.message('error: killDeathRatio failed.');
-		console.log('error: killDeathRatio failed', JSON.stringify(error));
+		console.log('error: killDeathRatio failed' + JSON.stringify(error));
 	});
 }
 
 function controversyValue(status) {
+	// to allow fetching owners
+	Parse.Cloud.useMasterKey();
+
 	console.log('controversy started');
 
 	var counter = 0;
@@ -123,7 +133,7 @@ function controversyValue(status) {
 	suggestionQuery.equalTo('moderated', true);
 	suggestionQuery.equalTo('rejected', false);
 	return suggestionQuery.each(function(suggestion) {
-		console.log('processing suggestion:', suggestion.id);
+		// console.log('processing suggestion:', suggestion.id);
 		// Update to plan value passed in
 		// user.set('plan', request.params.plan);
 
@@ -137,7 +147,9 @@ function controversyValue(status) {
 			success: function(savedSuggestion) {
 				if (counter % 50 === 0) {
 					// Set the  job's progress status
-					status.message('controversyValue: ' + counter + ' suggestions processed.');
+					var message = 'controversyValue: ' + counter + ' suggestions processed.';
+					console.log(message);
+					status.message(message);
 				}
 				counter += 1;
 			},
@@ -148,21 +160,24 @@ function controversyValue(status) {
 
 	}).then(function() {
 		// Set the job's success status
-		status.message('controversyValue completed successfully.', counter, 'suggestions updated.');
-		console.log('controversyValue completed successfully.', counter, 'suggestions updated.');
+		var message = 'controversyValue completed successfully.' + counter + 'suggestions updated.';
+		console.log(message);
+		status.message(message);
+		return message;
 	}, function(error) {
 		// Set the job's error status
-		console.log('error: controversyValue failed.');
-		status.message('error: controversyValue failed.');
+		var message = 'error: controversyValue failed. ' + JSON.stringify(error);
+		console.log(message);
+		status.message(message);
 	});
 }
 
 function testStats(request, status) {
-	var promise = controversyValue(status);
+	var promise = killDeathRatio(status);
 	// fin
-	promise.then(function() {
+	promise.then(function(results) {
 		// Set the job's success status
-		status.success('testStats completed successfully.');
+		status.success('testStats completed successfully.' + results);
 	}, function(error) {
 		// Set the job's error status
 		status.error('testStats failed:' + JSON.stringify(error));
