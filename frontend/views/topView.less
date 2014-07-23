@@ -1,24 +1,27 @@
-#topView .pair {
-	margin-top: 30px;
-	
-	.card {
-		cursor: pointer;
-	}
-
-	.ng-enter {
-		transition: opacity 1s ease-out;
-		opacity: 0;
-
-		&.ng-enter-active {
-			opacity: 1;
+#topView {
+	.pair {
+		margin-top: 30px;
+		
+		.card {
+			cursor: pointer;
 		}
-	}
 
-	.ng-leave {
-		transition: opacity 1s ease-out;
-
-		&.ng-leave-active {
+		.ng-enter {
+			transition: opacity 1s ease-out;
 			opacity: 0;
+
+			&.ng-enter-active {
+				opacity: 1;
+			}
+		}
+
+		.ng-leave {
+			transition: opacity 1s ease-out;
+
+			&.ng-leave-active {
+				opacity: 0;
+			}
 		}
 	}
+
 }

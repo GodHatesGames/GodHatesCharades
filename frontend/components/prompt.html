@@ -1,0 +1,26 @@
+<div class="prompt row"
+     collapse="hide || !show"
+     ng-class="{social: social}">
+	<!-- pairs increment by 2 each time, so 6 is 3 clicks -->
+
+	<button type="button"
+	        class="close"
+	        ng-show="closable"
+	        ng-click="hide = true">
+		<span aria-hidden="true">&times;</span>
+		<span class="sr-only">Close</span>
+	</button>
+
+	<div class="promptBlock"
+	     ng-class="promptBlockClasses"
+	     ng-html-compile="message">
+	</div>
+	<!-- AddThis Button BEGIN -->
+	<div class="addthis_toolbox addthis_default_style"
+	     ng-show="social">
+		<a class="addthis_button_facebook_like"
+		   fb:like:layout="button_count"></a>
+		<a class="addthis_button_tweet"></a>
+	</div>
+	<!-- AddThis Button END -->
+</div>

@@ -1,0 +1,59 @@
+.prompt {
+	transition: all 0.5s ease 0.5s;
+	background-color: #5FC99A;
+	border-radius: 5px;
+	background-size: 160px 121px;
+	background-repeat: no-repeat;
+	background-position: right;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 15px;
+
+	&.social {
+		background-image: url(../img/god_03_zps53cb184f.gif);
+		background-size: 160px 121px;
+		background-repeat: no-repeat;
+		background-position: right;
+
+		.promptBlock {
+			text-align: left;
+			padding-top: 50px;
+			padding-bottom: 50px;
+		}
+
+		.addthis_toolbox {
+			position: absolute;
+			bottom: 15px;
+			right: 0;
+		}
+	}
+
+	.promptBlock {
+		text-align: center;
+		padding-top: 26px;
+		padding-bottom: 20px;
+	}
+
+	.promptBlock {
+		font-size: 18px;
+		font-family: 'GodHatesCharades';
+		text-transform: uppercase;
+		color: white;
+		padding-left: 20px;
+	}
+
+	.close {
+		float: left;
+		position: relative;
+		left: 10px;
+		top: 5px;
+	}
+}
+
+@media (max-width: 620px) {
+	.prompt {
+		.promptBlock {
+			font-size: 15px;
+		}
+	}
+}

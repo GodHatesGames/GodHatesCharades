@@ -2,9 +2,9 @@
 	<div class="row">
 		<div class="col-md-offset-1 col-md-10">
 			<h2>Top Submissions</h2>
-			<p class="promptBlock">
-				These are the best of the best so far! If you dont agree <a ui-sref="vote">start voting</a>!
-			</p>
+			<prompt message="These are the best of the best so far! If you dont agree...<br> <a ui-sref='vote' class='btn btn-inline btn-inverted'>start voting!</a>"
+			        show="true">
+			</prompt>
 			<ul class="nav nav-pills subnav">
 				<li ng-class="{ active: tab == 'best' }">
 					<a ng-click="reloadPairs('best')">

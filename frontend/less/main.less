@@ -397,33 +397,37 @@ a.list-group-special:hover {
 	font-size: 20px;
 	padding-left: 15px;
 	padding-top: 10px;
-}
 
-.btn:hover {
-	background-color: white;
-	color: black;
-}
+	&:hover {
+		background-color: white;
+		color: black;
+	}
 
-.btn:disabled {
-	background-color: black;
-}
+	&:disabled {
+		background-color: black;
+	}
 
-.btn.btn-inverted {
-	background-color: white;
-	color: black;
-}
+	&.btn-inverted {
+		background-color: white;
+		color: black;
 
-.btn.btn-inverted:hover {
-	background-color: black;
-	color: white;
-}
+		&:hover {
+			background-color: black;
+			color: white;
+		}
 
-.btn.btn-inverted:disabled {
-	background-color: white;
-}
+		&:disabled {
+			background-color: white;
+		}
+	}
 
-.btn.btn-danger {
-	background-color: @color-actor;
+	&.btn-danger {
+		background-color: @color-actor;
+	}
+
+	&.btn-inline {
+		display: inline-block;
+	}
 }
 
 .socialUnlock {
@@ -450,7 +454,7 @@ a.list-group-special:hover {
 
 .nav.subnav {
 	border-bottom: 1px solid black;
-	
+
 	& > li {
 		& > a {
 			color: grey;
