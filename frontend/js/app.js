@@ -18,6 +18,7 @@ var app = angular.module('app', ['ng',
                                  'slugifier',
                                  'disqusHere',
                                  'angular-data.DSCacheFactory',
+                                 'templateInclude',
                                  'ngCsv'
                                 ]);
 console.log('starting app');

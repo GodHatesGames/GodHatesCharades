@@ -6,9 +6,10 @@ app.directive('prompt', function() {
 		replace: true,
 		scope: {
 			message: '@message',
-			show: '=show',
+			hide: '=hide',
 			social: '=social', //boolean
-			closable: '=closable' //boolean
+			closable: '=closable', //boolean
+			messageTemplateUrl: '@messageTemplate'
 		},
 		controller: function($scope) {
 			$scope.promptBlockClasses = {

@@ -1,19 +1,20 @@
-<div class="prompt row"
-     collapse="hide || !show"
+<div class="prompt"
+     collapse="hideOverride || hide"
      ng-class="{social: social}">
 	<!-- pairs increment by 2 each time, so 6 is 3 clicks -->
 
 	<button type="button"
 	        class="close"
 	        ng-show="closable"
-	        ng-click="hide = true">
+	        ng-click="hideOverride = true">
 		<span aria-hidden="true">&times;</span>
 		<span class="sr-only">Close</span>
 	</button>
 
 	<div class="promptBlock"
 	     ng-class="promptBlockClasses"
-	     ng-html-compile="message">
+	     ng-show="message || messageTemplateUrl"
+	     template-include="messageTemplateUrl">
 	</div>
 	<!-- AddThis Button BEGIN -->
 	<div class="addthis_toolbox addthis_default_style"
