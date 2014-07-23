@@ -6,14 +6,20 @@
 	              when="alwaysShow">
 	</ng-pluralize>
 
+	<!-- Show if chosen and skipped are the same -->
+	<ng-pluralize ng-show="pair.attributes.chosen == pair.attributes.skipped && pair.attributes.displayed > 0"
+	              count="(pair.attributes.chosen) || 0"
+	              when="halfsies">
+	</ng-pluralize>
+
 	<!-- Show if displayed and chosen are the same -->
-	<ng-pluralize ng-show="pair.attributes.displayed == pair.attributes.chosen && pair.attributes.displayed != 0"
+	<ng-pluralize ng-show="pair.attributes.displayed == pair.attributes.chosen && pair.attributes.displayed > 0 && pair.attributes.chosen != pair.attributes.skipped"
 	              count="(pair.attributes.chosen) || 0"
 	              when="onlyFunny">
 	</ng-pluralize>
 
 	<!-- Show if displayed and chosen are not the same -->
-	<ng-pluralize ng-show="pair.attributes.displayed != pair.attributes.chosen && pair.attributes.displayed != 0"
+	<ng-pluralize ng-show="pair.attributes.displayed != pair.attributes.chosen && pair.attributes.displayed > 0 && pair.attributes.chosen != pair.attributes.skipped"
 	              count="(pair.attributes.chosen) || 0"
 	              when="mixedBag">
 	</ng-pluralize>
