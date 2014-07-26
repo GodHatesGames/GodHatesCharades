@@ -7,11 +7,11 @@ app.directive('pairInfo', function(parseUser, pairService, $rootScope) {
 			id: '=id'
 		},
 		controller: function($scope, $element) {
-			$scope.times = {'0': 'times',
-			                'one': 'time',
-			                'other': 'times'};
-			$scope.person = {'one': 'person',
-		                     'other': 'people'};
+			$scope.times = {'0': ' times',
+			                'one': ' time',
+			                'other': ' times'};
+			$scope.person = {'one': ' person ',
+		                     'other': ' people '};
 
 			$scope.$watch('id', onIdChanged);
 
