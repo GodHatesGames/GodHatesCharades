@@ -25,8 +25,12 @@ server.use(prerender.set('prerenderToken', process.env.PRERENDER_TOKEN));
 server.engine('html', require('ejs').renderFile);
 server.set('views', staticFilePath);
 server.set('view engine', 'html');
-server.use(express.logger());
 server.use(express.bodyParser());
+
+server.configure('development', function(){
+	// server.use(express.logger());
+	server.use(express.errorHandler());
+});
 
 server.use(express.static(staticFilePath));
 
