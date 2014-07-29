@@ -4,6 +4,7 @@ var express = require('express');
 var path = require('path');
 var prerender = require('prerender-node');
 var mailchimp = require('./mailchimp');
+var compression = require('compression');
 
 var port = process.env.PORT || 3000;
 var files = process.env.FILES || '../frontend';
@@ -26,6 +27,7 @@ server.engine('html', require('ejs').renderFile);
 server.set('views', staticFilePath);
 server.set('view engine', 'html');
 server.use(express.bodyParser());
+server.use(compression());
 
 server.configure('development', function(){
 	// server.use(express.logger());
