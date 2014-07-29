@@ -14,7 +14,8 @@
     "ejs": "^1.0.0",
     "newrelic": "^1.5.4",
     "prerender-node": "^1.0.1",
-    "mailchimp-api": "^2.0.6"
+    "mailchimp-api": "^2.0.6",
+    "compression": "^1.0.9"
   },
   "devDependencies": {
     "bower": "1.2.7",
