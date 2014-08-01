@@ -18,7 +18,6 @@
 			<tr>
 				<th>Set Name</th>
 				<th>Items</th>
-				<th>Color</th>
 				<th>B&W</th>
 				<th>CSV</th>
 			</tr>
@@ -27,13 +26,6 @@
 				<td ng-bind="set.attributes.name"></td>
 				<!-- Text -->
 				<td ng-bind="getCardCount(set)"></td>
-				<!-- Color Button -->
-				<td class="tableButton">
-					<button class="btn btn-info printButtons"
-							ng-click="printColor(set)">
-						Print Full Color
-					</button>
-				</td>
 				<!-- B&W Button -->
 				<td class="tableButton">
 					<button class="btn btn-info printButtons"

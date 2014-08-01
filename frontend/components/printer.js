@@ -54,16 +54,10 @@ app.directive('printer', function(cardService, $compile, $window, prismic, sets,
 
 			function print() {
 				// time to breathe
-				$timeout($window.print, 100);
+				$timeout($window.print, 300);
 			}
 
 			// Public Methods
-			$scope.printColor = function(set) {
-				setupPrint(set);
-				$element.removeClass('colorless');
-				print();
-			};
-
 			$scope.printBlack = function(set) {
 				setupPrint(set);
 				$element.addClass('colorless');
