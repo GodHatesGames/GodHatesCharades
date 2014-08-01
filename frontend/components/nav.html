@@ -14,8 +14,7 @@
 			<a ui-sref='top'>Top Pairs</a>
 		</li>
 
-		<li ng-show="parseUser.isBetaUser()"
-		    ui-sref-active="active">
+		<li ui-sref-active="active">
 			<a ui-sref="blog">Blog</a>
 		</li>
 
@@ -30,20 +29,14 @@
 		<!-- <div class="logo-img"></div> -->
 	</a>
 
-		<!-- <li ng-class="{ active: $state.includes('rules') }"
-			ng-show="parseUser.isBetaUser()">
-			<a ui-sref='rules'>Rules</a>
-		</li> -->
-
 	<ul class="nav nav-pills nav-justified nav-right">
+		
+		<li ui-sref-active="active">
+			<a ui-sref='rules'>Rules</a>
+		</li>
 
 		<li ui-sref-active="active">
 			<a ui-sref='vote'>Vote</a>
-		</li>
-
-		<li ng-hide="parseUser.isBetaUser()"
-		    ui-sref-active="active">
-			<a ui-sref="blog">Blog</a>
 		</li>
 
 		<!-- user stuff -->

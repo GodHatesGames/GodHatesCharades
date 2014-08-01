@@ -63,7 +63,8 @@ app.config(function($stateProvider,
 		url: '/rules',
 		title: 'Rules: Detailed for the game',
 		description: 'Learn the rules before your play the game.',
-		templateUrl: 'views/rulesView.html'
+		templateUrl: 'views/rulesView.html',
+		controller: 'rulesView'
 	});
 	$stateProvider.state('top', {
 		url: '/top',

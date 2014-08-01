@@ -2,7 +2,7 @@
 	<ui-view autoscroll="false">
 		<div class="postsContainer">
 			<div ng-repeat="(key, post) in blogPosts"
-			     class="post" 
+			     class="post prismic-content" 
 			     ng-init="body = post.getStructuredText('blog.body')">
 				<!-- <a ui-sref="blog.detail({id: post.id})">
 					<h2 ng-bind-html="body.getTitle().text">

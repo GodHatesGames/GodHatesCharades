@@ -18,7 +18,8 @@ var CONFIG = {
 		API_ENDPOINT: 'https://godhatescharades.prismic.io/api',
 		DOCS: {
 			PRINT_RULES: 'U59QxSkAADUAzG7c',
-			PRINT_INSTRUCTIONS: 'U6DYyy8AACoA3W1e'
+			PRINT_INSTRUCTIONS: 'U6DYyy8AACoA3W1e',
+			PAGE_RULES: 'U9vc1zIAAC8AXTwE'
 		}
 	}
 };

@@ -84,6 +84,8 @@ app.directive('iframeFluid', function($window) {
 			}
 
 			function getHeightFromWidth(width, aspectW, aspectH) {
+				if(!aspectW) aspectW = 16;
+				if(!aspectH) aspectH = 9;
 				var aspectRatio = width / aspectW;
 				return aspectH * aspectRatio;
 			}
