@@ -6,24 +6,22 @@
 			     ng-init="body = post.getStructuredText('blog.body')">
 				<!-- post main image || embed || youtube-->
 				
-				<div ng-init="mainYoutube = post.getText('blog.youtube')"
-				     ng-show="mainYoutube"
-				     class="col-md-6 col-lg-6">
+				<div class="col-md-6 col-lg-6">
 					<youtube id="mainYoutube"
-					         fluid="true">
+					         fluid="true"
+					         ng-init="mainYoutube = post.getText('blog.youtube')"
+					         ng-show="mainYoutube">
 					</youtube>
-				</div>
 
-				<div ng-init="mainEmbed = post.getHtml('blog.embed')"
-				     ng-show="mainEmbed"
-				     class="mainEmbed col-md-6 col-lg-6">
-					<div ng-html-compile="mainEmbed"></div>
-				</div>
+					<div ng-html-compile="mainEmbed"
+					     ng-init="mainEmbed = post.getHtml('blog.embed')"
+					     ng-show="mainEmbed"
+					     class="mainEmbed"></div>
 
-				<div ng-init="mainImage = post.getImageView('blog.image', 'main')"
-				     ng-show="mainImage"
-				     class="mainImage col-md-6 col-lg-6">
-					<img ng-src="{{mainImage.url}}">
+					<img ng-init="mainImage = post.getImageView('blog.image', 'main')"
+					     ng-show="mainImage"
+					     class="mainImage"
+					     ng-src="{{mainImage.url}}">
 				</div>
 
 				<!-- post title + body -->
