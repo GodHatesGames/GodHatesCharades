@@ -1,30 +1,44 @@
-<div id="blogView" class="blog container col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+<div id="blogView" class="blog container col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
 	<ui-view autoscroll="false">
 		<div class="postsContainer">
 			<div ng-repeat="(key, post) in blogPosts"
-			     class="post prismic-content" 
+			     class="post prismic-content row" 
 			     ng-init="body = post.getStructuredText('blog.body')">
-				<!-- <a ui-sref="blog.detail({id: post.id})">
-					<h2 ng-bind-html="body.getTitle().text">
-					</h2>
-				</a> -->
-				<!-- post main image -->
+				<!-- post main image || embed || youtube-->
+				
+				<div ng-init="mainYoutube = post.getText('blog.youtube')"
+				     ng-show="mainYoutube"
+				     class="col-md-6 col-lg-6">
+					<youtube id="mainYoutube"
+					         fluid="true">
+					</youtube>
+				</div>
+
+				<div ng-init="mainEmbed = post.getHtml('blog.embed')"
+				     ng-show="mainEmbed"
+				     class="mainEmbed col-md-6 col-lg-6">
+					<div ng-html-compile="mainEmbed"></div>
+				</div>
+
 				<div ng-init="mainImage = post.getImageView('blog.image', 'main')"
-				     ng-show="mainImage">
+				     ng-show="mainImage"
+				     class="mainImage col-md-6 col-lg-6">
 					<img ng-src="{{mainImage.url}}">
 				</div>
+
 				<!-- post title + body -->
-				<div ng-if="body">
-					<a ui-sref="blog.detail({id: post.id, slug: post.slug})"
-					   class="title">
-						<h2 ng-html-compile="body.getTitle().text">
+				<div ng-if="body"
+				     class="body col-md-6 col-lg-6">
+					<a ui-sref="blog.detail({id: post.id})">
+						<h2 ng-bind-html="body.getTitle().text">
 						</h2>
 					</a>
-					<div ng-html-compile="body.getFirstParagraph().text">
+					<div class="details">
+						<b class="date">{{post.getDate('blog.date') | date:'MMMM d, yyyy'}}</b>
 					</div>
-				</div>
-				<div class="details">
-					<b class="date">{{post.getDate('blog.date') | date:'MMMM d, yyyy'}}</b>
+					<div ng-html-compile="body.getFirstParagraph().text"
+					     class="copy">
+					</div>
 					<a class="permalink"
 					   ui-sref="blog.detail({id: post.id, slug: post.slug})">
 						Continue reading

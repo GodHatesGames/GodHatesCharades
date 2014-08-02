@@ -4,27 +4,41 @@
 @margin-post-bottom: 35px;
 
 .blog.container {
-	h2 {
-		text-align: left;
-		background-color: black;
-		color: white;
-		padding: 10px 14px 10px 14px;
-		width: 100%;
-		line-height: 32px;
-	}
-
-	h3 {
-		text-align: left;
-	}
-
+	padding-top: 20px;
 	.post {
-
-		// margin: @margin-post-top 0 @margin-post-bottom 0;
 		clear: both;
+		margin-top: @margin-post-top;
+		margin-bottom: @margin-post-bottom;
 
-		.details {
-			padding-top: 10px;
-			padding-bottom: 10px;
+		h2 {
+			text-align: left;
+			// background-color: black;
+			color: black;
+			padding: 0 0 10px 0;
+			width: 100%;
+			line-height: 32px;
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+
+		h3 {
+			text-align: left;
+		}
+
+		.mainImage img {
+			margin-top: 0;
+		}
+
+		.mainEmbed {
+			overflow: hidden;
+		}
+
+		.body {
+
+			.details {
+				padding-top: 10px;
+				padding-bottom: 10px;
+			}
 
 			.permalink {
 				float: right;
