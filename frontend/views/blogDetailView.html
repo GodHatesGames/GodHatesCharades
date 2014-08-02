@@ -1,10 +1,21 @@
-<!-- <div class="nav">
-	<a ui-sref="blog"
-	   class="btn btn-success pull-left">
-		Back
-	</a>
-</div> -->
 <div class="post container prismic-content">
+	<div>
+		<youtube id="mainYoutube"
+		         fluid="true"
+		         ng-init="mainYoutube = post.getText('blog.youtube')"
+		         ng-show="mainYoutube">
+		</youtube>
+
+		<div ng-html-compile="mainEmbed"
+		     ng-init="mainEmbed = post.getHtml('blog.embed')"
+		     ng-show="mainEmbed"
+		     class="mainEmbed"></div>
+
+		<img ng-init="mainImage = post.getImageView('blog.image', 'main')"
+		     ng-show="mainImage"
+		     class="mainImage"
+		     ng-src="{{mainImage.url}}">
+	</div>
 	<div ng-html-compile="bodyHtml"></div>
 	<div class="details">
 		<b class="date">

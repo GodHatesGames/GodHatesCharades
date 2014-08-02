@@ -29,6 +29,12 @@ app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider){
 
 		if (CONFIG.PRISMIC) {
 			PrismicProvider.setApiEndpoint(CONFIG.PRISMIC.API_ENDPOINT);
+			if (CONFIG.PRISMIC.ACCESS_TOKEN)
+				PrismicProvider.setAccessToken(CONFIG.PRISMIC.ACCESS_TOKEN);
+			if(CONFIG.PRISMIC.CLIENT_ID)
+				PrismicProvider.setClientId(CONFIG.PRISMIC.CLIENT_ID);
+			if(CONFIG.PRISMIC.CLIENT_SECRET)
+				PrismicProvider.setClientSecret(CONFIG.PRISMIC.CLIENT_SECRET);
 		}
 		PrismicProvider.setLinkResolver(function(ctx, doc) {
 			return 'detail.html?id=' + doc.id + '&slug=' + doc.slug + ctx.maybeRefParam;
