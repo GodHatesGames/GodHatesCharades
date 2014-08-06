@@ -23,29 +23,34 @@ var app = angular.module('app', ['ng',
                                 ]);
 console.log('starting app');
 
-app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider){
-		$locationProvider.html5Mode(true);
-		$locationProvider.hashPrefix('!');
+app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider, $provide) {
+	$locationProvider.html5Mode(true);
+	$locationProvider.hashPrefix('!');
 
-		if (CONFIG.PRISMIC) {
-			PrismicProvider.setApiEndpoint(CONFIG.PRISMIC.API_ENDPOINT);
-			if (CONFIG.PRISMIC.ACCESS_TOKEN)
-				PrismicProvider.setAccessToken(CONFIG.PRISMIC.ACCESS_TOKEN);
-			if(CONFIG.PRISMIC.CLIENT_ID)
-				PrismicProvider.setClientId(CONFIG.PRISMIC.CLIENT_ID);
-			if(CONFIG.PRISMIC.CLIENT_SECRET)
-				PrismicProvider.setClientSecret(CONFIG.PRISMIC.CLIENT_SECRET);
-		}
-		PrismicProvider.setLinkResolver(function(ctx, doc) {
-			return 'detail.html?id=' + doc.id + '&slug=' + doc.slug + ctx.maybeRefParam;
-		});
-
-		DSCacheFactoryProvider.setCacheDefaults({
-			storageMode: 'localStorage',
-			capacity: 100
-		});
+	if (CONFIG.PRISMIC) {
+		PrismicProvider.setApiEndpoint(CONFIG.PRISMIC.API_ENDPOINT);
+		if (CONFIG.PRISMIC.ACCESS_TOKEN)
+			PrismicProvider.setAccessToken(CONFIG.PRISMIC.ACCESS_TOKEN);
+		if(CONFIG.PRISMIC.CLIENT_ID)
+			PrismicProvider.setClientId(CONFIG.PRISMIC.CLIENT_ID);
+		if(CONFIG.PRISMIC.CLIENT_SECRET)
+			PrismicProvider.setClientSecret(CONFIG.PRISMIC.CLIENT_SECRET);
 	}
-);
+	PrismicProvider.setLinkResolver(function(ctx, doc) {
+		return 'detail.html?id=' + doc.id + '&slug=' + doc.slug + ctx.maybeRefParam;
+	});
+
+	DSCacheFactoryProvider.setCacheDefaults({
+		storageMode: 'localStorage',
+		capacity: 100
+	});
+
+	$provide.decorator('$uiViewScroll', function ($delegate, $window) {
+		return function (uiViewElement) {
+			$window.scrollTo(0,0);
+		}; 
+	});
+});
 
 app.run(function($rootScope,
                  $state,

@@ -10,6 +10,16 @@
 		margin-top: @margin-post-top;
 		margin-bottom: @margin-post-bottom;
 
+		&.post-detail {
+			.details {
+				margin-bottom: 25px;
+			}
+		}
+
+		&:not(.post-detail) {
+			font-size: 14px;
+		}
+
 		h2 {
 			text-align: left;
 			// background-color: black;
@@ -34,14 +44,12 @@
 		}
 
 		.body {
-
 			.details {
 				padding-top: 10px;
 				padding-bottom: 10px;
 			}
 
 			.permalink {
-				float: right;
 				font-weight: bold;
 			}
 		}

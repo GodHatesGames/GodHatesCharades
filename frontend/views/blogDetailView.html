@@ -1,4 +1,4 @@
-<div class="post container prismic-content">
+<div class="post post-detail prismic-content col-md-10 col-md-offset-1">
 	<div>
 		<youtube id="mainYoutube"
 		         fluid="true"
@@ -16,11 +16,13 @@
 		     class="mainImage"
 		     ng-src="{{mainImage.url}}">
 	</div>
-	<div ng-html-compile="bodyHtml"></div>
-	<div class="details">
+	<!-- <div class="details">
 		<b class="date">
 			{{post.getDate('blog.date') | date:'MMMM d, yyyy'}}
 		</b>
+	</div> -->
+	<div ng-html-compile="bodyHtml"></div>
+	<div class="details">
 		<a class="permalink"
 		   ui-sref="blog">
 			Back to blog
