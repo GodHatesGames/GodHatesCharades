@@ -6,6 +6,7 @@ Parse/config/global.json
 npm-debug.log
 Parse/public/js/config.js
 frontend/js/config.js
+frontend/js/config_*
 api/config.js
 dist/
 .tmp/

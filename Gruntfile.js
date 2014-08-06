@@ -173,6 +173,18 @@ module.exports = function(grunt) {
 					}
 				]
 			},
+			stageConfigFrontend: {
+				files: [
+					{
+						// frontend
+						expand: true,
+						cwd: 'frontend/js/',
+						src: ['config_Stage.js'],
+						dest: '.tmp/stage/frontend/js/',
+						rename: configRename
+					}
+				]
+			},
 			distConfigFrontend: {
 				files: [
 					{
@@ -390,7 +402,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('deploy:stage', [
 		'clean:stage',
 		'buildApi',
-		'distBuildFrontend',
+		'stageBuildFrontend',
 		'copy:app',
 		'buildcontrol:stage'
 	]);
@@ -438,6 +450,21 @@ module.exports = function(grunt) {
 		'copy:stageApi',
 		'clean:distApi',
 		'copy:distApi'
+	]);
+
+	grunt.registerTask('stageBuildFrontend', [
+		'prepareFrontend',
+		'copy:stageConfigFrontend',
+		'ngtemplates',
+		'useminPrepare',
+		'concat',
+		'ngmin',
+		'uglify',
+		'cssmin',
+		'filerev',
+		'usemin',
+		'clean:distFrontend',
+		'copy:distFrontend'
 	]);
 
 	grunt.registerTask('distBuildFrontend', [
