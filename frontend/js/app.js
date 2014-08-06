@@ -45,11 +45,11 @@ app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider, 
 		capacity: 100
 	});
 
-	$provide.decorator('$uiViewScroll', function ($delegate, $window) {
+	$provide.decorator('$uiViewScroll', ['$delegate', '$window', function ($delegate, $window) {
 		return function (uiViewElement) {
 			$window.scrollTo(0,0);
 		}; 
-	});
+	}]);
 });
 
 app.run(function($rootScope,
