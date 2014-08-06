@@ -18,6 +18,6 @@ app.controller('blogDetailView', function(post, $scope, $sce, $compile, $state, 
 		shortname: 'godhatescharades',
 		id: post.id,
 		url: 'http://godhatescharades.com' + $location.url(),
-		show: allowComments
+		show: allowComments || true
 	};
 });
