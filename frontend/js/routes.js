@@ -57,7 +57,12 @@ app.config(function($stateProvider,
 	$stateProvider.state('pair', {
 		url: '/pair/:pairid/:slug',
 		templateUrl: 'views/pairView.html',
-		controller: 'pairView'
+		controller: 'pairView',
+		resolve: {
+			pair: ['$stateParams', 'pairService', function($stateParams, pairService) {
+				return pairService.getPairById($stateParams.pairid);
+			}]
+		}
 	});
 	$stateProvider.state('rules', {
 		url: '/rules',
