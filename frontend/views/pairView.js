@@ -1,5 +1,6 @@
 app.controller('pairView', function($scope, $state, $stateParams, $location, $window, pairService, $rootScope) {
 	$scope.pairId = $stateParams.pairid;
+	$scope.sharingConfig = {};
 
 	var card = pairService.getPairById($scope.pairId)
 	.then(function(pair) {
@@ -19,6 +20,7 @@ app.controller('pairView', function($scope, $state, $stateParams, $location, $wi
 		                              '" ',
 		                              'is a pair of cards that might be added to God Hates Charades.'].join('');
 
+		$scope.sharingConfig.title = $state.current.title;
 
 		if(!$rootScope.$$phase)
 			$scope.$digest();

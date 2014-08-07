@@ -16,12 +16,5 @@
 	     ng-show="message || messageTemplateUrl"
 	     template-include="messageTemplateUrl">
 	</div>
-	<!-- AddThis Button BEGIN -->
-	<div class="addthis_toolbox addthis_default_style"
-	     ng-show="social">
-		<a class="addthis_button_facebook_like"
-		   fb:like:layout="button_count"></a>
-		<a class="addthis_button_tweet"></a>
-	</div>
-	<!-- AddThis Button END -->
+	<addthis ng-if="social" sharing="sharingConfig"></addthis>
 </div>

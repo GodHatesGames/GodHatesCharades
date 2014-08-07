@@ -8,6 +8,7 @@ app.directive('prompt', function() {
 			message: '@message',
 			hide: '=hide',
 			social: '=social', //boolean
+			socialMessage: '@socialMessage', //boolean
 			closable: '=closable', //boolean
 			messageTemplateUrl: '@messageTemplate'
 		},
@@ -22,6 +23,9 @@ app.directive('prompt', function() {
 				'col-md-12': !$scope.social,
 				'col-lg-12': !$scope.social,
 			};
+			$scope.sharingConfig = {
+				title: $scope.socialMessage
+			}
 		}
 	};
 });

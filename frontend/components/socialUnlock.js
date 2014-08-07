@@ -5,13 +5,15 @@ app.directive('socialUnlock', function($window) {
 		templateUrl: 'components/socialUnlock.html',
 		scope: {
 			title: '@title',
-			facebookMessage: '@facebook',
-			twitterMessage: '@twitter',
+			message: '@message',
 			downloadUrl: '@download',
 			campaignName: '@campaign',
 			imgUrl: '@image'
 		},
 		controller: function($scope, $element) {
+			$scope.sharingConfig = {
+				title: $scope.message
+			};
 			$scope.shared = hasShared($scope.campaignName);
 
 			addthis.addEventListener('addthis.menu.share', onShare);
