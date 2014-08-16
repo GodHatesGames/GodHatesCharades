@@ -76,7 +76,44 @@ app.config(function($stateProvider,
 		title: 'Top Cards: Favorites chosen by the community',
 		description: 'Want to see everyone\'s favorite cards? See the most popular and the most controversial.',
 		templateUrl: 'views/topView.html',
-		controller: 'topView'
+		controller: 'topView',
+		abstract: true
+	});
+	$stateProvider.state('top.fame', {
+		url: '/fame',
+		title: 'Hall of Fame: Favorites chosen by the community',
+		description: 'Want to see everyone\'s favorite pairs?',
+		templateUrl: 'views/topView.detail.html',
+		controller: 'topView.fame',
+		resolve: {
+			pairs: ['leaderboard', function(leaderboard) {
+				return leaderboard.getBest();
+			}]
+		}
+	});
+	$stateProvider.state('top.shame', {
+		url: '/shame',
+		title: 'Hall of Shame: Most despised pairs chosen by the community',
+		description: 'Want to see everyone\'s most despised pairs?',
+		templateUrl: 'views/topView.detail.html',
+		controller: 'topView.shame',
+		resolve: {
+			pairs: ['leaderboard', function(leaderboard) {
+				return leaderboard.getWorst();
+			}]
+		}
+	});
+	$stateProvider.state('top.controversial', {
+		url: '/controversial',
+		title: 'Controversial: Most loved and hated pairs chosen by the community',
+		description: 'Want to see everyone\'s most loved and hated pairs?',
+		templateUrl: 'views/topView.detail.html',
+		controller: 'topView.controversial',
+		resolve: {
+			pairs: ['leaderboard', function(leaderboard) {
+				return leaderboard.getControversial();
+			}]
+		}
 	});
 	
 	// Admin

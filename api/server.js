@@ -46,7 +46,7 @@ server.get('/login', showIndex);
 server.get('/user/*', showIndex);
 server.get('/card/*/*', showIndex);
 server.get('/pair/*/*', showIndex);
-server.get('/top', showIndex);
+server.get('/top/*', showIndex);
 server.get('/admin/*', showIndex);
 server.get('/blog', showIndex);
 server.get('/blog/*/*', showIndex);
