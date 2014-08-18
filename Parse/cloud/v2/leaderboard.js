@@ -97,8 +97,7 @@ function calculateStats(request, status) {
 			promises.push(savePromise);
 		});
 		return Parse.Promise.when(promises);
-	})
-	.then(finishedSaving, errorSaving);
+	});
 
 
 	function finishedSaving() {
