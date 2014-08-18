@@ -42,7 +42,7 @@ app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider, 
 
 	DSCacheFactoryProvider.setCacheDefaults({
 		storageMode: 'localStorage',
-		capacity: 100
+		capacity: 200
 	});
 
 	$provide.decorator('$uiViewScroll', ['$delegate', '$window', function ($delegate, $window) {

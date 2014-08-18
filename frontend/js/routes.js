@@ -87,7 +87,7 @@ app.config(function($stateProvider,
 		controller: 'topView.fame',
 		resolve: {
 			pairs: ['leaderboard', function(leaderboard) {
-				return leaderboard.getBest();
+				return leaderboard.getTop();
 			}]
 		}
 	});
@@ -99,7 +99,7 @@ app.config(function($stateProvider,
 		controller: 'topView.shame',
 		resolve: {
 			pairs: ['leaderboard', function(leaderboard) {
-				return leaderboard.getWorst();
+				return leaderboard.getTop();
 			}]
 		}
 	});
@@ -111,7 +111,7 @@ app.config(function($stateProvider,
 		controller: 'topView.controversial',
 		resolve: {
 			pairs: ['leaderboard', function(leaderboard) {
-				return leaderboard.getControversial();
+				return leaderboard.getTop();
 			}]
 		}
 	});

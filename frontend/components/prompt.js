@@ -1,5 +1,5 @@
 'use strict';
-app.directive('prompt', function() {
+app.directive('prompt', function($window) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/prompt.html',
@@ -13,6 +13,7 @@ app.directive('prompt', function() {
 			messageTemplateUrl: '@messageTemplate'
 		},
 		controller: function($scope) {
+			$scope.$window = $window;
 			$scope.promptBlockClasses = {
 				'col-xs-8': $scope.social,
 				'col-sm-9': $scope.social,

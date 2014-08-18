@@ -15,7 +15,10 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory) {
 		getLink: getLink
 	}
 
-	var cardCache = DSCacheFactory('cards');
+	// expires in 1 week
+	var cardCache = DSCacheFactory('cards', {
+		maxAge: 604800000
+	});
 	var cardPromises = {};
 	var Suggestion = Parse.Object.extend('Suggestion');
 
@@ -133,6 +136,7 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory) {
 
 	function onCardFetched(card) {
 		delete cardPromises[card.id];
+		updateCache(card);
 		return card;
 	}
 
