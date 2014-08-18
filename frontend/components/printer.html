@@ -73,11 +73,11 @@
 		<div class="setItem page-break"
 			 ng-repeat="(index, setItem) in setItems | orderBy:'attributes.card.attributes.type'"
 			 ng-init="card = setItem.attributes.card">
-			<card card-id="card.id"></card>
+			<card card-id="card.id" domain="true"></card>
 		</div>
 		<div class="setItem page-break"
 			 ng-repeat="extraItem in extraItems | orderBy:'type'">
-			<card blank-type="extraItem.type"></card>
+			<card blank-type="extraItem.type" domain="true"></card>
 		</div>
 	</div>
 </div>

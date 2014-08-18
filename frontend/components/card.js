@@ -7,7 +7,8 @@ app.directive('card', function(parseUser, cardService, $rootScope) {
 		scope: {
 			cardId: '=cardId',
 			updatable: '=updatable',
-			blankType: '=blankType'
+			blankType: '=blankType',
+			domain: '=domain'
 		},
 		controller: function($scope, $element) {
 			$scope.typeClass = '';
