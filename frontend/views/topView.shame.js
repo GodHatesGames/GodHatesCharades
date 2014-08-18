@@ -4,6 +4,6 @@ app.controller('topView.shame', function(pairs, $scope, pairService, $filter, $s
 	$scope.pairs = pairs;
 	$scope.parseUser = parseUser;
 	$scope.sortPredicates = ['attributes.kdr',
-	                         '-skipped',
-	                         'chosen'];
+	                         '-attributes.skipped',
+	                         'attributes.chosen'];
 });

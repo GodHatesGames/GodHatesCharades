@@ -2,7 +2,7 @@
 	ng-hide="loading && skipIndex == 0">
 	<a class="row pair"
 		ui-sref="pair(pairService.getLink(pair))"
-		ng-repeat="(index, pair) in pairs | orderBy:sortPredicates | limitTo: 25">
+		ng-repeat="(index, pair) in pairs | orderBy:sortPredicates">
 
 		<ribbon message="index + 1"
 				class="ribbon-gold">
@@ -26,5 +26,12 @@
 				Discuss it!
 			</a>
 		</div> -->
+		<div ng-if="parseUser.isAdmin()">
+			<div>controversy: {{pair.get('controversy')}}</div>
+			<div>displayed: {{pair.get('displayed') || 0}}</div>
+			<div>chosen: {{pair.get('chosen') || 0}}</div>
+			<div>skipped: {{pair.get('skipped') || 0}}</div>
+			<div>kdr: {{pair.get('kdr') || 0}}</div>
+		</div>
 	</a>
 </div>

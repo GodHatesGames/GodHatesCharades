@@ -4,6 +4,6 @@ app.controller('topView.fame', function(pairs, $scope, pairService, $filter, $st
 	$scope.pairs = pairs;
 	$scope.parseUser = parseUser;
 	$scope.sortPredicates = ['-attributes.kdr',
-	                         '-chosen',
-	                         '-skipped'];
+	                         '-attributes.chosen',
+	                         'attributes.skipped'];
 });
