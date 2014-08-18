@@ -1,2 +1,2 @@
-app.controller('topView', function($scope, pairService, $filter, $state, parseUser) {
+app.controller('topView', function() {
 });

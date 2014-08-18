@@ -1,5 +1,5 @@
-app.service('leaderboard', function($q, DSCacheFactory, cardService) {
-	var pairService = {
+app.service('leaderboard', function($q, DSCacheFactory, cardService, pairService) {
+	var leaderboard = {
 		getTop: _getTop,
 	}
 	// expires in 1 day
@@ -11,11 +11,11 @@ app.service('leaderboard', function($q, DSCacheFactory, cardService) {
 	function _getTop() {
 		var currentCache = leaderboardCache.get('leaderboard');
 		if(currentCache) {
+			var pairPromises = [];
 			_.each(currentCache, function(pair, index) {
-				var parsePair = new Pair(pair);
-				currentCache[index] = parsePair;
+				pairPromises.push(pairService.getPairById(pair.objectId));
 			});
-			return $q.when(currentCache);
+			return $q.all(pairPromises);
 		} else {
 			var deferred = $q.defer();
 			var options = {
@@ -42,5 +42,5 @@ app.service('leaderboard', function($q, DSCacheFactory, cardService) {
 		cardService.cache(cards);
 	}
 
-	return pairService;
+	return leaderboard;
 });
