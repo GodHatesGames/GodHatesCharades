@@ -37,7 +37,7 @@ app.directive('nav', function(parseUser, $uiViewScroll, $state, $timeout) {
 					var element = angular.element(document.getElementById(id));
 					if (element.length > 0) {
 						$uiViewScroll(element);
-						element.addClass('animated pulse infinite');
+						// element.addClass('animated pulse infinite');
 						// $timeout(function() {
 						// 	element.removeClass('animated pulse');
 						// }, 1000);
