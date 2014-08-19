@@ -18,7 +18,8 @@ app.controller('homeView', function($scope, campaignService, $http, $window, $st
 	} else {
 		$scope.$watch('leanplum.vars.homeLayout', function(newValue) {
 			if(newValue) {
-				$scope.mainLayout = 'views/homeView.' + newValue + '.html';
+				// $scope.mainLayout = 'views/homeView.' + newValue + '.html';
+				$scope.mainLayout = 'views/homeView.ksLaunch.html';
 				// $state.go('home.' + newValue);
 			}
 		});

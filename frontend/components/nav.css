@@ -15,10 +15,17 @@
 	font-family: 'GodHatesCharades';
 	font-size: 20px;
 	text-transform: uppercase;
-	padding: 10px 25px;
+	padding: 10px 25px 15px 25px;
 	text-align: center;
 	cursor: pointer;
 	width: 300px;
+	transition: all 0.3s ease;
+}
+
+.ad:hover {
+	color: white;
+	text-decoration: none;
+	padding-top: 20px;
 }
 
 .ad b {
