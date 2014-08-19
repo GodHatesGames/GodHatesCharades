@@ -411,61 +411,64 @@
 		}
 	}
 
-/* end #homeView section */
-}
+	&.signup {
+		padding-left: 60px;
+		padding-right: 60px;
+		text-align: center;
+		background: @color-scenario;
+		line-height: 20px;
+		color: white;
 
-/* Section: Signup */
-
-#homeView section.signup {
-	padding-left: 60px;
-	padding-right: 60px;
-	text-align: center;
-	background: @color-scenario;
-	line-height: 20px;
-	color: white;
-
-	p {
-		font-family: 'GodHatesCharades';
-		font-size: 28px;
-		line-height: 34px;
-		margin: 0;
-		padding: 0;
-	}
-
-	b {
-		color: black;
-	}
-
-	.mailchimp {
-		top: 25px;
-	}
-	@media (max-width: 1200px) {
-		.mailchimp {
-			top: 42px;
-		}
-	}
-
-	@media (max-width: 992px) {
-		padding-left: 20px;
-		padding-right: 20px;
-
-		.mailchimp {
-			top: 0;
-		}
-	}
-
-	@media (max-width: 640px) {
-		padding-left: 0px;
-		padding-right: 0px;
-
-		.form-inline {
+		p {
+			font-family: 'GodHatesCharades';
+			font-size: 28px;
+			line-height: 34px;
+			margin: 0;
 			padding: 0;
 		}
+
+		b {
+			color: black;
+		}
+
+		.mailchimp {
+			top: 25px;
+		}
+		@media (max-width: 1200px) {
+			.mailchimp {
+				top: 42px;
+			}
+		}
+
+		@media (max-width: 992px) {
+			padding-left: 20px;
+			padding-right: 20px;
+
+			.mailchimp {
+				top: 0;
+			}
+		}
+
+		@media (max-width: 640px) {
+			padding-left: 0px;
+			padding-right: 0px;
+
+			.form-inline {
+				padding: 0;
+			}
+		}
 	}
+	&.voting {
+		padding-left: 60px;
+		padding-right: 60px;
+		text-align: center;
+		background: @color-scenario;
+		line-height: 20px;
+		color: white;
+	}
+
+/* end #homeView section */
 }
-
-
-/* End Sections*/
 
 #kickstarter {
 	text-align: center;
