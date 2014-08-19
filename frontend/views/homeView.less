@@ -207,39 +207,8 @@
 		overflow: hidden;
 		height: 600px;
 		position: relative;
-		background-color: black;
-		background-image: url(../img/chalk.jpg);
+		background-color: @color-scenario;
 		padding: 0;
-
-		.nextBtn, .prevBtn {
-			color: white;
-			width: 98px;
-			position: absolute;
-			top: 50%;
-			text-align: center;
-			cursor: pointer;
-			font-family: 'GodHatesCharades';
-			font-size: 20px;
-			text-decoration: none;
-			margin-top: -35px;
-
-			img {
-				width: 100%;
-			}
-		}
-
-		.nextBtn {
-			right: 15px;
-
-			img {
-				transform: scaleX(-1);
-				-webkit-transform: scaleX(-1);
-			}
-		}
-
-		.prevBtn {
-			left: 15px;
-		}
 
 		.slide {
 			position: absolute;
@@ -247,24 +216,8 @@
 			left: 0;
 			height: 100%;
 			width: 100%;
-			-webkit-transition: left .25s ease-out;
-			-moz-transition: left .25s ease-out;
-			-o-transition: left .25s ease-out;
-			-ms-transition: left .25s ease-out;
-			transition: left .25s ease-out;
-
-			&.prev {
-				left: -100%;
-			}
-
-			&.next {
-				left: 100%;
-			}
 
 			.slide-content {
-				background-repeat: no-repeat;
-				background-position: 50% 0;
-				background-size: initial;
 				width: 100%;
 				height: 100%;
 			}
@@ -275,26 +228,6 @@
 				h1 {
 					color: white;
 				}
-			}
-
-			&.slide-two .slide-content {
-				background-image: url(../img/tutorial_1.png);
-				background-size: 709px 600px;
-			}
-
-			&.slide-three .slide-content {
-				background-image: url(../img/tutorial_2.png);
-				background-size: 739px 600px;
-			}
-
-			&.slide-four .slide-content {
-				background-image: url(../img/tutorial_3.png);
-				background-size: 828px 600px;
-			}
-
-			&.slide-five .slide-content {
-				background-image: url(../img/tutorial_4.png);
-				background-size: 745px 600px;
 			}
 		}
 
@@ -415,7 +348,8 @@
 		padding-left: 60px;
 		padding-right: 60px;
 		text-align: center;
-		background: @color-scenario;
+		background-color: black;
+		background-image: url(../img/chalk.jpg);
 		line-height: 20px;
 		color: white;
 
@@ -428,7 +362,7 @@
 		}
 
 		b {
-			color: black;
+			color: @color-actor;
 		}
 
 		.mailchimp {
@@ -462,7 +396,8 @@
 		padding-left: 60px;
 		padding-right: 60px;
 		text-align: center;
-		background: @color-scenario;
+		background-color: black;
+		background-image: url(../img/chalk.jpg);
 		line-height: 20px;
 		color: white;
 	}
