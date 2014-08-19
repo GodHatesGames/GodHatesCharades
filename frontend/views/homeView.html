@@ -3,6 +3,16 @@
 	<!-- Homepage control -->
 	<section ng-include="mainLayout" class="mainLayout">
 	</section>
+	
+	<!-- Vote section -->
+	<section id="voting"
+			 class="voting row">
+		<h2>Help us find the funniest content for our first release.</h2>
+		<vote></vote>
+
+	</section>
+	<!--End Vote section-->
+
 
 	<section class="tutorial row">
 		<div class="slide slide-one"
@@ -44,15 +54,19 @@
 			NEXT
 		</a>
 	</section>
-	
-	<!-- Vote section -->
-	<section id="voting"
-			 class="voting row">
-		<h2>Help us find the funniest content for our first release.</h2>
-		<vote></vote>
 
+	<!-- Signup section -->
+	<section id="email_signup"
+			 class="signup row">
+		<h2 class="col-md-6">
+			SUBSCRIBE TO RECEIVE UPDATES + THE <b>PRINT ‘N PLAY</b> EDITION!
+		</h2>
+		<mailchimp class="col-xs-offset-0 col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-6"
+		           on-success="onEmailSubmitted"
+		           location="homepage_banner">
+		</mailchimp>
 	</section>
-	<!--End Vote section-->
+	<!--End Signup section-->
 
 	<!-- iOS Ad section -->
 	<section class="ios"
@@ -82,18 +96,4 @@
 		</div>
 	</section>
 	<!-- end iOS Ad section -->
-
-
-	<!-- Signup section -->
-	<section id="email_signup"
-			 class="signup row">
-		<h2 class="col-md-6">
-			SUBSCRIBE TO RECEIVE UPDATES + THE <b>PRINT ‘N PLAY</b> EDITION!
-		</h2>
-		<mailchimp class="col-xs-offset-0 col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-6"
-		           on-success="onEmailSubmitted"
-		           location="homepage_banner">
-		</mailchimp>
-	</section>
-	<!--End Signup section-->
 </div>
