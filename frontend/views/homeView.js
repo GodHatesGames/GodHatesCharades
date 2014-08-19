@@ -1,5 +1,6 @@
 'use strict';
 app.controller('homeView', function($scope, campaignService, $http, $window, $stateParams, $state, leanplum) {
+	$window.scrollTo(0, 0);
 	$scope.kickstarter = campaignService.campaignsById.ks2013;
 	$scope.ipad = campaignService.campaignsById.iPad2014;
 	$scope.leanplum = leanplum;

@@ -1,4 +1,5 @@
-app.controller('voteView', function($scope, leanplum) {
+app.controller('voteView', function($scope, leanplum, $window) {
+	$window.scrollTo(0, 0);
 	$scope.leanplum = leanplum;
 
 	$scope.onEmailSubmitted = function(fromLabel) {

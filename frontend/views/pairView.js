@@ -1,4 +1,5 @@
 app.controller('pairView', function(pair, $scope, $state, $stateParams, $location, $window, pairService, $rootScope) {
+	$window.scrollTo(0, 0);
 	$scope.pair = pair;
 	$scope.sharingConfig = {};
 

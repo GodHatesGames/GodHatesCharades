@@ -1,9 +1,13 @@
 'use strict';
-app.controller('blogDetailView', function(post, $scope, $sce, $compile, $state, $location) {
+app.controller('blogDetailView', function(post, $scope, $sce, $compile, $state, $location, $window) {
+	$window.scrollTo(0, 0);
 	$scope.post = post;
 
 	var structuredText = post.getStructuredText('blog.body');
 	$scope.bodyHtml = structuredText.asHtml();
+	$scope.mainImage = post.getImageView('blog.image', 'main');
+	$scope.mainEmbed = post.getHtml('blog.embed');
+	$scope.mainYoutube = post.getText('blog.youtube');
 	
 	//set meta title
 	$state.current.title = structuredText.getTitle().text;
@@ -19,5 +23,10 @@ app.controller('blogDetailView', function(post, $scope, $sce, $compile, $state, 
 		id: post.id,
 		url: 'http://godhatescharades.com' + $location.url(),
 		show: allowComments || true
+	};
+
+	$scope.backToBlog = function() {
+		$state.go('blog');
+		$window.scrollTo(0, 0);
 	};
 });

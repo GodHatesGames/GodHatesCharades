@@ -2,17 +2,14 @@
 	<div>
 		<youtube id="mainYoutube"
 		         fluid="true"
-		         ng-init="mainYoutube = post.getText('blog.youtube')"
-		         ng-show="mainYoutube">
+		         ng-if="mainYoutube">
 		</youtube>
 
 		<div ng-html-compile="mainEmbed"
-		     ng-init="mainEmbed = post.getHtml('blog.embed')"
-		     ng-show="mainEmbed"
+		     ng-if="mainEmbed"
 		     class="mainEmbed"></div>
 
-		<img ng-init="mainImage = post.getImageView('blog.image', 'main')"
-		     ng-show="mainImage"
+		<img ng-if="mainImage"
 		     class="mainImage"
 		     ng-src="{{mainImage.url}}">
 	</div>
@@ -24,7 +21,7 @@
 	<div ng-html-compile="bodyHtml"></div>
 	<div class="details">
 		<a class="permalink"
-		   ui-sref="blog">
+		   ng-click="backToBlog()">
 			Back to blog
 		</a>
 	</div>

@@ -1,5 +1,6 @@
 'use strict';
-app.controller('blogView', function(posts, $scope, prismic, $sce, $filter) {
+app.controller('blogView', function(posts, $scope, prismic, $sce, $filter, $window) {
+	$window.scrollTo(0, 0);
 	$scope.trust = $sce.trustAsHtml;
 	//reorder posts
 	$scope.blogPosts = $filter('orderBy')(posts.results, getPostDate, true);
