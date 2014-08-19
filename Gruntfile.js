@@ -68,7 +68,7 @@ module.exports = function(grunt) {
 			},
 			main: {
 				files: [
-					'frontend/less/main.less'
+					'frontend/less/*.less'
 				],
 				tasks: ['less:main', 'autoprefixer']
 			},
@@ -319,7 +319,8 @@ module.exports = function(grunt) {
 					sourceMapRootpath: '/'
 				},
 				files: {
-					'frontend/css/main.css': 'frontend/less/main.less'
+					'frontend/css/main.css': 'frontend/less/main.less',
+					'frontend/css/animate-pulse.css': 'frontend/less/animate-pulse.less'
 				}
 			},
 			components: {
