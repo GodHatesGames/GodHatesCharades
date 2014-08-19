@@ -10,11 +10,11 @@ app.directive('nav', function(parseUser, $uiViewScroll, $state, $timeout) {
 			$scope.$state = $state;
 
 			$scope.launchAd = function() {
-				// $scope.jumpToElementInView('email_signup', 'home');
-				// ga('send', 'event', 'signup', 'click', 'nav_ad');
+				$scope.jumpToElementInView('email_signup', 'home');
+				ga('send', 'event', 'signup', 'click', 'nav_ad');
 
-				$scope.jumpToElementInView('ipad_ad', 'home');
-				ga('send', 'event', 'ipad', 'click', 'ipad_ad');
+				// $scope.jumpToElementInView('ipad_ad', 'home');
+				// ga('send', 'event', 'ipad', 'click', 'ipad_ad');
 			};
 
 			$scope.jumpToElementInView = function(id, location) {
