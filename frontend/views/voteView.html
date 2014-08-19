@@ -5,7 +5,7 @@
 	<vote></vote>
 	<hr>
 
-	<div>
+	<div class="ksLaunch">
 		<div class="col-md-12">
 			<h1>
 				{{leanplum.vars.homeHeadline}}
@@ -13,23 +13,19 @@
 			<!-- <h3 ng-bind-html="leanplum.vars.homeSubtitle"></h3> -->
 		</div>
 		<div class="col-md-6 col-lg-6">
-			<youtube id="'mLwIEl59DKg'"
-			         class="video"
+			<youtube id="youtubeId || leanplum.vars.homeVideo"
 			         thumb="'img/video_title.png'"
 			         fluid="true"
 			         autoplay="true">
 			</youtube>
 		</div>
 		<div class="col-md-6 col-lg-6">
-			
-			<!-- <h4>{{leanplum.vars.homeCTA}}</h4> -->
-
-			<img src="img/printnplayAd.svg"
-			     alt="Print N' Play: Enter your email and we will send you a copy that you can print and play today!"
-			     class="img img-responsive printnplay">
-			<mailchimp on-success="onEmailSubmitted"
-			           location="vote_video_unlock">
-			</mailchimp>
+			<a href="http://bit.ly/godhatescharades"
+			   target="_blank">
+				<img src="img/webLaunchGraphic.jpg"
+				     alt="Help us fund the first print on Kickstarter"
+				     class="img img-responsive">
+			</a>
 		</div>
 	</div>
 </div>
