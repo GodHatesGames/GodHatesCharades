@@ -7,20 +7,27 @@ app.directive('addthis', function($location, $state) {
 			sharing: '=sharing'
 		},
 		controller: function($scope, $element) {
-			var defaultConfig = {};
+			var defaultConfig = {
+				twitter: true,
+				facebook: true
+			};
 			var defaultSharing = {};
+
 			$scope.$watchGroup(['config', 'sharing'], onUpdated);
 
 			function onUpdated(newValues) {
-				var config = {};
-				var sharing = {};
-				_.extend(config, defaultConfig, newValues[0]);
-				_.extend(sharing, defaultSharing, newValues[1]);
-				if(!sharing.title)
-					sharing.title = $state.current.description;
-				if(!sharing.url)
-					sharing.url = $location.absUrl();
-				addthis.toolbox($element[0], config, sharing);
+				if($scope.config) {
+					_.defaults($scope.config, defaultConfig);
+				}
+				console.log('$scope.config:',$scope.config);
+				if($scope.sharing) {
+					_.defaults($scope.sharing, defaultSharing);
+					if(!$scope.sharing.title)
+						$scope.sharing.title = $state.current.description;
+					if(!$scope.sharing.url)
+						$scope.sharing.url = $location.absUrl();
+				}
+				addthis.toolbox($element[0], $scope.config, $scope.sharing);
 			}
 		}
 	}

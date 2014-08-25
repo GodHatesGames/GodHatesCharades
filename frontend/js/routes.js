@@ -76,6 +76,13 @@ app.config(function($stateProvider,
 			}
 		}
 	});
+	$stateProvider.state('share', {
+		url: '/share',
+		title: 'Share: Help us spread the word!',
+		description: 'Spread the word about God Hates Charades.',
+		templateUrl: 'views/shareView.html',
+		controller: 'shareView'
+	});
 	$stateProvider.state('top', {
 		url: '/top',
 		title: 'Top Cards: Favorites chosen by the community',
