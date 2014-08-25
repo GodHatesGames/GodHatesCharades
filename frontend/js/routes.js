@@ -69,7 +69,12 @@ app.config(function($stateProvider,
 		title: 'Rules: Detailed for the game',
 		description: 'Learn the rules before your play the game.',
 		templateUrl: 'views/rulesView.html',
-		controller: 'rulesView'
+		controller: 'rulesView',
+		resolve: {
+			rulesDoc: function(prismic) {
+				return prismic.getDocumentById(CONFIG.PRISMIC.DOCS.PAGE_RULES);
+			}
+		}
 	});
 	$stateProvider.state('top', {
 		url: '/top',
