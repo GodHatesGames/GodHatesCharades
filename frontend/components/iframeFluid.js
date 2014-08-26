@@ -3,7 +3,7 @@ app.directive('iframeFluid', function($window) {
 	return {
 		restrict: 'EA',
 		scope: {
-			iframeUrl: '=url',
+			iframeUrl: '@url',
 			aspectW: '@aspectW',
 			aspectH: '@aspectH',
 			fluid: '=fluid',

@@ -1,10 +1,10 @@
-app.directive('addthis', function($location, $state) {
+app.directive('addthis', function($location, $state, $timeout) {
 	return {
 		templateUrl: 'components/addthis.html',
 		replace: true,
 		scope: {
-			config: '=',
-			sharing: '=sharing'
+			userConfig: '=config',
+			userSharing: '=sharing'
 		},
 		controller: function($scope, $element) {
 			var defaultConfig = {
@@ -12,22 +12,35 @@ app.directive('addthis', function($location, $state) {
 				facebook: true
 			};
 			var defaultSharing = {};
+			$scope.config = {};
+			$scope.sharing = {};
 
-			$scope.$watchGroup(['config', 'sharing'], onUpdated);
 
-			function onUpdated(newValues) {
-				if($scope.config) {
-					_.defaults($scope.config, defaultConfig);
+			$scope.$watchGroup(['userSharing', 'userSharing'], onUserSettingsUpdated);
+
+			function onUserSettingsUpdated(newValues) {
+				// defaults
+				if($scope.userConfig) {
+					_.defaults($scope.config, $scope.userConfig, defaultConfig);
+				} else {
+					$scope.config = _.clone(defaultConfig);
 				}
-				console.log('$scope.config:',$scope.config);
-				if($scope.sharing) {
-					_.defaults($scope.sharing, defaultSharing);
-					if(!$scope.sharing.title)
-						$scope.sharing.title = $state.current.description;
-					if(!$scope.sharing.url)
-						$scope.sharing.url = $location.absUrl();
+
+				if($scope.userSharing) {
+					_.defaults($scope.sharing, $scope.userSharing, defaultSharing);
+				} else {
+					$scope.sharing = _.clone(defaultSharing);
 				}
-				addthis.toolbox($element[0], $scope.config, $scope.sharing);
+
+				if(!$scope.sharing.title)
+					$scope.sharing.title = $state.current.description;
+				if(!$scope.sharing.url)
+					$scope.sharing.url = $location.absUrl();
+				
+				// must delay to allow time settings to update
+				$timeout(function() {
+					addthis.toolbox($element[0], $scope.config, $scope.sharing);
+				}, 100);
 			}
 		}
 	}

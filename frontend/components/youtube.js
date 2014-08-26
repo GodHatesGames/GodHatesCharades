@@ -3,6 +3,7 @@ app.directive('youtube', function() {
 	return {
 		restrict: 'E',
 		replace: true,
+		scope: false,
 		templateUrl: 'components/youtube.html',
 		link: function($scope, $element, $attr){
 			$attr.$observe('id', function(newValue) {
@@ -18,9 +19,10 @@ app.directive('youtube', function() {
 			});
 
 			function _updatePlayer(newId) {
-				$scope.videoUrl = '//www.youtube.com/embed/' + newId;
+				var videoUrl = '//www.youtube.com/embed/' + newId;
 				if ($attr.autoplay === 'true')
-					$scope.videoUrl += '?autoplay=1'
+					videoUrl += '?autoplay=1'
+				$attr.$set('url', videoUrl);
 			};
 		}
 	}
