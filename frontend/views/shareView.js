@@ -13,9 +13,9 @@ app.controller('shareView', function($scope, prismic, $window) {
 		title: 'Watch Bored With Life play God Hates Charades',
 		url: 'https://www.youtube.com/watch?v=gjgEoqLm9yk'
 	};
-	$scope.bowerSharing = {
-		title: 'God Hates Charades: This game makes your friends funny!',
-		url: 'https://www.youtube.com/watch?v=a7nIBkO8u0I'
+	$scope.learnSharing = {
+		title: 'God Hates Charades is so simple you can learn it in 46 seconds',
+		url: 'https://www.youtube.com/watch?v=mLwIEl59DKg'
 	};
 	$scope.ksSharing = {
 		title: 'God Hates Charades: This game makes your friends funny!',
