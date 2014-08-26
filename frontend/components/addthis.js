@@ -17,8 +17,9 @@ app.directive('addthis', function($location, $state, $timeout) {
 			$scope.config = {};
 			$scope.sharing = {};
 
-
-			$scope.$watchGroup(['userSharing', 'userSharing'], onUserSettingsUpdated);
+			$timeout(function() {
+				$scope.$watchGroup(['userSharing', 'userSharing'], onUserSettingsUpdated);
+			}, 1000);
 
 			function onUserSettingsUpdated(newValues) {
 				// defaults
