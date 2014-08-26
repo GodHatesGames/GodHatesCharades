@@ -53,7 +53,8 @@ app.run(function($rootScope,
                  parseUser,
                  $window,
                  $location,
-                 $timeout
+                 $timeout,
+                 addthisService
 	) {
 		// Default away value
 		$rootScope.isAway = false;

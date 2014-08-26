@@ -13,7 +13,7 @@ app.service('leanplum', function($q, $location, Restangular, $rootScope) {
 		if(!leanplumFetched && !leanplumDeffered) {
 			leanplumDeffered = $q.defer();
 
-			console.log('start LeanPlum');
+			// console.log('start LeanPlum');
 			Leanplum.start(userId, _onStarted);
 
 			// track campaign sources
@@ -43,7 +43,7 @@ app.service('leanplum', function($q, $location, Restangular, $rootScope) {
 	}
 
 	function _onStarted() {
-		console.log('leanplum started');
+		// console.log('leanplum started');
 		leanplumDeffered.resolve(leanplumMethods);
 		leanplumDeffered = null;
 		leanplumFetched = true;

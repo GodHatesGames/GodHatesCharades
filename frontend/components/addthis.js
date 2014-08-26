@@ -1,4 +1,4 @@
-app.directive('addthis', function($location, $state, $timeout) {
+app.directive('addthis', function($location, $state, $timeout, addthisService) {
 	return {
 		templateUrl: 'components/addthis.html',
 		replace: true,
@@ -17,11 +17,14 @@ app.directive('addthis', function($location, $state, $timeout) {
 			$scope.config = {};
 			$scope.sharing = {};
 
-			$timeout(function() {
-				$scope.$watchGroup(['userSharing', 'userSharing'], onUserSettingsUpdated);
-			}, 1000);
+			addthisService.waitForLoad()
+			.then(_onAddThisLoaded);
 
-			function onUserSettingsUpdated(newValues) {
+			function _onAddThisLoaded() {
+				$scope.$watchGroup(['userSharing', 'userSharing'], onUserSettingsUpdated);
+			}
+
+			function onUserSettingsUpdated() {
 				// defaults
 				if($scope.userConfig) {
 					_.extend($scope.config, $scope.userConfig);
@@ -42,9 +45,8 @@ app.directive('addthis', function($location, $state, $timeout) {
 				if(!$scope.sharing.url)
 					$scope.sharing.url = $location.absUrl();
 				
-				// must delay to allow time settings to update
+				// must delay to allow time settings to update in html
 				$timeout(function() {
-					var child = $element.children('at_ch');
 					addthis.toolbox($element[0], $scope.config, $scope.sharing);
 				}, 100);
 			}
