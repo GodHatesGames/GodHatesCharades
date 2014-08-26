@@ -71,9 +71,9 @@ app.config(function($stateProvider,
 		templateUrl: 'views/rulesView.html',
 		controller: 'rulesView',
 		resolve: {
-			rulesDoc: function(prismic) {
+			rulesDoc: ['prismic', function(prismic) {
 				return prismic.getDocumentById(CONFIG.PRISMIC.DOCS.PAGE_RULES);
-			}
+			}]
 		}
 	});
 	$stateProvider.state('share', {
