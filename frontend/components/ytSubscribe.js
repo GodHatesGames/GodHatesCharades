@@ -10,7 +10,9 @@ app.directive('ytSubscribe', function() {
 			$scope.$watch('channel', onChannelUpdated);
 
 			function onChannelUpdated(newValue) {
-				gapi.ytsubscribe.go($element[0]);
+				if(gapi) {
+					gapi.ytsubscribe.go($element[0]);
+				}
 			}
 		}
 	}
