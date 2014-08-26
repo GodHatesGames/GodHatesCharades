@@ -15,6 +15,7 @@ app.directive('youtubeUpload', function() {
 
 			function onUploadSuccess(event) {
 				console.log('upload complete');
+				$scope.videoProcessing = true;
 			}
 
 			function onProcessingComplete(event) {

@@ -8,8 +8,10 @@ app.directive('addthis', function($location, $state, $timeout) {
 		},
 		controller: function($scope, $element) {
 			var defaultConfig = {
+				type: 'buttons',
 				twitter: true,
-				facebook: true
+				facebookShare: true,
+				facebookLike: true,
 			};
 			var defaultSharing = {};
 			$scope.config = {};
@@ -21,13 +23,15 @@ app.directive('addthis', function($location, $state, $timeout) {
 			function onUserSettingsUpdated(newValues) {
 				// defaults
 				if($scope.userConfig) {
-					_.defaults($scope.config, $scope.userConfig, defaultConfig);
+					_.extend($scope.config, $scope.userConfig);
+					_.defaults($scope.config, defaultConfig);
 				} else {
 					$scope.config = _.clone(defaultConfig);
 				}
 
 				if($scope.userSharing) {
-					_.defaults($scope.sharing, $scope.userSharing, defaultSharing);
+					_.extend($scope.sharing, $scope.userSharing);
+					_.defaults($scope.sharing, defaultSharing);
 				} else {
 					$scope.sharing = _.clone(defaultSharing);
 				}
@@ -39,6 +43,7 @@ app.directive('addthis', function($location, $state, $timeout) {
 				
 				// must delay to allow time settings to update
 				$timeout(function() {
+					var child = $element.children('at_ch');
 					addthis.toolbox($element[0], $scope.config, $scope.sharing);
 				}, 100);
 			}

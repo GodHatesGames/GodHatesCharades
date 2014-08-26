@@ -1,7 +1,19 @@
-<div class="addthis_toolbox addthis_default_style">
-	<a class="addthis_button_facebook_like"
-	   fb:like:layout="button_count"
-	   ng-if="config.facebook"></a>
-	<a class="addthis_button_tweet"
-	   ng-if="config.twitter"></a>
+<div class="addthis">
+	<div class="at_ch addthis_toolbox addthis_default_style"
+	     ng-if="config.type == 'buttons'">
+		<a class="addthis_button_facebook_like"
+		   fb:like:layout="button_count"
+		   ng-if="config.facebookLike"></a>
+		<a class="addthis_button_facebook_share"
+		   fb:share:layout="button_count"
+		   ng-if="config.facebookShare"></a>
+		<a class="addthis_button_tweet"
+		   ng-if="config.twitter"></a>
+	</div>
+	<div class="at_ch addthis_native_toolbox"
+	     ng-if="config.type == 'native'">
+	</div>
+	<div class="at_ch addthis_sharing_toolbox"
+	     ng-if="config.type == 'sharing'">
+	</div>
 </div>
