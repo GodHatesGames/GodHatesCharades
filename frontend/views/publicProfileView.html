@@ -15,9 +15,9 @@
 		</a>
 	</div>
 	<!-- non beta users -->
-	<div ng-show="currentUser && !betaUser">
+	<h3 ng-show="currentUser && !betaUser">
 		New beta features coming soon. But you can <a ui-sref="vote">get voting now</a>!
-	</div>
+	</h3>
 
 	<!-- beta users -->
 	<div ng-hide="currentUser && !betaUser">
