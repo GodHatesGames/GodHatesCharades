@@ -1,40 +1,36 @@
 <div class="submit">
 	<h4>{{typeDisplay}}</h4>
 	<div class="cardContainer"
-		 ng-hide="success">
+	     ng-hide="success">
 		<div class="card"
-				ng-class="typeClass">
+		     ng-class="typeClass">
+			<span class="icon"
+			  ng-include="imageUrl"></span>
 			<div class="submitForm cardContent">
-					<!-- <input type="text" 
-							ng-model="text" 
-							placeholder="{{example}}" /> -->
-					<textarea ng-model="text"
-								class="editable"
-								placeholder="{{example}}"
-								maxlength="75"
-								required
-								textarea-noreturn>
-					</textarea>
-					<!-- <div contentEditable="true"
-							class="editable" 
-							ng-model="text"
-							></div> -->
+				<textarea ng-model="text"
+				          class="editable"
+				          placeholder="{{example}}"
+				          maxlength="75"
+				          required
+				          textarea-noreturn>
+				</textarea>
 			</div>
 		</div>
-		<div class="alert" ng-class="characterCount()">
+		<div class="alert"
+		     ng-class="characterCount()">
 			{{text.length}} / {{maxChars}} Characters
 		</div>
 		<button type="submit" 
-				class="btn btn-success submit"
-				ng-disabled="text.length == 0"
-				ng-click="submit()">
+		        class="btn btn-success submit"
+		        ng-disabled="text.length == 0"
+		        ng-click="submit()">
 			Submit {{typeDisplay}}
 		</button>
 	</div>
 	<div class="cardContainer"
-			ng-show="success">
+	     ng-show="success">
 			<div class="card submitted"
-				 ng-class="typeClass">
+			     ng-class="typeClass">
 				<div class="cardContent">
 					<h5>Thanks for the submission<b>{{displayName()}}</b>! Your card will be up soon.</h5>
 					<p ng-hide="parseUser.loggedin">
@@ -49,7 +45,7 @@
 			</div>
 
 			<button ng-click="reset()"
-					class="btn btn-info">
+			        class="btn btn-info">
 				Create a new Card
 			</button>
 	</div>

@@ -4,7 +4,7 @@ app.directive('submit', function(cardService, parseUser) {
 		templateUrl: 'components/submit.html',
 		replace: true,
 		scope: {
-			type: '=type'
+			type: '='
 		},
 		link: function($scope, $element, attr) {
 			$scope.$watch('text', $scope.onTextChange);
@@ -13,18 +13,16 @@ app.directive('submit', function(cardService, parseUser) {
 			var TYPE_PERSON = 0;
 			var TYPE_THING = 1;
 			var randomPeople = [
-				'Bill O\'Reilly',
-				'Barack Obama',
-				'Jesus',
-				'Cookie Monster',
-				'The little engine that could'
+				'BILL O\'REILLY',
+				'BARACK OBAMA',
+				'HONEY BOO BOO',
+				'THE LITTLE ENGINE THAT COULD'
 			];
 			var randomEvents = [
-				'sexting orphans.',
-				'being an accidental racist.',
-				'worshiping Satan.',
-				'selling drugs to the pope.',
-				'slashing tires.'
+				'FEEDING CATS TO AN ATM.',
+				'TELLING THEIR IMAGINARY FRIEND THEY\'RE TOO OLD TO HAVE AN IMAGINARY FRIEND.',
+				'TRAPPED IN R KELLY\'S CLOSET.',
+				'JOINING THE OFFICE FIGHT CLUB.'
 			];
 
 			$scope.text = '';
@@ -48,6 +46,7 @@ app.directive('submit', function(cardService, parseUser) {
 			
 			$scope.typeDisplay = cardService.getTypeDisplayByType($scope.type);
 			$scope.typeClass = cardService.getTypeClassByType($scope.type);
+			$scope.imageUrl = cardService.getImageByType($scope.type);
 
 			$scope.onTextChange = function(newValue, oldValue) {
 				if(newValue === undefined || newValue === null)
