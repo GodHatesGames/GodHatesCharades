@@ -10,7 +10,7 @@ app.controller('resetPasswordView', function(parseUser, $scope) {
 	};
 
 	function _onResetSent() {
-		$scope.message = 'Awesome, check your email for the reset link!';
+		$scope.successMessage = 'Awesome, check your email for the reset link!';
 	}
 
 	function _onResetFail(error) {
