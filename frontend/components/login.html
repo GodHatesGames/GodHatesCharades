@@ -1,11 +1,16 @@
 <form ng-submit="login()"
       class="login">
+	<div class="alert alert-danger"
+	     ng-if="errorMessage">
+		Server-bot says: {{errorMessage}}
+	</div>
 	<div class="form-group">
 		<label for="loginEmail">Email</label>
 		<input type="email"
 		       class="form-control"
 		       id="loginEmail"
 		       ng-model="email"
+		       required="true"
 		       placeholder="janedoe@gmail.com" />
 	</div>
 	<div class="form-group">
@@ -14,6 +19,7 @@
 		       class="form-control" 
 		       id="loginPassword" 
 		       ng-model="password" 
+		       required="true"
 		       placeholder="Password" />
 	</div>
 	<button type="submit"

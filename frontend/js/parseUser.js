@@ -90,6 +90,7 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 		$rootScope.$broadcast('alert', {
 			message: error.message
 		});
+		$rootScope.$apply();
 	}
 
 	function logout() {
@@ -103,11 +104,14 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 	}
 
 	function signupAnonUser(username, password, email, name) {
-		user.data.set('username', username);
-		user.data.set('password', password);
-		user.data.set('email', email);
-		user.data.set('name', name);
-		return user.data.save(null, {
+		var newUser = new Parse.User();
+		if(user.data)
+			newUser.set('id', user.data.id);
+		newUser.set('username', username);
+		newUser.set('password', password);
+		newUser.set('email', email);
+		newUser.set('name', name);
+		return newUser.save(null, {
 			success: onUserConnected,
 			error: onUserError
 		});

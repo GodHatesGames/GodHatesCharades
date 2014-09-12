@@ -12,18 +12,22 @@ app.directive('signup', function(parseUser, $state) {
 			$scope.email = '';
 			$scope.password = '';
 
-			$scope.signup = function() {
-				var promise = parseUser.signupAnonUser($scope.email, $scope.password, $scope.email, $scope.name);
-				promise.then(onSignedUp, onSignupError);
-			};
+			$scope.signup = _signup;
 
-			function onSignedUp(user) {
+			function _signup() {
+				$scope.errorMessage = '';
+				var promise = parseUser.signupAnonUser($scope.email, $scope.password, $scope.email, $scope.name);
+				promise.then(_onSignedUp, _onSignupError);
+			}
+
+			function _onSignedUp(user) {
 				console.log('signup success');
 				$state.go('user', {userid: user.id});
 			}
 
-			function onSignupError() {
-				console.log('error signing up');
+			function _onSignupError(error) {
+				$scope.errorMessage = error.message;
+				$scope.$digest();
 			}
 		}
 	};

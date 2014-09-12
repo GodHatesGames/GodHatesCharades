@@ -14,6 +14,6 @@ app.controller('resetPasswordView', function(parseUser, $scope) {
 	}
 
 	function _onResetFail(error) {
-		$scope.message = 'Oops something went wrong, our server-bot says: ' + error.message;
+		$scope.errorMessage = error.message;
 	}
 });

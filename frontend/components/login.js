@@ -8,15 +8,24 @@ app.directive('login', function(parseUser) {
 			$scope.email = '';
 			$scope.password = '';
 
-			$scope.login = function() {
+			$scope.login = _login;
+
+			function _login() {
+				$scope.errorMessage = '';
 				console.log('logging in:', $scope.email, $scope.password);
 				var promise = parseUser.connect($scope.email, $scope.password);
-				promise.then(function(user) {
-					$state.go('user', {
-						userid: user.id
-					});
+				promise.then(_onUserLoginSuccess, _onUserLoginError);
+			}
+
+			function _onUserLoginSuccess(user) {
+				$state.go('user', {
+					userid: user.id
 				});
-			};
+			}
+
+			function _onUserLoginError(error) {
+				$scope.errorMessage = error.message;
+			}
 		}
 	};
 });
