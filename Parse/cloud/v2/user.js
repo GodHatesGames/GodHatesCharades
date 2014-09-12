@@ -16,6 +16,7 @@ function getProfile(request, response) {
 	});
 
 	function onUserLoaded(user) {
+		userUtils.stripPrivateData(user);
 		owner = user;
 
 		var query = new Parse.Query(Suggestion);
@@ -28,18 +29,16 @@ function getProfile(request, response) {
 			success: onSuggestionsLoaded,
 			error: onProfileError
 		});
-
 	}
+
 	function onSuggestionsLoaded(suggestions) {
+		console.log('owner');
+		console.log(owner);
 		var profile = {
 			owner: owner
 		};
 		if(suggestions.length > 0) {
 			var suggestion;
-			// console.log(suggestions);
-			// console.log('owner');
-			// console.log(owner);
-			userUtils.stripPrivateData(owner);
 			for(var i = 0; i < suggestions.length; i++) {
 				suggestion = suggestions[i];
 				suggestion.attributes.owner = owner;

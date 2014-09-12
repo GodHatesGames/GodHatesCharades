@@ -3,24 +3,26 @@ exports.isUserAdmin = isUserAdmin;
 
 // Removes private data from original object
 function stripPrivateData(parseUser) {
-	if(!isThisParseUser(parseUser)) {
+	var shouldStrip = isThisSomeoneElsesAccount(parseUser);
+	if(shouldStrip) {
 		delete parseUser.attributes.email;
 		delete parseUser.attributes.username;
 		delete parseUser.attributes.ACL;
 		delete parseUser.attributes.admin;
 		delete parseUser.attributes.beta;
+		delete parseUser.attributes.emailVerified;
 		delete parseUser.createdAt;
 		delete parseUser.updatedAt;
 		// console.log(parseUser);
 	}
 }
 
-function isThisParseUser(parseUser) {
+function isThisSomeoneElsesAccount(parseUser) {
 	var current = Parse.User.current();
 	if(current && current.id === parseUser.id)
-		return true;
+		return false; //this is my account
 	else
-		return false;
+		return true; //yes, this is someone elses account
 }
 
 // method should not be exposed to raw requests
