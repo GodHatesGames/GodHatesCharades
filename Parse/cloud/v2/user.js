@@ -9,23 +9,33 @@ function getProfile(request, response) {
 
 	var Suggestion = Parse.Object.extend('Suggestion');
 	var owner = new Parse.User();
-	owner.id = request.params.userid;
-	var query = new Parse.Query(Suggestion);
-	query.descending('totalVotes');
-	query.equalTo('owner', owner);
-	query.include('owner');
-	query.limit(request.params.pageSize);
-	query.skip(request.params.skipIndex);
-	query.find({
-		success: onSuggestionsLoaded,
-		error: onSuggestionsError
+	owner.set('id', request.params.userid);
+	owner.fetch({
+		success: onUserLoaded,
+		error: onProfileError
 	});
 
+	function onUserLoaded(user) {
+		owner = user;
+
+		var query = new Parse.Query(Suggestion);
+		query.descending('totalVotes');
+		query.equalTo('owner', owner);
+		query.include('owner');
+		query.limit(request.params.pageSize);
+		query.skip(request.params.skipIndex);
+		query.find({
+			success: onSuggestionsLoaded,
+			error: onProfileError
+		});
+
+	}
 	function onSuggestionsLoaded(suggestions) {
-		var profile = {};
+		var profile = {
+			owner: owner
+		};
 		if(suggestions.length > 0) {
 			var suggestion;
-			profile.owner = suggestions[0].get('owner');
 			// console.log(suggestions);
 			// console.log('owner');
 			// console.log(owner);
@@ -41,7 +51,7 @@ function getProfile(request, response) {
 		response.success(profile);
 	}
 
-	function onSuggestionsError(error) {
+	function onProfileError(error) {
 		response.reject(error);
 	}
 

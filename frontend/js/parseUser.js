@@ -36,7 +36,7 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 		console.log('not logged in');
 		user.loggedin = false;
 		// create parse user to be used for suggestions and voting
-		_createAnonUser();
+		// _createAnonUser();
 	}
 
 	function _createAnonUser() {
