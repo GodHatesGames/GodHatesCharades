@@ -133,14 +133,14 @@
 }
 
 @media (max-width: 1200px) {
+	@ad-height: 125px;
 
 	#mainNav {
-		margin-top: 150px;
+		margin-top: @ad-height;
 	}
 
 	.ad {
-		width: 100%;
-		top: -150px;
+		top: -@ad-height;
 	}
 
 	.logo-img {
@@ -153,12 +153,14 @@
 }
 
 @media (max-width: 992px) {
+	@ad-height: 225px;
 	#mainNav {
-		margin-top: 110px;
+		margin-top: @ad-height;
 	}
 
 	.ad {
-		top: -110px;
+		width: 100%;
+		top: -@ad-height;
 	}
 
 	.logo-img {
@@ -167,15 +169,15 @@
 }
 
 @media (max-width: 767px) {
-	/* beta */
+	@ad-height: 155px;
 	
 	#mainNav {
-		margin-top: 95px;
+		margin-top: @ad-height;
 		height: 150px;
 	}
 
 	.ad {
-		top: -95px;
+		top: -@ad-height;
 		font-size: 17px;
 	}
 
@@ -185,8 +187,9 @@
 }
 
 @media (max-width: 640px) {
+	@ad-height: 125px;
 	#mainNav {
-		margin-top: 65px;
+		margin-top: @ad-height;
 		height: 150px;
 	}
 
@@ -195,18 +198,19 @@
 	}
 
 	.ad {
-		top: -65px;
+		top: -@ad-height;
 	}
 }
 
 @media (max-width: 457px) {
+	@ad-height: 105px;
 	#mainNav {
-		margin-top: 85px;
+		margin-top: @ad-height;
 		height: 150px;
 	}
 
 	.ad {
-		top: -85px;
+		top: -@ad-height;
 	}
 	
 	#mainNav .logo-img {
@@ -215,13 +219,14 @@
 }
 
 @media (max-width: 320px) {
+	@ad-height: 105px;
 	#mainNav {
-		margin-top: 85px;
+		margin-top: @ad-height;
 		height: 130px;
 	}
 
 	.ad {
-		top: -85px;
+		top: -@ad-height;
 	}
 	
 	#mainNav .logo-img {
