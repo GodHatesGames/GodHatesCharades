@@ -16,7 +16,8 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 		logout: logout,
 		signupAnonUser: signupAnonUser,
 		save: save,
-		getProfileById: getProfileById
+		getProfileById: getProfileById,
+		resetPassword: _resetPassword
 	};
 
 	var cache = {};
@@ -220,6 +221,15 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 		} else {
 			console.log('must provide user to cache');
 		}
+	}
+
+	function _resetPassword(email) {
+		var deffered = $q.defer();
+		Parse.User.requestPasswordReset(email, {
+			success: deffered.resolve,
+			error: deffered.reject
+		});
+		return deffered.promise;
 	}
 
 	return user;

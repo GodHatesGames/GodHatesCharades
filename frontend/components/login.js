@@ -4,9 +4,6 @@ app.directive('login', function(parseUser) {
 		templateUrl: 'components/login.html',
 		replace: true,
 		scope: true,
-		link: function($scope, $element) {
-			
-		},
 		controller: function($scope, $element, $state) {
 			$scope.email = '';
 			$scope.password = '';

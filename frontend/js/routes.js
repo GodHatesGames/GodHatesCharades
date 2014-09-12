@@ -227,4 +227,11 @@ app.config(function($stateProvider,
 		templateUrl: 'views/fixmeView.html',
 		controller: 'fixmeView'
 	});
+	$stateProvider.state('reset', {
+		url: '/reset',
+		title: 'Lose something?',
+		description: 'This is for people who lost their way...',
+		templateUrl: 'views/resetPasswordView.html',
+		controller: 'resetPasswordView'
+	});
 });
