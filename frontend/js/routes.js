@@ -20,12 +20,12 @@ app.config(function($stateProvider,
 		controller: 'homeView'
 	});
 
-	$stateProvider.state('submit', {
-		url: '/submit',
-		title: 'Create: Suggest a new card',
-		description: 'We need your help coming up with funny new cards. Submit your favorite ideas here.',
-		templateUrl: 'views/submitView.html'
-	});
+	// $stateProvider.state('submit', {
+	// 	url: '/submit',
+	// 	title: 'Create: Suggest a new card',
+	// 	description: 'We need your help coming up with funny new cards. Submit your favorite ideas here.',
+	// 	templateUrl: 'views/submitView.html'
+	// });
 	$stateProvider.state('vote', {
 		url: '/vote',
 		title: 'Vote: Help us choose new cards',
