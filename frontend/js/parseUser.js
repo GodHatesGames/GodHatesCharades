@@ -11,11 +11,11 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 		isBetaUser: isBetaUser,
 		isCurrentUser: isCurrentUser,
 		data: null,
-		createAnonUser: createAnonUser,
-		connect: connect,
+		createAnonUser: _createAnonUser,
+		connect: _connect,
 		logout: logout,
 		signupAnonUser: signupAnonUser,
-		save: save,
+		save: _save,
 		getProfileById: getProfileById,
 		resetPassword: _resetPassword
 	};
@@ -36,21 +36,24 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 		console.log('not logged in');
 		user.loggedin = false;
 		// create parse user to be used for suggestions and voting
-		createAnonUser();
+		_createAnonUser();
 	}
 
-	function createAnonUser() {
+	function _createAnonUser() {
 		console.log('creating anon user');
+		var deferred = $q.defer();
 		
 		var newUser = new Parse.User();
 		newUser.set('username', randString());
 		newUser.set('password', randString());
 		newUser.set('name', 'Anonymous');
-
-		return newUser.signUp(null, {
+		newUser.signUp(null, {
 			success: onUserConnected,
 			error: onUserError
-		});
+		})
+		.then(deferred.resolve, deferred.reject);
+
+		return deferred.promise;
 
 		function randString() {
 			// copy pasta'd from: http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript
@@ -61,14 +64,16 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 		}
 	}
 
-	function connect(username, password) {
+	function _connect(username, password) {
+		var deferred = $q.defer();
 		//returns Parse.Promise
-		var promise = Parse.User.logIn(username, password, {
+		Parse.User.logIn(username, password, {
 			success: onUserConnected,
 			error: onUserError
-		});
+		})
+		.then(deferred.resolve, deferred.reject);
 
-		return promise;
+		return deferred.promise;
 	}
 
 	function onUserConnected(userData) {
@@ -81,7 +86,6 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 		//track in leanplum
 		leanplum.startLeanPlum(user.data);
 
-		$rootScope.$apply();
 	}
 
 	function onUserError(user, error) {
@@ -90,7 +94,6 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 		$rootScope.$broadcast('alert', {
 			message: error.message
 		});
-		$rootScope.$apply();
 	}
 
 	function logout() {
@@ -117,17 +120,19 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 		});
 	}
 
-	function save() {
-		var promise = user.data.save();
-		promise.then(function(user) {
+	function _save() {
+		var deferred = $q.defer();
+		user.data.save()
+		.then(function(user) {
 				console.log('saved!');
 				user.data = user;
-				$rootScope.$apply();
 			}, function(user, error) {
 				console.log('could not save:', error);
 			}
-		);
-		return promise;
+		)
+		.then(deferred.resolve, deferred.reject);
+
+		return deferred.promise;
 	}
 
 	// returns true if current user is not Anonymous
@@ -182,13 +187,13 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 			options.userid = id;
 		}
 
-		var deffered = $q.defer();
+		var deferred = $q.defer();
 		if(fetching[id]) {
 			console.log('returning existing promise');
 			return fetching[id];
 		} else if(profiles[id]) {
 			console.log('delivering cached user');
-			deffered.resolve(profiles[id]);
+			deferred.resolve(profiles[id]);
 		} else {
 			console.log('fetching user');
 			// $scope.loading = true;
@@ -197,22 +202,22 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 				error: onProfileError
 			};
 			Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getProfile', options, callbacks);
-			fetching[id] = deffered.promise;
+			fetching[id] = deferred.promise;
 		}
 
-		return deffered.promise;
+		return deferred.promise;
 
 		function onProfileFound(profile) {
 			delete fetching[id];
 			var user = profile.owner;
 			profiles[user.id] = profile;
 			cardService.cache(profile.suggestions);
-			deffered.resolve(profile);
+			deferred.resolve(profile);
 		}
 
 		function onProfileError(user, error) {
 			delete fetching[id];
-			deffered.reject(error);
+			deferred.reject(error);
 		}
 
 	}
@@ -228,12 +233,12 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 	}
 
 	function _resetPassword(email) {
-		var deffered = $q.defer();
+		var deferred = $q.defer();
 		Parse.User.requestPasswordReset(email, {
-			success: deffered.resolve,
-			error: deffered.reject
+			success: deferred.resolve,
+			error: deferred.reject
 		});
-		return deffered.promise;
+		return deferred.promise;
 	}
 
 	return user;

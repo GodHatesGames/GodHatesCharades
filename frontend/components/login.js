@@ -13,8 +13,8 @@ app.directive('login', function(parseUser) {
 			function _login() {
 				$scope.errorMessage = '';
 				console.log('logging in:', $scope.email, $scope.password);
-				var promise = parseUser.connect($scope.email, $scope.password);
-				promise.then(_onUserLoginSuccess, _onUserLoginError);
+				parseUser.connect($scope.email, $scope.password)
+				.then(_onUserLoginSuccess, _onUserLoginError);
 			}
 
 			function _onUserLoginSuccess(user) {

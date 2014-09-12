@@ -4,7 +4,7 @@ app.controller('resetPasswordView', function(parseUser, $scope) {
 	$scope.reset = _reset;
 
 	function _reset() {
-		$scope.message = '';
+		$scope.errorMessage = '';
 		parseUser.resetPassword($scope.email)
 		.then(_onResetSent, _onResetFail);
 	};

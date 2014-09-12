@@ -27,7 +27,6 @@ app.directive('signup', function(parseUser, $state) {
 
 			function _onSignupError(error) {
 				$scope.errorMessage = error.message;
-				$scope.$digest();
 			}
 		}
 	};
