@@ -47,7 +47,12 @@ app.config(function($stateProvider,
 		type: 'profile',
 		url: '/user/:userid',
 		templateUrl: 'views/publicProfileView.html',
-		controller: 'publicProfileView'
+		controller: 'publicProfileView',
+		resolve: {
+			profile: ['parseUser', '$stateParams', function(parseUser, $stateParams) {
+				return parseUser.getProfileById($stateParams.userid);
+			}]
+		}
 	});
 	$stateProvider.state('card', {
 		url: '/card/:cardid/:slug',

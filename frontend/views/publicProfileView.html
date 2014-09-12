@@ -2,7 +2,7 @@
 	 class="container">
 	<!-- <link rel="stylesheet" type="text/css" href="css/profileView.css"> -->
 	<h2>Print N Play Downloads</h2>
-	<div class="btn-group">
+	<div class="print-btns">
 		<a href="http://www.godhatescharades.com/print/GodHatesCharadesPrintNPlay_Beta.pdf"
 		   target="_blank"
 		   class="btn btn-success btn-group">
@@ -15,12 +15,12 @@
 		</a>
 	</div>
 	<!-- non beta users -->
-	<h3 ng-show="currentUser && !betaUser">
+	<h3 ng-if="currentUser && !betaUser">
 		New beta features coming soon. But you can <a ui-sref="vote">get voting now</a>!
 	</h3>
 
 	<!-- beta users -->
-	<div ng-hide="currentUser && !betaUser">
+	<div ng-if="currentUser && betaUser">
 		<user-submissions userid="userid">
 		</user-submissions>
 	</div>
