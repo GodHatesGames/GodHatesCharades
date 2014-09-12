@@ -2,7 +2,7 @@
 	ng-hide="loading && skipIndex == 0">
 	<a class="row pair"
 		ui-sref="pair(pairService.getLink(pair))"
-		ng-repeat="(index, pair) in pairs | orderBy:sortPredicates">
+		ng-repeat="(index, pair) in pairs | orderBy:sortPredicates | limitTo:50">
 
 		<ribbon message="index + 1"
 				class="ribbon-gold">
