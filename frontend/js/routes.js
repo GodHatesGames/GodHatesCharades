@@ -220,4 +220,11 @@ app.config(function($stateProvider,
 		description: 'Thanks for subscribing to our mailing list.',
 		templateUrl: 'views/mail.thanksView.html'
 	});
+	$stateProvider.state('fixme', {
+		url: '/fixme',
+		title: 'Fix yoself',
+		description: 'If you\'re having account problems, you\'re in the right place',
+		templateUrl: 'views/fixmeView.html',
+		controller: 'fixmeView'
+	});
 });

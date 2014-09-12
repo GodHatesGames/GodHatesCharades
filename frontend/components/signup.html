@@ -1,51 +1,45 @@
 <form ng-submit="signup()"
-		class="signup form-horizontal"
-		role="form">
+	  class="signup form"
+	  role="form">
 	<div class="form-group">
 		<label for="signupName"
-			   class="control-label col-sm-3 col-md-3 col-lg-2">
+		       class="control-label">
 			Name
 		</label>
-		<div class="col-sm-9 col-md-9 col-lg-10">
-			<input type="text"
-					class="form-control"
-					id="signupName"
-					ng-model="name"
-					placeholder="PlainJane"
-					required />
-			<span class="help-block">Other people will see this on your entries.</span>
-		</div>
+		<input type="text"
+		       class="form-control"
+		       id="signupName"
+		       ng-model="name"
+		       placeholder="PlainJane"
+		       required />
+		<span class="help-block">Other people will see this on your entries.</span>
 	</div>
 	<div class="form-group">
 		<label for="signupEmail"
-			   class="control-label col-sm-3 col-md-3 col-lg-2">
+		       class="control-label">
 			Email
 		</label>
-		<div class="col-sm-9 col-md-9 col-lg-10">
-			<input type="email"
-					class="form-control"
-					id="signupEmail"
-					ng-model="email"
-					placeholder="janedoe@gmail.com"
-					required />
-			<span class="help-block">Just for logging in. Never shared, never sold.</span>
-		</div>
+		<input type="email"
+		       class="form-control"
+		       id="signupEmail"
+		       ng-model="email"
+		       placeholder="janedoe@gmail.com"
+		       required />
+		<span class="help-block">Just for logging in. Never shared, never sold.</span>
 	</div>
 	<div class="form-group">
 		<label for="signupPassword"
-			   class="control-label col-sm-3 col-md-3 col-lg-2">
+		       class="control-label">
 			Password
 		</label>
-		<div class="col-sm-9 col-md-9 col-lg-10">
-			<input type="password" 
-					class="form-control" 
-					id="signupPassword"
-					ng-model="password"
-					placeholder="donthackmebro"
-					required />
-			<span class="help-block">Always use protection!</span>
-		</div>
+		<input type="password" 
+		       class="form-control" 
+		       id="signupPassword"
+		       ng-model="password"
+		       placeholder="donthackmebro"
+		       required />
+		<span class="help-block">Always use protection!</span>
 	</div>
 	<button type="submit"
-			class="btn btn-primary">Signup!</button>
+	        class="btn btn-primary">Signup!</button>
 </form>
