@@ -35,8 +35,9 @@ app.directive('youtubeUpload', function(ytUploadService) {
 				switch(event.data.state) {
 					case YT.UploadWidgetState.IDLE :
 						// user has triggered the Record button, though recording has not yet started
+						if(!$scope.recording)
+							ga('send', 'event', 'youtube', 'recording', 'started');
 						$scope.recording = true;
-						ga('send', 'event', 'youtube', 'upload', 'started');
 						break;
 					case YT.UploadWidgetState.STOPPED :
 						// user has triggered the Record button, though recording has not yet started
