@@ -1,5 +1,5 @@
 'use strict';
-app.directive('youtubeUpload', function() {
+app.directive('youtubeUpload', function(ytUploadService) {
 	return {
 		restrict: 'E',
 		templateUrl: 'components/youtubeUpload.html',
@@ -10,7 +10,8 @@ app.directive('youtubeUpload', function() {
 		},
 		controller: function($scope, $element) {
 			$scope.uploadClass = _uploadClass;
-			var widget = new YT.UploadWidget('youtubeUpload', {
+
+			var widget = ytUploadService.createUpload('youtubeUpload', {
 				width: 600,
 				height: 300,
 				events: {

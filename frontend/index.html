@@ -83,7 +83,6 @@
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular-animate.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.12.1/TweenMax.min.js"></script>
-		<script src="//www.youtube.com/iframe_api"></script>
 		<!-- <script src="//apis.google.com/js/client.js?onload=googleApiClientReady"></script> -->
 
 		<!-- build:js js/app.js -->
@@ -137,6 +136,7 @@
 		<script src="services/mailchimp.js"></script>
 		<script src="services/leaderboard.js"></script>
 		<script src="services/addthisService.js"></script>
+		<script src="services/ytUploadService.js"></script>
 		<script src="filters/property.js"></script>
 		<script src="components/textarea-noreturn.js"></script>
 		<script src="components/card.js"></script>
@@ -238,5 +238,14 @@
 		<!-- Youtube Embed Button -->
 		<script src="https://apis.google.com/js/platform.js"></script>
 		<!-- end Youtube Embed Button -->
+
+		<script type="text/javascript">
+			window.onYouTubeIframeAPIReady = function() {
+				console.log('$window.onYouTubeIframeAPIReady');
+				window.youTubeIframeAPIReady = true;
+				angular.element(document).scope().$digest();
+			}
+		</script>
+		<script src="//www.youtube.com/iframe_api"></script>
 	</body>
 </html>

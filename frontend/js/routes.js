@@ -66,6 +66,9 @@ app.config(function($stateProvider,
 		resolve: {
 			pair: ['$stateParams', 'pairService', function($stateParams, pairService) {
 				return pairService.getPairById($stateParams.pairid);
+			}],
+			readyForUpload: ['ytUploadService', function(ytUploadService) {
+				return ytUploadService.waitForLoad();
 			}]
 		}
 	});
