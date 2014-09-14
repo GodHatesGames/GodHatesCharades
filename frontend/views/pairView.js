@@ -29,7 +29,12 @@ app.controller('pairView', function(pair, readyForUpload, $scope, $state, $state
 	                            '"\n',
 	                            'Check out the game on Kickstarter right now! http://bit.ly/godhatescharades \n',
 	                            'Vote on cards or record your own vide on godhatescharades.com',].join('');
-	$scope.uploadKeywords = [pair.id];
+	$scope.uploadKeywords = [pair.id,
+	                         '"God Hates Charades"',
+	                         '"Party Game"',
+	                         'Acting',
+	                         'Actor',
+	                         'Scenario'];
 
 
 	// DISQUS
@@ -38,4 +43,4 @@ app.controller('pairView', function(pair, readyForUpload, $scope, $state, $state
 		id: $stateParams.pairId,
 		url: 'http://godhatescharades.com' + $location.url()
 	};
-})
+});
