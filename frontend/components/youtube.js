@@ -34,7 +34,7 @@ app.directive('youtube', function() {
 			function _updateListPlayer(newList) {
 				var attributes = [];
 				attributes.push('listType=search');
-				attributes.push('list=' + newList);
+				attributes.push('list=%22' + newList + '%22');
 				_updatePlayer(youtubeUrl, attributes);
 			}
 
