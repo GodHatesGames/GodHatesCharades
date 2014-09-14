@@ -26,9 +26,9 @@ app.controller('pairView', function(pair, readyForUpload, $scope, $state, $state
 	                      '"'].join('');
 	$scope.uploadDescription = ['I just acted out a scene from God Hates Charades: The Game that makes your friends funny! I\'m acting as "',
 	                            $state.current.title,
-	                            '"\n',
-	                            'Check out the game on Kickstarter right now! http://bit.ly/godhatescharades \n',
-	                            'Vote on cards or record your own vide on godhatescharades.com',].join('');
+	                            '"\n\n',
+	                            'Check out the game on Kickstarter right now! http://bit.ly/godhatescharades \n\n',
+	                            'Vote on cards or record your own vide on http://godhatescharades.com',].join('');
 	$scope.uploadKeywords = [pair.id,
 	                         '"God Hates Charades"',
 	                         '"Party Game"',
