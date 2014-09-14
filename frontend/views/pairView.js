@@ -11,6 +11,7 @@ app.controller('pairView', function(pair, $scope, $state, $stateParams, $locatio
 	//set meta title
 	$state.current.title = [actor.get('text'),
 	                        scenario.get('text')].join(' ');
+	$scope.title = $state.current.title;
 
 	// set meta description
 	$state.current.description = ['"',
@@ -19,6 +20,16 @@ app.controller('pairView', function(pair, $scope, $state, $stateParams, $locatio
 	                              'is a pair of cards that might be added to God Hates Charades.'].join('');
 
 	$scope.sharingConfig.title = $state.current.title;
+
+	$scope.uploadTitle = ['Watch me act like "',
+	                      $state.current.title,
+	                      '"'].join('');
+	$scope.uploadDescription = ['I just acted out a scene from God Hates Charades: The Game that makes your friends funny! I\'m acting as "',
+	                            $state.current.title,
+	                            '"\n',
+	                            'Check out the game on Kickstarter right now! http://bit.ly/godhatescharades \n',
+	                            'Vote on cards or record your own vide on godhatescharades.com',].join('');
+	$scope.uploadKeywords = [pair.id];
 
 
 	// DISQUS

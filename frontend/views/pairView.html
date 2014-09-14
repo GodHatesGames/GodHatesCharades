@@ -3,7 +3,7 @@
 	        class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6">
 	</prompt>
 	<div class="col-md-6">
-		<div class="row pair">
+		<div class="pair">
 			<div class="col-xs-6 col-sm-6 col-md-6">
 				<card card-id="actorId"
 				      updatable="true"></card>
@@ -14,13 +14,24 @@
 			</div>
 		</div>
 		<pair-info id="pair.id"></pair-info>
-	</div>
-	<div class="col-md-6 social">
+
 		<h3>Share it</h3>
 		<addthis sharing="sharingConfig"></addthis>
 		<disqus-here shortname="{{disqus.shortname}}"
 		             url="{{disqus.url}}"
 		             identifier="{{disqus.id}}">
 		</disqus-here>
+	</div>
+	<div class="col-md-6 col-lg-6 social">
+		<!-- Upload! -->
+		<h2>Act out this pair</h2>
+		<youtube-upload title="uploadTitle"
+		                description="uploadDescription"
+		                keywords="uploadKeywords"></youtube-upload>
+
+		<h2>Watch people act it out</h2>
+		<youtube list="title"
+		         fluid="true"
+		         class="playlist"></youtube>
 	</div>
 </div>
