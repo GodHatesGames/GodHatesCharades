@@ -36,6 +36,7 @@ app.directive('youtubeUpload', function(ytUploadService) {
 					case YT.UploadWidgetState.IDLE :
 						// user has triggered the Record button, though recording has not yet started
 						$scope.recording = true;
+						ga('send', 'event', 'youtube', 'upload', 'started');
 						break;
 					case YT.UploadWidgetState.STOPPED :
 						// user has triggered the Record button, though recording has not yet started
@@ -50,6 +51,7 @@ app.directive('youtubeUpload', function(ytUploadService) {
 
 			function _onUploadSuccess(event) {
 				console.log('upload complete');
+				ga('send', 'event', 'youtube', 'upload', 'complete');
 				$scope.videoProcessing = true;
 			}
 
