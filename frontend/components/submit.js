@@ -37,10 +37,11 @@ app.directive('submit', function(cardService, parseUser) {
 
 			var halfMax = $scope.maxChars / 2;
 
-			var rand = Math.floor(Math.random() * 5);
 			if($scope.type === TYPE_PERSON) {
+				var rand = Math.floor(Math.random() * randomPeople.length);
 				$scope.example = randomPeople[rand];
 			} else if($scope.type === TYPE_THING) {
+				var rand = Math.floor(Math.random() * randomEvents.length);
 				$scope.example = randomEvents[rand];
 			}
 			

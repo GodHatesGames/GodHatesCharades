@@ -89,6 +89,9 @@ app.run(function($rootScope,
 			$rootScope.unsetLoading();
 			console.log('Error transitioning to state', to.controller, error.message);
 			console.log(error.stack);
+			$state.go('error', {
+				message: error.message
+			})
 		});
 	}
 );

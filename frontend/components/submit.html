@@ -31,21 +31,15 @@
 	     ng-show="success">
 			<div class="card submitted"
 			     ng-class="typeClass">
+				<span class="icon"
+				  ng-include="imageUrl"></span>
 				<div class="cardContent">
 					<h5>Thanks for the submission<b>{{displayName()}}</b>! Your card will be up soon.</h5>
-					<p ng-hide="parseUser.loggedin">
-						Want to people to know how brilliant you are? Signup and we'll credit your name or nickname on the card!
-					</p>
-				<a ui-sref="login"
-				   class="btn btn-success"
-				   ng-hide="parseUser.loggedin">
-					Signup Now
-				</a>
 				</div>
 			</div>
 
 			<button ng-click="reset()"
-			        class="btn btn-info">
+			        class="btn btn-info newCard">
 				Create a new Card
 			</button>
 	</div>

@@ -1,0 +1,55 @@
+.submit {
+	.card {
+		margin-bottom: 0;
+		
+		&.submitted {
+			font-size: 12px;
+
+			.cardContent {
+				padding-top: 100%;
+			}
+		}
+
+		.cardContent {
+			top: 0;
+		}
+		
+		.editable {
+			text-transform: uppercase;
+			border: none;
+			width: 100%;
+			height: 100%;
+			background: transparent;
+			resize: none;
+			padding: 100% 15px 15px 15px;
+			
+			/*font-size: 18px;*/
+			/*font-weight: bold;*/
+			text-align: center;
+			overflow: hidden;
+		}
+	}
+
+	.newCard {
+		margin-top: 15px;
+	}
+	
+	.alert {
+		color: black;
+		border: none;
+		border-radius: 0;
+		padding-top: 20px;
+		margin: -5px auto 0 auto;
+		background: transparent;
+		
+		&.alert-warning {
+			font-weight: bold;
+		}
+		
+		&.alert-danger {
+			font-weight: bold;
+			color: #BB0000;
+		}
+	}
+
+}

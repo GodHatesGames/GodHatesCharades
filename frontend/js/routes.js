@@ -12,6 +12,13 @@ app.config(function($stateProvider,
 		controller: '404View'
 	});
 
+	$stateProvider.state('error', {
+		url: '/error?message',
+		title: 'Error accessing page',
+		templateUrl: 'views/errorView.html',
+		controller: 'errorView'
+	});
+
 	$stateProvider.state('home', {
 		url: '/?vine&youtube',
 		title: 'Your favorite new party game',
@@ -24,7 +31,17 @@ app.config(function($stateProvider,
 		url: '/submit',
 		title: 'Create: Suggest a new card',
 		description: 'We need your help coming up with funny new cards. Submit your favorite ideas here.',
-		templateUrl: 'views/submitView.html'
+		templateUrl: 'views/submitView.html',
+		resolve: {
+			betaUser: ['parseUser', '$q', function(parseUser, $q) {
+				if(parseUser.isBetaUser())
+					return true;
+				else
+					return $q.reject({
+						message: 'You must be a Backer to access this page. Please login.'
+					});
+			}]
+		}
 	});
 	$stateProvider.state('vote', {
 		url: '/vote',

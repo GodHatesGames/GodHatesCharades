@@ -1,0 +1,39 @@
+#submitView {
+	text-align: center;
+	min-height: 100%;
+	.submitForm:not(:last-child) {
+		margin-right: 15px;
+	}
+
+	.cardContainer {
+		max-width: 300px;
+		margin: 0 auto;
+	}
+}
+
+@media (max-width: 525px) {
+	#submitView .submitForm {
+		margin-right: 0 !important;
+		margin-bottom: 15px;
+	}
+}
+
+@media (max-width: 620px) {
+	#submitView {
+		.prompt {
+			.btn {
+				display: block;
+			}
+		}
+	}
+}
+
+@media (max-width: 1200px) {
+	#submitView {
+		.prompt {
+			.btn {
+				margin-top: 15px;
+			}
+		}
+	}
+}

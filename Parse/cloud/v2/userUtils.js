@@ -1,8 +1,9 @@
-exports.stripPrivateData = stripPrivateData;
+exports.stripPrivateData = _stripPrivateData;
 exports.isUserAdmin = isUserAdmin;
+exports.isUserBeta = _isUserBeta;
 
 // Removes private data from original object
-function stripPrivateData(parseUser) {
+function _stripPrivateData(parseUser) {
 	var shouldStrip = isThisSomeoneElsesAccount(parseUser);
 	if(shouldStrip) {
 		delete parseUser.attributes.email;
@@ -34,6 +35,23 @@ function isUserAdmin(userId) {
 	var promise = query.get(userId)
 		.then(function (user) {
 			if(user && user.get('admin')) {
+				return true;
+			} else {
+				return false;
+			}
+		})
+	return promise;
+}
+
+// method should not be exposed to raw requests
+function _isUserBeta(userId) {
+	// to allow fetching users
+	Parse.Cloud.useMasterKey();
+
+	var query = new Parse.Query(Parse.User);
+	var promise = query.get(userId)
+		.then(function (user) {
+			if(user && user.get('beta')) {
 				return true;
 			} else {
 				return false;

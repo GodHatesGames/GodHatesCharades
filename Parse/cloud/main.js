@@ -42,21 +42,13 @@ Parse.Cloud.job('calculateStats', leaderboard.calculateStats);
 Parse.Cloud.job('testStats', leaderboard.testStats);
 
 
-Parse.Cloud.beforeSave('Suggestion', function(request, response) {
-	if(request.object.isNew()) {
-		request.object.set('backgroundUpdatedAt', new Date());
-		request.object.set('totalVotes', 1);
-		request.object.set('skipped', 0);
-	}
-	response.success();
-});
-
 // V2 Code
 
 var v2 = {};
 v2.admin = require('cloud/v2/admin.js');
 v2.vote = require('cloud/v2/vote.js');
 v2.cardUtils = require('cloud/v2/cardUtils.js');
+v2.userUtils = require('cloud/v2/userUtils.js');
 v2.leaderboard = require('cloud/v2/leaderboard.js');
 v2.user = require('cloud/v2/user.js');
 v2.pair = require('cloud/v2/pair.js');
@@ -94,3 +86,17 @@ Parse.Cloud.define('v2_getCardById', v2.cardUtils.getCardById);
 
 // Background Jobs
 Parse.Cloud.job('v2_calculateStats', v2.leaderboard.calculateStats);
+
+Parse.Cloud.beforeSave('Suggestion', function(request, response) {
+	var betaUser = v2.userUtils.isUserBeta(request.user.id);
+	if(betaUser) {
+		if(request.object.isNew()) {
+			request.object.set('backgroundUpdatedAt', new Date());
+			request.object.set('totalVotes', 1);
+			request.object.set('skipped', 0);
+		}
+		response.success();
+	} else {
+		response.error('You must be a beta user to submit cards.');
+	}
+});
