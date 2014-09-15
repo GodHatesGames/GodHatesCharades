@@ -2,27 +2,35 @@
 	 class="container">
 	<!-- <link rel="stylesheet" type="text/css" href="css/profileView.css"> -->
 	<h2>Print N Play Downloads</h2>
-	<div class="print-btns">
+	<div class="btns">
 		<a href="http://www.godhatescharades.com/print/GodHatesCharadesPrintNPlay_Beta.pdf"
 		   target="_blank"
-		   class="btn btn-success btn-group">
+		   class="btn btn-success">
 			Kit N Play: Round 1
 		</a>
 		<a href="http://www.godhatescharades.com/print/GodHatesCharadesPrintNPlay_Beta2.pdf"
 		   target="_blank"
-		   class="btn btn-success btn-group">
+		   class="btn btn-success">
 			Kit N Play: Round 2
 		</a>
 	</div>
 	<!-- non beta users -->
 	<h3 ng-if="currentUser && !betaUser">
-		New beta features coming soon. But you can <a ui-sref="vote">get voting now</a>!
+		New features coming soon. But you can <a ui-sref="vote">get voting now</a>!
 	</h3>
 
 	<!-- beta users -->
 	<div ng-if="currentUser && betaUser"
-	     class="backerZone">
-		<h1>Backer Zone</h1>
+	     class="backerZone row">
+		<h1>Backers Only Down Here!</h1>
+
+		<h2>Help build the game</h2>
+		<div class="btns">
+			<a ui-sref="submit"
+			   class="btn btn-success">
+				Submit new cards
+			</a>
+		</div>
 		<user-submissions userid="userid">
 		</user-submissions>
 	</div>
