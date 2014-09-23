@@ -259,4 +259,12 @@ app.config(function($stateProvider,
 		templateUrl: 'views/resetPasswordView.html',
 		controller: 'resetPasswordView'
 	});
+
+	$stateProvider.state('timeline', {
+		url: '/timeline',
+		title: 'Timeline: Our Kickstarter fufillment timeline',
+		description: 'See our progress in shipping the game to our kickstarter backers!',
+		templateUrl: 'views/timelineView.html',
+		controller: 'timelineView'
+	});
 });
