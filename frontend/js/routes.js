@@ -265,6 +265,11 @@ app.config(function($stateProvider,
 		title: 'Timeline: Our Kickstarter fufillment timeline',
 		description: 'See our progress in shipping the game to our kickstarter backers!',
 		templateUrl: 'views/timelineView.html',
-		controller: 'timelineView'
+		controller: 'timelineView',
+		resolve: {
+			timelineDoc: ['prismic', function(prismic) {
+				return prismic.getDocumentById(CONFIG.PRISMIC.DOCS.PAGE_TIMELINE);
+			}]
+		}
 	});
 });
