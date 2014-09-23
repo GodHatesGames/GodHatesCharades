@@ -1,7 +1,7 @@
 'use strict';
 var parseUser = angular.module('parse.user', []);
 
-parseUser.service('parseUser', function factory($rootScope, $q, $location, leanplum, cardService) {
+parseUser.service('parseUser', function factory($rootScope, $q, $location, cardService) {
 	var user = {
 		loggedin: false,
 		dataloaded: false,
@@ -31,7 +31,7 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 		user.data = currentUser;
 		cache[user.data.id] = user.data;
 		user.loggedin = true;
-		leanplum.startLeanPlum(user.data)
+		// leanplum.startLeanPlum(user.data)
 	} else {
 		console.log('not logged in');
 		user.loggedin = false;
@@ -84,7 +84,7 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, leanp
 		user.data = userData;
 		user.loggedin = true;
 		//track in leanplum
-		leanplum.startLeanPlum(user.data);
+		// leanplum.startLeanPlum(user.data);
 
 	}
 

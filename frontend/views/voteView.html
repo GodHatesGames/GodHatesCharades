@@ -3,7 +3,16 @@
 	<h2>Pick your favorite pair</h2>
 	<p>We need your help picking the funniest cards for the game. <br>Pick the set most likely to make your friends cry with laughter or shame their parents when you post the video.(hint, hint)</p>
 	<vote></vote>
-	<hr>
-
-	<section ng-include="'views/homeView.ksLaunch.html'" class="mainLayout"></section>
+	<!-- Signup section -->
+	<section id="email_signup"
+			 class="signup row">
+		<h2 class="col-md-6">
+			SUBSCRIBE TO RECEIVE UPDATES + THE <b>PRINT ‘N PLAY</b> EDITION!
+		</h2>
+		<mailchimp class="col-xs-offset-0 col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-0 col-md-6"
+		           on-success="onEmailSubmitted"
+		           location="homepage_banner">
+		</mailchimp>
+	</section>
+	<!--End Signup section-->
 </div>

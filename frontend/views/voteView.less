@@ -1,0 +1,62 @@
+@import "../less/colors";
+
+#voteView {
+	padding-bottom: 0;
+	
+	p {
+		text-align: center;
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+
+	.signup {
+		margin-top: 35px;
+		padding-left: 60px;
+		padding-right: 60px;
+		text-align: center;
+		background-color: black;
+		background-image: url(../img/chalk.jpg);
+		line-height: 20px;
+		color: white;
+
+		p {
+			font-family: 'GodHatesCharades';
+			font-size: 28px;
+			line-height: 34px;
+			margin: 0;
+			padding: 0;
+		}
+
+		b {
+			color: @color-actor;
+		}
+
+		.mailchimp {
+			top: 25px;
+		}
+		@media (max-width: 1200px) {
+			.mailchimp {
+				top: 42px;
+			}
+		}
+
+		@media (max-width: 992px) {
+			padding-left: 20px;
+			padding-right: 20px;
+
+			.mailchimp {
+				top: 0;
+			}
+		}
+
+		@media (max-width: 640px) {
+			padding-left: 0px;
+			padding-right: 0px;
+
+			.form-inline {
+				padding: 0;
+			}
+		}
+	}
+}
+

@@ -79,227 +79,14 @@
 
 /* Section - Examples */
 #homeView section {
-	padding-top: 35px;
-	padding-bottom: 35px;
-
-	&.mainLayout {
-		padding-top: 15px;
-
-		.examples {
-			margin: 0 auto;
-
-			h2 {
-				margin-top: 36px;
-				font-size: 38px;
-				max-width: 600px;
-				margin: 0 auto;
-			}
-
-			p {
-				font-size: 18px;
-				text-align: center;
-				font-style: italic;
-			}
-
-			@media (max-width: 767px) {
-				h2 {
-					font-size: 32px;
-					max-width: 500px;
-					margin: 0 auto;
-				}
-			}
-
-			@media (max-width: 640px) {
-				margin-left: -10px;
-				margin-right: -10px;
-
-				.characters{
-					position: relative;
-					left: 12px;
-				}
-
-				.scenarios{
-					position: relative;
-					left: -12px;
-				}
-
-				h2 {
-					font-size: 17px;
-					line-height: 21px;
-					max-width: 260px;
-					margin: 0 auto;
-				}
-
-				p {
-					font-size: 12px;
-					max-width: 250px;
-					margin: 0 auto;
-				}
-			}
-
-			@media (max-width: 320px) {
-				.characters{
-					left: 0px;
-				}
-
-				.scenarios{
-					left: 0px;
-				}
-			}
-
-		/* end &.examples */
-		}
-
-	
-
-		.videoUnlock, .examplesUnlock, .vineUnlock, .ksLaunch {
-			
-			@media (max-width: 640px) {
-				& > div {
-					padding-left: 0;
-					padding-right: 0;
-				}
-			}
-
-			h3 {
-				margin-top: 0;
-				margin-bottom: 25px;
-			}
-
-			h4 {
-				margin-top: 0;
-				margin-bottom: 0;
-				background-color: black;
-				color: white;
-				padding: 10px;
-			}
-
-			.printnplay {
-				margin: 0 0 15px 0;
-			}
-			
-			.mailchimp {
-				width: 100%;
-			}
-
-			p {
-				text-align: center;
-				padding-top: 10px;
-			}
-
-			@media (max-width: 640px) {
-				h3 {
-					margin-left: 15px;
-					margin-right: 15px;
-				}
-
-				.printnplay {
-					margin: 15px;
-				}
-			}
-		}
+	&:not(:first-child) {
+		padding-top: 35px;
 	}
-
+	padding-bottom: 35px;
 
 	/* Section - Tutorial */
 
 	&.tutorial {
-		overflow: hidden;
-		height: 600px;
-		position: relative;
-		background-color: @color-scenario;
-		padding: 0;
-
-		.slide {
-			position: absolute;
-			top: 0;
-			left: 0;
-			height: 100%;
-			width: 100%;
-
-			.slide-content {
-				width: 100%;
-				height: 100%;
-			}
-
-			&.slide-one .slide-content {
-				padding: 5% 15% 0 15%;
-
-				h1 {
-					color: white;
-				}
-			}
-		}
-
-
-		@media
-		only screen and (-webkit-min-device-pixel-ratio: 2),
-		only screen and (   min--moz-device-pixel-ratio: 2),
-		only screen and (     -o-min-device-pixel-ratio: 2/1),
-		only screen and (        min-device-pixel-ratio: 2),
-		only screen and (                min-resolution: 192dpi),
-		only screen and (                min-resolution: 2dppx) {
-
-			.slide-two .slide-content {
-				background-image: url(../img/tutorial_1@2x.png);
-			}
-
-			.slide-three .slide-content {
-				background-image: url(../img/tutorial_2@2x.png);
-			}
-
-			.slide-four .slide-content {
-				background-image: url(../img/tutorial_3@2x.png);
-			}
-
-			.slide-five .slide-content {
-				background-image: url(../img/tutorial_4@2x.png);
-			}
-
-		}
-	
-		@media (max-width: 1200px) {
-		}
-
-		@media (max-width: 992px) {
-			height: 300px;
-
-			.slide .slide-content {
-				background-size: 50% !important;
-			}
-		}
-
-		@media (max-width: 767px) {
-			height: 270px;
-		}
-
-		@media (max-width: 640px) {
-			height: 280px;
-
-			.slide .slide-content {
-				background-size: 60% !important;
-			}
-
-			.nextBtn, .prevBtn {
-				width: 50px;
-			}
-		}
-
-		@media (max-width: 350px) {
-			height: 280px;
-
-			.slide .slide-content {
-				background-size: 90% !important;
-			}
-			
-			.nextBtn, .prevBtn {
-				width: 40px;
-				font-size: 13px;
-				top: 100%;
-				margin-top: -60px;
-			}
-		}
-		
 	/* end &.tutorial */
 	}
 
@@ -393,11 +180,12 @@
 		}
 	}
 	&.voting {
-		padding-left: 60px;
-		padding-right: 60px;
-		background-color: black;
-		background-image: url(../img/chalk.jpg);
+		background-color: @color-scenario;
+		// background-image: url(../img/chalk.jpg);
 		color: white;
+		.vs {
+			background-color: black;
+		}
 	}
 
 /* end #homeView section */

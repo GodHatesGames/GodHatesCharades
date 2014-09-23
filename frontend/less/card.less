@@ -1,0 +1,131 @@
+.card {
+	position: relative;	/*relative size hack*/
+	/*border: 1px solid #DDD;*/
+	border-radius: 5px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.card:before {
+	/*relative size hack*/
+	content: "";
+	display: block;
+	padding-top: 150%;
+	/* END relative size hack*/
+}
+
+.card svg {
+	width: 50%;
+	height: 50%;
+	position: absolute;
+	top: 10%;
+	left: 50%;
+	margin-left: -25%;
+	path {
+		fill: #000000;
+	}
+}
+
+.cardContent {
+	/* relative size hack*/
+	position:  absolute;
+	top: 60%;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	/* END relative size hack*/
+	padding: 6%;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	font-size: 15px;
+	font-family: 'GodHatesCharades';
+	text-transform: uppercase;
+	color: black !important;
+}
+
+.card .domain {
+	position: absolute;
+	bottom: 10px;
+	left: 0;
+	width: 100%;
+	text-align: center;
+	font-size: 10px;
+}
+
+.card.character .domain {
+	color: darken(@color-actor, 20%) !important;
+}
+
+.card.scenario .domain {
+	color: darken(@color-scenario, 20%) !important;
+}
+
+@media (max-width: 992px) {
+	.cardContent {
+		font-size: 11px;
+		line-height: 14px;
+	}
+}
+
+@media (max-width: 640px) {
+	.cardContent {
+		font-size: 11px;
+		line-height: 14px;
+	}
+}
+
+@media (max-width: 320px) {
+	.cardContent {
+		font-size: 9px;
+		line-height: 12px;
+	}
+}
+
+.card.character, .card.scenario {
+	background-color: white !important;
+	box-shadow: -2px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.card.character .editable, .card.character {
+	color: black;
+	font-weight: normal;
+}
+
+.card.scenario .editable, .card.scenario {
+	color: black;
+	font-weight: normal;
+}
+
+.card .editable::-webkit-input-placeholder { /* WebKit browsers */
+	color: rgba(0, 0, 0, 0.5);
+}
+.card .editable:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	color: rgba(0, 0, 0, 0.5);
+}
+.card .editable::-moz-placeholder { /* Mozilla Firefox 19+ */
+	color: rgba(0, 0, 0, 0.5);
+}
+.card .editable:-ms-input-placeholder { /* Internet Explorer 10+ */
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.cardInfo {
+	max-width: 200px;
+	margin: 0 auto;
+}
+
+.pair {
+	.card {
+		&.character {
+			transform: scale(0.97, 0.97) rotate(-8deg) translateX(15px);
+		}
+
+		&.scenario {
+			transform: scale(1, 1) rotate(6deg) translateX(-15px);
+		}
+	}
+}
