@@ -1,5 +1,46 @@
+@import "../less/colors";
+
 #timelineView {
 	padding-bottom: 0;
+	background-size: 500px 500px;
+	background-image: url(../img/vicepattern-light.png);
+	
+	.prismic-content {
+		background-color: black;
+		background-image: url(../img/chalk.jpg);
+		border-radius: 15px;
+		padding: 35px;
+		color: white;
+
+		ul {
+
+			li {
+				padding-bottom: 15px;
+				list-style: none;
+				&:before {
+					content: '⃝';
+					position: absolute;
+					left: 56px;
+				}
+				strong {
+					color: @color-actor;
+
+					&:before {
+						content: ' ';
+						background-image: url(../img/bolt-actor.svg);
+						width: 21px;
+						height: 30px;
+						position: absolute;
+						left: 36px;
+					}
+				}
+				em {
+					display: block;
+					font-size: 0.85em;
+				}
+			}
+		}
+	}
 
 	.signup-section {
 		margin-top: 35px;
