@@ -45,4 +45,28 @@
 	.signup-section {
 		margin-top: 35px;
 	}
+
+	@media (max-width: 320px) {
+		.prismic-content {
+			border-radius: 0;
+			padding: 10px;
+			ul {
+				li {
+					&:before {
+						left: 36px;
+					}
+					strong {
+						&:before {
+							left: 16px;
+						}
+					}
+				}
+			}
+		}
+
+		.signup-section {
+			margin-top: 0;
+			background-color: transparent;
+		}
+	}
 }
