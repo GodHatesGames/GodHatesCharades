@@ -88,15 +88,20 @@ Parse.Cloud.define('v2_getCardById', v2.cardUtils.getCardById);
 Parse.Cloud.job('v2_calculateStats', v2.leaderboard.calculateStats);
 
 Parse.Cloud.beforeSave('Suggestion', function(request, response) {
-	var betaUser = v2.userUtils.isUserBeta(request.user.id);
-	if(betaUser) {
-		if(request.object.isNew()) {
+	if(request.object.isNew()) {
+		var betaUser;
+		if(request.user) {
+			betaUser = v2.userUtils.isUserBeta(request.user.id);
+		}
+		if(betaUser) {
 			request.object.set('backgroundUpdatedAt', new Date());
 			request.object.set('totalVotes', 1);
 			request.object.set('skipped', 0);
+		} else {
+			response.error('You must be a beta user to submit cards.');
+			return;
 		}
-		response.success();
-	} else {
-		response.error('You must be a beta user to submit cards.');
 	}
+
+	response.success();
 });
