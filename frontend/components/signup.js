@@ -16,7 +16,7 @@ app.directive('signup', function(parseUser, $state) {
 
 			function _signup() {
 				$scope.errorMessage = '';
-				var promise = parseUser.signupAnonUser($scope.email, $scope.password, $scope.email, $scope.name);
+				var promise = parseUser.signup($scope.email, $scope.password, $scope.email, $scope.name);
 				promise.then(_onSignedUp, _onSignupError);
 			}
 

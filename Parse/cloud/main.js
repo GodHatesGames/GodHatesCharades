@@ -52,6 +52,7 @@ v2.userUtils = require('cloud/v2/userUtils.js');
 v2.leaderboard = require('cloud/v2/leaderboard.js');
 v2.user = require('cloud/v2/user.js');
 v2.pair = require('cloud/v2/pair.js');
+v2.backer = require('cloud/v2/backer.js');
 
 // Admin
 Parse.Cloud.define('v2_getUnmoderatedSuggestions', v2.admin.getUnmoderatedSuggestions);
@@ -87,6 +88,7 @@ Parse.Cloud.define('v2_getCardById', v2.cardUtils.getCardById);
 // Background Jobs
 Parse.Cloud.job('v2_calculateStats', v2.leaderboard.calculateStats);
 
+// Before Saves
 Parse.Cloud.beforeSave('Suggestion', function(request, response) {
 	if(request.object.isNew()) {
 		var betaUser;
@@ -104,4 +106,20 @@ Parse.Cloud.beforeSave('Suggestion', function(request, response) {
 	}
 
 	response.success();
+});
+
+Parse.Cloud.beforeSave('_User', function(request, response) {
+	if(request.object.isNew()) {
+		v2.backer.getBackerByEmail(request.object.get('email'))
+		.then(onBackerChecked, response.success);
+	} else {
+		response.success();
+	}
+
+	function onBackerChecked(isBacker) {
+		if(isBacker) {
+			request.object.set('beta', true);
+		}
+		response.success();
+	}
 });

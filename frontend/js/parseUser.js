@@ -15,6 +15,7 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, cardS
 		connect: _connect,
 		logout: logout,
 		signupAnonUser: signupAnonUser,
+		signup: _signup,
 		save: _save,
 		getProfileById: getProfileById,
 		resetPassword: _resetPassword
@@ -110,6 +111,18 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, cardS
 		var newUser = new Parse.User();
 		if(user.data)
 			newUser.set('id', user.data.id);
+		newUser.set('username', username);
+		newUser.set('password', password);
+		newUser.set('email', email);
+		newUser.set('name', name);
+		return newUser.save(null, {
+			success: onUserConnected,
+			error: onUserError
+		});
+	}
+
+	function _signup(username, password, email, name) {
+		var newUser = new Parse.User();
 		newUser.set('username', username);
 		newUser.set('password', password);
 		newUser.set('email', email);
