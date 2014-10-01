@@ -38,6 +38,7 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt-nodemon": "~0.1.2",
     "grunt-autoprefixer": "^0.7.3",
-    "errorhandler": "^1.1.1"
+    "errorhandler": "^1.1.1",
+    "dotenv": "^0.4.0"
   }
 }

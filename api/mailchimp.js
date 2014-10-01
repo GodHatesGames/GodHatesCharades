@@ -1,12 +1,11 @@
-var config = require('./config');
 var mcapi = require('mailchimp-api');
-var mc = new mcapi.Mailchimp(config.MAILCHIMP_API_KEY);
+var mc = new mcapi.Mailchimp(process.env.MAILCHIMP_API_KEY);
 
 module.exports.subscribe = subscribe;
 
 function subscribe(req, res){
 	mc.lists.subscribe({
-			id: config.MAILCHIMP_LIST_ID,
+			id: process.env.MAILCHIMP_LIST_ID,
 			email: {
 				email: req.body.email
 			}

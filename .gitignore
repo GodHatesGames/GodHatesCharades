@@ -14,3 +14,4 @@ dist/
 # css is compiled via less
 frontend/css/
 frontend/components/*.css
+.env

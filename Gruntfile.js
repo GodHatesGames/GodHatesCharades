@@ -1,4 +1,8 @@
 'use strict';
+
+var dotenv = require('dotenv');
+dotenv.load();
+
 module.exports = function(grunt) {
 
 	// Load the plugin that provides the 'uglify' task.
@@ -32,7 +36,10 @@ module.exports = function(grunt) {
 					watchedExtensions: ['js'],
 					watchedFolders: ['dist/api'],
 					env: {
-						PORT: 3000
+						PORT: process.env.PORT,
+						MANDRILL_KEY: process.env.MANDRILL_KEY,
+						MAILCHIMP_LIST_ID: process.env.MAILCHIMP_LIST_ID,
+						MAILCHIMP_API_KEY: process.env.MAILCHIMP_API_KEY
 					}
 				}
 			},
@@ -43,7 +50,10 @@ module.exports = function(grunt) {
 					watchedExtensions: ['js'],
 					watchedFolders: ['api'],
 					env: {
-						PORT: 4000
+						PORT: process.env.PORT,
+						MANDRILL_KEY: process.env.MANDRILL_KEY,
+						MAILCHIMP_LIST_ID: process.env.MAILCHIMP_LIST_ID,
+						MAILCHIMP_API_KEY: process.env.MAILCHIMP_API_KEY
 					}
 				}
 			}
