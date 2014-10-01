@@ -1,6 +1,7 @@
 app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory) {
 	var cardService = {
 		cache: cache,
+		clearCache: clearCache,
 		getTypeDisplay: getTypeDisplay,
 		getTypeDisplayByType: getTypeDisplayByType,
 		getTypeClass: getTypeClass,
@@ -17,6 +18,9 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory) {
 
 	// expires in 1 week
 	var cardCache = DSCacheFactory('cards', {
+		maxAge: 604800000
+	});
+	var ownerCache = DSCacheFactory('owners', {
 		maxAge: 604800000
 	});
 	var cardPromises = {};
@@ -113,17 +117,40 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory) {
 
 	function updateCache(updatedItem) {
 		cardCache.put(updatedItem.id, updatedItem);
+		var owner = updatedItem.get('owner');
+		ownerCache.put(owner.id, owner);
+	}
+
+	function clearCache() {
+		cardCache.removeAll();
 	}
 
 	function getCard(cardId) {
 		if(cardPromises[cardId]) {
 			return cardPromises[cardId];
 		} else {
-			var currentCache = cardCache.get(cardId);
-			if(currentCache) {
-				var parseSuggestion = new Suggestion(currentCache);
-				return $q.when(parseSuggestion);
+			var currentCardCache = cardCache.get(cardId),
+			currentOwnerCache,
+			ownerId;
+
+			if(currentCardCache) {
+				// if current card cache is fufilled then check that owner is set
+				ownerId = currentCardCache ? currentCardCache.owner.objectId : undefined;
+
+				if(ownerId) {
+					// if ownerId exists then get cache
+					currentOwnerCache = ownerCache.get(ownerId);
+				}
+			}
+
+			if(currentCardCache && currentOwnerCache) {
+				// if caches were fufilled then return them
+				var parseCard = new Suggestion(currentCardCache);
+				var parseCardOwner = new Parse.User(currentOwnerCache);
+				parseCard.attributes.owner = parseCardOwner;
+				return $q.when(parseCard);
 			} else {
+				// else fetch data
 				var options = {
 					id: cardId
 				};

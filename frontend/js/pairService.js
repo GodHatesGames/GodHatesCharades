@@ -2,7 +2,8 @@ app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory,
 	var pairService = {
 		getLink: _getLink,
 		getSlug: _getSlug,
-		getPairById: _getPairById
+		getPairById: _getPairById,
+		clearCache: clearCache
 	}
 
 	var pairCache = DSCacheFactory('pairs');
@@ -15,6 +16,9 @@ app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory,
 		                   pairToCache.get('scenario')]);
 	}
 
+	function clearCache() {
+		pairCache.removeAll();
+	}
 
 	function _getPairById(pairId) {
 		if(pairPromises[pairId]) {

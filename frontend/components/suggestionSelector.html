@@ -14,6 +14,7 @@
 					<th ng-show="showEdit">Edit</th>
 					<th>Suggestion</th>
 					<th>Type</th>
+					<th>Author</th>
 				</tr>
 				<tr ng-repeat="(index, suggestion) in suggestions | property:'attributes.text':searchSelector | orderBy:['attributes.type', 'attributes.text']"
 					ng-init="newText = suggestion.attributes.text">
@@ -53,6 +54,8 @@
 					</td>
 					<!-- Type -->
 					<td ng-class="cardService.getTypeClass(suggestion)"></td>
+					<!-- Author Name -->
+					<td ng-bind="suggestion.attributes.owner.attributes.name"></td>
 				</tr>
 			</table>
 	</div>

@@ -67,7 +67,6 @@ Parse.Cloud.define('v2_addCardToSet', v2.admin.addCardToSet);
 Parse.Cloud.define('v2_removeSetItem', v2.admin.removeSetItem);
 Parse.Cloud.define('v2_createSet', v2.admin.createSet);
 Parse.Cloud.define('v2_updateSuggestionText', v2.admin.updateSuggestionText);
-Parse.Cloud.define('v2_getCard', v2.admin.getCard);
 
 // Profile
 Parse.Cloud.define('v2_getProfile', v2.user.getProfile);

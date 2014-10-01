@@ -6,6 +6,9 @@ exports.approveSuggestion = _approveSuggestion;
 exports.disapproveSuggestion = _disapproveSuggestion;
 
 function _getUnmoderatedSuggestions(request, response) {
+	//to allow fetching owners
+	Parse.Cloud.useMasterKey();
+	
 	// console.log('request.user.id:' + request.user.id);
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
@@ -24,6 +27,7 @@ function _getUnmoderatedSuggestions(request, response) {
 			query.limit(1000);
 			query.notEqualTo('rejected', true);
 			query.notEqualTo('moderated', true);
+			query.include('owner');
 			query.find({
 				success: onSuccess,
 				error: onError

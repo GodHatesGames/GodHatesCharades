@@ -1,7 +1,7 @@
 'use strict';
 var parseUser = angular.module('parse.user', []);
 
-parseUser.service('parseUser', function factory($rootScope, $q, $location, cardService) {
+parseUser.service('parseUser', function factory($rootScope, $q, $location, cardService, pairService) {
 	var user = {
 		loggedin: false,
 		dataloaded: false,
@@ -84,6 +84,12 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, cardS
 
 		user.data = userData;
 		user.loggedin = true;
+
+		if(isAdmin())
+		{
+			cardService.clearCache();
+			pairService.clearCache();
+		}
 		//track in leanplum
 		// leanplum.startLeanPlum(user.data);
 

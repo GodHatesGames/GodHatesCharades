@@ -7,9 +7,11 @@ exports.addCardToSet = addCardToSet;
 exports.removeSetItem = removeSetItem;
 exports.createSet = createSet;
 exports.updateSuggestionText = updateSuggestionText;
-exports.getCard = getCard;
 
 function getAllSuggestions(request, response) {
+	//to allow fetching owners
+	Parse.Cloud.useMasterKey();
+
 	// console.log('getAllSuggestions');
 	var queryLimit = 1000;
 	var allSuggestions = [];
@@ -31,6 +33,7 @@ function getAllSuggestions(request, response) {
 			query.limit(queryLimit);
 			query.equalTo('rejected', false);
 			query.equalTo('moderated', true);
+			query.include('owner');
 			query.ascending('type');
 			if(request.params.skipIndex)
 				query.skip(request.params.skipIndex);
@@ -276,47 +279,6 @@ function updateSuggestionText(request, response) {
 
 	function onError(error) {
 		console.log('updateSuggestionText saveData Error');
-		response.error(error);
-	}
-
-}
-
-function getCard(request, response) {
-	Parse.Cloud.useMasterKey();
-	var setId = request.params.id;
-	if(request.user) {
-		userUtils.isUserAdmin(request.user.id)
-			.then(fetchData, onError);
-	} else {
-		onError();
-	}
-
-	function fetchData(isAdmin) {
-		if(isAdmin) {
-			if(setId !== undefined) {
-				// console.log('getCardsForSet fetchData');
-				var SuggestionObject = Parse.Object.extend('Suggestion');
-				var query = new Parse.Query(SuggestionObject);
-				query.include('owner');
-				query.get(request.params.id, {
-					success: onSuccess,
-					error: onError
-				});
-			} else {
-				response.error('you must pass a set id to get');
-			}
-		} else {
-			// console.log('user is not admin');
-			onError('You need to be an admin to access this page.');
-		}
-	}
-
-	function onSuccess(card) {
-		response.success(card);
-	}
-
-	function onError(error) {
-		console.log('getCard Error');
 		response.error(error);
 	}
 

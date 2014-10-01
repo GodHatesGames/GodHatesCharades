@@ -1,79 +1,96 @@
 <div class="moderator">
 
-	<div class="alert alert-info" 
-			ng-show="loading">
-		Loading...</div>
-
-	<div class="alert alert-info" 
-			ng-show="allApproved && !loading && !errorMessage">
-		Thats all folks... dont you have something better you could be doing?
-	</div>
-
-	<div class="alert alert-danger" 
-			ng-show="errorMessage">
-		Uh oh! {{errorMessage}}
-	</div>
-
 	<div ng-show="!allApproved && !loading"
 	     class="alert alert-info">
 		Try not to fuck this up
 	</div>
 	<div class="row">
 		<!-- One suggestion at a time -->
-		<div class="cardContainer col-md-6"
-		     ng-hide="loading || allApproved || !suggestion">
+		<div class="col-md-6">
+			<div class="alert alert-info" 
+			     ng-show="loading">
+				Loading...</div>
 
-			<card card-id="suggestion.id"
-			      updatable="true"></card>
-			<form class="form-horizontal" role="form">
-				<div class="form-group">
-					<div class="row">
-						<div class="radio col-md-3">
-							<label>
-								<input class="legal" type="radio" ng-model="legalMod" value="">
-							</label>
-						</div>
-						<div class="radio col-md-3">
-							<label>
-								<input class="legal" type="radio" ng-model="legalMod" value="©">
-								&copy;
-							</label>
-						</div>
-						<div class="radio col-md-3">
-							<label>
-								<input class="legal" type="radio" ng-model="legalMod" value="™">
-								&trade;
-							</label>
-						</div>
-						<div class="radio col-md-3">
-							<label>
-								<input class="legal" type="radio" ng-model="legalMod" value="®">
-								&reg;
-							</label>
+			<div class="alert alert-info" 
+			     ng-show="allApproved && !loading && !errorMessage">
+				Thats all folks... dont you have something better you could be doing?
+			</div>
+
+			<div class="alert alert-danger" 
+			     ng-show="errorMessage">
+				Uh oh! {{errorMessage}}
+			</div>
+			<div class="cardContainer"
+			     ng-hide="loading || allApproved || !suggestion">
+
+				<card card-id="suggestion.id"
+				      updatable="true"></card>
+				<form class="form-horizontal"
+				      role="form">
+					<div class="form-group">
+						<div class="row">
+							<div class="radio col-md-3">
+								<label>
+									<input class="legal"
+									       type="radio"
+									       ng-model="legalMod"
+									       value="">
+								</label>
+							</div>
+							<div class="radio col-md-3">
+								<label>
+									<input class="legal"
+									       type="radio"
+									       ng-model="legalMod"
+									       value="©">
+									&copy;
+								</label>
+							</div>
+							<div class="radio col-md-3">
+								<label>
+									<input class="legal"
+									       type="radio"
+									       ng-model="legalMod"
+									       value="™">
+									&trade;
+								</label>
+							</div>
+							<div class="radio col-md-3">
+								<label>
+									<input class="legal"
+									       type="radio"
+									       ng-model="legalMod"
+									       value="®">
+									&reg;
+								</label>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label for="suggestionText">New Text</label>
-					<input type="text" class="form-control" id="suggestionText" ng-model="suggestionText">
-				</div>
-			</form>
-			<button class="btn btn-xs btn-success"
-					ng-click="approve()">
-				Approve &amp; Save
-			</button>
-			<button class="btn btn-xs btn-danger"
-					ng-click="disapprove()">
-				Disapprove
-			</button>
-			<button ng-click="skip()"
-					class="btn btn-xs btn-warning skip">
-				Ask me later
-			</button>
+					<div class="form-group">
+						<label for="suggestionText">New Text</label>
+						<input type="text"
+						       class="form-control"
+						       id="suggestionText"
+						       ng-model="suggestionText">
+					</div>
+				</form>
+				<button class="btn btn-xs btn-success"
+				        ng-click="approve()">
+					Approve &amp; Save
+				</button>
+				<button class="btn btn-xs btn-danger"
+				        ng-click="disapprove()">
+					Disapprove
+				</button>
+				<button ng-click="skip()"
+				        class="btn btn-xs btn-warning skip">
+					Ask me later
+				</button>
+			</div>
 		</div>
 		<suggestion-selector class="col-sm-6 col-md-6 col-lg-6"
 		                     search="suggestionText"
-		                     showEdit="true"></suggestion-selector>
+		                     show-edit="true"></suggestion-selector>
 	</div>
 
 
