@@ -14,60 +14,65 @@
 		Uh oh! {{errorMessage}}
 	</div>
 
-	<p ng-show="!allApproved && !loading">Try not to fuck this up</p>
+	<div ng-show="!allApproved && !loading"
+	     class="alert alert-info">
+		Try not to fuck this up
+	</div>
+	<div class="row">
+		<!-- One suggestion at a time -->
+		<div class="cardContainer col-md-6"
+		     ng-hide="loading || allApproved || !suggestion">
 
-	<!-- One suggestion at a time -->
-	<div class="cardContainer"
-			ng-hide="loading || allApproved || !suggestion">
-
-		<hr/>
-		<card card-id="suggestion.id"
-		      updatable="true"></card>
-		<form class="form-horizontal" role="form">
-			<div class="form-group">
-				<div class="row">
-					<div class="radio col-md-3">
-						<label>
-							<input class="legal" type="radio" ng-model="legalMod" value="">
-						</label>
-					</div>
-					<div class="radio col-md-3">
-						<label>
-							<input class="legal" type="radio" ng-model="legalMod" value="©">
-							&copy;
-						</label>
-					</div>
-					<div class="radio col-md-3">
-						<label>
-							<input class="legal" type="radio" ng-model="legalMod" value="™">
-							&trade;
-						</label>
-					</div>
-					<div class="radio col-md-3">
-						<label>
-							<input class="legal" type="radio" ng-model="legalMod" value="®">
-							&reg;
-						</label>
+			<card card-id="suggestion.id"
+			      updatable="true"></card>
+			<form class="form-horizontal" role="form">
+				<div class="form-group">
+					<div class="row">
+						<div class="radio col-md-3">
+							<label>
+								<input class="legal" type="radio" ng-model="legalMod" value="">
+							</label>
+						</div>
+						<div class="radio col-md-3">
+							<label>
+								<input class="legal" type="radio" ng-model="legalMod" value="©">
+								&copy;
+							</label>
+						</div>
+						<div class="radio col-md-3">
+							<label>
+								<input class="legal" type="radio" ng-model="legalMod" value="™">
+								&trade;
+							</label>
+						</div>
+						<div class="radio col-md-3">
+							<label>
+								<input class="legal" type="radio" ng-model="legalMod" value="®">
+								&reg;
+							</label>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="form-group">
-				<label for="suggestionText">New Text</label>
-				<input type="text" class="form-control" id="suggestionText" ng-model="suggestionText">
-			</div>
-		</form>
-		<button class="btn btn-success"
-				ng-click="approve()">
-			Approve &amp; Save
-		</button>
-		<button class="btn btn-danger"
-				ng-click="disapprove()">
-			Disapprove
-		</button>
-		<button ng-click="skip()"
-				class="btn btn-warning skip">
-			Ask me later
-		</button>
+				<div class="form-group">
+					<label for="suggestionText">New Text</label>
+					<input type="text" class="form-control" id="suggestionText" ng-model="suggestionText">
+				</div>
+			</form>
+			<button class="btn btn-xs btn-success"
+					ng-click="approve()">
+				Approve &amp; Save
+			</button>
+			<button class="btn btn-xs btn-danger"
+					ng-click="disapprove()">
+				Disapprove
+			</button>
+			<button ng-click="skip()"
+					class="btn btn-xs btn-warning skip">
+				Ask me later
+			</button>
+		</div>
+		<suggestion-selector class="col-sm-6 col-md-6 col-lg-6"
+		                     search="suggestionText"></suggestion-selector>
 	</div>
 
 

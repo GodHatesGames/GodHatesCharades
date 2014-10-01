@@ -173,11 +173,17 @@ a.list-group-special:hover {
 	border-radius: 0;
 	color: white;
 	letter-spacing: 1px;
-	font-family: 'GodHatesCharades';
-	text-transform: uppercase;
-	font-size: 20px;
-	padding-left: 15px;
-	padding-top: 10px;
+
+	&:not(.btn-xs) {
+		font-family: 'GodHatesCharades';
+		text-transform: uppercase;
+		padding-left: 15px;
+		padding-top: 10px;
+	}
+
+	&.btn-xs {
+		padding: 3px 10px;
+	}
 
 	&:hover {
 		background-color: white;

@@ -4,7 +4,11 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/suggestionSelector.html',
 		replace: true,
-		scope: true,
+		scope: {
+			searchSelector: '=search',
+			showAdd: '=showAdd',
+			showEdit: '=showEdit'
+		},
 		link: function($scope, $element) {
 			// $scope.$watch('pairIndex', $scope.onPairIndexChanged);
 		},
