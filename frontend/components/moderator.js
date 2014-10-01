@@ -13,7 +13,7 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 			$scope.legalMod = '';
 			$scope.allApproved = false;
 			$scope.errorMessage;
-			
+
 			Parse.Cloud.run(
 				CONFIG.PARSE_VERSION + 'getUnmoderatedSuggestions',
 				{}, 
@@ -61,6 +61,7 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 			}
 
 			// Public Methods
+			$scope.getSansLegal = _getSansLegal;
 
 			$scope.skip = function() {
 				console.log('skip:', $scope.suggestion.id);
@@ -89,10 +90,20 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 			// Watch
 			$scope.$watch('legalMod', function(newValue, oldValue, scope) {
 				if($scope.suggestion) {
-					var sansLegal = $scope.suggestionText.replace(/ (®|©|™)/, '');
-					$scope.suggestionText = sansLegal + ' ' + $scope.legalMod;
+					var sansLegal = _getSansLegal($scope.suggestionText);
+					if($scope.legalMod)
+						$scope.suggestionText = sansLegal + ' ' + $scope.legalMod;
+					else
+						$scope.suggestionText = sansLegal;
 				}
 			});
+
+			function _getSansLegal(text) {
+				if(text)
+					return text.replace(/ (®|©|™)/, '');
+				else
+					return text;
+			}
 
 		}
 	}
