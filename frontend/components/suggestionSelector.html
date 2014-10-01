@@ -10,8 +10,8 @@
 			   class="form-control">
 			<table class="table table-striped">
 				<tr>
-					<th ng-if="showAdd">Add</th>
-					<th ng-if="showEdit">Edit</th>
+					<th ng-show="showAdd">Add</th>
+					<th ng-show="showEdit">Edit</th>
 					<th>Suggestion</th>
 					<th>Type</th>
 				</tr>
@@ -19,7 +19,7 @@
 					ng-init="newText = suggestion.attributes.text">
 					<!-- Add button -->
 					<td class="tableButton"
-					    ng-if="showAdd">
+					    ng-show="showAdd">
 						<a ng-click="selectSuggestion(suggestion)"
 						   class="btn btn-success">
 							+
@@ -27,7 +27,7 @@
 					</td>
 					<!-- Edit Button -->
 					<td class="tableButton"
-					    ng-if="showEdit">
+					    ng-show="showEdit">
 						<a ng-click="editing = true"
 						   class="btn btn-danger"
 						   ng-hide="newText != suggestion.attributes.text">

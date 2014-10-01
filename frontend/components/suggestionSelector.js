@@ -5,7 +5,7 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 		templateUrl: 'components/suggestionSelector.html',
 		replace: true,
 		scope: {
-			searchSelector: '=search',
+			search: '=search',
 			showAdd: '=showAdd',
 			showEdit: '=showEdit'
 		},
@@ -20,6 +20,7 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 			$scope.skipIndex = 0; //TODO: make private
 			$scope.allLoaded = false;
 			$scope.tab = 'best';
+			$scope.$watch('search', _onSearchUpdated);
 
 			// Public methods
 			$scope.reloadSuggestions = function(tab) {
@@ -98,6 +99,10 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 
 			function onSuggestionsError(error) {
 				console.log('couldn\'t find any pairs:', error);
+			}
+
+			function _onSearchUpdated(newValue) {
+				$scope.searchSelector = newValue;
 			}
 
 			// // init
