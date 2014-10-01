@@ -53,9 +53,14 @@ v2.leaderboard = require('cloud/v2/leaderboard.js');
 v2.user = require('cloud/v2/user.js');
 v2.pair = require('cloud/v2/pair.js');
 v2.backer = require('cloud/v2/backer.js');
+v2.moderation = require('cloud/v2/moderation.js');
+
+// Moderation
+Parse.Cloud.define('v2_getUnmoderatedSuggestions', v2.moderation.getUnmoderatedSuggestions);
+Parse.Cloud.define('v2_approveSuggestion', v2.moderation.approveSuggestion);
+Parse.Cloud.define('v2_disapproveSuggestion', v2.moderation.disapproveSuggestion);
 
 // Admin
-Parse.Cloud.define('v2_getUnmoderatedSuggestions', v2.admin.getUnmoderatedSuggestions);
 Parse.Cloud.define('v2_getAllSuggestions', v2.admin.getAllSuggestions);
 Parse.Cloud.define('v2_getAllSets', v2.admin.getAllSets);
 Parse.Cloud.define('v2_addCardToSet', v2.admin.addCardToSet);

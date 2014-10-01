@@ -1,4 +1,4 @@
-app.directive('moderator', function(cardService, $compile) {
+app.directive('moderator', function(cardService, $compile, $rootScope) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/moderator.html',
@@ -44,7 +44,8 @@ app.directive('moderator', function(cardService, $compile) {
 					$scope.index++;
 					$scope.suggestion = suggestions[$scope.index];
 					$scope.suggestionText = $scope.suggestion.get('text');
-					$compile($element);
+					if(!$rootScope.$$phase)
+						$scope.$digest();
 				} else {
 					$scope.allApproved = true;
 				}
@@ -67,20 +68,22 @@ app.directive('moderator', function(cardService, $compile) {
 			}
 
 			$scope.approve = function() {
-				$scope.suggestion.set('moderated', true);
-				$scope.suggestion.set('rejected', false);
-				$scope.suggestion.set('text', $scope.suggestionText);
-				$scope.suggestion.save();
-
-				loadNext();
+				var options = {
+					suggestionId: $scope.suggestion.id,
+					text: $scope.suggestion.text,
+					message: $scope.suggestion.message
+				}
+				Parse.Cloud.run(CONFIG.PARSE_VERSION + 'approveSuggestion', options)
+				.then(loadNext);
 			}
 
 			$scope.disapprove = function() {
-				$scope.suggestion.set('moderated', true);
-				$scope.suggestion.set('rejected', true);
-				$scope.suggestion.save();
-
-				loadNext();
+				var options = {
+					suggestionId: $scope.suggestion.id,
+					message: $scope.suggestion.message
+				}
+				Parse.Cloud.run(CONFIG.PARSE_VERSION + 'disapproveSuggestion', options)
+				.then(loadNext);
 			}
 
 			// Watch
