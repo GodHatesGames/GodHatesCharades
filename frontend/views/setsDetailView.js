@@ -22,6 +22,8 @@ app.controller('setsDetailView', function(allSets, $scope, $state, $stateParams,
 		});
 	});
 
+	$scope.getLengthForType = _getLengthForType;
+
 	$scope.deleteSet = function() {
 		$scope.saving = true;
 		sets.deleteSet($scope.set)
@@ -68,5 +70,9 @@ app.controller('setsDetailView', function(allSets, $scope, $state, $stateParams,
 				insertSetItem(newSetItem);
 			});
 		}
+	}
+
+	function _getLengthForType(type) {
+		return $scope.setItemsByCardType[type].length;
 	}
 });

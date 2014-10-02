@@ -15,7 +15,7 @@
 	<hr>
 </div>
 <div class="col-sm-6 col-md-6 col-lg-6">
-	<h5>Actor: {{setItemsByCardType.0.length}} | Scenario: {{setItemsByCardType.1.length}}</h5>
+	<h5>Actor: {{getLengthForType(0)}} | Scenario: {{getLengthForType(1)}}</h5>
 	<div class="loadingAlert"
 		 ng-show="saving">
 		Saving...
@@ -35,7 +35,7 @@
 				<th>Suggestion</th>
 				<th>Type</th>
 			</tr>
-			<tr ng-repeat="(index, setItem) in setItems | property:'attributes.card.attributes.text':searchDetail | orderBy:['attributes.card.attributes.type', 'attributes.card.attributes.text']"
+			<tr ng-repeat="(index, setItem) in setItems | fuse:['attributes.card.attributes.text']:searchDetail"
 				ng-init="card = setItem.attributes.card">
 				<!-- Delete Button -->
 				<td class="tableButton">
@@ -53,5 +53,4 @@
 	</div>
 </div>
 <suggestion-selector class="col-sm-6 col-md-6 col-lg-6"
-                     showAdd="true"
-                     showEdit="true"></suggestion-selector>
+                     show-add="true"></suggestion-selector>

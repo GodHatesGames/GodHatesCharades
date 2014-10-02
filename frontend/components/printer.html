@@ -21,7 +21,7 @@
 				<th>B&W</th>
 				<th>CSV</th>
 			</tr>
-			<tr ng-repeat="(index, set) in loadedSets | property:'attributes.name' | orderBy:['attributes.name']">
+			<tr ng-repeat="(index, set) in loadedSets | orderBy:['attributes.name']">
 				<!-- Text -->
 				<td ng-bind="set.attributes.name"></td>
 				<!-- Text -->
@@ -73,7 +73,7 @@
 		<div class="setItem page-break"
 			 ng-repeat="(index, setItem) in setItems | orderBy:'attributes.card.attributes.type'"
 			 ng-init="card = setItem.attributes.card">
-			<card card-id="card.id" domain="true"></card>
+			<card card-id="card.id"></card>
 		</div>
 		<div class="setItem page-break"
 			 ng-repeat="extraItem in extraItems | orderBy:'type'">

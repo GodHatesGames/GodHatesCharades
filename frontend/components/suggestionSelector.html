@@ -15,7 +15,7 @@
 					<th>Type</th>
 					<th>Author</th>
 				</tr>
-				<tr ng-repeat="(index, suggestion) in suggestions | fuse:['attributes.text']:searchSelector | orderBy:'attributes.type'"
+				<tr ng-repeat="(index, suggestion) in suggestions | fuse:['attributes.text']:searchSelector"
 					ng-init="newText = suggestion.attributes.text">
 					<!-- Add button -->
 					<td class="tableButton"
