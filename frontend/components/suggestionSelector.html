@@ -11,7 +11,6 @@
 			<table class="table table-striped">
 				<tr>
 					<th ng-show="showAdd">Add</th>
-					<th ng-show="showEdit">Edit</th>
 					<th>Suggestion</th>
 					<th>Type</th>
 					<th>Author</th>
@@ -26,30 +25,22 @@
 							+
 						</a>
 					</td>
-					<!-- Edit Button -->
-					<td class="tableButton"
-					    ng-show="showEdit">
-						<a ng-click="editing = true"
-						   class="btn btn-danger"
-						   ng-hide="newText != suggestion.attributes.text">
-							Edit
-						</a>
-						<a ng-click="saveSuggestion(this, suggestion, newText)"
-						   class="btn btn-danger"
-						   ng-show="newText != suggestion.attributes.text">
-							Save
-						</a>
-					</td>
 					<!-- Text -->
-					<td ng-bind="suggestion.attributes.text"
-						ng-hide="editing">
+					<td ng-hide="editing"
+					    ng-dblclick="editing = true"
+					    class="noselect">
+						{{suggestion.attributes.text}}
+						<span class="legal"
+						      ng-if="suggestion.attributes.legal">
+							{{suggestion.attributes.legal}}
+						</span>
 					</td>
 					<td ng-show="editing">
-						<form ng-submit="saveSuggestion(this, suggestion, newText)">
+						<form ng-submit="saveSuggestion(this, suggestion)">
 							<input type="text"
-								   ng-model="newText"
-								   class="form-control"
-								   />
+							       ng-model="suggestion.attributes.text"
+							       ng-keyup="checkEscape($event)"
+							       class="form-control">
 						</form>
 					</td>
 					<!-- Type -->

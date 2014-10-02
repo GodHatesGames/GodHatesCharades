@@ -26,20 +26,22 @@
 			      updatable="true"></card>
 			<form class="form-horizontal"
 			      role="form">
-				<div class="form-group">
+				<div class="form-group well">
+					<p>Legal Info</p>
 					<div class="radio col-md-3">
 						<label>
 							<input class="legal"
 							       type="radio"
-							       ng-model="legalMod"
+							       ng-model="suggestion.attributes.legal"
 							       value="">
+							n/a
 						</label>
 					</div>
 					<div class="radio col-md-3">
 						<label>
 							<input class="legal"
 							       type="radio"
-							       ng-model="legalMod"
+							       ng-model="suggestion.attributes.legal"
 							       value="©">
 							&copy;
 						</label>
@@ -48,7 +50,7 @@
 						<label>
 							<input class="legal"
 							       type="radio"
-							       ng-model="legalMod"
+							       ng-model="suggestion.attributes.legal"
 							       value="™">
 							&trade;
 						</label>
@@ -57,7 +59,7 @@
 						<label>
 							<input class="legal"
 							       type="radio"
-							       ng-model="legalMod"
+							       ng-model="suggestion.attributes.legal"
 							       value="®">
 							&reg;
 						</label>
@@ -70,7 +72,7 @@
 							<input type="text"
 							       class="form-control"
 							       id="suggestionText"
-							       ng-model="suggestionText">
+							       ng-model="suggestion.attributes.text">
 						</div>
 					</div>
 				</div>
@@ -90,8 +92,7 @@
 		</div>
 	</div>
 	<suggestion-selector class="col-sm-6 col-md-6 col-lg-6"
-	                     search="getSansLegal(suggestionText)"
-	                     show-edit="true"></suggestion-selector>
+	                     search="suggestion.attributes.text"></suggestion-selector>
 
 
 </div>

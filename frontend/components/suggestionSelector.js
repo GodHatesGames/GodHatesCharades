@@ -6,8 +6,7 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 		replace: true,
 		scope: {
 			search: '=search',
-			showAdd: '=showAdd',
-			showEdit: '=showEdit'
+			showAdd: '=showAdd'
 		},
 		link: function($scope, $element) {
 			// $scope.$watch('pairIndex', $scope.onPairIndexChanged);
@@ -23,6 +22,7 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 			$scope.$watch('search', _onSearchUpdated);
 
 			// Public methods
+			$scope.checkEscape = _checkEscape;
 			$scope.reloadSuggestions = function(tab) {
 				$scope.tab = tab;
 				$scope.suggestions = [];
@@ -51,28 +51,23 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 				$scope.$emit('suggestionAdded', suggestion);
 			};
 
-			$scope.saveSuggestion = function(isolateScope, suggestion, newText) {
-				if (newText != suggestion.get('text')) {
-					$scope.saving = true;
-					isolateScope.editing = true;
-					Parse.Cloud.run(
-						CONFIG.PARSE_VERSION + 'updateSuggestionText',
-						{
-							'suggestionId': suggestion.id,
-							'text': newText
-						},
-						{
-							success: onSuggestionSaved,
-							error: onSuggestionError
-						}
-					);
-				} else {
-					isolateScope.editing = false;
-				}
+			$scope.saveSuggestion = function(isolateScope, suggestion) {
+				$scope.saving = true;
+				isolateScope.editing = true;
+				Parse.Cloud.run(
+					CONFIG.PARSE_VERSION + 'updateSuggestionText',
+					{
+						'suggestionId': suggestion.id,
+						'text': suggestion.get('text')
+					},
+					{
+						success: onSuggestionSaved,
+						error: onSuggestionError
+					}
+				);
 
 				function onSuggestionSaved (savedSuggestion) {
 					console.log('suggestion saved');
-					suggestion.set('text', newText);
 					$scope.saving = false;
 					isolateScope.editing = false;
 					$scope.$digest();
@@ -103,6 +98,11 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 
 			function _onSearchUpdated(newValue) {
 				$scope.searchSelector = newValue;
+			}
+
+			function _checkEscape(event) {
+				if(event.keyCode === 27)
+					angular.element(event.target).scope().editing = false;
 			}
 
 			// // init

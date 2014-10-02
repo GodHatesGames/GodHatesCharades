@@ -10,7 +10,6 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 			$scope.index = 0;
 			$scope.loading = true;
 			$scope.suggestion = null;
-			$scope.legalMod = '';
 			$scope.allApproved = false;
 			$scope.errorMessage;
 
@@ -30,7 +29,6 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 					suggestions = newSuggestions;
 					cardService.cache(suggestions);
 					$scope.suggestion = suggestions[$scope.index];
-					$scope.suggestionText = $scope.suggestion.get('text');
 					$scope.allApproved = false;
 				} else {
 					$scope.allApproved = true;
@@ -43,7 +41,6 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 				if($scope.index + 1 < suggestions.length) {
 					$scope.index++;
 					$scope.suggestion = suggestions[$scope.index];
-					$scope.suggestionText = $scope.suggestion.get('text');
 					if(!$rootScope.$$phase)
 						$scope.$digest();
 				} else {
@@ -61,8 +58,6 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 			}
 
 			// Public Methods
-			$scope.getSansLegal = _getSansLegal;
-
 			$scope.skip = function() {
 				console.log('skip:', $scope.suggestion.id);
 				loadNext();
@@ -71,8 +66,9 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 			$scope.approve = function() {
 				var options = {
 					suggestionId: $scope.suggestion.id,
-					text: $scope.suggestion.text,
-					message: $scope.suggestion.message
+					text: $scope.suggestion.get('text'),
+					legal: $scope.suggestion.get('legal'),
+					message: $scope.feedbackMessage
 				}
 				Parse.Cloud.run(CONFIG.PARSE_VERSION + 'approveSuggestion', options)
 				.then(loadNext);
@@ -85,24 +81,6 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 				}
 				Parse.Cloud.run(CONFIG.PARSE_VERSION + 'disapproveSuggestion', options)
 				.then(loadNext);
-			}
-
-			// Watch
-			$scope.$watch('legalMod', function(newValue, oldValue, scope) {
-				if($scope.suggestion) {
-					var sansLegal = _getSansLegal($scope.suggestionText);
-					if($scope.legalMod)
-						$scope.suggestionText = sansLegal + ' ' + $scope.legalMod;
-					else
-						$scope.suggestionText = sansLegal;
-				}
-			});
-
-			function _getSansLegal(text) {
-				if(text)
-					return text.replace(/ (®|©|™)/, '');
-				else
-					return text;
 			}
 
 		}

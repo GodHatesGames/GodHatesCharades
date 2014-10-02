@@ -66,6 +66,7 @@ function _approveSuggestion(request, response) {
 			// console.log('user is admin');
 			var suggestionId = request.params.suggestionId;
 			var newText = request.params.text;
+			var newLegal = request.params.legal;
 
 			// mock suggestion
 			var SuggestionObject = Parse.Object.extend('Suggestion');
@@ -74,6 +75,7 @@ function _approveSuggestion(request, response) {
 			suggestion.set('moderated', true);
 			suggestion.set('rejected', false);
 			suggestion.set('text', newText);
+			suggestion.set('legal', newLegal);
 			suggestion.save({
 				success: onSuccess,
 				error: onError
