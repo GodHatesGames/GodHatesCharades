@@ -1,5 +1,8 @@
 'use strict';
 var userUtils = require('cloud/v2/userUtils.js');
+var config = require('cloud/config.js');
+var Mandrill = require('mandrill');
+Mandrill.initialize(config.MANDRILL_KEY);
 
 exports.getUnmoderatedSuggestions = _getUnmoderatedSuggestions;
 exports.approveSuggestion = _approveSuggestion;
@@ -64,20 +67,18 @@ function _approveSuggestion(request, response) {
 		// console.log('approveSuggestion saveData');
 		if(isAdmin) {
 			// console.log('user is admin');
-			var suggestionId = request.params.suggestionId;
-			var newText = request.params.text;
-			var newLegal = request.params.legal;
+			var card = request.params.card;
 
 			// mock suggestion
 			var SuggestionObject = Parse.Object.extend('Suggestion');
 			var suggestion = new SuggestionObject();
-			suggestion.id = suggestionId;
+			suggestion.id = card.id;
 			suggestion.set('moderated', true);
 			suggestion.set('rejected', false);
-			suggestion.set('text', newText);
-			suggestion.set('legal', newLegal);
+			suggestion.set('text', card.text);
+			suggestion.set('legal', card.legal);
 			suggestion.save({
-				success: onSuccess,
+				success: onDataSaved,
 				error: onError
 			});
 		} else {
@@ -86,9 +87,25 @@ function _approveSuggestion(request, response) {
 		}
 	}
 
-	function onSuccess(suggestion) {
+	function onDataSaved(suggestion) {
+		var cardType = suggestion.get('type');
+		if(cardType == 0) {
+			request.params.card.image = 'http://godhatescharades.com/img/email/actor.png';
+		} else {
+			request.params.card.image = 'http://godhatescharades.com/img/email/scenario.png';
+		}
+		var params = _getMandrillMessage(request.params.recipient, request.params.email, request.params.card);
+		var options = {};
+		Mandrill.sendTemplate(params, {
+			success: onSuccess,
+			error: onError
+		});
+	}
+
+	function onSuccess(result) {
 		// console.log('approveSuggestion saveData success');
-		response.success(suggestion);
+
+		response.success(result);
 	}
 
 	function onError(error) {
@@ -140,4 +157,64 @@ function _disapproveSuggestion(request, response) {
 		response.error(error);
 	}
 
+}
+
+function _getMandrillMessage(recipient, email, card) {
+	return {
+		template_name: 'single-card-email',
+		template_content: [],
+		async: false,
+		message: {
+			subject: email.subject,
+			from_email: config.LIST_EMAIL,
+			from_name: config.LIST_COMPANY,
+			to: [{
+				email: recipient.address,
+				name: recipient.name,
+				type: "to"
+			}],
+			headers: {
+				'Reply-To': config.LIST_EMAIL
+			},
+			important: false,
+			merge: true,
+			global_merge_vars: [
+				{
+					name: 'LIST_COMPANY',
+					content: config.LIST_COMPANY
+				},
+				{
+					name: 'LIST_EMAIL',
+					content: config.LIST_EMAIL
+				},
+			],
+			merge_vars: [{
+				rcpt: recipient.address,
+				vars: [
+					{
+						name: 'card_url',
+						content: card.url
+					},{
+						name: 'card_text',
+						content: card.text
+					},{
+						name: 'card_image_url',
+						content: card.image
+					},{
+						name: 'recipient_name',
+						content: recipient.name
+					},{
+						name: 'email_message',
+						content: email.message
+					}
+				]
+			}],
+			recipient_metadata: [{
+				rcpt: recipient.address,
+				values: {
+					user_id: recipient.id
+				}
+			}]
+		}
+	}
 }

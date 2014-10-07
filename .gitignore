@@ -15,3 +15,4 @@ dist/
 frontend/css/
 frontend/components/*.css
 .env
+Parse/cloud/config.js

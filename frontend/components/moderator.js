@@ -64,21 +64,42 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 			}
 
 			$scope.approve = function() {
+				var owner = $scope.suggestion.get('owner');
 				var options = {
-					suggestionId: $scope.suggestion.id,
-					text: $scope.suggestion.get('text'),
-					legal: $scope.suggestion.get('legal'),
-					message: $scope.feedbackMessage
-				}
+					card: {
+						id: $scope.suggestion.id,
+						text: $scope.suggestion.get('text'),
+						legal: $scope.suggestion.get('legal'),
+					},
+					email: {
+						subject: 'We reviewed your ',
+						message: 'Your card was approved, it will now show up in voting! If everyone really likes it we\'ll put it in the game with your username on it.'
+					},
+					recipient: {
+						address: owner.get('email'),
+						name: owner.get('name')
+					}
+				};
 				Parse.Cloud.run(CONFIG.PARSE_VERSION + 'approveSuggestion', options)
 				.then(loadNext);
 			}
 
 			$scope.disapprove = function() {
 				var options = {
-					suggestionId: $scope.suggestion.id,
-					message: $scope.suggestion.message
-				}
+					card: {
+						id: $scope.suggestion.id,
+						text: $scope.suggestion.get('text'),
+						legal: $scope.suggestion.get('legal'),
+					},
+					email: {
+						subject: 'We reviewed your ',
+						message: 'Your card was not approved :( It\'s either a duplicate of an existing card, a card we think doesn\'t fit in the spirit of the game.'
+					},
+					recipient: {
+						address: owner.get('email'),
+						name: owner.get('name')
+					}
+				};
 				Parse.Cloud.run(CONFIG.PARSE_VERSION + 'disapproveSuggestion', options)
 				.then(loadNext);
 			}
