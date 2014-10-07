@@ -45,11 +45,11 @@
                                 <tr>
                                     <td style="padding: 15px;">
 
-                                        <h4 style="font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; line-height: 1.1; margin-bottom: 15px; color: #000; font-weight: 500; font-size: 23px;">Hello, *|card_user|*</h4>
-                                        <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.6;">*|card_message|*</p>
+                                        <h4 style="font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; line-height: 1.1; margin-bottom: 15px; color: #000; font-weight: 500; font-size: 23px;">Hello, *|recipient_name|*</h4>
+                                        <p style="margin-bottom: 10px; font-weight: normal; font-size: 14px; line-height: 1.6; color: black;">*|email_message|*</p>
                                         <a class="btn" href="*|card_url|*" style="color: #FFF; text-decoration: none; font-weight: bold; margin-right: 10px; text-align: center; cursor: pointer; display: inline-block; background: black; padding: 10px 16px;">
-										Look at it!
-									</a>
+                                        Look at it!
+                                    </a>
                                     </td>
                                 </tr>
                             </table>
@@ -65,8 +65,8 @@
                                                 <table class="card" height="100%" width="100%" style="color: black; border-radius: 5px; text-align: center; width: 190px; height: 285px; box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1); background: white;">
                                                     <tr>
                                                         <td height="55%" style="text-align:center; vertical-align:bottom;">
-															<img src="*|card_image_url|*" />
-															<!-- <img src="http://godhatescharades.com/img/email/actor.png" alt="" /> -->
+                                                            <img src="*|card_image_url|*"/>
+                                                            <!-- <img src="http://godhatescharades.com/img/email/actor.png" alt="" /> -->
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -101,16 +101,13 @@
                     <div class="content" style="font-size: 10px; font-weight: bold; max-width: 600px; display: block; margin: 0 auto; padding: 15px;">
                         <table style="width: 100%;">
                             <tr>
-                                <em>Copyright © *|CURRENT_YEAR|* *|LIST:COMPANY|*, All rights reserved.</em>
-                                <br/>*|IFNOT:ARCHIVE_PAGE|* *|LIST:DESCRIPTION|*
+                                <em>Copyright © *|CURRENT_YEAR|* *|LIST_COMPANY|*, All rights reserved.</em>
+                                <br/>You're receiving this email because you submitted content to http://godhatescharades.com.
                                 <br/>
                                 <br/>
                                 <strong>Our mailing address is:</strong>
-                                <br/>*|HTML:LIST_ADDRESS_HTML|* *|END:IF|*
+                                <br/>*|LIST_EMAIL|*
                                 <br/>
-                                <br/><a class="utilityLink" href="*|UNSUB|*" style="color: white;">unsubscribe from this list</a>    <a class="utilityLink" href="*|UPDATE_PROFILE|*" style="color: white;">update subscription preferences</a> 
-                                <br/>
-                                <br/>*|IF:REWARDS|* *|HTML:REWARDS|* *|END:IF|*
                             </tr>
                         </table>
                     </div>
