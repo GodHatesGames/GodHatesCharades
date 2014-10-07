@@ -94,7 +94,9 @@ Parse.Cloud.job('v2_calculateStats', v2.leaderboard.calculateStats);
 
 // Before Saves
 Parse.Cloud.beforeSave('Suggestion', function(request, response) {
-	if(request.object.isNew()) {
+	var isNewObject = request.object.isNew();
+	if(isNewObject) {
+		// console.log('new suggestion, checking it out');
 		var betaUser;
 		if(request.user) {
 			betaUser = v2.userUtils.isUserBeta(request.user.id);

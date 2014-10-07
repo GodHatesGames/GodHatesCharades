@@ -88,12 +88,7 @@ function _approveSuggestion(request, response) {
 	}
 
 	function onDataSaved(suggestion) {
-		var cardType = suggestion.get('type');
-		if(cardType == 0) {
-			request.params.card.image = 'http://godhatescharades.com/img/email/actor.png';
-		} else {
-			request.params.card.image = 'http://godhatescharades.com/img/email/scenario.png';
-		}
+		_setCardImage(request.params.card, suggestion.get('type'));
 		var params = _getMandrillMessage(request.params.recipient, request.params.email, request.params.card);
 		var options = {};
 		Mandrill.sendTemplate(params, {
@@ -129,22 +124,32 @@ function _disapproveSuggestion(request, response) {
 		// console.log('disapproveSuggestion saveData');
 		if(isAdmin) {
 			// console.log('user is admin');
-			var suggestionId = request.params.suggestionId;
+			var card = request.params.card;
 
 			// mock suggestion
 			var SuggestionObject = Parse.Object.extend('Suggestion');
 			var suggestion = new SuggestionObject();
-			suggestion.id = suggestionId;
+			suggestion.id = card.id;
 			suggestion.set('moderated', true);
 			suggestion.set('rejected', true);
 			suggestion.save({
-				success: onSuccess,
+				success: onDataSaved,
 				error: onError
 			});
 		} else {
 			console.log('user is not admin');
 			onError('You need to be an admin to access this method.');
 		}
+	}
+
+	function onDataSaved(suggestion) {
+		_setCardImage(request.params.card, suggestion.get('type'));
+		var params = _getMandrillMessage(request.params.recipient, request.params.email, request.params.card);
+		var options = {};
+		Mandrill.sendTemplate(params, {
+			success: onSuccess,
+			error: onError
+		});
 	}
 
 	function onSuccess(suggestion) {
@@ -216,5 +221,13 @@ function _getMandrillMessage(recipient, email, card) {
 				}
 			}]
 		}
+	}
+}
+
+function _setCardImage(card, type) {
+	if(type == 0) {
+		card.image = 'http://godhatescharades.com/img/email/actor.png';
+	} else {
+		card.image = 'http://godhatescharades.com/img/email/scenario.png';
 	}
 }

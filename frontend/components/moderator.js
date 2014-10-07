@@ -73,7 +73,7 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 						url: cardService.getUrl($scope.suggestion)
 					},
 					email: {
-						subject: 'We reviewed your card',
+						subject: 'Thanks for submitting a card to God Hates Charades.',
 						message: 'Your card was approved, it will now show up in voting! If everyone really likes it we\'ll put it in the game with your username on it.'
 					},
 					recipient: {
@@ -86,6 +86,7 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 			}
 
 			$scope.disapprove = function() {
+				var owner = $scope.suggestion.get('owner');
 				var options = {
 					card: {
 						id: $scope.suggestion.id,
@@ -94,7 +95,7 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 						url: cardService.getUrl($scope.suggestion)
 					},
 					email: {
-						subject: 'We reviewed your card',
+						subject: 'Thanks for submitting a card to God Hates Charades.',
 						message: 'Your card was not approved :( It\'s either a duplicate of an existing card or a card we think doesn\'t fit in the spirit of the game.'
 					},
 					recipient: {
