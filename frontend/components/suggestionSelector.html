@@ -16,7 +16,11 @@
 					<th>Author</th>
 				</tr>
 				<tr ng-repeat="(index, suggestion) in suggestions | fuse:['attributes.text']:searchSelector"
-					ng-init="newText = suggestion.attributes.text">
+				    ng-init="newText = suggestion.attributes.text"
+				    tooltip="Double-click to edit"
+				    tooltip-placement="left"
+				    tooltip-popup-delay="300"
+				    tooltip-append-to-body="true">
 					<!-- Add button -->
 					<td class="tableButton"
 					    ng-show="showAdd">
@@ -41,6 +45,9 @@
 							       ng-model="suggestion.attributes.text"
 							       ng-keyup="checkEscape($event)"
 							       class="form-control">
+							<span class="help-block">
+								Press enter to save.
+							</span>
 						</form>
 					</td>
 					<!-- Type -->
