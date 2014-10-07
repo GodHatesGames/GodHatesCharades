@@ -1,4 +1,4 @@
-app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory) {
+app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMatcherFactory, $state) {
 	var cardService = {
 		cache: cache,
 		clearCache: clearCache,
@@ -13,7 +13,8 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory) {
 		getKDR: getKDR,
 		getCard: getCard,
 		getSlug: getSlug,
-		getLink: getLink
+		getLink: getLink,
+		getUrl: getUrl
 	}
 
 	// expires in 1 week
@@ -72,6 +73,16 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory) {
 			cardid: card.id,
 			slug: getSlug(card)
 		}
+	}
+
+	function getUrl(card) {
+		var cardState = $state.get('card').url;
+		var matcher = $urlMatcherFactory.compile(cardState);
+		var path = matcher.format(getLink(card));
+		return [
+			'http://godhatescharades.com',
+			path
+		].join('');
 	}
 
 	function getImageUrl(card) {

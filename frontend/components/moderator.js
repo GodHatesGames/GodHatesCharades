@@ -70,6 +70,7 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 						id: $scope.suggestion.id,
 						text: $scope.suggestion.get('text'),
 						legal: $scope.suggestion.get('legal'),
+						url: cardService.getUrl($scope.suggestion)
 					},
 					email: {
 						subject: 'We reviewed your ',
@@ -90,6 +91,7 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 						id: $scope.suggestion.id,
 						text: $scope.suggestion.get('text'),
 						legal: $scope.suggestion.get('legal'),
+						url: cardService.getUrl($scope.suggestion)
 					},
 					email: {
 						subject: 'We reviewed your ',
