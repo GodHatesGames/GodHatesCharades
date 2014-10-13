@@ -30,25 +30,13 @@
 						</a>
 					</td>
 					<!-- Text -->
-					<td ng-hide="editing"
-					    ng-dblclick="editing = true"
+					<td ng-dblclick="editSuggestion(this, suggestion)"
 					    class="noselect">
 						{{suggestion.attributes.text}}
 						<span class="legal"
 						      ng-if="suggestion.attributes.legal">
 							{{suggestion.attributes.legal}}
 						</span>
-					</td>
-					<td ng-show="editing">
-						<form ng-submit="saveSuggestion(this, suggestion)">
-							<input type="text"
-							       ng-model="suggestion.attributes.text"
-							       ng-keyup="checkEscape($event)"
-							       class="form-control">
-							<span class="help-block">
-								Press enter to save.
-							</span>
-						</form>
 					</td>
 					<!-- Type -->
 					<td ng-class="cardService.getTypeClass(suggestion)"></td>

@@ -256,12 +256,14 @@ function updateSuggestionText(request, response) {
 		if(isAdmin) {
 			// console.log('user is admin');
 			var suggestionId = request.params.suggestionId;
-			var newText = request.params.text;
 			// mock suggestion
 			var SuggestionObject = Parse.Object.extend('Suggestion');
 			var suggestion = new SuggestionObject();
 			suggestion.id = suggestionId;
-			suggestion.set('text', newText);
+			suggestion.set('text', request.params.text);
+			if(request.params.legal) {
+				suggestion.set('legal', request.params.legal);
+			}
 			suggestion.save({
 				success: onSuccess,
 				error: onError

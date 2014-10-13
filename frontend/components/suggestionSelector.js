@@ -1,5 +1,5 @@
 'use strict';
-app.directive('suggestionSelector', function(cardService, $filter, $state) {
+app.directive('suggestionSelector', function(cardService, $filter, $state, $modal) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/suggestionSelector.html',
@@ -51,35 +51,7 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 				$scope.$emit('suggestionAdded', suggestion);
 			};
 
-			$scope.saveSuggestion = function(isolateScope, suggestion) {
-				$scope.saving = true;
-				isolateScope.editing = true;
-				Parse.Cloud.run(
-					CONFIG.PARSE_VERSION + 'updateSuggestionText',
-					{
-						'suggestionId': suggestion.id,
-						'text': suggestion.get('text')
-					},
-					{
-						success: onSuggestionSaved,
-						error: onSuggestionError
-					}
-				);
-
-				function onSuggestionSaved (savedSuggestion) {
-					console.log('suggestion saved');
-					$scope.saving = false;
-					isolateScope.editing = false;
-					$scope.$digest();
-				}
-
-				function onSuggestionError (error) {
-					console.error('error saving suggestion:', error);
-					$scope.saving = false;
-					isolateScope.editing = false;
-					$scope.$digest();
-				}
-			};
+			$scope.editSuggestion = _editSuggestion;
 
 			// Private methods
 
@@ -103,6 +75,29 @@ app.directive('suggestionSelector', function(cardService, $filter, $state) {
 			function _checkEscape(event) {
 				if(event.keyCode === 27)
 					angular.element(event.target).scope().editing = false;
+			}
+
+			function _editSuggestion(isolatedScope, suggestion) {
+				var modalScope = $scope.$new(true);
+				modalScope.suggestion = suggestion;
+				modalScope.onSuccess = _onEditSuccess;
+				modalScope.onError = _onEditError;
+
+				var modalInstance = $modal.open({
+					templateUrl: 'components/cardForm.modal.html',
+					scope: modalScope,
+					size: 'sm'
+				})
+
+				function _onEditSuccess() {
+					console.log('modal success');
+					modalInstance.dismiss();
+				}
+
+				function _onEditError(err) {
+					console.log('modal error');
+					modalInstance.dismiss();
+				}
 			}
 
 			// // init
