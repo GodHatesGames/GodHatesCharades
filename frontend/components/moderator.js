@@ -31,6 +31,7 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 					$scope.suggestion = suggestions[$scope.index];
 					$scope.allApproved = false;
 				} else {
+					$scope.suggestion = null;
 					$scope.allApproved = true;
 				}
 				$scope.loading = false;
@@ -41,11 +42,11 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 				if($scope.index + 1 < suggestions.length) {
 					$scope.index++;
 					$scope.suggestion = suggestions[$scope.index];
-					if(!$rootScope.$$phase)
-						$scope.$digest();
 				} else {
 					$scope.allApproved = true;
 				}
+				if(!$rootScope.$$phase)
+					$scope.$digest();
 			}
 
 			function onSuggestionsError(error) {
