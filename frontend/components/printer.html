@@ -12,7 +12,7 @@
 
 	<!-- Loaded message -->
 	<div class="doNotPrint" 
-			ng-show="!loading && !errorMessage">
+	     ng-show="!loading && !errorMessage">
 
 		<table class="table table-striped">
 			<tr>
@@ -29,7 +29,7 @@
 				<!-- B&W Button -->
 				<td class="tableButton">
 					<button class="btn btn-info printButtons"
-							ng-click="printBlack(set)">
+					        ng-click="printBlack(set)">
 						Print Black & White
 					</button>
 				</td>
@@ -47,8 +47,8 @@
 			<div class="printHeader">
 				<span class="title">LETS PRINT</span>
 				<img src="img/logo_bw.svg"
-					 alt="God Hates Charades"
-					 class="printLogo">
+				     alt="God Hates Charades"
+				     class="printLogo">
 			</div>
 			<div ng-html-compile="instructionsHtml"
 			     class="instructions col-xs-8 col-xs-offset-2"></div>
@@ -60,8 +60,8 @@
 			<div class="printHeader">
 				<span class="title">LETS PLAY</span>
 				<img src="img/logo_bw.svg"
-					 alt="God Hates Charades"
-					 class="printLogo">
+				     alt="God Hates Charades"
+				     class="printLogo">
 			</div>
 			<div ng-html-compile="rulesHtml"
 			     class="rules col-xs-8 col-xs-offset-2"></div>
@@ -71,13 +71,14 @@
 	<div class="cardContainer">
 		
 		<div class="setItem page-break"
-			 ng-repeat="(index, setItem) in setItems | orderBy:'attributes.card.attributes.type'"
-			 ng-init="suggestion = setItem.attributes.card">
+		     ng-repeat="(index, setItem) in setItems | orderBy:'attributes.card.attributes.type'"
+		     ng-init="suggestion = setItem.attributes.card">
 			<card suggestion="suggestion"></card>
 		</div>
 		<div class="setItem page-break"
-			 ng-repeat="extraItem in extraItems | orderBy:'type'">
-			<card blank-type="extraItem.type" domain="true"></card>
+		     ng-repeat="extraItem in extraItems | orderBy:'attributes.type'">
+			<card suggestion="extraItem"
+			      domain="true"></card>
 		</div>
 	</div>
 </div>

@@ -14,7 +14,8 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMa
 		getCard: getCard,
 		getSlug: getSlug,
 		getLink: getLink,
-		getUrl: getUrl
+		getUrl: getUrl,
+		getBlankCardByType: _getBlankCardByType
 	}
 
 	// expires in 1 week
@@ -176,6 +177,14 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMa
 		delete cardPromises[card.id];
 		updateCache(card);
 		return card;
+	}
+
+	function _getBlankCardByType(type) {
+		return {
+			attributes: {
+				type: type
+			}
+		};
 	}
 
 	return cardService;

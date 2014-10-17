@@ -45,9 +45,7 @@ app.directive('printer', function(cardService, $compile, $window, prismic, sets,
 				var newItem, itemType;
 				for(var i = 0; i < extraCount; i++) {
 					itemType = i % 2;
-					newItem = {
-						type: itemType
-					};
+					newItem = cardService.getBlankCardByType(itemType);
 					$scope.extraItems.push(newItem);
 				}
 			}

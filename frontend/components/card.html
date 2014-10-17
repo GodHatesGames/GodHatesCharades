@@ -1,7 +1,7 @@
 <div class="card"
-     ng-class="typeClass()">
+     ng-class="cardService.getTypeClassByType(suggestion.attributes.type)">
 	<span class="icon"
-		  ng-include="imageUrl()"></span>
+		  ng-include="cardService.getImageByType(suggestion.attributes.type)"></span>
 	<div class="cardContent">
 		{{suggestion.attributes.text}}<span>{{suggestion.attributes.legal}}</span>
 	</div>
