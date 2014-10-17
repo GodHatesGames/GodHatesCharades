@@ -24,7 +24,7 @@
 		     ng-click="selectPair($event, index)">
 			<!-- Repeat suggestions in pairs -->
 				<card ng-repeat="(index, suggestion) in pair"
-				      card-id="suggestion.id">
+				      suggestion="suggestion">
 				</card>
 
 		</div>

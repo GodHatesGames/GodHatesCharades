@@ -72,8 +72,8 @@
 		
 		<div class="setItem page-break"
 			 ng-repeat="(index, setItem) in setItems | orderBy:'attributes.card.attributes.type'"
-			 ng-init="card = setItem.attributes.card">
-			<card card-id="card.id"></card>
+			 ng-init="suggestion = setItem.attributes.card">
+			<card suggestion="suggestion"></card>
 		</div>
 		<div class="setItem page-break"
 			 ng-repeat="extraItem in extraItems | orderBy:'type'">

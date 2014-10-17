@@ -5,7 +5,7 @@
 		<div class="characterContainer" 
 			 ng-class="cardClass(index)"
 			 ng-repeat="(index, suggestion) in characters">
-			<card card-id="suggestion.id"></card>
+			<card suggestion="suggestion"></card>
 		</div>
 	</div>
 	<!-- Scenario -->
@@ -13,7 +13,7 @@
 		<div class="scenarioContainer" 
 			 ng-class="cardClass(index)"
 			 ng-repeat="(index, suggestion) in scenarios">
-			<card card-id="suggestion.id"></card>
+			<card suggestion="suggestion"></card>
 		</div>
 
 	</div>
