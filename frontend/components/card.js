@@ -1,47 +1,33 @@
 'use strict';
-app.directive('card', function(parseUser, cardService, $rootScope) {
+app.directive('card', function(parseUser, cardService) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/card.html',
 		replace: true,
 		scope: {
-			cardId: '=cardId',
-			updatable: '=updatable',
-			blankType: '=blankType',
-			domain: '=domain'
+			suggestion: '=',
+			blankType: '=',
+			domain: '='
 		},
 		controller: function($scope, $element) {
-			$scope.typeClass = '';
-			$scope.imageUrl = '';
-			if($scope.cardId) {
-				var promise = cardService.getCard($scope.cardId);
-				promise.then(onSuccess, onError);
-			} else if($scope.blankType !== undefined && $scope.blankType !== null) {
-				$scope.typeClass = cardService.getTypeClassByType($scope.blankType);
-				$scope.imageUrl = cardService.getImageByType($scope.blankType);
+			$scope.cardService = cardService;
+			$scope.imageUrl = _imageUrl;
+			$scope.typeClass = _typeClass;
+
+			function _imageUrl() {
+				if($scope.blankType) {
+					return cardService.getImageByType($scope.blankType);
+				} else if($scope.suggestion) {
+					return cardService.getImageUrl($scope.suggestion);
+				}
 			}
 
-			if($scope.updatable === true) {
-				$scope.$watch('cardId', function(newValue, oldValue) {
-					if(newValue) {
-						// console.log('id changed to:', newValue, 'from', oldValue);
-						var promise = cardService.getCard($scope.cardId);
-						promise.then(onSuccess, onError);
-					}
-				});
-			}
-
-			function onSuccess(card) {
-				$scope.card = card;
-				$scope.typeClass = cardService.getTypeClass(card);
-				$scope.imageUrl = cardService.getImageUrl(card);
-
-				if(!$rootScope.$$phase)
-					$scope.$digest();
-			}
-
-			function onError(error) {
-				console.log('error fetching card:', error);
+			function _typeClass() {
+				if($scope.blankType) {
+					return cardService.getTypeClassByType($scope.blankType);
+				} else if($scope.suggestion) {
+					return cardService.getTypeClass($scope.suggestion);
+				}
 			}
 		}
 	};

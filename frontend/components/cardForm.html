@@ -1,7 +1,6 @@
 <div class="cardForm">
-	<card card-id="suggestion.id"
-	      updatable="true"
-	      ng-if="suggestion"></card>
+	<card suggestion="suggestion"
+	      updatable="true"></card>
 	<a ui-sref="card(cardService.getLink(suggestion))"
 	   ng-if="suggestion"
 	   class="card-link btn btn-success btn-xs"

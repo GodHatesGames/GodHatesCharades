@@ -1,24 +1,20 @@
-app.controller('cardView', function($scope, $state, $stateParams, $location, $window, cardService) {
-	$scope.cardid = $stateParams.cardid;
+app.controller('cardView', function(suggestion, $scope, $state, $location, cardService) {
+	$scope.suggestion = suggestion;
+	//set meta title
+	$state.current.title = suggestion.get('text');
 
-	var card = cardService.getCard($scope.cardid)
-	.then(function(card) {
-		//set meta title
-		$state.current.title = card.get('text');
-
-		// set meta description
-		$state.current.description = ['"',
-		                              card.get('text'),
-		                              '" is a ',
-		                              cardService.getTypeDisplay(card),
-		                              ' card submitted by ',
-		                              card.get('owner').get('name')].join('');
-	});
+	// set meta description
+	$state.current.description = ['"',
+	                              suggestion.get('text'),
+	                              '" is a ',
+	                              cardService.getTypeDisplay(suggestion),
+	                              ' card submitted by ',
+	                              suggestion.get('owner').get('name')].join('');
 
 	// DISQUS
 	$scope.disqus = {
 		shortname: 'godhatescharades',
-		id: $stateParams.cardid,
+		id: suggestion.id,
 		url: 'http://godhatescharades.com' + $location.url()
 	};
 })

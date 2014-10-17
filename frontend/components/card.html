@@ -1,17 +1,16 @@
 <div class="card"
-     id="{{id}}"
-     ng-class="typeClass">
+     ng-class="typeClass()">
 	<span class="icon"
-		  ng-include="imageUrl"></span>
+		  ng-include="imageUrl()"></span>
 	<div class="cardContent">
-		{{card.attributes.text}}<span>{{card.attributes.legal}}</span>
+		{{suggestion.attributes.text}}<span>{{suggestion.attributes.legal}}</span>
 	</div>
 	<div ng-if="domain"
 	     class="domain">
 		godhatescharades.com
 	</div>
-	<div ng-if="card.attributes.owner.attributes.name"
+	<div ng-if="suggestion.attributes.owner.attributes.name"
 	     class="author">
-		{{card.attributes.owner.attributes.name}}
+		{{suggestion.attributes.owner.attributes.name}}
 	</div>
 </div>

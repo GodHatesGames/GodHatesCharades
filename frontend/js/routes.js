@@ -74,7 +74,12 @@ app.config(function($stateProvider,
 	$stateProvider.state('card', {
 		url: '/card/:cardid/:slug',
 		templateUrl: 'views/cardView.html',
-		controller: 'cardView'
+		controller: 'cardView',
+		resolve: {
+			suggestion: ['cardService', '$stateParams', function(cardService, $stateParams) {
+				return cardService.getCard($stateParams.cardid);
+			}]
+		}
 	});
 	$stateProvider.state('pair', {
 		url: '/pair/:pairid/:slug',
