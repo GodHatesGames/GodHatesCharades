@@ -1,5 +1,5 @@
 'use strict';
-app.directive('iframeFluid', function($window) {
+app.directive('iframeFluid', function($window, $compile) {
 	return {
 		restrict: 'EA',
 		scope: {
@@ -10,9 +10,11 @@ app.directive('iframeFluid', function($window) {
 			iframeThumb: '=thumb'
 		},
 		controller: function($scope, $element) {
+			$element.addClass('iframe-fluid')
 			var currentWidth = getWidth($element);
 			var thumbClicked = false;
 			var thumb;
+			$scope.onThumbClicked = onThumbClicked;
 			$scope.$watch('iframeUrl', setIframe);
 			$scope.$watch('iframeThumb', setThumb);
 
@@ -34,27 +36,21 @@ app.directive('iframeFluid', function($window) {
 					var newHeight = getHeightFromWidth(newWidth, $scope.aspectW, $scope.aspectH);
 
 					// create thumb
-					thumb = angular.element('<div>');
+					thumb = angular.element('<div ng-click="onThumbClicked()">');
+					thumb.addClass('iframe-thumb');
 					thumb.css('width', newWidth + 'px');
 					thumb.css('height', newHeight + 'px');
-					thumb.css('background-size', 'cover');
-					thumb.css('cursor', 'pointer');
 					thumb.css('background-image', ['url(',
 					                               iframeThumb,
 					                               ')'].join(''));
-					thumb.bind('mouseenter', function() {
-						thumb.css('background-position-y', '100%');
-					});
-					thumb.bind('mouseleave', function() {
-						thumb.css('background-position-y', '0');
-					});
-					thumb.bind('click', function() {
-						thumbClicked = true;
-						setIframe($scope.iframeUrl);
-					});
-					console.log(thumb);
 					$element.append(thumb);
+					$compile($element.contents())($scope);
 				}
+			}
+
+			function onThumbClicked() {
+				thumbClicked = true;
+				setIframe($scope.iframeUrl);
 			}
 
 			function setIframe(iframeUrl) {
@@ -80,14 +76,14 @@ app.directive('iframeFluid', function($window) {
 			}
 
 			function getWidth(element) {
-				return element.prop('offsetWidth');
+				return Math.floor(element.prop('offsetWidth'));
 			}
 
 			function getHeightFromWidth(width, aspectW, aspectH) {
 				if(!aspectW) aspectW = 16;
 				if(!aspectH) aspectH = 9;
 				var aspectRatio = width / aspectW;
-				return aspectH * aspectRatio;
+				return Math.floor(aspectH * aspectRatio);
 			}
 
 			function onResize() {
