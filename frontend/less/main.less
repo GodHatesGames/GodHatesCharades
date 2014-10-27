@@ -152,13 +152,17 @@ input.form-control {
 }
 
 .content {
-	padding-top: 75px;
 	width: 100%;
 	overflow: hidden;
 }
 
 .content > .container {
 	padding-bottom: 30px;
+}
+
+
+.content > .container:not(.flush) {
+	padding-top: 45px;
 }
 
 .footer {
@@ -299,20 +303,20 @@ input.form-control {
 }
 
 @media (max-width: 1200px) {
-	.content {
+	.content > .container:not(.flush) {
 		padding-top: 70px;
 	}
 }
 
 @media (max-width: 992px) {
-	.content {
-		padding-top: 65px;
+	.content > .container:not(.flush) {
+		padding-top: 0px;
 	}
 }
 
 @media (max-width: 767px) {
-	.content {
-		padding-top: 0;
+	.content > .container:not(.flush) {
+		padding-top: 0px;
 	}
 }
 

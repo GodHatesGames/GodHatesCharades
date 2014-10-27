@@ -39,9 +39,25 @@ app.directive('youtube', function() {
 			}
 
 			function _updatePlayer(videoUrl, videoAttrs) {
-				var attributes = videoAttrs || [];
+				// https://developers.google.com/youtube/player_parameters#playsinline
+				var attributes = videoAttrs || [
+					'modestbranding=1',
+					'autohide=1',
+					'rel=0'];
 				if ($attr.autoplay === 'true')
 					attributes.push('autoplay=1');
+				if ($attr.playsinline === 'true')
+					attributes.push('playsinline=1');
+				if ($attr.loop === 'true')
+					attributes.push('loop=1');
+				if ($attr.end)
+					attributes.push('end=' + $attr.end);
+				if ($attr.showinfo === 'false')
+					attributes.push('showinfo=0');
+				if ($attr.theme)
+					attributes.push('theme=' + $attr.theme);
+				if ($attr.hidecontrols)
+					attributes.push('controls=0');
 
 				var urlAttrs = attributes.join('&');
 				videoUrl = [videoUrl, '?', urlAttrs].join('');

@@ -69,7 +69,7 @@ app.directive('iframeFluid', function($window, $compile) {
 					                 newHeight,
 					                 '" src="',
 					                 iframeUrl,
-					                 '" frameborder="0" allowfullscreen></iframe>'].join('');
+					                 '" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen scrolling="no"></iframe>'].join('');
 					var newIframe = angular.element(iframeStr);
 					$element.append(newIframe);
 				}

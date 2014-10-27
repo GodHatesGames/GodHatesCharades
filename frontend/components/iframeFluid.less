@@ -1,4 +1,7 @@
 .iframe-fluid {
+	display: block;
+	width: 100%;
+	
 	.iframe-thumb {
 		background-size: cover;
 		cursor: pointer;
@@ -7,5 +10,10 @@
 		&:hover {
 			background-position-y: 100%;
 		}
+	}
+
+	iframe {
+		-webkit-backface-visibility: hidden;
+		-webkit-transform: scale(1);
 	}
 }
