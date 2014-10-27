@@ -1,7 +1,24 @@
 'use strict';
-app.controller('homeView', function($scope, campaignService, $http, $window, $stateParams, $state) {
+app.controller('homeView', function($scope, $window, $timeout) {
 	$window.scrollTo(0, 0);
-	$scope.ipad = campaignService.campaignsById.iPad2014;
-	$scope.mainLayout = undefined;
-	$scope.emailSubmitted = false;
+	$scope.hidePreorder = true;
+	$timeout(_onShowPreorder, 37000);
+
+	angular.element($window).bind('scroll', function() {
+		if (this.pageYOffset >= 100) {
+			_onShowPreorder();
+		}
+	});
+
+	function _onShowPreorder() {
+		$scope.hidePreorder = false;
+		$scope.preorderClass= 'animated bounceInDown';
+		if(!$scope.$$phase) {
+			$scope.$digest();
+			// $timeout(_animatePreorder, 500);
+		}
+	}
+
+	function _animatePreorder() {
+	}
 });

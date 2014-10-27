@@ -2,28 +2,33 @@
 
 
 
-	<section class="row">
+	<section class="row row-compact intro">
 		<iframe-fluid url="https://vid.me/e/T42?autoplay=1&loop=1"
 		              class="intro-video"
 		              fluid="true"></iframe-fluid>
 	</section>
-	<section class="row">
-		
-		<div class="col-sm-12 col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
-		</div>
-		<div class="col-sm-12 col-md-5 col-lg-5">
+	<section class="row preorder"
+	         collapse="hidePreorder">
+		<!-- <div class="col-sm-12 col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
+			<ul>
+				<li>3-14 players</li>
+				<li>350+ absurd cards</li>
+				<li>Awful art by Damien Weighill.</li>
+			</ul>
+		</div> -->
+		<div class="col-sm-12 col-md-12 col-lg-12">
 			<a href="http://bit.ly/10f9Kv6"
+			   class="btn btn-success btn-lg btn-block" 
+			   ng-class="preorderClass"
 			   target="_blank">
-				<img src="img/preorderGraphic.png"
-				     class="img-responsive"
-				     alt="Preorder God Hates Charades"/>
+				Preorder Now!
 			</a>
 		</div>
 	</section>
 	
 	<!-- Vote section -->
 	<section id="voting"
-			 class="voting row bg-dark">
+	         class="voting row bg-light-bright">
 		<h2>Vote on the funniest content for our first release.</h2>
 		<vote></vote>
 
@@ -32,17 +37,16 @@
 
 	<!-- Signup section -->
 	<signup-section location="homepage_banner"
-	                class="bg-dark-bright">
+	                class="bg-dark">
 	</signup-section>
 	<!--End Signup section-->
 
 	<!-- iOS Ad section -->
-	<section class="ios"
-	         id="ipad_ad"
-	         ng-show="ipad.active">
+	<section class="row ios"
+	         id="ipad_ad">
 		<h2>We like pixels too</h2>
 		<h3>Grab the game now on the iPad!</h3>
-		<div class="col-md-6 col-lg-6">
+		<div class="col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
 			<ul>
 				<li>Absurd content</li>
 				<li>Beautiful art by Damien Weighill</li>
@@ -57,7 +61,7 @@
 			   Get the app!
 			</a>
 		</div>
-		<div class="col-md-6 col-lg-6">
+		<div class="col-md-5 col-lg-5">
 			<img src="img/ipadScreenshot.png"
 			     class="screenshot img-responsive" 
 			     alt="Screenshot of God Hates Charades for iPad"/>

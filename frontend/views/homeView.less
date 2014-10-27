@@ -48,7 +48,7 @@
 		padding-top: 0;
 	}
 
-	.row {
+	& > .row {
 		margin-left: -60px;
 		margin-right: -60px;
 	}
@@ -86,12 +86,31 @@
 	&:not(:first-child) {
 		padding-top: 35px;
 	}
-	padding-bottom: 35px;
 
-	/* Section - Tutorial */
+	&:not(.row-compact) {
+		padding-bottom: 35px;
+	}
 
-	&.tutorial {
-	/* end &.tutorial */
+	/* Section - intro */
+	&.intro {
+		.intro-video {
+			z-index: 1;
+		}
+	/* end &.intro */
+	}
+
+	/* Section - Preorder */
+	&.preorder {
+		padding-top: 0;
+		text-align: center;
+		overflow: hidden;
+
+		.btn {
+			position: relative;
+			top: -1px;
+			padding-top: 20px;
+		}
+	/* end &.preorder */
 	}
 
 	/* Section - iOS*/
@@ -123,7 +142,6 @@
 				&:before{
 					content: '★';
 					margin-right: 6px;
-					color: black;
 				}
 			}
 		}
