@@ -140,11 +140,13 @@
 	cursor: pointer;
 }
 
+@ad-size: 0;
+
 @media (max-width: 1200px) {
-	@ad-height: 125px;
+	@ad-height: @ad-size + 85;
 
 	#mainNav {
-		margin-top: @ad-height;
+		margin-top: unit(@ad-height, px);
 	}
 
 	.ad {
@@ -161,9 +163,9 @@
 }
 
 @media (max-width: 992px) {
-	@ad-height: 130px;
+	@ad-height: @ad-size + 75px;
 	#mainNav {
-		margin-top: @ad-height;
+		margin-top: unit(@ad-height, px);
 	}
 
 	.ad {
@@ -177,10 +179,10 @@
 }
 
 @media (max-width: 767px) {
-	@ad-height: 55px;
+	@ad-height: @ad-size;
 	
 	#mainNav {
-		margin-top: @ad-height;
+		margin-top: unit(@ad-height, px);
 		height: 150px;
 	}
 
@@ -195,9 +197,9 @@
 }
 
 @media (max-width: 640px) {
-	@ad-height: 75px;
+	@ad-height: @ad-size + 30;
 	#mainNav {
-		margin-top: @ad-height;
+		margin-top: unit(@ad-height, px);
 		height: 150px;
 	}
 
@@ -211,9 +213,9 @@
 }
 
 @media (max-width: 457px) {
-	@ad-height: 55px;
+	@ad-height: @ad-size;
 	#mainNav {
-		margin-top: @ad-height;
+		margin-top: unit(@ad-height, px);
 		height: 150px;
 	}
 
@@ -227,9 +229,9 @@
 }
 
 @media (max-width: 320px) {
-	@ad-height: 55px;
+	@ad-height: @ad-size;
 	#mainNav {
-		margin-top: @ad-height;
+		margin-top: unit(@ad-height, px);
 		height: 130px;
 	}
 
