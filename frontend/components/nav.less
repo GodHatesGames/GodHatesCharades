@@ -6,9 +6,12 @@
 @dropdown-inactive: white;
 @dropdown-active: @color-actor;
 
+@ad-size: 85px;
+@ad-space: @ad-size + 30;
+
 #mainNav {
 	/* margin-bottom: 40px; */
-	margin-top: 125px;
+	margin-top: @ad-space;
 	min-height: 1px;
 	height: 45px;
 	position: relative;
@@ -17,7 +20,7 @@
 .ad {
 	position: absolute;
 	right: 0;
-	top: -125px;
+	top: -@ad-space;
 	background-color: black;
 	color: white;
 	font-family: 'GodHatesCharades';
@@ -116,35 +119,35 @@
 	font-weight: bold;
 	cursor: default;
 }
+
+@logo-width: 16%;
 .nav-left,
 .nav-right {
-	width: 40%;
+	width: 50% - (@logo-width / 2);
 }
 .nav-left,
 .nav-right {
 	float: left;
 }
 .nav-logo {
-	width: 20%;
+	width: @logo-width;
 	float: left;
-	height: 25px;
+	height: 100%;
 	position: relative;
 	z-index: 2;
 }
 
 .logo-img {
 	position: relative;
-	bottom: 130px;
+	top: -60px;
 }
 
 .dropdown a {
 	cursor: pointer;
 }
 
-@ad-size: 0;
-
-@media (max-width: @screen-lg) {
-	@ad-height: @ad-size + 85;
+@media (max-width: @screen-md-max) {
+	@ad-height: @ad-size + 25px;
 
 	#mainNav {
 		margin-top: unit(@ad-height, px);
@@ -155,7 +158,7 @@
 	}
 
 	.logo-img {
-		bottom: 110px;
+		top: -77px;
 	}
 
 	.nav > li > a {
@@ -163,8 +166,8 @@
 	}
 }
 
-@media (max-width: @screen-md) {
-	@ad-height: @ad-size + 75px;
+@media (max-width: @screen-sm-max) {
+	@ad-height: @ad-size + 45px;
 	#mainNav {
 		margin-top: unit(@ad-height, px);
 	}
@@ -175,11 +178,11 @@
 	}
 
 	.logo-img {
-		bottom: 75px;
+		top: -63px;
 	}
 }
 
-@media (max-width: @screen-sm) {
+@media (max-width: @screen-sm-er-max) {
 	@ad-height: @ad-size;
 	
 	#mainNav {
@@ -192,20 +195,38 @@
 		font-size: 17px;
 	}
 
-	#mainNav .logo-img {
-		bottom: 20px;
+	@logo-width: 20%;
+	.nav-left,
+	.nav-right {
+		width: 50% - (@logo-width / 2);
+	}
+	.nav-logo {
+		width: @logo-width;
+	}
+
+	.logo-img {
+		top: -35px;
 	}
 }
 
-@media (max-width: @screen-sm-ish) {
+@media (max-width: @screen-xs-max) {
 	@ad-height: @ad-size + 30;
 	#mainNav {
 		margin-top: unit(@ad-height, px);
 		height: 150px;
 	}
 
+	@logo-width: 25%;
+	.nav-left,
+	.nav-right {
+		width: 50% - (@logo-width / 2);
+	}
+	.nav-logo {
+		width: @logo-width;
+	}
+
 	.logo-img {
-		bottom: 50px;
+		top: -45px;
 	}
 
 	.ad {
@@ -213,7 +234,7 @@
 	}
 }
 
-@media (max-width: @screen-xs) {
+@media (max-width: @screen-iphone-max) {
 	@ad-height: @ad-size;
 	#mainNav {
 		margin-top: unit(@ad-height, px);
@@ -224,8 +245,8 @@
 		top: -@ad-height;
 	}
 	
-	#mainNav .logo-img {
-		bottom: -24px;
+	.logo-img {
+		top: -15px;
 	}
 }
 
@@ -240,7 +261,7 @@
 		top: -@ad-height;
 	}
 	
-	#mainNav .logo-img {
-		bottom: -24px;
+	.logo-img {
+		top: 10px;
 	}
 }
