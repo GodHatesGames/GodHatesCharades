@@ -11,6 +11,7 @@
 @import "colors";
 @import "card";
 @import "backgrounds";
+@import "bootstrap-variables";
 
 html {
 	height: 100%;
@@ -302,26 +303,26 @@ input.form-control {
 	}
 }
 
-@media (max-width: 1200px) {
+@media (max-width: @screen-lg) {
 	.content > .container:not(.flush) {
 		padding-top: 70px;
 	}
 }
 
-@media (max-width: 992px) {
+@media (max-width: @screen-md) {
 	.content > .container:not(.flush) {
 		padding-top: 0px;
 	}
 }
 
-@media (max-width: 767px) {
+@media (max-width: @screen-md) {
 	.content > .container:not(.flush) {
 		padding-top: 0px;
 	}
 }
 
-@media (max-width: 640px) {
+@media (max-width: @screen-sm-ish) {
 }
 
-@media (max-width: 320px) {
+@media (max-width: @screen-iphone) {
 }

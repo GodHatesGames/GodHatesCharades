@@ -1,4 +1,5 @@
 @import "../less/colors";
+@import "../less/bootstrap-variables";
 
 .signup-section {
 	padding-left: 60px;
@@ -17,13 +18,13 @@
 	.mailchimp {
 		top: 25px;
 	}
-	@media (max-width: 1200px) {
+	@media (max-width: @screen-lg) {
 		.mailchimp {
 			top: 42px;
 		}
 	}
 
-	@media (max-width: 992px) {
+	@media (max-width: @screen-md) {
 		padding-left: 20px;
 		padding-right: 20px;
 
@@ -32,7 +33,7 @@
 		}
 	}
 
-	@media (max-width: 640px) {
+	@media (max-width: @screen-sm-ish) {
 		padding-left: 0px;
 		padding-right: 0px;
 

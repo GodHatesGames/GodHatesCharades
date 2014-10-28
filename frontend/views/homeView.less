@@ -1,4 +1,5 @@
 @import "../less/colors";
+@import "../less/bootstrap-variables";
 
 #homeView {
 	padding-left: 60px;
@@ -18,7 +19,7 @@
 		overflow: hidden;
 	}
 
-	@media (max-width: 640px) {
+	@media (max-width: @screen-sm-ish) {
 		padding-left: 10px;
 		padding-right: 10px;
 
@@ -28,7 +29,7 @@
 		}
 	}
 
-	@media (max-width: 320px) {
+	@media (max-width: @screen-iphone) {
 		padding-left: 10px;
 		padding-right: 10px;
 
@@ -109,7 +110,7 @@
 			}
 		}
 
-		@media (max-width: 992px) {
+		@media (max-width: @screen-md) {
 			.screenshot{
 				padding-top: 25px;
 			}
@@ -195,7 +196,7 @@
 	color: black;
 }
 
-@media (max-width: 767px) {
+@media (max-width: @screen-md) {
 
 	#homeView .rules > div:not(:first-child) {
 		padding-top: 30px;
@@ -212,7 +213,7 @@
 }
 
 
-@media (max-width: 767px) {
+@media (max-width: @screen-md) {
 	#homeView .examplesContainer {
 		height: 310px;
 	}

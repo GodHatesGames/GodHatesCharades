@@ -1,4 +1,5 @@
 @import "../less/colors";
+@import "../less/bootstrap-variables";
 
 @enter-time: 0.75s;
 @leave-time: 1.2s;
@@ -78,7 +79,7 @@
 	
 }
 
-@media (max-width: 1200px) {
+@media (max-width: @screen-lg) {
 	.vote {
 		.cardsContainer {
 			height: 300px;
@@ -86,7 +87,7 @@
 	}
 }
 
-@media (max-width: 991px) {
+@media (max-width: @screen-md) {
 	.vote {
 		.cardsContainer {
 			height: 225px;
@@ -94,7 +95,7 @@
 	}
 }
 
-@media (max-width: 620px) {
+@media (max-width: @screen-sm-ish) {
 	.vote {
 		.cardsContainer {
 			height: auto;
@@ -135,7 +136,7 @@
 		}
 	}
 }
-@media (min-width: 621px) {
+@media (min-width: @screen-sm-ish) {
 	.vote {
 		.pairContainer {
 
@@ -208,7 +209,7 @@
 }
 
 
-@media (min-width: 1025px) {
+@media (min-width: @screen-md) {
 	.vote {
 		.pairContainer {
 			&:hover {

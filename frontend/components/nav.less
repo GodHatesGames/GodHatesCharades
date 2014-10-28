@@ -1,4 +1,5 @@
 @import "../less/colors";
+@import "../less/bootstrap-variables";
 @nav-inactive: black;
 @nav-active: @color-actor;
 @dropdown-bg: @color-actor;
@@ -142,7 +143,7 @@
 
 @ad-size: 0;
 
-@media (max-width: 1200px) {
+@media (max-width: @screen-lg) {
 	@ad-height: @ad-size + 85;
 
 	#mainNav {
@@ -162,7 +163,7 @@
 	}
 }
 
-@media (max-width: 992px) {
+@media (max-width: @screen-md) {
 	@ad-height: @ad-size + 75px;
 	#mainNav {
 		margin-top: unit(@ad-height, px);
@@ -178,7 +179,7 @@
 	}
 }
 
-@media (max-width: 767px) {
+@media (max-width: @screen-sm) {
 	@ad-height: @ad-size;
 	
 	#mainNav {
@@ -196,7 +197,7 @@
 	}
 }
 
-@media (max-width: 640px) {
+@media (max-width: @screen-sm-ish) {
 	@ad-height: @ad-size + 30;
 	#mainNav {
 		margin-top: unit(@ad-height, px);
@@ -212,7 +213,7 @@
 	}
 }
 
-@media (max-width: 457px) {
+@media (max-width: @screen-xs) {
 	@ad-height: @ad-size;
 	#mainNav {
 		margin-top: unit(@ad-height, px);
@@ -228,7 +229,7 @@
 	}
 }
 
-@media (max-width: 320px) {
+@media (max-width: @screen-iphone) {
 	@ad-height: @ad-size;
 	#mainNav {
 		margin-top: unit(@ad-height, px);

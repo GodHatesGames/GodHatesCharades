@@ -1,3 +1,5 @@
+@import "../less/bootstrap-variables";
+
 .card {
 	position: relative;	/*relative size hack*/
 	/*border: 1px solid #DDD;*/
@@ -74,21 +76,21 @@
 	color: darken(@color-scenario, 20%) !important;
 }
 
-@media (max-width: 992px) {
+@media (max-width: @screen-md) {
 	.cardContent {
 		font-size: 11px;
 		line-height: 14px;
 	}
 }
 
-@media (max-width: 640px) {
+@media (max-width: @screen-sm-ish) {
 	.cardContent {
 		font-size: 11px;
 		line-height: 14px;
 	}
 }
 
-@media (max-width: 320px) {
+@media (max-width: @screen-iphone) {
 	.cardContent {
 		font-size: 9px;
 		line-height: 12px;

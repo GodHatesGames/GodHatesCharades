@@ -211,10 +211,14 @@
 // --------------------------------------------------
 
 // Extra small screen / phone
+@screen-iphone:              320px;
+
 // Note: Deprecated @screen-xs and @screen-phone as of v3.0.1
 @screen-xs:                  480px;
 @screen-xs-min:              @screen-xs;
 @screen-phone:               @screen-xs-min;
+
+@screen-sm-ish:               650px;
 
 // Small screen / tablet
 // Note: Deprecated @screen-sm and @screen-tablet as of v3.0.1
@@ -634,9 +638,9 @@
 @container-sm:                 @container-tablet;
 
 // Medium screen / desktop
-@container-desktop:            ((940px + @grid-gutter-width));
+@container-desktop:            ((840px + @grid-gutter-width));
 @container-md:                 @container-desktop;
 
 // Large screen / wide desktop
-@container-large-desktop:      ((1050px + @grid-gutter-width));
+@container-large-desktop:      ((840px + @grid-gutter-width));
 @container-lg:                 @container-large-desktop;
