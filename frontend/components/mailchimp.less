@@ -1,4 +1,30 @@
+@mailchimp-height: 44;
+
 .mailchimp {
+
+	.email {
+		text-indent: 15px;
+		height: unit(@mailchimp-height, px);
+		line-height: unit(@mailchimp-height, px);
+		font-weight: bold;
+		margin: 0;
+		border: 0;
+		width: 100%;
+		font-size: 22px;
+	}
+
+	.submit {
+		margin: 0;
+		width: 35%;
+		float: left;
+		border-radius: 0;
+	}
+
+	.form-group {
+		float: left;
+		width: 65%;
+
+	}
 
 	.errorMessage {
 		clear: both;
@@ -10,5 +36,15 @@
 
 	.confirmEmail p {
 		text-align: left !important;
+	}
+
+	@media (max-width: 767px) {
+		 .form-group {
+			width: 55%;
+		}
+
+		.submit {
+			width: 45%;
+		}
 	}
 }
