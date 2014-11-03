@@ -6,21 +6,27 @@
 @dropdown-inactive: white;
 @dropdown-active: @color-actor;
 
-@ad-size: 85px;
-@ad-space: @ad-size + 30;
+@no-ad: 0px; //use if no ad is present
+@ad-size: @no-ad;
+@nav-height: 65px;
+@ad-height: @ad-size + 30;
 
 #mainNav {
 	/* margin-bottom: 40px; */
-	margin-top: @ad-space;
+	margin-top: @nav-height;
 	min-height: 1px;
 	height: 45px;
 	position: relative;
+
+	&.has-ad {
+		margin-top: @ad-height;
+	}
 }
 
 .ad {
 	position: absolute;
 	right: 0;
-	top: -@ad-space;
+	top: -@ad-height;
 	background-color: black;
 	color: white;
 	font-family: 'GodHatesCharades';
@@ -147,10 +153,12 @@
 }
 
 @media (max-width: @screen-md-max) {
-	@ad-height: @ad-size + 25px;
+	@ad-height: @ad-size + 25;
 
 	#mainNav {
-		margin-top: unit(@ad-height, px);
+		&.has-ad {
+			margin-top: @ad-height;
+		}
 	}
 
 	.ad {
@@ -169,7 +177,9 @@
 @media (max-width: @screen-sm-max) {
 	@ad-height: @ad-size + 45px;
 	#mainNav {
-		margin-top: unit(@ad-height, px);
+		&.has-ad {
+			margin-top: @ad-height;
+		}
 	}
 
 	.ad {
@@ -183,11 +193,15 @@
 }
 
 @media (max-width: @screen-sm-er-max) {
+	@nav-height: 35px;
 	@ad-height: @ad-size;
 	
 	#mainNav {
-		margin-top: unit(@ad-height, px);
+		margin-top: @nav-height;
 		height: 150px;
+		&.has-ad {
+			margin-top: @ad-height;
+		}
 	}
 
 	.ad {
@@ -210,9 +224,13 @@
 }
 
 @media (max-width: @screen-xs-max) {
+	@nav-height: 25px;
 	@ad-height: @ad-size + 30;
 	#mainNav {
-		margin-top: unit(@ad-height, px);
+		margin-top: @nav-height;
+		&.has-ad {
+			margin-top: @ad-height;
+		}
 		height: 150px;
 	}
 
@@ -226,7 +244,7 @@
 	}
 
 	.logo-img {
-		top: -45px;
+		top: -25px;
 	}
 
 	.ad {
@@ -237,7 +255,9 @@
 @media (max-width: @screen-iphone-max) {
 	@ad-height: @ad-size;
 	#mainNav {
-		margin-top: unit(@ad-height, px);
+		&.has-ad {
+			margin-top: @ad-height;
+		}
 		height: 150px;
 	}
 
@@ -253,7 +273,9 @@
 @media (max-width: @screen-iphone) {
 	@ad-height: @ad-size;
 	#mainNav {
-		margin-top: unit(@ad-height, px);
+		&.has-ad {
+			margin-top: @ad-height;
+		}
 		height: 130px;
 	}
 
