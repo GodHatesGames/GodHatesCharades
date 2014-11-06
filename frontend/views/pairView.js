@@ -34,6 +34,10 @@ app.controller('pairView', function(pair, readyForUpload, $scope, $state, $state
 	                         'Actor',
 	                         'Scenario'];
 
+	$scope.playerVars = {
+		listType: 'search',
+		list: '%22' + $scope.title + '%22'
+	};
 
 	// DISQUS
 	$scope.disqus = {

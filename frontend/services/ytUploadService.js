@@ -1,5 +1,5 @@
 'use strict';
-app.service('ytUploadService', function($window, $q, $rootScope) {
+app.service('ytUploadService', function($window, $q, $rootScope, youtubeEmbedUtils) {
 	// console.log('instantiate ytUploadService');
 	var ytUploadService = {
 		waitForLoad: _waitForLoad,
@@ -11,11 +11,7 @@ app.service('ytUploadService', function($window, $q, $rootScope) {
 	var windowWatcher = $rootScope.$watch(_checkLoad, _onLoaded);
 
 	function _checkLoad() {
-		if(typeof $window.youTubeIframeAPIReady === 'undefined') {
-			return false;
-		} else {
-			return true;
-		}
+		return youtubeEmbedUtils.ready;
 	}
 
 	function _onLoaded(loaded) {

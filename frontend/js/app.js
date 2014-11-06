@@ -19,7 +19,8 @@ var app = angular.module('app', ['ng',
                                  'disqusHere',
                                  'angular-data.DSCacheFactory',
                                  'templateInclude',
-                                 'ngCsv'
+                                 'ngCsv',
+                                 'youtube-embed'
                                 ]);
 console.log('starting app');
 

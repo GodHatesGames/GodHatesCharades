@@ -72,10 +72,6 @@ module.exports = function(grunt) {
 				],
 				tasks: ['distBuildFrontend']
 			},
-			bootstrap: {
-				files: ['frontend/less/bootstrap-variables.less'],
-				tasks: ['buildBootstrap']
-			},
 			main: {
 				files: [
 					'frontend/less/*.less'
@@ -103,7 +99,7 @@ module.exports = function(grunt) {
 				}
 			},
 			dev: {
-				tasks: ['nodemon:dev', 'watch:bootstrap', 'watch:main', 'watch:components', 'watch:views'],
+				tasks: ['nodemon:dev', 'watch:main', 'watch:components', 'watch:views'],
 				options: {
 					logConcurrentOutput: true
 				}
@@ -112,8 +108,7 @@ module.exports = function(grunt) {
 		clean: {
 			distApi: 'dist/api',
 			distFrontend: 'dist/frontend',
-			stage: '.tmp',
-			bootstrap: 'frontend/bower_components/bootstrap/less/variables.less'
+			stage: '.tmp'
 		},
 		useminPrepare: {
 			html: '.tmp/stage/frontend/index.html',
@@ -122,18 +117,6 @@ module.exports = function(grunt) {
 			}
 		},
 		copy: {
-			// Bootstrap Less
-			bootstrap: {
-				files: [
-					{
-						expand: true,
-						cwd: 'frontend/less/',
-						src: 'bootstrap-variables.less',
-						dest: 'frontend/bower_components/bootstrap/less/',
-						rename: function(dest) {return dest + 'variables.less';}
-					}
-				]
-			},
 			// Stage
 			stageApi: {
 				files: [
@@ -308,18 +291,6 @@ module.exports = function(grunt) {
 			}
 		},
 		less: {
-			bootstrap: {
-				options: {
-					sourceMap: true,
-					sourceMapFilename: 'frontend/css/bootstrap.css.map', // where file is generated and located
-					sourceMapURL: '/css/bootstrap.css.map',
-					sourceMapBasepath: 'frontend',
-					sourceMapRootpath: '/'
-				},
-				files: {
-					'frontend/css/bootstrap.css': 'frontend/bower_components/bootstrap/less/bootstrap.less'
-				}
-			},
 			main: {
 				options: {
 					sourceMap: true,
@@ -330,7 +301,7 @@ module.exports = function(grunt) {
 				},
 				files: {
 					'frontend/css/main.css': 'frontend/less/main.less',
-					'frontend/css/animate-pulse.css': 'frontend/less/animate-pulse.less'
+					'frontend/css/bootstrap.css': 'frontend/less/bootstrap.less'
 				}
 			},
 			components: {
@@ -437,17 +408,10 @@ module.exports = function(grunt) {
 	// ]);
 
 	grunt.registerTask('buildCss', [
-		'buildBootstrap',
 		'less:main',
 		'less:components',
 		'less:views',
 		'autoprefixer'
-	]);
-
-	grunt.registerTask('buildBootstrap', [
-		'clean:bootstrap',
-		'copy:bootstrap',
-		'less:bootstrap'
 	]);
 
 	grunt.registerTask('prepareFrontend', [

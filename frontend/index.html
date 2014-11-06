@@ -31,7 +31,6 @@
 		<link rel="stylesheet" href="views/rulesView.css">
 		<link rel="stylesheet" href="views/setsView.css">
 		<link rel="stylesheet" href="components/examples.css">
-		<link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
 		<!-- endbuild -->
 
 		<!-- Google Analytics -->
@@ -96,6 +95,7 @@
 		<script src="bower_components/disqus-here/src/disqus-here.js"></script>
 		<script src="bower_components/angular-cache/dist/angular-cache.min.js"></script>
 		<script src="bower_components/fuse.js/src/fuse.js"></script>
+		<script src="bower_components/angular-youtube-mb/src/angular-youtube-embed.js"></script>
 		<script src="js/vendor/parse-1.2.16.min.js"></script>
 		<!-- <script src="js/vendor/leanplum.js"></script> -->
 		<script src="js/config.js"></script>
@@ -241,14 +241,5 @@
 		<!-- Youtube Embed Button -->
 		<script src="https://apis.google.com/js/platform.js"></script>
 		<!-- end Youtube Embed Button -->
-
-		<script type="text/javascript">
-			window.onYouTubeIframeAPIReady = function() {
-				console.log('$window.onYouTubeIframeAPIReady');
-				window.youTubeIframeAPIReady = true;
-				angular.element(document).scope().$digest();
-			}
-		</script>
-		<script src="//www.youtube.com/iframe_api"></script>
 	</body>
 </html>
