@@ -9,9 +9,9 @@
 	font-family: 'GodHatesCharades';
 	src: url('../fonts/GodHatesCharades.eot');
 	src: url('../fonts/GodHatesCharades.eot?#iefix') format('embedded-opentype'),
-	     url('../fonts/GodHatesCharades.woff') format('woff'),
-	     url('../fonts/GodHatesCharades.ttf') format('truetype'),
-	     url('../fonts/GodHatesCharades.svg#webfont') format('svg');
+		 url('../fonts/GodHatesCharades.woff') format('woff'),
+		 url('../fonts/GodHatesCharades.ttf') format('truetype'),
+		 url('../fonts/GodHatesCharades.svg#webfont') format('svg');
 }
 
 html {
@@ -239,6 +239,10 @@ input.form-control {
 	&.btn-inline {
 		display: inline-block;
 	}
+
+	@media (max-width: @screen-sm-max) {
+		font-size: 70%;
+	}
 }
 
 .socialUnlock {
@@ -313,4 +317,84 @@ input.form-control {
 	.content > .container:not(.flush) {
 		padding-top: 0px;
 	}
+}
+
+// Equal height columns
+// from http://www.minimit.com/articles/solutions-tutorials/bootstrap-3-responsive-columns-of-same-height
+/* columns of same height styles */
+.container-style {
+	display:table;
+	width: 100%;
+}
+.row-style {
+	display:table-row;
+
+	&:before {
+		content: none;
+	}
+	&:after {
+		content: none;
+	}
+}
+.col-style {
+	display:table-cell;
+	float:none;
+	vertical-align:top;
+}
+.container-xs-height {
+	.container-style;
+}
+.row-xs-height {
+	.row-style;
+}
+.col-xs-height {
+	.col-style;
+}
+@media (min-width: @screen-xs-min) {
+	.container-sm-height {
+		.container-style;
+	}
+	.row-sm-height {
+		.row-style;
+	}
+	.col-sm-height {
+		.col-style;
+	}
+}
+@media (min-width: @screen-sm-min) {
+	.container-md-height {
+		.container-style;
+	}
+	.row-md-height {
+		.row-style;
+	}
+	.col-md-height {
+		.col-style;
+	}
+}
+@media (min-width: @screen-md-min) {
+	.container-lg-height {
+		.container-style;
+	}
+	.row-lg-height {
+		.row-style;
+	}
+	.col-lg-height {
+		.col-style;
+	}
+}
+/* vertical alignment styles */
+.col-top {
+	vertical-align:top;
+}
+.col-middle {
+	vertical-align:middle;
+}
+.col-bottom {
+	vertical-align:bottom;
+}
+
+.col-flush {
+	padding-left: 0;
+	padding-right: 0;
 }

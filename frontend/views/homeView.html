@@ -2,42 +2,49 @@
 
 
 
-	<section class="row row-compact intro">
-		<div class="col-sm-12 col-md-9 col-lg-9">
-			<!-- <iframe-fluid url="https://vid.me/e/T42?autoplay=1&loop=1"
-			              class="intro-video"
-			              fluid="true"></iframe-fluid> -->
-			<div class="embed-responsive embed-responsive-16by9">
-				<youtube-video class="embed-responsive-item"
-				               video-id="'mLwIEl59DKg'"
-				               player-vars="playerVars">
-				</youtube-video>
+	<section class="row intro bg-dark">
+		<div class="container-md-height">
+			<div class="row row-md-height">
+				<div class="col-md-height col-sm-9 col-flush col-middle">
+					<div class="embed-responsive">
+						<youtube-video class="intro-video embed-responsive-item"
+						               video-id="'mLwIEl59DKg'"
+						               player-vars="playerVars">
+						</youtube-video>
+					</div>
+				</div>
+				<div class="preorder col-md-height col-sm-3 col-flush">
+					<div class="row">
+						<div class="col-xs-6 col-sm-12">
+							<img src="img/preorder1.svg"
+							     class="img-responsive" 
+							     alt="350+ cards"/>
+						</div>
+						<div class="col-xs-6 col-sm-12">
+							<img src="img/preorder2.svg"
+							     class="img-responsive" 
+							     alt="3-14 players"/>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-offset-3 col-xs-6 col-sm-offset-0 col-sm-12">
+							<a href="http://bit.ly/10f9Kv6"
+							   class="btn btn-success btn-block animated " 
+							   ng-class="preorderClass"
+							   target="_blank">
+								Preorder!
+							</a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-		<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-			<img src="img/preorder1.svg"
-			     class="img-responsive" 
-			     alt="350+ cards"/>
-		</div>
-		<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-			<img src="img/preorder2.svg"
-			     class="img-responsive" 
-			     alt="3-14 players"/>
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-
-			<a href="http://bit.ly/10f9Kv6"
-			   class="btn btn-success btn-block animated " 
-			   ng-class="preorderClass"
-			   target="_blank">
-				Preorder!
-			</a>
-		</div>
+		
 	</section>
 	
 	<!-- Vote section -->
 	<section id="voting"
-	         class="voting row bg-dark">
+	         class="voting row bg-light">
 		<h2>Vote on the funniest content for our first release.</h2>
 		<vote></vote>
 

@@ -60,11 +60,22 @@
 
 	/* Section - intro */
 	&.intro {
-		.intro-video {
-			z-index: 1;
+		padding: 0;
+
+		.embed-responsive {
+			padding-bottom: 53.25%;
 		}
-		.info {
-			font-size: 15px;
+		.intro-video {
+			height: 100%;
+		}
+		
+		.preorder {
+			padding-top: 15px;
+			background-color: @color-scenario;
+
+			@media (max-width: @screen-sm-er-max) {
+				padding-bottom: 15px;
+			}
 		}
 	/* end &.intro */
 	}
