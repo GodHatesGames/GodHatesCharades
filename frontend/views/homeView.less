@@ -64,8 +64,10 @@
 
 	/* Section - intro */
 	&.intro {
-		margin-left: -45px;
-		margin-right: -45px;
+		@media (min-width: @screen-sm-min) {
+			margin-left: -45px;
+			margin-right: -45px;
+		}
 
 		.intro-video {
 			padding-left: 0;
