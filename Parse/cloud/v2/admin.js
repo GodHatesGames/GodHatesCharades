@@ -6,6 +6,7 @@ exports.getAllSets = getAllSets;
 exports.addCardToSet = addCardToSet;
 exports.removeSetItem = removeSetItem;
 exports.createSet = createSet;
+exports.destroySet = destroySet;
 exports.updateSuggestionText = updateSuggestionText;
 
 function getAllSuggestions(request, response) {
@@ -236,6 +237,47 @@ function createSet(request, response) {
 
 	function onError(error) {
 		console.log('createSet createNewSet Error');
+		response.error(error);
+	}
+
+}
+
+function destroySet(request, response) {
+	console.log('destroySet');
+	Parse.Cloud.useMasterKey();
+	console.log('request.user.id:' + request.user.id);
+	if(request.user) {
+		userUtils.isUserAdmin(request.user.id)
+			.then(destroyItem, onError);
+	} else {
+		onError();
+	}
+
+	function destroyItem(isAdmin) {
+		console.log('destroySet destroyItem');
+		if(isAdmin) {
+			console.log('user is admin');
+			// create new setitem and add setitem to set
+			var SetObject = Parse.Object.extend('Set');
+			var setToDelete = new SetObject();
+			setToDelete.id = request.params.id;
+			setToDelete.destroy({
+				success: onSuccess,
+				error: onError
+			});
+		} else {
+			console.log('user is not admin');
+			onError('You need to be an admin to access this page.');
+		}
+	}
+
+	function onSuccess(setItem) {
+		// console.log('destroySet destroyItem success');
+		response.success(setItem);
+	}
+
+	function onError(error) {
+		console.log('destroySet destroyItem Error');
 		response.error(error);
 	}
 

@@ -207,8 +207,8 @@ app.config(function($stateProvider,
 		title: 'Set Details',
 		templateUrl: 'views/setsDetailView.html',
 		resolve: {
-			allSets: ['sets', function(sets) {
-				return sets.getAllSets();
+			set: ['sets', '$stateParams', function(sets, $stateParams) {
+				return sets.getSet($stateParams.id);
 			}]
 		},
 		controller: 'setsDetailView'

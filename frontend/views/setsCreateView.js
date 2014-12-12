@@ -1,29 +1,23 @@
 'use strict';
-app.controller('setsCreateView', function($scope, $state) {
+app.controller('setsCreateView', function($scope, $state, sets) {
 	$scope.saving = false;
-	$scope.createSet = function() {
+	$scope.createSet = _createSet;
+
+	function _createSet() {
 		$scope.saving = true;
 
-		Parse.Cloud.run(
-			CONFIG.PARSE_VERSION + 'createSet',
-			{
-				name: $scope.name
-			},
-			{
-				success: onSuggestionsLoaded,
-				error: onSuggestionsError
-			}
-		);
+		sets.createSet({
+			name: $scope.name
+		})
+		.then(_onSetCreated, _onCreateError);
 
-		function onSuggestionsLoaded(newSet) {
+		function _onSetCreated(newSet) {
 			console.log('newSet created');
-			$scope.sets.data.push(newSet);
-			$scope.sets.byId[newSet.id] = newSet;
 			$state.go('admin.sets');
 			$scope.saving = false;
 		}
 
-		function onSuggestionsError(err) {
+		function _onCreateError(err) {
 			console.log('err creating set:', err);
 			$scope.saving = false;
 		}

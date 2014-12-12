@@ -1,9 +1,9 @@
 'use strict';
-app.controller('setsDetailView', function(allSets, $scope, $state, $stateParams, cardService, sets) {
+app.controller('setsDetailView', function(set, $scope, $state, $stateParams, cardService, sets) {
 	$scope.saving = false;
 	$scope.cardsLoading = true;
 	$scope.cardService = cardService;
-	$scope.set = sets.byId[$stateParams.id];
+	$scope.set = set;
 	$scope.setItems =[];
 	$scope.setItemsByCardId = {};
 	$scope.setItemsByCardType = {
@@ -11,9 +11,9 @@ app.controller('setsDetailView', function(allSets, $scope, $state, $stateParams,
 		1: []
 	};
 	$scope.$on('suggestionAdded', onSuggestionAdded);
-	console.log('set:', $scope.set);
+	console.log('set:', set);
 
-	sets.getSetItemsForSet($scope.set)
+	sets.getSetItemsForSet(set)
 	.then(function (setItems) {
 		$scope.cardsLoading = false;
 		$scope.setItemsByCardId = {};
@@ -26,7 +26,7 @@ app.controller('setsDetailView', function(allSets, $scope, $state, $stateParams,
 
 	$scope.deleteSet = function() {
 		$scope.saving = true;
-		sets.deleteSet($scope.set)
+		sets.deleteSet(set)
 		.then(function success() {
 			$scope.saving = false;
 			console.log('newSet deleted');
@@ -63,7 +63,7 @@ app.controller('setsDetailView', function(allSets, $scope, $state, $stateParams,
 	function onSuggestionAdded(event, suggestion) {
 		// if the card isn't already in the set, then created a new set item
 		if(!$scope.setItemsByCardId[suggestion.id]) {
-			sets.addCardToSet(suggestion, $scope.set).
+			sets.addCardToSet(suggestion, set).
 			then(function onSuccess(newSetItem) {
 				// force the card data to avoid a reload
 				newSetItem.attributes.card = suggestion;
