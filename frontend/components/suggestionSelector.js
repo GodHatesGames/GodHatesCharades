@@ -5,8 +5,7 @@ app.directive('suggestionSelector', function(cardService, $filter, $state, $moda
 		templateUrl: 'components/suggestionSelector.html',
 		replace: true,
 		scope: {
-			search: '=search',
-			showAdd: '=showAdd'
+			search: '=search'
 		},
 		link: function($scope, $element) {
 			// $scope.$watch('pairIndex', $scope.onPairIndexChanged);
@@ -16,7 +15,6 @@ app.directive('suggestionSelector', function(cardService, $filter, $state, $moda
 			$scope.cardService = cardService;
 			$scope.loading = false;
 			$scope.suggestions = [];
-			$scope.skipIndex = 0; //TODO: make private
 			$scope.allLoaded = false;
 			$scope.tab = 'best';
 			$scope.$watch('search', _onSearchUpdated);
@@ -26,7 +24,6 @@ app.directive('suggestionSelector', function(cardService, $filter, $state, $moda
 			$scope.reloadSuggestions = function(tab) {
 				$scope.tab = tab;
 				$scope.suggestions = [];
-				$scope.skipIndex = 0;
 				$scope.allLoaded = false;
 				$scope.loadSuggestions();
 			};
@@ -34,9 +31,6 @@ app.directive('suggestionSelector', function(cardService, $filter, $state, $moda
 			$scope.loadSuggestions = function() {
 				// console.log($state.current.name);
 				if(!$scope.loading && !$scope.allLoaded) {
-					var options = {
-						skipIndex: $scope.skipIndex
-					};
 					var callbacks = {
 						success: onSuggestionsLoaded,
 						error: onSuggestionsError
@@ -59,7 +53,6 @@ app.directive('suggestionSelector', function(cardService, $filter, $state, $moda
 				$scope.allLoaded = true;
 				cardService.cache(suggestions);
 				$scope.suggestions = $scope.suggestions.concat(suggestions);
-				$scope.skipIndex += suggestions.length;
 				$scope.loading = false;
 				$scope.$digest();
 			}

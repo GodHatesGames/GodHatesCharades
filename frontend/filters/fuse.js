@@ -1,5 +1,5 @@
 'use strict';
-app.filter('fuse', function() {
+app.filter('fuse', function($filter) {
 	return function (array, keys, target, sort){
 		if(array.length  > 0 && keys.length > 0 && target) {
 			if(sort === undefined)
@@ -14,7 +14,7 @@ app.filter('fuse', function() {
 			var fuse = new Fuse(array, options);
 			return fuse.search(target);
 		} else {
-			return array;
+			return $filter('orderBy')(array, keys);
 		}
 	};
 });

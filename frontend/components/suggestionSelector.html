@@ -1,7 +1,7 @@
 <div class="suggestionSelector">
 	<h5>Suggestions: {{suggestions.length}}</h5>
 	<div class="cardList"
-		 ng-hide="loading && skipIndex == 0"
+		 ng-hide="loading"
 		 infinite-scroll="loadSuggestions()"
 		 infinite-scroll-disabled="loading"
 		 infinite-scroll-immediate-check="true">
@@ -10,7 +10,6 @@
 			   class="form-control">
 			<table class="table table-striped">
 				<tr>
-					<th ng-show="showAdd">Add</th>
 					<th>Suggestion</th>
 					<th>Type</th>
 					<th>Author</th>
@@ -21,27 +20,19 @@
 				    tooltip-placement="left"
 				    tooltip-popup-delay="300"
 				    tooltip-append-to-body="true">
-					<!-- Add button -->
-					<td class="tableButton"
-					    ng-show="showAdd">
-						<a ng-click="selectSuggestion(suggestion)"
-						   class="btn btn-success">
-							+
-						</a>
-					</td>
 					<!-- Text -->
 					<td ng-dblclick="editSuggestion(this, suggestion)"
 					    class="noselect">
-						{{suggestion.attributes.text}}
+						{{::suggestion.attributes.text}}
 						<span class="legal"
-						      ng-if="suggestion.attributes.legal">
-							{{suggestion.attributes.legal}}
+						      ng-if="::suggestion.attributes.legal">
+							{{::suggestion.attributes.legal}}
 						</span>
 					</td>
 					<!-- Type -->
 					<td ng-class="cardService.getTypeClass(suggestion)"></td>
 					<!-- Author Name -->
-					<td ng-bind="suggestion.attributes.owner.attributes.name"></td>
+					<td>{{::suggestion.attributes.owner.attributes.name}}</td>
 				</tr>
 			</table>
 	</div>

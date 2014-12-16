@@ -36,8 +36,6 @@ function getAllSuggestions(request, response) {
 			query.equalTo('moderated', true);
 			query.include('owner');
 			query.ascending('type');
-			if(request.params.skipIndex)
-				query.skip(request.params.skipIndex);
 			query.find({
 				success: onSuccess,
 				error: onError
