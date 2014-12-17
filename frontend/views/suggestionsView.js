@@ -1,5 +1,5 @@
 'use strict';
-app.controller('suggestionsView', function(suggestions, allSets, $scope, cardService) {
+app.controller('suggestionsView', function(suggestions, allSets, $scope, cardService, $modal) {
 	$scope.suggestions = suggestions.data;
 	$scope.allSets = allSets;
 	$scope.cardService = cardService;
