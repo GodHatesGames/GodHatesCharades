@@ -183,6 +183,19 @@ app.config(function($stateProvider,
 		controller: 'exportView'
 	});
 
+	$stateProvider.state('admin.suggestions', {
+		url: '/suggestions',
+		title: 'Suggestions',
+		templateUrl: 'views/suggestionsView.html',
+		resolve: {
+			suggestions: 'getAllSuggestions',
+			allSets: ['sets', function(sets) {
+				return sets.getAllSets();
+			}]
+		},
+		controller: 'suggestionsView'
+	});
+
 	$stateProvider.state('admin.sets', {
 		url: '/sets',
 		title: 'Sets',

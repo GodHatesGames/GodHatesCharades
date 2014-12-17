@@ -1,17 +1,33 @@
-<div class="suggestionSelector">
-	<h5>Suggestions: {{suggestions.length}}</h5>
+<div id="suggestionView">
+	<h2>Suggestions</h2>
 	<div class="cardList"
-		 ng-if="suggestions">
+		 ng-hide="loading">
+		<h3>{{suggestions.length}} suggestions loaded</h3>
 		<input ng-model="searchSelector"
 			   placeholder="search here"
 			   class="form-control">
 			<table class="table table-striped">
 				<tr>
-					<th>Suggestion</th>
-					<th>Type</th>
-					<th>Author</th>
+					<th>
+						<a ng-click="overrideSort(SORT_TEXT)">
+							Suggestion
+							<span ng-class="getSortClass(SORT_TEXT)"></span>
+						</a>
+					</th>
+					<th>
+						<a ng-click="overrideSort(SORT_TYPE)">
+							Type
+							<span ng-class="getSortClass(SORT_TYPE)"></span>
+						</a>
+					</th>
+					<th>
+						<a ng-click="overrideSort(SORT_AUTHOR)">
+							Author
+							<span ng-class="getSortClass(SORT_AUTHOR)"></span>
+						</a>
+					</th>
 				</tr>
-				<tr ng-repeat="(index, suggestion) in suggestions | fuse:['attributes.text']:searchSelector"
+				<tr ng-repeat="(index, suggestion) in suggestions | fuse:searchProps:searchSelector:sortOverrideKeys[sortDirection]"
 				    ng-init="newText = suggestion.attributes.text"
 				    tooltip="Double-click to edit"
 				    tooltip-placement="left"
