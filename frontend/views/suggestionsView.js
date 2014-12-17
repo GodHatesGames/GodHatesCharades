@@ -20,6 +20,7 @@ app.controller('suggestionsView', function(suggestions, allSets, $scope, cardSer
 	$scope.sortDirection = 'descending';
 	$scope.overrideSort = _overrideSort;
 	$scope.getSortClass = _getSortClass;
+	$scope.editSuggestion = _editSuggestion;
 
 	function _overrideSort(type) {
 		if($scope.sortOverrideKeys && $scope.sortOverrideKeys === type) {
@@ -49,6 +50,29 @@ app.controller('suggestionsView', function(suggestions, allSets, $scope, cardSer
 			}
 		} else {
 			return;
+		}
+	}
+
+	function _editSuggestion(isolatedScope, suggestion) {
+		var modalScope = $scope.$new(true);
+		modalScope.suggestion = suggestion;
+		modalScope.onSuccess = _onEditSuccess;
+		modalScope.onError = _onEditError;
+
+		var modalInstance = $modal.open({
+			templateUrl: 'components/cardForm.modal.html',
+			scope: modalScope,
+			size: 'sm'
+		})
+
+		function _onEditSuccess() {
+			console.log('modal success');
+			modalInstance.dismiss();
+		}
+
+		function _onEditError(err) {
+			console.log('modal error');
+			modalInstance.dismiss();
 		}
 	}
 });
