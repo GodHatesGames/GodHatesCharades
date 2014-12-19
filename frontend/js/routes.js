@@ -192,7 +192,7 @@ app.config(function($stateProvider,
 			allSets: ['sets', function(sets) {
 				return sets.getAllSets();
 			}],
-			setItemsByCardId: ['sets', function(sets) {
+			setIdsByCardId: ['sets', function(sets) {
 				return sets.getAllSetsAndItems();
 			}]
 		},

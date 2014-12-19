@@ -8,7 +8,7 @@ app.service('sets', function($q, $rootScope) {
 		getSet: getSet,
 		byId: {},
 		setItemsById: {},
-		setItemsByCardId: {},
+		setIdsByCardId: {},
 		deleteSet: deleteSet,
 		createSet: createSet,
 		getSetItemsForSet: getSetItemsForSet,
@@ -57,7 +57,7 @@ app.service('sets', function($q, $rootScope) {
 			});
 			return $q.all(setItemPromises)
 			.then(function() {
-				return sets.setItemsByCardId;
+				return sets.setIdsByCardId;
 			});
 		}
 	}
@@ -157,11 +157,11 @@ app.service('sets', function($q, $rootScope) {
 						_.each(setItems, function(setItem) {
 							var setId = setItem.get('owner').id;
 							var cardId = setItem.get('card').id;
-							if(!sets.setItemsByCardId[cardId]) {
-								sets.setItemsByCardId[cardId] = [];
+							if(!sets.setIdsByCardId[cardId]) {
+								sets.setIdsByCardId[cardId] = [];
 							}
-							if(sets.setItemsByCardId[cardId].indexOf(setId) === -1)
-								sets.setItemsByCardId[cardId].push(setId);
+							if(sets.setIdsByCardId[cardId].indexOf(setId) === -1)
+								sets.setIdsByCardId[cardId].push(setId);
 						});
 						deferred.resolve(setItems);
 					},

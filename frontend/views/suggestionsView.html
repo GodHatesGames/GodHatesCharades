@@ -31,14 +31,14 @@
 					</th>
 				</tr>
 				<tr ng-repeat="(index, suggestion) in suggestions | fuse:searchProps:searchSelector:sortOverrideKeys[sortDirection]"
-				    ng-init="newText = suggestion.attributes.text"
-				    tooltip="Double-click to edit"
-				    tooltip-placement="left"
-				    tooltip-popup-delay="300"
-				    tooltip-append-to-body="true">
+				    ng-init="newText = suggestion.attributes.text">
 					<!-- Text -->
 					<td ng-dblclick="editSuggestion(this, suggestion)"
-					    class="noselect">
+					    class="noselect"
+					    tooltip="Double-click to edit"
+					    tooltip-placement="left"
+					    tooltip-popup-delay="300"
+					    tooltip-append-to-body="true">
 						{{::suggestion.attributes.text}}
 						<span class="legal"
 						      ng-if="::suggestion.attributes.legal">
@@ -50,8 +50,8 @@
 					<!-- Author Name -->
 					<td>{{::suggestion.attributes.owner.attributes.name}}</td>
 					<td>
-						<span ng-repeat="setItems in setItemsByCardId[suggestion.id]">
-							{{setItems}}
+						<span ng-repeat="setId in sets.setIdsByCardId[suggestion.id]">
+							<span class="label label-default">{{sets.byId[setId].attributes.name}}</span>
 						</span>
 					</td>
 				</tr>
