@@ -1,7 +1,8 @@
 'use strict';
-app.controller('suggestionsView', function(suggestions, allSets, $scope, cardService, $modal) {
+app.controller('suggestionsView', function(suggestions, allSets, setItemsByCardId, $scope, cardService, $modal, sets) {
 	$scope.suggestions = suggestions.data;
 	$scope.allSets = allSets;
+	$scope.setItemsByCardId = setItemsByCardId;
 	$scope.cardService = cardService;
 	$scope.SORT_TEXT = {
 		descending: ['attributes.text'],

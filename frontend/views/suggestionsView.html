@@ -26,6 +26,9 @@
 							<span ng-class="getSortClass(SORT_AUTHOR)"></span>
 						</a>
 					</th>
+					<th>
+						SETS
+					</th>
 				</tr>
 				<tr ng-repeat="(index, suggestion) in suggestions | fuse:searchProps:searchSelector:sortOverrideKeys[sortDirection]"
 				    ng-init="newText = suggestion.attributes.text"
@@ -46,6 +49,11 @@
 					<td ng-class="cardService.getTypeClass(suggestion)"></td>
 					<!-- Author Name -->
 					<td>{{::suggestion.attributes.owner.attributes.name}}</td>
+					<td>
+						<span ng-repeat="setItems in setItemsByCardId[suggestion.id]">
+							{{setItems}}
+						</span>
+					</td>
 				</tr>
 			</table>
 	</div>

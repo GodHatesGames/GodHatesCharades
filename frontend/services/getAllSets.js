@@ -4,9 +4,11 @@ app.service('sets', function($q, $rootScope) {
 	var sets = {
 		data: [],
 		getAllSets: getAllSets,
+		getAllSetsAndItems: getAllSetsAndItems,
 		getSet: getSet,
 		byId: {},
 		setItemsById: {},
+		setItemsByCardId: {},
 		deleteSet: deleteSet,
 		createSet: createSet,
 		getSetItemsForSet: getSetItemsForSet,
@@ -43,6 +45,21 @@ app.service('sets', function($q, $rootScope) {
 			}
 		);
 		return deferred.promise;
+	}
+
+	function getAllSetsAndItems(scope) {
+		return getAllSets().then(_getAllSetItemsForSets);
+
+		function _getAllSetItemsForSets(allSets) {
+			var setItemPromises = [];
+			_.each(sets.byId, function(set) {
+				setItemPromises.push(getSetItemsForSet(set));
+			});
+			return $q.all(setItemPromises)
+			.then(function() {
+				return sets.setItemsByCardId;
+			});
+		}
 	}
 
 	function getSet(id) {
@@ -137,6 +154,15 @@ app.service('sets', function($q, $rootScope) {
 					success: function(setItems) {
 						delete gettingSetItemsPromises[set.id];
 						sets.setItemsById[set.id] = setItems;
+						_.each(setItems, function(setItem) {
+							var setId = setItem.get('owner').id;
+							var cardId = setItem.get('card').id;
+							if(!sets.setItemsByCardId[cardId]) {
+								sets.setItemsByCardId[cardId] = [];
+							}
+							if(sets.setItemsByCardId[cardId].indexOf(setId) === -1)
+								sets.setItemsByCardId[cardId].push(setId);
+						});
 						deferred.resolve(setItems);
 					},
 					error: function(err) {

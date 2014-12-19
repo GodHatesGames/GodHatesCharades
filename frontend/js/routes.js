@@ -191,6 +191,9 @@ app.config(function($stateProvider,
 			suggestions: 'getAllSuggestions',
 			allSets: ['sets', function(sets) {
 				return sets.getAllSets();
+			}],
+			setItemsByCardId: ['sets', function(sets) {
+				return sets.getAllSetsAndItems();
 			}]
 		},
 		controller: 'suggestionsView'
