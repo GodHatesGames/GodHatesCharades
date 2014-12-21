@@ -4,14 +4,17 @@
 .mailchimp {
 
 	.email {
-		text-indent: 15px;
 		height: unit(@mailchimp-height, px);
 		line-height: unit(@mailchimp-height, px);
 		font-weight: bold;
 		margin: 0;
 		border: 0;
 		width: 100%;
-		font-size: 22px;
+		@media (max-width: @screen-sm-max) {
+			height: unit(@mailchimp-height * 0.81, px);
+			line-height: unit(@mailchimp-height * 0.81, px);
+			font-size: 81%;
+		}
 	}
 
 	.submit {
