@@ -19,12 +19,7 @@
 		     ng-hide="loading || allApproved || !suggestion">
 			<card suggestion="suggestion"
 			      updatable="true"></card>
-			<a ui-sref="card(cardService.getLink(suggestion))"
-			   ng-if="suggestion"
-			   class="card-link btn btn-default btn-xs"
-			   target="blank">
-				View Card Page
-			</a>
+			<card-link suggestion="suggestion"></card-link>
 			
 			<card-form suggestion="suggestion"
 			           save-on-submit="false"></card-form>

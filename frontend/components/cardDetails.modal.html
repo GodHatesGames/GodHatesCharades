@@ -4,7 +4,17 @@
 	</h3>
 </div>
 <div class="modal-body">
-	<card-form suggestion="suggestion"
-	           on-success="onSuccess"
-	           on-error="onError"></card-form>
+	<div class="row">
+		<div class="col-xs-4">
+			<card suggestion="suggestion"
+			      updatable="true"></card>
+			<card-link suggestion="suggestion"></card-link>
+		</div>
+		<div class="col-xs-8">
+			<card-form suggestion="suggestion"
+			           on-success="onSuccess"
+			           on-error="onError"></card-form>
+			<card-info-table suggestion="suggestion"></card-info-table>
+		</div>
+	</div>
 </div>

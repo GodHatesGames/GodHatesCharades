@@ -8,12 +8,7 @@
 		<div class="col-xs-4">
 			<card suggestion="suggestion"
 			      updatable="true"></card>
-			<a ui-sref="card(cardService.getLink(suggestion))"
-			   ng-if="suggestion"
-			   class="card-link btn btn-default btn-xs"
-			   target="blank">
-				View Card Page
-			</a>
+			<card-link suggestion="suggestion"></card-link>
 		</div>
 		<div class="col-xs-8">
 			<card-form suggestion="suggestion"

@@ -1,0 +1,33 @@
+<table class="cardInfoTable table table-striped">
+	<tr>
+		<th>Votes</th>
+		<th>Skips</th>
+		<th>KDR</th>
+		<th>Author</th>
+	</tr>
+	<tr>
+		<td>
+			<ng-pluralize
+			    count="getTotalVotes()"
+			    when="{'0': 'No votes.',
+			           'one': '1 pity vote',
+			           'other': '{{getTotalVotes()}} votes'}">
+			</ng-pluralize>
+		</td>
+		<td>
+			<ng-pluralize
+			    count="getTotalSkips()"
+			    when="{'0': 'No skips.',
+			           'one': '1 measly skip',
+			           'other': '{{getTotalSkips()}} skips'}">
+			</ng-pluralize>
+		</td>
+		<td>{{getKdr()}}</td>
+		<td>
+			<a ui-sref="user({userid: suggestion.attributes.owner.id})"
+			   target="_blank">
+				<b>{{suggestion.attributes.owner.attributes.name}}</b>
+			</a>
+		</td>
+	</tr>
+</table>
