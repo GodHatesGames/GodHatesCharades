@@ -60,7 +60,7 @@ app.controller('suggestionsView', function(suggestions, allSets, setIdsByCardId,
 		modalScope.onError = _onEditError;
 
 		var modalInstance = $modal.open({
-			templateUrl: 'components/cardForm.modal.html',
+			templateUrl: 'components/cardDetails.modal.html',
 			scope: modalScope,
 			size: 'lg'
 		})

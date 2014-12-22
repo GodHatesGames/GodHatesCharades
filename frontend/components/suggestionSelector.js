@@ -54,7 +54,7 @@ app.directive('suggestionSelector', function(getAllSuggestions, cardService, $fi
 				var modalInstance = $modal.open({
 					templateUrl: 'components/cardForm.modal.html',
 					scope: modalScope,
-					size: 'sm'
+					size: 'md'
 				})
 
 				function _onEditSuccess() {
