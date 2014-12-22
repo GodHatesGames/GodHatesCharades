@@ -3,62 +3,22 @@
 	      updatable="true"></card>
 	<a ui-sref="card(cardService.getLink(suggestion))"
 	   ng-if="suggestion"
-	   class="card-link btn btn-success btn-xs"
+	   class="card-link btn btn-default btn-xs"
 	   target="blank">
 		View Card Page
 	</a>
 	<form class="form-horizontal"
 	      role="form"
 	      ng-submit="saveSuggestion()">
-		<div class="form-group well">
-			<p>Legal Info</p>
-			<div class="radio col-md-3">
-				<label>
-					<input class="legal"
-					       type="radio"
-					       ng-model="suggestion.attributes.legal"
-					       value="">
-					n/a
-				</label>
-			</div>
-			<div class="radio col-md-3">
-				<label>
-					<input class="legal"
-					       type="radio"
-					       ng-model="suggestion.attributes.legal"
-					       value="©">
-					&copy;
-				</label>
-			</div>
-			<div class="radio col-md-3">
-				<label>
-					<input class="legal"
-					       type="radio"
-					       ng-model="suggestion.attributes.legal"
-					       value="™">
-					&trade;
-				</label>
-			</div>
-			<div class="radio col-md-3">
-				<label>
-					<input class="legal"
-					       type="radio"
-					       ng-model="suggestion.attributes.legal"
-					       value="®">
-					&reg;
-				</label>
-			</div>
+		<div class="btn-group legal">
+			<a class="btn btn-success btn-plain btn-xs" ng-model="suggestion.attributes.legal" btn-radio="" uncheckable>None</a>
+			<a class="btn btn-success btn-plain btn-xs" ng-model="suggestion.attributes.legal" btn-radio="'©'" uncheckable>&copy;</a>
+			<a class="btn btn-success btn-plain btn-xs" ng-model="suggestion.attributes.legal" btn-radio="'™'" uncheckable>&trade;</a>
+			<a class="btn btn-success btn-plain btn-xs" ng-model="suggestion.attributes.legal" btn-radio="'®'" uncheckable>&reg;</a>
 		</div>
-		<div class="form-group">
-			<div class="row">
-				<div class="col-md-12">
-					<label for="suggestionText">New Text</label>
-					<input type="text"
-					       class="form-control"
-					       id="suggestionText"
-					       ng-model="suggestion.attributes.text">
-				</div>
-			</div>
-		</div>
+		<input type="text"
+		       class="form-control"
+		       id="suggestionText"
+		       ng-model="suggestion.attributes.text">
 	</form>
 </div>

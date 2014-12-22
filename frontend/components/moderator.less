@@ -4,8 +4,12 @@
 		max-width: 200px;
 	}
 
-	.btn {
-		margin-right: 5px;
+	.btn-group .btn {
+		margin-left: 0;
+
+		&:not(:last-child) {
+			border-right: 1px solid white;
+		}
 	}
 
 	.cardContainer {

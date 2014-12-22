@@ -20,19 +20,21 @@
 			
 			<card-form suggestion="suggestion"
 			           save-on-submit="false"></card-form>
-
-			<button class="btn btn-xs btn-success"
-			        ng-click="approve()">
-				Approve &amp; Save
-			</button>
-			<button class="btn btn-xs btn-danger"
-			        ng-click="disapprove()">
-				Disapprove
-			</button>
-			<button ng-click="skip()"
-			        class="btn btn-xs btn-warning skip">
-				Ask me later
-			</button>
+			
+			<div class="btn-group">
+				<button class="btn btn-xs btn-success"
+				        ng-click="approve()">
+					Approve &amp; Save
+				</button>
+				<button class="btn btn-xs btn-danger"
+				        ng-click="disapprove()">
+					Disapprove
+				</button>
+				<button ng-click="skip()"
+				        class="btn btn-xs btn-info skip">
+					Ask me later
+				</button>
+			</div>
 		</div>
 	</div>
 	<suggestion-selector class="col-sm-6 col-md-6 col-lg-6"
