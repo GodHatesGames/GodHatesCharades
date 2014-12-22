@@ -112,6 +112,10 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMa
 		}
 	}
 
+	function getTotalViews() {
+		return this.getTotalVotes() + this.getTotalSkips();
+	}
+
 	function cache(cards) {
 		if(_.isArray(cards)) {
 			_.each(cards, function(element) {
@@ -134,6 +138,7 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMa
 		card.getKDR = getKDR;
 		card.getTotalVotes = getTotalVotes;
 		card.getTotalSkips = getTotalSkips;
+		card.getTotalViews = getTotalViews;
 		card.getTypeDisplay = getTypeDisplay;
 		card.getTypeClass = getTypeClass;
 		card.getSlug = getSlug;

@@ -45,6 +45,12 @@
 						</a>
 					</th>
 					<th>
+						<a ng-click="overrideSort(SORT_VIEWS)">
+							Views
+							<i ng-class="getSortClass(SORT_VIEWS)"></i>
+						</a>
+					</th>
+					<th>
 						Sets
 					</th>
 				</tr>
@@ -71,10 +77,11 @@
 					<td>{{::suggestion.getTotalVotes()}}</td>
 					<td>{{::suggestion.getTotalSkips()}}</td>
 					<td>{{::suggestion.getKDR()}}</td>
+					<td>{{::suggestion.getTotalViews()}}</td>
 					<td>
-						<span ng-repeat="setId in sets.setIdsByCardId[suggestion.id]">
+						<div ng-repeat="setId in sets.setIdsByCardId[suggestion.id]">
 							<span class="label label-default">{{sets.byId[setId].attributes.name}}</span>
-						</span>
+						</div>
 					</td>
 				</tr>
 			</table>

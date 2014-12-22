@@ -27,6 +27,10 @@ app.controller('suggestionsView', function(suggestions, allSets, setIdsByCardId,
 		descending: ['getKDR()'],
 		ascending: ['-getKDR()']
 	};
+	$scope.SORT_VIEWS = {
+		descending: ['getTotalViews()'],
+		ascending: ['-getTotalViews()']
+	};
 	$scope.searchProps = ['attributes.text'];
 	$scope.sortOverrideKeys;
 	$scope.sortDirection;
