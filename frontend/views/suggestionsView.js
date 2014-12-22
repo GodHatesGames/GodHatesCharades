@@ -15,9 +15,21 @@ app.controller('suggestionsView', function(suggestions, allSets, setIdsByCardId,
 		descending: ['attributes.owner.attributes.name'],
 		ascending: ['-attributes.owner.attributes.name']
 	};
+	$scope.SORT_VOTES = {
+		descending: ['attributes.totalVotes'],
+		ascending: ['-attributes.totalVotes']
+	};
+	$scope.SORT_SKIPS = {
+		descending: ['attributes.skipped'],
+		ascending: ['-attributes.skipped']
+	};
+	$scope.SORT_KDR = {
+		descending: ['cardService(attributes.totalVotes, attributes.skipped)'],
+		ascending: ['-cardService(attributes.totalVotes, attributes.skipped)']
+	};
 	$scope.searchProps = ['attributes.text'];
-	$scope.sortOverrideKeys = null;
-	$scope.sortDirection = 'descending';
+	$scope.sortOverrideKeys;
+	$scope.sortDirection;
 	$scope.overrideSort = _overrideSort;
 	$scope.getSortClass = _getSortClass;
 	$scope.editSuggestion = _editSuggestion;
@@ -30,8 +42,13 @@ app.controller('suggestionsView', function(suggestions, allSets, setIdsByCardId,
 			else
 				$scope.sortDirection = 'descending';
 		} else {
-			// assigned descending sort order
-			$scope.sortDirection = 'descending';
+			// assigned descending sort order to alpha and ascending as default to numerical
+			if(type === $scope.SORT_TEXT || type === $scope.SORT_AUTHOR) {
+				$scope.sortDirection = 'descending';
+			} else {
+				$scope.sortDirection = 'ascending';
+			}
+
 			// assign new type
 			$scope.sortOverrideKeys = type;
 		}

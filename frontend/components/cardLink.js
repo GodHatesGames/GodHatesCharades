@@ -5,14 +5,6 @@ app.directive('cardLink', function(cardService) {
 		replace: true,
 		scope: {
 			suggestion: '='
-		},
-		controller: function($scope, $element) {
-			$scope.getLink = _getLink;
-
-			function _getLink() {
-				if($scope.suggestion)
-					return cardService.getLink($scope.suggestion);
-			}
 		}
 	}
 });

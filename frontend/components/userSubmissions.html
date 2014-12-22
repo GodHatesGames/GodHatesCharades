@@ -21,7 +21,11 @@
 				<tr ng-repeat="(index, suggestion) in suggestions">
 					<td ng-bind="index + 1"></td>
 					<!-- Text -->
-					<td ng-bind="suggestion.attributes.text"></td>
+					<td>
+						<a ui-sref="card(suggestion.getLink())">
+							{{suggestion.attributes.text}}
+						</a>
+					</td>
 					<!-- Votes -->
 					<td ng-show="suggestion.attributes.totalVotes">
 						{{suggestion.attributes.totalVotes | number}}
@@ -35,7 +39,7 @@
 					<!-- Views -->
 					<td ng-bind="suggestion.attributes.skipped + suggestion.attributes.totalVotes"></td>
 					<!-- Type -->
-					<td ng-class="cardService.getTypeClass(suggestion)"></td>
+					<td ng-class="suggestion.getTypeClass()"></td>
 				</tr>
 			</table>
 	</div>

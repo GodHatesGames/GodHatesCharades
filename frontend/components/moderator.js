@@ -71,7 +71,7 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 						id: $scope.suggestion.id,
 						text: $scope.suggestion.get('text'),
 						legal: $scope.suggestion.get('legal'),
-						url: cardService.getUrl($scope.suggestion)
+						url: $scope.suggestion.getUrl()
 					},
 					email: {
 						subject: 'Thanks for submitting a card to God Hates Charades.',
@@ -93,7 +93,7 @@ app.directive('moderator', function(cardService, $compile, $rootScope) {
 						id: $scope.suggestion.id,
 						text: $scope.suggestion.get('text'),
 						legal: $scope.suggestion.get('legal'),
-						url: cardService.getUrl($scope.suggestion)
+						url: $scope.suggestion.getUrl()
 					},
 					email: {
 						subject: 'Thanks for submitting a card to God Hates Charades.',

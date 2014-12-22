@@ -1,20 +1,11 @@
-app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMatcherFactory, $state) {
+app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMatcherFactory, $state, $filter) {
 	var cardService = {
 		cache: cache,
 		clearCache: clearCache,
-		getTypeDisplay: getTypeDisplay,
 		getTypeDisplayByType: getTypeDisplayByType,
-		getTypeClass: getTypeClass,
 		getTypeClassByType: getTypeClassByType,
-		getImageUrl: getImageUrl,
 		getImageByType: getImageByType,
-		getTotalVotes: getTotalVotes,
-		getTotalSkips: getTotalSkips,
-		getKDR: getKDR,
 		getCard: getCard,
-		getSlug: getSlug,
-		getLink: getLink,
-		getUrl: getUrl,
 		getBlankCardByType: _getBlankCardByType
 	}
 
@@ -33,8 +24,8 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMa
 	var TYPE_CLASS_CHARACTER = "character";
 	var TYPE_CLASS_SCENARIO = "scenario";
 
-	function getTypeDisplay(card) {
-		var type = card.get('type');
+	function getTypeDisplay() {
+		var type = this.get('type');
 		return getTypeDisplayByType(type);
 	}
 
@@ -64,30 +55,30 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMa
 		}
 	}
 
-	function getSlug(card) {
-		var text = card.get('text');
+	function getSlug() {
+		var text = this.get('text');
 		return Slug.slugify(text);
 	}
 
-	function getLink(card) {
+	function getLink() {
 		return {
-			cardid: card.id,
-			slug: getSlug(card)
-		}
+			cardid: this.id,
+			slug: this.getSlug()
+		};
 	}
 
-	function getUrl(card) {
+	function getUrl() {
 		var cardState = $state.get('card').url;
 		var matcher = $urlMatcherFactory.compile(cardState);
-		var path = matcher.format(getLink(card));
+		var path = matcher.format(this.getLink());
 		return [
 			'http://godhatescharades.com',
 			path
 		].join('');
 	}
 
-	function getImageUrl(card) {
-		var type = card.get('type');
+	function getImageUrl() {
+		var type = this.get('type');
 		return getImageByType(type);
 	}
 
@@ -100,21 +91,25 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMa
 		}
 	}
 
-	function getTotalVotes(card) {
-		var totalVotes = card.get('totalVotes');
+	function getTotalVotes() {
+		var totalVotes = this.get('totalVotes');
 		return totalVotes ? totalVotes : 0;
 	}
 
-	function getTotalSkips(card) {
-		var totalSkips = card.get('skipped');
+	function getTotalSkips() {
+		var totalSkips = this.get('skipped');
 		return totalSkips ? totalSkips : 0;
 	}
 
-	function getKDR(kills, deaths) {
-		if(deaths === 0)
-			return '∞';
-		else
-			return kills / deaths;
+	function getKDR() {
+		var kills = this.getTotalVotes();
+		var deaths = this.getTotalSkips();
+		if(deaths === 0) {
+			return 0;
+		} else {
+			var kdr = kills / deaths;
+			return $filter('number')(kdr, 1);
+		}
 	}
 
 	function cache(cards) {
@@ -129,8 +124,20 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMa
 
 	function updateCache(updatedItem) {
 		cardCache.put(updatedItem.id, updatedItem);
+		addModelMethods(updatedItem);
 		var owner = updatedItem.get('owner');
 		ownerCache.put(owner.id, owner);
+	}
+
+	function addModelMethods(card) {
+		// add model methods
+		card.getKDR = getKDR;
+		card.getTotalVotes = getTotalVotes;
+		card.getTotalSkips = getTotalSkips;
+		card.getTypeDisplay = getTypeDisplay;
+		card.getSlug = getSlug;
+		card.getLink = getLink;
+		card.getUrl = getUrl;
 	}
 
 	function clearCache() {
@@ -160,6 +167,7 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMa
 				var parseCard = new Suggestion(currentCardCache);
 				var parseCardOwner = new Parse.User(currentOwnerCache);
 				parseCard.attributes.owner = parseCardOwner;
+				addModelMethods(parseCard);
 				return $q.when(parseCard);
 			} else {
 				// else fetch data

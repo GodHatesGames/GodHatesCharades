@@ -27,6 +27,24 @@
 						</a>
 					</th>
 					<th>
+						<a ng-click="overrideSort(SORT_VOTES)">
+							Votes
+							<span ng-class="getSortClass(SORT_VOTES)"></span>
+						</a>
+					</th>
+					<th>
+						<a ng-click="overrideSort(SORT_SKIPS)">
+							Skips
+							<span ng-class="getSortClass(SORT_SKIPS)"></span>
+						</a>
+					</th>
+					<th>
+						<a ng-click="overrideSort(SORT_KDR)">
+							KDR
+							<span ng-class="getSortClass(SORT_KDR)"></span>
+						</a>
+					</th>
+					<th>
 						Sets
 					</th>
 				</tr>
@@ -46,9 +64,12 @@
 						</span>
 					</td>
 					<!-- Type -->
-					<td ng-class="cardService.getTypeClass(suggestion)"></td>
+					<td ng-class="suggestion.getTypeClass()"></td>
 					<!-- Author Name -->
 					<td>{{::suggestion.attributes.owner.attributes.name}}</td>
+					<td>{{::suggestion.getTotalVotes()}}</td>
+					<td>{{::suggestion.getTotalSkips()}}</td>
+					<td>{{::suggestion.getKDR()}}</td>
 					<td>
 						<span ng-repeat="setId in sets.setIdsByCardId[suggestion.id]">
 							<span class="label label-default">{{sets.byId[setId].attributes.name}}</span>

@@ -7,7 +7,7 @@ app.controller('cardView', function(suggestion, $scope, $state, $location, cardS
 	$state.current.description = ['"',
 	                              suggestion.get('text'),
 	                              '" is a ',
-	                              cardService.getTypeDisplay(suggestion),
+	                              suggestion.getTypeDisplay(),
 	                              ' card submitted by ',
 	                              suggestion.get('owner').get('name')].join('');
 
