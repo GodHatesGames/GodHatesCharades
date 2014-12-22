@@ -24,8 +24,8 @@ app.controller('suggestionsView', function(suggestions, allSets, setIdsByCardId,
 		ascending: ['-attributes.skipped']
 	};
 	$scope.SORT_KDR = {
-		descending: ['cardService(attributes.totalVotes, attributes.skipped)'],
-		ascending: ['-cardService(attributes.totalVotes, attributes.skipped)']
+		descending: ['getKDR()'],
+		ascending: ['-getKDR()']
 	};
 	$scope.searchProps = ['attributes.text'];
 	$scope.sortOverrideKeys;

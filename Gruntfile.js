@@ -140,6 +140,18 @@ module.exports = function(grunt) {
 					}
 				]
 			},
+			stageBootstrapFonts: {
+				files: [
+					{
+						expand: true,
+						cwd: '.tmp/stage/frontend/bower_components/bootstrap/fonts/',
+						src: [
+							'*.*'
+						],
+						dest: 'dist/frontend/fonts'
+					}
+				]
+			},
 			// Robots copy
 			prodRobotsFrontend: {
 				files: [
@@ -417,6 +429,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('prepareFrontend', [
 		'buildCss',
 		'copy:stageFrontend',
+		'copy:stageBootstrapFonts',
 		'imagemin:stage',
 		'svgmin:stage'
 	]);
