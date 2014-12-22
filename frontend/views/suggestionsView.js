@@ -34,6 +34,10 @@ app.controller('suggestionsView', function(suggestions, allSets, setIdsByCardId,
 	$scope.getSortClass = _getSortClass;
 	$scope.editSuggestion = _editSuggestion;
 
+	function _isAlphaSort(type) {
+		return type === $scope.SORT_TEXT || type === $scope.SORT_AUTHOR;
+	}
+
 	function _overrideSort(type) {
 		if($scope.sortOverrideKeys && $scope.sortOverrideKeys === type) {
 			// flip order if necessary
@@ -43,7 +47,7 @@ app.controller('suggestionsView', function(suggestions, allSets, setIdsByCardId,
 				$scope.sortDirection = 'descending';
 		} else {
 			// assigned descending sort order to alpha and ascending as default to numerical
-			if(type === $scope.SORT_TEXT || type === $scope.SORT_AUTHOR) {
+			if(_isAlphaSort(type)) {
 				$scope.sortDirection = 'descending';
 			} else {
 				$scope.sortDirection = 'ascending';
@@ -56,18 +60,18 @@ app.controller('suggestionsView', function(suggestions, allSets, setIdsByCardId,
 	}
 
 	function _getSortClass(type) {
-		if($scope.sortOverrideKeys && type === $scope.sortOverrideKeys) {
-			var descending = $scope.sortDirection === 'descending';
-			switch(type) {
-				case $scope.SORT_TEXT :
-				case $scope.SORT_AUTHOR :
-					return descending ? 'glyphicon glyphicon-sort-by-alphabet' : 'glyphicon glyphicon-sort-by-alphabet-alt';
-				default :
-					return descending ? 'glyphicon glyphicon glyphicon-sort-by-attributes' : 'glyphicon glyphicon-sort-by-attributes-alt';
-			}
+		var isDescending = $scope.sortDirection === 'descending';
+		var sortClass = '';
+		if(_isAlphaSort(type)) {
+			sortClass =  isDescending ? 'glyphicon glyphicon-sort-by-alphabet' : 'glyphicon glyphicon-sort-by-alphabet-alt';
 		} else {
-			return;
+			sortClass = isDescending ? 'glyphicon glyphicon glyphicon-sort-by-attributes' : 'glyphicon glyphicon-sort-by-attributes-alt';
 		}
+		if(type != $scope.sortOverrideKeys) {
+			sortClass += ' invisible';
+		}
+
+		return sortClass;
 	}
 
 	function _editSuggestion(isolatedScope, suggestion) {

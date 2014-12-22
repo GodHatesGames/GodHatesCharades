@@ -38,8 +38,8 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMa
 		}
 	}
 
-	function getTypeClass(card) {
-		var type = card.get('type');
+	function getTypeClass() {
+		var type = this.get('type');
 		return getTypeClassByType(type);
 	}
 
@@ -135,6 +135,7 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMa
 		card.getTotalVotes = getTotalVotes;
 		card.getTotalSkips = getTotalSkips;
 		card.getTypeDisplay = getTypeDisplay;
+		card.getTypeClass = getTypeClass;
 		card.getSlug = getSlug;
 		card.getLink = getLink;
 		card.getUrl = getUrl;
