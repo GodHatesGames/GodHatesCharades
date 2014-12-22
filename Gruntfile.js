@@ -148,7 +148,7 @@ module.exports = function(grunt) {
 						src: [
 							'*.*'
 						],
-						dest: 'dist/frontend/fonts'
+						dest: '.tmp/stage/frontend/fonts'
 					}
 				]
 			},
