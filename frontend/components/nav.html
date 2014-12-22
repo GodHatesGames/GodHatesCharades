@@ -41,14 +41,15 @@
 		</li>
 
 		<!-- user stuff -->
-		<li class="dropdown"
+		<li dropdown
 		    ng-hide="parseUser.isAnon()">
 			<a class="dropdown-toggle" 
-			    data-toggle="dropdown">
+			   dropdown-toggle>
 				{{parseUser.data.attributes.name}}
 				<b class="caret"></b>
 			</a>
-			<ul class="dropdown-menu">
+			<ul class="dropdown-menu"
+			    role="menu">
 				<li ui-sref-active="active">
 					<a ui-sref='user({userid: parseUser.data.id})'>
 						My Profile

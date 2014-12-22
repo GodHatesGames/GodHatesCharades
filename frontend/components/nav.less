@@ -2,9 +2,11 @@
 @import "../less/bootstrap-variables";
 @nav-inactive: black;
 @nav-active: @color-actor;
-@dropdown-bg: @color-actor;
-@dropdown-inactive: white;
-@dropdown-active: @color-actor;
+@dropdown-bg-inactive: @color-background-nav;
+@dropdown-bg-active: @color-background-nav-selected;
+@dropdown-text-inactive: white;
+@dropdown-text-active: @color-actor;
+@dropdown-accent: white;
 
 @no-ad: 0px; //use if no ad is present
 @ad-size: @no-ad;
@@ -86,44 +88,68 @@
 	color: @nav-inactive;
 	text-shadow: 1px 2px rgba(0, 0, 0, 0.1);
 }
-.nav .dropdown.open a {
-	color: @dropdown-inactive;
-	background-color: @dropdown-bg;
-}
-.nav .dropdown .dropdown-toggle:hover .caret {
-	border-top-color: @dropdown-inactive;
-	border-bottom-color: @dropdown-inactive;
-}
-.nav .dropdown .dropdown-toggle .caret {
-	border-top-color: @dropdown-bg;
-	border-bottom-color: @dropdown-bg;
-}
-.nav .dropdown.open .dropdown-toggle .caret {
-	border-top-color: @dropdown-inactive;
-	border-bottom-color: @dropdown-inactive;
-}
-.nav .dropdown-menu {
-	left: 12px;
-	background-color: @dropdown-bg;
-	border: none;
-	min-width: inherit;
-	color: @dropdown-inactive;
-	border-radius: 0;
-	width: 100%;
-	box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
-}
-.nav .dropdown-menu a {
-	color: @dropdown-inactive;
-}
-.nav .dropdown-menu a:hover,
-.nav .dropdown-menu .active a {
-	background-color: @dropdown-inactive;
-	color: @dropdown-active;
-}
-.nav .dropdown-menu .dropdown-header {
-	color: @dropdown-inactive;
-	font-weight: bold;
-	cursor: default;
+
+.nav {
+	.dropdown {
+		&.open {
+			a {
+				color: @dropdown-text-inactive;
+				background-color: @dropdown-bg-inactive;
+			}
+
+			.dropdown-toggle {
+				.caret {
+					border-top-color: @dropdown-accent;
+					border-bottom-color: @dropdown-accent;
+				}
+			}
+		}
+
+		.dropdown-toggle {
+			&:hover {
+				.caret {
+					border-top-color: @dropdown-accent;
+					border-bottom-color: @dropdown-accent;
+				}
+			}
+			.caret {
+				border-top-color: @dropdown-bg-inactive;
+				border-bottom-color: @dropdown-bg-inactive;
+			}
+		}
+	}
+
+	.dropdown-menu {
+		font-size: 70%;
+		background-color: @dropdown-bg-inactive;
+		border: none;
+		min-width: inherit;
+		color: @dropdown-text-inactive;
+		border-radius: 0;
+		width: 100%;
+		box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
+
+		a {
+			color: @dropdown-text-inactive;
+			&:hover {
+				background-color: @dropdown-bg-active;
+				color: @dropdown-text-active;
+			}
+		}
+
+		.active {
+			a {
+				background-color: @dropdown-bg-active;
+				color: @dropdown-text-active;
+			}
+		}
+
+		.dropdown-header {
+			color: @dropdown-text-inactive;
+			font-weight: bold;
+			cursor: default;
+		}
+	}
 }
 
 @logo-width: 16%;
