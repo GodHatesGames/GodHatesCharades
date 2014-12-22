@@ -1,5 +1,6 @@
 @import "colors";
 @import "card";
+@import "buttons";
 @import "backgrounds";
 @import "bootstrap-variables";
 @import (inline) "../bower_components/animate.css/source/_base.css";
@@ -191,62 +192,6 @@ input.form-control {
 
 .clear {
 	clear: both;
-}
-
-.btn {
-	border: none;
-	border-radius: 0;
-	letter-spacing: 1px;
-	color: white;
-
-	.btn-success {
-		color: white;
-	}
-
-	&:not(.btn-xs) {
-		font-family: 'GodHatesCharades';
-		text-transform: uppercase;
-		padding-top: 10px;
-	}
-
-	&.btn-xs {
-		padding: 3px 10px;
-	}
-
-	&:hover {
-		background-color: white;
-		color: black;
-	}
-
-	&:disabled {
-		background-color: black;
-	}
-
-	&.btn-inverted {
-		background-color: white;
-		color: black;
-
-		&:hover {
-			background-color: black;
-			color: white;
-		}
-
-		&:disabled {
-			background-color: white;
-		}
-	}
-
-	&.btn-danger {
-		background-color: @color-actor;
-	}
-
-	&.btn-inline {
-		display: inline-block;
-	}
-
-	@media (max-width: @screen-sm-max) {
-		font-size: 70%;
-	}
 }
 
 .socialUnlock {

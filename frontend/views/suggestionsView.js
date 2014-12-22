@@ -62,7 +62,7 @@ app.controller('suggestionsView', function(suggestions, allSets, setIdsByCardId,
 		var modalInstance = $modal.open({
 			templateUrl: 'components/cardForm.modal.html',
 			scope: modalScope,
-			size: 'sm'
+			size: 'lg'
 		})
 
 		function _onEditSuccess() {

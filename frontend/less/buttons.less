@@ -1,0 +1,77 @@
+@import "../less/colors";
+
+.btn {
+	border: none;
+	border-radius: 0;
+	letter-spacing: 1px;
+
+	&.btn-default:hover {
+		background-color: rgba(0, 0, 0, 0.7)
+	}
+
+	@media (max-width: @screen-sm-max) {
+		font-size: 70%;
+	}
+
+	&:not(.btn-xs) {
+		font-family: 'GodHatesCharades';
+		text-transform: uppercase;
+		padding-top: 10px;
+	}
+
+	&.btn-xs {
+		padding: 3px 10px;
+	}
+
+	// &:hover {
+	// 	background-color: white;
+	// 	color: black;
+	// }
+
+	&:disabled {
+		opacity: 0.7;
+	}
+
+	&.btn-inline {
+		display: inline-block;
+	}
+
+	&.btn-plain {
+		font-family: 'Helvetica';
+	}
+}
+
+@color-btn-default: rgba(255, 255, 255, 0.25);
+@color-btn-default-hover: rgba(255, 255, 255, 0.4);
+
+.bg-dark {
+}
+
+.bg-light-bright {
+}
+
+.bg-dark-bright {
+	.btn-default {
+		background-color: @color-btn-default;
+		color: white;
+
+		&:hover {
+			background-color: @color-btn-default-hover;
+		}
+	}
+
+}
+
+.bg-light {
+}
+
+.bg-heavens {
+	.btn-default {
+		background-color: @color-btn-default;
+		color: white;
+
+		&:hover {
+			background-color: @color-btn-default-hover;
+		}
+	}
+}
