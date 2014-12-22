@@ -7,20 +7,10 @@
 	</tr>
 	<tr>
 		<td>
-			<ng-pluralize
-			    count="suggestion.getTotalVotes()"
-			    when="{'0': 'No votes.',
-			           'one': '1 pity vote',
-			           'other': '{{suggestion.getTotalVotes()}} votes'}">
-			</ng-pluralize>
+			{{suggestion.getTotalVotes()}}
 		</td>
 		<td>
-			<ng-pluralize
-			    count="suggestion.getTotalSkips()"
-			    when="{'0': 'No skips.',
-			           'one': '1 measly skip',
-			           'other': '{{suggestion.getTotalSkips()}} skips'}">
-			</ng-pluralize>
+			{{suggestion.getTotalSkips()}}
 		</td>
 		<td>{{suggestion.getKDR()}}</td>
 		<td>

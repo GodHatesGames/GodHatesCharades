@@ -54,9 +54,10 @@
 				    tooltip="Double-click to edit"
 				    tooltip-placement="left"
 				    tooltip-popup-delay="300"
-				    tooltip-append-to-body="true">
+				    tooltip-append-to-body="true"
+				    class="noselect">
 					<!-- Text -->
-					<td class="noselect">
+					<td>
 						{{::suggestion.attributes.text}}
 						<span class="legal"
 						      ng-if="::suggestion.attributes.legal">
