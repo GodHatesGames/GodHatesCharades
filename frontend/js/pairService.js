@@ -3,6 +3,7 @@ app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory,
 		getLink: _getLink,
 		getSlug: _getSlug,
 		getPairById: _getPairById,
+		getPairsByCard: _getPairsByCard,
 		clearCache: clearCache
 	}
 
@@ -19,6 +20,43 @@ app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory,
 	function clearCache() {
 		pairCache.removeAll();
 	}
+
+	function _getPairsByCard(card) {
+		if(pairPromises[card.id]) {
+			return pairPromises[card.id];
+		} else {
+			console.log('getPairsByCard:', card.id);
+			var returnVal;
+			var options = {
+				cardid: card.id,
+				cardtype: card.getTypeDisplay().toLowerCase()
+			};
+			pairPromises[card.id] = Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getPairsByCard', options)
+			.then(_onCardPairsFetched)
+			.then(_onCardsFetched);
+
+			return pairPromises[card.id];
+		}
+
+		function _onCardPairsFetched(pairs) {
+			pairs;
+			// cache pairs
+			_.each(pairs, cache);
+			// fetch pair cards
+			var pairPromises = [];
+			_.each(pairs, function(pair) {
+				var pairPromise = _getPairById(pair.id);
+				pairPromises.push(pairPromise);
+			});
+			return $q.all(pairPromises);
+		}
+
+		function _onCardsFetched(pairs) {
+			delete pairPromises[card.id];
+			return pairs;
+		}
+	}
+
 
 	function _getPairById(pairId) {
 		if(pairPromises[pairId]) {

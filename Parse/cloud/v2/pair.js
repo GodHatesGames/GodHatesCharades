@@ -8,6 +8,7 @@ exports.recordGuessed = recordGuessed;
 exports.recordStumped = recordStumped;
 exports.recordChosenAndSkipped = recordChosenAndSkipped;
 exports.getPairById = getPairById;
+exports.getPairsByCard = getPairsByCard;
 
 function recordGuessed (request, response) {
 	Parse.Cloud.useMasterKey();
@@ -175,6 +176,54 @@ function getPairById(request, response) {
 
 	function onError(error) {
 		console.log('getPair Error');
+		response.error(error);
+	}
+
+}
+
+function getPairsByCard(request, response) {
+	console.log('addCardToSet');
+	// Parse.Cloud.useMasterKey();
+	var cardId = request.params.cardid;
+	var cardType = request.params.cardtype;
+	// console.log('request.user.id:' + request.user.id);
+	if(request.user) {
+		userUtils.isUserAdmin(request.user.id)
+			.then(getPair, onError);
+	} else {
+		onError();
+	}
+
+	function getPair() {
+		Parse.Cloud.useMasterKey();
+		if(cardId !== undefined) {
+			console.log('getPair fetchData');
+			console.log(cardType);
+			console.log(cardId);
+			console.log('--');
+			var SuggestionObject = Parse.Object.extend('Suggestion');
+			var mockCard = new SuggestionObject();
+			mockCard.id = cardId;
+			var PairObject = Parse.Object.extend('Pair');
+			var query = new Parse.Query(PairObject);
+			query.equalTo(cardType, mockCard);
+			query.find({
+				success: onSuccess,
+				error: onError
+			});
+		} else {
+			response.error('you must pass a pair id to get');
+		}
+	}
+
+	function onSuccess(pairs) {
+		console.log('onSuccess');
+		console.log(pairs)
+		response.success(pairs);
+	}
+
+	function onError(error) {
+		console.log('getPairsByCard Error');
 		response.error(error);
 	}
 

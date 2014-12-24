@@ -127,10 +127,12 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMa
 	}
 
 	function updateCache(updatedItem) {
-		cardCache.put(updatedItem.id, updatedItem);
-		addModelMethods(updatedItem);
-		var owner = updatedItem.get('owner');
-		ownerCache.put(owner.id, owner);
+		if(!_.isEmpty(updatedItem.attributes)) {
+			cardCache.put(updatedItem.id, updatedItem);
+			addModelMethods(updatedItem);
+			var owner = updatedItem.get('owner');
+			ownerCache.put(owner.id, owner);
+		}
 	}
 
 	function addModelMethods(card) {

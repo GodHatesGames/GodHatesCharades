@@ -84,6 +84,7 @@ Parse.Cloud.define('v2_recordChosenAndSkipped', v2.pair.recordChosenAndSkipped);
 Parse.Cloud.define('v2_recordGuessed', v2.pair.recordGuessed);
 Parse.Cloud.define('v2_recordStumped', v2.pair.recordStumped);
 Parse.Cloud.define('v2_getPairById', v2.pair.getPairById);
+Parse.Cloud.define('v2_getPairsByCard', v2.pair.getPairsByCard);
 
 // Card Utils
 Parse.Cloud.define('v2_examples', v2.cardUtils.examples);

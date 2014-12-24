@@ -1,0 +1,20 @@
+<table class="pairInfoTable table table-striped">
+	<tr>
+		<th>Actor</th>
+		<th>Scenario</th>
+	</tr>
+	<tr ng-repeat="pair in pairs">
+		<td>
+			<a ui-sref="card({cardid: pair.attributes.actor.id})"
+			   target="_blank">
+				<b>{{::pair.attributes.actor.attributes.name}}</b>
+			</a>
+		</td>
+		<td>
+			<a ui-sref="card({cardid: pair.attributes.scenario.id})"
+			   target="_blank">
+				<b>{{::pair.attributes.scenario.attributes.name}}</b>
+			</a>
+		</td>
+	</tr>
+</table>
