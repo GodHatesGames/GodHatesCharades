@@ -206,6 +206,8 @@ function getPairsByCard(request, response) {
 			mockCard.id = cardId;
 			var PairObject = Parse.Object.extend('Pair');
 			var query = new Parse.Query(PairObject);
+			query.descending('displayed');
+			query.limit(50);
 			query.equalTo(cardType, mockCard);
 			query.find({
 				success: onSuccess,

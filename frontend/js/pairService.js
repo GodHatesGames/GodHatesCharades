@@ -95,6 +95,21 @@ app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory,
 	function addModelMethods(pair) {
 		pair.getLink = _getLink;
 		pair.getSlug = _getSlug;
+		pair.getViews = _getViews;
+		pair.getVotes = _getVotes;
+		pair.getSkips = _getSkips;
+	}
+
+	function _getViews() {
+		return this.attributes.displayed || 0;
+	}
+
+	function _getVotes() {
+		return this.attributes.chosen || 0;
+	}
+
+	function _getSkips() {
+		return this.attributes.skipped || 0;
 	}
 
 	function onPairFetched(pair) {

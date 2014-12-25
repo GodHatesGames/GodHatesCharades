@@ -1,4 +1,4 @@
-app.directive('cardPairsInfoTable', function($rootScope, pairService) {
+app.directive('cardPairsInfoTable', function(pairService) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/cardPairsInfoTable.html',
@@ -7,7 +7,9 @@ app.directive('cardPairsInfoTable', function($rootScope, pairService) {
 			suggestion: '='
 		},
 		controller: function($scope, $element, $attrs) {
-			
+			$scope.sortPredicates = ['-getViews()',
+			                    '-getVotes()',
+			                    'getSkips()'];
 			$scope.$watch('suggestion', _onSuggestionUpdated);
 
 			function _onSuggestionUpdated() {

@@ -1,24 +1,24 @@
 
 <table class="pairInfoTable pairList table table-striped">
 	<tr>
-		<th>Actor</th>
-		<th>Scenario</th>
+		<th>Pair</th>
 		<th>Views</th>
 		<th>Votes</th>
 		<th>Skips</th>
 	</tr>
-	<tr ng-repeat="pair in pairs">
+	<tr ng-repeat="pair in pairs | orderBy:sortPredicates">
 		<td>
 			<a ui-sref="card(pair.attributes.actor.getLink())"
 			   target="_blank">
 				<b>{{::pair.attributes.actor.attributes.text}}</b>
 			</a>
-		</td>
-		<td>
 			<a ui-sref="card(pair.attributes.scenario.getLink())"
 			   target="_blank">
 				<b>{{pair.attributes.scenario.attributes.text}}</b>
 			</a>
 		</td>
+		<td>{{pair.getViews()}}</td>
+		<td>{{pair.getVotes()}}</td>
+		<td>{{pair.getSkips()}}</td>
 	</tr>
 </table>
