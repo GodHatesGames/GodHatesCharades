@@ -1,4 +1,4 @@
-app.directive('cardPairsInfoTable', function(pairService) {
+app.directive('cardPairsInfoTable', function($rootScope, pairService) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/cardPairsInfoTable.html',

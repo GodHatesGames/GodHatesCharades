@@ -1,7 +1,5 @@
 app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory, Slug) {
 	var pairService = {
-		getLink: _getLink,
-		getSlug: _getSlug,
 		getPairById: _getPairById,
 		getPairsByCard: _getPairsByCard,
 		clearCache: clearCache
@@ -67,6 +65,7 @@ app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory,
 			var currentCache = pairCache.get(pairId);
 			if(currentCache) {
 				var parsePair = new Pair(currentCache);
+				addModelMethods(parsePair);
 				var actorData = parsePair.get('actor');
 				var scenarioData = parsePair.get('scenario');
 
@@ -93,22 +92,27 @@ app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory,
 		}
 	}
 
+	function addModelMethods(pair) {
+		pair.getLink = _getLink;
+		pair.getSlug = _getSlug;
+	}
+
 	function onPairFetched(pair) {
 		delete pairPromises[pair.id];
 		cache(pair);
 		return pair;
 	}
 
-	function _getSlug(pair) {
-		var text = [pair.get('actor').get('text'),
-		            pair.get('scenario').get('text')].join(' ');
+	function _getSlug() {
+		var text = [this.get('actor').get('text'),
+		            this.get('scenario').get('text')].join(' ');
 		return Slug.slugify(text);
 	}
 
-	function _getLink(pair) {
+	function _getLink() {
 		return {
-			pairid: pair.id,
-			slug: _getSlug(pair)
+			pairid: this.id,
+			slug: this.getSlug()
 		}
 	}
 

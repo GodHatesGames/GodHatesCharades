@@ -1,7 +1,7 @@
 <div class="cardList"
 	ng-hide="loading && skipIndex == 0">
 	<a class="row pair"
-		ui-sref="pair(pairService.getLink(pair))"
+		ui-sref="pair(pair.getLink())"
 		ng-repeat="(index, pair) in pairs | orderBy:sortPredicates | limitTo:50">
 
 		<ribbon message="index + 1"
@@ -22,7 +22,7 @@
 			<div>Skipped: {{pair.get('skipped')}}</div>
 			<div>Controversy: {{pair.get('controversy')}}</div>
 			<div>KDR: {{pair.get('kdr') | number:2}}</div>
-			<a ui-sref="pair(pairService.getLink(pair))">
+			<a ui-sref="pair(pair.getLink())">
 				Discuss it!
 			</a>
 		</div> -->
