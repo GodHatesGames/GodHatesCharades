@@ -33,6 +33,7 @@
     "angular-data": "~0.9.1",
     "angular-cache": "~3.0.3",
     "fuse.js": "~1.2.0",
-    "angular-youtube-mb": "~0.1.4"
+    "angular-youtube-mb": "~0.1.4",
+    "angular-ui-select": "~0.9.5"
   }
 }

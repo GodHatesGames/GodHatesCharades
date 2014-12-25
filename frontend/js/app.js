@@ -8,6 +8,7 @@ var app = angular.module('app', ['ng',
                                  'ngAnimate',
                                  'ui.router',
                                  'ui.bootstrap',
+                                 'ui.select',
                                  'textareaNoreturn',
                                  'parse.user',
                                  'ngSanitize',
@@ -24,7 +25,7 @@ var app = angular.module('app', ['ng',
                                 ]);
 console.log('starting app');
 
-app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider, $provide) {
+app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider, $provide, uiSelectConfig) {
 	$locationProvider.html5Mode(true);
 	$locationProvider.hashPrefix('!');
 
@@ -45,6 +46,8 @@ app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider, 
 		storageMode: 'localStorage',
 		capacity: 200
 	});
+
+	uiSelectConfig.theme = 'bootstrap';
 
 });
 

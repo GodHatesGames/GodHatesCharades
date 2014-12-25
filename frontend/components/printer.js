@@ -38,7 +38,7 @@ app.directive('printer', function(cardService, $compile, $window, prismic, sets,
 
 			// Private methods
 			function setupPrint(set) {
-				$scope.setItems = sets.setItemsById[set.id];
+				$scope.setItems = _.values(sets.setItemsBySetId[set.id]);
 				if($scope.extraItems.length > 0)
 					$scope.extraItems = [];
 				var extraCount = itemsPerPage - ($scope.setItems.length % itemsPerPage);
@@ -74,8 +74,8 @@ app.directive('printer', function(cardService, $compile, $window, prismic, sets,
 			};
 
 			$scope.getCardCount = function(set) {
-				if(sets.setItemsById[set.id])
-					return sets.setItemsById[set.id].length;
+				if(sets.setItemsBySetId[set.id])
+					return _.size(sets.setItemsBySetId[set.id]);
 				else
 					return 'loading';
 			}

@@ -1,23 +1,25 @@
-<table class="cardInfoTable table table-striped">
-	<tr>
-		<th>Votes</th>
-		<th>Skips</th>
-		<th>KDR</th>
-		<th>Author</th>
-	</tr>
-	<tr>
-		<td>
-			{{suggestion.getTotalVotes()}}
-		</td>
-		<td>
-			{{suggestion.getTotalSkips()}}
-		</td>
-		<td>{{suggestion.getKDR()}}</td>
-		<td>
-			<a ui-sref="user({userid: suggestion.attributes.owner.id})"
-			   target="_blank">
-				<b>{{suggestion.attributes.owner.attributes.name}}</b>
-			</a>
-		</td>
-	</tr>
-</table>
+<div class="cardList">
+	<table class="cardInfoTable table table-striped">
+		<tr>
+			<th>Votes</th>
+			<th>Skips</th>
+			<th>KDR</th>
+			<th>Author</th>
+		</tr>
+		<tr>
+			<td>
+				{{suggestion.getTotalVotes()}}
+			</td>
+			<td>
+				{{suggestion.getTotalSkips()}}
+			</td>
+			<td>{{suggestion.getKDR()}}</td>
+			<td>
+				<a ui-sref="user({userid: suggestion.attributes.owner.id})"
+				   target="_blank">
+					<b>{{suggestion.attributes.owner.attributes.name}}</b>
+				</a>
+			</td>
+		</tr>
+	</table>
+</div>

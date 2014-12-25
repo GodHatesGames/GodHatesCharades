@@ -7,13 +7,14 @@ app.service('sets', function($q, $rootScope) {
 		getAllSetsAndItems: getAllSetsAndItems,
 		getSet: getSet,
 		byId: {},
-		setItemsById: {},
+		setItemsBySetId: {},
 		setIdsByCardId: {},
 		deleteSet: deleteSet,
 		createSet: createSet,
 		getSetItemsForSet: getSetItemsForSet,
 		addCardToSet: addCardToSet,
-		removeSetItem: removeSetItem
+		removeSetItem: removeSetItem,
+		removeCardFromSet: removeCardFromSet
 	};
 
 	function getAllSets(scope) {
@@ -153,16 +154,7 @@ app.service('sets', function($q, $rootScope) {
 				{
 					success: function(setItems) {
 						delete gettingSetItemsPromises[set.id];
-						sets.setItemsById[set.id] = setItems;
-						_.each(setItems, function(setItem) {
-							var setId = setItem.get('owner').id;
-							var cardId = setItem.get('card').id;
-							if(!sets.setIdsByCardId[cardId]) {
-								sets.setIdsByCardId[cardId] = [];
-							}
-							if(sets.setIdsByCardId[cardId].indexOf(setId) === -1)
-								sets.setIdsByCardId[cardId].push(setId);
-						});
+						_.each(setItems, cacheSetItem);
 						deferred.resolve(setItems);
 					},
 					error: function(err) {
@@ -177,6 +169,35 @@ app.service('sets', function($q, $rootScope) {
 		}
 	}
 
+	function cacheSetItem(setItem) {
+		var setId = setItem.get('owner').id;
+		var cardId = setItem.get('card').id;
+		// index sets by Card Id
+		if(!sets.setIdsByCardId[cardId]) {
+			sets.setIdsByCardId[cardId] = [];
+		}
+		if(sets.setIdsByCardId[cardId].indexOf(setId) === -1) {
+			sets.setIdsByCardId[cardId].push(setId);
+		}
+		// index setItem by Card Id
+		if(!sets.setItemsBySetId[cardId]) {
+			sets.setItemsBySetId[cardId] = {};
+		}
+		sets.setItemsBySetId[cardId][setId] = setItem;
+	}
+
+	function removeSetItemCache(setItem) {
+		var cardId = setItem.get('card').id;
+		var setId = setItem.get('owner').id;
+		delete sets.setItemsBySetId[cardId][setId];
+
+		var setList = sets.setIdsByCardId[cardId];
+		var index = setList.indexOf(setId);
+		if(index !== -1) {
+			setList.splice(index, 1);
+		}
+	}
+
 	function addCardToSet(card, set) {
 		var deferred = $q.defer();
 		Parse.Cloud.run(
@@ -188,11 +209,7 @@ app.service('sets', function($q, $rootScope) {
 			{
 				success: function(setItem) {
 					// update data
-
-					// sets.data = setItem;
-					//index by id
-					// sets.byId[setItem.id] = setItem;
-					// resolve deffered
+					cacheSetItem(setItem);
 					deferred.resolve(setItem);
 				},
 				error: function(err) {
@@ -212,6 +229,8 @@ app.service('sets', function($q, $rootScope) {
 			},
 			{
 				success: function(success) {
+					// cleanup indexes
+					removeSetItemCache(setItem);
 					deferred.resolve(success);
 				},
 				error: function(err) {
@@ -220,6 +239,11 @@ app.service('sets', function($q, $rootScope) {
 			}
 		);
 		return deferred.promise;
+	}
+
+	function removeCardFromSet(card, set) {
+		var setItem = sets.setItemsBySetId[card.id][set.id];
+		return removeSetItem(setItem);
 	}
 
 	return sets;
