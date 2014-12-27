@@ -2,15 +2,29 @@
 	<form class="form-horizontal"
 	      role="form"
 	      ng-submit="saveSuggestion()">
-		<div class="btn-group legal">
-			<a class="btn btn-success btn-plain btn-xs" ng-model="suggestion.attributes.legal" btn-radio="" uncheckable>None</a>
-			<a class="btn btn-success btn-plain btn-xs" ng-model="suggestion.attributes.legal" btn-radio="'©'" uncheckable>&copy;</a>
-			<a class="btn btn-success btn-plain btn-xs" ng-model="suggestion.attributes.legal" btn-radio="'™'" uncheckable>&trade;</a>
-			<a class="btn btn-success btn-plain btn-xs" ng-model="suggestion.attributes.legal" btn-radio="'®'" uncheckable>&reg;</a>
+		<div class="form-group">
+			<div class="col-md-12 btn-group legal">
+				<a class="btn btn-success btn-plain btn-xs" ng-model="updates.legal" btn-radio="" uncheckable>None</a>
+				<a class="btn btn-success btn-plain btn-xs" ng-model="updates.legal" btn-radio="'©'" uncheckable>&copy;</a>
+				<a class="btn btn-success btn-plain btn-xs" ng-model="updates.legal" btn-radio="'™'" uncheckable>&trade;</a>
+				<a class="btn btn-success btn-plain btn-xs" ng-model="updates.legal" btn-radio="'®'" uncheckable>&reg;</a>
+			</div>
 		</div>
-		<input type="text"
-		       class="form-control"
-		       id="suggestionText"
-		       ng-model="suggestion.attributes.text">
+		<div class="form-group">
+			<div class="col-md-8">
+				<input type="text"
+				       class="form-control"
+				       id="suggestionText"
+				       ng-model="updates.text">
+			</div>
+			<div class="col-md-4">
+				<button type="submit"
+				        id="submit"
+				        class="btn btn-success btn-xs btn-block"
+				        ng-disabled="saving">
+					{{saving ? 'Saving' : 'Update'}}
+				</button>
+			</div>
+		</div>
 	</form>
 </div>

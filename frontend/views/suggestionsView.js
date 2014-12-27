@@ -90,14 +90,16 @@ app.controller('suggestionsView', function(suggestions, allSets, setIdsByCardId,
 			size: 'lg'
 		})
 
-		function _onEditSuccess() {
+		function _onEditSuccess(updatedSuggestion) {
 			console.log('modal success');
-			modalInstance.dismiss();
+			suggestion.attributes.text = updatedSuggestion.attributes.text;
+			suggestion.attributes.legal = updatedSuggestion.attributes.legal;
+			// modalInstance.dismiss();
 		}
 
 		function _onEditError(err) {
 			console.log('modal error');
-			modalInstance.dismiss();
+			// modalInstance.dismiss();
 		}
 	}
 });

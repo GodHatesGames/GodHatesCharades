@@ -13,6 +13,11 @@ app.directive('cardForm', function(cardService) {
 		controller: function($scope, $element) {
 			$scope.cardService = cardService;
 			$scope.saveSuggestion = _saveSuggestion;
+			$scope.saving = false;
+			$scope.updates = {
+				text: $scope.suggestion.get('text'),
+				legal: $scope.suggestion.get('legal')
+			}
 
 			function _saveSuggestion() {
 				if($scope.saveOnSubmit !== false) {
@@ -21,8 +26,8 @@ app.directive('cardForm', function(cardService) {
 						CONFIG.PARSE_VERSION + 'updateSuggestionText',
 						{
 							suggestionId: $scope.suggestion.id,
-							text: $scope.suggestion.get('text'),
-							legal: $scope.suggestion.get('legal')
+							text: $scope.updates.text,
+							legal: $scope.updates.legal
 						},
 						{
 							success: onSuggestionSaved,
