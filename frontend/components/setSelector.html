@@ -1,13 +1,19 @@
-<div class="setSelector">
-	<ui-select multiple
-	           ng-model="selectedSets"
-	           on-select="onSelect($item)"
-	           on-remove="onRemove($item)">
-		<ui-select-match placeholder="Select set...">
-			{{$item.attributes.name}}
-		</ui-select-match>
-		<ui-select-choices repeat="set in sets.data | fuse:searchProps:$select.search">
-			<div ng-bind-html="set.attributes.name | highlight: $select.search"></div>
-		</ui-select-choices>
-	</ui-select>
+<div class="setSelector row">
+	<div class="col-sm-11">
+		<ui-select multiple
+		           ng-model="selectedSets"
+		           on-select="onSelect($item)"
+		           on-remove="onRemove($item)">
+			<ui-select-match placeholder="Select set...">
+				{{$item.attributes.name}}
+			</ui-select-match>
+			<ui-select-choices repeat="set in sets.data | fuse:searchProps:$select.search">
+				<div ng-bind-html="set.attributes.name | highlight: $select.search"></div>
+			</ui-select-choices>
+		</ui-select>
+	</div>
+	<div class="col-sm-1">
+		<span class="glyphicon"
+		      ng-class="feedbackClass()"></span>
+	</div>
 </div>
