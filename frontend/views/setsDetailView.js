@@ -7,7 +7,7 @@ app.controller('setsDetailView', function(set, $scope, $state, $stateParams, car
 	$scope.actorCount = 0;
 	$scope.scenarioCount = 0;
 	$scope.removeSetItem = _removeSetItem;
-	_updateCount();
+	$scope.$watch('sets.setItemsBySetId[set.id].length', _updateCount);
 
 	$scope.deleteSet = function() {
 		$scope.saving = true;
