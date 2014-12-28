@@ -31,7 +31,7 @@ app.controller('setsDetailView', function(set, $scope, $state, $stateParams, car
 			if(type === 0) {
 				// actor
 				actors++;
-			} else if(type === 0) {
+			} else if(type === 1) {
 				scenarios++;
 			}
 		});
