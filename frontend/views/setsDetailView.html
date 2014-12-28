@@ -15,17 +15,13 @@
 	<hr>
 </div>
 <div class="col-sm-6 col-md-6 col-lg-6">
-	<h5>Actor: {{getLengthForType(0)}} | Scenario: {{getLengthForType(1)}}</h5>
+	<h5>Actor: {{actorCount}} | Scenario: {{scenarioCount}}</h5>
 	<div class="loadingAlert"
 		 ng-show="saving">
 		Saving...
 	</div>
-	<div class="loadingAlert"
-		 ng-show="cardsLoading">
-		Loading...
-	</div>
 	<div class="cardList"
-		 ng-hide="cardsLoading">
+	     ng-if="sets.setItemsBySetId[set.id]">
 		<input ng-model="searchDetail"
 			   placeholder="search here"
 			   class="form-control">
@@ -35,8 +31,7 @@
 				<th>Suggestion</th>
 				<th>Type</th>
 			</tr>
-			<tr ng-repeat="(index, setItem) in setItems | fuse:['attributes.card.attributes.text']:searchDetail"
-				ng-init="card = setItem.attributes.card">
+			<tr ng-repeat="(index, setItem) in sets.setItemsBySetId[set.id] | fuse:['attributes.card.attributes.text']:searchDetail">
 				<!-- Delete Button -->
 				<td class="tableButton">
 					<a ng-click="removeSetItem(setItem)"
@@ -45,9 +40,15 @@
 					</a>
 				</td>
 				<!-- Text -->
-				<td ng-bind="card.attributes.text"></td>
+				<td>
+					{{setItem.attributes.card.attributes.text}}
+					<span class="legal"
+					      ng-if="::setItem.attributes.card.attributes.legal">
+						{{setItem.attributes.card.attributes.legal}}
+					</span>
+				</td>
 				<!-- Type -->
-				<td ng-class="card.getTypeClass()"></td>
+				<td ng-class="setItem.attributes.card.getTypeClass()"></td>
 			</tr>
 		</table>
 	</div>

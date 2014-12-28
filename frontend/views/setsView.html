@@ -4,7 +4,7 @@
 	<div class="list-group col-sm-2 col-md-2 col-lg-2">
 		<a ui-sref="admin.sets.create"
 		   class="list-group-item list-group-special">Add New Set</a>
-		<a ng-repeat="(index, set) in allSets"
+		<a ng-repeat="(index, set) in sets.data"
 		   ng-click="showSet(set)"
 		   ng-class="{active: isActive(set)}"
 		   class="list-group-item">

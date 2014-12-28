@@ -1,6 +1,6 @@
 'use strict';
-app.controller('setsView', function(allSets, $scope, $state, sets) {
-	$scope.allSets = allSets;
+app.controller('setsView', function(setIdsByCardId, $scope, $state, sets) {
+	$scope.sets = sets;
 
 	$scope.showSet = function(set) {
 		$state.go('admin.sets.detail', {

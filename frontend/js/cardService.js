@@ -6,6 +6,7 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMa
 		getTypeClassByType: getTypeClassByType,
 		getImageByType: getImageByType,
 		getCard: getCard,
+		getCached: getCached,
 		getBlankCardByType: _getBlankCardByType
 	}
 
@@ -38,7 +39,7 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMa
 		}
 	}
 
-	function getTypeClass() {
+	function getTypeClass(test) {
 		var type = this.get('type');
 		return getTypeClassByType(type);
 	}
@@ -122,7 +123,7 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMa
 				updateCache(element);
 			});
 		} else {
-			updateCache(cards);
+			return updateCache(cards);
 		}
 	}
 
@@ -133,6 +134,7 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMa
 			var owner = updatedItem.get('owner');
 			ownerCache.put(owner.id, owner);
 		}
+		return getCached(updatedItem.id);
 	}
 
 	function addModelMethods(card) {
@@ -152,31 +154,39 @@ app.service('cardService', function($q, $rootScope, Slug, DSCacheFactory, $urlMa
 		cardCache.removeAll();
 	}
 
-	function getCard(cardId) {
-		if(cardPromises[cardId]) {
-			return cardPromises[cardId];
-		} else {
-			var currentCardCache = cardCache.get(cardId),
-			currentOwnerCache,
-			ownerId;
+	function getCached(cardId) {
+		var currentCardCache = cardCache.get(cardId),
+		currentOwnerCache;
 
-			if(currentCardCache) {
-				// if current card cache is fufilled then check that owner is set
-				ownerId = currentCardCache ? currentCardCache.owner.objectId : undefined;
+		if(currentCardCache) {
+			// if current card cache is fufilled then check that owner is set
+			var ownerId = currentCardCache ? currentCardCache.owner.objectId : undefined;
 
-				if(ownerId) {
-					// if ownerId exists then get cache
-					currentOwnerCache = ownerCache.get(ownerId);
-				}
+			if(ownerId) {
+				// if ownerId exists then get cache
+				currentOwnerCache = ownerCache.get(ownerId);
 			}
 
-			if(currentCardCache && currentOwnerCache) {
+			if(currentOwnerCache) {
 				// if caches were fufilled then return them
 				var parseCard = new Suggestion(currentCardCache);
 				var parseCardOwner = new Parse.User(currentOwnerCache);
 				parseCard.attributes.owner = parseCardOwner;
 				addModelMethods(parseCard);
-				return $q.when(parseCard);
+				return parseCard;
+			}
+		}
+		return;
+	}
+
+	function getCard(cardId) {
+		if(cardPromises[cardId]) {
+			return cardPromises[cardId];
+		} else {
+			var cachedCard = getCached(cardId);
+
+			if(cachedCard) {
+				return $q.when(cachedCard);
 			} else {
 				// else fetch data
 				var options = {

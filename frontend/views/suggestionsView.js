@@ -98,7 +98,7 @@ app.controller('suggestionsView', function(suggestions, allSets, setIdsByCardId,
 		}
 
 		function _onEditError(err) {
-			console.log('modal error');
+			console.log('modal error', err);
 			// modalInstance.dismiss();
 		}
 	}

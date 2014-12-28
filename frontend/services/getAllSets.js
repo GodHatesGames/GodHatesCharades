@@ -1,5 +1,5 @@
 'use strict';
-app.service('sets', function($q, $rootScope) {
+app.service('sets', function($q, $rootScope, cardService) {
 	// console.log('instantiate sets');
 	var sets = {
 		data: [],
@@ -8,6 +8,7 @@ app.service('sets', function($q, $rootScope) {
 		getSet: getSet,
 		byId: {},
 		setItemsBySetId: {},
+		setItemsByCardBySetId: {},
 		setIdsByCardId: {},
 		deleteSet: deleteSet,
 		createSet: createSet,
@@ -171,28 +172,44 @@ app.service('sets', function($q, $rootScope) {
 
 	function cacheSetItem(setItem) {
 		var setId = setItem.get('owner').id;
-		var cardId = setItem.get('card').id;
+		var card = setItem.get('card');
+		// cache card
+		setItem.attributes.card = cardService.cache(card);
+
 		// index sets by Card Id
-		if(!sets.setIdsByCardId[cardId]) {
-			sets.setIdsByCardId[cardId] = [];
+		if(!sets.setIdsByCardId[card.id]) {
+			sets.setIdsByCardId[card.id] = [];
 		}
-		if(sets.setIdsByCardId[cardId].indexOf(setId) === -1) {
-			sets.setIdsByCardId[cardId].push(setId);
+		if(sets.setIdsByCardId[card.id].indexOf(setId) === -1) {
+			sets.setIdsByCardId[card.id].push(setId);
 		}
 		// index setItem by Card Id
-		if(!sets.setItemsBySetId[cardId]) {
-			sets.setItemsBySetId[cardId] = {};
+		if(!sets.setItemsByCardBySetId[card.id]) {
+			sets.setItemsByCardBySetId[card.id] = {};
 		}
-		sets.setItemsBySetId[cardId][setId] = setItem;
+		sets.setItemsByCardBySetId[card.id][setId] = setItem;
+
+		if(!sets.setItemsBySetId[setId]) {
+			sets.setItemsBySetId[setId] = [];
+		}
+		if(sets.setItemsBySetId[setId].indexOf(setItem) === -1) {
+			sets.setItemsBySetId[setId].push(setItem);
+		}
 	}
 
 	function removeSetItemCache(setItem) {
 		var cardId = setItem.get('card').id;
 		var setId = setItem.get('owner').id;
-		delete sets.setItemsBySetId[cardId][setId];
+		delete sets.setItemsByCardBySetId[cardId][setId];
 
 		var setList = sets.setIdsByCardId[cardId];
 		var index = setList.indexOf(setId);
+		if(index !== -1) {
+			setList.splice(index, 1);
+		}
+
+		setList = sets.setItemsBySetId[setId];
+		index = setList.indexOf(setItem);
 		if(index !== -1) {
 			setList.splice(index, 1);
 		}
@@ -242,7 +259,7 @@ app.service('sets', function($q, $rootScope) {
 	}
 
 	function removeCardFromSet(card, set) {
-		var setItem = sets.setItemsBySetId[card.id][set.id];
+		var setItem = sets.setItemsByCardBySetId[card.id][set.id];
 		return removeSetItem(setItem);
 	}
 

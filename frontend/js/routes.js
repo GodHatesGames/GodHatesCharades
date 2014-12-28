@@ -204,8 +204,8 @@ app.config(function($stateProvider,
 		title: 'Sets',
 		templateUrl: 'views/setsView.html',
 		resolve: {
-			allSets: ['sets', function(sets) {
-				return sets.getAllSets();
+			setIdsByCardId: ['sets', function(sets) {
+				return sets.getAllSetsAndItems();
 			}]
 		},
 		controller: 'setsView'

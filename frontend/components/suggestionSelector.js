@@ -52,19 +52,20 @@ app.directive('suggestionSelector', function(getAllSuggestions, cardService, $fi
 				modalScope.onError = _onEditError;
 
 				var modalInstance = $modal.open({
-					templateUrl: 'components/cardForm.modal.html',
+					templateUrl: 'components/cardDetails.modal.html',
 					scope: modalScope,
-					size: 'md'
+					size: 'lg'
 				})
 
 				function _onEditSuccess() {
 					console.log('modal success');
-					modalInstance.dismiss();
+					suggestion.attributes.text = updatedSuggestion.attributes.text;
+					suggestion.attributes.legal = updatedSuggestion.attributes.legal;
 				}
 
 				function _onEditError(err) {
-					console.log('modal error');
-					modalInstance.dismiss();
+					console.log('modal error', err);
+					// modalInstance.dismiss();
 				}
 			}
 		}

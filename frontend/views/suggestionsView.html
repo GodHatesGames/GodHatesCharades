@@ -55,7 +55,6 @@
 					</th>
 				</tr>
 				<tr ng-repeat="(index, suggestion) in suggestions | fuse:searchProps:searchSelector:sortOverrideKeys[sortDirection]"
-				    ng-init="newText = suggestion.attributes.text"
 				    ng-dblclick="editSuggestion(this, suggestion)"
 				    tooltip="Double-click to edit"
 				    tooltip-placement="left"
