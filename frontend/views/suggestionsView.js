@@ -1,5 +1,5 @@
 'use strict';
-app.controller('suggestionsView', function(suggestions, allSets, setIdsByCardId, $scope, cardService, $modal, sets) {
+app.controller('suggestionsView', function(suggestions, allSets, setIdsByCardId, $scope, cardService, $modal, sets, cardDetailsModal) {
 	$scope.suggestions = suggestions.data;
 	$scope.sets = sets;
 	$scope.cardService = cardService;
@@ -37,6 +37,7 @@ app.controller('suggestionsView', function(suggestions, allSets, setIdsByCardId,
 	$scope.overrideSort = _overrideSort;
 	$scope.getSortClass = _getSortClass;
 	$scope.editSuggestion = _editSuggestion;
+	$scope.cardDetailsModal = cardDetailsModal;
 
 	function _isAlphaSort(type) {
 		return type === $scope.SORT_TEXT || type === $scope.SORT_AUTHOR;

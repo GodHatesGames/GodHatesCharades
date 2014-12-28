@@ -8,12 +8,12 @@
 		</tr>
 		<tr ng-repeat="pair in pairs | orderBy:sortPredicates">
 			<td>
-				<a ui-sref="card(pair.attributes.actor.getLink())"
+				<a ng-click="cardDetailsModal.show(this, pair.attributes.actor)"
 				   target="_blank">
 					<b>{{::pair.attributes.actor.attributes.text}}</b>
 				</a>
 				&nbsp;
-				<a ui-sref="card(pair.attributes.scenario.getLink())"
+				<a ng-click="cardDetailsModal.show(this, pair.attributes.scenario)"
 				   target="_blank">
 					<b>{{pair.attributes.scenario.attributes.text}}</b>
 				</a>
