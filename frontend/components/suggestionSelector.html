@@ -12,13 +12,9 @@
 					<th>Author</th>
 				</tr>
 				<tr ng-repeat="(index, suggestion) in suggestions | fuse:['attributes.text']:searchSelector"
-				    ng-init="newText = suggestion.attributes.text"
-				    tooltip="Double-click to edit"
-				    tooltip-placement="left"
-				    tooltip-popup-delay="300"
-				    tooltip-append-to-body="true">
+				    ng-init="newText = suggestion.attributes.text">
 					<!-- Text -->
-					<td ng-dblclick="editSuggestion(this, suggestion)"
+					<td ng-click="editSuggestion(this, suggestion)"
 					    class="noselect">
 						{{::suggestion.attributes.text}}
 						<span class="legal"
