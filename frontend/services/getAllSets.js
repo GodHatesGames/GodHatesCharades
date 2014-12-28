@@ -192,7 +192,8 @@ app.service('sets', function($q, $rootScope, cardService) {
 		if(!sets.setItemsBySetId[setId]) {
 			sets.setItemsBySetId[setId] = [];
 		}
-		if(sets.setItemsBySetId[setId].indexOf(setItem) === -1) {
+		var existingCache = _.findWhere(sets.setItemsBySetId[setId], {id:setItem.id}) ;
+		if(!existingCache) {
 			sets.setItemsBySetId[setId].push(setItem);
 		}
 	}

@@ -7,8 +7,7 @@ app.controller('setsDetailView', function(set, $scope, $state, $stateParams, car
 	$scope.actorCount = 0;
 	$scope.scenarioCount = 0;
 	$scope.removeSetItem = _removeSetItem;
-	console.log('set:', set);
-	_getLengthForType();
+	_updateCount();
 
 	$scope.deleteSet = function() {
 		$scope.saving = true;
@@ -24,7 +23,7 @@ app.controller('setsDetailView', function(set, $scope, $state, $stateParams, car
 		});
 	};
 
-	function _getLengthForType(type) {
+	function _updateCount() {
 		var actors = 0;
 		var scenarios = 0;
 		_.each(sets.setItemsBySetId[set.id], function(setItem) {
@@ -42,10 +41,7 @@ app.controller('setsDetailView', function(set, $scope, $state, $stateParams, car
 
 	function _removeSetItem(setItem) {
 		sets.removeSetItem(setItem)
-		.then(_onSetItemRemoved);
+		.then(_updateCount);
 	}
 
-	function _onSetItemRemoved() {
-		console.log('removed');
-	}
 });
