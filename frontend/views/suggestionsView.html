@@ -56,10 +56,6 @@
 				</tr>
 				<tr ng-repeat="(index, suggestion) in suggestions | fuse:searchProps:searchSelector:sortOverrideKeys[sortDirection]"
 				    ng-click="cardDetailsModal.show(this, suggestion)"
-				    tooltip="Double-click to edit"
-				    tooltip-placement="left"
-				    tooltip-popup-delay="300"
-				    tooltip-append-to-body="true"
 				    class="noselect">
 					<!-- Text -->
 					<td>
