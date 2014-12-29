@@ -12,10 +12,10 @@
 					<th>Author</th>
 				</tr>
 				<tr ng-repeat="(index, suggestion) in suggestions | fuse:['attributes.text']:searchSelector"
+				    ng-click="editSuggestion(this, suggestion)"
 				    ng-init="newText = suggestion.attributes.text">
 					<!-- Text -->
-					<td ng-click="editSuggestion(this, suggestion)"
-					    class="noselect">
+					<td class="noselect">
 						{{::suggestion.attributes.text}}
 						<span class="legal"
 						      ng-if="::suggestion.attributes.legal">
