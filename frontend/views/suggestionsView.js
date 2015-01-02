@@ -1,27 +1,25 @@
 'use strict';
-app.controller('suggestionsView', function(suggestions, allSets, setIdsByCardId, $scope, cardService, $modal, sets, cardDetailsModal) {
-	$scope.suggestions = suggestions.data;
-	$scope.sets = sets;
-	$scope.cardService = cardService;
+app.controller('suggestionsView', function(suggestions, setIdsByCardId, $scope, $modal, cardDetailsModal, Suggestion) {
+	$scope.suggestions = suggestions;
 	$scope.SORT_TEXT = {
-		descending: ['attributes.text'],
-		ascending: ['-attributes.text']
+		descending: ['text'],
+		ascending: ['-text']
 	};
 	$scope.SORT_TYPE = {
-		descending: ['attributes.type'],
-		ascending: ['-attributes.type']
+		descending: ['type'],
+		ascending: ['-type']
 	};
 	$scope.SORT_AUTHOR = {
-		descending: ['attributes.owner.attributes.name'],
-		ascending: ['-attributes.owner.attributes.name']
+		descending: ['owner.name'],
+		ascending: ['-owner.name']
 	};
 	$scope.SORT_VOTES = {
-		descending: ['attributes.totalVotes'],
-		ascending: ['-attributes.totalVotes']
+		descending: ['totalVotes'],
+		ascending: ['-totalVotes']
 	};
 	$scope.SORT_SKIPS = {
-		descending: ['attributes.skipped'],
-		ascending: ['-attributes.skipped']
+		descending: ['skipped'],
+		ascending: ['-skipped']
 	};
 	$scope.SORT_KDR = {
 		descending: ['getKDR()'],
@@ -31,13 +29,17 @@ app.controller('suggestionsView', function(suggestions, allSets, setIdsByCardId,
 		descending: ['getTotalViews()'],
 		ascending: ['-getTotalViews()']
 	};
-	$scope.searchProps = ['attributes.text'];
+	$scope.searchProps = ['text'];
 	$scope.sortOverrideKeys;
 	$scope.sortDirection;
 	$scope.overrideSort = _overrideSort;
 	$scope.getSortClass = _getSortClass;
 	$scope.editSuggestion = _editSuggestion;
 	$scope.cardDetailsModal = cardDetailsModal;
+
+	_.each(suggestions, function(suggestion) {
+		suggestion.updateLinks();
+	});
 
 	function _isAlphaSort(type) {
 		return type === $scope.SORT_TEXT || type === $scope.SORT_AUTHOR;
@@ -93,8 +95,8 @@ app.controller('suggestionsView', function(suggestions, allSets, setIdsByCardId,
 
 		function _onEditSuccess(updatedSuggestion) {
 			console.log('modal success');
-			suggestion.attributes.text = updatedSuggestion.attributes.text;
-			suggestion.attributes.legal = updatedSuggestion.attributes.legal;
+			suggestion.text = updatedSuggestion.attributes.text;
+			suggestion.legal = updatedSuggestion.attributes.legal;
 			// modalInstance.dismiss();
 		}
 

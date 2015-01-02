@@ -1,4 +1,4 @@
-app.directive('setSelector', function(parseUser, pairService, $rootScope, sets) {
+app.directive('setSelector', function(parseUser, pairService, $rootScope, Set, SetItem) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/setSelector.html',
@@ -7,30 +7,40 @@ app.directive('setSelector', function(parseUser, pairService, $rootScope, sets) 
 			suggestion: '=suggestion'
 		},
 		controller: function($scope, $element) {
-			$scope.searchProps = ['attributes.name'];
-			$scope.sets = sets;
+			$scope.searchProps = ['name'];
 			$scope.onSelect = _onSelect;
 			$scope.onRemove = _onRemove;
 			$scope.saving = false;
 			$scope.feedbackClass = _feedbackClass;
-			_updateModel();
+			$scope.sets = [];
+			$scope.updates = {
+				sets: []
+			};
+			Set.findAll()
+			.then(_onSetsFound)
+			.then(_updateModel);
+
+			function _onSetsFound(sets) {
+				$scope.sets = sets;
+			}
 
 			function _updateModel() {
-				var currentSetIds = sets.setIdsByCardId[$scope.suggestion.id];
-				var currentSets = _.pick(sets.byId, currentSetIds);
-				$scope.selectedSets = _.values(currentSets);
+				var newSets = _.pluck($scope.suggestion.setItems, 'owner');
+				$scope.updates.sets.length = 0;
+				Array.prototype.push.apply($scope.updates.sets, newSets);
 			}
 
 			function _onSelect(set) {
 				$scope.saving = true;
-				sets.addCardToSet($scope.suggestion, set)
+				set.addCard($scope.suggestion)
 				.then(_updateModel)
 				.then(_onComplete);
 			}
 
 			function _onRemove(set) {
 				$scope.saving = true;
-				sets.removeCardFromSet($scope.suggestion, set)
+				var setItem = _.findWhere($scope.suggestion.setItems, {ownerId: set.id});
+				SetItem.destroy(setItem.id)
 				.then(_updateModel)
 				.then(_onComplete);
 			}

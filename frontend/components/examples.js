@@ -1,5 +1,5 @@
 'use strict';
-app.directive('examples', function(cardService, $timeout) {
+app.directive('examples', function(Suggestion, $timeout) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/examples.html',
@@ -23,23 +23,12 @@ app.directive('examples', function(cardService, $timeout) {
 			$scope.loadExamples = function() {
 				if(!$scope.loading) {
 					$scope.loading = true;
-					
-					Parse.Cloud.run(
-						CONFIG.PARSE_VERSION + 'examples',
-						{
-							id: CONFIG.EXAMPLE_SET_ID
-						},
-						{
-							success: onExamplesLoaded,
-							error: onExamplesError
-						}
-					);
+					Suggestion.loadExamples()
+					.then(onExamplesLoaded);
 				}
 			};
 
 			function onExamplesLoaded(examples) {
-				cardService.cache(examples.zero);
-				cardService.cache(examples.one);
 				$scope.loading = false;
 				$scope.characters = $scope.characters.concat(examples.zero);
 				$scope.scenarios = $scope.scenarios.concat(examples.one);

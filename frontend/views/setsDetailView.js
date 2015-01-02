@@ -1,8 +1,6 @@
 'use strict';
-app.controller('setsDetailView', function(set, $scope, $state, $stateParams, cardService, sets) {
+app.controller('setsDetailView', function(set, $scope, $state, $stateParams) {
 	$scope.saving = false;
-	$scope.cardService = cardService;
-	$scope.sets = sets;
 	$scope.set = set;
 	$scope.actorCount = 0;
 	$scope.scenarioCount = 0;
@@ -26,13 +24,18 @@ app.controller('setsDetailView', function(set, $scope, $state, $stateParams, car
 	function _updateCount() {
 		var actors = 0;
 		var scenarios = 0;
-		_.each(sets.setItemsBySetId[set.id], function(setItem) {
-			var type = setItem.get('card').get('type');
-			if(type === 0) {
-				// actor
-				actors++;
-			} else if(type === 1) {
-				scenarios++;
+		_.each(set.setItems, function(setItem) {
+			var card = setItem.card;
+			if(card) {
+				var type = setItem.card.type;
+				if(type === 0) {
+					// actor
+					actors++;
+				} else if(type === 1) {
+					scenarios++;
+				}
+			} else {
+				console.log('setItem', setItem.id, 'has no card');
 			}
 		});
 		$scope.actorCount = actors;

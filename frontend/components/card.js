@@ -1,5 +1,5 @@
 'use strict';
-app.directive('card', function(parseUser, cardService) {
+app.directive('card', function() {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/card.html',
@@ -7,9 +7,6 @@ app.directive('card', function(parseUser, cardService) {
 		scope: {
 			suggestion: '=',
 			domain: '='
-		},
-		controller: function($scope, $element) {
-			$scope.cardService = cardService;
 		}
 	};
 });

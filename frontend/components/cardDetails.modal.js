@@ -16,8 +16,8 @@ app.service('cardDetailsModal', function($modal) {
 
 		function _onEditSuccess(updatedSuggestion) {
 			console.log('modal success');
-			suggestion.attributes.text = updatedSuggestion.attributes.text;
-			suggestion.attributes.legal = updatedSuggestion.attributes.legal;
+			suggestion.text = updatedSuggestion.attributes.text;
+			suggestion.legal = updatedSuggestion.attributes.legal;
 			// modalInstance.dismiss();
 		}
 

@@ -1,15 +1,15 @@
-app.controller('cardView', function(suggestion, $scope, $state, $location, cardService) {
+app.controller('cardView', function(suggestion, $scope, $state, $location) {
 	$scope.suggestion = suggestion;
 	//set meta title
-	$state.current.title = suggestion.get('text');
+	$state.current.title = suggestion.attributes.text;
 
 	// set meta description
 	$state.current.description = ['"',
-	                              suggestion.get('text'),
+	                              suggestion.attributes.text,
 	                              '" is a ',
 	                              suggestion.getTypeDisplay(),
 	                              ' card submitted by ',
-	                              suggestion.get('owner').get('name')].join('');
+	                              suggestion.getOwnerName()].join('');
 
 	// DISQUS
 	$scope.disqus = {

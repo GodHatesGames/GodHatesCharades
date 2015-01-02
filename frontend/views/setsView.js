@@ -1,5 +1,5 @@
 'use strict';
-app.controller('setsView', function(setIdsByCardId, $scope, $state, sets) {
+app.controller('setsView', function(sets, $scope, $state) {
 	$scope.sets = sets;
 
 	$scope.showSet = function(set) {

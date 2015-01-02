@@ -1,15 +1,15 @@
 'use strict';
-app.directive('downloader', function(cardService) {
+app.directive('downloader', function($filter) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/downloader.html',
 		replace: true,
 		scope: {
-			items: '=items'
+			items: '=',
+			filename: '@'
 		},
 		controller: function($scope) {
 			// public vars
-			$scope.cardService = cardService;
 			$scope.csvHeaders = [
 				'text',
 				'type',
@@ -21,6 +21,10 @@ app.directive('downloader', function(cardService) {
 			];
 
 			// generate all cards CSV
+			$scope.csvName = [$scope.filename || 'Cards',
+			                  '_',
+			                  $filter('date')(new Date(), 'short'),
+			                  '.csv'].join('');
 
 
 			$scope.$watch('items', generateSetData);
@@ -29,17 +33,17 @@ app.directive('downloader', function(cardService) {
 				var allCsvData = [];
 				var item;
 				_.each(newValue, function(value, key) {
-					var text = value.attributes.text;
+					var text = value.text;
 					// fix bad qoutes and escape them too
 					text = text.replace(/[”“"’]/g, '\'');
 					item = {
 						'text': text,
-						'type': value.attributes.type,
-						'totalVotes': value.attributes.totalVotes,
-						'skipped': value.attributes.skipped,
-						'rejected': value.attributes.rejected,
-						'kdr': value.attributes.kdr,
-						'moderated': value.attributes.moderated
+						'type': value.type,
+						'totalVotes': value.totalVotes,
+						'skipped': value.skipped,
+						'rejected': value.rejected,
+						'kdr': value.kdr,
+						'moderated': value.moderated
 					};
 					allCsvData.push(item);
 				});

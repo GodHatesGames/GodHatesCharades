@@ -207,6 +207,8 @@ function getPairsByCard(request, response) {
 			var PairObject = Parse.Object.extend('Pair');
 			var query = new Parse.Query(PairObject);
 			query.descending('displayed');
+			query.include('actor.owner');
+			query.include('scenario.owner');
 			query.limit(50);
 			query.equalTo(cardType, mockCard);
 			query.find({

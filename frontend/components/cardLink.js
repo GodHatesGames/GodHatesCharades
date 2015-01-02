@@ -1,4 +1,4 @@
-app.directive('cardLink', function(cardService) {
+app.directive('cardLink', function() {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/cardLink.html',

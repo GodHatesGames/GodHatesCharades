@@ -1,5 +1,5 @@
 'use strict';
-app.directive('suggestionSelector', function(getAllSuggestions, cardService, $filter, $state, $modal) {
+app.directive('suggestionSelector', function(Suggestion, $filter, $state, $modal) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/suggestionSelector.html',
@@ -12,7 +12,6 @@ app.directive('suggestionSelector', function(getAllSuggestions, cardService, $fi
 		},
 		controller: function($scope, $element) {
 			// public vars
-			$scope.cardService = cardService;
 			$scope.tab = 'best';
 			$scope.loading = true;
 			$scope.$watch('search', _onSearchUpdated);
@@ -20,7 +19,8 @@ app.directive('suggestionSelector', function(getAllSuggestions, cardService, $fi
 			// Public methods
 			$scope.checkEscape = _checkEscape;
 
-			getAllSuggestions.then(_onSuggestionsRetrieved);
+			Suggestion.getAllApprovedSuggestions()
+			.then(_onSuggestionsRetrieved);
 
 			$scope.selectSuggestion = function(suggestion) {
 				console.log('selectSuggestion');
@@ -33,7 +33,7 @@ app.directive('suggestionSelector', function(getAllSuggestions, cardService, $fi
 
 			function _onSuggestionsRetrieved(suggestions) {
 				$scope.loading = false;
-				$scope.suggestions = suggestions.data;
+				$scope.suggestions = suggestions;
 			}
 
 			function _onSearchUpdated(newValue) {
@@ -59,8 +59,8 @@ app.directive('suggestionSelector', function(getAllSuggestions, cardService, $fi
 
 				function _onEditSuccess() {
 					console.log('modal success');
-					suggestion.attributes.text = updatedSuggestion.attributes.text;
-					suggestion.attributes.legal = updatedSuggestion.attributes.legal;
+					suggestion.text = updatedSuggestion.attributes.text;
+					suggestion.legal = updatedSuggestion.attributes.legal;
 				}
 
 				function _onEditError(err) {

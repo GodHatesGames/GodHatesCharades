@@ -19,6 +19,7 @@ var app = angular.module('app', ['ng',
                                  'slugifier',
                                  'disqusHere',
                                  'angular-data.DSCacheFactory',
+                                 'angular-data.DS',
                                  'templateInclude',
                                  'ngCsv',
                                  'youtube-embed'

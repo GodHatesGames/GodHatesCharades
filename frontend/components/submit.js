@@ -1,4 +1,4 @@
-app.directive('submit', function(cardService, parseUser) {
+app.directive('submit', function(Suggestion, parseUser) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/submit.html',
@@ -45,9 +45,9 @@ app.directive('submit', function(cardService, parseUser) {
 				$scope.example = randomEvents[rand];
 			}
 			
-			$scope.typeDisplay = cardService.getTypeDisplayByType($scope.type);
-			$scope.typeClass = cardService.getTypeClassByType($scope.type);
-			$scope.imageUrl = cardService.getImageByType($scope.type);
+			$scope.typeDisplay = Suggestion.getTypeDisplayByType($scope.type);
+			$scope.typeClass = Suggestion.getTypeClassByType($scope.type);
+			$scope.imageUrl = Suggestion.getImageByType($scope.type);
 
 			$scope.onTextChange = function(newValue, oldValue) {
 				if(newValue === undefined || newValue === null)

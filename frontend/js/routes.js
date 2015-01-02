@@ -76,8 +76,8 @@ app.config(function($stateProvider,
 		templateUrl: 'views/cardView.html',
 		controller: 'cardView',
 		resolve: {
-			suggestion: ['cardService', '$stateParams', function(cardService, $stateParams) {
-				return cardService.getCard($stateParams.cardid);
+			suggestion: ['Suggestion', '$stateParams', function(Suggestion, $stateParams) {
+				return Suggestion.find($stateParams.cardid);
 			}]
 		}
 	});
@@ -175,9 +175,11 @@ app.config(function($stateProvider,
 		title: 'Export',
 		templateUrl: 'views/exportView.html',
 		resolve: {
-			getAllSuggestions: 'getAllSuggestions',
-			allSets: ['sets', function(sets) {
-				return sets.getAllSets();
+			suggestions: ['Suggestion', function(Suggestion) {
+				return Suggestion.getAllApprovedSuggestions();
+			}],
+			allSets: ['Set', function(Set) {
+				return Set.findAll();
 			}]
 		},
 		controller: 'exportView'
@@ -188,12 +190,11 @@ app.config(function($stateProvider,
 		title: 'Suggestions',
 		templateUrl: 'views/suggestionsView.html',
 		resolve: {
-			suggestions: 'getAllSuggestions',
-			allSets: ['sets', function(sets) {
-				return sets.getAllSets();
+			suggestions: ['Suggestion', function(Suggestion) {
+				return Suggestion.getAllApprovedSuggestions();
 			}],
-			setIdsByCardId: ['sets', function(sets) {
-				return sets.getAllSetsAndItems();
+			setIdsByCardId: ['Set', function(Set) {
+				return Set.getAllSetsAndItems();
 			}]
 		},
 		controller: 'suggestionsView'
@@ -204,8 +205,8 @@ app.config(function($stateProvider,
 		title: 'Sets',
 		templateUrl: 'views/setsView.html',
 		resolve: {
-			setIdsByCardId: ['sets', function(sets) {
-				return sets.getAllSetsAndItems();
+			sets: ['Set', function(Set) {
+				return Set.getAllSetsAndItems();
 			}]
 		},
 		controller: 'setsView'
@@ -223,8 +224,8 @@ app.config(function($stateProvider,
 		title: 'Set Details',
 		templateUrl: 'views/setsDetailView.html',
 		resolve: {
-			set: ['sets', '$stateParams', function(sets, $stateParams) {
-				return sets.getSet($stateParams.id);
+			set: ['Set', '$stateParams', function(Set, $stateParams) {
+				return Set.find($stateParams.id);
 			}]
 		},
 		controller: 'setsDetailView'

@@ -1,6 +1,7 @@
 <div id="suggestionView">
 	<h2>Suggestions</h2>
-	<div class="cardList" 
+	<div class="cardList"
+	     ng-if="suggestions"
 	     ng-hide="loading">
 		<h3>{{suggestions.length}} suggestions loaded</h3>
 		<input ng-model="searchSelector"
@@ -59,23 +60,23 @@
 				    class="noselect">
 					<!-- Text -->
 					<td>
-						{{suggestion.attributes.text}}
+						{{suggestion.text}}
 						<span class="legal"
-						      ng-if="::suggestion.attributes.legal">
-							{{suggestion.attributes.legal}}
+						      ng-if="::suggestion.legal">
+							{{suggestion.legal}}
 						</span>
 					</td>
 					<!-- Type -->
 					<td ng-class="suggestion.getTypeClass()"></td>
 					<!-- Author Name -->
-					<td>{{::suggestion.attributes.owner.attributes.name}}</td>
+					<td>{{::suggestion.owner.name}}</td>
 					<td>{{::suggestion.getTotalVotes()}}</td>
 					<td>{{::suggestion.getTotalSkips()}}</td>
 					<td>{{::suggestion.getKDR()}}</td>
 					<td>{{::suggestion.getTotalViews()}}</td>
 					<td>
-						<div ng-repeat="setId in sets.setIdsByCardId[suggestion.id]">
-							<span class="label label-default">{{sets.byId[setId].attributes.name}}</span>
+						<div ng-repeat="setItem in suggestion.setItems">
+							<span class="label label-default">{{setItem.owner.name}}</span>
 						</div>
 					</td>
 				</tr>

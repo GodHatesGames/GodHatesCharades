@@ -22,6 +22,7 @@
 			<card-link suggestion="suggestion"></card-link>
 			
 			<card-form suggestion="suggestion"
+			           ng-if="suggestion"
 			           save-on-submit="false"></card-form>
 			
 			<div class="btn-group">
@@ -41,7 +42,7 @@
 		</div>
 	</div>
 	<suggestion-selector class="col-sm-6 col-md-6 col-lg-6"
-	                     search="suggestion.attributes.text"></suggestion-selector>
+	                     search="suggestion.text"></suggestion-selector>
 
 
 </div>

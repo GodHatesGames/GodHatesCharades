@@ -17,7 +17,7 @@
 	{{suggestion.getKDR()}} KDR
 	<br>
 	Submitted by
-	<a ui-sref="user({userid: suggestion.attributes.owner.id})">
-		<b>{{suggestion.attributes.owner.attributes.name}}</b>
+	<a ui-sref="user({userid: suggestion.owner.id})">
+		<b>{{suggestion.owner.name}}</b>
 	</a>
 </div>

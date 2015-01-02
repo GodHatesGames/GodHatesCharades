@@ -11,21 +11,21 @@
 					<th>Type</th>
 					<th>Author</th>
 				</tr>
-				<tr ng-repeat="(index, suggestion) in suggestions | fuse:['attributes.text']:searchSelector"
+				<tr ng-repeat="(index, suggestion) in suggestions | fuse:['text']:searchSelector"
 				    ng-click="editSuggestion(this, suggestion)"
-				    ng-init="newText = suggestion.attributes.text">
+				    ng-init="newText = suggestion.text">
 					<!-- Text -->
 					<td class="noselect">
-						{{::suggestion.attributes.text}}
+						{{::suggestion.text}}
 						<span class="legal"
-						      ng-if="::suggestion.attributes.legal">
-							{{::suggestion.attributes.legal}}
+						      ng-if="::suggestion.legal">
+							{{::suggestion.legal}}
 						</span>
 					</td>
 					<!-- Type -->
 					<td ng-class="suggestion.getTypeClass()"></td>
 					<!-- Author Name -->
-					<td>{{::suggestion.attributes.owner.attributes.name}}</td>
+					<td>{{::suggestion.owner.name}}</td>
 				</tr>
 			</table>
 	</div>

@@ -8,14 +8,14 @@
 		</tr>
 		<tr ng-repeat="pair in pairs | orderBy:sortPredicates">
 			<td>
-				<a ng-click="cardDetailsModal.show(this, pair.attributes.actor)"
+				<a ng-click="cardDetailsModal.show(this, pair.actor)"
 				   target="_blank">
-					<b>{{::pair.attributes.actor.attributes.text}}</b>
+					<b>{{::pair.actor.text}}</b>
 				</a>
 				&nbsp;
-				<a ng-click="cardDetailsModal.show(this, pair.attributes.scenario)"
+				<a ng-click="cardDetailsModal.show(this, pair.scenario)"
 				   target="_blank">
-					<b>{{pair.attributes.scenario.attributes.text}}</b>
+					<b>{{pair.scenario.text}}</b>
 				</a>
 			</td>
 			<td>{{pair.getViews()}}</td>

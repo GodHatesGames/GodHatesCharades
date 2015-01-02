@@ -1,5 +1,5 @@
 'use strict';
-app.directive('cardForm', function(cardService) {
+app.directive('cardForm', function() {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/cardForm.html',
@@ -11,12 +11,11 @@ app.directive('cardForm', function(cardService) {
 			onError: '='
 		},
 		controller: function($scope, $element) {
-			$scope.cardService = cardService;
 			$scope.saveSuggestion = _saveSuggestion;
 			$scope.saving = false;
 			$scope.updates = {
-				text: $scope.suggestion.get('text'),
-				legal: $scope.suggestion.get('legal')
+				text: $scope.suggestion.text,
+				legal: $scope.suggestion.legal
 			}
 
 			function _saveSuggestion() {

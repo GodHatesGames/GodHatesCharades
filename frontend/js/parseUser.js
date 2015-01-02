@@ -1,7 +1,7 @@
 'use strict';
 var parseUser = angular.module('parse.user', []);
 
-parseUser.service('parseUser', function factory($rootScope, $q, $location, cardService, pairService) {
+parseUser.service('parseUser', function factory($rootScope, $q, $location, pairService, Suggestion) {
 	var user = {
 		loggedin: false,
 		dataloaded: false,
@@ -28,7 +28,7 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, cardS
 	// check login status
 	var currentUser = Parse.User.current();
 	if (currentUser) {
-		console.log('logged in', currentUser);
+		// console.log('logged in', currentUser);
 		user.data = currentUser;
 		cache[user.data.id] = user.data;
 		user.loggedin = true;
@@ -87,7 +87,6 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, cardS
 
 		if(isAdmin())
 		{
-			cardService.clearCache();
 			pairService.clearCache();
 		}
 		//track in leanplum
@@ -230,7 +229,7 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, cardS
 			delete fetching[id];
 			var user = profile.owner;
 			profiles[user.id] = profile;
-			cardService.cache(profile.suggestions);
+			Suggestion.inject(profile.suggestions);
 			deferred.resolve(profile);
 		}
 

@@ -1,4 +1,4 @@
-app.directive('userSubmissions', function($filter, cardService, parseUser) {
+app.directive('userSubmissions', function($filter, parseUser) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/userSubmissions.html',
@@ -11,7 +11,6 @@ app.directive('userSubmissions', function($filter, cardService, parseUser) {
 		},
 		controller: function($scope, $element) {
 			// public vars
-			$scope.cardService = cardService;
 			$scope.pageSize = 50;
 			$scope.loading = false;
 			$scope.suggestions = [];

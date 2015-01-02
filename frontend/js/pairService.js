@@ -1,4 +1,4 @@
-app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory, Slug) {
+app.service('pairService', function($q, $rootScope, Suggestion, DSCacheFactory, Slug) {
 	var pairService = {
 		getPairById: _getPairById,
 		getPairsByCard: _getPairsByCard,
@@ -11,8 +11,8 @@ app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory,
 
 	function cache(pairToCache) {
 		pairCache.put(pairToCache.id, pairToCache);
-		cardService.cache([pairToCache.get('actor'),
-		                   pairToCache.get('scenario')]);
+		pairToCache.attributes.actor = Suggestion.inject(pairToCache.attributes.actor);
+		pairToCache.attributes.scenario = Suggestion.inject(pairToCache.attributes.scenario);
 	}
 
 	function clearCache() {
@@ -69,8 +69,8 @@ app.service('pairService', function($q, $rootScope, cardService, DSCacheFactory,
 				var actorData = parsePair.get('actor');
 				var scenarioData = parsePair.get('scenario');
 
-				var actorPromise = cardService.getCard(actorData.id);
-				var scenarioPromise = cardService.getCard(scenarioData.id);
+				var actorPromise = Suggestion.find(actorData.id);
+				var scenarioPromise = Suggestion.find(scenarioData.id);
 
 				var pairPromise = $q.all([actorPromise, scenarioPromise])
 				.then(function(results) {

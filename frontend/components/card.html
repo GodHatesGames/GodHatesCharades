@@ -1,16 +1,16 @@
 <div class="card"
-     ng-class="cardService.getTypeClassByType(suggestion.attributes.type)">
+     ng-class="suggestion.getTypeClass()">
 	<span class="icon"
-		  ng-include="cardService.getImageByType(suggestion.attributes.type)"></span>
+		  ng-include="suggestion.getImageUrl()"></span>
 	<div class="cardContent">
-		{{suggestion.attributes.text}}<span>{{suggestion.attributes.legal}}</span>
+		{{suggestion.text}}<span>{{suggestion.legal}}</span>
 	</div>
 	<div ng-if="domain"
 	     class="domain">
 		godhatescharades.com
 	</div>
-	<div ng-if="suggestion.attributes.owner.attributes.name"
+	<div ng-if="suggestion.getOwnerName()"
 	     class="author">
-		{{suggestion.attributes.owner.attributes.name}}
+		{{suggestion.getOwnerName()}}
 	</div>
 </div>

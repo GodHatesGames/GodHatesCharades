@@ -1,28 +1,17 @@
 'use strict';
-app.directive('printer', function(cardService, $compile, $window, prismic, sets, $timeout) {
+app.directive('printer', function(Suggestion, $compile, $window, prismic, Set, $timeout, SetItem) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/printer.html',
 		replace: true,
 		controller: function($scope, $element) {
 			// public vars
-			$scope.cardService = cardService;
 			$scope.extraItems = [];
 			$scope.rulesHtml = null;
 			$scope.instructionsHtml = null;
 			$scope.loadedSets = [];
 			$scope.cardsBySet = {};
 			var itemsPerPage = 9;
-
-			_.each(sets.data, function loadSet(set, index) {
-				sets.getSetItemsForSet(set)
-				.then(function(setItems) {
-					$scope.loadedSets.push(set);
-					var attributes = _.pluck(setItems, 'attributes'); 
-					var cards = _.pluck(attributes, 'card');
-					$scope.cardsBySet[set.id] = cards;
-				})
-			});
 
 			prismic.getDocumentById(CONFIG.PRISMIC.DOCS.PRINT_RULES)
 			.then(function onRulesLoaded(rules) {
@@ -38,14 +27,14 @@ app.directive('printer', function(cardService, $compile, $window, prismic, sets,
 
 			// Private methods
 			function setupPrint(set) {
-				$scope.setItems = _.values(sets.setItemsByCardBySetId[set.id]);
+				$scope.setItems = sets.setItemsBySetId[set.id];
 				if($scope.extraItems.length > 0)
 					$scope.extraItems = [];
 				var extraCount = itemsPerPage - ($scope.setItems.length % itemsPerPage);
 				var newItem, itemType;
 				for(var i = 0; i < extraCount; i++) {
 					itemType = i % 2;
-					newItem = cardService.getBlankCardByType(itemType);
+					newItem = Suggestion.getBlankCardByType(itemType);
 					$scope.extraItems.push(newItem);
 				}
 			}
@@ -74,8 +63,8 @@ app.directive('printer', function(cardService, $compile, $window, prismic, sets,
 			};
 
 			$scope.getCardCount = function(set) {
-				if(sets.setItemsByCardBySetId[set.id])
-					return _.size(sets.setItemsByCardBySetId[set.id]);
+				if(sets.setItemsBySetId[set.id])
+					return sets.setItemsBySetId[set.id].length;
 				else
 					return 'loading';
 			}

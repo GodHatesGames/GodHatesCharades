@@ -1,4 +1,4 @@
-<h3>{{set.attributes.name}}</h3>
+<h3>{{set.name}}</h3>
 <div class="btn btn-warning"
 	 ng-click="ilikedanger = true"
 	 ng-hide="ilikedanger">
@@ -21,7 +21,7 @@
 		Saving...
 	</div>
 	<div class="cardList"
-	     ng-if="sets.setItemsBySetId[set.id]">
+	     ng-if="set.setItems.length > 0">
 		<input ng-model="searchDetail"
 			   placeholder="search here"
 			   class="form-control">
@@ -31,7 +31,7 @@
 				<th>Suggestion</th>
 				<th>Type</th>
 			</tr>
-			<tr ng-repeat="(index, setItem) in sets.setItemsBySetId[set.id] | fuse:['attributes.card.attributes.text']:searchDetail">
+			<tr ng-repeat="(index, setItem) in set.setItems | fuse:['card.text']:searchDetail">
 				<!-- Delete Button -->
 				<td class="tableButton">
 					<a ng-click="removeSetItem(setItem)"
@@ -41,14 +41,14 @@
 				</td>
 				<!-- Text -->
 				<td>
-					{{setItem.attributes.card.attributes.text}}
+					{{setItem.card.text}}
 					<span class="legal"
-					      ng-if="::setItem.attributes.card.attributes.legal">
-						{{setItem.attributes.card.attributes.legal}}
+					      ng-if="::setItem.card.legal">
+						{{setItem.card.legal}}
 					</span>
 				</td>
 				<!-- Type -->
-				<td ng-class="setItem.attributes.card.getTypeClass()"></td>
+				<td ng-class="setItem.card.getTypeClass()"></td>
 			</tr>
 		</table>
 	</div>

@@ -1,5 +1,5 @@
 'use strict';
-app.directive('vote', function(cardService, cloudUtils, $timeout) {
+app.directive('vote', function(cloudUtils, Suggestion, $q) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/vote.html',
@@ -9,7 +9,6 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 			$scope.$watch('pairIndex', _onPairIndexChanged);
 
 			// public vars
-			$scope.cardService = cardService;
 			$scope.pairLimit = 2;
 			$scope.loading = true;
 			$scope.suggestionPairs = [];
@@ -25,35 +24,21 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 
 			function _loadSuggestionPairs(skip) {
 				$scope.loading = true;
-				
-				Parse.Cloud.run(
-					CONFIG.PARSE_VERSION + 'getRandomSuggestionPairs',
-					{
-						'skip': skip
-					},
-					{
-						success: _onSuggestionPairsLoaded,
-						error: _onSuggestionPairsError
-					}
-				);
+				Suggestion.getSuggestionPairs(skip)
+				.then(_onSuggestionPairsLoaded, _onSuggestionPairsError);
 			}
 
 			function _onSuggestionPairsLoaded(suggestionPairs) {
-				_.each(suggestionPairs, function(pair, index) {
-					cardService.cache(_.values(pair));
-				});
-				if($scope.suggestionPairSrc.length === 0) {
-					var descriptor = {
-						value: true,
-						enumerable: false
-					};
-					Object.defineProperty(suggestionPairs[0], 'first', descriptor);
-					Object.defineProperty(suggestionPairs[1], 'first', descriptor);
-				}
-				$scope.suggestionPairSrc = $scope.suggestionPairSrc.concat(suggestionPairs);
+				var descriptor = {
+					value: true,
+					enumerable: false
+				};
+				Object.defineProperty(suggestionPairs[0], 'first', descriptor);
+				Object.defineProperty(suggestionPairs[1], 'first', descriptor);
+				$scope.suggestionPairSrc = suggestionPairs;
+				$scope.pairIndex = 0;
 				$scope.loading = false;
 				_updateSuggestionPairs();
-				$scope.$digest();
 			}
 
 			function _onSuggestionPairsError(error) {
@@ -70,13 +55,16 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 					$scope.suggestionPairs = newPairs;
 				} else {
 					console.log('load again');
-					if(!$scope.loading)
-						_loadSuggestionPairs($scope.pairIndex);
+					if(!$scope.loading) {
+						// offset by one to keep from reselecting the current pair which may still be saving
+						_loadSuggestionPairs(2);
+					}
 				}
 			}
 
 			function _onPairVoted(message) {
-				console.log('vote success:', message);
+				// console.log('vote success:', message);
+
 			}
 
 			function _onPairVoteError(error) {
@@ -90,6 +78,7 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 			};
 
 			function _selectPair($event, selectedIndex) {
+
 				// add class to the chosen pair
 				angular.element($event.currentTarget).addClass('chosen');
 
@@ -103,17 +92,19 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 						skippedActor: skippedPair[0].id,
 						skippedScenario: skippedPair[1].id
 				};
+				var deferred = $q.defer();
 				Parse.Cloud.run(
 					CONFIG.PARSE_VERSION + 'recordChosenAndSkipped',
 					cloudUtils.getDefaultParams(params),
 					{
-						success: _onPairVoted,
-						error: _onPairVoteError
+						success: deferred.resolve,
+						error: deferred.reject
 					}
 				);
-
 				// update current index
 				$scope.pairIndex += $scope.pairLimit;
+
+				deferred.promise.then(_onPairVoted, _onPairVoteError)
 
 				// Track
 				ga('send', 'event', 'vote', 'pair');
@@ -128,19 +119,22 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 					});
 				});
 
+				var deferred = $q.defer();
+
 				Parse.Cloud.run(
 					CONFIG.PARSE_VERSION + 'skipSuggestions',
 					{
 						'skippedIds': skippedIds
 					},
 					{
-						success: _onPairVoted,
-						error: _onPairVoteError
+						success: deferred.resolve,
+						error: deferred.reject
 					}
 				);
-
 				// update current index
 				$scope.pairIndex += $scope.pairLimit;
+
+				deferred.promise.then(_onPairVoted, _onPairVoteError)
 
 				// Track
 				ga('send', 'event', 'vote', 'skip');

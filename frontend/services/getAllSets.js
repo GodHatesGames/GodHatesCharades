@@ -1,5 +1,5 @@
 'use strict';
-app.service('sets', function($q, $rootScope, cardService) {
+app.service('sets', function($q, $rootScope, Suggestion) {
 	// console.log('instantiate sets');
 	var sets = {
 		data: [],
@@ -171,10 +171,10 @@ app.service('sets', function($q, $rootScope, cardService) {
 	}
 
 	function cacheSetItem(setItem) {
-		var setId = setItem.get('owner').id;
-		var card = setItem.get('card');
+		var setId = setItem.attributes.owner.attributes.id;
+		var card = setItem.attributes.card;
 		// cache card
-		setItem.attributes.card = cardService.cache(card);
+		setItem.attributes.card = Suggestion.inject(card);
 
 		// index sets by Card Id
 		if(!sets.setIdsByCardId[card.id]) {
@@ -199,8 +199,8 @@ app.service('sets', function($q, $rootScope, cardService) {
 	}
 
 	function removeSetItemCache(setItem) {
-		var cardId = setItem.get('card').id;
-		var setId = setItem.get('owner').id;
+		var cardId = setItem.attributes.card.attributes.id;
+		var setId = setItem.attributes.owner.attributes.id;
 		delete sets.setItemsByCardBySetId[cardId][setId];
 
 		var setList = sets.setIdsByCardId[cardId];

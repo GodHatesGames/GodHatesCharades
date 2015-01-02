@@ -15,9 +15,9 @@
 			</td>
 			<td>{{suggestion.getKDR()}}</td>
 			<td>
-				<a ui-sref="user({userid: suggestion.attributes.owner.id})"
+				<a ui-sref="user({userid: suggestion.owner.id})"
 				   target="_blank">
-					<b>{{suggestion.attributes.owner.attributes.name}}</b>
+					<b>{{suggestion.owner.name}}</b>
 				</a>
 			</td>
 		</tr>

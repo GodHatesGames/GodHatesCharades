@@ -1,14 +1,14 @@
 <div class="setSelector row">
 	<div class="col-sm-11">
 		<ui-select multiple
-		           ng-model="selectedSets"
+		           ng-model="updates.sets"
 		           on-select="onSelect($item)"
 		           on-remove="onRemove($item)">
 			<ui-select-match placeholder="Select set...">
-				{{$item.attributes.name}}
+				{{$item.name}}
 			</ui-select-match>
-			<ui-select-choices repeat="set in sets.data | fuse:searchProps:$select.search">
-				<div ng-bind-html="set.attributes.name | highlight: $select.search"></div>
+			<ui-select-choices repeat="set in sets | fuse:searchProps:$select.search">
+				<div ng-bind-html="set.name | highlight: $select.search"></div>
 			</ui-select-choices>
 		</ui-select>
 	</div>
