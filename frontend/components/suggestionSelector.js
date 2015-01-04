@@ -5,7 +5,8 @@ app.directive('suggestionSelector', function(Suggestion, $filter, $state, $modal
 		templateUrl: 'components/suggestionSelector.html',
 		replace: true,
 		scope: {
-			search: '=search'
+			suggestions: '=',
+			search: '='
 		},
 		link: function($scope, $element) {
 			// $scope.$watch('pairIndex', $scope.onPairIndexChanged);
@@ -13,14 +14,10 @@ app.directive('suggestionSelector', function(Suggestion, $filter, $state, $modal
 		controller: function($scope, $element) {
 			// public vars
 			$scope.tab = 'best';
-			$scope.loading = true;
 			$scope.$watch('search', _onSearchUpdated);
 
 			// Public methods
 			$scope.checkEscape = _checkEscape;
-
-			Suggestion.getAllApprovedSuggestions()
-			.then(_onSuggestionsRetrieved);
 
 			$scope.selectSuggestion = function(suggestion) {
 				console.log('selectSuggestion');
@@ -30,11 +27,6 @@ app.directive('suggestionSelector', function(Suggestion, $filter, $state, $modal
 			$scope.editSuggestion = _editSuggestion;
 
 			// Private methods
-
-			function _onSuggestionsRetrieved(suggestions) {
-				$scope.loading = false;
-				$scope.suggestions = suggestions;
-			}
 
 			function _onSearchUpdated(newValue) {
 				$scope.searchSelector = newValue;

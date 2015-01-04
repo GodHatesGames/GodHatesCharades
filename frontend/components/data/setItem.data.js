@@ -1,4 +1,4 @@
-app.factory('SetItem', function (DS, $q, Suggestion, ParseData) {
+app.factory('SetItem', function (DS, $q, Suggestion, ParseData, User) {
 	// vars
 	var definition = {
 		name: 'setItem',
@@ -15,7 +15,7 @@ app.factory('SetItem', function (DS, $q, Suggestion, ParseData) {
 				}
 			}
 		},
-		beforeInject: ParseData.flattenAttrsBeforeInject,
+		beforeInject: _beforeInject,
 		afterInject: _afterInject,
 		computed: {
 			ownerId: ['owner', _updateOwnerId],
@@ -26,7 +26,6 @@ app.factory('SetItem', function (DS, $q, Suggestion, ParseData) {
 			updateLinks: _updateLinks
 		}
 	}
-	var setItemPromises = {};
 
 	// Adapter
 	DS.adapters.setItemAdapter = {
@@ -46,12 +45,21 @@ app.factory('SetItem', function (DS, $q, Suggestion, ParseData) {
 
 	// methods
 
+	function _beforeInject(resourceName, parseObject, cb){
+		if(parseObject.attributes) {
+			Suggestion.inject(parseObject.attributes.card);
+			ParseData.flattenAttrsBeforeInject(resourceName, parseObject, cb);
+		} else {
+			console.log('injecting non-server suggestion');
+		}
+	}
+
 	function _afterInject(resourceName, parseObject, cb) {
 		parseObject.updateLinks();
 	}
 
 	function _updateLinks() {
-		ParseData.linkRelationsAfterInject(Suggestion, RELATIONS, this);
+		ParseData.linkRelationsAfterInject(SetItem, RELATIONS, this);
 	}
 
 	function _updateOwnerId(owner) {
@@ -64,33 +72,23 @@ app.factory('SetItem', function (DS, $q, Suggestion, ParseData) {
 
 	function _getSetItemsForSet(set) {
 		console.log('setItem getSetItemsForSet');
-		if (setItemPromises[set.id]) {
-			// return promise so we dont make the call twice
-			return setItemPromises[set.id];
-		} else {
-			var deferred = $q.defer();
-			// save promise if needed
-			setItemPromises[set.id] = deferred.promise;
-			Parse.Cloud.run(
-				CONFIG.PARSE_VERSION + 'getCardsForSet',
-				{
-					id: set.id,
-					includeOwner: true
+		var deferred = $q.defer();
+		// save promise if needed
+		Parse.Cloud.run(
+			CONFIG.PARSE_VERSION + 'getCardsForSet',
+			{
+				id: set.id,
+				includeOwner: true
+			},
+			{
+				success: function(setItems) {
+					setItems = SetItem.inject(setItems);
+					deferred.resolve(setItems);
 				},
-				{
-					success: function(setItems) {
-						delete setItemPromises[set.id];
-						setItems = SetItem.inject(setItems);
-						deferred.resolve(setItems);
-					},
-					error: function(err) {
-						delete setItemPromises[set.id];
-						deferred.reject(err);
-					}
-				}
-			);
-			return deferred.promise;
-		}
+				error: deferred.reject
+			}
+		);
+		return deferred.promise;
 	}
 
 	function _destroy(resource, id) {

@@ -38,7 +38,6 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 		beforeInject: _beforeInject,
 		afterInject: _afterInject
 	}
-	var suggestionPromises = {};
 
 	// Adapter
 	DS.adapters.suggestionAdapter = {
@@ -68,11 +67,13 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 	// methods
 
 	function _beforeInject(resourceName, parseObject, cb){
-		if(parseObject.attributes) {
-			User.inject(parseObject.attributes.owner);
+		if(!_.isEmpty(parseObject.attributes)) {
+			if(!_.isEmpty(parseObject.attributes.owner.attributes)) {
+				User.inject(parseObject.attributes.owner);
+			}
 			ParseData.flattenAttrsBeforeInject(resourceName, parseObject, cb);
 		} else {
-			console.log('injecting non-server suggestion');
+			// console.log('injecting empty or non-server suggestion');
 		}
 	}
 
@@ -165,28 +166,17 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 	}
 
 	function _find(resource, id) {
-		if(suggestionPromises[id]) {
-			return suggestionPromises[id];
+		var cached = Suggestion.get(id);
+
+		if(cached) {
+			return $q.when(cached);
 		} else {
-			var cached = Suggestion.get(id);
-
-			if(cached) {
-				return $q.when(cached);
-			} else {
-				// else fetch data
-				var options = {
-					id: id
-				};
-				suggestionPromises[id] = Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getCardById', options)
-				.then(_onSuggestionFetched);
-				return suggestionPromises[id];
-			}
+			// else fetch data
+			var options = {
+				id: id
+			};
+			return Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getCardById', options);
 		}
-	}
-
-	function _onSuggestionFetched(suggestion) {
-		delete suggestionPromises[suggestion.id];
-		return suggestion;
 	}
 
 	function _getAllApprovedSuggestions() {

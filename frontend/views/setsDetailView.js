@@ -1,5 +1,5 @@
 'use strict';
-app.controller('setsDetailView', function(set, $scope, $state, $stateParams) {
+app.controller('setsDetailView', function(set, $scope, $state, $stateParams, SetItem) {
 	$scope.saving = false;
 	$scope.set = set;
 	$scope.actorCount = 0;
@@ -43,7 +43,7 @@ app.controller('setsDetailView', function(set, $scope, $state, $stateParams) {
 	}
 
 	function _removeSetItem(setItem) {
-		sets.removeSetItem(setItem)
+		SetItem.destroy(setItem.id)
 		.then(_updateCount);
 	}
 

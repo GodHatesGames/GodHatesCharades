@@ -19,7 +19,6 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 			updateLinks: _updateLinks
 		}
 	}
-	var setPromises = {};
 
 	// Adapter
 	DS.adapters.setAdapter = {
@@ -53,7 +52,7 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 		if(cachedSet)
 			return $q.when(cachedSet);
 		else{
-			return _findAll()
+			return Set.findAll()
 			.then(function(allSets) {
 				return Set.get(id);
 			});
@@ -61,23 +60,42 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 	}
 
 	function _findAll() {
-		console.log('sets loadData');
-		var deferred = $q.defer();
-		Parse.Cloud.run(
-			CONFIG.PARSE_VERSION + 'getAllSets',
-			{},
-			{
-				success: deferred.resolve,
-				error: deferred.reject
-			}
-		);
-		return deferred.promise;
+		var cached = Set.getAll();
+		if(!_.isEmpty(cached)) {
+			return $q.when(cached);
+		} else {
+			console.log('sets loadData');
+			var deferred = $q.defer();
+			Parse.Cloud.run(
+				CONFIG.PARSE_VERSION + 'getAllSets',
+				{},
+				{
+					success: function(sets) {
+						deferred.resolve(sets);
+					},
+					error: deferred.reject
+				}
+			);
+			return deferred.promise;
+		}
 	}
 
 	function _getAllSetsAndItems() {
-		return _findAll()
-		.then(Set.inject)
-		.then(_getAllSetItemsForSets);
+		var sets;
+		return Set.findAll()
+		.then(function(allSets) {
+			// save sets
+			sets = allSets;
+			return sets;
+		})
+		.then(_getAllSetItemsForSets)
+		.then(function() {
+			// update links to capture setItems
+			_.each(sets, function(set) {
+				set.updateLinks();
+			})
+			return sets;
+		});
 	}
 
 	function _getAllSetItemsForSets(allSets) {

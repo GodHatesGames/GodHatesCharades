@@ -24,7 +24,7 @@ var app = angular.module('app', ['ng',
                                  'ngCsv',
                                  'youtube-embed'
                                 ]);
-console.log('starting app');
+console.log('starting app!');
 
 app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider, $provide, uiSelectConfig) {
 	$locationProvider.html5Mode(true);
@@ -59,7 +59,11 @@ app.run(function($rootScope,
                  $window,
                  $location,
                  $timeout,
-                 addthisService
+                 addthisService,
+                 SetItem,
+                 Set,
+                 User,
+                 Suggestion
 	) {
 		// Default away value
 		$rootScope.isAway = false;

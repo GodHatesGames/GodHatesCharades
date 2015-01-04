@@ -168,7 +168,16 @@ app.config(function($stateProvider,
 	$stateProvider.state('admin.moderation', {
 		url: '/moderation',
 		title: 'Moderation',
-		templateUrl: 'views/moderationView.html'
+		templateUrl: 'views/moderationView.html',
+		resolve: {
+			unmoderated: ['Suggestion', function(Suggestion) {
+				return Suggestion.getUnmoderatedSuggestions();
+			}],
+			approved: ['Suggestion', function(Suggestion) {
+				return Suggestion.getAllApprovedSuggestions();
+			}]
+		},
+		controller: 'moderationView'
 	});
 	$stateProvider.state('admin.export', {
 		url: '/export',
@@ -207,7 +216,10 @@ app.config(function($stateProvider,
 		resolve: {
 			sets: ['Set', function(Set) {
 				return Set.getAllSetsAndItems();
-			}]
+			}],
+			suggestions: ['Suggestion', function(Suggestion) {
+				return Suggestion.getAllApprovedSuggestions();
+			}],
 		},
 		controller: 'setsView'
 	});

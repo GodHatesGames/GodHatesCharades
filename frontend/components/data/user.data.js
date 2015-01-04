@@ -16,7 +16,6 @@ app.factory('User', function (DS, $q, ParseData) {
 			// Instance methods
 		}
 	}
-	var userPromises = {};
 
 	// Adapter
 	DS.adapters.userAdapter = {
