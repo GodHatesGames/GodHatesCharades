@@ -21,11 +21,11 @@
 				<th>B&W</th>
 				<th>CSV</th>
 			</tr>
-			<tr ng-repeat="(index, set) in loadedSets | orderBy:['name']">
+			<tr ng-repeat="(index, set) in sets | orderBy:['name']">
 				<!-- Text -->
 				<td ng-bind="set.name"></td>
 				<!-- Text -->
-				<td ng-bind="getCardCount(set)"></td>
+				<td ng-bind="set.setItems.length"></td>
 				<!-- B&W Button -->
 				<td class="tableButton">
 					<button class="btn btn-info printButtons"
@@ -35,7 +35,7 @@
 				</td>
 				<!-- B&W Button -->
 				<td class="tableButton">
-					<downloader items="cardsBySet[set.id]"
+					<downloader items="set.getSuggestions()"
 					            filename="GodHatesCharades_{{set.name}}"></downloader>
 				</td>
 			</tr>
@@ -72,9 +72,8 @@
 	<div class="cardContainer">
 		
 		<div class="setItem page-break"
-		     ng-repeat="(index, setItem) in setItems | orderBy:'card.type'"
-		     ng-init="suggestion = setItem.card">
-			<card suggestion="suggestion"></card>
+		     ng-repeat="(index, setItem) in selectedSet.setItems | orderBy:'card.type'">
+			<card suggestion="setItem.card"></card>
 		</div>
 		<div class="setItem page-break"
 		     ng-repeat="extraItem in extraItems | orderBy:'type'">

@@ -36,6 +36,8 @@ app.directive('downloader', function($filter) {
 					var text = value.text;
 					// fix bad qoutes and escape them too
 					text = text.replace(/[”“"’]/g, '\'');
+					// remove line breaks and replace them with a space
+					text = text.replace(/(\r\n|\n|\r)/gm,' ');
 					item = {
 						'text': text,
 						'type': value.type,

@@ -4,14 +4,15 @@ app.directive('printer', function(Suggestion, $compile, $window, prismic, Set, $
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/printer.html',
 		replace: true,
+		scope: {
+			sets: '='
+		},
 		controller: function($scope, $element) {
 			// public vars
 			$scope.extraItems = [];
 			$scope.rulesHtml = null;
 			$scope.instructionsHtml = null;
-			$scope.loadedSets = [];
-			$scope.cardsBySet = {};
-			var itemsPerPage = 9;
+			var itemsPerPage = 8;
 
 			prismic.getDocumentById(CONFIG.PRISMIC.DOCS.PRINT_RULES)
 			.then(function onRulesLoaded(rules) {
@@ -27,10 +28,10 @@ app.directive('printer', function(Suggestion, $compile, $window, prismic, Set, $
 
 			// Private methods
 			function setupPrint(set) {
-				$scope.setItems = sets.setItemsBySetId[set.id];
+				$scope.selectedSet = set;
 				if($scope.extraItems.length > 0)
-					$scope.extraItems = [];
-				var extraCount = itemsPerPage - ($scope.setItems.length % itemsPerPage);
+					$scope.extraItems.length = 0;
+				var extraCount = itemsPerPage - ($scope.selectedSet.setItems.length % itemsPerPage);
 				var newItem, itemType;
 				for(var i = 0; i < extraCount; i++) {
 					itemType = i % 2;

@@ -16,7 +16,8 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 		methods: {
 			// Instance methods
 			addCard: _addCard,
-			updateLinks: _updateLinks
+			updateLinks: _updateLinks,
+			getSuggestions: _getSuggestions
 		}
 	}
 
@@ -129,6 +130,10 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 			}
 		);
 		return deferred.promise;
+	}
+
+	function _getSuggestions() {
+		return _.pluck(this.setItems, 'card');
 	}
 
 });

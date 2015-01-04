@@ -188,7 +188,7 @@ app.config(function($stateProvider,
 				return Suggestion.getAllApprovedSuggestions();
 			}],
 			allSets: ['Set', function(Set) {
-				return Set.findAll();
+				return Set.getAllSetsAndItems();
 			}]
 		},
 		controller: 'exportView'
