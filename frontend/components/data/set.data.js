@@ -16,8 +16,10 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 		methods: {
 			// Instance methods
 			addCard: _addCard,
-			updateLinks: _updateLinks,
-			getSuggestions: _getSuggestions
+			updateLinks: _updateLinks
+		},
+		computed: {
+			suggestions: ['setItems', _updateSuggestions]
 		}
 	}
 
@@ -46,6 +48,10 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 
 	function _updateLinks() {
 		ParseData.linkRelationsAfterInject(Set, RELATIONS, this);
+	}
+
+	function _updateSuggestions(setItems) {
+		return _.pluck(setItems, 'card');
 	}
 
 	function _find(resource, id) {
@@ -130,10 +136,6 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 			}
 		);
 		return deferred.promise;
-	}
-
-	function _getSuggestions() {
-		return _.pluck(this.setItems, 'card');
 	}
 
 });
