@@ -94,6 +94,7 @@ function buildCardsForSetQuery(id) {
 	mockSet.id = id;
 	var SetItemObject = Parse.Object.extend('SetItem');
 	var query = new Parse.Query(SetItemObject);
+	query.limit(1000);
 	query.equalTo('owner', mockSet);
 	return query;
 }
