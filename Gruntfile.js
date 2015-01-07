@@ -1,5 +1,6 @@
 'use strict';
 
+var open = require('open');
 var dotenv = require('dotenv');
 dotenv.load();
 
@@ -30,30 +31,40 @@ module.exports = function(grunt) {
 		pkg: pkg,
 		nodemon: {
 			dist: {
+				script: 'dist/api/server.js',
 				options: {
-					file: 'dist/api/server.js',
 					nodeArgs: ['--debug'],
-					watchedExtensions: ['js'],
-					watchedFolders: ['dist/api'],
 					env: {
 						PORT: process.env.PORT,
 						MANDRILL_KEY: process.env.MANDRILL_KEY,
 						MAILCHIMP_LIST_ID: process.env.MAILCHIMP_LIST_ID,
 						MAILCHIMP_API_KEY: process.env.MAILCHIMP_API_KEY
+					},
+					callback: function(nodemon) {
+						nodemon.on('config:update', function() {
+							setTimeout(function() {
+								open('http://localhost:3000');
+							}, 1000);
+						});
 					}
 				}
 			},
 			dev: {
+				script: 'api/server.js',
 				options: {
-					file: 'api/server.js',
 					nodeArgs: ['--debug'],
-					watchedExtensions: ['js'],
-					watchedFolders: ['api'],
 					env: {
 						PORT: process.env.PORT,
 						MANDRILL_KEY: process.env.MANDRILL_KEY,
 						MAILCHIMP_LIST_ID: process.env.MAILCHIMP_LIST_ID,
 						MAILCHIMP_API_KEY: process.env.MAILCHIMP_API_KEY
+					},
+					callback: function(nodemon) {
+						nodemon.on('config:update', function() {
+							setTimeout(function() {
+								open('http://localhost:3000');
+							}, 1000);
+						});
 					}
 				}
 			}
@@ -78,6 +89,17 @@ module.exports = function(grunt) {
 				],
 				tasks: ['less:main', 'autoprefixer']
 			},
+			livereload: {
+				files: [
+					'frontend/**/*.js',
+					'frontend/**/*.less',
+					'frontend/**/*.html',
+					'!frontend/bower_components/**'
+				],
+				options: {
+					livereload: true
+				}
+			},
 			components: {
 				files: [
 					'frontend/components/*.less'
@@ -99,7 +121,7 @@ module.exports = function(grunt) {
 				}
 			},
 			dev: {
-				tasks: ['nodemon:dev', 'watch:main', 'watch:components', 'watch:views'],
+				tasks: ['nodemon:dev', 'watch:main', 'watch:components', 'watch:views', 'watch:livereload'],
 				options: {
 					logConcurrentOutput: true
 				}
