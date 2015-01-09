@@ -1,4 +1,4 @@
-app.directive('cardPairs', function(pairService) {
+app.directive('cardPairs', function(Pair) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/cardPairs.html',
@@ -21,7 +21,7 @@ app.directive('cardPairs', function(pairService) {
 
 			function _onSuggestionUpdated() {
 				if($scope.suggestion) {
-					pairService.getPairsByCard($scope.suggestion)
+					Pair.getPairsByCard($scope.suggestion)
 					.then(_onPairsLoaded);
 				}
 			}

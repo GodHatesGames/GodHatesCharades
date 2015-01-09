@@ -73,7 +73,7 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 			}
 			ParseData.flattenAttrsBeforeInject(resourceName, parseObject, cb);
 		} else {
-			// console.log('injecting empty or non-server suggestion');
+			console.log('injecting empty or non-server suggestion');
 		}
 	}
 

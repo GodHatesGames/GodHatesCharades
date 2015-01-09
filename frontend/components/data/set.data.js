@@ -50,8 +50,9 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 		ParseData.linkRelationsAfterInject(Set, RELATIONS, this);
 	}
 
-	function _updateSuggestions(setItems) {
-		return _.pluck(setItems, 'card');
+	function _updateSuggestions(setItems, that) {
+		if(setItems)
+			return _.pluck(setItems, 'card');
 	}
 
 	function _find(resource, id) {
@@ -97,10 +98,6 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 		})
 		.then(_getAllSetItemsForSets)
 		.then(function() {
-			// update links to capture setItems
-			_.each(sets, function(set) {
-				set.updateLinks();
-			})
 			return sets;
 		});
 	}

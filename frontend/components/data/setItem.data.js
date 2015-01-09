@@ -47,7 +47,6 @@ app.factory('SetItem', function (DS, $q, Suggestion, ParseData, User) {
 
 	function _beforeInject(resourceName, parseObject, cb){
 		if(parseObject.attributes) {
-			Suggestion.inject(parseObject.attributes.card);
 			ParseData.flattenAttrsBeforeInject(resourceName, parseObject, cb);
 		} else {
 			console.log('injecting non-server set item');

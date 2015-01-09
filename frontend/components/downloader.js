@@ -13,11 +13,10 @@ app.directive('downloader', function($filter) {
 			$scope.csvHeaders = [
 				'text',
 				'type',
-				'totalVotes',
-				'skipped',
-				'rejected',
-				'kdr',
-				'moderated'
+				'votes',
+				'skips',
+				'views',
+				'kdr'
 			];
 
 			// generate all cards CSV
@@ -33,19 +32,20 @@ app.directive('downloader', function($filter) {
 				var allCsvData = [];
 				var item;
 				_.each(newValue, function(value, key) {
-					var text = value.text;
+					// if it's a set item then use the card
+					var suggestion = value.card ? value.card : value;
+					var text = suggestion.text;
 					// fix bad qoutes and escape them too
 					text = text.replace(/[”“"’]/g, '\'');
 					// remove line breaks and replace them with a space
 					text = text.replace(/(\r\n|\n|\r)/gm,' ');
 					item = {
 						'text': text,
-						'type': value.type,
-						'totalVotes': value.totalVotes,
-						'skipped': value.skipped,
-						'rejected': value.rejected,
-						'kdr': value.kdr,
-						'moderated': value.moderated
+						'type': suggestion.getTypeDisplay(),
+						'votes': suggestion.getTotalVotes(),
+						'skipped': suggestion.getTotalSkips(),
+						'views': suggestion.getTotalViews(),
+						'kdr': suggestion.getKDR()
 					};
 					allCsvData.push(item);
 				});
