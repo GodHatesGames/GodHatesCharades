@@ -99,9 +99,8 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 		}
 	}
 
-	function _getTypeClass(test) {
-		var type = this.type;
-		return Suggestion.getTypeClassByType(type);
+	function _getTypeClass() {
+		return Suggestion.getTypeClassByType(this.type);
 	}
 
 	function _getSlug() {

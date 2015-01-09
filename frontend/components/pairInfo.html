@@ -1,15 +1,15 @@
 <div class="pairInfo">
 	<!-- Always show this -->
-	This pair was viewed {{pair.getViews()}}
-	<ng-pluralize count="pair.getViews()"
+	This pair was viewed {{pair.views}}
+	<ng-pluralize count="pair.views"
 	              when="times">
 	</ng-pluralize>.
-	{{pair.getVotes()}}
-	<ng-pluralize count="pair.getVotes()"
+	{{pair.votes}}
+	<ng-pluralize count="pair.votes"
 	              when="person">
 	</ng-pluralize>
-	thought it was funny and {{pair.getSkips()}}
-	<ng-pluralize count="pair.getSkips()"
+	thought it was funny and {{pair.skips}}
+	<ng-pluralize count="pair.skips"
 	              when="person">
 	</ng-pluralize>
 	thought it sucked.

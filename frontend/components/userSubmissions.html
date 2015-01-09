@@ -1,14 +1,8 @@
 <div>
-	<h2>Submissions from {{user.attributes.name || '...'}}</h2>
-	<hr>
-
-	<div ng-hide="loading || suggestions.length > 0">No cards have been submitted.</div>
+	<div ng-if="!suggestions || suggestions.length == 0">No cards have been submitted.</div>
 
 	<div class="cardList" 
-		 ng-hide="loading && skipIndex == 0 || !loading && suggestions.length == 0"
-		 infinite-scroll="loadSuggestions()"
-		 infinite-scroll-disabled="loading"
-		 infinite-scroll-immediate-check="true">
+		 ng-if="suggestions && suggestions.length > 0">
 			<table class="table">
 				<tr>
 					<th>Rank</th>
@@ -23,29 +17,23 @@
 					<!-- Text -->
 					<td>
 						<a ui-sref="card(suggestion.getLink())">
-							{{suggestion.attributes.text}}
+							{{suggestion.text}}
 						</a>
 					</td>
 					<!-- Votes -->
-					<td ng-show="suggestion.attributes.totalVotes">
-						{{suggestion.attributes.totalVotes | number}}
+					<td>
+						{{suggestion.getTotalVotes()}}
 					</td>
-					<td ng-hide="suggestion.attributes.totalVotes">0</td>
 					<!-- Skips -->
-					<td ng-show="suggestion.attributes.skipped">
-						{{suggestion.attributes.skipped | number}}
+					<td>
+						{{suggestion.getTotalSkips() | number}}
 					</td>
-					<td ng-hide="suggestion.attributes.skipped">0</td>
 					<!-- Views -->
-					<td ng-bind="suggestion.attributes.skipped + suggestion.attributes.totalVotes"></td>
+					<td ng-bind="suggestion.getTotalViews()"></td>
 					<!-- Type -->
 					<td ng-class="suggestion.getTypeClass()"></td>
 				</tr>
 			</table>
 	</div>
 
-	<div class="loadingAlert" 
-			ng-show="loading">
-		Loading...
-	</div>
 </div>

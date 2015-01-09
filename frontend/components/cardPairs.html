@@ -1,7 +1,7 @@
 <div class="cardList"
      ng-hide="loading">
 	<a class="row pair"
-		ui-sref="pair(pair.getLink())"
+		ui-sref="pair(pair.link)"
 		ng-repeat="(index, pair) in pairs | orderBy:sortPredicates | limitTo:50">
 
 		<ribbon message="index + 1"
@@ -15,23 +15,12 @@
 			<card suggestion="pair.scenario"
 				updatable="true"></card>
 		</div>
-		<!-- <div class="col-md-4">
-			<pair-info id="pair.id"></pair-info>
-			<div>Displayed: {{pair.get('displayed')}}</div>
-			<div>Votes: {{pair.get('chosen')}}</div>
-			<div>Skipped: {{pair.get('skipped')}}</div>
-			<div>Controversy: {{pair.get('controversy')}}</div>
-			<div>KDR: {{pair.get('kdr') | number:2}}</div>
-			<a ui-sref="pair(pair.getLink())">
-				Discuss it!
-			</a>
-		</div> -->
 		<div ng-if="parseUser.isAdmin()">
-			<div>controversy: {{pair.get('controversy')}}</div>
-			<div>displayed: {{pair.getViews()}}</div>
-			<div>chosen: {{pair.getVotes()}}</div>
-			<div>skipped: {{pair.getSkips()}}</div>
-			<div>kdr: {{pair.get('kdr') || 0}}</div>
+			<div>controversy: {{pair.controversy}}</div>
+			<div>displayed: {{pair.views}}</div>
+			<div>chosen: {{pair.votes}}</div>
+			<div>skipped: {{pair.skips}}</div>
+			<div>kdr: {{pair.kdr}}</div>
 		</div>
 	</a>
 </div>

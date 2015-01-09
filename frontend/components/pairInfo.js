@@ -1,4 +1,4 @@
-app.directive('pairInfo', function(parseUser, pairService, $rootScope) {
+app.directive('pairInfo', function(parseUser, Pair, $rootScope) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/pairInfo.html',
@@ -16,7 +16,7 @@ app.directive('pairInfo', function(parseUser, pairService, $rootScope) {
 			$scope.$watch('id', onIdChanged);
 
 			function onIdChanged(newValue) {
-				pairService.getPairById(newValue)
+				Pair.find(newValue)
 				.then(onSuccess, onError);
 			}
 

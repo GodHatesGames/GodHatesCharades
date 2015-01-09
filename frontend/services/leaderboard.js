@@ -1,4 +1,4 @@
-app.service('leaderboard', function($q, DSCacheFactory, Suggestion, pairService) {
+app.service('leaderboard', function($q, DSCacheFactory, Suggestion, Pair) {
 	var leaderboard = {
 		getTop: _getTop,
 	}
@@ -6,14 +6,13 @@ app.service('leaderboard', function($q, DSCacheFactory, Suggestion, pairService)
 	var leaderboardCache = DSCacheFactory('leaderboard', {
 		maxAge: 86400000
 	});
-	var Pair = Parse.Object.extend('Pair');
 
 	function _getTop() {
 		var currentCache = leaderboardCache.get('leaderboard');
 		if(currentCache) {
 			var pairPromises = [];
 			_.each(currentCache, function(pair, index) {
-				pairPromises.push(pairService.getPairById(pair.objectId));
+				pairPromises.push(Pair.find(pair.objectId));
 			});
 			return $q.all(pairPromises);
 		} else {
@@ -37,8 +36,8 @@ app.service('leaderboard', function($q, DSCacheFactory, Suggestion, pairService)
 	}
 
 	function _processPairs(pair) {
-		var cards = [pair.get('actor'),
-		             pair.get('scenario')];
+		var cards = [pair.actor,
+		             pair.scenario];
 		Suggestion.inject(cards);
 	}
 

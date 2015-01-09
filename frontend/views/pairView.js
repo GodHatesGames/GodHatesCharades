@@ -3,12 +3,12 @@ app.controller('pairView', function(pair, readyForUpload, $scope, $state, $state
 	$scope.pair = pair;
 	$scope.sharingConfig = {};
 
-	$scope.actor = pair.get('actor');
-	$scope.scenario = pair.get('scenario');
+	$scope.actor = pair.actor;
+	$scope.scenario = pair.scenario;
 
 	//set meta title
-	$state.current.title = [$scope.actor.get('text'),
-	                        $scope.scenario.get('text')].join(' ');
+	$state.current.title = [$scope.actor.text,
+	                        $scope.scenario.text].join(' ');
 	$scope.title = $state.current.title;
 
 	// set meta description

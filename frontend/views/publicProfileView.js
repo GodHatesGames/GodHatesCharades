@@ -1,5 +1,5 @@
 app.controller('publicProfileView', function(profile, $scope, $stateParams, parseUser, $state) {
-	$scope.userid = profile.owner.id;
+	$scope.profile = profile;
 	$scope.currentUser = parseUser.isCurrentUser(profile.owner.id);
 	$scope.betaUser = parseUser.isBetaUser();
 

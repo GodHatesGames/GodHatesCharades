@@ -37,7 +37,9 @@
 				Submit new cards
 			</a>
 		</div>
-		<user-submissions userid="userid">
+
+		<h2>Submissions from {{user.attributes.name || '...'}}</h2>
+		<user-submissions suggestions="profile.suggestions">
 		</user-submissions>
 	</div>
 </div>

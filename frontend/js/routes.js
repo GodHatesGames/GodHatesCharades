@@ -86,8 +86,8 @@ app.config(function($stateProvider,
 		templateUrl: 'views/pairView.html',
 		controller: 'pairView',
 		resolve: {
-			pair: ['$stateParams', 'pairService', function($stateParams, pairService) {
-				return pairService.getPairById($stateParams.pairid);
+			pair: ['$stateParams', 'Pair', function($stateParams, Pair) {
+				return Pair.find($stateParams.pairid);
 			}],
 			readyForUpload: ['ytUploadService', function(ytUploadService) {
 				return ytUploadService.waitForLoad();

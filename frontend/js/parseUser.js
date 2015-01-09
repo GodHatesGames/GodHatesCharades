@@ -199,7 +199,8 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, pairS
 
 		if (!options) {
 			options = {
-				userid: id
+				userid: id,
+				pageSize: 1000
 			};
 		} else {
 			options.userid = id;
