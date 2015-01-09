@@ -126,8 +126,6 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 				success: function(setItem) {
 					// update data
 					SetItem.inject(setItem);
-					set.updateLinks();
-					card.updateLinks();
 					deferred.resolve(setItem);
 				},
 				error: function(err) {

@@ -77,31 +77,6 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, pairS
 		return deferred.promise;
 	}
 
-	function onUserConnected(userData) {
-		// Do stuff after successful login.
-		console.log('Welcome', userData.get('username'));
-		console.log(userData);
-
-		user.data = userData;
-		user.loggedin = true;
-
-		if(isAdmin())
-		{
-			pairService.clearCache();
-		}
-		//track in leanplum
-		// leanplum.startLeanPlum(user.data);
-
-	}
-
-	function onUserError(user, error) {
-		// The login failed. Check error to see why.
-		console.log('Login failed:', error);
-		$rootScope.$broadcast('alert', {
-			message: error.message
-		});
-	}
-
 	function logout() {
 		Parse.User.logOut();
 		user.loggedin = false;

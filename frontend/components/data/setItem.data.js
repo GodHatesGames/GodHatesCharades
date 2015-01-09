@@ -50,7 +50,7 @@ app.factory('SetItem', function (DS, $q, Suggestion, ParseData, User) {
 			Suggestion.inject(parseObject.attributes.card);
 			ParseData.flattenAttrsBeforeInject(resourceName, parseObject, cb);
 		} else {
-			console.log('injecting non-server suggestion');
+			console.log('injecting non-server set item');
 		}
 	}
 

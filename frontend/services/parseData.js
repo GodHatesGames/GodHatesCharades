@@ -13,5 +13,6 @@ app.factory('ParseData', function () {
 
 	function _linkRelationsAfterInject(constructor, relations, parseObject) {
 		constructor.link(parseObject.id, relations);
+		constructor.linkInverse(parseObject.id);
 	}
 });

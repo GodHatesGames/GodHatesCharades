@@ -66,8 +66,8 @@ app.config(function($stateProvider,
 		templateUrl: 'views/publicProfileView.html',
 		controller: 'publicProfileView',
 		resolve: {
-			profile: ['parseUser', '$stateParams', function(parseUser, $stateParams) {
-				return parseUser.getProfileById($stateParams.userid);
+			profile: ['Profile', '$stateParams', function(Profile, $stateParams) {
+				return Profile.find($stateParams.userid);
 			}]
 		}
 	});

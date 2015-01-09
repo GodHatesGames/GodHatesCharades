@@ -1,4 +1,4 @@
-app.directive('login', function(parseUser) {
+app.directive('login', function(User) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/login.html',
@@ -13,7 +13,7 @@ app.directive('login', function(parseUser) {
 			function _login() {
 				$scope.errorMessage = '';
 				console.log('logging in:', $scope.email, $scope.password);
-				parseUser.connect($scope.email, $scope.password)
+				User.login($scope.email, $scope.password)
 				.then(_onUserLoginSuccess, _onUserLoginError);
 			}
 

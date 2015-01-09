@@ -38,8 +38,9 @@
 			</a>
 		</div>
 
-		<h2>Submissions from {{user.attributes.name || '...'}}</h2>
-		<user-submissions suggestions="profile.suggestions">
-		</user-submissions>
 	</div>
+
+	<h2>Submissions from {{profile.owner.name}}</h2>
+	<user-submissions suggestions="profile.owner.suggestions">
+	</user-submissions>
 </div>

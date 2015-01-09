@@ -121,7 +121,7 @@ module.exports = function(grunt) {
 				}
 			},
 			dev: {
-				tasks: ['nodemon:dev', 'watch:main', 'watch:components', 'watch:views', 'watch:livereload'],
+				tasks: ['nodemon:dev', 'watch:main', 'watch:components', 'watch:views'],
 				options: {
 					logConcurrentOutput: true
 				}
