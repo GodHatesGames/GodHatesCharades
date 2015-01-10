@@ -26,7 +26,9 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 	// Adapter
 	DS.adapters.setAdapter = {
 		find: _find,
-		findAll: _findAll
+		findAll: _findAll,
+		destroy: _destroy,
+		create: _create
 	};
 
 	// Constants
@@ -47,7 +49,7 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 	}
 
 	function _updateLinks() {
-		ParseData.linkRelationsAfterInject(Set, RELATIONS, this);
+		ParseData.linkRelationsAfterInject(SetItem, RELATIONS, this);
 	}
 
 	function _updateSuggestions(setItems, that) {
@@ -78,9 +80,7 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 				CONFIG.PARSE_VERSION + 'getAllSets',
 				{},
 				{
-					success: function(sets) {
-						deferred.resolve(sets);
-					},
+					success: deferred.resolve,
 					error: deferred.reject
 				}
 			);
@@ -98,6 +98,9 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 		})
 		.then(_getAllSetItemsForSets)
 		.then(function() {
+			// _.each(sets, function(set) {
+			// 	set.updateLinks();
+			// })
 			return sets;
 		});
 	}
@@ -130,6 +133,58 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 				}
 			}
 		);
+		return deferred.promise;
+	}
+
+	function _destroy(resource, id) {
+		var deferred = $q.defer();
+		var set = Set.get(id);
+
+		var itemPromises = [];
+		_.each(set.setItems, function(setItem) {
+			itemPromises.push(setItem.DSDestroy());
+		});
+
+		$q.all(itemPromises)
+		.then(function() {
+			Parse.Cloud.run(
+				CONFIG.PARSE_VERSION + 'destroySet',
+				{
+					id: set.id
+				},
+				{
+					success: function(){
+						Set.eject(set.id);
+						deferred.resolve();
+					},
+					error: deferred.reject
+				}
+			);
+		})
+		
+		return deferred.promise;
+	}
+
+	function _create(resource, setData) {
+		var deferred = $q.defer();
+		
+		Parse.Cloud.run(
+			CONFIG.PARSE_VERSION + 'createSet',
+			setData,
+			{
+				success: _onSetCreated,
+				error: _onCreateError
+			}
+		);
+
+		function _onSetCreated(newSet) {
+			deferred.resolve(newSet);
+		}
+
+		function _onCreateError(err) {
+			deferred.reject(err);
+		}
+
 		return deferred.promise;
 	}
 

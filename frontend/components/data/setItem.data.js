@@ -59,6 +59,7 @@ app.factory('SetItem', function (DS, $q, Suggestion, ParseData, User) {
 
 	function _updateLinks() {
 		ParseData.linkRelationsAfterInject(SetItem, RELATIONS, this);
+		SetItem.linkInverse(this.id);
 	}
 
 	function _updateOwnerId(owner) {
@@ -98,7 +99,10 @@ app.factory('SetItem', function (DS, $q, Suggestion, ParseData, User) {
 				id: id
 			},
 			{
-				success: deferred.resolve,
+				success: function() {
+					SetItem.eject(id);
+					deferred.resolve();
+				},
 				error: deferred.reject
 			}
 		);

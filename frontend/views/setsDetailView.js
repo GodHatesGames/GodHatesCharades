@@ -5,21 +5,7 @@ app.controller('setsDetailView', function(set, $scope, $state, $stateParams, Set
 	$scope.actorCount = 0;
 	$scope.scenarioCount = 0;
 	$scope.removeSetItem = _removeSetItem;
-	$scope.$watch('sets.setItemsBySetId[set.id].length', _updateCount);
-
-	$scope.deleteSet = function() {
-		$scope.saving = true;
-		sets.deleteSet(set)
-		.then(function success() {
-			$scope.saving = false;
-			console.log('newSet deleted');
-			$state.go('admin.sets');
-		},
-		function error(err) {
-			$scope.saving = false;
-			console.log('err saving set:', err);
-		});
-	};
+	$scope.$watch('set.setItems', _updateCount);
 
 	function _updateCount() {
 		var actors = 0;

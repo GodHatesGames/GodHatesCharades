@@ -37,9 +37,9 @@ app.controller('suggestionsView', function(suggestions, setIdsByCardId, $scope, 
 	$scope.editSuggestion = _editSuggestion;
 	$scope.cardDetailsModal = cardDetailsModal;
 
-	_.each(suggestions, function(suggestion) {
-		suggestion.updateLinks();
-	});
+	// _.each(suggestions, function(suggestion) {
+	// 	suggestion.updateLinks();
+	// });
 
 	function _isAlphaSort(type) {
 		return type === $scope.SORT_TEXT || type === $scope.SORT_AUTHOR;

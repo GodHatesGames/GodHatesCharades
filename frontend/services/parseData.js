@@ -1,7 +1,8 @@
 app.factory('ParseData', function () {
 	var parseData = {
 		flattenAttrsBeforeInject: _flattenAttrsBeforeInject,
-		linkRelationsAfterInject: _linkRelationsAfterInject
+		linkRelationsAfterInject: _linkRelationsAfterInject,
+		defaultValueHandler: _defaultValueHandler
 	};
 
 	return parseData;
@@ -13,6 +14,11 @@ app.factory('ParseData', function () {
 
 	function _linkRelationsAfterInject(constructor, relations, parseObject) {
 		constructor.link(parseObject.id, relations);
-		constructor.linkInverse(parseObject.id);
+	}
+
+	function _defaultValueHandler(defaultValue) {
+		return function _defaultFunc(newValue) {
+			return newValue || defaultValue;
+		}
 	}
 });

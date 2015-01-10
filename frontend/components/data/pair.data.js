@@ -22,12 +22,13 @@ app.factory('Pair', function (DS, $q, Suggestion, ParseData, Slug, $filter) {
 		computed: {
 			actorId: ['actor', _updateActorID],
 			scenarioId: ['scenario', _updateScenarioId],
-			votes: ['totalVotes', _updateVotes],
-			skips: ['skipped', _updateSkips],
-			views: ['votes', 'skips', _updateViews],
+			chosen: ['chosen', ParseData.defaultValueHandler(0)],
+			skips: ['skipped', ParseData.defaultValueHandler(0)],
+			views: ['displayed', ParseData.defaultValueHandler(0)],
 			slug: ['actor', 'scenario', _updateSlug],
 			link: ['slug', 'id', _updateLink],
-			kdr: ['votes', 'skips', _updateKdr]
+			kdr: ['chosen', 'skips', _updateKdr],
+			controversy: ['controversy', ParseData.defaultValueHandler(0)]
 		},
 		methods: {
 			// Instance methods
@@ -112,20 +113,8 @@ app.factory('Pair', function (DS, $q, Suggestion, ParseData, Slug, $filter) {
 		}
 	}
 
-	function _updateViews(votes, skips) {
-		return votes + skips;
-	}
-
-	function _updateVotes(totalVotes) {
-		return totalVotes || 0;
-	}
-
-	function _updateSkips(skipped) {
-		return skipped || 0;
-	}
-
-	function _updateKdr(votes, skips) {
-		var kdr = votes / skips;
+	function _updateKdr(chosen, skips) {
+		var kdr = chosen / skips;
 		return $filter('number')(kdr, 2);
 	}
 

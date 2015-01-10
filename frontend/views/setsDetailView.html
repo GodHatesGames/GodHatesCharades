@@ -1,57 +1,37 @@
-<h3>{{set.name}}</h3>
-<div class="btn btn-warning"
-	 ng-click="ilikedanger = true"
-	 ng-hide="ilikedanger">
-	Danger Zone
+<h5>Actor: {{actorCount}} | Scenario: {{scenarioCount}}</h5>
+<div class="loadingAlert"
+	 ng-show="saving">
+	Saving...
 </div>
-<div ng-show="ilikedanger">
-	<h4>Danger Zone</h4>
-	<button ng-click="ilikedanger = false"
-	   class="btn btn-success pull-right">Hide</button>
-	<button class="btn btn-danger" 
-			ng-click="deleteSet()">
-		Delete Set
-	</button>
-	<hr>
+<div class="cardList"
+     ng-if="set.setItems.length > 0">
+	<input ng-model="searchDetail"
+		   placeholder="search here"
+		   class="form-control">
+	<table class="table table-striped">
+		<tr>
+			<th>Remove</th>
+			<th>Suggestion</th>
+			<th>Type</th>
+		</tr>
+		<tr ng-repeat="(index, setItem) in set.setItems">
+			<!-- Delete Button -->
+			<td class="tableButton">
+				<a ng-click="removeSetItem(setItem)"
+				   class="btn btn-danger">
+					-
+				</a>
+			</td>
+			<!-- Text -->
+			<td>
+				{{setItem.card.text}}
+				<span class="legal"
+				      ng-if="::setItem.card.legal">
+					{{setItem.card.legal}}
+				</span>
+			</td>
+			<!-- Type -->
+			<td ng-class="setItem.card.getTypeClass()"></td>
+		</tr>
+	</table>
 </div>
-<div class="col-sm-6 col-md-6 col-lg-6">
-	<h5>Actor: {{actorCount}} | Scenario: {{scenarioCount}}</h5>
-	<div class="loadingAlert"
-		 ng-show="saving">
-		Saving...
-	</div>
-	<div class="cardList"
-	     ng-if="set.setItems.length > 0">
-		<input ng-model="searchDetail"
-			   placeholder="search here"
-			   class="form-control">
-		<table class="table table-striped">
-			<tr>
-				<th>Remove</th>
-				<th>Suggestion</th>
-				<th>Type</th>
-			</tr>
-			<tr ng-repeat="(index, setItem) in set.setItems | fuse:['card.text']:searchDetail">
-				<!-- Delete Button -->
-				<td class="tableButton">
-					<a ng-click="removeSetItem(setItem)"
-					   class="btn btn-danger">
-						-
-					</a>
-				</td>
-				<!-- Text -->
-				<td>
-					{{setItem.card.text}}
-					<span class="legal"
-					      ng-if="::setItem.card.legal">
-						{{setItem.card.legal}}
-					</span>
-				</td>
-				<!-- Type -->
-				<td ng-class="setItem.card.getTypeClass()"></td>
-			</tr>
-		</table>
-	</div>
-</div>
-<suggestion-selector class="col-sm-6 col-md-6 col-lg-6"
-                     suggestions="suggestions"></suggestion-selector>

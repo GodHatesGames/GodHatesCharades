@@ -3,13 +3,17 @@ app.factory('Profile', function (DS, $q, ParseData, User, Suggestion) {
 	var definition = {
 		name: 'profile',
 		defaultAdapter: 'profileAdapter',
-		beforeInject: _beforeInject,
-		afterInject: _afterInject,
 		relations: {
 			belongsTo: {
 				user: {
 					localField: 'owner',
 					localKey: 'id'
+				}
+			},
+			hasMany: {
+				suggestion: {
+					localField: 'suggestions',
+					foreignKey: 'ownerId'
 				}
 			}
 		},
@@ -18,9 +22,9 @@ app.factory('Profile', function (DS, $q, ParseData, User, Suggestion) {
 		},
 		methods: {
 			// Instance methods
-			updateLinks: _updateLinks
 		}
 	}
+	var RELATIONS = ['user', 'suggestion'];
 
 	// Adapter
 	DS.adapters.profileAdapter = {
@@ -35,20 +39,6 @@ app.factory('Profile', function (DS, $q, ParseData, User, Suggestion) {
 	// definition methods
 	function _updateId(owner) {
 		return this.owner.id;
-	}
-
-	function _beforeInject(resourceName, parseObject, cb){
-		User.inject(parseObject.owner);
-		Suggestion.inject(parseObject.suggestions);
-		delete parseObject.suggestions;
-	}
-
-	function _afterInject(resourceName, parseObject, cb) {
-		parseObject.updateLinks();
-	}
-
-	function _updateLinks() {
-		// ParseData.linkRelationsAfterInject(Profile, RELATIONS, this);
 	}
 
 	// adapter methods

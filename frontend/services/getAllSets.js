@@ -85,32 +85,6 @@ app.service('sets', function($q, $rootScope, Suggestion) {
 		}
 	}
 
-	function deleteSet(set) {
-		var deferred = $q.defer();
-		
-		Parse.Cloud.run(
-			CONFIG.PARSE_VERSION + 'destroySet',
-			{
-				id: set.id
-			},
-			{
-				success: function(result) {
-					// save data
-					var oldSet = _.findWhere(sets.data, {id: set.id});
-					var index = sets.data.indexOf(oldSet);
-					sets.data.splice(index, 1);
-					delete sets.byId[set.id];
-					deferred.resolve(result);
-				},
-				error: function(err) {
-					deferred.reject(err);
-				}
-			}
-		);
-
-		return deferred.promise;
-	}
-
 	function createSet(setData) {
 		var deferred = $q.defer();
 		

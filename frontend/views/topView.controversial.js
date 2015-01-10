@@ -2,7 +2,7 @@ app.controller('topView.controversial', function(pairs, $scope, pairService, $fi
 	// public vars
 	$scope.pairs = pairs;
 	$scope.parseUser = parseUser;
-	$scope.sortPredicates = ['attributes.controversy',
-	                         '-attributes.skipped',
-	                         '-attributes.chosen'];
+	$scope.sortPredicates = ['controversy',
+	                         '-skips',
+	                         '-chosen'];
 });

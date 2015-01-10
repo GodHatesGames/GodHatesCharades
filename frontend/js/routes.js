@@ -219,7 +219,7 @@ app.config(function($stateProvider,
 			}],
 			suggestions: ['Suggestion', function(Suggestion) {
 				return Suggestion.getAllApprovedSuggestions();
-			}],
+			}]
 		},
 		controller: 'setsView'
 	});

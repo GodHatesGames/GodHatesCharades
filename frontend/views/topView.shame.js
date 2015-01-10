@@ -2,7 +2,7 @@ app.controller('topView.shame', function(pairs, $scope, pairService, $filter, $s
 	// public vars
 	$scope.pairs = pairs;
 	$scope.parseUser = parseUser;
-	$scope.sortPredicates = ['attributes.kdr',
-	                         '-attributes.skipped',
-	                         'attributes.chosen'];
+	$scope.sortPredicates = ['kdr',
+	                         '-skips',
+	                         'chosen'];
 });

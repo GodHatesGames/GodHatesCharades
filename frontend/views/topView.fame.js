@@ -2,7 +2,7 @@ app.controller('topView.fame', function(pairs, $scope, pairService, $filter, $st
 	// public vars
 	$scope.pairs = pairs;
 	$scope.parseUser = parseUser;
-	$scope.sortPredicates = ['-attributes.kdr',
-	                         '-attributes.chosen',
-	                         'attributes.skipped'];
+	$scope.sortPredicates = ['-kdr',
+	                         '-chosen',
+	                         'skips'];
 });

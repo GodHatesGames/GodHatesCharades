@@ -1,15 +1,32 @@
 <div class="container">
 	<h2>Sets Builder</h2>
 	<hr>
-	<div class="list-group col-sm-2 col-md-2 col-lg-2">
-		<a ui-sref="admin.sets.create"
-		   class="list-group-item list-group-special">Add New Set</a>
-		<a ng-repeat="(index, set) in sets"
-		   ng-click="showSet(set)"
-		   ng-class="{active: isActive(set)}"
-		   class="list-group-item">
-			{{set.name}}
-		</a>
+	<div class="col-sm-2 col-md-2 col-lg-2">
+		<div class="list-group">
+			<a ui-sref="admin.sets.create"
+			   ui-sref-active="active"
+			   class="list-group-item">Add New Set</a>
+		</div>
+		<div class="list-group">
+			<a ng-repeat="(index, set) in sets"
+			   ng-click="showSet(set)"
+			   ng-class="{active: isActive(set)}"
+			   class="list-group-item">
+				{{set.name}}
+				<div ng-if="isActive(set)">
+					<button class="btn btn-warning btn-xs"
+					        ng-class="deleteClass()"
+					        ng-click="deleteSet(set)">
+						<span class="glyphicon glyphicon-trash"
+						      aria-hidden="true">
+						</span>
+					</button>
+				</div>
+			</a>
+		</div>
 	</div>
-	<ui-view class="col-sm-10 col-md-10 col-lg-10"></ui-view>
+	<ui-view class="col-sm-5 col-md-5 col-lg-5"></ui-view>
+	<suggestion-selector class="col-sm-5 col-md-5 col-lg-5"
+                     ng-if="suggestions"
+                     suggestions="suggestions"></suggestion-selector>
 </div>

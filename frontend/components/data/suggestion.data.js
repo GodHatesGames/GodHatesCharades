@@ -69,7 +69,10 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 	function _beforeInject(resourceName, parseObject, cb){
 		if(!_.isEmpty(parseObject.attributes)) {
 			if(!_.isEmpty(parseObject.attributes.owner.attributes)) {
-				User.inject(parseObject.attributes.owner);
+				// inject user if needed
+				var cachedOwner = User.get(parseObject.attributes.owner.id);
+				if(!cachedOwner)
+					User.inject(parseObject.attributes.owner);
 			}
 			ParseData.flattenAttrsBeforeInject(resourceName, parseObject, cb);
 		} else {
@@ -82,7 +85,11 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 	}
 
 	function _updateOwnerId(owner) {
-		return this.owner.id;
+		if(this.owner)
+			return this.owner.id;
+		else {
+			console.log('why no owner');
+		}
 	}
 
 	function _getTypeDisplay() {
@@ -162,6 +169,7 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 
 	function _updateLinks() {
 		ParseData.linkRelationsAfterInject(Suggestion, RELATIONS, this);
+		Suggestion.linkInverse(this.id);
 	}
 
 	function _find(resource, id) {
