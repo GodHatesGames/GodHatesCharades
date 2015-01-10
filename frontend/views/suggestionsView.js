@@ -1,5 +1,6 @@
 'use strict';
 app.controller('suggestionsView', function(suggestions, setIdsByCardId, $scope, $modal, cardDetailsModal, Suggestion) {
+	console.log('view loaded');
 	$scope.suggestions = suggestions;
 	$scope.SORT_TEXT = {
 		descending: ['text'],

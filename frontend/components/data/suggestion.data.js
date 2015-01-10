@@ -35,8 +35,7 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 			getOwnerName: _getOwnerName,
 			updateLinks: _updateLinks
 		},
-		beforeInject: _beforeInject,
-		afterInject: _afterInject
+		beforeInject: _beforeInject
 	}
 
 	// Adapter
@@ -50,6 +49,8 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 	var TYPE_CLASS_CHARACTER = "character";
 	var TYPE_CLASS_SCENARIO = "scenario";
 	var RELATIONS = ['user', 'setItem'];
+	var INJECT_OPTIONS = {
+	};
 
 	var Suggestion = DS.defineResource(definition);
 	// Static Methods
@@ -67,8 +68,8 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 	// methods
 
 	function _beforeInject(resourceName, parseObject, cb){
-		if(!_.isEmpty(parseObject.attributes)) {
-			if(!_.isEmpty(parseObject.attributes.owner.attributes)) {
+		if(parseObject.attributes) {
+			if(parseObject.attributes.owner.attributes) {
 				// inject user if needed
 				var cachedOwner = User.get(parseObject.attributes.owner.id);
 				if(!cachedOwner)
@@ -81,7 +82,13 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 	}
 
 	function _afterInject(resourceName, parseObject, cb) {
-		parseObject.updateLinks();
+		// parseObject.updateLinks(['user']);
+	}
+
+	function _updateLinks(relations) {
+		// if(!relations) relations = RELATIONS;
+		// ParseData.linkRelationsAfterInject(Suggestion, relations, this);
+		// Suggestion.linkInverse(this.id);
 	}
 
 	function _updateOwnerId(owner) {
@@ -167,11 +174,6 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 			return this.owner.name;
 	}
 
-	function _updateLinks() {
-		ParseData.linkRelationsAfterInject(Suggestion, RELATIONS, this);
-		Suggestion.linkInverse(this.id);
-	}
-
 	function _find(resource, id) {
 		var cached = Suggestion.get(id);
 
@@ -236,7 +238,7 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 
 	function _onSuggestionListSuccess(suggestions) {
 		// _cache(suggestions);
-		suggestions = Suggestion.inject(suggestions);
+		suggestions = Suggestion.inject(suggestions, INJECT_OPTIONS);
 		this.resolve(suggestions);
 	}
 

@@ -1,4 +1,4 @@
-app.directive('setSelector', function(parseUser, pairService, $rootScope, Set, SetItem) {
+app.directive('setSelector', function(Set, SetItem) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/setSelector.html',
