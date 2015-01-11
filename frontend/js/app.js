@@ -22,7 +22,8 @@ var app = angular.module('app', ['ng',
                                  'angular-data.DS',
                                  'templateInclude',
                                  'ngCsv',
-                                 'youtube-embed'
+                                 'youtube-embed',
+                                 'infinite-scroll'
                                 ]);
 console.log('starting app!');
 

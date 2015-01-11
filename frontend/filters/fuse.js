@@ -15,7 +15,8 @@ app.filter('fuse', function($filter) {
 			var fuse = new Fuse(array, options);
 			var fusedArr = fuse.search(target);
 			if(sortOverride) {
-				return $filter('orderBy')(fusedArr, sortOverrideKeys);
+				var ordered = $filter('orderBy')(fusedArr, sortOverrideKeys);
+				return ordered
 			} else {
 				return fusedArr;
 			}

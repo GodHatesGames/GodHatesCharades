@@ -1,20 +1,20 @@
 <div class="cardInfo">
-	<h4>{{suggestion.getTypeDisplay()}} Card</h4>
+	<h4>{{suggestion.typeDisplay}} Card</h4>
 	<ng-pluralize
-		count="suggestion.getTotalVotes()"
+		count="suggestion.votes"
 		when="{'0': 'No votes.',
 				'one': '1 pity vote',
-				'other': '{{suggestion.getTotalVotes()}} votes'}">
+				'other': '{{suggestion.votes}} votes'}">
 	</ng-pluralize>
 	<br>
 	<ng-pluralize
-		count="suggestion.getTotalSkips()"
+		count="suggestion.skips"
 		when="{'0': 'No skips.',
 				'one': '1 measly skip',
-				'other': '{{suggestion.getTotalSkips()}} skips'}">
+				'other': '{{suggestion.skips}} skips'}">
 	</ng-pluralize>
 	<br>
-	{{suggestion.getKDR()}} KDR
+	{{suggestion.kdr}} KDR
 	<br>
 	Submitted by
 	<a ui-sref="user({userid: suggestion.owner.id})">

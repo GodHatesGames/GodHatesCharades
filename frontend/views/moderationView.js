@@ -33,7 +33,7 @@ app.controller('moderationView', function(unmoderated, approved, $scope, Suggest
 				id: $scope.suggestion.id,
 				text: $scope.suggestion.text,
 				legal: $scope.suggestion.legal,
-				url: $scope.suggestion.getUrl()
+				url: $scope.suggestion.url
 			},
 			email: {
 				subject: 'Thanks for submitting a card to God Hates Charades.',
@@ -55,7 +55,7 @@ app.controller('moderationView', function(unmoderated, approved, $scope, Suggest
 				id: $scope.suggestion.id,
 				text: $scope.suggestion.text,
 				legal: $scope.suggestion.legal,
-				url: $scope.suggestion.getUrl()
+				url: $scope.suggestion.url
 			},
 			email: {
 				subject: 'Thanks for submitting a card to God Hates Charades.',

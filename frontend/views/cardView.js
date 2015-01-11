@@ -7,14 +7,14 @@ app.controller('cardView', function(suggestion, $scope, $state, $location) {
 	$state.current.description = ['"',
 	                              suggestion.text,
 	                              '" is a ',
-	                              suggestion.getTypeDisplay(),
+	                              suggestion.typeDisplay,
 	                              ' card submitted by ',
-	                              suggestion.getOwnerName()].join('');
+	                              suggestion.owner.name].join('');
 
 	// DISQUS
 	$scope.disqus = {
 		shortname: 'godhatescharades',
 		id: suggestion.id,
-		url: 'http://godhatescharades.com' + $location.url()
+		url: suggestion.url
 	};
 })

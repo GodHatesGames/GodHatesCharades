@@ -41,11 +41,11 @@ app.directive('downloader', function($filter) {
 					text = text.replace(/(\r\n|\n|\r)/gm,' ');
 					item = {
 						'text': text,
-						'type': suggestion.getTypeDisplay(),
-						'votes': suggestion.getTotalVotes(),
-						'skipped': suggestion.getTotalSkips(),
-						'views': suggestion.getTotalViews(),
-						'kdr': suggestion.getKDR()
+						'type': suggestion.typeDisplay,
+						'votes': suggestion.votes,
+						'skipped': suggestion.skips,
+						'views': suggestion.views,
+						'kdr': suggestion.kdr
 					};
 					allCsvData.push(item);
 				});

@@ -16,22 +16,22 @@
 					<td ng-bind="index + 1"></td>
 					<!-- Text -->
 					<td>
-						<a ui-sref="card(suggestion.getLink())">
+						<a ui-sref="card(suggestion.link)">
 							{{suggestion.text}}
 						</a>
 					</td>
 					<!-- Votes -->
 					<td>
-						{{suggestion.getTotalVotes()}}
+						{{suggestion.votes}}
 					</td>
 					<!-- Skips -->
 					<td>
-						{{suggestion.getTotalSkips() | number}}
+						{{suggestion.skips | number}}
 					</td>
 					<!-- Views -->
-					<td ng-bind="suggestion.getTotalViews()"></td>
+					<td ng-bind="suggestion.views"></td>
 					<!-- Type -->
-					<td ng-class="suggestion.getTypeClass()"></td>
+					<td ng-class="suggestion.typeClass"></td>
 				</tr>
 			</table>
 	</div>

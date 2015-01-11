@@ -18,21 +18,20 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 			}
 		},
 		computed: {
-			ownerId: ['owner', _updateOwnerId]
+			ownerId: ['owner', _updateOwnerId],
+			votes: ['totalVotes', ParseData.defaultValueHandler(0)],
+			skips: ['skipped', ParseData.defaultValueHandler(0)],
+			views: ['votes', 'skips', _updateViews],
+			slug: ['text', _updateSlug],
+			link: ['slug', 'id', _updateLink],
+			kdr: ['votes', 'skips', _updateKdr],
+			typeClass: ['type', _updateTypeClass],
+			typeDisplay: ['type', _updateTypeDisplay],
+			url: ['url', _updateUrl],
+			imageUrl: ['type', _updateImageUrl]
 		},
 		methods: {
 			// Instance methods
-			getTypeDisplay: _getTypeDisplay,
-			getTypeClass: _getTypeClass,
-			getSlug: _getSlug,
-			getLink: _getLink,
-			getUrl: _getUrl,
-			getImageUrl: _getImageUrl,
-			getTotalVotes: _getTotalVotes,
-			getTotalSkips: _getTotalSkips,
-			getKDR: _getKDR,
-			getTotalViews: _getTotalViews,
-			getOwnerName: _getOwnerName,
 			updateLinks: _updateLinks
 		},
 		beforeInject: _beforeInject
@@ -44,10 +43,10 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 	};
 
 	// Constants
-	var TYPE_DISPLAY_CHARACTER = "Actor";
-	var TYPE_DISPLAY_SCENARIO = "Scenario";
-	var TYPE_CLASS_CHARACTER = "character";
-	var TYPE_CLASS_SCENARIO = "scenario";
+	var TYPE_DISPLAY_CHARACTER = 'Actor';
+	var TYPE_DISPLAY_SCENARIO = 'Scenario';
+	var TYPE_CLASS_CHARACTER = 'character';
+	var TYPE_CLASS_SCENARIO = 'scenario';
 	var RELATIONS = ['user', 'setItem'];
 	var INJECT_OPTIONS = {
 	};
@@ -92,16 +91,91 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 	}
 
 	function _updateOwnerId(owner) {
-		if(this.owner)
-			return this.owner.id;
+		if(owner)
+			return owner.id;
 		else {
 			console.log('why no owner');
 		}
 	}
 
-	function _getTypeDisplay() {
-		var type = this.type;
+	function _updateTypeDisplay(type) {
 		return Suggestion.getTypeDisplayByType(type);
+	}
+
+	function _updateTypeClass(type) {
+		console.log('typeClass');
+		return Suggestion.getTypeClassByType(type);
+	}
+
+	function _updateSlug(text) {
+		return Slug.slugify(text);
+	}
+
+	function _updateLink(slug, id) {
+		return {
+			cardid: id,
+			slug: slug
+		};
+	}
+
+	function _updateImageUrl(type) {
+		return Suggestion.getImageByType(type);
+	}
+
+	function _updateUrl(link) {
+		var cardState = $state.get('card').url;
+		var matcher = $urlMatcherFactory.compile(cardState);
+		var path = matcher.format(link);
+		return [
+			'http://godhatescharades.com',
+			path
+		].join('');
+	}
+
+	function _updateKdr(votes, skips) {
+		if(votes && skips) {
+			if(skips === 0) {
+				return 0;
+			} else {
+				var kdr = votes / skips;
+				return $filter('number')(kdr, 1);
+			}
+		}
+	}
+
+	function _updateViews(votes, skips) {
+		var views = 0;
+		if(votes) views += votes;
+		if(skips) views += skips;
+		return views;
+	}
+
+	// class methods
+	function _getBlankCardByType(type) {
+		return {
+			type: type
+		};
+	}
+
+	function _getImageByType(type) {
+		switch(type) {
+			case 0 :
+				return 'img/actor_skull.svg';
+			case 1 :
+				return 'img/scenario_ball.svg';
+		}
+	}
+
+	function _getTypeClassByType(type) {
+		switch(type) {
+			case 0 :
+				return TYPE_CLASS_CHARACTER;
+			case 1 :
+				return TYPE_CLASS_SCENARIO;
+			default :
+				console.log('unhandled card type:', type);
+				break;
+		}
 	}
 
 	function _getTypeDisplayByType(type) {
@@ -113,80 +187,6 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 		}
 	}
 
-	function _getTypeClass() {
-		return Suggestion.getTypeClassByType(this.type);
-	}
-
-	function _getSlug() {
-		var text = this.text;
-		return Slug.slugify(text);
-	}
-
-	function _getLink() {
-		return {
-			cardid: this.id,
-			slug: this.getSlug()
-		};
-	}
-
-	function _getUrl() {
-		var cardState = $state.get('card').url;
-		var matcher = $urlMatcherFactory.compile(cardState);
-		var path = matcher.format(this.getLink());
-		return [
-			'http://godhatescharades.com',
-			path
-		].join('');
-	}
-
-	function _getImageUrl() {
-		var type = this.type;
-		return Suggestion.getImageByType(type);
-	}
-
-	function _getTotalVotes() {
-		var totalVotes = this.totalVotes;
-		return totalVotes ? totalVotes : 0;
-	}
-
-	function _getTotalSkips() {
-		var totalSkips = this.skipped;
-		return totalSkips ? totalSkips : 0;
-	}
-
-	function _getKDR() {
-		var kills = this.getTotalVotes();
-		var deaths = this.getTotalSkips();
-		if(deaths === 0) {
-			return 0;
-		} else {
-			var kdr = kills / deaths;
-			return $filter('number')(kdr, 1);
-		}
-	}
-
-	function _getTotalViews() {
-		return this.getTotalVotes() + this.getTotalSkips();
-	}
-
-	function _getOwnerName() {
-		if(this.owner)
-			return this.owner.name;
-	}
-
-	function _find(resource, id) {
-		var cached = Suggestion.get(id);
-
-		if(cached) {
-			return $q.when(cached);
-		} else {
-			// else fetch data
-			var options = {
-				id: id
-			};
-			return Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getCardById', options);
-		}
-	}
 
 	function _getAllApprovedSuggestions() {
 		var deferred = $q.defer();
@@ -238,7 +238,7 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 
 	function _onSuggestionListSuccess(suggestions) {
 		// _cache(suggestions);
-		suggestions = Suggestion.inject(suggestions, INJECT_OPTIONS);
+		suggestions = Suggestion.inject(suggestions);
 		this.resolve(suggestions);
 	}
 
@@ -264,31 +264,19 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 		return deferred.promise;
 	}
 
-	function _getBlankCardByType(type) {
-		return {
-			type: type
-		};
-	}
+	// adapter methods
 
-	function _getImageByType(type) {
-		switch(type) {
-			case 0 :
-				return 'img/actor_skull.svg';
-			case 1 :
-				return 'img/scenario_ball.svg';
+	function _find(resource, id) {
+		var cached = Suggestion.get(id);
+
+		if(cached) {
+			return $q.when(cached);
+		} else {
+			// else fetch data
+			var options = {
+				id: id
+			};
+			return Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getCardById', options);
 		}
 	}
-
-	function _getTypeClassByType(type) {
-		switch(type) {
-			case 0 :
-				return TYPE_CLASS_CHARACTER;
-			case 1 :
-				return TYPE_CLASS_SCENARIO;
-			default :
-				console.log('unhandled card type:', type);
-				break;
-		}
-	}
-
 });

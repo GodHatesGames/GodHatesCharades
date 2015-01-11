@@ -11,7 +11,7 @@
 					<th>Type</th>
 					<th>Author</th>
 				</tr>
-				<tr ng-repeat="(index, suggestion) in suggestions | fuse:['text']:searchSelector"
+				<tr ng-repeat="suggestion in suggestions | fuse:['text']:searchSelector | limitTo:30 track by suggestion.id"
 				    ng-click="editSuggestion(this, suggestion)"
 				    ng-init="newText = suggestion.text">
 					<!-- Text -->
@@ -23,7 +23,7 @@
 						</span>
 					</td>
 					<!-- Type -->
-					<td ng-class="suggestion.getTypeClass()"></td>
+					<td ng-class="suggestion.typeClass"></td>
 					<!-- Author Name -->
 					<td>{{::suggestion.owner.name}}</td>
 				</tr>

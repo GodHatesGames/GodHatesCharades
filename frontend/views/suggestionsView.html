@@ -3,10 +3,12 @@
 	<div class="cardList"
 	     ng-if="suggestions">
 		<h3>{{suggestions.length}} suggestions loaded</h3>
-		<input ng-model="searchSelector"
+		{{list.search}} : {{list.limit}}
+		<input ng-model="list.search"
 			   placeholder="search here"
 			   class="form-control">
-		<table class="table table-striped">
+		<table class="table table-striped"
+		       infinite-scroll="loadSuggestions()">
 			<tr>
 				<th>
 					<a ng-click="overrideSort(SORT_TEXT)">
@@ -54,28 +56,28 @@
 					Sets
 				</th>
 			</tr>
-			<tr ng-repeat="(index, suggestion) in ::suggestions | fuse:searchProps:searchSelector:sortOverrideKeys[sortDirection]"
+			<tr ng-repeat="suggestion in suggestions | fuse:list.sortProps:list.search:list.sortOverrideKeys[sortDirection] | limitTo:list.limit track by suggestion.id"
 			    ng-click="cardDetailsModal.show(this, suggestion)"
 			    class="noselect">
 				<!-- Text -->
 				<td>
-					{{::suggestion.text}}
+					{{suggestion.text}}
 					<span class="legal"
-					      ng-if="::suggestion.legal">
-						{{::suggestion.legal}}
+					      ng-if="suggestion.legal">
+						{{suggestion.legal}}
 					</span>
 				</td>
 				<!-- Type -->
-				<td ng-class="suggestion.getTypeClass()"></td>
+				<td ng-class="suggestion.typeClass"></td>
 				<!-- Author Name -->
 				<td>{{::suggestion.owner.name}}</td>
-				<td>{{::suggestion.getTotalVotes()}}</td>
-				<td>{{::suggestion.getTotalSkips()}}</td>
-				<td>{{::suggestion.getKDR()}}</td>
-				<td>{{::suggestion.getTotalViews()}}</td>
+				<td>{{::suggestion.votes}}</td>
+				<td>{{::suggestion.skips}}</td>
+				<td>{{::suggestion.kdr}}</td>
+				<td>{{::suggestion.views}}</td>
 				<td>
 					<div ng-repeat="setItem in suggestion.setItems">
-						<span class="label label-default">{{setItem.owner.name}}</span>
+						<span class="label label-default">{{::setItem.owner.name}}</span>
 					</div>
 				</td>
 			</tr>
