@@ -138,7 +138,6 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 			} else {
 				var kdr = votes / skips;
 				var filtered = $filter('number')(kdr, 2);
-				console.log(filtered, this.text);
 				return filtered;
 			}
 		}
