@@ -3,7 +3,6 @@
 	<div class="cardList"
 	     ng-if="suggestions">
 		<h3>{{suggestions.length}} suggestions loaded</h3>
-		{{list.search}} : {{list.limit}}
 		<input ng-model="list.search"
 			   placeholder="search here"
 			   class="form-control">
@@ -56,7 +55,7 @@
 					Sets
 				</th>
 			</tr>
-			<tr ng-repeat="suggestion in suggestions | fuse:list.sortProps:list.search:list.sortOverrideKeys[sortDirection] | limitTo:list.limit track by suggestion.id"
+			<tr ng-repeat="suggestion in suggestions | fuse:list.searchProps:list.search:list.sortOverrideKeys[sortDirection] | limitTo:list.limit track by suggestion.id"
 			    ng-click="cardDetailsModal.show(this, suggestion)"
 			    class="noselect">
 				<!-- Text -->

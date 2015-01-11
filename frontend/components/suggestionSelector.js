@@ -15,18 +15,35 @@ app.directive('suggestionSelector', function(Suggestion, $filter, $state, $modal
 			// public vars
 			$scope.tab = 'best';
 			$scope.$watch('search', _onSearchUpdated);
+			var LIST_LIMIT = 10;
+			$scope.list = {
+				search: null,
+				limit: LIST_LIMIT,
+				searchProps: ['text']
+			}
+			$scope.$watch('list.search', _onSelectorUpdated);
 
 			// Public methods
 			$scope.checkEscape = _checkEscape;
-
-			$scope.selectSuggestion = function(suggestion) {
-				console.log('selectSuggestion');
-				$scope.$emit('suggestionAdded', suggestion);
-			};
-
+			$scope.loadSuggestions = _loadSuggestions;
+			$scope.selectSuggestion = _selectSuggestion;
 			$scope.editSuggestion = _editSuggestion;
 
 			// Private methods
+			function _loadSuggestions() {
+				$scope.list.limit += LIST_LIMIT;
+			}
+
+			function _selectSuggestion(suggestion) {
+				console.log('selectSuggestion');
+				$scope.$emit('suggestionAdded', suggestion);
+			}
+			
+			function _onSelectorUpdated(newValue) {
+				if($scope.list.limit > LIST_LIMIT) {
+					$scope.list.limit = LIST_LIMIT;
+				}
+			}
 
 			function _onSearchUpdated(newValue) {
 				$scope.searchSelector = newValue;

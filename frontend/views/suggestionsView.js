@@ -34,7 +34,7 @@ app.controller('suggestionsView', function(suggestions, setIdsByCardId, $scope, 
 	$scope.list = {
 		search: null,
 		limit: LIST_LIMIT,
-		sortProps: ['text'],
+		searchProps: ['text'],
 		sortDirection: null,
 		sortOverrideKeys: null
 	}
