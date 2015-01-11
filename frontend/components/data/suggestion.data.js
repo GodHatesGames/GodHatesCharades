@@ -24,7 +24,7 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 			views: ['votes', 'skips', _updateViews],
 			slug: ['text', _updateSlug],
 			link: ['slug', 'id', _updateLink],
-			kdr: ['votes', 'skips', _updateKdr],
+			KDR: ['votes', 'skips', _updateKdr],
 			typeClass: ['type', _updateTypeClass],
 			typeDisplay: ['type', _updateTypeDisplay],
 			url: ['url', _updateUrl],
@@ -137,7 +137,9 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 				return 0;
 			} else {
 				var kdr = votes / skips;
-				return $filter('number')(kdr, 1);
+				var filtered = $filter('number')(kdr, 2);
+				console.log(filtered, this.text);
+				return filtered;
 			}
 		}
 	}

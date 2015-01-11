@@ -45,7 +45,7 @@ app.directive('downloader', function($filter) {
 						'votes': suggestion.votes,
 						'skipped': suggestion.skips,
 						'views': suggestion.views,
-						'kdr': suggestion.kdr
+						'kdr': suggestion.KDR
 					};
 					allCsvData.push(item);
 				});
