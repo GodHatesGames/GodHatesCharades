@@ -60,6 +60,8 @@ app.factory('SetItem', function (DS, $q, Suggestion, ParseData, User) {
 	function _updateLinks() {
 		ParseData.linkRelationsAfterInject(SetItem, RELATIONS, this);
 		SetItem.linkInverse(this.id);
+		if(!this.suggestion)
+			console.log('there is a problem!');
 	}
 
 	function _updateOwnerId(owner) {

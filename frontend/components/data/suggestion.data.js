@@ -81,12 +81,12 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 	}
 
 	function _afterInject(resourceName, parseObject, cb) {
-		// parseObject.updateLinks(['user']);
+		parseObject.updateLinks();
 	}
 
-	function _updateLinks(relations) {
+	function _updateLinks() {
 		// if(!relations) relations = RELATIONS;
-		// ParseData.linkRelationsAfterInject(Suggestion, relations, this);
+		ParseData.linkRelationsAfterInject(Suggestion, RELATIONS, this);
 		// Suggestion.linkInverse(this.id);
 	}
 
@@ -103,7 +103,6 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 	}
 
 	function _updateTypeClass(type) {
-		console.log('typeClass');
 		return Suggestion.getTypeClassByType(type);
 	}
 

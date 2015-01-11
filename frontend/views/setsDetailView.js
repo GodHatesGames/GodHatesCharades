@@ -1,5 +1,5 @@
 'use strict';
-app.controller('setsDetailView', function(set, $scope, $state, $stateParams, SetItem) {
+app.controller('setsDetailView', function(set, suggestions, $scope, $state, $stateParams, SetItem) {
 	$scope.saving = false;
 	$scope.set = set;
 	$scope.actorCount = 0;
@@ -11,17 +11,15 @@ app.controller('setsDetailView', function(set, $scope, $state, $stateParams, Set
 		var actors = 0;
 		var scenarios = 0;
 		_.each(set.setItems, function(setItem) {
-			var card = setItem.card;
-			if(card) {
-				var type = setItem.card.type;
-				if(type === 0) {
+			if(setItem.card) {
+				if(setItem.card.type === 0) {
 					// actor
 					actors++;
-				} else if(type === 1) {
+				} else if(setItem.card.type === 1) {
 					scenarios++;
 				}
 			} else {
-				console.log('setItem', setItem.id, 'has no card');
+				console.log('setItem', setItem.id, 'has no suggestion');
 			}
 		});
 		$scope.actorCount = actors;

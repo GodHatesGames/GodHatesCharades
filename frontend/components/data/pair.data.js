@@ -87,7 +87,7 @@ app.factory('Pair', function (DS, $q, Suggestion, ParseData, Slug, $filter) {
 		var returnVal;
 		var options = {
 			cardid: card.id,
-			cardtype: card.getTypeDisplay().toLowerCase()
+			cardtype: card.typeDisplay.toLowerCase()
 		};
 		Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getPairsByCard', options)
 		.then(_onCardPairsFetched, deferred.reject);

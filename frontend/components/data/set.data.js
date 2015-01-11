@@ -74,7 +74,6 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 		if(!_.isEmpty(cached)) {
 			return $q.when(cached);
 		} else {
-			console.log('sets loadData');
 			var deferred = $q.defer();
 			Parse.Cloud.run(
 				CONFIG.PARSE_VERSION + 'getAllSets',
