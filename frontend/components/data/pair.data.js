@@ -22,12 +22,12 @@ app.factory('Pair', function (DS, $q, Suggestion, ParseData, Slug, $filter) {
 		computed: {
 			actorId: ['actor', _updateActorID],
 			scenarioId: ['scenario', _updateScenarioId],
-			chosen: ['chosen', ParseData.defaultValueHandler(0)],
+			votes: ['chosen', ParseData.defaultValueHandler(0)],
 			skips: ['skipped', ParseData.defaultValueHandler(0)],
 			views: ['displayed', ParseData.defaultValueHandler(0)],
 			slug: ['actor', 'scenario', _updateSlug],
 			link: ['slug', 'id', _updateLink],
-			kdr: ['chosen', 'skips', _updateKdr],
+			kdr: ['votes', 'skips', _updateKdr],
 			controversy: ['controversy', ParseData.defaultValueHandler(0)]
 		},
 		methods: {

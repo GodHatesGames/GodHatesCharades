@@ -9,9 +9,9 @@ app.directive('cardPairs', function(Pair) {
 			sortPredicates: '=?'
 		},
 		controller: function($scope, $element, $attrs) {
-			var defaultPredicates = ['-getViews()',
-			                         '-getVotes()',
-			                         'getSkips()'];
+			var defaultPredicates = ['-views',
+			                         '-votes',
+			                         'skips'];
 			if(!$scope.sortPredicates)
 				$scope.sortPredicates = defaultPredicates;
 

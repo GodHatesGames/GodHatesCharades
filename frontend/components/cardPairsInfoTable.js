@@ -8,9 +8,9 @@ app.directive('cardPairsInfoTable', function(Pair, cardDetailsModal) {
 		},
 		controller: function($scope, $element, $attrs) {
 			$scope.cardDetailsModal = cardDetailsModal;
-			$scope.sortPredicates = ['-getViews()',
-			                    '-getVotes()',
-			                    'getSkips()'];
+			$scope.sortPredicates = ['-views',
+			                    '-votes',
+			                    'skips'];
 			$scope.$watch('suggestion', _onSuggestionUpdated);
 
 			function _onSuggestionUpdated() {
