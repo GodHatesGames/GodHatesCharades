@@ -5,7 +5,6 @@ var path = require('path');
 var prerender = require('prerender-node');
 var mailchimp = require('./mailchimp');
 var compression = require('compression');
-var livereload = require('connect-livereload')();
 
 var port = process.env.PORT || 3000;
 var files = process.env.FILES || '../frontend';
@@ -33,7 +32,7 @@ server.use(compression());
 server.configure('development', function(){
 	// server.use(express.logger());
 	server.use(express.errorHandler());
-	// server.use(livereload);
+	// server.use(require('connect-livereload')());
 });
 
 server.use(express.static(staticFilePath));
