@@ -435,7 +435,7 @@ module.exports = function(grunt) {
 		'buildApi',
 		'stageBuildFrontend',
 		'copy:app',
-		'buildcontrol:stage'
+		'buildcontrol:dev'
 	]);
 
 	grunt.registerTask('dev', [
