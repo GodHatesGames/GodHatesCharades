@@ -8,7 +8,8 @@
 			   class="form-control">
 		<table class="table table-striped"
 		       infinite-scroll="loadSuggestions()"
-		       infinite-scroll-disabled="list.limit >= suggestions.length">
+		       infinite-scroll-disabled="list.limit >= suggestions.length"
+		       infinite-scroll-distance="0.25">
 			<tr>
 				<th>
 					<a ng-click="overrideSort(SORT_TEXT)">
@@ -56,7 +57,7 @@
 					Sets
 				</th>
 			</tr>
-			<tr ng-repeat="suggestion in suggestions | fuse:list.searchProps:list.search:list.sortOverrideKeys[list.sortDirection] | limitTo:list.limit track by suggestion.id"
+			<tr ng-repeat="suggestion in suggestions | fuse:list.searchProps:list.search:list.sortOverrideKeys[list.sortDirection] | limit:list.limit:list track by suggestion.id"
 			    ng-click="cardDetailsModal.show(this, suggestion)"
 			    class="noselect">
 				<!-- Text -->
@@ -81,12 +82,11 @@
 					</div>
 				</td>
 			</tr>
+			<tr ng-if="!list.loaded">
+				<td colspan="8">
+					<h3>Scroll for more...</h3>
+				</td>
+			</tr>
 		</table>
-		<h3 ng-if="list.limit < suggestions.length">
-			Scroll for more...
-		</h3>
-		<h3 ng-if="list.limit >= suggestions.length">
-			Thats all folks
-		</h3>
 	</div>
 </div>

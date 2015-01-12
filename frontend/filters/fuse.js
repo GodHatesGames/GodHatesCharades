@@ -1,5 +1,6 @@
 'use strict';
 app.filter('fuse', function($filter) {
+	var orderByFilter = $filter('orderBy');
 	return function (array, keys, target, sortOverrideKeys){
 		if(array.length  > 0 && keys.length > 0 && target) {
 			var sortOverride = false;
@@ -15,13 +16,13 @@ app.filter('fuse', function($filter) {
 			var fuse = new Fuse(array, options);
 			var fusedArr = fuse.search(target);
 			if(sortOverride) {
-				var ordered = $filter('orderBy')(fusedArr, sortOverrideKeys);
+				var ordered = orderByFilter(fusedArr, sortOverrideKeys);
 				return ordered
 			} else {
 				return fusedArr;
 			}
 		} else {
-			return $filter('orderBy')(array, (sortOverrideKeys || keys));
+			return orderByFilter(array, (sortOverrideKeys || keys));
 		}
 	};
 });

@@ -30,10 +30,13 @@ app.controller('suggestionsView', function(suggestions, setIdsByCardId, $scope, 
 		descending: ['views'],
 		ascending: ['-views']
 	};
-	var LIST_LIMIT = 5;
+	var DEFAULT_LIMIT = 10;
+	var LOAD_LIMIT = 1;
+	$scope.DEFAULT_LIMIT = DEFAULT_LIMIT;
+	$scope.extras = _.range(DEFAULT_LIMIT);
 	$scope.list = {
 		search: null,
-		limit: LIST_LIMIT,
+		limit: DEFAULT_LIMIT,
 		searchProps: ['text'],
 		sortDirection: null,
 		sortOverrideKeys: null
@@ -46,8 +49,8 @@ app.controller('suggestionsView', function(suggestions, setIdsByCardId, $scope, 
 	$scope.$watch('list.search', _onSelectorUpdated);
 
 	function _onSelectorUpdated(newValue) {
-		if($scope.list.limit > LIST_LIMIT) {
-			$scope.list.limit = LIST_LIMIT;
+		if($scope.list.limit > DEFAULT_LIMIT) {
+			$scope.list.limit = DEFAULT_LIMIT;
 		}
 	}
 
@@ -56,7 +59,7 @@ app.controller('suggestionsView', function(suggestions, setIdsByCardId, $scope, 
 	}
 
 	function _overrideSort(type) {
-		$scope.list.limit = LIST_LIMIT;
+		$scope.list.limit = DEFAULT_LIMIT;
 		if($scope.list.sortOverrideKeys && $scope.list.sortOverrideKeys === type) {
 			// flip order if necessary
 			if($scope.list.sortDirection === 'descending')
@@ -118,6 +121,6 @@ app.controller('suggestionsView', function(suggestions, setIdsByCardId, $scope, 
 	}
 
 	function _loadSuggestions() {
-		$scope.list.limit += LIST_LIMIT;
+		$scope.list.limit += LOAD_LIMIT;
 	}
 });
