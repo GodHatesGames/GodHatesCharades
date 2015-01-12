@@ -403,6 +403,13 @@ module.exports = function(grunt) {
 					branch: 'master',
 					tag: pkg.version
 				}
+			},
+			dev: {
+				options: {
+					remote: 'git@heroku.com:ghcdev.git',
+					branch: 'master',
+					tag: pkg.version
+				}
 			}
 		}
 	});
@@ -416,6 +423,14 @@ module.exports = function(grunt) {
 	]);
 
 	grunt.registerTask('deploy:stage', [
+		'clean:stage',
+		'buildApi',
+		'stageBuildFrontend',
+		'copy:app',
+		'buildcontrol:stage'
+	]);
+
+	grunt.registerTask('deploy:dev', [
 		'clean:stage',
 		'buildApi',
 		'stageBuildFrontend',
