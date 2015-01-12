@@ -30,7 +30,7 @@ app.controller('suggestionsView', function(suggestions, setIdsByCardId, $scope, 
 		descending: ['views'],
 		ascending: ['-views']
 	};
-	var LIST_LIMIT = 10;
+	var LIST_LIMIT = 5;
 	$scope.list = {
 		search: null,
 		limit: LIST_LIMIT,
@@ -56,6 +56,7 @@ app.controller('suggestionsView', function(suggestions, setIdsByCardId, $scope, 
 	}
 
 	function _overrideSort(type) {
+		$scope.list.limit = LIST_LIMIT;
 		if($scope.list.sortOverrideKeys && $scope.list.sortOverrideKeys === type) {
 			// flip order if necessary
 			if($scope.list.sortDirection === 'descending')

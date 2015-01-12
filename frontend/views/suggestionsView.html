@@ -7,7 +7,8 @@
 			   placeholder="search here"
 			   class="form-control">
 		<table class="table table-striped"
-		       infinite-scroll="loadSuggestions()">
+		       infinite-scroll="loadSuggestions()"
+		       infinite-scroll-disabled="list.limit >= suggestions.length">
 			<tr>
 				<th>
 					<a ng-click="overrideSort(SORT_TEXT)">
@@ -72,7 +73,7 @@
 				<td>{{::suggestion.owner.name}}</td>
 				<td>{{::suggestion.votes}}</td>
 				<td>{{::suggestion.skips}}</td>
-				<td>{{::suggestion.KDR}}</td>
+				<td>{{::suggestion.kdr}}</td>
 				<td>{{::suggestion.views}}</td>
 				<td>
 					<div ng-repeat="setItem in suggestion.setItems">
@@ -81,5 +82,11 @@
 				</td>
 			</tr>
 		</table>
+		<h3 ng-if="list.limit < suggestions.length">
+			Scroll for more...
+		</h3>
+		<h3 ng-if="list.limit >= suggestions.length">
+			Thats all folks
+		</h3>
 	</div>
 </div>
