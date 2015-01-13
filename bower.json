@@ -36,5 +36,8 @@
     "angular-youtube-mb": "~0.1.4",
     "angular-ui-select": "~0.9.5",
     "ngInfiniteScroll": "~1.2.0"
+  },
+  "devDependencies": {
+    "ng-stats": "~2.0.4"
   }
 }
