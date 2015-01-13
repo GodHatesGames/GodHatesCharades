@@ -1,4 +1,4 @@
-app.controller('pairView', function(pair, readyForUpload, $scope, $state, $stateParams, $location, $window, pairService, $rootScope) {
+app.controller('pairView', function(pair, readyForUpload, $scope, $state, $stateParams, $location, $window, $rootScope) {
 	$window.scrollTo(0, 0);
 	$scope.pair = pair;
 	$scope.sharingConfig = {};

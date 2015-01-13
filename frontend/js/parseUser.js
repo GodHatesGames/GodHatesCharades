@@ -1,7 +1,7 @@
 'use strict';
 var parseUser = angular.module('parse.user', []);
 
-parseUser.service('parseUser', function factory($rootScope, $q, $location, pairService, Suggestion) {
+parseUser.service('parseUser', function factory($rootScope, $q, $location, Suggestion) {
 	var user = {
 		loggedin: false,
 		dataloaded: false,
