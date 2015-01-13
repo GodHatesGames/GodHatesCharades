@@ -33,8 +33,8 @@ app.config(function($stateProvider,
 		description: 'We need your help coming up with funny new cards. Submit your favorite ideas here.',
 		templateUrl: 'views/submitView.html',
 		resolve: {
-			betaUser: ['parseUser', '$q', function(parseUser, $q) {
-				if(parseUser.isBetaUser())
+			betaUser: ['User', '$q', function(User, $q) {
+				if(User.current.beta)
 					return true;
 				else
 					return $q.reject({

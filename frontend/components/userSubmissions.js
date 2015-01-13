@@ -1,4 +1,4 @@
-app.directive('userSubmissions', function($filter, parseUser) {
+app.directive('userSubmissions', function() {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/userSubmissions.html',

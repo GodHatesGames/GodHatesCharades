@@ -14,12 +14,12 @@
 		</a>
 	</div>
 	<!-- non beta users -->
-	<h3 ng-if="currentUser && !betaUser">
+	<h3 ng-if="!User.current.beta">
 		New features coming soon. But you can <a ui-sref="vote">get voting now</a>!
 	</h3>
 
 	<!-- beta users -->
-	<div ng-if="currentUser && betaUser"
+	<div ng-if="User.current.beta"
 	     class="backerZone row">
 		<h1>Backers Only Down Here!</h1>
 

@@ -1,12 +1,12 @@
 'use strict';
-app.directive('nav', function(parseUser, $uiViewScroll, $state, $timeout) {
+app.directive('nav', function(User, $uiViewScroll, $state, $timeout) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/nav.html',
 		replace: true,
 		scope: true,
 		controller: function($scope, $element) {
-			$scope.parseUser = parseUser;
+			$scope.User = User;
 			$scope.$state = $state;
 
 			$scope.launchAd = function() {

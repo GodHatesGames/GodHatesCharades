@@ -2,7 +2,7 @@
 	<div ng-if="!suggestions || suggestions.length == 0">No cards have been submitted.</div>
 
 	<div class="cardList" 
-		 ng-if="suggestions && suggestions.length > 0">
+		 ng-if="suggestions.length > 0">
 			<table class="table">
 				<tr>
 					<th>Rank</th>
@@ -12,26 +12,26 @@
 					<th>Viewed</th>
 					<th>Type</th>
 				</tr>
-				<tr ng-repeat="(index, suggestion) in suggestions">
+				<tr ng-repeat="(index, suggestion) in ::suggestions">
 					<td ng-bind="index + 1"></td>
 					<!-- Text -->
 					<td>
 						<a ui-sref="card(suggestion.link)">
-							{{suggestion.text}}
+							{{::suggestion.text}}
 						</a>
 					</td>
 					<!-- Votes -->
 					<td>
-						{{suggestion.votes}}
+						{{::suggestion.votes}}
 					</td>
 					<!-- Skips -->
 					<td>
-						{{suggestion.skips | number}}
+						{{::suggestion.skips}}
 					</td>
 					<!-- Views -->
-					<td ng-bind="suggestion.views"></td>
+					<td ng-bind="::suggestion.views"></td>
 					<!-- Type -->
-					<td ng-class="suggestion.typeClass"></td>
+					<td ng-class="::suggestion.typeClass"></td>
 				</tr>
 			</table>
 	</div>

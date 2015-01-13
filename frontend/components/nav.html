@@ -1,5 +1,5 @@
 <div id="mainNav" 
-     ng-class="{beta: parseUser.isBetaUser()}">
+     ng-class="{beta: User.current.beta}">
 	<!-- <a class="ad"
 	   ui-sref="timeline">
 		See our Kickstarter timeline!
@@ -42,16 +42,16 @@
 
 		<!-- user stuff -->
 		<li dropdown
-		    ng-hide="parseUser.isAnon()">
+		    ng-show="User.current">
 			<a class="dropdown-toggle" 
 			   dropdown-toggle>
-				{{parseUser.data.attributes.name}}
+				{{User.current.name}}
 				<b class="caret"></b>
 			</a>
 			<ul class="dropdown-menu"
 			    role="menu">
 				<li ui-sref-active="active">
-					<a ui-sref='user({userid: parseUser.data.id})'>
+					<a ui-sref='user({userid: User.current.id})'>
 						My Profile
 					</a>
 				</li>
@@ -59,43 +59,43 @@
 				<!-- Admin section -->
 				<li role="presentation" 
 				    class="divider"
-				    ng-show="parseUser.isAdmin()"></li>
+				    ng-show="User.current.admin"></li>
 				<li role="presentation" 
 				    class="dropdown-header"
-				    ng-show="parseUser.isAdmin()">
+				    ng-show="User.current.admin">
 					ADMIN
 				</li>
 				<li>
 					<a href="https://godhatescharades.prismic.io/documents/-blog">Edit Blog</a>
 				</li>
 				<li ui-sref-active="active"
-				    ng-show="parseUser.isAdmin()">
+				    ng-show="User.current.admin">
 					<a ui-sref='admin.suggestions'>Suggestions</a>
 				</li>
 				<li ui-sref-active="active"
-				    ng-show="parseUser.isAdmin()">
+				    ng-show="User.current.admin">
 					<a ui-sref='admin.moderation'>Moderation</a>
 				</li>
 				<li ui-sref-active="active"
-				    ng-show="parseUser.isAdmin()">
+				    ng-show="User.current.admin">
 					<a ui-sref='admin.export'>Export</a>
 				</li>
 				<li ui-sref-active="active"
-				    ng-show="parseUser.isAdmin()">
+				    ng-show="User.current.admin">
 					<a ui-sref='admin.sets'>Set Builder</a>
 				</li>
 
 				<li role="presentation" class="divider"></li>
 				<!-- logout -->
 				<li>
-					<a ng-click="parseUser.logout()">Logout</a>
+					<a ng-click="User.current.logout()">Logout</a>
 				</li>
 			</ul>
 		</li>
 		
 		<li class="login" 
 		    ui-sref-active="active"
-		    ng-show="parseUser.isAnon()">
+		    ng-hide="User.current">
 			<a ui-sref='login'>
 				Login
 			</a>

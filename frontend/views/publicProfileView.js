@@ -1,7 +1,6 @@
-app.controller('publicProfileView', function(profile, $scope, $stateParams, parseUser, $state) {
+app.controller('publicProfileView', function(profile, $scope, $stateParams, parseUser, $state, User) {
 	$scope.profile = profile;
-	$scope.currentUser = parseUser.isCurrentUser(profile.owner.id);
-	$scope.betaUser = parseUser.isBetaUser();
+	$scope.User = User;
 
 	//set meta title
 	$state.current.title = [profile.owner.name, '\'s profile'].join('');;

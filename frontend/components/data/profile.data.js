@@ -3,6 +3,7 @@ app.factory('Profile', function (DS, $q, ParseData, User, Suggestion) {
 	var definition = {
 		name: 'profile',
 		defaultAdapter: 'profileAdapter',
+		afterInject: _afterInject,
 		relations: {
 			belongsTo: {
 				user: {
@@ -22,6 +23,7 @@ app.factory('Profile', function (DS, $q, ParseData, User, Suggestion) {
 		},
 		methods: {
 			// Instance methods
+			updateLinks: _updateLinks
 		}
 	}
 	var RELATIONS = ['user', 'suggestion'];
@@ -41,6 +43,16 @@ app.factory('Profile', function (DS, $q, ParseData, User, Suggestion) {
 		return this.owner.id;
 	}
 
+	function _afterInject(resourceName, parseObject, cb) {
+		parseObject.updateLinks();
+	}
+
+	function _updateLinks() {
+		// if(!relations) relations = RELATIONS;
+		ParseData.linkRelationsAfterInject(Profile, RELATIONS, this);
+		// Suggestion.linkInverse(this.id);
+	}
+
 	// adapter methods
 	function _find(resource, id) {
 		var cached = Profile.get(id);
@@ -58,7 +70,12 @@ app.factory('Profile', function (DS, $q, ParseData, User, Suggestion) {
 			console.log('fetching user');
 			// $scope.loading = true;
 			var callbacks = {
-				success: deferred.resolve,
+				success: function(profile) {
+					Suggestion.inject(profile.suggestions);
+					var user = User.inject(profile.owner);
+					user.updateLinks();
+					deferred.resolve(profile);
+				},
 				error: deferred.reject
 			};
 			Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getProfile', options, callbacks);
