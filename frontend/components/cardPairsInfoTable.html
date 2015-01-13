@@ -6,7 +6,7 @@
 			<th>Votes</th>
 			<th>Skips</th>
 		</tr>
-		<tr ng-repeat="pair in pairs | orderBy:sortPredicates">
+		<tr ng-repeat="pair in pairs | orderBy:sortPredicates track by pair.id">
 			<td>
 				<a ng-click="cardDetailsModal.show(this, pair.actor)"
 				   target="_blank">
