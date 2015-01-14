@@ -23,26 +23,6 @@ app.factory('ParseData', function (DS, $q, $timeout) {
 		}
 	}
 
-	function _safeInject(resourceName, items) {
-		if(_.isArray(items)) {
-			var returnItems = [];
-			_.each(items, function(item) {
-				var cached = DS.get(resourceName, item.id);
-				var newItem;
-				if(cached) {
-					// console.log('found one');
-					newItem = cached;
-				} else {
-					newItem = DS.inject(resourceName, item);
-				}
-				returnItems.push(newItem);
-			});
-			return returnItems;
-		} else {
-			return DS.inject(resourceName, items);
-		}
-	}
-
 	function _safeInjectDefer(resourceName, items) {
 		if(_.isArray(items)) {
 			var returnItems = [];
