@@ -31,8 +31,8 @@
     "angular-data": "~1.5.3",
     "angular-cache": "~3.2.4",
     "fuse.js": "~1.2.2",
-    "angular-youtube-mb": "~0.1.4",
-    "angular-ui-select": "~0.9.5",
+    "angular-youtube-mb": "~0.1.6",
+    "angular-ui-select": "~0.9.6",
     "ngInfiniteScroll": "~1.2.0"
   },
   "devDependencies": {
