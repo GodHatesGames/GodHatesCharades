@@ -9,12 +9,6 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 					localField: 'owner',
 					localKey: 'ownerId'
 				}
-			},
-			hasMany: {
-				setItem: {
-					localField: 'setItems',
-					foreignKey: 'cardId'
-				}
 			}
 		},
 		computed: {
@@ -47,7 +41,7 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 	var TYPE_DISPLAY_SCENARIO = 'Scenario';
 	var TYPE_CLASS_CHARACTER = 'character';
 	var TYPE_CLASS_SCENARIO = 'scenario';
-	var RELATIONS = ['user', 'setItem'];
+	var RELATIONS = ['user'];
 	var INJECT_OPTIONS = {
 	};
 
