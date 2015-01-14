@@ -137,7 +137,6 @@ input.form-control {
 .viewLoader {
 	height: 0;
 	opacity: 0;
-	position: relative;
 	pointer-events: none;
 	/* top: -30px; */
 	-webkit-transition: opacity .5s ease-out;
@@ -153,8 +152,6 @@ input.form-control {
 
 .viewLoader p {
 	text-align: center;
-	background-color: black;
-	color: white;
 	padding: 10px;
 }
 
@@ -180,7 +177,7 @@ input.form-control {
 }
 
 .loadingAlert {
-	background: black;
+	.bg-light();
 	padding: 15px;
 	color: white;
 	text-align: center;
