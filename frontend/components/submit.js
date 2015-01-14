@@ -1,4 +1,4 @@
-app.directive('submit', function(Suggestion, parseUser) {
+app.directive('submit', function(Suggestion, User) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/submit.html',
@@ -28,12 +28,9 @@ app.directive('submit', function(Suggestion, parseUser) {
 			$scope.text = '';
 			$scope.maxChars = 75;
 			$scope.success = false;
-			$scope.parseUser = parseUser;
+			$scope.User = User;
 			$scope.typeDisplay = '';
 			$scope.typeClass = '';
-			$scope.displayName = function() {
-				return ' ' + parseUser.data.get('name');
-			}
 
 			var halfMax = $scope.maxChars / 2;
 
@@ -70,7 +67,7 @@ app.directive('submit', function(Suggestion, parseUser) {
 					var suggestion = new Suggestion();
 					suggestion.set('text', $scope.text);
 					suggestion.set('type', $scope.type);
-					suggestion.set('owner', parseUser.data);
+					suggestion.set('owner', User.current);
 					suggestion.save({
 						success: function(suggestion) {
 							$scope.success = true;

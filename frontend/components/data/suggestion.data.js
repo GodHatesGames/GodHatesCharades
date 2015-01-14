@@ -1,4 +1,4 @@
-app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFactory, $state, $filter, ParseData, User) {
+app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFactory, $state, $filter, ParseData) {
 	// vars
 	var definition = {
 		name: 'suggestion',
@@ -68,15 +68,15 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 
 	function _beforeInject(resourceName, parseObject, cb){
 		if(parseObject.attributes) {
-			if(parseObject.attributes.owner.attributes) {
-				// inject user if needed
-				var cachedOwner = User.get(parseObject.attributes.owner.id);
-				if(!cachedOwner)
-					User.inject(parseObject.attributes.owner);
-			}
 			ParseData.flattenAttrsBeforeInject(resourceName, parseObject, cb);
 		} else {
-			console.log('injecting empty or non-server suggestion');
+			// console.log('injecting non-parse suggestion or pre-cleaned suggestion');
+		}
+		if(parseObject.owner) {
+			// inject user if needed
+			var cachedOwner = DS.get('user', parseObject.owner.id);
+			if(!cachedOwner)
+				DS.inject('user', parseObject.owner);
 		}
 	}
 
@@ -234,8 +234,8 @@ app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFac
 
 	function _onSuggestionListSuccess(suggestions) {
 		// _cache(suggestions);
-		suggestions = Suggestion.inject(suggestions);
-		this.resolve(suggestions);
+		ParseData.safeInject('suggestion', suggestions)
+		.then(this.resolve);
 	}
 
 	function _getSuggestionPairs(skip) {

@@ -55,9 +55,6 @@ app.config(function($stateProvider,
 		title: 'Login: Access our community site',
 		description: 'Join our community site and help us improve the game.',
 		templateUrl: 'views/loginView.html',
-		resolve: {
-			parseUser: 'parseUser'
-		},
 		controller: 'loginView'
 	});
 	$stateProvider.state('user', {
@@ -66,7 +63,7 @@ app.config(function($stateProvider,
 		templateUrl: 'views/publicProfileView.html',
 		controller: 'publicProfileView',
 		resolve: {
-			profile: ['Profile', '$stateParams', function(Profile, $stateParams) {
+			publicProfile: ['Profile', '$stateParams', function(Profile, $stateParams) {
 				return Profile.find($stateParams.userid);
 			}]
 		}

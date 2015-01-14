@@ -1,3 +1,3 @@
-app.controller('loginView', function(parseUser, $scope) {
-	$scope.parseUser = parseUser;
+app.controller('loginView', function(User, $scope) {
+	$scope.User = User;
 });

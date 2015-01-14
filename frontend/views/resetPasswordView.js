@@ -1,11 +1,11 @@
-app.controller('resetPasswordView', function(parseUser, $scope) {
+app.controller('resetPasswordView', function(User, $scope) {
 	$scope.email = '';
 
 	$scope.reset = _reset;
 
 	function _reset() {
 		$scope.errorMessage = '';
-		parseUser.resetPassword($scope.email)
+		User.resetPassword($scope.email)
 		.then(_onResetSent, _onResetFail);
 	};
 

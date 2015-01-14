@@ -1,4 +1,4 @@
-app.directive('userinfo', function(parseUser) {
+app.directive('userinfo', function(Profile) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/userinfo.html',
@@ -11,7 +11,7 @@ app.directive('userinfo', function(parseUser) {
 			// $scope.loading = false;
 
 			if ($scope.userid) {
-				parseUser.getProfileById($scope.userid)
+				Profile.find($scope.userid)
 				.then(onProfileFound, onProfileError);
 			}
 

@@ -15,7 +15,7 @@
 			<card suggestion="pair.scenario"
 				updatable="true"></card>
 		</div>
-		<div ng-if="parseUser.isAdmin()">
+		<div ng-if="User.current.admin">
 			<div>controversy: {{pair.controversy}}</div>
 			<div>displayed: {{pair.views}}</div>
 			<div>chosen: {{pair.votes}}</div>

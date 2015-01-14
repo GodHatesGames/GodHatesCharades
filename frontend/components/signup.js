@@ -1,4 +1,4 @@
-app.directive('signup', function(parseUser, $state) {
+app.directive('signup', function(User, $state) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/signup.html',
@@ -16,7 +16,7 @@ app.directive('signup', function(parseUser, $state) {
 
 			function _signup() {
 				$scope.errorMessage = '';
-				var promise = parseUser.signup($scope.email, $scope.password, $scope.email, $scope.name);
+				var promise = User.signup($scope.email, $scope.password, $scope.email, $scope.name);
 				promise.then(_onSignedUp, _onSignupError);
 			}
 

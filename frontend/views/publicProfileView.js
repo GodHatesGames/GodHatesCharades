@@ -1,11 +1,11 @@
-app.controller('publicProfileView', function(profile, $scope, $stateParams, parseUser, $state, User) {
-	$scope.profile = profile;
+app.controller('publicProfileView', function(publicProfile, $scope, $stateParams, $state, User) {
+	$scope.publicProfile = publicProfile;
 	$scope.User = User;
 
 	//set meta title
-	$state.current.title = [profile.owner.name, '\'s profile'].join('');;
+	$state.current.title = [publicProfile.owner.name, '\'s profile'].join('');;
 
 	// set meta description
-	$state.current.description = [profile.owner.name, '\'s public profile page'].join('');
+	$state.current.description = [publicProfile.owner.name, '\'s public profile page'].join('');
 
 });

@@ -1,5 +1,5 @@
 <div id="loginView" class="container">
-	<span ng-hide="parseUser.isReal()">
+	<span ng-hide="User.current">
 		<div class="row">
 			<!-- left side -->
 			<h3 class="col-sm-6">
@@ -19,17 +19,17 @@
 			<login class="col-sm-6 col-md-6 col-lg-6"></login>
 		</div>
 	</span>
-	<span ng-show="parseUser.isReal()">
+	<span ng-show="User.current">
 		<h3>
 			You're logged in
 		</h3>
 		<button class="btn btn-success"
-				ui-sref="user({userid: parseUser.data.id})">
+				ui-sref="user({userid: User.current.id})">
 			View Profile
 		</button>
 		<hr>
 		<button class="btn btn-success"
-				ng-click="parseUser.logout()">
+				ng-click="User.current.logout()">
 			Logout
 		</button>
 	</span>

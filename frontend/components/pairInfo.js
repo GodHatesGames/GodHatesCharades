@@ -1,4 +1,4 @@
-app.directive('pairInfo', function(parseUser, Pair, $rootScope) {
+app.directive('pairInfo', function(Pair, $rootScope) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/pairInfo.html',

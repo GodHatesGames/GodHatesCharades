@@ -1,4 +1,4 @@
-app.factory('Profile', function (DS, $q, ParseData, User, Suggestion) {
+app.factory('Profile', function (DS, $q, ParseData) {
 	// vars
 	var definition = {
 		name: 'profile',
@@ -71,10 +71,15 @@ app.factory('Profile', function (DS, $q, ParseData, User, Suggestion) {
 			// $scope.loading = true;
 			var callbacks = {
 				success: function(profile) {
-					Suggestion.inject(profile.suggestions);
-					var user = User.inject(profile.owner);
-					user.updateLinks();
-					deferred.resolve(profile);
+					ParseData.safeInject('suggestion', profile.suggestions)
+					.then(function(suggestions) {
+						return DS.inject('user', profile.owner);
+					})
+					.then(function(user){
+						user.updateLinks();
+						deferred.resolve(profile);
+					})
+					
 				},
 				error: deferred.reject
 			};

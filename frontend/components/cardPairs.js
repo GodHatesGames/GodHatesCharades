@@ -1,4 +1,4 @@
-app.directive('cardPairs', function(Pair) {
+app.directive('cardPairs', function(Pair, User) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/cardPairs.html',
@@ -9,6 +9,7 @@ app.directive('cardPairs', function(Pair) {
 			sortPredicates: '=?'
 		},
 		controller: function($scope, $element, $attrs) {
+			$scope.User = User;
 			var defaultPredicates = ['-views',
 			                         '-votes',
 			                         'skips'];

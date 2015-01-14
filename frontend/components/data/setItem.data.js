@@ -1,4 +1,4 @@
-app.factory('SetItem', function (DS, $q, Suggestion, ParseData, User) {
+app.factory('SetItem', function (DS, $q, Suggestion, ParseData) {
 	// vars
 	var definition = {
 		name: 'setItem',
@@ -82,8 +82,8 @@ app.factory('SetItem', function (DS, $q, Suggestion, ParseData, User) {
 			},
 			{
 				success: function(setItems) {
-					setItems = SetItem.inject(setItems);
-					deferred.resolve(setItems);
+					ParseData.safeInject('setItem', setItems)
+					.then(deferred.resolve);
 				},
 				error: deferred.reject
 			}
