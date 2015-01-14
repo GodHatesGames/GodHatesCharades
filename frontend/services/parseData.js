@@ -58,7 +58,7 @@ app.factory('ParseData', function (DS, $q, $timeout) {
 					promise = itemDeferred.promise;
 					$timeout(function() {
 						this.resolve(DS.inject(resourceName, item));
-					}.bind(itemDeferred), 1);
+					}.bind(itemDeferred));
 				}
 				promises.push(promise);
 			});
