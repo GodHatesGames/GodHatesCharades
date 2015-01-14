@@ -49,7 +49,7 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 	}
 
 	function _updateLinks() {
-		ParseData.linkRelationsAfterInject(SetItem, RELATIONS, this);
+		ParseData.linkRelationsAfterInject(Set, RELATIONS, this);
 	}
 
 	function _updateSuggestions(setItems, that) {
