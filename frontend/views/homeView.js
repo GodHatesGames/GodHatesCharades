@@ -20,7 +20,6 @@ app.controller('homeView', function($scope, $window, $timeout) {
 
 	function _onShowPreorder() {
 		$scope.hidePreorder = false;
-		$scope.preorderClass = 'pulse';
 		if(!$scope.$$phase) {
 			$scope.$digest();
 		}
