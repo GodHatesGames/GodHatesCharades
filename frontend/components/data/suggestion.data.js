@@ -1,4 +1,4 @@
-app.factory('Suggestion', function (DS, $q, Slug, DSCacheFactory, $urlMatcherFactory, $state, $filter, ParseData) {
+app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $filter, ParseData) {
 	// vars
 	var definition = {
 		name: 'suggestion',
