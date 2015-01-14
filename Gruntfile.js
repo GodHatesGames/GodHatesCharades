@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-nodemon');
 	grunt.loadNpmTasks('grunt-concurrent');
 	grunt.loadNpmTasks('grunt-filerev');
-	grunt.loadNpmTasks('grunt-angular-templates');
+	grunt.loadNpmTasks('grunt-html2js');
 	grunt.loadNpmTasks('grunt-ngmin');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-svgmin');
@@ -273,7 +273,9 @@ module.exports = function(grunt) {
 		},
 		uglify: {
 			options: {
-				mangle: true
+				mangle: false,
+				beautify: true,
+				compress: false
 			}
 		},
 		cssmin: {
@@ -296,26 +298,26 @@ module.exports = function(grunt) {
 				]
 			}
 		},
-		ngtemplates: {
-			app: {
-				cwd: '.tmp/stage/frontend',
-				src: [
-					'components/**.html',
-					'views/**.html',
-				],
-				dest: '.tmp/stage/frontend/js/templates.js',
-				options: {
-					htmlmin: {
-						collapseBooleanAttributes: true,
-						collapseWhitespace: true,
-						removeAttributeQuotes: true,
-						removeComments: true, // Only if you don't use comment directives!
-						removeEmptyAttributes: true,
-						removeRedundantAttributes: true,
-						removeScriptTypeAttributes: true,
-						removeStyleLinkTypeAttributes: true
-					}
+		html2js: {
+			options: {
+				base: '.tmp/stage/frontend',
+				htmlmin: {
+					collapseBooleanAttributes: true,
+					collapseWhitespace: true,
+					removeAttributeQuotes: true,
+					removeComments: true, // Only if you don't use comment directives!
+					removeEmptyAttributes: true,
+					removeRedundantAttributes: true,
+					removeScriptTypeAttributes: true,
+					removeStyleLinkTypeAttributes: true
 				}
+			},
+			app: {
+				src: [
+					'.tmp/stage/frontend/components/**.html',
+					'.tmp/stage/frontend/views/**.html',
+				],
+				dest: '.tmp/stage/frontend/js/templates.js'
 			}
 		},
 		ngmin: {
@@ -480,7 +482,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('stageBuildFrontend', [
 		'prepareFrontend',
 		'copy:stageConfigFrontend',
-		'ngtemplates',
+		'html2js',
 		'useminPrepare',
 		'concat',
 		'ngmin',
@@ -495,7 +497,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('distBuildFrontend', [
 		'prepareFrontend',
 		'copy:distConfigFrontend',
-		'ngtemplates',
+		'html2js',
 		'useminPrepare',
 		'concat',
 		'ngmin',
@@ -511,7 +513,7 @@ module.exports = function(grunt) {
 		'prepareFrontend',
 		'copy:prodConfigFrontend',
 		'copy:prodRobotsFrontend',
-		'ngtemplates',
+		'html2js',
 		'useminPrepare',
 		'concat',
 		'ngmin',
