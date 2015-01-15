@@ -1,6 +1,7 @@
 # God Hates Charades
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/astrism/GodHatesCharades?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Dependency Status](https://gemnasium.com/astrism/GodHatesCharades.svg)](https://gemnasium.com/astrism/GodHatesCharades)
 
 ## A game where you act out the vile and despicable inside all of us.
 God Hates Charades is a game where you can talk, shout, and say vile things in the form of 30 second act outs.
