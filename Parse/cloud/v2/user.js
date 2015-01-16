@@ -22,7 +22,6 @@ function getProfile(request, response) {
 		var query = new Parse.Query(Suggestion);
 		query.descending('totalVotes');
 		query.equalTo('owner', owner);
-		query.include('owner');
 		query.limit(request.params.pageSize);
 		query.skip(request.params.skipIndex);
 		query.find({
@@ -37,13 +36,6 @@ function getProfile(request, response) {
 		var profile = {
 			owner: owner
 		};
-		if(suggestions.length > 0) {
-			var suggestion;
-			for(var i = 0; i < suggestions.length; i++) {
-				suggestion = suggestions[i];
-				suggestion.attributes.owner = owner;
-			}
-		}
 
 		profile.suggestions = suggestions;
 
