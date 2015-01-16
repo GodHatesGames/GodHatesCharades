@@ -3,20 +3,9 @@ app.factory('Profile', function (DS, $q, ParseData) {
 	var definition = {
 		name: 'profile',
 		defaultAdapter: 'profileAdapter',
+		beforeInject: _beforeInject,
 		afterInject: _afterInject,
 		relations: {
-			belongsTo: {
-				user: {
-					localField: 'owner',
-					localKey: 'id'
-				}
-			},
-			hasMany: {
-				suggestion: {
-					localField: 'suggestions',
-					foreignKey: 'ownerId'
-				}
-			}
 		},
 		computed: {
 			id: ['owner', _updateId]
@@ -41,6 +30,23 @@ app.factory('Profile', function (DS, $q, ParseData) {
 	// definition methods
 	function _updateId(owner) {
 		return this.owner.id;
+	}
+
+	function _beforeInject(resourceName, parseObject, cb){
+		if(parseObject.owner) {
+			// inject user if needed
+			var cachedOwner = DS.get('user', parseObject.owner.id);
+			if(cachedOwner) {
+				parseObject.owner = cachedOwner;
+			} else {
+				parseObject.owner = DS.inject('user', parseObject.owner);
+			}
+		}
+
+		if(parseObject.suggestions) {
+			// inject user if needed
+			parseObject.suggestions = DS.inject('suggestion', parseObject.suggestions);
+		}
 	}
 
 	function _afterInject(resourceName, parseObject, cb) {
@@ -70,17 +76,7 @@ app.factory('Profile', function (DS, $q, ParseData) {
 			console.log('fetching user');
 			// $scope.loading = true;
 			var callbacks = {
-				success: function(profile) {
-					ParseData.safeInject('suggestion', profile.suggestions)
-					.then(function(suggestions) {
-						return DS.inject('user', profile.owner);
-					})
-					.then(function(user){
-						user.updateLinks();
-						deferred.resolve(profile);
-					})
-					
-				},
+				success: deferred.resolve,
 				error: deferred.reject
 			};
 			Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getProfile', options, callbacks);

@@ -4,12 +4,6 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 		name: 'suggestion',
 		defaultAdapter: 'suggestionAdapter',
 		relations: {
-			belongsTo: {
-				user: {
-					localField: 'owner',
-					localKey: 'ownerId'
-				}
-			}
 		},
 		computed: {
 			ownerId: ['owner', _updateOwnerId],
@@ -69,8 +63,11 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 		if(parseObject.owner) {
 			// inject user if needed
 			var cachedOwner = DS.get('user', parseObject.owner.id);
-			if(!cachedOwner)
-				DS.inject('user', parseObject.owner);
+			if(cachedOwner) {
+				parseObject.owner = cachedOwner;
+			} else {
+				parseObject.owner = DS.inject('user', parseObject.owner);
+			}
 		}
 	}
 

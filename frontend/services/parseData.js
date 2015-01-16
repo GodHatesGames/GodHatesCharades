@@ -44,7 +44,7 @@ app.factory('ParseData', function (DS, $q, $timeout) {
 			});
 			return $q.all(promises);
 		} else {
-			return DS.inject(resourceName, items);
+			return $q.when(DS.inject(resourceName, items));
 		}
 	}
 
