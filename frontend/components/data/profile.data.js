@@ -5,10 +5,10 @@ app.factory('Profile', function (DS, $q, ParseData) {
 		defaultAdapter: 'profileAdapter',
 		afterInject: _afterInject,
 		relations: {
-			belongsTo: {
+			hasOne: {
 				user: {
 					localField: 'owner',
-					localKey: 'id'
+					foreignKey: 'id'
 				}
 			},
 			hasMany: {
@@ -71,15 +71,10 @@ app.factory('Profile', function (DS, $q, ParseData) {
 			// $scope.loading = true;
 			var callbacks = {
 				success: function(profile) {
-					ParseData.safeInject('suggestion', profile.suggestions)
-					.then(function(suggestions) {
-						return DS.inject('user', profile.owner);
-					})
-					.then(function(user){
-						user.updateLinks();
-						deferred.resolve(profile);
-					})
-					
+					_.each(profile.suggestions, function(suggestion) {
+						suggestion.attributes.owner = profile.owner;
+					});
+					deferred.resolve(profile);
 				},
 				error: deferred.reject
 			};

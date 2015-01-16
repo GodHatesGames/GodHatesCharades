@@ -4,12 +4,6 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 		name: 'suggestion',
 		defaultAdapter: 'suggestionAdapter',
 		relations: {
-			belongsTo: {
-				user: {
-					localField: 'owner',
-					localKey: 'ownerId'
-				}
-			}
 		},
 		computed: {
 			ownerId: ['owner', _updateOwnerId],
@@ -28,7 +22,8 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 			// Instance methods
 			updateLinks: _updateLinks
 		},
-		beforeInject: _beforeInject
+		beforeInject: _beforeInject,
+		afterInject: _afterInject
 	}
 
 	// Adapter
@@ -60,7 +55,7 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 
 	// methods
 
-	function _beforeInject(resourceName, parseObject, cb){
+	function _beforeInject(resourceName, attrs){
 		if(parseObject.attributes) {
 			ParseData.flattenAttrsBeforeInject(resourceName, parseObject, cb);
 		} else {
