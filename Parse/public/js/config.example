@@ -1,5 +1,0 @@
-var CONFIG = {
-	// This app uses parse to access/save player creations 
-	PARSE_APP_ID: '',
-	PARSE_JS_KEY: ''
-}
