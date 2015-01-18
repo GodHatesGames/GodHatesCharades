@@ -40,6 +40,7 @@ app.factory('SetItem', function (DS, $q, Suggestion, ParseData) {
 
 	// Static Methods
 	SetItem.getSetItemsForSet = _getSetItemsForSet;
+	SetItem.getSetItemsForSuggestion = _getSetItemsForSuggestion;
 
 	return SetItem;
 
@@ -84,6 +85,28 @@ app.factory('SetItem', function (DS, $q, Suggestion, ParseData) {
 				success: function(setItems) {
 					ParseData.safeInject('setItem', setItems)
 					.then(deferred.resolve);
+				},
+				error: deferred.reject
+			}
+		);
+		return deferred.promise;
+	}
+
+	function _getSetItemsForSuggestion(suggestion) {
+		console.log('setItem getSetItemsForSet');
+		var deferred = $q.defer();
+		// save promise if needed
+		Parse.Cloud.run(
+			CONFIG.PARSE_VERSION + 'getCardsForSuggestion',
+			{
+				id: suggestion.id,
+				includeOwner: true
+			},
+			{
+				success: function(setItems) {
+					setItems = SetItem.inject(setItems);
+					suggestion.setItems = setItems;
+					deferred.resolve(setItems);
 				},
 				error: deferred.reject
 			}

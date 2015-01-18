@@ -20,7 +20,8 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 		},
 		methods: {
 			// Instance methods
-			updateLinks: _updateLinks
+			updateLinks: _updateLinks,
+			linkSetItems: _linkSetItems
 		},
 		beforeInject: _beforeInject
 	}
@@ -137,6 +138,18 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 		return views;
 	}
 
+	function _linkSetItems() {
+		var params = {
+			where: {
+				cardId: {
+					'==': this.id
+				}
+			}
+		};
+		this.setItems = DS.filter('setItem', params);
+		this.sets = _.pluck(this.setItems, 'owner');
+	}
+
 	// class methods
 	function _getBlankCardByType(type) {
 		return {
@@ -224,9 +237,10 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 	}
 
 	function _onSuggestionListSuccess(suggestions) {
-		// _cache(suggestions);
-		ParseData.safeInject('suggestion', suggestions)
-		.then(this.resolve);
+		suggestions = Suggestion.inject(suggestions);
+		this.resolve(suggestions);
+		// ParseData.safeInject('suggestion', suggestions)
+		// .then(this.resolve);
 	}
 
 	function _getSuggestionPairs(skip) {

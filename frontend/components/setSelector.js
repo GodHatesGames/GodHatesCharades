@@ -4,7 +4,8 @@ app.directive('setSelector', function(Set, SetItem) {
 		templateUrl: 'components/setSelector.html',
 		replace: true,
 		scope: {
-			suggestion: '=suggestion'
+			suggestion: '=suggestion',
+			sets: '=sets'
 		},
 		controller: function($scope, $element) {
 			$scope.searchProps = ['name'];
@@ -12,22 +13,16 @@ app.directive('setSelector', function(Set, SetItem) {
 			$scope.onRemove = _onRemove;
 			$scope.saving = false;
 			$scope.feedbackClass = _feedbackClass;
-			$scope.sets = [];
-			$scope.updates = {
-				sets: []
-			};
-			Set.findAll()
-			.then(_onSetsFound)
-			.then(_updateModel);
-
-			function _onSetsFound(sets) {
-				$scope.sets = sets;
-			}
+			// $scope.updates = {
+			// 	sets: []
+			// };
+			_updateModel();
 
 			function _updateModel() {
-				var newSets = _.pluck($scope.suggestion.setItems, 'owner');
-				$scope.updates.sets.length = 0;
-				Array.prototype.push.apply($scope.updates.sets, newSets);
+				// var newSets = _.pluck($scope.suggestion.getSetItems(), 'owner');
+				// $scope.updates.sets.length = 0;
+				// Array.prototype.push.apply($scope.updates.sets, newSets);
+				$scope.suggestion.linkSetItems();
 			}
 
 			function _onSelect(set) {

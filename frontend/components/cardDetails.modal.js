@@ -11,8 +11,21 @@ app.service('cardDetailsModal', function($modal) {
 		var modalInstance = $modal.open({
 			templateUrl: 'components/cardDetails.modal.html',
 			scope: modalScope,
-			size: 'lg'
-		})
+			size: 'lg',
+			resolve: {
+				currentItems: ['SetItem', function(SetItem) {
+					return SetItem.getSetItemsForSuggestion(suggestion);
+				}],
+				sets: ['Set', function(Set) {
+					return Set.findAll();
+				}]
+			},
+			controller: ['currentItems', 'sets', '$scope', _modalController]
+		});
+
+		function _modalController(currentItems, sets, $scope) {
+			$scope.sets = sets;
+		}
 
 		function _onEditSuccess(updatedSuggestion) {
 			console.log('modal success');

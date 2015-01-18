@@ -199,8 +199,8 @@ app.config(function($stateProvider,
 			suggestions: ['Suggestion', function(Suggestion) {
 				return Suggestion.getAllApprovedSuggestions();
 			}],
-			setIdsByCardId: ['Set', function(Set) {
-				return Set.getAllSetsAndItems();
+			sets: ['Set', function(Set) {
+				return Set.findAll();
 			}]
 		},
 		controller: 'suggestionsView'

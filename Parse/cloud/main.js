@@ -90,6 +90,7 @@ Parse.Cloud.define('v2_getPairsByCard', v2.pair.getPairsByCard);
 Parse.Cloud.define('v2_examples', v2.cardUtils.examples);
 Parse.Cloud.define('v2_getCardsForSet', v2.cardUtils.getCardsForSet);
 Parse.Cloud.define('v2_getCardById', v2.cardUtils.getCardById);
+Parse.Cloud.define('v2_getCardsForSuggestion', v2.cardUtils.getCardsForSuggestion);
 
 // Background Jobs
 Parse.Cloud.job('v2_calculateStats', v2.leaderboard.calculateStats);
