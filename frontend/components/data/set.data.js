@@ -4,12 +4,6 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 		name: 'set',
 		defaultAdapter: 'setAdapter',
 		relations: {
-			hasMany: {
-				setItem: {
-					localField: 'setItems',
-					foreignKey: 'ownerId'
-				}
-			}
 		},
 		beforeInject: ParseData.flattenAttrsBeforeInject,
 		afterInject: _afterInject,
@@ -107,7 +101,10 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 	function _getAllSetItemsForSets(allSets) {
 		var setItemPromises = [];
 		_.each(allSets, function(set) {
-			setItemPromises.push(SetItem.getSetItemsForSet(set));
+			var params = {
+				setId: set.id
+			};
+			setItemPromises.push(SetItem.findAll(params));
 		});
 		return $q.all(setItemPromises);
 	}

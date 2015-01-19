@@ -14,7 +14,7 @@ app.service('cardDetailsModal', function($modal) {
 			size: 'lg',
 			resolve: {
 				currentItems: ['SetItem', function(SetItem) {
-					return SetItem.getSetItemsForSuggestion(suggestion);
+					return suggestion.getSetItems();
 				}],
 				sets: ['Set', function(Set) {
 					return Set.findAll();

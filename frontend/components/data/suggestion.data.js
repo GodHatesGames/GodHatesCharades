@@ -1,4 +1,4 @@
-app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $filter, ParseData) {
+app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $filter, ParseData, SetItem) {
 	// vars
 	var definition = {
 		name: 'suggestion',
@@ -21,7 +21,8 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 		methods: {
 			// Instance methods
 			updateLinks: _updateLinks,
-			linkSetItems: _linkSetItems
+			linkSetItems: _linkSetItems,
+			getSetItems: _getSetItems
 		},
 		beforeInject: _beforeInject
 	}
@@ -148,6 +149,14 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 		};
 		this.setItems = DS.filter('setItem', params);
 		this.sets = _.pluck(this.setItems, 'owner');
+	}
+
+	function _getSetItems() {
+		var params = {
+			suggestionId: this.id
+		};
+		return SetItem.findAll(params)
+		.then(_linkSetItems);
 	}
 
 	// class methods

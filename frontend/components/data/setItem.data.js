@@ -1,4 +1,4 @@
-app.factory('SetItem', function (DS, $q, Suggestion, ParseData) {
+app.factory('SetItem', function (DS, $q, ParseData) {
 	// vars
 	var definition = {
 		name: 'setItem',
@@ -16,7 +16,6 @@ app.factory('SetItem', function (DS, $q, Suggestion, ParseData) {
 			}
 		},
 		beforeInject: _beforeInject,
-		afterInject: _afterInject,
 		computed: {
 			ownerId: ['owner', _updateOwnerId],
 			cardId: ['card', _updateCardId]
@@ -29,7 +28,8 @@ app.factory('SetItem', function (DS, $q, Suggestion, ParseData) {
 
 	// Adapter
 	DS.adapters.setItemAdapter = {
-		destroy: _destroy
+		destroy: _destroy,
+		findAll: _findAll
 	};
 
 	// constants
@@ -37,10 +37,6 @@ app.factory('SetItem', function (DS, $q, Suggestion, ParseData) {
 
 	// init
 	var SetItem = DS.defineResource(definition);
-
-	// Static Methods
-	SetItem.getSetItemsForSet = _getSetItemsForSet;
-	SetItem.getSetItemsForSuggestion = _getSetItemsForSuggestion;
 
 	return SetItem;
 
@@ -71,14 +67,25 @@ app.factory('SetItem', function (DS, $q, Suggestion, ParseData) {
 		return this.card.id;
 	}
 
-	function _getSetItemsForSet(set) {
+	function _findAll(definition, params, options) {
+		if(params) {
+			if(params.setId) {
+				return _getSetItemsForSet(params.setId);
+			} else if(params.suggestionId) {
+				return _getSetItemsForSuggestion(params.suggestionId);
+			}
+		}
+		return $q.reject('unhandled SetItem findAll');
+	}
+
+	function _getSetItemsForSet(setId) {
 		console.log('setItem getSetItemsForSet');
 		var deferred = $q.defer();
 		// save promise if needed
 		Parse.Cloud.run(
 			CONFIG.PARSE_VERSION + 'getCardsForSet',
 			{
-				id: set.id,
+				id: setId,
 				includeOwner: true
 			},
 			{
@@ -92,20 +99,24 @@ app.factory('SetItem', function (DS, $q, Suggestion, ParseData) {
 		return deferred.promise;
 	}
 
-	function _getSetItemsForSuggestion(suggestion) {
+	function _getSetItemsForSuggestion(suggestionId) {
 		console.log('setItem getSetItemsForSet');
 		var deferred = $q.defer();
 		// save promise if needed
 		Parse.Cloud.run(
 			CONFIG.PARSE_VERSION + 'getCardsForSuggestion',
 			{
-				id: suggestion.id,
+				id: suggestionId,
 				includeOwner: true
 			},
 			{
 				success: function(setItems) {
 					setItems = SetItem.inject(setItems);
-					suggestion.setItems = setItems;
+					var suggestion = DS.get('suggestion', suggestionId);
+					if(suggestion) {
+						suggestion.setItems = setItems;
+					}
+
 					deferred.resolve(setItems);
 				},
 				error: deferred.reject
