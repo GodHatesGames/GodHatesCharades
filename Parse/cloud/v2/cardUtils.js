@@ -14,7 +14,11 @@ function _examples(request, response) {
 	_loadSetItems();
 
 	function _loadSetItems() {
-		var query = buildCardsForSetQuery(setId);
+		var query = _buildCardsQuery();
+		var SetObject = Parse.Object.extend('Set');
+		var mockSet = new SetObject();
+		mockSet.id = setId;
+		query.equalTo('owner', mockSet);
 		query.include('card.owner');
 		query.find({
 			success: _onSuggestionsLoaded,
@@ -58,10 +62,10 @@ function _getCardsForSet(request, response) {
 
 	if(setId !== undefined) {
 		// console.log('getCardsForSet fetchData');
-		var query = _buildCardsForSetQuery(setId);
+		var query = _buildCardsQuery(setId);
 		var SetObject = Parse.Object.extend('Set');
 		var mockSet = new SetObject();
-		mockSet.id = id;
+		mockSet.id = setId;
 		query.equalTo('owner', mockSet);
 		if(includeOwner === true) {
 			query.include('card.owner');

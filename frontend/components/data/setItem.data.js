@@ -45,8 +45,6 @@ app.factory('SetItem', function (DS, $q, ParseData) {
 	function _beforeInject(resourceName, parseObject, cb){
 		if(parseObject.attributes) {
 			ParseData.flattenAttrsBeforeInject(resourceName, parseObject, cb);
-		} else {
-			console.log('injecting non-server set item');
 		}
 	}
 
@@ -90,8 +88,12 @@ app.factory('SetItem', function (DS, $q, ParseData) {
 			},
 			{
 				success: function(setItems) {
-					ParseData.safeInject('setItem', setItems)
-					.then(deferred.resolve);
+					setItems = SetItem.inject(setItems);
+					var set = DS.get('set', setId);
+					if(set) {
+						set.setItems = setItems;
+					}
+					deferred.resolve(setItems);
 				},
 				error: deferred.reject
 			}

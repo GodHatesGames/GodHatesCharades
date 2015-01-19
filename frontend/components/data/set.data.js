@@ -91,9 +91,6 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 		})
 		.then(_getAllSetItemsForSets)
 		.then(function() {
-			// _.each(sets, function(set) {
-			// 	set.updateLinks();
-			// })
 			return sets;
 		});
 	}
