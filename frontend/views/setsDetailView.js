@@ -1,10 +1,11 @@
 'use strict';
-app.controller('setsDetailView', function(set, suggestions, $scope, $state, $stateParams, SetItem) {
+app.controller('setsDetailView', function(set, setItems, $scope, $state, $stateParams, SetItem, $modal) {
 	$scope.saving = false;
 	$scope.set = set;
 	$scope.actorCount = 0;
 	$scope.scenarioCount = 0;
 	$scope.removeSetItem = _removeSetItem;
+	$scope.editSuggestion = _editSuggestion;
 	$scope.$watch('set.setItems', _updateCount);
 
 	function _updateCount() {
@@ -26,9 +27,34 @@ app.controller('setsDetailView', function(set, suggestions, $scope, $state, $sta
 		$scope.scenarioCount = scenarios;
 	}
 
-	function _removeSetItem(setItem) {
+	function _removeSetItem($event, setItem) {
+		$event.stopImmediatePropagation();
 		SetItem.destroy(setItem.id)
 		.then(_updateCount);
+	}
+
+	function _editSuggestion(isolatedScope, suggestion) {
+		var modalScope = $scope.$new(true);
+		modalScope.suggestion = suggestion;
+		modalScope.onSuccess = _onEditSuccess;
+		modalScope.onError = _onEditError;
+
+		var modalInstance = $modal.open({
+			templateUrl: 'components/cardDetails.modal.html',
+			scope: modalScope,
+			size: 'lg'
+		})
+
+		function _onEditSuccess() {
+			console.log('modal success');
+			suggestion.text = updatedSuggestion.attributes.text;
+			suggestion.legal = updatedSuggestion.attributes.legal;
+		}
+
+		function _onEditError(err) {
+			console.log('modal error', err);
+			// modalInstance.dismiss();
+		}
 	}
 
 });

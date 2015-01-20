@@ -1,5 +1,5 @@
 'use strict';
-app.controller('suggestionsView', function(suggestions, sets, $scope, $modal, cardDetailsModal, Suggestion) {
+app.controller('suggestionsView', function(suggestions, sets, $scope, $modal, Suggestion) {
 	console.log('view loaded');
 	$scope.suggestions = suggestions;
 	$scope.SORT_TEXT = {
@@ -44,7 +44,6 @@ app.controller('suggestionsView', function(suggestions, sets, $scope, $modal, ca
 	$scope.overrideSort = _overrideSort;
 	$scope.getSortClass = _getSortClass;
 	$scope.editSuggestion = _editSuggestion;
-	$scope.cardDetailsModal = cardDetailsModal;
 	$scope.loadSuggestions = _loadSuggestions;
 	$scope.$watch('list.search', _onSelectorUpdated);
 

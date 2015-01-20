@@ -3,19 +3,9 @@ app.factory('SetItem', function (DS, $q, ParseData) {
 	var definition = {
 		name: 'setItem',
 		defaultAdapter: 'setItemAdapter',
-		relations: {
-			belongsTo: {
-				set: {
-					localField: 'owner',
-					localKey: 'ownerId'
-				},
-				suggestion: {
-					localField: 'card',
-					localKey: 'cardId'
-				}
-			}
-		},
 		beforeInject: _beforeInject,
+		afterInject: _afterInject,
+		afterDestroy: _afterDestroy,
 		computed: {
 			ownerId: ['owner', _updateOwnerId],
 			cardId: ['card', _updateCardId]
@@ -29,7 +19,8 @@ app.factory('SetItem', function (DS, $q, ParseData) {
 	// Adapter
 	DS.adapters.setItemAdapter = {
 		destroy: _destroy,
-		findAll: _findAll
+		findAll: _findAll,
+		create: _create
 	};
 
 	// constants
@@ -46,15 +37,29 @@ app.factory('SetItem', function (DS, $q, ParseData) {
 		if(parseObject.attributes) {
 			ParseData.flattenAttrsBeforeInject(resourceName, parseObject, cb);
 		}
+		ParseData.linkProperty(parseObject, 'set', 'owner');
+		ParseData.linkProperty(parseObject, 'suggestion', 'card');
 	}
 
 	function _afterInject(resourceName, parseObject, cb) {
-		parseObject.updateLinks();
+		// parseObject.updateLinks();
+		parseObject.owner.addSetItem(parseObject);
+		parseObject.card.addSetItem(parseObject);
+	}
+
+	function _afterDestroy(resourceName, attrs, cb) {
+		var setItem = SetItem.get(id);
+		var set = setItem.owner;
+		// remove setItem from set
+		set.removeSetItem(setItem);
+		// remove setItem from suggestion
+		setItem.card.removeSetItem(setItem);
+		cb(attrs);
 	}
 
 	function _updateLinks() {
 		ParseData.linkRelationsAfterInject(SetItem, RELATIONS, this);
-		SetItem.linkInverse(this.id);
+		// SetItem.linkInverse(this.id);
 	}
 
 	function _updateOwnerId(owner) {
@@ -89,10 +94,6 @@ app.factory('SetItem', function (DS, $q, ParseData) {
 			{
 				success: function(setItems) {
 					setItems = SetItem.inject(setItems);
-					var set = DS.get('set', setId);
-					if(set) {
-						set.setItems = setItems;
-					}
 					deferred.resolve(setItems);
 				},
 				error: deferred.reject
@@ -114,14 +115,31 @@ app.factory('SetItem', function (DS, $q, ParseData) {
 			{
 				success: function(setItems) {
 					setItems = SetItem.inject(setItems);
-					var suggestion = DS.get('suggestion', suggestionId);
-					if(suggestion) {
-						suggestion.setItems = setItems;
-					}
-
 					deferred.resolve(setItems);
 				},
 				error: deferred.reject
+			}
+		);
+		return deferred.promise;
+	}
+
+	function _create(resourceConfig, attrs, options) {
+		var deferred = $q.defer();
+		var set = this;
+		Parse.Cloud.run(
+			CONFIG.PARSE_VERSION + 'addCardToSet',
+			{
+				card: attrs.card.id,
+				set: attrs.set.id
+			},
+			{
+				success: function(setItem) {
+					setItem = SetItem.inject(setItem);
+					deferred.resolve(setItem);
+				},
+				error: function(err) {
+					deferred.reject(err);
+				}
 			}
 		);
 		return deferred.promise;
@@ -135,10 +153,7 @@ app.factory('SetItem', function (DS, $q, ParseData) {
 				id: id
 			},
 			{
-				success: function() {
-					SetItem.eject(id);
-					deferred.resolve();
-				},
+				success: deferred.resolve,
 				error: deferred.reject
 			}
 		);

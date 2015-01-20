@@ -3,7 +3,8 @@ app.factory('ParseData', function (DS, $q, $timeout) {
 		flattenAttrsBeforeInject: _flattenAttrsBeforeInject,
 		linkRelationsAfterInject: _linkRelationsAfterInject,
 		defaultValueHandler: _defaultValueHandler,
-		safeInject: _safeInjectDefer
+		safeInject: _safeInjectDefer,
+		linkProperty: _linkProperty
 	};
 
 	return parseData;
@@ -45,6 +46,19 @@ app.factory('ParseData', function (DS, $q, $timeout) {
 			return $q.all(promises);
 		} else {
 			return $q.when(DS.inject(resourceName, items));
+		}
+	}
+
+	function _linkProperty(parseObject, className, property) {
+
+		if(parseObject[property]) {
+			// inject user if needed
+			var cachedObj = DS.get(className, parseObject[property].id);
+			if(cachedObj) {
+				parseObject[property] = cachedObj;
+			} else {
+				parseObject[property] = DS.inject(className, parseObject[property]);
+			}
 		}
 	}
 

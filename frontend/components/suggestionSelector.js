@@ -27,7 +27,6 @@ app.directive('suggestionSelector', function(Suggestion, $filter, $state, $modal
 			$scope.checkEscape = _checkEscape;
 			$scope.loadSuggestions = _loadSuggestions;
 			$scope.selectSuggestion = _selectSuggestion;
-			$scope.editSuggestion = _editSuggestion;
 
 			// Private methods
 			function _loadSuggestions() {
@@ -54,29 +53,6 @@ app.directive('suggestionSelector', function(Suggestion, $filter, $state, $modal
 					angular.element(event.target).scope().editing = false;
 			}
 
-			function _editSuggestion(isolatedScope, suggestion) {
-				var modalScope = $scope.$new(true);
-				modalScope.suggestion = suggestion;
-				modalScope.onSuccess = _onEditSuccess;
-				modalScope.onError = _onEditError;
-
-				var modalInstance = $modal.open({
-					templateUrl: 'components/cardDetails.modal.html',
-					scope: modalScope,
-					size: 'lg'
-				})
-
-				function _onEditSuccess() {
-					console.log('modal success');
-					suggestion.text = updatedSuggestion.attributes.text;
-					suggestion.legal = updatedSuggestion.attributes.legal;
-				}
-
-				function _onEditError(err) {
-					console.log('modal error', err);
-					// modalInstance.dismiss();
-				}
-			}
 		}
 	};
 });

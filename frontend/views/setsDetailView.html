@@ -14,10 +14,11 @@
 			<th>Suggestion</th>
 			<th>Type</th>
 		</tr>
-		<tr ng-repeat="(index, setItem) in set.setItems">
+		<tr ng-repeat="(index, setItem) in set.setItems"
+		    card-details-modal="setItem.card">
 			<!-- Delete Button -->
 			<td class="tableButton">
-				<a ng-click="removeSetItem(setItem)"
+				<a ng-click="removeSetItem($event, setItem)"
 				   class="btn btn-danger">
 					-
 				</a>

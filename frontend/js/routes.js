@@ -212,7 +212,7 @@ app.config(function($stateProvider,
 		templateUrl: 'views/setsView.html',
 		resolve: {
 			sets: ['Set', function(Set) {
-				return Set.getAllSetsAndItems();
+				return Set.findAll();
 			}],
 			suggestions: ['Suggestion', function(Suggestion) {
 				return Suggestion.getAllApprovedSuggestions();
@@ -235,6 +235,12 @@ app.config(function($stateProvider,
 		resolve: {
 			set: ['Set', '$stateParams', function(Set, $stateParams) {
 				return Set.find($stateParams.id);
+			}],
+			setItems: ['sets', 'suggestions', '$stateParams', 'SetItem', function(sets, suggestions, $stateParams, SetItem) {
+				var params = {
+					setId: $stateParams.id
+				};
+				return SetItem.findAll(params);
 			}]
 		},
 		controller: 'setsDetailView'

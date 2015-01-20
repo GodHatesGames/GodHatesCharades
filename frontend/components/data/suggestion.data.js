@@ -3,8 +3,6 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 	var definition = {
 		name: 'suggestion',
 		defaultAdapter: 'suggestionAdapter',
-		relations: {
-		},
 		computed: {
 			ownerId: ['owner', _updateOwnerId],
 			votes: ['totalVotes', ParseData.defaultValueHandler(0)],
@@ -22,7 +20,11 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 			// Instance methods
 			updateLinks: _updateLinks,
 			linkSetItems: _linkSetItems,
-			getSetItems: _getSetItems
+			getSetItems: _getSetItems,
+			addSetItems: _addSetItems,
+			addSetItem: _addSetItem,
+			removeSetItem: _removeSetItem,
+			removeSetItems: _removeSetItems
 		},
 		beforeInject: _beforeInject
 	}
@@ -62,15 +64,7 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 		} else {
 			// console.log('injecting non-parse suggestion or pre-cleaned suggestion');
 		}
-		if(parseObject.owner) {
-			// inject user if needed
-			var cachedOwner = DS.get('user', parseObject.owner.id);
-			if(cachedOwner) {
-				parseObject.owner = cachedOwner;
-			} else {
-				parseObject.owner = DS.inject('user', parseObject.owner);
-			}
-		}
+		ParseData.linkProperty(parseObject, 'user', 'owner');
 	}
 
 	function _afterInject(resourceName, parseObject, cb) {
@@ -81,6 +75,40 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 		// if(!relations) relations = RELATIONS;
 		ParseData.linkRelationsAfterInject(Suggestion, RELATIONS, this);
 		// Suggestion.linkInverse(this.id);
+	}
+
+	function _addSetItems(setItems) {
+		_.each(setItems, this.addSetItem);
+	}
+
+	function _addSetItem(setItem) {
+		if(!this.setItems) {
+			this.setItems = [setItem];
+			this.sets = [setItem.owner];
+		} else {
+			if(this.setItems.indexOf(setItem) === -1) {
+				// add to set if its not already there
+				this.setItems.push(setItem);
+				this.sets.push(setItem.owner);
+			}
+		}
+	}
+
+	function _removeSetItems(setItems) {
+		_.each(setItems, this.removeSetItems);
+	}
+
+	function _removeSetItem(setItem) {
+		if(this.setItems) {
+			var index = this.setItems.indexOf(setItem);
+			if(index > -1) {
+				this.setItems.splice(index, 1);
+			}
+			var index = this.sets.indexOf(setItem.owner);
+			if(index > -1) {
+				this.sets.splice(index, 1);
+			}
+		}
 	}
 
 	function _updateOwnerId(owner) {

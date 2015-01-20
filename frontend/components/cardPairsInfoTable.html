@@ -8,12 +8,12 @@
 		</tr>
 		<tr ng-repeat="pair in pairs | orderBy:sortPredicates track by pair.id">
 			<td>
-				<a ng-click="cardDetailsModal.show(this, pair.actor)"
+				<a card-details-modal="pair.actor"
 				   target="_blank">
 					<b>{{::pair.actor.text}}</b>
 				</a>
 				&nbsp;
-				<a ng-click="cardDetailsModal.show(this, pair.scenario)"
+				<a card-details-modal="pair.scenario"
 				   target="_blank">
 					<b>{{pair.scenario.text}}</b>
 				</a>

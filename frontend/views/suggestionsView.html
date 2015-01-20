@@ -58,7 +58,7 @@
 				</th>
 			</tr>
 			<tr ng-repeat="suggestion in suggestions | fuse:list.searchProps:list.search:list.sortOverrideKeys[list.sortDirection] | limit:list.limit:list track by suggestion.id"
-			    ng-click="cardDetailsModal.show(this, suggestion)"
+			    card-details-modal="suggestion"
 			    class="noselect"
 			    ng-init="suggestion.getSetItems()">
 				<!-- Text -->

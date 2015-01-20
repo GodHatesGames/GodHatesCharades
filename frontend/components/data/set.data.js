@@ -9,8 +9,11 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 		afterInject: _afterInject,
 		methods: {
 			// Instance methods
-			addCard: _addCard,
-			updateLinks: _updateLinks
+			updateLinks: _updateLinks,
+			addSetItems: _addSetItems,
+			addSetItem: _addSetItem,
+			removeSetItem: _removeSetItem,
+			removeSetItems: _removeSetItems
 		},
 		computed: {
 			suggestions: ['setItems', _updateSuggestions]
@@ -106,27 +109,32 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 		return $q.all(setItemPromises);
 	}
 
-	function _addCard(card) {
-		var deferred = $q.defer();
-		var set = this;
-		Parse.Cloud.run(
-			CONFIG.PARSE_VERSION + 'addCardToSet',
-			{
-				card: card.id,
-				set: set.id
-			},
-			{
-				success: function(setItem) {
-					// update data
-					SetItem.inject(setItem);
-					deferred.resolve(setItem);
-				},
-				error: function(err) {
-					deferred.reject(err);
-				}
+	function _addSetItems(setItems) {
+		_.each(setItems, this.addSetItem);
+	}
+
+	function _addSetItem(setItem) {
+		if(!this.setItems) {
+			this.setItems = [setItem];
+		} else {
+			if(this.setItems.indexOf(setItem) === -1) {
+				// add to set if its not already there
+				this.setItems.push(setItem);
 			}
-		);
-		return deferred.promise;
+		}
+	}
+
+	function _removeSetItems(setItems) {
+		_.each(setItems, this.removeSetItems);
+	}
+
+	function _removeSetItem(setItem) {
+		if(this.setItems) {
+			var index = this.setItems.indexOf(setItem);
+			if(index > -1) {
+				this.setItems.splice(index, 1);
+			}
+		}
 	}
 
 	function _destroy(resource, id) {

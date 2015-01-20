@@ -13,7 +13,7 @@
 					<th>Author</th>
 				</tr>
 				<tr ng-repeat="suggestion in suggestions | fuse:list.searchProps:list.search | limitTo:list.limit track by suggestion.id"
-				    ng-click="editSuggestion(this, suggestion)"
+				    card-details-modal="suggestion"
 				    ng-init="newText = suggestion.text">
 					<!-- Text -->
 					<td class="noselect">

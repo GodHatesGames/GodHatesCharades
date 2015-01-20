@@ -13,9 +13,6 @@ app.directive('setSelector', function(Set, SetItem) {
 			$scope.onRemove = _onRemove;
 			$scope.saving = false;
 			$scope.feedbackClass = _feedbackClass;
-			// $scope.updates = {
-			// 	sets: []
-			// };
 			_updateModel();
 
 			function _updateModel() {
@@ -27,7 +24,10 @@ app.directive('setSelector', function(Set, SetItem) {
 
 			function _onSelect(set) {
 				$scope.saving = true;
-				set.addCard($scope.suggestion)
+				SetItem.create({
+					set: set,
+					card: $scope.suggestion
+				})
 				.then(_updateModel)
 				.then(_onComplete);
 			}
