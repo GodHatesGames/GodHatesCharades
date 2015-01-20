@@ -5,7 +5,7 @@
 </div>
 <div class="cardList"
      ng-if="set.setItems.length > 0">
-	<input ng-model="searchDetail"
+	<input ng-model="list.search"
 		   placeholder="search here"
 		   class="form-control">
 	<table class="table table-striped">
@@ -14,25 +14,25 @@
 			<th>Suggestion</th>
 			<th>Type</th>
 		</tr>
-		<tr ng-repeat="(index, setItem) in set.setItems"
-		    card-details-modal="setItem.card">
+		<tr ng-repeat="(index, suggestion) in set.suggestions | fuse:list.searchProps:list.search track by suggestion.id"
+		    card-details-modal="suggestion">
 			<!-- Delete Button -->
 			<td class="tableButton">
-				<a ng-click="removeSetItem($event, setItem)"
+				<a ng-click="removeSetItem($event, suggestion)"
 				   class="btn btn-danger">
 					-
 				</a>
 			</td>
 			<!-- Text -->
 			<td>
-				{{setItem.card.text}}
+				{{suggestion.text}}
 				<span class="legal"
-				      ng-if="::setItem.card.legal">
-					{{setItem.card.legal}}
+				      ng-if="::suggestion.legal">
+					{{suggestion.legal}}
 				</span>
 			</td>
 			<!-- Type -->
-			<td ng-class="setItem.card.typeClass"></td>
+			<td ng-class="suggestion.typeClass"></td>
 		</tr>
 	</table>
 </div>

@@ -116,10 +116,13 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 	function _addSetItem(setItem) {
 		if(!this.setItems) {
 			this.setItems = [setItem];
+			this.suggestions = [setItem.card];
 		} else {
 			if(this.setItems.indexOf(setItem) === -1) {
-				// add to set if its not already there
 				this.setItems.push(setItem);
+			}
+			if(this.suggestions.indexOf(setItem.card) === -1) {
+				this.suggestions.push(setItem.card);
 			}
 		}
 	}
@@ -133,6 +136,10 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 			var index = this.setItems.indexOf(setItem);
 			if(index > -1) {
 				this.setItems.splice(index, 1);
+			}
+			index = this.suggestions.indexOf(setItem.card);
+			if(index > -1) {
+				this.suggestions.splice(index, 1);
 			}
 		}
 	}

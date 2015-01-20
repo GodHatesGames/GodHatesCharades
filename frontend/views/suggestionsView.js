@@ -32,7 +32,6 @@ app.controller('suggestionsView', function(suggestions, sets, $scope, $modal, Su
 	};
 	var DEFAULT_LIMIT = 10;
 	var LOAD_LIMIT = 1;
-	$scope.DEFAULT_LIMIT = DEFAULT_LIMIT;
 	$scope.extras = _.range(DEFAULT_LIMIT);
 	$scope.list = {
 		search: null,

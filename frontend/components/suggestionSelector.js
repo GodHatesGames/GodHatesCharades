@@ -14,13 +14,17 @@ app.directive('suggestionSelector', function(Suggestion, $filter, $state, $modal
 		controller: function($scope, $element) {
 			// public vars
 			$scope.tab = 'best';
-			$scope.$watch('search', _onSearchUpdated);
-			var LIST_LIMIT = 10;
+			var DEFAULT_LIMIT = 10;
+			var LOAD_LIMIT = 1;
+			$scope.extras = _.range(DEFAULT_LIMIT);
 			$scope.list = {
 				search: null,
-				limit: LIST_LIMIT,
-				searchProps: ['text']
+				limit: DEFAULT_LIMIT,
+				searchProps: ['text'],
+				sortDirection: null,
+				sortOverrideKeys: null
 			}
+			$scope.$watch('search', _onSearchUpdated);
 			$scope.$watch('list.search', _onSelectorUpdated);
 
 			// Public methods
@@ -30,7 +34,7 @@ app.directive('suggestionSelector', function(Suggestion, $filter, $state, $modal
 
 			// Private methods
 			function _loadSuggestions() {
-				$scope.list.limit += LIST_LIMIT;
+				$scope.list.limit += DEFAULT_LIMIT;
 			}
 
 			function _selectSuggestion(suggestion) {
@@ -39,8 +43,8 @@ app.directive('suggestionSelector', function(Suggestion, $filter, $state, $modal
 			}
 			
 			function _onSelectorUpdated(newValue) {
-				if($scope.list.limit > LIST_LIMIT) {
-					$scope.list.limit = LIST_LIMIT;
+				if($scope.list.limit > DEFAULT_LIMIT) {
+					$scope.list.limit = DEFAULT_LIMIT;
 				}
 			}
 

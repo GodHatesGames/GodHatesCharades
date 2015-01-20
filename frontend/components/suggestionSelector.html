@@ -6,13 +6,15 @@
 			   placeholder="search here"
 			   class="form-control">
 			<table class="table table-striped"
-			       infinite-scroll="loadSuggestions()">
+			       infinite-scroll="loadSuggestions()"
+			       infinite-scroll-disabled="list.limit >= suggestions.length"
+			       infinite-scroll-distance="0.25">
 				<tr>
 					<th>Suggestion</th>
 					<th>Type</th>
 					<th>Author</th>
 				</tr>
-				<tr ng-repeat="suggestion in suggestions | fuse:list.searchProps:list.search | limitTo:list.limit track by suggestion.id"
+				<tr ng-repeat="suggestion in suggestions | fuse:list.searchProps:list.search | limit:list.limit:list track by suggestion.id"
 				    card-details-modal="suggestion"
 				    ng-init="newText = suggestion.text">
 					<!-- Text -->
