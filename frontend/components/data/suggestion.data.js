@@ -19,7 +19,6 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 		methods: {
 			// Instance methods
 			updateLinks: _updateLinks,
-			linkSetItems: _linkSetItems,
 			getSetItems: _getSetItems,
 			addSetItems: _addSetItems,
 			addSetItem: _addSetItem,
@@ -58,16 +57,16 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 
 	// methods
 
-	function _beforeInject(resourceName, parseObject, cb){
+	function _beforeInject(resourceName, parseObject){
 		if(parseObject.attributes) {
-			ParseData.flattenAttrsBeforeInject(resourceName, parseObject, cb);
+			ParseData.flattenAttrsBeforeInject(resourceName, parseObject);
 		} else {
 			// console.log('injecting non-parse suggestion or pre-cleaned suggestion');
 		}
 		ParseData.linkProperty(parseObject, 'user', 'owner');
 	}
 
-	function _afterInject(resourceName, parseObject, cb) {
+	function _afterInject(resourceName, parseObject) {
 		parseObject.updateLinks();
 	}
 
@@ -89,6 +88,8 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 			if(this.setItems.indexOf(setItem) === -1) {
 				// add to set if its not already there
 				this.setItems.push(setItem);
+			}
+			if(this.sets.indexOf(setItem.owner) === -1) {
 				this.sets.push(setItem.owner);
 			}
 		}

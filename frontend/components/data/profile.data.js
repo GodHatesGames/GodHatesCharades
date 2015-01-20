@@ -32,7 +32,7 @@ app.factory('Profile', function (DS, $q, ParseData) {
 		return this.owner.id;
 	}
 
-	function _beforeInject(resourceName, parseObject, cb){
+	function _beforeInject(resourceName, parseObject){
 		if(parseObject.owner) {
 			// inject user if needed
 			var cachedOwner = DS.get('user', parseObject.owner.id);
@@ -49,7 +49,7 @@ app.factory('Profile', function (DS, $q, ParseData) {
 		}
 	}
 
-	function _afterInject(resourceName, parseObject, cb) {
+	function _afterInject(resourceName, parseObject) {
 		parseObject.updateLinks();
 	}
 

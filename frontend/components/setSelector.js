@@ -13,14 +13,6 @@ app.directive('setSelector', function(Set, SetItem) {
 			$scope.onRemove = _onRemove;
 			$scope.saving = false;
 			$scope.feedbackClass = _feedbackClass;
-			_updateModel();
-
-			function _updateModel() {
-				// var newSets = _.pluck($scope.suggestion.getSetItems(), 'owner');
-				// $scope.updates.sets.length = 0;
-				// Array.prototype.push.apply($scope.updates.sets, newSets);
-				$scope.suggestion.linkSetItems();
-			}
 
 			function _onSelect(set) {
 				$scope.saving = true;
@@ -28,7 +20,6 @@ app.directive('setSelector', function(Set, SetItem) {
 					set: set,
 					card: $scope.suggestion
 				})
-				.then(_updateModel)
 				.then(_onComplete);
 			}
 
@@ -36,7 +27,6 @@ app.directive('setSelector', function(Set, SetItem) {
 				$scope.saving = true;
 				var setItem = _.findWhere($scope.suggestion.setItems, {ownerId: set.id});
 				SetItem.destroy(setItem.id)
-				.then(_updateModel)
 				.then(_onComplete);
 			}
 

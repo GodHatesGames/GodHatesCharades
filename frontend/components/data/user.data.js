@@ -39,15 +39,15 @@ app.factory('User', function (DS, $q, ParseData) {
 
 	// definition methods
 
-	function _beforeInject(resourceName, parseObject, cb) {
+	function _beforeInject(resourceName, parseObject) {
 		if(parseObject.attributes) {
 			if(!parseObject.attributes.admin) parseObject.attributes.admin = false;
 			if(!parseObject.attributes.beta) parseObject.attributes.beta = false;
-			ParseData.flattenAttrsBeforeInject(resourceName, parseObject, cb);
+			ParseData.flattenAttrsBeforeInject(resourceName, parseObject);
 		}
 	}
 
-	function _afterInject(resourceName, parseObject, cb) {
+	function _afterInject(resourceName, parseObject) {
 		parseObject.updateLinks();
 	}
 

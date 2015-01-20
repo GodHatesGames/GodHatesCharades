@@ -9,7 +9,7 @@ app.factory('ParseData', function (DS, $q, $timeout) {
 
 	return parseData;
 
-	function _flattenAttrsBeforeInject(resourceName, parseObject, cb){
+	function _flattenAttrsBeforeInject(resourceName, parseObject){
 		_.extend(parseObject, parseObject.attributes);
 		delete parseObject.attributes;
 	}

@@ -7,7 +7,7 @@
 			<ui-select-match placeholder="Select set...">
 				{{$item.name}}
 			</ui-select-match>
-			<ui-select-choices repeat="set in sets | fuse:searchProps:$select.search">
+			<ui-select-choices repeat="set in sets | fuse:searchProps:$select.search track by set.id">
 				<div ng-bind-html="set.name | highlight: $select.search"></div>
 			</ui-select-choices>
 		</ui-select>

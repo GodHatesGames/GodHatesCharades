@@ -33,28 +33,25 @@ app.factory('SetItem', function (DS, $q, ParseData) {
 
 	// methods
 
-	function _beforeInject(resourceName, parseObject, cb){
+	function _beforeInject(resourceName, parseObject){
 		if(parseObject.attributes) {
-			ParseData.flattenAttrsBeforeInject(resourceName, parseObject, cb);
+			ParseData.flattenAttrsBeforeInject(resourceName, parseObject);
 		}
 		ParseData.linkProperty(parseObject, 'set', 'owner');
 		ParseData.linkProperty(parseObject, 'suggestion', 'card');
 	}
 
-	function _afterInject(resourceName, parseObject, cb) {
+	function _afterInject(resourceName, parseObject) {
 		// parseObject.updateLinks();
 		parseObject.owner.addSetItem(parseObject);
 		parseObject.card.addSetItem(parseObject);
 	}
 
 	function _afterDestroy(resourceName, attrs, cb) {
-		var setItem = SetItem.get(id);
-		var set = setItem.owner;
-		// remove setItem from set
-		set.removeSetItem(setItem);
-		// remove setItem from suggestion
+		var setItem = attrs;
 		setItem.card.removeSetItem(setItem);
-		cb(attrs);
+		setItem.owner.removeSetItem(setItem);
+		cb(null, attrs);
 	}
 
 	function _updateLinks() {
