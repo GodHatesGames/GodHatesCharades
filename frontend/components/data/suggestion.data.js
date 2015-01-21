@@ -1,4 +1,4 @@
-app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $filter, ParseData, SetItem, User) {
+app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $filter, ParseData, SetItem) {
 	// vars
 	var definition = {
 		name: 'suggestion',
@@ -322,7 +322,7 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 
 	function _create(resourceName, attrs) {
 		var user = new Parse.User();
-		user.id = User.current.id;
+		user.id = attrs.userId;
 		var SuggestionObj = Parse.Object.extend('Suggestion');
 		var suggestion = new SuggestionObj();
 		suggestion.set('text', attrs.text);

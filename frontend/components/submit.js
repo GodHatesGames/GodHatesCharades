@@ -65,7 +65,8 @@ app.directive('submit', function(Suggestion, User) {
 				if($scope.text.length > 0) {
 					var newSuggestion = {
 						text: $scope.text,
-						type: $scope.type
+						type: $scope.type,
+						userId: User.current.id
 					}
 					Suggestion.create(newSuggestion)
 					.then(_onSubmitSuccess);

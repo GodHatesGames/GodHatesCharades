@@ -162,6 +162,7 @@ app.config(function($stateProvider,
 		title: 'Admin',
 		template: '<ui-view></ui-view>'
 	});
+	
 	$stateProvider.state('admin.moderation', {
 		url: '/moderation',
 		title: 'Moderation',
