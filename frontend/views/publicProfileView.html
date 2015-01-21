@@ -1,17 +1,20 @@
 <div id="publicProfileView"
 	 class="container">
 	<!-- <link rel="stylesheet" type="text/css" href="css/profileView.css"> -->
-	<h2>Print N Play Downloads</h2>
-	<div class="btns">
-		<a href="http://www.godhatescharades.com/print/GodHatesCharadesPrintNPlay_Beta.pdf"
-		   target="_blank"
-		   class="btn btn-success">
-			Kit N Play: Round 1
-		</a><a href="http://www.godhatescharades.com/print/GodHatesCharadesPrintNPlay_Beta2.pdf"
-		   target="_blank"
-		   class="btn btn-success">
-			Kit N Play: Round 2
-		</a>
+	<div class="pnp"
+	     ng-if="User.current">
+		<h2>Print N Play Downloads</h2>
+		<div class="btns">
+			<a href="http://www.godhatescharades.com/print/GodHatesCharadesPrintNPlay_Beta.pdf"
+			   target="_blank"
+			   class="btn btn-success">
+				Kit N Play: Round 1
+			</a><a href="http://www.godhatescharades.com/print/GodHatesCharadesPrintNPlay_Beta2.pdf"
+			   target="_blank"
+			   class="btn btn-success">
+				Kit N Play: Round 2
+			</a>
+		</div>
 	</div>
 	<!-- non beta users -->
 	<h3 ng-if="!User.current.beta">
@@ -20,7 +23,7 @@
 
 	<!-- beta users -->
 	<div ng-if="User.current.beta"
-	     class="backerZone row">
+		 class="backerZone row">
 		<h1>Backers Only Down Here!</h1>
 
 		<div class="btns">
