@@ -3,14 +3,6 @@ app.factory('User', function (DS, $q, ParseData) {
 	var definition = {
 		name: 'user',
 		defaultAdapter: 'userAdapter',
-		relations: {
-			hasMany: {
-				suggestion: {
-					localField: 'suggestions',
-					foreignKey: 'ownerId'
-				}
-			}
-		},
 		beforeInject: _beforeInject,
 		afterInject: _afterInject,
 		methods: {
@@ -50,7 +42,6 @@ app.factory('User', function (DS, $q, ParseData) {
 	}
 
 	function _afterInject(resourceName, parseObject) {
-		parseObject.updateLinks();
 		if(parseObject.hasOwnProperty('email')) {
 			// user is logged in
 			_updateCurrentUser(parseObject);
