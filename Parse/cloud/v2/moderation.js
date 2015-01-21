@@ -1,4 +1,5 @@
 'use strict';
+var _ = require('underscore');
 var userUtils = require('cloud/v2/userUtils.js');
 var config = require('cloud/config.js');
 var Mandrill = require('mandrill');
@@ -43,6 +44,9 @@ function _getUnmoderatedSuggestions(request, response) {
 
 	function onSuccess(suggestions) {
 		// console.log('getUnmoderatedSuggestions Success');
+		_.each(suggestions, function(suggestion) {
+		    userUtils.stripPrivateData(suggestion.attributes.owner);
+		});
 		response.success(suggestions);
 	}
 

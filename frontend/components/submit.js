@@ -63,21 +63,18 @@ app.directive('submit', function(Suggestion, User) {
 
 			$scope.submit = function() {
 				if($scope.text.length > 0) {
-					var Suggestion = Parse.Object.extend("Suggestion");
-					var suggestion = new Suggestion();
-					suggestion.set('text', $scope.text);
-					suggestion.set('type', $scope.type);
-					suggestion.set('owner', User.current);
-					suggestion.save({
-						success: function(suggestion) {
-							$scope.success = true;
-							$scope.$digest();
-						},
-						error: function(suggestion, error) {
-							console.log('error:', error.message);
-						}
-					});
+					var newSuggestion = {
+						text: $scope.text,
+						type: $scope.type
+					}
+					Suggestion.create(newSuggestion)
+					.then(_onSubmitSuccess);
 				}
+			}
+			
+			function _onSubmitSuccess(suggestion) {
+				$scope.success = true;
+				$scope.$digest();
 			}
 
 			$scope.reset = function() {

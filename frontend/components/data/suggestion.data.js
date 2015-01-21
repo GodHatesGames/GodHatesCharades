@@ -1,4 +1,4 @@
-app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $filter, ParseData, SetItem) {
+app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $filter, ParseData, SetItem, User) {
 	// vars
 	var definition = {
 		name: 'suggestion',
@@ -30,7 +30,8 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 
 	// Adapter
 	DS.adapters.suggestionAdapter = {
-		find: _find
+		find: _find,
+		create: _create
 	};
 
 	// Constants
@@ -317,5 +318,16 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 			};
 			return Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getCardById', options);
 		}
+	}
+
+	function _create(resourceName, attrs) {
+		var user = new Parse.User();
+		user.id = User.current.id;
+		var SuggestionObj = Parse.Object.extend('Suggestion');
+		var suggestion = new SuggestionObj();
+		suggestion.set('text', attrs.text);
+		suggestion.set('type', attrs.type);
+		suggestion.set('owner', user);
+		return suggestion.save();
 	}
 });
