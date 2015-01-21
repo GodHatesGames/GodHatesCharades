@@ -236,7 +236,7 @@ app.config(function($stateProvider,
 			set: ['Set', '$stateParams', function(Set, $stateParams) {
 				return Set.find($stateParams.id);
 			}],
-			setItems: ['sets', 'suggestions', '$stateParams', 'SetItem', function(sets, suggestions, $stateParams, SetItem) {
+			setItems: ['set', '$stateParams', 'SetItem', function(set, $stateParams, SetItem) {
 				var params = {
 					setId: $stateParams.id
 				};
