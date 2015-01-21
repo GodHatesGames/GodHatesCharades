@@ -12,6 +12,7 @@ app.factory('User', function (DS, $q, ParseData) {
 			}
 		},
 		beforeInject: _beforeInject,
+		afterInject: _afterInject,
 		methods: {
 			// Instance methods
 			logout: _logout,
@@ -21,6 +22,7 @@ app.factory('User', function (DS, $q, ParseData) {
 
 	// Adapter
 	DS.adapters.userAdapter = {
+		create: _create
 	};
 
 	// Constants
@@ -49,6 +51,10 @@ app.factory('User', function (DS, $q, ParseData) {
 
 	function _afterInject(resourceName, parseObject) {
 		parseObject.updateLinks();
+		if(parseObject.hasOwnProperty('email')) {
+			// user is logged in
+			_updateCurrentUser(parseObject);
+		}
 	}
 
 	function _updateLinks() {
@@ -69,9 +75,11 @@ app.factory('User', function (DS, $q, ParseData) {
 	}
 
 	function _onUserConnected(userData) {
-		userData = User.inject(userData);
-		User.current = userData;
+		User.inject(userData);
+	}
 
+	function _updateCurrentUser(userData) {
+		User.current = userData;
 		console.log('Welcome', userData.username);
 		console.log(userData);
 	}
@@ -101,6 +109,20 @@ app.factory('User', function (DS, $q, ParseData) {
 
 	function _getCurrent() {
 		return User.current;
+	}
+
+	function _create(resourceConfig, attrs, options) {
+		var newUser = new Parse.User();
+		newUser.set('username', attrs.username);
+		newUser.set('password', attrs.password);
+		newUser.set('email', attrs.email);
+		newUser.set('name', attrs.name);
+		return newUser.signUp();
+	}
+
+	function _onSignupError(user, error) {
+		// The login failed. Check error to see why.
+		console.log('signup failed:', error);
 	}
 
 	// instance methods

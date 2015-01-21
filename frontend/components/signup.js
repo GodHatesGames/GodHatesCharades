@@ -16,7 +16,13 @@ app.directive('signup', function(User, $state) {
 
 			function _signup() {
 				$scope.errorMessage = '';
-				var promise = User.signup($scope.email, $scope.password, $scope.email, $scope.name);
+				var attrs = {
+					username: $scope.email,
+					password: $scope.password,
+					email: $scope.email,
+					name: $scope.name
+				}
+				var promise = User.create(attrs);
 				promise.then(_onSignedUp, _onSignupError);
 			}
 
