@@ -58,6 +58,7 @@ function _getCardsForSet(request, response) {
 	// console.log('getCardsForSet');
 		Parse.Cloud.useMasterKey();
 	var setId = request.params.id;
+	var includeOwner = request.params.includeOwner;
 
 	if(setId !== undefined) {
 		// console.log('getCardsForSet fetchData');
@@ -66,6 +67,11 @@ function _getCardsForSet(request, response) {
 		var mockSet = new SetObject();
 		mockSet.id = setId;
 		query.equalTo('owner', mockSet);
+		if(includeOwner === true) {
+			query.include('card.owner');
+		} else {
+			query.include('card');
+		}
 		query.find({
 			success: _onSuccess,
 			error: _onError
@@ -134,6 +140,7 @@ function _getCardsForSuggestion(request, response) {
 		// actor query
 		var query = _buildCardsQuery();
 		query.equalTo('card', mockSuggestion);
+		includeOwner ? query.include('card.owner') : query.include('card');
 
 		query.find({
 			success: _onSuccess,
