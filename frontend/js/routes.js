@@ -184,7 +184,7 @@ app.config(function($stateProvider,
 			suggestions: ['Suggestion', function(Suggestion) {
 				return Suggestion.getAllApprovedSuggestions();
 			}],
-			allSets: ['Set', function(Set) {
+			allSets: ['Set', 'suggestions', function(Set, suggestions) {
 				return Set.getAllSetsAndItems();
 			}]
 		},

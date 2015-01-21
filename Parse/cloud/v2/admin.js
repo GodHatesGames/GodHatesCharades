@@ -1,5 +1,6 @@
 'use strict';
 var userUtils = require('cloud/v2/userUtils.js');
+var _ = require('underscore');
 
 exports.getAllSuggestions = getAllSuggestions;
 exports.getAllSets = getAllSets;
@@ -50,8 +51,13 @@ function getAllSuggestions(request, response) {
 		if(suggestions.length > 0)
 			allSuggestions = allSuggestions.concat(suggestions);
 
+
 		if(suggestions.length < queryLimit) {
 			// console.log('found suggetions: ' + allSuggestions.length);
+
+			_.each(allSuggestions, function(suggestion) {
+			    userUtils.stripPrivateData(suggestion.attributes.owner);
+			});
 			response.success(allSuggestions);
 		} else {
 			// console.log('fetching more suggestions');
