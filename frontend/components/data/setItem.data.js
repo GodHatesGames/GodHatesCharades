@@ -89,10 +89,7 @@ app.factory('SetItem', function (DS, $q, ParseData) {
 				includeOwner: true
 			},
 			{
-				success: function(setItems) {
-					setItems = SetItem.inject(setItems);
-					deferred.resolve(setItems);
-				},
+				success: deferred.resolve,
 				error: deferred.reject
 			}
 		);
