@@ -9,9 +9,10 @@ app.factory('ParseData', function (DS, $q, $timeout) {
 
 	return parseData;
 
-	function _flattenAttrsBeforeInject(resourceName, parseObject){
+	function _flattenAttrsBeforeInject(resourceName, parseObject, keepOriginal){
 		_.extend(parseObject, parseObject.attributes);
-		delete parseObject.attributes;
+		if(!keepOriginal)
+			delete parseObject.attributes;
 	}
 
 	function _linkRelationsAfterInject(constructor, relations, parseObject) {

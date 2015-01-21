@@ -43,7 +43,7 @@ app.factory('User', function (DS, $q, ParseData) {
 		if(parseObject.attributes) {
 			if(!parseObject.attributes.admin) parseObject.attributes.admin = false;
 			if(!parseObject.attributes.beta) parseObject.attributes.beta = false;
-			ParseData.flattenAttrsBeforeInject(resourceName, parseObject);
+			ParseData.flattenAttrsBeforeInject(resourceName, parseObject, true);
 		}
 	}
 
@@ -77,8 +77,17 @@ app.factory('User', function (DS, $q, ParseData) {
 	}
 
 	function _disconnectUser() {
-		User.current.unlinkInverse();
-		DS.eject(definition.name, User.current.id);
+		// cleanup sensitive details
+		delete User.current.attributes.email;
+		delete User.current.attributes.username;
+		delete User.current.attributes.ACL;
+		delete User.current.attributes.admin;
+		delete User.current.email;
+		delete User.current.username;
+		delete User.current.ACL;
+		delete User.current.admin;
+		delete User.current.createdAt;
+		delete User.current.updatedAt;
 		User.current = null;
 	}
 
@@ -97,9 +106,8 @@ app.factory('User', function (DS, $q, ParseData) {
 	// instance methods
 
 	function _logout() {
-		var user = this;
-		Parse.User.logOut()
-		.then(_disconnectUser);a
+		Parse.User.logOut();
+		_disconnectUser();
 	}
 
 
