@@ -3,13 +3,9 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 	var definition = {
 		name: 'set',
 		defaultAdapter: 'setAdapter',
-		relations: {
-		},
 		beforeInject: ParseData.flattenAttrsBeforeInject,
-		afterInject: _afterInject,
 		methods: {
 			// Instance methods
-			updateLinks: _updateLinks,
 			addSetItems: _addSetItems,
 			addSetItem: _addSetItem,
 			removeSetItem: _removeSetItem,
@@ -41,14 +37,6 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 
 	// methods
 
-	function _afterInject(resourceName, parseObject, cb) {
-		parseObject.updateLinks();
-	}
-
-	function _updateLinks() {
-		ParseData.linkRelationsAfterInject(Set, RELATIONS, this);
-	}
-
 	function _updateSuggestions(setItems, that) {
 		if(setItems)
 			return _.pluck(setItems, 'card');
@@ -71,16 +59,7 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 		if(!_.isEmpty(cached)) {
 			return $q.when(cached);
 		} else {
-			var deferred = $q.defer();
-			Parse.Cloud.run(
-				CONFIG.PARSE_VERSION + 'getAllSets',
-				{},
-				{
-					success: deferred.resolve,
-					error: deferred.reject
-				}
-			);
-			return deferred.promise;
+			return Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getAllSets', {});
 		}
 	}
 
@@ -145,7 +124,6 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 	}
 
 	function _destroy(resource, id) {
-		var deferred = $q.defer();
 		var set = Set.get(id);
 
 		var itemPromises = [];
@@ -153,47 +131,14 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 			itemPromises.push(setItem.DSDestroy());
 		});
 
-		$q.all(itemPromises)
+		return $q.all(itemPromises)
 		.then(function() {
-			Parse.Cloud.run(
-				CONFIG.PARSE_VERSION + 'destroySet',
-				{
-					id: set.id
-				},
-				{
-					success: function(){
-						Set.eject(set.id);
-						deferred.resolve();
-					},
-					error: deferred.reject
-				}
-			);
-		})
-		
-		return deferred.promise;
+			return Parse.Cloud.run(CONFIG.PARSE_VERSION + 'destroySet', set);
+		});
 	}
 
 	function _create(resource, setData) {
-		var deferred = $q.defer();
-		
-		Parse.Cloud.run(
-			CONFIG.PARSE_VERSION + 'createSet',
-			setData,
-			{
-				success: _onSetCreated,
-				error: _onCreateError
-			}
-		);
-
-		function _onSetCreated(newSet) {
-			deferred.resolve(newSet);
-		}
-
-		function _onCreateError(err) {
-			deferred.reject(err);
-		}
-
-		return deferred.promise;
+		return Parse.Cloud.run(CONFIG.PARSE_VERSION + 'createSet', setData);
 	}
 
 });

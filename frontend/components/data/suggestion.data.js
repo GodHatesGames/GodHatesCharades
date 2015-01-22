@@ -67,9 +67,9 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 		ParseData.linkProperty(parseObject, 'user', 'owner');
 	}
 
-	function _afterInject(resourceName, parseObject) {
-		parseObject.updateLinks();
-	}
+	// function _afterInject(resourceName, parseObject) {
+	// 	parseObject.updateLinks();
+	// }
 
 	function _updateLinks() {
 		// if(!relations) relations = RELATIONS;

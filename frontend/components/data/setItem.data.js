@@ -12,7 +12,6 @@ app.factory('SetItem', function (DS, $q, ParseData) {
 		},
 		methods: {
 			// Instance methods
-			updateLinks: _updateLinks
 		}
 	}
 
@@ -34,9 +33,7 @@ app.factory('SetItem', function (DS, $q, ParseData) {
 	// methods
 
 	function _beforeInject(resourceName, parseObject){
-		if(parseObject.attributes) {
-			ParseData.flattenAttrsBeforeInject(resourceName, parseObject);
-		}
+		ParseData.flattenAttrsBeforeInject(resourceName, parseObject);
 		ParseData.linkProperty(parseObject, 'set', 'owner');
 		ParseData.linkProperty(parseObject, 'suggestion', 'card');
 	}
@@ -80,78 +77,38 @@ app.factory('SetItem', function (DS, $q, ParseData) {
 
 	function _getSetItemsForSet(setId) {
 		console.log('setItem getSetItemsForSet');
-		var deferred = $q.defer();
 		// save promise if needed
-		Parse.Cloud.run(
-			CONFIG.PARSE_VERSION + 'getCardsForSet',
-			{
-				id: setId,
-				includeOwner: true
-			},
-			{
-				success: deferred.resolve,
-				error: deferred.reject
-			}
-		);
-		return deferred.promise;
+		var query = {
+			id: setId,
+			includeOwner: true
+		};
+		return Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getCardsForSet', query);
 	}
 
 	function _getSetItemsForSuggestion(suggestionId) {
 		console.log('setItem getSetItemsForSet');
-		var deferred = $q.defer();
 		// save promise if needed
-		Parse.Cloud.run(
-			CONFIG.PARSE_VERSION + 'getCardsForSuggestion',
-			{
-				id: suggestionId,
-				includeOwner: true
-			},
-			{
-				success: function(setItems) {
-					setItems = SetItem.inject(setItems);
-					deferred.resolve(setItems);
-				},
-				error: deferred.reject
-			}
-		);
-		return deferred.promise;
+		var query = {
+			id: suggestionId,
+			includeOwner: true
+		};
+		return Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getCardsForSuggestion', query);
 	}
 
 	function _create(resourceConfig, attrs, options) {
-		var deferred = $q.defer();
 		var set = this;
-		Parse.Cloud.run(
-			CONFIG.PARSE_VERSION + 'addCardToSet',
-			{
-				card: attrs.card.id,
-				set: attrs.set.id
-			},
-			{
-				success: function(setItem) {
-					setItem = SetItem.inject(setItem);
-					deferred.resolve(setItem);
-				},
-				error: function(err) {
-					deferred.reject(err);
-				}
-			}
-		);
-		return deferred.promise;
+		var setItemData = {
+			card: attrs.card.id,
+			set: attrs.set.id
+		};
+		return Parse.Cloud.run(CONFIG.PARSE_VERSION + 'addCardToSet', setItemData);
 	}
 
 	function _destroy(resource, id) {
-		var deferred = $q.defer();
-		Parse.Cloud.run(
-			CONFIG.PARSE_VERSION + 'removeSetItem',
-			{
-				id: id
-			},
-			{
-				success: deferred.resolve,
-				error: deferred.reject
-			}
-		);
-		return deferred.promise;
+		var obj = {
+			id: id
+		};
+		return Parse.Cloud.run(CONFIG.PARSE_VERSION + 'removeSetItem', obj);
 	}
 
 });

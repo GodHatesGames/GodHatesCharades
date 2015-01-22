@@ -56,9 +56,9 @@ app.factory('Pair', function (DS, $q, Suggestion, ParseData, Slug, $filter) {
 
 	function _beforeInject(resourceName, parseObject){
 		if(parseObject.attributes) {
-			Suggestion.inject(parseObject.attributes.actor);
-			Suggestion.inject(parseObject.attributes.scenario);
 			ParseData.flattenAttrsBeforeInject(resourceName, parseObject);
+			ParseData.linkProperty(parseObject, 'suggestion', 'actor');
+			ParseData.linkProperty(parseObject, 'suggestion', 'scenario');
 			if(!parseObject.controversy) parseObject.controversy = 0;
 		} else {
 			console.log('injecting non-server pair');
@@ -82,21 +82,17 @@ app.factory('Pair', function (DS, $q, Suggestion, ParseData, Slug, $filter) {
 	}
 
 	function _getPairsByCard(card) {
-		var deferred = $q.defer();
 		console.log('getPairsByCard:', card.id);
 		var returnVal;
 		var options = {
 			cardid: card.id,
 			cardtype: card.typeDisplay.toLowerCase()
 		};
-		Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getPairsByCard', options)
-		.then(_onCardPairsFetched, deferred.reject);
-
-		return deferred.promise;
+		return Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getPairsByCard', options)
+		.then(_onCardPairsFetched);
 
 		function _onCardPairsFetched(pairs) {
-			pairs = Pair.inject(pairs);
-			deferred.resolve(pairs);
+			return Pair.inject(pairs);
 		}
 	}
 

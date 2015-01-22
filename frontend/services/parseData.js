@@ -1,5 +1,6 @@
 app.factory('ParseData', function (DS, $q, $timeout) {
 	var parseData = {
+		simplify: _simplify,
 		flattenAttrsBeforeInject: _flattenAttrsBeforeInject,
 		linkRelationsAfterInject: _linkRelationsAfterInject,
 		defaultValueHandler: _defaultValueHandler,
@@ -8,6 +9,28 @@ app.factory('ParseData', function (DS, $q, $timeout) {
 	};
 
 	return parseData;
+
+	function _simplify(data) {
+		var $q
+		if(_.isArray(data)) {
+			_.each(data, function(obj, index) {
+				data[index] = _createSimpleObject(obj);
+			});
+			return data;
+		} else {
+			return _createSimpleObject(data);
+		}
+	}
+
+	function _createSimpleObject(obj) {
+		var newObj = {
+			id: obj.id
+		};
+		if(obj.attributes) {
+			_.extend(newObj, obj.attributes);
+		}
+		return newObj;
+	}
 
 	function _flattenAttrsBeforeInject(resourceName, parseObject, keepOriginal){
 		_.extend(parseObject, parseObject.attributes);
@@ -58,7 +81,8 @@ app.factory('ParseData', function (DS, $q, $timeout) {
 			if(cachedObj) {
 				parseObject[property] = cachedObj;
 			} else {
-				parseObject[property] = DS.inject(className, parseObject[property]);
+				var simpleObj = _createSimpleObject(parseObject[property]);
+				parseObject[property] = DS.inject(className, simpleObj);
 			}
 		}
 	}
