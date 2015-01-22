@@ -11,7 +11,6 @@ app.factory('ParseData', function (DS, $q, $timeout) {
 	return parseData;
 
 	function _simplify(data) {
-		var $q
 		if(_.isArray(data)) {
 			_.each(data, function(obj, index) {
 				data[index] = _createSimpleObject(obj);
