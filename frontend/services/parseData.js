@@ -1,14 +1,6 @@
-app.factory('ParseData', function (DS, $q, $timeout) {
-	var parseData = {
-		simplify: _simplify,
-		flattenAttrsBeforeInject: _flattenAttrsBeforeInject,
-		linkRelationsAfterInject: _linkRelationsAfterInject,
-		defaultValueHandler: _defaultValueHandler,
-		safeInject: _safeInjectDefer,
-		linkProperty: _linkProperty
-	};
+'use strict';
 
-	return parseData;
+app.provider('ParseDataSimplifier', function() {
 
 	function _simplify(data) {
 		if(_.isArray(data)) {
@@ -28,8 +20,33 @@ app.factory('ParseData', function (DS, $q, $timeout) {
 		if(obj.attributes) {
 			_.extend(newObj, obj.attributes);
 		}
+
+		_.each(obj.attributes, function(subObj, key) {
+			if(subObj.hasOwnProperty('attributes')) {
+				obj.attributes[key] = _createSimpleObject(subObj);
+			}
+		});
 		return newObj;
 	}
+
+	this.simplify = _simplify;
+
+	this.$get = function formlyConfig() {
+		return this;
+	};
+	
+});
+
+app.factory('ParseData', function (DS, $q, $timeout) {
+	var parseData = {
+		flattenAttrsBeforeInject: _flattenAttrsBeforeInject,
+		linkRelationsAfterInject: _linkRelationsAfterInject,
+		defaultValueHandler: _defaultValueHandler,
+		safeInject: _safeInjectDefer,
+		linkProperty: _linkProperty
+	};
+
+	return parseData;
 
 	function _flattenAttrsBeforeInject(resourceName, parseObject, keepOriginal){
 		_.extend(parseObject, parseObject.attributes);
@@ -80,8 +97,7 @@ app.factory('ParseData', function (DS, $q, $timeout) {
 			if(cachedObj) {
 				parseObject[property] = cachedObj;
 			} else {
-				var simpleObj = _createSimpleObject(parseObject[property]);
-				parseObject[property] = DS.inject(className, simpleObj);
+				parseObject[property] = DS.inject(className, parseObject[property]);
 			}
 		}
 	}

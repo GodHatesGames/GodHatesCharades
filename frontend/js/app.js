@@ -28,7 +28,26 @@ var app = angular.module('app', ['ng',
                                 ]);
 console.log('starting app!');
 
-app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider, $provide, uiSelectConfig) {
+app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider, $provide, uiSelectConfig, DSProvider, ParseDataSimplifierProvider) {
+	// customize Angular-Data
+	DSProvider.defaults.deserialize = function (resourceName, data) {
+		if(_.isArray(data)) {
+			_.each(data, function(obj, index) {
+				data[index] = ParseDataSimplifierProvider.simplify(obj);
+			})
+			return data;
+		} else {
+			return ParseDataProvider.simplify(obj);
+		}
+
+		function _convert(data) {
+			var newData = data._toFullJSON();
+			newData.id = newData.objectId;
+			delete newData.objectId;
+			return newData;
+		}
+	};
+
 	$locationProvider.html5Mode(true);
 	$locationProvider.hashPrefix('!');
 

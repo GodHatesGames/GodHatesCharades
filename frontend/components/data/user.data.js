@@ -1,4 +1,4 @@
-app.factory('User', function (DS, $q, ParseData) {
+app.factory('User', function (DS, $q, ParseData, ParseDataSimplifier) {
 	// vars
 	var definition = {
 		name: 'user',
@@ -24,7 +24,7 @@ app.factory('User', function (DS, $q, ParseData) {
 	var User = DS.defineResource(definition);
 	User.login = _login;
 	User.current;
-	var currentUser = Parse.User.current();
+	var currentUser = ParseDataSimplifier.simplify(Parse.User.current());
 	if(currentUser) {
 		_onUserConnected(currentUser);
 	}

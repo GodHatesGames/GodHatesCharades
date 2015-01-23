@@ -1,4 +1,4 @@
-app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $filter, ParseData, SetItem) {
+app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $filter, ParseData, SetItem, ParseDataSimplifier) {
 	// vars
 	var definition = {
 		name: 'suggestion',
@@ -292,8 +292,8 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 			{
 				success: function(pairs) {
 					_.each(pairs, function(pair) {
-						pair['0'] = Suggestion.inject(pair['0']);
-						pair['1'] = Suggestion.inject(pair['1']);
+						pair['0'] = Suggestion.inject(ParseDataSimplifier.simplify(pair['0']));
+						pair['1'] = Suggestion.inject(ParseDataSimplifier.simplify(pair['1']));
 					})
 					deferred.resolve(pairs);
 				},
