@@ -17,7 +17,7 @@
 			<th>Suggestion</th>
 			<th>Type</th>
 		</tr>
-		<tr ng-repeat="(index, suggestion) in set.suggestions | fuse:list.searchProps:list.search track by suggestion.id"
+		<tr ng-repeat="suggestion in set.suggestions | fuse:list.searchProps:list.search track by suggestion.id"
 		    card-details-modal="suggestion">
 			<!-- Delete Button -->
 			<td class="tableButton">

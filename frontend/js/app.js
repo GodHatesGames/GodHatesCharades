@@ -37,7 +37,7 @@ app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider, 
 			})
 			return data;
 		} else {
-			return ParseDataProvider.simplify(obj);
+			return ParseDataSimplifierProvider.simplify(obj);
 		}
 
 		function _convert(data) {
