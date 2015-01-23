@@ -3,7 +3,6 @@ app.factory('Set', function (DS, $q, Suggestion, SetItem, ParseData) {
 	var definition = {
 		name: 'set',
 		defaultAdapter: 'setAdapter',
-		beforeInject: ParseData.flattenAttrsBeforeInject,
 		methods: {
 			// Instance methods
 			addSetItems: _addSetItems,

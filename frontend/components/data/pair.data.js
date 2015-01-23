@@ -55,14 +55,9 @@ app.factory('Pair', function (DS, $q, Suggestion, ParseData, Slug, $filter) {
 	// methods
 
 	function _beforeInject(resourceName, parseObject){
-		if(parseObject.attributes) {
-			ParseData.flattenAttrsBeforeInject(resourceName, parseObject);
-			ParseData.linkProperty(parseObject, 'suggestion', 'actor');
-			ParseData.linkProperty(parseObject, 'suggestion', 'scenario');
-			if(!parseObject.controversy) parseObject.controversy = 0;
-		} else {
-			console.log('injecting non-server pair');
-		}
+		ParseData.linkProperty(parseObject, 'suggestion', 'actor');
+		ParseData.linkProperty(parseObject, 'suggestion', 'scenario');
+		if(!parseObject.controversy) parseObject.controversy = 0;
 	}
 
 	function _afterInject(resourceName, parseObject) {

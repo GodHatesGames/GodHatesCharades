@@ -34,11 +34,8 @@ app.factory('User', function (DS, $q, ParseData, ParseDataSimplifier) {
 	// definition methods
 
 	function _beforeInject(resourceName, parseObject) {
-		if(parseObject.attributes) {
-			if(!parseObject.attributes.admin) parseObject.attributes.admin = false;
-			if(!parseObject.attributes.beta) parseObject.attributes.beta = false;
-			ParseData.flattenAttrsBeforeInject(resourceName, parseObject, true);
-		}
+		if(!parseObject.attributes.admin) parseObject.attributes.admin = false;
+		if(!parseObject.attributes.beta) parseObject.attributes.beta = false;
 	}
 
 	function _afterInject(resourceName, parseObject) {

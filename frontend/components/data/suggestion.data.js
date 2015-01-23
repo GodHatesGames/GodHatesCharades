@@ -59,11 +59,6 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 	// methods
 
 	function _beforeInject(resourceName, parseObject){
-		if(parseObject.attributes) {
-			ParseData.flattenAttrsBeforeInject(resourceName, parseObject);
-		} else {
-			// console.log('injecting non-parse suggestion or pre-cleaned suggestion');
-		}
 		ParseData.linkProperty(parseObject, 'user', 'owner');
 	}
 

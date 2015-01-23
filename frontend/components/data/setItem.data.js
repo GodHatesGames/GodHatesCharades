@@ -33,7 +33,6 @@ app.factory('SetItem', function (DS, $q, ParseData) {
 	// methods
 
 	function _beforeInject(resourceName, parseObject){
-		ParseData.flattenAttrsBeforeInject(resourceName, parseObject);
 		ParseData.linkProperty(parseObject, 'set', 'owner');
 		ParseData.linkProperty(parseObject, 'suggestion', 'card');
 	}

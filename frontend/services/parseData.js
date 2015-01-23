@@ -39,7 +39,6 @@ app.provider('ParseDataSimplifier', function() {
 
 app.factory('ParseData', function (DS, $q, $timeout) {
 	var parseData = {
-		flattenAttrsBeforeInject: _flattenAttrsBeforeInject,
 		linkRelationsAfterInject: _linkRelationsAfterInject,
 		defaultValueHandler: _defaultValueHandler,
 		safeInject: _safeInjectDefer,
@@ -47,12 +46,6 @@ app.factory('ParseData', function (DS, $q, $timeout) {
 	};
 
 	return parseData;
-
-	function _flattenAttrsBeforeInject(resourceName, parseObject, keepOriginal){
-		_.extend(parseObject, parseObject.attributes);
-		if(!keepOriginal)
-			delete parseObject.attributes;
-	}
 
 	function _linkRelationsAfterInject(constructor, relations, parseObject) {
 		constructor.link(parseObject.id, relations);
