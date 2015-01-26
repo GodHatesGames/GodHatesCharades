@@ -205,7 +205,7 @@ parseUser.service('parseUser', function factory($rootScope, $q, $location, Sugge
 			delete fetching[id];
 			var user = profile.owner;
 			profiles[user.id] = profile;
-			Suggestion.inject(profile.suggestions);
+			profile.suggestions = ParseData.inject('suggestion', profile.suggestions);
 			deferred.resolve(profile);
 		}
 

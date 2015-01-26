@@ -1,4 +1,4 @@
-app.service('leaderboard', function($q, DSCacheFactory, Suggestion, Pair) {
+app.service('leaderboard', function($q, DSCacheFactory, ParseData, Pair) {
 	var leaderboard = {
 		getTop: _getTop,
 	}
@@ -38,7 +38,7 @@ app.service('leaderboard', function($q, DSCacheFactory, Suggestion, Pair) {
 	function _processPairs(pair) {
 		var cards = [pair.actor,
 		             pair.scenario];
-		Suggestion.inject(cards);
+		ParseData.inject('suggestion', cards);
 	}
 
 	return leaderboard;

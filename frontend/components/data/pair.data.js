@@ -87,7 +87,7 @@ app.factory('Pair', function (DS, $q, Suggestion, ParseData, Slug, $filter) {
 		.then(_onCardPairsFetched);
 
 		function _onCardPairsFetched(pairs) {
-			return Pair.inject(pairs);
+			return ParseData.inject('pair', pairs);
 		}
 	}
 

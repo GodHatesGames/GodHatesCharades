@@ -271,7 +271,7 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 	}
 
 	function _onSuggestionListSuccess(suggestions) {
-		suggestions = Suggestion.inject(suggestions);
+		suggestions = ParseData.inject('suggestion', suggestions);
 		this.resolve(suggestions);
 		// ParseData.safeInject('suggestion', suggestions)
 		// .then(this.resolve);
@@ -287,8 +287,8 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 			{
 				success: function(pairs) {
 					_.each(pairs, function(pair) {
-						pair['0'] = Suggestion.inject(ParseDataSimplifier.simplify(pair['0']));
-						pair['1'] = Suggestion.inject(ParseDataSimplifier.simplify(pair['1']));
+						pair['0'] = ParseData.inject('suggestion', pair['0']);
+						pair['1'] = ParseData.inject('suggestion', pair['1']);
 					})
 					deferred.resolve(pairs);
 				},

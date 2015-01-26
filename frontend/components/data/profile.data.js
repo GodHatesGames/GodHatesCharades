@@ -4,9 +4,6 @@ app.factory('Profile', function (DS, $q, ParseData) {
 		name: 'profile',
 		defaultAdapter: 'profileAdapter',
 		beforeInject: _beforeInject,
-		afterInject: _afterInject,
-		relations: {
-		},
 		computed: {
 			id: ['owner', _updateId]
 		},
@@ -33,24 +30,8 @@ app.factory('Profile', function (DS, $q, ParseData) {
 	}
 
 	function _beforeInject(resourceName, parseObject){
-		if(parseObject.owner) {
-			// inject user if needed
-			var cachedOwner = DS.get('user', parseObject.owner.id);
-			if(cachedOwner) {
-				parseObject.owner = cachedOwner;
-			} else {
-				parseObject.owner = DS.inject('user', parseObject.owner);
-			}
-		}
-
-		if(parseObject.suggestions) {
-			// inject user if needed
-			parseObject.suggestions = DS.inject('suggestion', parseObject.suggestions);
-		}
-	}
-
-	function _afterInject(resourceName, parseObject) {
-		parseObject.updateLinks();
+		parseObject.owner = ParseData.linkProperty(parseObject, 'user', 'owner');
+		parseObject.suggestions = ParseData.linkProperty(parseObject, 'suggestion', 'suggestions');
 	}
 
 	function _updateLinks() {

@@ -24,7 +24,7 @@ app.factory('User', function (DS, $q, ParseData, ParseDataSimplifier) {
 	var User = DS.defineResource(definition);
 	User.login = _login;
 	User.current;
-	var currentUser = ParseDataSimplifier.simplify(Parse.User.current());
+	var currentUser = Parse.User.current();
 	if(currentUser) {
 		_onUserConnected(currentUser);
 	}
@@ -34,8 +34,8 @@ app.factory('User', function (DS, $q, ParseData, ParseDataSimplifier) {
 	// definition methods
 
 	function _beforeInject(resourceName, parseObject) {
-		if(!parseObject.attributes.admin) parseObject.attributes.admin = false;
-		if(!parseObject.attributes.beta) parseObject.attributes.beta = false;
+		if(!parseObject.admin) parseObject.admin = false;
+		if(!parseObject.beta) parseObject.beta = false;
 	}
 
 	function _afterInject(resourceName, parseObject) {
@@ -63,7 +63,7 @@ app.factory('User', function (DS, $q, ParseData, ParseDataSimplifier) {
 	}
 
 	function _onUserConnected(userData) {
-		User.inject(userData);
+		ParseData.inject('user', userData);
 	}
 
 	function _updateCurrentUser(userData) {

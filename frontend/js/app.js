@@ -31,21 +31,11 @@ console.log('starting app!');
 app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider, $provide, uiSelectConfig, DSProvider, ParseDataSimplifierProvider) {
 	// customize Angular-Data
 	DSProvider.defaults.deserialize = function (resourceName, data) {
-		if(_.isArray(data)) {
-			_.each(data, function(obj, index) {
-				data[index] = ParseDataSimplifierProvider.simplify(obj);
-			})
-			return data;
-		} else {
-			return ParseDataSimplifierProvider.simplify(data);
+		if(!data) {
+			console.log('test');
 		}
-
-		function _convert(data) {
-			var newData = data._toFullJSON();
-			newData.id = newData.objectId;
-			delete newData.objectId;
-			return newData;
-		}
+		var newData = ParseDataSimplifierProvider.simplify(data);
+		return newData;
 	};
 
 	$locationProvider.html5Mode(true);

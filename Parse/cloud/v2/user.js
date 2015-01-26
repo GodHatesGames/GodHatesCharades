@@ -34,6 +34,7 @@ function getProfile(request, response) {
 		console.log('owner');
 		console.log(owner);
 		var profile = {
+			id: owner.id + '_profile',
 			owner: owner
 		};
 

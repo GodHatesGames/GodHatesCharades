@@ -14,19 +14,24 @@ app.provider('ParseDataSimplifier', function() {
 	}
 
 	function _createSimpleObject(obj) {
-		var newObj = {
-			id: obj.id
-		};
-		if(obj.attributes) {
-			_.extend(newObj, obj.attributes);
-		}
-
-		_.each(obj.attributes, function(subObj, key) {
-			if(subObj.hasOwnProperty('attributes')) {
-				obj.attributes[key] = _createSimpleObject(subObj);
+		if(obj._toFullJSON) {
+			// is a parse object
+			if(obj.attributes) {
+				_.each(obj.attributes, function(subObj, key) {
+					if(subObj.hasOwnProperty('attributes')) {
+						obj.attributes[key] = _createSimpleObject(subObj);
+					}
+				});
 			}
-		});
-		return newObj;
+
+			var newObj = obj._toFullJSON();
+			newObj.id = newObj.objectId;
+			delete newObj.objectId;
+			return newObj;
+		} else {
+			// not a parse object
+			return obj;
+		}
 	}
 
 	this.simplify = _simplify;
@@ -37,11 +42,11 @@ app.provider('ParseDataSimplifier', function() {
 	
 });
 
-app.factory('ParseData', function (DS, $q, $timeout) {
+app.factory('ParseData', function (DS, $q, $timeout, ParseDataSimplifier) {
 	var parseData = {
 		linkRelationsAfterInject: _linkRelationsAfterInject,
 		defaultValueHandler: _defaultValueHandler,
-		safeInject: _safeInjectDefer,
+		inject: _inject,
 		linkProperty: _linkProperty
 	};
 
@@ -57,33 +62,12 @@ app.factory('ParseData', function (DS, $q, $timeout) {
 		}
 	}
 
-	function _safeInjectDefer(resourceName, items) {
-		if(_.isArray(items)) {
-			var returnItems = [];
-			var promises = [];
-			_.each(items, function(item) {
-				var cached = DS.get(resourceName, item.id);
-				var promise;
-				if(cached) {
-					// console.log('found one');
-					promise = $q.when(cached);
-				} else {
-					var itemDeferred = $q.defer();
-					promise = itemDeferred.promise;
-					$timeout(function() {
-						this.resolve(DS.inject(resourceName, item));
-					}.bind(itemDeferred));
-				}
-				promises.push(promise);
-			});
-			return $q.all(promises);
-		} else {
-			return $q.when(DS.inject(resourceName, items));
-		}
+	function _inject(resourceName, items) {
+		var simpleItems = ParseDataSimplifier.simplify(items);
+		return DS.inject(resourceName, simpleItems);
 	}
 
 	function _linkProperty(parseObject, className, property) {
-
 		if(parseObject[property]) {
 			// inject user if needed
 			var cachedObj = DS.get(className, parseObject[property].id);
