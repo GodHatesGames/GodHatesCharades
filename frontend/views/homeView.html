@@ -31,7 +31,7 @@
 							<a ng-href="{{preorderLink}}"
 							   class="btn btn-success btn-block animated " 
 							   ng-class="preorderClass"
-							   ng-mouseup="_onPreorderClicked('homepage: main')"
+							   ng-mouseup="onPreorderClicked('homepage: main')"
 							   target="_blank">
 								Preorder!
 							</a>
@@ -62,14 +62,15 @@
 	<section id="preorder"
 	         class="row bg-light-bright">
 		<a ng-href="{{preorderLink}}"
-		   ng-mouseup="_onPreorderClicked('homepage: secondary')">
+		   ng-mouseup="onPreorderClicked('homepage: secondary')"
+		   target="_blank">
 			<img src="img/pre_order_gif_02.gif"
 			     class="img-responsive"
 			     alt="Pre-Order Now!">
 		</a>
 		<div class="col-xs-offset-0 col-xs-12 col-sm-offset-4 col-sm-4">
 			<a ng-href="{{preorderLink}}"
-			   ng-mouseup="_onPreorderClicked('homepage: secondary')"
+			   ng-mouseup="onPreorderClicked('homepage: secondary')"
 			   class="btn btn-success btn-block" 
 			   target="_blank">
 				Preorder Now!
