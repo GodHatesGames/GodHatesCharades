@@ -28,10 +28,10 @@
 					</div>
 					<div class="row">
 						<div class="col-xs-offset-3 col-xs-6 col-sm-offset-0 col-sm-12">
-							<a href="http://godhatesgames.myshopify.com/cart/1051755037:1?source_app=shopify-widget?referer=https%3A%2F%2Fgodhatescharades.com"
+							<a ng-href="{{preorderLink}}"
 							   class="btn btn-success btn-block animated " 
 							   ng-class="preorderClass"
-							   ng-mouseup="_onPreorderClicked()"
+							   ng-mouseup="_onPreorderClicked('homepage: main')"
 							   target="_blank">
 								Preorder!
 							</a>
@@ -61,13 +61,15 @@
 	<!-- Preorder section -->
 	<section id="preorder"
 	         class="row bg-light-bright">
-		<a href="http://bit.ly/ghcbackerkit">
+		<a ng-href="{{preorderLink}}"
+		   ng-mouseup="_onPreorderClicked('homepage: secondary')">
 			<img src="img/pre_order_gif_02.gif"
 			     class="img-responsive"
 			     alt="Pre-Order Now!">
 		</a>
 		<div class="col-xs-offset-0 col-xs-12 col-sm-offset-4 col-sm-4">
-			<a href="http://bit.ly/ghcbackerkit"
+			<a ng-href="{{preorderLink}}"
+			   ng-mouseup="_onPreorderClicked('homepage: secondary')"
 			   class="btn btn-success btn-block" 
 			   target="_blank">
 				Preorder Now!

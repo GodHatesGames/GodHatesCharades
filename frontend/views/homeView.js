@@ -11,6 +11,7 @@ app.controller('homeView', function($scope, $window, $timeout) {
 		autohide: 1,
 		rel: 0
 	};
+	$scope.preorderLink = 'http://godhatesgames.myshopify.com/cart/1051755037:1?source_app=shopify-widget?referer=https%3A%2F%2Fgodhatescharades.com';
 
 	angular.element($window).bind('scroll', function() {
 		if (this.pageYOffset >= 100) {
@@ -31,8 +32,10 @@ app.controller('homeView', function($scope, $window, $timeout) {
 		player.setVolume(0);
 	}
 
-	function _onPreorderClicked() {
-		mixpanel.track('Preorder: Clicked');
+	function _onPreorderClicked(location) {
+		mixpanel.track('Preorder: Clicked', {
+			location: location
+		});
 	}
 
 });
