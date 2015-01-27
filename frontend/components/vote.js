@@ -117,6 +117,7 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 
 				// Track
 				ga('send', 'event', 'vote', 'pair');
+				mixpanel.track('Vote: Pair');
 			};
 
 			function _skipBoth() {
@@ -143,7 +144,7 @@ app.directive('vote', function(cardService, cloudUtils, $timeout) {
 				$scope.pairIndex += $scope.pairLimit;
 
 				// Track
-				ga('send', 'event', 'vote', 'skip');
+				mixpanel.track('Vote: Skipped Both');
 			};
 
 			// init

@@ -26,7 +26,18 @@ app.service('addthisService', function($rootScope, $q) {
 
 	function _onAddThisReady(event) {
 		console.log('add this ready');
+
+		addthis.addEventListener('addthis.menu.share', _onShare);
 		deferred.resolve();
+	}
+
+	function _onShare(response) {
+		console.log('shared', response);
+		var service = response.data.service;
+		ga('send', 'event', 'social_share', 'addthis', service);
+		mixpanel.track('Social: AddThis', {
+			service: service
+		});
 	}
 
 	function _waitForLoad(callback) {

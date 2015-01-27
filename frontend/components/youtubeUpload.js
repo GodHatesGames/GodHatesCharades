@@ -35,8 +35,10 @@ app.directive('youtubeUpload', function(ytUploadService) {
 				switch(event.data.state) {
 					case YT.UploadWidgetState.IDLE :
 						// user has triggered the Record button, though recording has not yet started
-						if(!$scope.recording)
+						if(!$scope.recording) {
 							ga('send', 'event', 'youtube', 'recording', 'started');
+							mixpanel.track('YouTube: Recording');
+						}
 						$scope.recording = true;
 						break;
 					case YT.UploadWidgetState.STOPPED :
@@ -53,6 +55,7 @@ app.directive('youtubeUpload', function(ytUploadService) {
 			function _onUploadSuccess(event) {
 				console.log('upload complete');
 				ga('send', 'event', 'youtube', 'upload', 'complete');
+				mixpanel.track('YouTube: Uploaded');
 				$scope.videoProcessing = true;
 			}
 
