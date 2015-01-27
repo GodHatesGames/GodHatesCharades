@@ -108,6 +108,7 @@ app.directive('vote', function(cloudUtils, Suggestion, $q) {
 
 				// Track
 				ga('send', 'event', 'vote', 'pair');
+				mixpanel.track('Vote: Pair');
 			};
 
 			function _skipBoth() {
@@ -137,7 +138,7 @@ app.directive('vote', function(cloudUtils, Suggestion, $q) {
 				deferred.promise.then(_onPairVoted, _onPairVoteError)
 
 				// Track
-				ga('send', 'event', 'vote', 'skip');
+				mixpanel.track('Vote: Skipped Both');
 			};
 
 			// init

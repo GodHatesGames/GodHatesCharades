@@ -10,6 +10,9 @@ app.directive('signupSection', function() {
 			$scope.onEmailSubmitted = function(fromLabel) {
 				$scope.emailSubmitted = true;
 				ga('send', 'event', 'signup', 'newsletter', fromLabel);
+				mixpanel.track('Newsletter: Signup', {
+					location: fromLabel
+				});
 				_pa.track('signup_newletter');
 			};
 		}
