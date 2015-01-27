@@ -31,4 +31,8 @@ app.controller('homeView', function($scope, $window, $timeout) {
 		player.setVolume(0);
 	}
 
+	function _onPreorderClicked() {
+		mixpanel.track('Preorder: Clicked');
+	}
+
 });
