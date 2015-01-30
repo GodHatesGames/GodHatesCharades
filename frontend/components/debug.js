@@ -4,9 +4,8 @@ app.directive('debug', function() {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/debug.html',
 		replace: true,
-		scope: {
-			suggestion: '=',
-			domain: '='
+		link: function($scope, $element) {
+			$scope.debugMode = CONFIG.DEV;
 		}
 	};
 });
