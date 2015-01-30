@@ -1,5 +1,5 @@
 'use strict';
-// var _ = require('underscore');
+var _ = require('underscore');
 var PairObject = Parse.Object.extend('Pair');
 var SuggestionObject = Parse.Object.extend('Suggestion');
 var userUtils = require('cloud/v2/userUtils.js');
@@ -183,46 +183,40 @@ function getPairById(request, response) {
 
 function getPairsByCard(request, response) {
 	console.log('addCardToSet');
-	// Parse.Cloud.useMasterKey();
+	Parse.Cloud.useMasterKey();
 	var cardId = request.params.cardid;
 	var cardType = request.params.cardtype;
 	// console.log('request.user.id:' + request.user.id);
-	if(request.user) {
-		userUtils.isUserAdmin(request.user.id)
-			.then(getPair, onError);
+	if(cardId !== undefined) {
+		console.log('getPair fetchData');
+		console.log(cardType);
+		console.log(cardId);
+		console.log('--');
+		var SuggestionObject = Parse.Object.extend('Suggestion');
+		var mockCard = new SuggestionObject();
+		mockCard.id = cardId;
+		var PairObject = Parse.Object.extend('Pair');
+		var query = new Parse.Query(PairObject);
+		query.descending('displayed');
+		query.include('actor.owner');
+		query.include('scenario.owner');
+		query.limit(50);
+		query.equalTo(cardType, mockCard);
+		query.find({
+			success: onSuccess,
+			error: onError
+		});
 	} else {
-		onError();
-	}
-
-	function getPair() {
-		Parse.Cloud.useMasterKey();
-		if(cardId !== undefined) {
-			console.log('getPair fetchData');
-			console.log(cardType);
-			console.log(cardId);
-			console.log('--');
-			var SuggestionObject = Parse.Object.extend('Suggestion');
-			var mockCard = new SuggestionObject();
-			mockCard.id = cardId;
-			var PairObject = Parse.Object.extend('Pair');
-			var query = new Parse.Query(PairObject);
-			query.descending('displayed');
-			query.include('actor.owner');
-			query.include('scenario.owner');
-			query.limit(50);
-			query.equalTo(cardType, mockCard);
-			query.find({
-				success: onSuccess,
-				error: onError
-			});
-		} else {
-			response.error('you must pass a pair id to get');
-		}
+		response.error('you must pass a pair id to get');
 	}
 
 	function onSuccess(pairs) {
 		console.log('onSuccess');
 		console.log(pairs)
+		_.each(pairs, function(pair) {
+			userUtils.stripPrivateData(pair.attributes.actor.attributes.owner);
+			userUtils.stripPrivateData(pair.attributes.scenario.attributes.owner);
+		});
 		response.success(pairs);
 	}
 
