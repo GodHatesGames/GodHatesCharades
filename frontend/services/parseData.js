@@ -78,7 +78,7 @@ app.factory('ParseData', function (DS, $q, $timeout, ParseDataSimplifier) {
 		if(parseObject[property]) {
 			if(_.isArray(parseObject[property])) {
 				// inject array
-				DS.inject(className, parseObject[property]);
+				parseObject[property] = DS.inject(className, parseObject[property]);
 			} else {
 				// check cache for object
 				var cachedObj = DS.get(className, parseObject[property].id);
