@@ -14,7 +14,7 @@ app.provider('ParseDataSimplifier', function() {
 	}
 
 	function _createSimpleObject(obj) {
-		if(obj._toFullJSON) {
+		if(obj && obj._toFullJSON) {
 			// is a parse object
 			if(obj.attributes) {
 				_.each(obj.attributes, function(subObj, key) {
