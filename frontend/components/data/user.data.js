@@ -1,4 +1,4 @@
-app.factory('User', function (DS, $q, ParseData, ParseDataSimplifier) {
+app.factory('User', function (DS, $q, ParseData, ParseDataSimplifier, $rootScope) {
 	// vars
 	var definition = {
 		name: 'user',
