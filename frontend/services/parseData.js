@@ -19,7 +19,7 @@ app.provider('ParseDataSimplifier', function() {
 			if(obj.attributes) {
 				_.each(obj.attributes, function(subObj, key) {
 					if(subObj.hasOwnProperty('attributes')) {
-						obj.attributes[key] = _createSimpleObject(subObj);
+						obj.attributes[key] = _simplify(subObj);
 					}
 				});
 			}
@@ -29,7 +29,14 @@ app.provider('ParseDataSimplifier', function() {
 			delete newObj.objectId;
 			return newObj;
 		} else {
-			// not a parse object
+			// not a parse object, check properties
+			if(_.isObject(obj)) {
+				_.each(obj, function(prop, key){
+					if(_.isObject(prop)) {
+						obj[key] = _simplify(prop);
+					}
+				});
+			}
 			return obj;
 		}
 	}
@@ -69,12 +76,17 @@ app.factory('ParseData', function (DS, $q, $timeout, ParseDataSimplifier) {
 
 	function _linkProperty(parseObject, className, property) {
 		if(parseObject[property]) {
-			// inject user if needed
-			var cachedObj = DS.get(className, parseObject[property].id);
-			if(cachedObj) {
-				parseObject[property] = cachedObj;
+			if(_.isArray(parseObject[property])) {
+				// inject array
+				DS.inject(className, parseObject[property]);
 			} else {
-				parseObject[property] = DS.inject(className, parseObject[property]);
+				// check cache for object
+				var cachedObj = DS.get(className, parseObject[property].id);
+				if(cachedObj) {
+					parseObject[property] = cachedObj;
+				} else {
+					parseObject[property] = DS.inject(className, parseObject[property]);
+				}
 			}
 		}
 	}

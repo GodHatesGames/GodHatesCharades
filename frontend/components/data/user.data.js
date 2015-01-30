@@ -74,10 +74,6 @@ app.factory('User', function (DS, $q, ParseData, ParseDataSimplifier) {
 
 	function _disconnectUser() {
 		// cleanup sensitive details
-		delete User.current.attributes.email;
-		delete User.current.attributes.username;
-		delete User.current.attributes.ACL;
-		delete User.current.attributes.admin;
 		delete User.current.email;
 		delete User.current.username;
 		delete User.current.ACL;

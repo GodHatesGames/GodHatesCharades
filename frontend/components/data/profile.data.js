@@ -30,8 +30,8 @@ app.factory('Profile', function (DS, $q, ParseData) {
 	}
 
 	function _beforeInject(resourceName, parseObject){
-		parseObject.owner = ParseData.linkProperty(parseObject, 'user', 'owner');
-		parseObject.suggestions = ParseData.linkProperty(parseObject, 'suggestion', 'suggestions');
+		ParseData.linkProperty(parseObject, 'user', 'owner');
+		ParseData.linkProperty(parseObject, 'suggestion', 'suggestions');
 	}
 
 	function _updateLinks() {
@@ -56,13 +56,7 @@ app.factory('Profile', function (DS, $q, ParseData) {
 			var deferred = $q.defer();
 			console.log('fetching user');
 			// $scope.loading = true;
-			var callbacks = {
-				success: deferred.resolve,
-				error: deferred.reject
-			};
-			Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getProfile', options, callbacks);
-
-			return deferred.promise;
+			return Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getProfile', options);
 		}
 	}
 
