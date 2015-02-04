@@ -10,13 +10,31 @@
 		<li ui-sref-active="active">
 			<a ui-sref="home">Home</a>
 		</li>
-		
-		<li ui-sref-active="active">
-			<a ui-sref='rules'>Rules</a>
+
+
+		<li dropdown
+		    class="dropdown" 
+		    is-open="gameOpen"
+		    ng-mouseover="gameOpen = true"
+		    ng-mouseout="gameOpen = false"
+		    ng-show="User.current">
+			<a class="dropdown-toggle">
+				Game
+				<b class="caret"></b>
+			</a>
+			<ul class="dropdown-menu"
+			    role="menu">
+				<li ui-sref-active="active">
+					<a ui-sref='rules'>Rules</a>
+				</li>
+			</ul>
 		</li>
 
 		<li ui-sref-active="active">
-			<a ui-sref="blog">Blog</a>
+			<a href="https://godhatesgames.myshopify.com"
+			target="_blank">
+				Store
+			</a>
 		</li>
 
 	</ul>
@@ -31,10 +49,14 @@
 	</a>
 
 	<ul class="nav nav-pills nav-justified nav-right">
-
+		
 		<li ui-sref-active="active">
-			<a ui-sref='top.fame'>Top Pairs</a>
+			<a ui-sref="blog">Blog</a>
 		</li>
+
+		<!-- <li ui-sref-active="active">
+			<a ui-sref='top.fame'>Top Pairs</a>
+		</li> -->
 
 		<li ui-sref-active="active">
 			<a ui-sref='vote'>Vote</a>
@@ -42,9 +64,12 @@
 
 		<!-- user stuff -->
 		<li dropdown
-		    ng-show="User.current">
-			<a class="dropdown-toggle" 
-			   dropdown-toggle>
+		    class="dropdown" 
+		    ng-show="User.current"
+		    is-open="userOpen"
+		    ng-mouseover="userOpen = true"
+		    ng-mouseout="userOpen = false">
+			<a class="dropdown-toggle">
 				{{User.current.name}}
 				<b class="caret"></b>
 			</a>
