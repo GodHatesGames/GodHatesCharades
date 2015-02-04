@@ -5,67 +5,12 @@
 	padding-left: 60px;
 	padding-right: 60px;
 	padding-bottom: 0;
-
-	.content{
-		padding-top: 0;
-	}
-
-	& > .row {
-		margin-left: -60px;
-		margin-right: -60px;
-	}
-
-	section {
-		overflow: hidden;
-	}
-
-	@media (max-width: @screen-xs-max) {
-		padding-left: 10px;
-		padding-right: 10px;
-
-		.row {
-			margin-left: -10px;
-			margin-right: -10px;
-		}
-	}
-
-	@media (max-width: @screen-iphone) {
-		padding-left: 10px;
-		padding-right: 10px;
-
-		.row {
-			margin-left: -10px;
-			margin-right: -10px;
-		}
-	}
 }
 
 /* Sections */
 
 /* Section - Examples */
 #homeView section {
-
-	&:not(:first-child) {
-		padding-top: 35px;
-	}
-
-	&:not(.row-flush) {
-		padding-bottom: 25px;
-	}
-
-	&.row-compact {
-		padding-top: 15px;
-		padding-bottom: 15px;
-		@media (max-width: @screen-sm-er-max) {
-			padding-top: 0;
-			padding-bottom: 0;
-		}
-	}
-
-	&.row-flush {
-		padding-top: 0;
-		padding-bottom: 0;
-	}
 
 	/* Section - intro */
 	&.intro {
