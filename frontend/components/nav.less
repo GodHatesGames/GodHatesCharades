@@ -2,10 +2,10 @@
 @import "../less/bootstrap-variables";
 @nav-inactive: black;
 @nav-active: @color-actor;
-@dropdown-bg-inactive: @color-background-nav;
-@dropdown-bg-active: @color-background-nav-selected;
+@dropdown-bg: @color-dropdown-bg;
+@dropdown-header-bg: @color-dropdown-header-bg;
 @dropdown-text-inactive: white;
-@dropdown-text-active: @color-actor;
+@dropdown-text-active: black;
 @dropdown-accent: white;
 
 @no-ad: 0px; //use if no ad is present
@@ -71,74 +71,91 @@
 .nav li {
 	cursor: pointer;
 }
-.nav li a {
+.nav > li > a {
 	border-radius: 0;
+	color: @nav-inactive;
+	text-shadow: 1px 2px rgba(0, 0, 0, 0.1);
 }
 .nav-pills li + li {
 	margin: 0;
 	cursor: pointer;
 }
-.nav > li > a:hover,
-.nav > li.active > a,
-.nav > li.active > a:hover {
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus,
+.nav-pills > li > a:hover,
+.nav-pills > li > a:focus {
 	color: @nav-active;
 	background-color: transparent;
-}
-.nav > li > a {
-	color: @nav-inactive;
-	text-shadow: 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .nav {
 	.dropdown {
 		.dropdown-toggle {
 			// default toggle colors
-			.caret {
-				border-top-color: @dropdown-bg-inactive;
-				border-bottom-color: @dropdown-bg-inactive;
+			.dropup {
+				display: none;
 			}
 		}
 
 		&.open {
 			.dropdown-toggle {
 				// open toggle
-				.caret {
-					border-top-color: @dropdown-text-active;
-					border-bottom-color: @dropdown-text-active;
+				background-color: @dropdown-header-bg;
+				color: @dropdown-text-active;
+				.dropup {
+					.caret {
+						border-top-color: @dropdown-bg;
+						border-bottom-color: @dropdown-bg;
+					}
+					position: absolute;
+					left: 50%;
+					bottom: -11px;
+					margin-left: -5px;
+					display: inline;
 				}
 			}
 		}
 
 		.dropdown-menu {
 			font-size: 70%;
-			background-color: @dropdown-bg-inactive;
+			background-color: @dropdown-bg;
 			border: none;
 			min-width: inherit;
 			color: @dropdown-text-inactive;
-			border-radius: 0;
+			border-radius: 15px;
 			width: 100%;
 			box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
 			margin-top: 0;
 
 			a {
 				color: @dropdown-text-inactive;
+				text-align: center;
+				line-height: 25px;
 				&:hover {
-					background-color: @dropdown-bg-active;
 					color: @dropdown-text-active;
+					background-color: transparent;
 				}
 			}
 
 			.active {
 				a {
-					background-color: @dropdown-bg-active;
+					background-color: @dropdown-header-bg;
 					color: @dropdown-text-active;
 				}
+			}
+
+			.divider {
+				margin-top: 5px;
+				margin-bottom: 5px;
 			}
 
 			.dropdown-header {
 				color: @dropdown-text-inactive;
 				font-weight: bold;
 				cursor: default;
+				text-align: center;
 			}
 		}
 	}

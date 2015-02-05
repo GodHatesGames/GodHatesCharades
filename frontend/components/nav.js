@@ -42,6 +42,10 @@ app.directive('nav', function(User, $uiViewScroll, $state, $timeout) {
 					}
 				}
 			};
+
+			$scope.clickCapture = function($event) {
+				$event.stopImmediatePropagation();
+			}
 		}
 	};
 });

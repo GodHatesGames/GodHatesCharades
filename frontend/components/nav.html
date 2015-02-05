@@ -18,9 +18,12 @@
 		    ng-mouseover="gameOpen = true"
 		    ng-mouseout="gameOpen = false"
 		    ng-show="User.current">
-			<a class="dropdown-toggle">
+			<a class="dropdown-toggle"
+			   ng-click="clickCapture($event)">
 				Game
-				<b class="caret"></b>
+				<span class="dropup">
+					<span class="caret"></span>
+				</span>
 			</a>
 			<ul class="dropdown-menu"
 			    role="menu">
@@ -72,9 +75,12 @@
 		    is-open="userOpen"
 		    ng-mouseover="userOpen = true"
 		    ng-mouseout="userOpen = false">
-			<a class="dropdown-toggle">
+			<a class="dropdown-toggle"
+			   ng-click="clickCapture($event)">
 				{{User.current.name}}
-				<b class="caret"></b>
+				<span class="dropup">
+					<span class="caret"></span>
+				</span>
 			</a>
 			<ul class="dropdown-menu"
 			    role="menu">
