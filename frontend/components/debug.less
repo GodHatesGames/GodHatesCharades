@@ -1,13 +1,18 @@
 @import "../less/backgrounds";
 
 .debug {
-	.bg-light();
-	padding: 5px;
-	font-size: 12px;
-	color: black;
 	min-height: 0;
+	background-color: transparent;
+	border: none;
 
 	.container {
 		padding: 0;
+		.stats {
+			.bg-dark();
+			padding: 15px 15px 10px 15px;
+			font-size: 12px;
+			border-bottom-left-radius: 15px;
+			border-bottom-right-radius: 15px;
+		}
 	}
 }

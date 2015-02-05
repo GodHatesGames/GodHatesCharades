@@ -136,23 +136,33 @@ input.form-control {
 
 .viewLoader {
 	height: 0;
-	opacity: 0;
 	pointer-events: none;
-	/* top: -30px; */
-	-webkit-transition: opacity .5s ease-out;
-	-moz-transition: opacity .5s ease-out;
-	-o-transition: opacity .5s ease-out;
-	-ms-transition: opacity .5s ease-out;
-	transition: opacity .5s ease-out;
+	text-align: center;
+	background-color: transparent;
+	border: none;
+	top: -100%;
+	-webkit-transition: top .25s ease-out;
+	-moz-transition: top .25s ease-out;
+	-o-transition: top .25s ease-out;
+	-ms-transition: top .25s ease-out;
+	transition: top .25s ease-out;
 }
 
 .viewLoader.loading {
-	opacity: 1;
+	top: 0;
 }
 
-.viewLoader p {
+.viewLoader span {
+	font-size: 14px;
+	font-family: 'GodHatesCharades';
+	text-transform: uppercase;
 	text-align: center;
-	padding: 10px;
+	padding-top: 35px;
+	padding-right: 15px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	border-radius: 15px;
+	top: -15px;
 }
 
 .content {

@@ -1,10 +1,11 @@
 <div class="debug navbar navbar-default navbar-fixed-top"
      ng-show="debugMode">
 	<div class="container">
-		<div angular-stats
-		     watch-count=".watch-count"
-		     digest-length=".digest-length">
+		<span angular-stats
+		      class="stats"
+		      watch-count=".watch-count"
+		      digest-length=".digest-length">
 			Watch Count: <span class="watch-count"></span> / Digest Cycle Length: <span class="digest-length"></span>
-		</div>
+		</span>
 	</div>
 </div>
