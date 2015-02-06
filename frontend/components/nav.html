@@ -11,7 +11,6 @@
 			<a ui-sref="home">Home</a>
 		</li>
 
-
 		<li dropdown
 		    class="dropdown" 
 		    is-open="gameOpen"
@@ -63,8 +62,27 @@
 			<a ui-sref='top.fame'>Top Pairs</a>
 		</li> -->
 
-		<li ui-sref-active="active">
-			<a ui-sref='vote'>Vote</a>
+		<li dropdown
+		    class="dropdown" 
+		    is-open="voteOpen"
+		    ng-mouseover="voteOpen = true"
+		    ng-mouseout="voteOpen = false">
+			<a class="dropdown-toggle"
+			   ng-click="clickCapture($event)">
+				Vote
+				<span class="dropup">
+					<span class="caret"></span>
+				</span>
+			</a>
+			<ul class="dropdown-menu"
+			    role="menu">
+				<li ui-sref-active="active">
+					<a ui-sref='vote'>Pair VS Pair</a>
+				</li>
+				<li ui-sref-active="active">
+					<a ui-sref='top/fame'>Top Pairs</a>
+				</li>
+			</ul>
 		</li>
 
 		<!-- user stuff -->
