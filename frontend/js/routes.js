@@ -247,6 +247,12 @@ app.config(function($stateProvider,
 		controller: 'setsDetailView'
 	});
 
+	$stateProvider.state('admin.components', {
+		url: '/components',
+		title: 'Components',
+		templateUrl: 'views/componentsView.html'
+	});
+
 	$stateProvider.state('blog', {
 		url: '/blog',
 		title: 'Blog: News about the game and more',

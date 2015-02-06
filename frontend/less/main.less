@@ -132,6 +132,9 @@ input.form-control {
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+}
+
+.passthrough {
 	pointer-events: none;
 }
 
@@ -176,7 +179,7 @@ input.form-control {
 }
 
 
-.content > .container:not(.flush) {
+.content > .container:not(.flush), .content > ui-view > .container {
 	padding-top: 45px;
 }
 
