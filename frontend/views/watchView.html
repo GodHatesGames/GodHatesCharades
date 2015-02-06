@@ -1,0 +1,13 @@
+<div id="topView" class="container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<h2>Weekly Content</h2>
+			<p class="sub">Share your talents with the world, if you have the best video of the week you'll get a badass prize.</p>
+		</div>
+	</div>
+	<div ng-repeat="video in ghcVids">
+		<youtube-video class="embed-responsive-item"
+		               video-id="video.id.videoId">
+		</youtube-video>
+	</div>
+</div>
