@@ -55,6 +55,7 @@ server.get('/blog/*/*', showIndex);
 server.get('/mail/*', showIndex);
 server.get('/rules', showIndex);
 server.get('/share', showIndex);
+server.get('/timeline', showIndex);
 
 // otherwise 404
 server.get('/*', show404);
