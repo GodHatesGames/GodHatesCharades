@@ -307,9 +307,8 @@ function updateSuggestionText(request, response) {
 			var suggestion = new SuggestionObject();
 			suggestion.id = suggestionId;
 			suggestion.set('text', request.params.text);
-			if(request.params.legal) {
-				suggestion.set('legal', request.params.legal);
-			}
+			suggestion.set('legal', request.params.legal);
+			suggestion.set('spite', request.params.spite);
 			suggestion.save({
 				success: onSuccess,
 				error: onError

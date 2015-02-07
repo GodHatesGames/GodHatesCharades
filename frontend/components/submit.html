@@ -4,8 +4,7 @@
 	     ng-hide="success">
 		<div class="card"
 		     ng-class="typeClass">
-			<span class="icon"
-			  ng-include="imageUrl"></span>
+			<span class="icon"></span>
 			<div class="submitForm cardContent">
 				<textarea ng-model="text"
 				          class="editable"
@@ -31,8 +30,7 @@
 	     ng-show="success">
 			<div class="card submitted"
 			     ng-class="typeClass">
-				<span class="icon"
-				  ng-include="imageUrl"></span>
+				<span class="icon"></span>
 				<div class="cardContent">
 					<h5>Thanks for the submission <b>{{User.current.name}}</b>! Your card will be up soon.</h5>
 				</div>

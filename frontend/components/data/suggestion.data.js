@@ -11,10 +11,10 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 			slug: ['text', _updateSlug],
 			link: ['slug', 'id', _updateLink],
 			kdr: ['votes', 'skips', _updateKdr],
-			typeClass: ['type', _updateTypeClass],
+			styleClass: ['type', 'spite', _updateStyleClass],
 			typeDisplay: ['type', _updateTypeDisplay],
 			url: ['url', _updateUrl],
-			imageUrl: ['type', _updateImageUrl]
+			imageUrl: ['type', 'spite', _updateImageUrl]
 		},
 		methods: {
 			// Instance methods
@@ -31,7 +31,8 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 	// Adapter
 	DS.adapters.suggestionAdapter = {
 		find: _find,
-		create: _create
+		create: _create,
+		update: _update
 	};
 
 	// Constants
@@ -39,6 +40,7 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 	var TYPE_DISPLAY_SCENARIO = 'Scenario';
 	var TYPE_CLASS_CHARACTER = 'character';
 	var TYPE_CLASS_SCENARIO = 'scenario';
+	var SPITE_CLASS = 'spite';
 	var RELATIONS = ['user'];
 	var INJECT_OPTIONS = {
 	};
@@ -48,7 +50,6 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 	Suggestion.getBlankCardByType = _getBlankCardByType;
 	Suggestion.getTypeDisplayByType = _getTypeDisplayByType;
 	Suggestion.getTypeClassByType = _getTypeClassByType;
-	Suggestion.getImageByType = _getImageByType;
 	Suggestion.getExamples = _getExamples;
 	Suggestion.getUnmoderatedSuggestions = _getUnmoderatedSuggestions;
 	Suggestion.getSuggestionPairs = _getSuggestionPairs;
@@ -120,8 +121,20 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 		return Suggestion.getTypeDisplayByType(type);
 	}
 
-	function _updateTypeClass(type) {
-		return Suggestion.getTypeClassByType(type);
+	function _updateStyleClass(type) {
+		var styleClass = Suggestion.getTypeClassByType(type);
+		if(this.spite) styleClass = [styleClass, SPITE_CLASS].join(' ');
+		return styleClass;
+	}
+
+	function _updateImageUrl(type) {
+		if(this.spite) {
+			return 'img/spite_guy.svg';
+		} else if(type === 0) {
+			return 'img/actor_skull.svg';
+		} else if(type === 1) {
+			return 'img/scenario_ball.svg';
+		}
 	}
 
 	function _updateSlug(text) {
@@ -133,10 +146,6 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 			cardid: id,
 			slug: slug
 		};
-	}
-
-	function _updateImageUrl(type) {
-		return Suggestion.getImageByType(type);
 	}
 
 	function _updateUrl(link) {
@@ -189,15 +198,6 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 		return {
 			type: type
 		};
-	}
-
-	function _getImageByType(type) {
-		switch(type) {
-			case 0 :
-				return 'img/actor_skull.svg';
-			case 1 :
-				return 'img/scenario_ball.svg';
-		}
 	}
 
 	function _getTypeClassByType(type) {
@@ -324,5 +324,21 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 		suggestion.set('type', attrs.type);
 		suggestion.set('owner', user);
 		return suggestion.save();
+	}
+
+	function _update(resource, id, attrs) {
+		return Parse.Cloud.run(
+			CONFIG.PARSE_VERSION + 'updateSuggestionText',
+			attrs,
+			{
+				success: onSuggestionSaved
+			}
+		);
+
+		function onSuggestionSaved (updatedSuggestion) {
+			var suggestion = Suggestion.get(id);
+			_.extend(suggestion, updatedSuggestion.attributes);
+			return suggestion;
+		}
 	}
 });
