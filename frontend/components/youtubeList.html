@@ -1,0 +1,24 @@
+<div class="youtube-list">
+	<div>
+		<p ng-if="!playlist || playlist.length == 0">Be the first to record this pair!</p>
+		<p>Record a video directly to youtube.</p>
+		<youtube-upload title="uploadTitle"
+		                description="uploadDescription"
+		                keywords="uploadKeywords"
+		                on-video-ready="onVideoReady"></youtube-upload>
+	</div>
+	<!-- Playlist -->
+	<div ng-repeat="video in playlist | orderBy:'-snippet.publishedAt' track by video.id"
+	      class="list-video">
+		<h6 ng-if="video.snippet.channelTitle.length > 0">
+			{{video.snippet.channelTitle}}
+			<small>{{video.snippet.publishedAt | date}}</small>
+		</h6>
+		<div class="embed-responsive embed-responsive-4by3">
+			<youtube-video class="embed-responsive-item"
+			               video-id="video.id"
+			               player-vars="playerVars">
+			</youtube-video>
+		</div>
+	</div>
+</div>

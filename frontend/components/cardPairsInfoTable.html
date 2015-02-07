@@ -1,6 +1,7 @@
 <div class="pairList">
 	<table class="pairInfoTable table table-striped">
 		<tr>
+			<th>Visit</th>
 			<th>Pair</th>
 			<th>Views</th>
 			<th>Votes</th>
@@ -8,11 +9,17 @@
 		</tr>
 		<tr ng-repeat="pair in pairs | orderBy:sortPredicates track by pair.id">
 			<td>
+				<a class="btn btn-success btn-block btn-xs" 
+				   ui-sref="pair(pair.link)"
+				   target="_blank">
+					View Pair
+				</a>
+			</td>
+			<td>
 				<a card-details-modal="pair.actor"
 				   target="_blank">
 					<b>{{::pair.actor.text}}</b>
 				</a>
-				&nbsp;
 				<a card-details-modal="pair.scenario"
 				   target="_blank">
 					<b>{{pair.scenario.text}}</b>

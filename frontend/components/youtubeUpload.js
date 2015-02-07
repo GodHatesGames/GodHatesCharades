@@ -6,7 +6,8 @@ app.directive('youtubeUpload', function(ytUploadService) {
 		scope: {
 			title: '=',
 			description: '=',
-			keywords: '='
+			keywords: '=',
+			onVideoReady: '='
 		},
 		controller: function($scope, $element) {
 			$scope.uploadClass = _uploadClass;
@@ -31,17 +32,19 @@ app.directive('youtubeUpload', function(ytUploadService) {
 
 			function _onStateChange(event) {
 				// https://developers.google.com/youtube/youtube_upload_widget#onStateChange
-				console.log('yt uploader triggered:', event.data.state);
 				switch(event.data.state) {
 					case YT.UploadWidgetState.IDLE :
 						// user has triggered the Record button, though recording has not yet started
 						if(!$scope.recording) {
+							console.log('recording');
 							ga('send', 'event', 'youtube', 'recording', 'started');
 							mixpanel.track('YouTube: Recording');
 						}
 						$scope.recording = true;
 						break;
 					case YT.UploadWidgetState.STOPPED :
+						console.log('recording stopped');
+						$scope.status = 'Uploading to YouTube...';
 						// user has triggered the Record button, though recording has not yet started
 						$scope.recording = false;
 						break;
@@ -53,14 +56,17 @@ app.directive('youtubeUpload', function(ytUploadService) {
 			}
 
 			function _onUploadSuccess(event) {
-				console.log('upload complete');
+				console.log('youtube upload complete');
 				ga('send', 'event', 'youtube', 'upload', 'complete');
 				mixpanel.track('YouTube: Uploaded');
-				$scope.videoProcessing = true;
+				$scope.status = 'YouTube is processing...';
 			}
 
 			function _onProcessingComplete(event) {
-				$scope.videoId = event.data.videoId;
+				console.log('youtube processing complete');
+				$scope.status = 'Your video is complete, thanks for the submission!';
+				if($scope.onVideoReady)
+					$scope.onVideoReady(event.data.videoId);
 				$scope.$digest();
 			}
 

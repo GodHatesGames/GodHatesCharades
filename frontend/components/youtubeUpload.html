@@ -2,13 +2,5 @@
 	<div id="youtubeUpload"
 	     ng-class="uploadClass()">
 	</div>
-	<h3 ng-if="processing">Seriously you're our new favorite super-fan! Youtube already has your video, so start a new one or wait for that one to finish uploading it.</h3>
-	<div class="player"
-	     ng-if="videoId">
-		<div class="embed-responsive embed-responsive-16by9">
-			<youtube-video class="embed-responsive-item"
-			               video-id="videoId">
-			</youtube-video>
-		</div>
-	</div>
+	<h5 ng-if="status">{{status}}</h5>
 </div>
