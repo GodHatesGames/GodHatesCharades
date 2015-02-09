@@ -13,7 +13,8 @@ app.directive('signupSection', function() {
 				mixpanel.track('Newsletter: Signup', {
 					location: fromLabel
 				});
-				_pa.track('signup_newletter');
+				if(this._pa)
+					_pa.track('signup_newletter');
 			};
 		}
 	}
