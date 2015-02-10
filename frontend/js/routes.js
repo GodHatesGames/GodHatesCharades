@@ -173,6 +173,9 @@ app.config(function($stateProvider,
 			}],
 			approved: ['Suggestion', function(Suggestion) {
 				return Suggestion.getAllApprovedSuggestions();
+			}],
+			sets: ['Set', function(Set) {
+				return Set.findAll();
 			}]
 		},
 		controller: 'moderationView'
