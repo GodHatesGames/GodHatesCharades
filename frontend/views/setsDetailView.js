@@ -6,7 +6,7 @@ app.controller('setsDetailView', function(set, setItems, $scope, $state, $stateP
 	$scope.scenarioCount = 0;
 	$scope.removeSetItem = _removeSetItem;
 	$scope.editSuggestion = _editSuggestion;
-	$scope.$watch('set', _updateCount);
+	$scope.$watch('set.suggestions.length', _updateCount);
 	$scope.list = {
 		search: null,
 		searchProps: ['text']
