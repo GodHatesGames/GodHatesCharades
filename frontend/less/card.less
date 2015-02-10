@@ -1,4 +1,7 @@
 @import "../less/bootstrap-variables";
+@img-actor: url(../img/actor_skull.svg);
+@img-scenario: url(../img/scenario_ball.svg);
+@img-spite: url(../img/spite_guy.svg);
 
 .card {
 	position: relative; /*relative size hack*/
@@ -140,19 +143,19 @@
 
 				&.scenario {
 					background-color: @color-scenario;
-					background-image: url(../img/scenario_ball.svg);
+					background-image: @img-scenario;
 					background-size: 34px 33px;
 					background-repeat: no-repeat;
 					background-position: center 50%;
 					&.spite {
-						background-image: url(../img/spite_guy.svg);
+						background-image: @img-spite;
 						background-size: 34px 33px;
 					}
 				}
 
 				&.character {
 					background-color: @color-actor;
-					background-image: url(../img/actor_skull.svg);
+					background-image: @img-actor;
 					background-size: 30px 34px;
 					background-repeat: no-repeat;
 					background-position: center 50%;
@@ -172,5 +175,36 @@
 			margin-bottom: 0;
 			text-align: left;
 		}
+	}
+}
+
+.cardStats {
+	margin-top: 10px;
+	.scenario {
+		background-color: @color-scenario;
+		background-image: @img-scenario;
+		background-size: 34px 33px;
+		background-repeat: no-repeat;
+		background-position: 25% 50%;
+		&.spite {
+			background-image: @img-spite;
+			background-size: 34px 33px;
+		}
+	}
+
+	.character {
+		background-color: @color-actor;
+		background-image: @img-actor;
+		background-size: 30px 34px;
+		background-repeat: no-repeat;
+		background-position: 25% 50%;
+	}
+
+	.stat {
+		position: relative;
+		left: 55%;
+		font-family: 'GodHatesCharades';
+		color: white;
+		line-height: 45px;
 	}
 }
