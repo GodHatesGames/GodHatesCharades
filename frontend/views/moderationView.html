@@ -9,7 +9,7 @@
 				Loading...</div>
 
 			<div class="alert alert-info" 
-			     ng-show="allApproved && !errorMessage">
+			     ng-show="!suggestion || (allApproved && !errorMessage)">
 				Thats all folks... dont you have something better you could be doing?
 			</div>
 
