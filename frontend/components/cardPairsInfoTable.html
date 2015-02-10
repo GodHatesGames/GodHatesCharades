@@ -1,5 +1,17 @@
 <div class="pairList">
-	<table class="pairInfoTable table table-striped">
+	<button ng-click="showPairsAndLoad()"
+	        class="btn btn-success btn-xs"
+	        ng-hide="showPairs">Load Pairs</button>
+	<p ng-if="showPairs">{{pairs.length}} pairs loaded</p>
+	<input ng-model="list.search"
+	       ng-if="showPairs"
+	       placeholder="search here"
+	       class="form-control">
+	<table class="pairInfoTable table table-striped"
+	       ng-if="showPairs"
+	       infinite-scroll="displayMorePairs()"
+	       infinite-scroll-disabled="list.limit >= pairs.length"
+	       infinite-scroll-distance="0.25">
 		<tr>
 			<th>Visit</th>
 			<th>Pair</th>
@@ -7,7 +19,7 @@
 			<th>Votes</th>
 			<th>Skips</th>
 		</tr>
-		<tr ng-repeat="pair in pairs | orderBy:sortPredicates track by pair.id">
+		<tr ng-repeat="pair in pairs | fuse:list.searchProps:list.search:list.sortOverrideKeys[list.sortDirection] | limit:list.limit:list track by pair.id">
 			<td>
 				<a class="btn btn-success btn-block btn-xs" 
 				   ui-sref="pair(pair.link)"

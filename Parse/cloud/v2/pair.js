@@ -200,7 +200,7 @@ function getPairsByCard(request, response) {
 		query.descending('displayed');
 		query.include('actor.owner');
 		query.include('scenario.owner');
-		query.limit(50);
+		query.limit(1000);
 		query.equalTo(cardType, mockCard);
 		query.find({
 			success: onSuccess,

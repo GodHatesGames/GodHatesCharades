@@ -26,6 +26,7 @@ app.factory('Pair', function (DS, $q, Suggestion, ParseData, Slug, $filter) {
 			skips: ['skipped', ParseData.defaultValueHandler(0)],
 			views: ['displayed', ParseData.defaultValueHandler(0)],
 			slug: ['actor', 'scenario', _updateSlug],
+			text: ['actor', 'scenario', _updateText],
 			link: ['slug', 'id', _updateLink],
 			kdr: ['votes', 'skips', _updateKdr],
 			controversy: ['controversy', ParseData.defaultValueHandler(0)]
@@ -95,6 +96,12 @@ app.factory('Pair', function (DS, $q, Suggestion, ParseData, Slug, $filter) {
 		var text = [actor.text,
 		            scenario.text].join(' ');
 		return Slug.slugify(text);
+	}
+
+	function _updateText(actor, scenario) {
+		var text = [actor.text,
+		            scenario.text].join(' ');
+		return text;
 	}
 
 	function _updateLink(slug, id) {
