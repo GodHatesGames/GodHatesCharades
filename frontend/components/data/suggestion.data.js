@@ -14,7 +14,8 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 			styleClass: ['type', 'spite', _updateStyleClass],
 			typeDisplay: ['type', _updateTypeDisplay],
 			url: ['url', _updateUrl],
-			imageUrl: ['type', 'spite', _updateImageUrl]
+			imageUrl: ['type', 'spite', _updateImageUrl],
+			textLines: ['text', 'legal', _updateTextLines]
 		},
 		methods: {
 			// Instance methods
@@ -129,16 +130,28 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 
 	function _updateImageUrl(type) {
 		if(this.spite) {
-			return 'img/spite_guy.svg';
+			return 'img/card_spite.svg';
 		} else if(type === 0) {
-			return 'img/actor_skull.svg';
+			return 'img/card_actor.svg';
 		} else if(type === 1) {
-			return 'img/scenario_ball.svg';
+			return 'img/card_scenario.svg';
 		}
 	}
 
 	function _updateSlug(text) {
 		return Slug.slugify(text);
+	}
+
+	function _updateTextLines(text, legal) {
+		var fullText = text;
+		if(legal)
+			fullText += legal;
+		var wrapped = wordWrap(fullText, {
+			width: 18,
+			trim: true,
+			indent: ''
+		});
+		return wrapped.toUpperCase().split('\n');
 	}
 
 	function _updateLink(slug, id) {

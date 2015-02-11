@@ -166,9 +166,21 @@
 				    ng-show="User.current.admin">
 					<a ui-sref='admin.sets'>Set Builder</a>
 				</li>
+				<li role="presentation" 
+				    class="divider"
+				    ng-show="User.current.admin"></li>
+				<li role="presentation" 
+				    class="dropdown-header"
+				    ng-show="User.current.admin">
+					STYLING
+				</li>
 				<li ui-sref-active="active"
 				    ng-show="User.current.admin">
 					<a ui-sref='admin.components'>Components</a>
+				</li>
+				<li ui-sref-active="active"
+				    ng-show="User.current.admin">
+					<a ui-sref='admin.cards'>Cards</a>
 				</li>
 
 				<li role="presentation" class="divider"></li>

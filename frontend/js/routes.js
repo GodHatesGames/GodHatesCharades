@@ -256,6 +256,12 @@ app.config(function($stateProvider,
 		templateUrl: 'views/componentsView.html'
 	});
 
+	$stateProvider.state('admin.cards', {
+		url: '/cards',
+		title: 'Components',
+		templateUrl: 'views/cardsView.html'
+	});
+
 	$stateProvider.state('blog', {
 		url: '/blog',
 		title: 'Blog: News about the game and more',

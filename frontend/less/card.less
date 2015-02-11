@@ -4,85 +4,16 @@
 @img-spite: url(../img/spite_guy.svg);
 
 .card {
-	position: relative; /*relative size hack*/
-	/*border: 1px solid #DDD;*/
-	border-radius: 5px;
-	text-align: center;
+	border-radius: 12px;
+	overflow: hidden;
 	margin: 0 auto;
-
-	&:before {
-		/*relative size hack*/
-		content: "";
-		display: block;
-		padding-top: 150%;
-		/* END relative size hack*/
-	}
-	.icon {
-		svg {
-			width: 50%;
-			height: 50%;
-			position: absolute;
-			top: 10%;
-			left: 50%;
-			margin-left: -25%;
-			path {
-				fill: #000000;
-			}
-		}
-	}
+	line-height: 0;
 
 	&.character, &.scenario {
 		background-color: white !important;
 		box-shadow: 1px 3px 0 rgba(0, 0, 0, 0.1), 0px 0px 10px rgba(0, 0, 0, 0.1);
 	}
 
-	.cardContent {
-		/* relative size hack*/
-		position:  absolute;
-		top: 60%;
-		left: 0;
-		bottom: 0;
-		right: 0;
-		/* END relative size hack*/
-		padding: 6%;
-		-webkit-touch-callout: none;
-		-webkit-user-select: none;
-		-khtml-user-select: none;
-		-moz-user-select: none;
-		-ms-user-select: none;
-		user-select: none;
-		font-size: 15px;
-		font-family: 'GodHatesCharades';
-		text-transform: uppercase;
-		color: black !important;
-
-		span {
-			font-family: 'Helvetica';
-		}
-
-		@media (max-width: @screen-sm-er-max) {
-			font-size: 11px;
-			line-height: 14px;
-		}
-		@media (max-width: @screen-xs-max) {
-			font-size: 11px;
-			line-height: 14px;
-		}
-		@media (max-width: @screen-iphone) {
-			font-size: 9px;
-			line-height: 12px;
-		}
-	}
-
-	.author {
-		color: #999;
-		position: absolute;
-		bottom: 10px;
-		left: 0;
-		width: 100%;
-		text-align: center;
-		font-size: 10px;
-	}
 }
 
 .card.character .editable, .card.character, .card.scenario .editable, .card.scenario {

@@ -1,16 +1,4 @@
 <div class="card"
-     ng-class="suggestion.styleClass">
-	<span class="icon"
-	      ng-include="suggestion.imageUrl"></span>
-	<div class="cardContent">
-		{{suggestion.text}}<span>{{suggestion.legal}}</span>
-	</div>
-	<div ng-if="domain"
-	     class="domain">
-		godhatescharades.com
-	</div>
-	<div ng-if="suggestion.owner.name"
-	     class="author">
-		{{suggestion.owner.name}}
-	</div>
+     ng-class="suggestion.styleClass"
+     ng-include="suggestion.imageUrl">
 </div>
