@@ -34,11 +34,39 @@
 			</ul>
 		</li>
 
-		<li ui-sref-active="active">
-			<a href="https://godhatesgames.myshopify.com"
-			target="_blank">
+		<li dropdown
+		    class="dropdown" 
+		    is-open="storeOpen"
+		    ng-mouseover="storeOpen = true"
+		    ng-mouseout="storeOpen = false">
+			<a class="dropdown-toggle"
+			   ng-click="clickCapture($event)">
 				Store
+				<span class="dropup">
+					<span class="caret"></span>
+				</span>
 			</a>
+			<ul class="dropdown-menu"
+			    role="menu">
+				<li ui-sref-active="active">
+					<a href="https://godhatesgames.myshopify.com/products/god-hates-charades"
+					   target="_blank">
+						The Damn Game
+					</a>
+				</li>
+				<li ui-sref-active="active">
+					<a href="https://godhatesgames.myshopify.com/products/8bit-expansion-all-your-monies-belong-to-us"
+					   target="_blank">
+						8-Bit Expansion
+					</a>
+				</li>
+				<li ui-sref-active="active">
+					<a href="https://godhatesgames.myshopify.com/collections/swag"
+					   target="_blank">
+						Swag
+					</a>
+				</li>
+			</ul>
 		</li>
 
 	</ul>
