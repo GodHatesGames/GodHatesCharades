@@ -364,7 +364,8 @@ module.exports = function(grunt) {
 			options: {
 				plugins: [
 					{
-						removeEmptyText: false,
+						removeEmptyText: false
+					}, {
 						removeUnknownsAndDefaults: false
 					}
 				]
