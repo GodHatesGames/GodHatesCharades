@@ -1,4 +1,6 @@
 @import "../less/bootstrap-variables";
+@import "../components/ribbon";
+@import "../less/colors";
 @img-actor: url(../img/actor_skull.svg);
 @img-scenario: url(../img/scenario_ball.svg);
 @img-spite: url(../img/spite_guy.svg);
@@ -106,6 +108,52 @@
 			margin-bottom: 0;
 			text-align: left;
 		}
+	}
+
+	.pair {
+		position: relative;
+		margin-top: 70px;
+		display: block;
+		
+		.card, .ribbon-container {
+			cursor: pointer;
+		}
+
+		.ng-enter {
+			transition: opacity 1s ease-out;
+			opacity: 0;
+
+			&.ng-enter-active {
+				opacity: 1;
+			}
+		}
+
+		.ng-leave {
+			transition: opacity 1s ease-out;
+
+			&.ng-leave-active {
+				opacity: 0;
+			}
+		}
+
+		.ribbon-container {
+			font-family: GodHatesCharades;
+			text-align: center;
+			width: 100%;
+			position: absolute;
+			left: 50%;
+			top: 95%;
+			margin-left: -50%;
+
+			.ribbon {
+				padding-left: 50px;
+				padding-right: 50px;
+			}
+		}
+	}
+
+	.ribbon-gold {
+		.ribbon-colors(@color-scenario);
 	}
 }
 

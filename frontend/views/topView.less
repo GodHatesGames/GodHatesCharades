@@ -1,50 +1,5 @@
-@import "../components/ribbon";
-@import "../less/colors";
 @import "../less/bootstrap-variables";
 
-#topView {
-	.pair {
-		position: relative;
-		margin-top: 50px;
-		display: block;
-		
-		.card, .ribbon-container {
-			cursor: pointer;
-		}
-
-		.ng-enter {
-			transition: opacity 1s ease-out;
-			opacity: 0;
-
-			&.ng-enter-active {
-				opacity: 1;
-			}
-		}
-
-		.ng-leave {
-			transition: opacity 1s ease-out;
-
-			&.ng-leave-active {
-				opacity: 0;
-			}
-		}
-
-		.ribbon-container {
-			font-family: 'GodHatesCharades';
-			text-align: center;
-			width: 100px;
-			position: absolute;
-			left: 50%;
-			top: 86%;
-			margin-left: -50px;
-
-			.ribbon {
-				padding-left: 50px;
-				padding-right: 50px;
-			}
-		}
-	}
-}
 
 @media (max-width: @screen-md-max) {
 	#topView {
@@ -64,8 +19,4 @@
 			}
 		}
 	}
-}
-
-.ribbon-gold {
-	.ribbon-colors(@color-scenario);
 }
