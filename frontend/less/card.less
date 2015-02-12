@@ -10,6 +10,7 @@
 	overflow: hidden;
 	margin: 0 auto;
 	line-height: 0;
+	text-decoration: none;
 
 	&.character, &.scenario {
 		background-color: white !important;
@@ -44,11 +45,23 @@
 .pair {
 	.card {
 		&.character {
-			transform: scale(0.97, 0.97) rotate(-8deg) translateX(15px);
+			z-index: 1;
+			transform: scale(1, 1) rotate(-8deg) translateX(15px);
 		}
 
 		&.scenario {
+			z-index: 2;
 			transform: scale(1, 1) rotate(6deg) translateX(-15px);
+		}
+	}
+
+	&.pair-standalone {
+		.card {
+			transition: transform 0.25s ease;
+			&:hover {
+				z-index: 3;
+				transform: scale(1.1, 1.1) rotate(0);
+			}
 		}
 	}
 }
@@ -119,22 +132,22 @@
 			cursor: pointer;
 		}
 
-		.ng-enter {
-			transition: opacity 1s ease-out;
-			opacity: 0;
+		// &.ng-enter {
+		// 	transition: opacity 1s ease-out;
+		// opacity: 0;
 
-			&.ng-enter-active {
-				opacity: 1;
-			}
-		}
+		// 	&.ng-enter-active {
+		// 		opacity: 1;
+		// 	}
+		// }
 
-		.ng-leave {
-			transition: opacity 1s ease-out;
+		// &.ng-leave {
+		// 	transition: opacity 1s ease-out;
 
-			&.ng-leave-active {
-				opacity: 0;
-			}
-		}
+		// 	&.ng-leave-active {
+		// 		opacity: 0;
+		// 	}
+		// }
 
 		.ribbon-container {
 			font-family: GodHatesCharades;
