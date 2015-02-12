@@ -4,16 +4,38 @@ app.directive('cardPairsInfoTable', function(Pair) {
 		templateUrl: 'components/cardPairsInfoTable.html',
 		replace: true,
 		scope: {
-			suggestion: '='
+			suggestion: '=',
+			showPairsOnLoad: '='
 		},
 		controller: function($scope, $element, $attrs) {
 			$scope.sortPredicates = ['-views',
-			                    '-votes',
-			                    'skips'];
-			$scope.$watch('suggestion', _onSuggestionUpdated);
+			                         '-votes',
+			                         'skips'];
+			$scope.showPairs = $scope.showPairsOnLoad ? true : false;
+			$scope.$watch('suggestion', _loadPairs);
+			$scope.showPairsAndLoad = _showPairsAndLoad;
+			$scope.displayMorePairs = _displayMorePairs;
+			var DEFAULT_LIMIT = 10;
+			var LOAD_LIMIT = 1;
+			$scope.list = {
+				search: null,
+				limit: DEFAULT_LIMIT,
+				searchProps: ['text']
+			}
+			$scope.$watch('list.search', _onSelectorUpdated);
 
-			function _onSuggestionUpdated() {
-				if($scope.suggestion) {
+			function _onSelectorUpdated(newValue) {
+				if($scope.list.limit > DEFAULT_LIMIT) {
+					$scope.list.limit = DEFAULT_LIMIT;
+				}
+			}
+
+			function _displayMorePairs() {
+				$scope.list.limit += LOAD_LIMIT;
+			}
+
+			function _loadPairs() {
+				if($scope.suggestion && $scope.showPairs) {
 					Pair.getPairsByCard($scope.suggestion)
 					.then(_onPairsLoaded);
 				}
@@ -21,6 +43,11 @@ app.directive('cardPairsInfoTable', function(Pair) {
 
 			function _onPairsLoaded(pairs) {
 				$scope.pairs = pairs;
+			}
+
+			function _showPairsAndLoad() {
+				$scope.showPairs = true;
+				_loadPairs();
 			}
 		}
 	}

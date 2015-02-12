@@ -361,6 +361,15 @@ module.exports = function(grunt) {
 			}
 		},
 		svgmin: {
+			options: {
+				plugins: [
+					{
+						removeEmptyText: false
+					}, {
+						removeUnknownsAndDefaults: false
+					}
+				]
+			},
 			stage: {
 				files: [
 					{

@@ -173,6 +173,9 @@ app.config(function($stateProvider,
 			}],
 			approved: ['Suggestion', function(Suggestion) {
 				return Suggestion.getAllApprovedSuggestions();
+			}],
+			sets: ['Set', function(Set) {
+				return Set.findAll();
 			}]
 		},
 		controller: 'moderationView'
@@ -251,6 +254,12 @@ app.config(function($stateProvider,
 		url: '/components',
 		title: 'Components',
 		templateUrl: 'views/componentsView.html'
+	});
+
+	$stateProvider.state('admin.cards', {
+		url: '/cards',
+		title: 'Components',
+		templateUrl: 'views/cardsView.html'
 	});
 
 	$stateProvider.state('blog', {

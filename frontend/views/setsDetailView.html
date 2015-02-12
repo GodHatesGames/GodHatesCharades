@@ -1,7 +1,18 @@
 <downloader items="set.setItems"
             filename="GodHatesCharades_{{set.name}}"
             ng-if="set.setItems.length > 0"></downloader>
-<h5>Actor: {{actorCount}} | Scenario: {{scenarioCount}}</h5>
+<!-- <h5>Actor: {{actorCount}} | Scenario: {{scenarioCount}} ({{spiteCount}} Spite)</h5> -->
+<div class="cardStats">
+	<div class="col-md-4 character">
+		<span class="stat">{{actorCount}}</span class="stat">
+	</div>
+	<div class="col-md-4 scenario">
+		<span class="stat">{{scenarioCount}}</span class="stat">
+	</div>
+	<div class="col-md-4 scenario spite">
+		<span class="stat">{{spiteCount}}</span class="stat">
+	</div>
+</div>
 <div class="loadingAlert"
 	 ng-show="saving">
 	Saving...
@@ -35,7 +46,7 @@
 				</span>
 			</td>
 			<!-- Type -->
-			<td ng-class="suggestion.typeClass"></td>
+			<td ng-class="suggestion.styleClass"></td>
 		</tr>
 	</table>
 </div>

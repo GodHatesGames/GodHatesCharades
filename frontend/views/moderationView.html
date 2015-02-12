@@ -9,7 +9,7 @@
 				Loading...</div>
 
 			<div class="alert alert-info" 
-			     ng-show="allApproved && !errorMessage">
+			     ng-show="!suggestion || (allApproved && !errorMessage)">
 				Thats all folks... dont you have something better you could be doing?
 			</div>
 
@@ -23,6 +23,10 @@
 				      updatable="true"></card>
 				<card-link suggestion="suggestion"></card-link>
 				
+				<h6>Sets</h6>
+				<set-selector suggestion="suggestion" sets="sets"></set-selector>
+				
+				<h6>Details</h6>
 				<card-form suggestion="suggestion"
 				           ng-if="suggestion"
 				           save-on-submit="false"></card-form>

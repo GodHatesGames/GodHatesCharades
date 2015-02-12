@@ -1,117 +1,24 @@
 @import "../less/bootstrap-variables";
+@import "../components/ribbon";
+@import "../less/colors";
+@img-actor: url(../img/actor_skull.svg);
+@img-scenario: url(../img/scenario_ball.svg);
+@img-spite: url(../img/spite_guy.svg);
 
 .card {
-	position: relative;	/*relative size hack*/
-	/*border: 1px solid #DDD;*/
-	border-radius: 5px;
-	text-align: center;
+	border-radius: 12px;
+	overflow: hidden;
 	margin: 0 auto;
-}
+	line-height: 0;
 
-.card:before {
-	/*relative size hack*/
-	content: "";
-	display: block;
-	padding-top: 150%;
-	/* END relative size hack*/
-}
-
-.card svg {
-	width: 50%;
-	height: 50%;
-	position: absolute;
-	top: 10%;
-	left: 50%;
-	margin-left: -25%;
-	path {
-		fill: #000000;
+	&.character, &.scenario {
+		background-color: white !important;
+		box-shadow: 1px 3px 0 rgba(0, 0, 0, 0.1), 0px 0px 10px rgba(0, 0, 0, 0.1);
 	}
+
 }
 
-.cardContent {
-	/* relative size hack*/
-	position:  absolute;
-	top: 60%;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	/* END relative size hack*/
-	padding: 6%;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	font-size: 15px;
-	font-family: 'GodHatesCharades';
-	text-transform: uppercase;
-	color: black !important;
-
-	span {
-		font-family: 'Helvetica';
-	}
-}
-
-.card .domain {
-	position: absolute;
-	bottom: 10px;
-	left: 0;
-	width: 100%;
-	text-align: center;
-	font-size: 10px;
-}
-
-.card .author {
-	color: #999;
-	position: absolute;
-	bottom: 10px;
-	left: 0;
-	width: 100%;
-	text-align: center;
-	font-size: 10px;
-}
-
-.card.character .domain {
-	color: darken(@color-actor, 20%) !important;
-}
-
-.card.scenario .domain {
-	color: darken(@color-scenario, 20%) !important;
-}
-
-@media (max-width: @screen-sm-er-max) {
-	.cardContent {
-		font-size: 11px;
-		line-height: 14px;
-	}
-}
-
-@media (max-width: @screen-xs-max) {
-	.cardContent {
-		font-size: 11px;
-		line-height: 14px;
-	}
-}
-
-@media (max-width: @screen-iphone) {
-	.cardContent {
-		font-size: 9px;
-		line-height: 12px;
-	}
-}
-
-.card.character, .card.scenario {
-	background-color: white !important;
-	box-shadow: 1px 3px 0 rgba(0, 0, 0, 0.1), 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-.card.character .editable, .card.character {
-	color: black;
-	font-weight: normal;
-}
-
-.card.scenario .editable, .card.scenario {
+.card.character .editable, .card.character, .card.scenario .editable, .card.scenario {
 	color: black;
 	font-weight: normal;
 }
@@ -169,15 +76,19 @@
 
 				&.scenario {
 					background-color: @color-scenario;
-					background-image: url(../img/scenario_ball.svg);
+					background-image: @img-scenario;
 					background-size: 34px 33px;
 					background-repeat: no-repeat;
 					background-position: center 50%;
+					&.spite {
+						background-image: @img-spite;
+						background-size: 34px 33px;
+					}
 				}
 
 				&.character {
 					background-color: @color-actor;
-					background-image: url(../img/actor_skull.svg);
+					background-image: @img-actor;
 					background-size: 30px 34px;
 					background-repeat: no-repeat;
 					background-position: center 50%;
@@ -197,5 +108,82 @@
 			margin-bottom: 0;
 			text-align: left;
 		}
+	}
+
+	.pair {
+		position: relative;
+		margin-top: 70px;
+		display: block;
+		
+		.card, .ribbon-container {
+			cursor: pointer;
+		}
+
+		.ng-enter {
+			transition: opacity 1s ease-out;
+			opacity: 0;
+
+			&.ng-enter-active {
+				opacity: 1;
+			}
+		}
+
+		.ng-leave {
+			transition: opacity 1s ease-out;
+
+			&.ng-leave-active {
+				opacity: 0;
+			}
+		}
+
+		.ribbon-container {
+			font-family: GodHatesCharades;
+			text-align: center;
+			width: 100%;
+			position: absolute;
+			left: 50%;
+			top: 95%;
+			margin-left: -50%;
+
+			.ribbon {
+				padding-left: 50px;
+				padding-right: 50px;
+			}
+		}
+	}
+
+	.ribbon-gold {
+		.ribbon-colors(@color-scenario);
+	}
+}
+
+.cardStats {
+	margin-top: 10px;
+	.scenario {
+		background-color: @color-scenario;
+		background-image: @img-scenario;
+		background-size: 34px 33px;
+		background-repeat: no-repeat;
+		background-position: 25% 50%;
+		&.spite {
+			background-image: @img-spite;
+			background-size: 34px 33px;
+		}
+	}
+
+	.character {
+		background-color: @color-actor;
+		background-image: @img-actor;
+		background-size: 30px 34px;
+		background-repeat: no-repeat;
+		background-position: 25% 50%;
+	}
+
+	.stat {
+		position: relative;
+		left: 55%;
+		font-family: 'GodHatesCharades';
+		color: white;
+		line-height: 45px;
 	}
 }

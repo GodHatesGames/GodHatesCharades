@@ -1,9 +1,10 @@
 'use strict';
-app.controller('moderationView', function(unmoderated, approved, $scope, Suggestion, $compile, $rootScope) {
+app.controller('moderationView', function(unmoderated, approved, sets, $scope, Suggestion, $compile, $rootScope) {
 	// public vars
 	$scope.index = 0;
 	$scope.unmoderated = unmoderated;
 	$scope.approved = approved;
+	$scope.sets = sets;
 	$scope.allApproved = false;
 	$scope.errorMessage;
 	$scope.suggestion = unmoderated[$scope.index];

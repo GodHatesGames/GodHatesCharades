@@ -6,25 +6,32 @@ app.controller('setsDetailView', function(set, setItems, $scope, $state, $stateP
 	$scope.scenarioCount = 0;
 	$scope.removeSetItem = _removeSetItem;
 	$scope.editSuggestion = _editSuggestion;
-	$scope.$watch('set.suggestions', _updateCount);
+	$scope.$watch('set.suggestions.length', _updateCount);
 	$scope.list = {
 		search: null,
 		searchProps: ['text']
 	};
 
 	function _updateCount() {
+		console.log('_updateCount');
 		var actors = 0;
 		var scenarios = 0;
+		var spite = 0;
 		_.each(set.suggestions, function(suggestion) {
 			if(suggestion.type === 0) {
 				// actor
 				actors++;
 			} else if(suggestion.type === 1) {
-				scenarios++;
+				if(suggestion.spite) {
+					spite++;
+				} else {
+					scenarios++;
+				}
 			}
 		});
 		$scope.actorCount = actors;
 		$scope.scenarioCount = scenarios;
+		$scope.spiteCount = spite;
 	}
 
 	function _removeSetItem($event, suggestion) {

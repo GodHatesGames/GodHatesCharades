@@ -96,26 +96,12 @@ app.controller('suggestionsView', function(suggestions, sets, $scope, $modal, Su
 	function _editSuggestion(isolatedScope, suggestion) {
 		var modalScope = $scope.$new(true);
 		modalScope.suggestion = suggestion;
-		modalScope.onSuccess = _onEditSuccess;
-		modalScope.onError = _onEditError;
 
 		var modalInstance = $modal.open({
 			templateUrl: 'components/cardDetails.modal.html',
 			scope: modalScope,
 			size: 'lg'
 		})
-
-		function _onEditSuccess(updatedSuggestion) {
-			console.log('modal success');
-			suggestion.text = updatedSuggestion.attributes.text;
-			suggestion.legal = updatedSuggestion.attributes.legal;
-			// modalInstance.dismiss();
-		}
-
-		function _onEditError(err) {
-			console.log('modal error', err);
-			// modalInstance.dismiss();
-		}
 	}
 
 	function _loadSuggestions() {

@@ -1,5 +1,5 @@
 'use strict';
-app.directive('cardForm', function() {
+app.directive('cardForm', function(Suggestion) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/cardForm.html',
@@ -14,39 +14,29 @@ app.directive('cardForm', function() {
 			$scope.saveSuggestion = _saveSuggestion;
 			$scope.saving = false;
 			$scope.updates = {
+				suggestionId: $scope.suggestion.id,
 				text: $scope.suggestion.text,
-				legal: $scope.suggestion.legal
+				legal: $scope.suggestion.legal,
+				spite: $scope.suggestion.spite
 			}
 
 			function _saveSuggestion() {
 				if($scope.saveOnSubmit !== false) {
 					$scope.saving = true;
-					Parse.Cloud.run(
-						CONFIG.PARSE_VERSION + 'updateSuggestionText',
-						{
-							suggestionId: $scope.suggestion.id,
-							text: $scope.updates.text,
-							legal: $scope.updates.legal
-						},
-						{
-							success: onSuggestionSaved,
-							error: onSuggestionError
-						}
-					);
+					Suggestion.update($scope.updates.suggestionId, $scope.updates)
+					.then(_onSuggestionSaved, _onSuggestionError);
 				}
 
-				function onSuggestionSaved (savedSuggestion) {
+				function _onSuggestionSaved (savedSuggestion) {
 					console.log('suggestion saved');
 					$scope.saving = false;
-					$scope.$digest();
 					if($scope.onSuccess)
 						$scope.onSuccess(savedSuggestion);
 				}
 
-				function onSuggestionError (error) {
+				function _onSuggestionError (error) {
 					console.error('error saving suggestion:', error);
 					$scope.saving = false;
-					$scope.$digest();
 					if($scope.onError)
 						$scope.onError(error);
 				}

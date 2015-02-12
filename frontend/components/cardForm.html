@@ -10,6 +10,15 @@
 				<a class="btn btn-success btn-plain btn-xs" ng-model="updates.legal" btn-radio="'®'" uncheckable>&reg;</a>
 			</div>
 		</div>
+		<!-- Spite checkbox to show if scenario -->
+		<div class="checkbox"
+		      ng-if="suggestion.type == 1">
+			<label>
+				<input type="checkbox"
+				       ng-model="updates.spite">
+				Spite Card
+			</label>
+		</div>
 		<div class="form-group">
 			<div class="col-md-8">
 				<input type="text"

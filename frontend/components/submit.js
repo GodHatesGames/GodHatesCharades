@@ -44,7 +44,6 @@ app.directive('submit', function(Suggestion, User) {
 			
 			$scope.typeDisplay = Suggestion.getTypeDisplayByType($scope.type);
 			$scope.typeClass = Suggestion.getTypeClassByType($scope.type);
-			$scope.imageUrl = Suggestion.getImageByType($scope.type);
 
 			$scope.onTextChange = function(newValue, oldValue) {
 				if(newValue === undefined || newValue === null)

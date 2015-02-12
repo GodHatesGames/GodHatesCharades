@@ -188,10 +188,10 @@ function getPairsByCard(request, response) {
 	var cardType = request.params.cardtype;
 	// console.log('request.user.id:' + request.user.id);
 	if(cardId !== undefined) {
-		console.log('getPair fetchData');
-		console.log(cardType);
-		console.log(cardId);
-		console.log('--');
+		// console.log('getPair fetchData');
+		// console.log(cardType);
+		// console.log(cardId);
+		// console.log('--');
 		var SuggestionObject = Parse.Object.extend('Suggestion');
 		var mockCard = new SuggestionObject();
 		mockCard.id = cardId;
@@ -200,7 +200,7 @@ function getPairsByCard(request, response) {
 		query.descending('displayed');
 		query.include('actor.owner');
 		query.include('scenario.owner');
-		query.limit(50);
+		query.limit(1000);
 		query.equalTo(cardType, mockCard);
 		query.find({
 			success: onSuccess,
@@ -211,8 +211,8 @@ function getPairsByCard(request, response) {
 	}
 
 	function onSuccess(pairs) {
-		console.log('onSuccess');
-		console.log(pairs)
+		// console.log('onSuccess');
+		// console.log(pairs)
 		_.each(pairs, function(pair) {
 			userUtils.stripPrivateData(pair.attributes.actor.attributes.owner);
 			userUtils.stripPrivateData(pair.attributes.scenario.attributes.owner);
