@@ -24,7 +24,8 @@ var app = angular.module('app', ['ng',
                                  'youtube-embed',
                                  'infinite-scroll',
                                  'angularStats',
-                                 'templates-app'
+                                 'templates-app',
+                                 'hj.uiSrefFastclick'
                                 ]);
 console.log('starting app!');
 
