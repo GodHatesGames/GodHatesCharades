@@ -27,7 +27,7 @@
 				<!-- post title + body -->
 				<div ng-if="body"
 				     class="body col-md-6 col-lg-6">
-					<a ui-sref="blog.detail({id: post.id})">
+					<a ui-sref="blog.detail({id: post.id, slug: post.slug})">
 						<h2 ng-bind-html="body.getTitle().text">
 						</h2>
 					</a>
