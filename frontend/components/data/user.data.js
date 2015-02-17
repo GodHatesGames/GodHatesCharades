@@ -5,6 +5,7 @@ app.factory('User', function (DS, $q, ParseData, $rootScope) {
 		defaultAdapter: 'userAdapter',
 		beforeInject: _beforeInject,
 		afterInject: _afterInject,
+		afterCreate: _afterCreate,
 		methods: {
 			// Instance methods
 			logout: _logout,
@@ -45,6 +46,20 @@ app.factory('User', function (DS, $q, ParseData, $rootScope) {
 		}
 	}
 
+	function _afterCreate(resourceName, parseObject, cb) {
+		// alias any existing newletter user with their new userid
+		mixpanel.alias(parseObject.id, parseObject.email);
+		mixpanel.people.set({
+			'$email': parseObject.email,
+			'$name': parseObject.name,
+			'$created': new Date(),
+			'Beta': parseObject.beta
+		});
+		mixpanel.identify(parseObject.id);
+
+		cb(null, parseObject);
+	}
+
 	function _updateLinks() {
 		ParseData.linkRelationsAfterInject(User, RELATIONS, this);
 	}
@@ -63,6 +78,7 @@ app.factory('User', function (DS, $q, ParseData, $rootScope) {
 	}
 
 	function _onUserConnected(userData) {
+		mixpanel.identify(userData.id);
 		ParseData.inject('user', userData);
 	}
 
@@ -102,11 +118,6 @@ app.factory('User', function (DS, $q, ParseData, $rootScope) {
 		newUser.set('email', attrs.email);
 		newUser.set('name', attrs.name);
 		return newUser.signUp();
-	}
-
-	function _onSignupError(user, error) {
-		// The login failed. Check error to see why.
-		console.log('signup failed:', error);
 	}
 
 	// instance methods

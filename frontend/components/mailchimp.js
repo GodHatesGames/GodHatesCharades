@@ -1,5 +1,5 @@
 'use strict';
-app.directive('mailchimp', function() {
+app.directive('mailchimp', function(User) {
 	return {
 		restrict: 'E',
 		templateUrl: 'components/mailchimp.html',
@@ -26,7 +26,14 @@ app.directive('mailchimp', function() {
 					$scope.onSuccess($scope.location);
 				$scope.submitted = true;
 				$scope.sending = false;
-				mixpanel.identify($scope.email);
+				if(!User.current) {
+					// create email based mixpanel user if they're not already logged in
+					mixpanel.people.set({
+						'$email': $scope.email,
+						'Subscriber': true
+					});
+					mixpanel.identify($scope.email);
+				}
 			}
 
 			function onSubscribeError(err) {
