@@ -26,6 +26,7 @@ app.directive('mailchimp', function() {
 					$scope.onSuccess($scope.location);
 				$scope.submitted = true;
 				$scope.sending = false;
+				mixpanel.identify($scope.email);
 			}
 
 			function onSubscribeError(err) {
