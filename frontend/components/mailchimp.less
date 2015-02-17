@@ -2,7 +2,6 @@
 @mailchimp-height: 44;
 
 .mailchimp {
-
 	.email {
 		height: unit(@mailchimp-height, px);
 		line-height: unit(@mailchimp-height, px);
@@ -49,6 +48,12 @@
 
 		.submit {
 			width: 45%;
+		}
+	}
+
+	@media (max-width: @screen-xs-max) {
+		.form-inline {
+			padding: 0;
 		}
 	}
 }

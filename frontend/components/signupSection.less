@@ -23,14 +23,10 @@
 	@media (max-width: @screen-xs-max) {
 		padding-left: 0px;
 		padding-right: 0px;
-
-		.form-inline {
-			padding: 0;
-		}
 	}
 
 	@media (min-width: @screen-md-min) {
-		.mailchimp {
+		.mailchimp:not(.submitted) {
 			top: 20px;
 		}
 	}

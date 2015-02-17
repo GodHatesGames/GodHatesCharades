@@ -399,7 +399,7 @@ section {
 		padding-top: 35px;
 	}
 
-	&:not(.row-flush) {
+	&:not(.row-vertical-flush) {
 		padding-bottom: 25px;
 	}
 
@@ -412,20 +412,20 @@ section {
 		}
 	}
 
-	&.row-flush {
+	&.row-vertical-flush {
 		padding-top: 0;
 		padding-bottom: 0;
+	}
+
+	&.row-horizontal-flush {
+		margin-left: -60px;
+		margin-right: -60px;
 	}
 }
 
 .container {
 	.content{
 		padding-top: 0;
-	}
-
-	& > .row {
-		margin-left: -60px;
-		margin-right: -60px;
 	}
 
 	section {
