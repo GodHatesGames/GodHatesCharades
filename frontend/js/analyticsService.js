@@ -5,7 +5,11 @@ app.service('analytics', function($location, $state) {
 	};
 
 	function _getPageTitle() {
-		return ($state.current.title || $state.current.parent.title);
+		if($state.current.title) {
+			return $state.current.title;
+		} else if($state.current.parent) {
+			return $state.current.parent.title;
+		}
 	}
 
 	function _getPageUrl() {
