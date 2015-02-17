@@ -8,7 +8,10 @@
 		<link rel="icon" href="favicon.ico?v=3" type="image/x-icon">
 		<link rel="shortcut icon" href="favicon.ico?v=3" type="image/x-icon">
 
-		<title ng-bind="($state.current.title || $state.current.parent.title) + ' | ' + 'God Hates Charades'"></title>
+		<title ng-if="$state.current.title || $state.current.parent.title"
+		       ng-bind="($state.current.title || $state.current.parent.title) + ' | ' + 'God Hates Charades'"></title>
+		<title ng-if="!$state.current.title && !$state.current.parent.title"
+		       ng-bind="'God Hates Charades'"></title>
 		<meta name="description" ng-content="$state.current.description"/>
 
 		<!-- Facebook OG Tags -->
@@ -102,6 +105,7 @@
 		<script src="js/app.js"></script>
 		<script src="js/templates.js"></script>
 		<script src="js/campaignService.js"></script>
+		<script src="js/analyticsService.js"></script>
 		<script src="js/vendor/word-wrap.js"></script>
 		<script src="components/data/pair.data.js"></script>
 		<script src="components/data/profile.data.js"></script>

@@ -21,7 +21,6 @@ app.config(function($stateProvider,
 
 	$stateProvider.state('home', {
 		url: '/?vine&youtube',
-		title: 'Your favorite new party game',
 		description: 'A game where you act out the vile and despicable inside all of us. Talk, shout, and say awful things in the form of 30 second act outs.',
 		templateUrl: 'views/homeView.html',
 		controller: 'homeView'
@@ -29,7 +28,7 @@ app.config(function($stateProvider,
 
 	$stateProvider.state('submit', {
 		url: '/submit',
-		title: 'Create: Suggest a new card',
+		title: 'Create',
 		description: 'We need your help coming up with funny new cards. Submit your favorite ideas here.',
 		templateUrl: 'views/submitView.html',
 		resolve: {
@@ -45,14 +44,14 @@ app.config(function($stateProvider,
 	});
 	$stateProvider.state('vote', {
 		url: '/vote',
-		title: 'Vote: Help us choose new cards',
+		title: 'Vote',
 		description: 'Vote on cards submitted by other players to help us choose the best ones.',
 		templateUrl: 'views/voteView.html',
 		controller: 'voteView'
 	});
 	$stateProvider.state('login', {
 		url: '/login',
-		title: 'Login: Access our community site',
+		title: 'Login',
 		description: 'Join our community site and help us improve the game.',
 		templateUrl: 'views/loginView.html',
 		controller: 'loginView'
@@ -93,7 +92,7 @@ app.config(function($stateProvider,
 	});
 	$stateProvider.state('rules', {
 		url: '/rules',
-		title: 'Rules: Detailed for the game',
+		title: 'Rules',
 		description: 'Learn the rules before your play the game.',
 		templateUrl: 'views/rulesView.html',
 		controller: 'rulesView',
@@ -105,14 +104,14 @@ app.config(function($stateProvider,
 	});
 	$stateProvider.state('share', {
 		url: '/share',
-		title: 'Share: Help us spread the word!',
+		title: 'Share',
 		description: 'Spread the word about God Hates Charades.',
 		templateUrl: 'views/shareView.html',
 		controller: 'shareView'
 	});
 	$stateProvider.state('top', {
 		url: '/top',
-		title: 'Top Cards: Favorites chosen by the community',
+		title: 'Top Pairs',
 		description: 'Want to see everyone\'s favorite cards? See the most popular and the most controversial.',
 		templateUrl: 'views/topView.html',
 		controller: 'topView',
@@ -120,7 +119,7 @@ app.config(function($stateProvider,
 	});
 	$stateProvider.state('top.fame', {
 		url: '/fame',
-		title: 'Hall of Fame: Favorites chosen by the community',
+		title: 'Hall of Fame',
 		description: 'Want to see everyone\'s favorite pairs?',
 		templateUrl: 'views/topView.detail.html',
 		controller: 'topView.fame',
@@ -132,7 +131,7 @@ app.config(function($stateProvider,
 	});
 	$stateProvider.state('top.shame', {
 		url: '/shame',
-		title: 'Hall of Shame: Most despised pairs chosen by the community',
+		title: 'Hall of Shame',
 		description: 'Want to see everyone\'s most despised pairs?',
 		templateUrl: 'views/topView.detail.html',
 		controller: 'topView.shame',
@@ -144,7 +143,7 @@ app.config(function($stateProvider,
 	});
 	$stateProvider.state('top.controversial', {
 		url: '/controversial',
-		title: 'Controversial: Most loved and hated pairs chosen by the community',
+		title: 'Controversial',
 		description: 'Want to see everyone\'s most loved and hated pairs?',
 		templateUrl: 'views/topView.detail.html',
 		controller: 'topView.controversial',
@@ -264,7 +263,7 @@ app.config(function($stateProvider,
 
 	$stateProvider.state('blog', {
 		url: '/blog',
-		title: 'Blog: News about the game and more',
+		title: 'Blog',
 		description: 'All the latest news about our game and our ramblings about our favorite games made by others.',
 		templateUrl: 'views/blogView.html',
 		resolve: {
@@ -315,7 +314,7 @@ app.config(function($stateProvider,
 
 	$stateProvider.state('timeline', {
 		url: '/timeline',
-		title: 'Timeline: Our Kickstarter fufillment timeline',
+		title: 'Timeline',
 		description: 'See our progress in shipping the game to our kickstarter backers!',
 		templateUrl: 'views/timelineView.html',
 		controller: 'timelineView',
@@ -328,7 +327,7 @@ app.config(function($stateProvider,
 
 	$stateProvider.state('watch', {
 		url: '/watch',
-		title: 'Watch: See videos of God Hates Charades',
+		title: 'Watch',
 		description: 'Watch people make fools out of themselves on the internet!',
 		templateUrl: 'views/watchView.html',
 		controller: 'watchView',
