@@ -1,5 +1,5 @@
 'use strict';
-app.controller('homeView', function($scope, $window, $timeout) {
+app.controller('homeView', function($scope, $window, $timeout, analytics) {
 	$window.scrollTo(0, 0);
 	$scope.hidePreorder = true;
 	$timeout(_onShowPreorder, 37000);
@@ -33,8 +33,8 @@ app.controller('homeView', function($scope, $window, $timeout) {
 	}
 
 	function _onPreorderClicked(location) {
-		mixpanel.track('Preorder: Clicked', {
-			location: location
+		analytics.mpEvent('Click', {
+			'Location': location
 		});
 	}
 

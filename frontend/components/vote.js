@@ -1,5 +1,5 @@
 'use strict';
-app.directive('vote', function(cloudUtils, Suggestion, $q) {
+app.directive('vote', function(cloudUtils, Suggestion, $q, analytics) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
 		templateUrl: 'components/vote.html',
@@ -108,7 +108,9 @@ app.directive('vote', function(cloudUtils, Suggestion, $q) {
 
 				// Track
 				ga('send', 'event', 'vote', 'pair');
-				mixpanel.track('Vote: Pair');
+				analytics.mpEvent('Vote', {
+					'Value': 'Vote'
+				});
 			};
 
 			function _skipBoth() {
@@ -138,7 +140,10 @@ app.directive('vote', function(cloudUtils, Suggestion, $q) {
 				deferred.promise.then(_onPairVoted, _onPairVoteError)
 
 				// Track
-				mixpanel.track('Vote: Skipped Both');
+				ga('send', 'event', 'skip', 'pair');
+				analytics.mpEvent('Vote', {
+					'Value': 'Skip'
+				});
 			};
 
 			// init

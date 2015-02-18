@@ -10,10 +10,8 @@ app.directive('signupSection', function(analytics) {
 			$scope.onEmailSubmitted = function(fromLabel) {
 				$scope.emailSubmitted = true;
 				ga('send', 'event', 'signup', 'newsletter', fromLabel);
-				mixpanel.track('Newsletter Signup', {
-					'Location': fromLabel,
-					'Page Title': analytics.getPageTitle(),
-					'Page Url': analytics.getPageUrl()
+				analytics.mpEvent('Newsletter Signup', {
+					'Location': fromLabel
 				});
 				if(this._pa)
 					_pa.track('signup_newletter');

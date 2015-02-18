@@ -25,7 +25,8 @@ var app = angular.module('app', ['ng',
                                  'infinite-scroll',
                                  'angularStats',
                                  'templates-app',
-                                 'hj.uiSrefFastclick'
+                                 'hj.uiSrefFastclick',
+                                 'analytics.mixpanel'
                                 ]);
 console.log('starting app!');
 

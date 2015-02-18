@@ -1,5 +1,5 @@
 'use strict';
-app.directive('mailchimp', function(User) {
+app.directive('mailchimp', function(User, $mixpanel) {
 	return {
 		restrict: 'E',
 		templateUrl: 'components/mailchimp.html',
@@ -28,14 +28,14 @@ app.directive('mailchimp', function(User) {
 				$scope.sending = false;
 				
 				// update mixpanel user
-				mixpanel.people.set({
+				$mixpanel.people.set({
 					'$email': $scope.email
 				});
 				if(User.current) {
-					mixpanel.identify(User.current.id);
+					$mixpanel.identify(User.current.id);
 				} else {
-					mixpanel.alias($scope.email, mixpanel.get_distinct_id());
-					mixpanel.identify($scope.email);
+					$mixpanel.alias($scope.email, $mixpanel.get_distinct_id());
+					$mixpanel.identify($scope.email);
 				}
 			}
 

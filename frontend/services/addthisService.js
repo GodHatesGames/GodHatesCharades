@@ -1,5 +1,5 @@
 'use strict';
-app.service('addthisService', function($rootScope, $q) {
+app.service('addthisService', function($rootScope, $q, analytics) {
 	// console.log('instantiate addthisService');
 	var addthisService = {
 		waitForLoad: _waitForLoad
@@ -35,8 +35,8 @@ app.service('addthisService', function($rootScope, $q) {
 		console.log('shared', response);
 		var service = response.data.service;
 		ga('send', 'event', 'social_share', 'addthis', service);
-		mixpanel.track('Social: AddThis', {
-			service: service
+		analytics.mpEvent('Social', {
+			'Service': service
 		});
 	}
 

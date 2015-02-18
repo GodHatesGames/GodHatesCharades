@@ -1,7 +1,8 @@
-app.service('analytics', function($location, $state) {
+app.service('analytics', function($mixpanel, $location, $state) {
 	var analyticsService = {
 		getPageTitle: _getPageTitle,
-		getPageUrl: _getPageUrl
+		getPageUrl: _getPageUrl,
+		mpEvent: _mpEvent
 	};
 
 	function _getPageTitle() {
@@ -14,6 +15,15 @@ app.service('analytics', function($location, $state) {
 
 	function _getPageUrl() {
 		return $location.host() + $location.path()
+	}
+
+	function _mpEvent(eventTitle, eventOptions) {
+		var defaultOptions = {
+			'Page Title': _getPageTitle(),
+			'Page Url': _getPageUrl()
+		};
+		var options = _.extend(customOption, eventOptions);
+		$mixpanel.track(eventTitle, options);
 	}
 
 	return analyticsService;

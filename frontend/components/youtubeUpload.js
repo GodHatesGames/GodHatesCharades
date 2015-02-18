@@ -1,5 +1,5 @@
 'use strict';
-app.directive('youtubeUpload', function(ytUploadService) {
+app.directive('youtubeUpload', function(ytUploadService, analytics) {
 	return {
 		restrict: 'E',
 		templateUrl: 'components/youtubeUpload.html',
@@ -38,7 +38,9 @@ app.directive('youtubeUpload', function(ytUploadService) {
 						if(!$scope.recording) {
 							console.log('recording');
 							ga('send', 'event', 'youtube', 'recording', 'started');
-							mixpanel.track('YouTube: Recording');
+							analytics.mpEvent('YouTube', {
+								'State': 'Recording'
+							});
 						}
 						$scope.recording = true;
 						break;
@@ -58,13 +60,19 @@ app.directive('youtubeUpload', function(ytUploadService) {
 			function _onUploadSuccess(event) {
 				console.log('youtube upload complete');
 				ga('send', 'event', 'youtube', 'upload', 'complete');
-				mixpanel.track('YouTube: Uploaded');
+				analytics.mpEvent('YouTube', {
+					'State': 'Uploaded'
+				});
 				$scope.status = 'YouTube is processing...';
 			}
 
 			function _onProcessingComplete(event) {
 				console.log('youtube processing complete');
 				$scope.status = 'Your video is complete, thanks for the submission!';
+				analytics.mpEvent('YouTube', {
+					'State': 'Processed',
+					'VideoId': event.data.videoId
+				});
 				if($scope.onVideoReady)
 					$scope.onVideoReady(event.data.videoId);
 				$scope.$digest();
