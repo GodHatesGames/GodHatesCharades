@@ -49,11 +49,8 @@ app.factory('User', function (DS, $q, ParseData, $rootScope) {
 	function _afterCreate(resourceName, parseObject, cb) {
 		// alias any existing newletter user with their new userid
 		mixpanel.alias(parseObject.id, parseObject.email);
-		mixpanel.people.set({
-			'$email': parseObject.email,
-			'$name': parseObject.name,
+		mixpanel.people.set_once({
 			'$created': new Date(),
-			'Beta': parseObject.beta
 		});
 		mixpanel.identify(parseObject.id);
 
@@ -78,12 +75,18 @@ app.factory('User', function (DS, $q, ParseData, $rootScope) {
 	}
 
 	function _onUserConnected(userData) {
-		mixpanel.identify(userData.id);
 		ParseData.inject('user', userData);
 	}
 
 	function _updateCurrentUser(userData) {
 		User.current = userData;
+		mixpanel.people.set({
+			'$email': userData.email,
+			'$name': userData.name,
+			'Beta': userData.beta,
+			'Subscriber': userData.subscriber
+		});
+		mixpanel.identify(userData.id);
 		console.log('Welcome', userData.username);
 		console.log(userData);
 	}
