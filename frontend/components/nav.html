@@ -26,13 +26,13 @@
 			<ul class="dropdown-menu"
 			    role="menu">
 				<li ui-sref-active="active">
-					<a ui-sref='rules'>The Rules</a>
+					<a ui-sref="rules">The Rules</a>
 				</li>
 				<!-- <li ui-sref-active="active">
-					<a ui-sref='watch'>Watch</a>
+					<a ui-sref="watch">Watch</a>
 				</li> -->
 				<li ui-sref-active="active">
-					<a ui-sref='timeline'>The Timeline</a>
+					<a ui-sref="timeline">The Timeline</a>
 				</li>
 			</ul>
 		</li>
@@ -90,7 +90,7 @@
 		</li>
 
 		<!-- <li ui-sref-active="active">
-			<a ui-sref='top.fame'>Top Pairs</a>
+			<a ui-sref="top.fame">Top Pairs</a>
 		</li> -->
 
 		<li dropdown
@@ -108,10 +108,10 @@
 			<ul class="dropdown-menu"
 			    role="menu">
 				<li ui-sref-active="active">
-					<a ui-sref='vote'>Pair vs Pair</a>
+					<a ui-sref="vote">Pair vs Pair</a>
 				</li>
 				<li ui-sref-active="active">
-					<a ui-sref='top.fame'>Top Pairs</a>
+					<a ui-sref="top.fame">Top Pairs</a>
 				</li>
 			</ul>
 		</li>
@@ -133,7 +133,7 @@
 			<ul class="dropdown-menu"
 			    role="menu">
 				<li ui-sref-active="active">
-					<a ui-sref='user({userid: User.current.id})'>
+					<a ui-sref="user({userid: User.current.id})">
 						My Profile
 					</a>
 				</li>
@@ -155,19 +155,19 @@
 				</li>
 				<li ui-sref-active="active"
 				    ng-show="User.current.admin">
-					<a ui-sref='admin.suggestions'>Suggestions</a>
+					<a ui-sref="admin.suggestions">Suggestions</a>
 				</li>
 				<li ui-sref-active="active"
 				    ng-show="User.current.admin">
-					<a ui-sref='admin.moderation'>Moderation</a>
+					<a ui-sref="admin.moderation">Moderation</a>
 				</li>
 				<li ui-sref-active="active"
 				    ng-show="User.current.admin">
-					<a ui-sref='admin.export'>Export</a>
+					<a ui-sref="admin.export">Export</a>
 				</li>
 				<li ui-sref-active="active"
 				    ng-show="User.current.admin">
-					<a ui-sref='admin.sets'>Set Builder</a>
+					<a ui-sref="admin.sets">Set Builder</a>
 				</li>
 				<li role="presentation" 
 				    class="divider"
@@ -179,11 +179,11 @@
 				</li>
 				<li ui-sref-active="active"
 				    ng-show="User.current.admin">
-					<a ui-sref='admin.components'>Components</a>
+					<a ui-sref="admin.components">Components</a>
 				</li>
 				<li ui-sref-active="active"
 				    ng-show="User.current.admin">
-					<a ui-sref='admin.cards'>Cards</a>
+					<a ui-sref="admin.cards">Cards</a>
 				</li>
 
 				<li role="presentation" class="divider"></li>
@@ -197,7 +197,7 @@
 		<li class="login" 
 		    ui-sref-active="active"
 		    ng-hide="User.current">
-			<a ui-sref='login'>
+			<a ui-sref="login">
 				Login
 			</a>
 		</li>
