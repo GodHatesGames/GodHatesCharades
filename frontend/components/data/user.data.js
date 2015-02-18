@@ -84,6 +84,7 @@ app.factory('User', function (DS, $q, ParseData, $rootScope) {
 			'$email': userData.email,
 			'$name': userData.name,
 			'Beta': userData.beta,
+			'ParseId': userData.id,
 			'Subscriber': userData.subscriber
 		});
 		mixpanel.identify(userData.id);
@@ -127,6 +128,7 @@ app.factory('User', function (DS, $q, ParseData, $rootScope) {
 
 	function _logout() {
 		Parse.User.logOut();
+		mixpanel.cookie.clear();
 		_disconnectUser();
 	}
 

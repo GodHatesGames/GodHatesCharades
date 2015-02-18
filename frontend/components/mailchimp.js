@@ -26,12 +26,15 @@ app.directive('mailchimp', function(User) {
 					$scope.onSuccess($scope.location);
 				$scope.submitted = true;
 				$scope.sending = false;
-				if(!User.current) {
-					// create email based mixpanel user if they're not already logged in
-					mixpanel.people.set({
-						'$email': $scope.email,
-						'Subscriber': true
-					});
+				
+				// update mixpanel user
+				mixpanel.people.set({
+					'$email': $scope.email
+				});
+				if(User.current) {
+					mixpanel.identify(User.current.id);
+				} else {
+					mixpanel.alias($scope.email, mixpanel.get_distinct_id());
 					mixpanel.identify($scope.email);
 				}
 			}
