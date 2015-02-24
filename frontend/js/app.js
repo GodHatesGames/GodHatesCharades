@@ -75,7 +75,8 @@ app.run(function($rootScope,
                  SetItem,
                  Set,
                  User,
-                 Suggestion
+                 Suggestion,
+                 analytics
 	) {
 		// Default away value
 		$rootScope.isAway = false;
@@ -104,6 +105,7 @@ app.run(function($rootScope,
 		$rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
 			$rootScope.unsetLoading();
 			$rootScope.currentUrl = $location.absUrl();
+			analytics.mpEvent('View');
 		});
 
 		$rootScope.$on('$stateChangeError', function (ev, to, toParams, from, fromParams, error) {

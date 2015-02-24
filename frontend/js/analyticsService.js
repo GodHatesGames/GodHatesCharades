@@ -10,6 +10,8 @@ app.service('analytics', function($mixpanel, $location, $state) {
 			return $state.current.title;
 		} else if($state.current.parent) {
 			return $state.current.parent.title;
+		} else {
+			return 'God Hates Charades';
 		}
 	}
 
@@ -22,7 +24,7 @@ app.service('analytics', function($mixpanel, $location, $state) {
 			'Page Title': _getPageTitle(),
 			'Page Url': _getPageUrl()
 		};
-		var options = _.extend(customOption, eventOptions);
+		var options = _.extend(defaultOptions, eventOptions);
 		$mixpanel.track(eventTitle, options);
 	}
 
