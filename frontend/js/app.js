@@ -76,9 +76,11 @@ app.run(function($rootScope,
                  Set,
                  User,
                  Suggestion,
-                 analytics
+                 analytics,
+                 $mixpanel
 	) {
 		// Default away value
+		$rootScope.firstLoad = true;
 		$rootScope.isAway = false;
 
 		$rootScope.$state = $state;
@@ -103,8 +105,16 @@ app.run(function($rootScope,
 		});
 
 		$rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+			console.log('page loaded:', $rootScope.currentUrl);
+
 			$rootScope.unsetLoading();
 			$rootScope.currentUrl = $location.absUrl();
+			
+			if($rootScope.firstLoad) {
+				$rootScope.firstLoad = false;
+				analytics.mpFirstLoad();
+			}
+
 			analytics.mpEvent('View');
 		});
 

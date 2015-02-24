@@ -2,7 +2,8 @@ app.service('analytics', function($mixpanel, $location, $state) {
 	var analyticsService = {
 		getPageTitle: _getPageTitle,
 		getPageUrl: _getPageUrl,
-		mpEvent: _mpEvent
+		mpEvent: _mpEvent,
+		mpFirstLoad: _mpFirstLoad
 	};
 
 	function _getPageTitle() {
@@ -26,6 +27,13 @@ app.service('analytics', function($mixpanel, $location, $state) {
 		};
 		var options = _.extend(defaultOptions, eventOptions);
 		$mixpanel.track(eventTitle, options);
+	}
+
+	function _mpFirstLoad() {
+		$mixpanel.register({
+			'Landing Page Title': _getPageTitle(),
+			'Landing Page Url': _getPageUrl()
+		});
 	}
 
 	return analyticsService;
