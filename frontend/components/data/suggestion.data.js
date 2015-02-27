@@ -143,15 +143,19 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 	}
 
 	function _updateTextLines(text, legal) {
-		var fullText = text;
-		if(legal)
-			fullText += legal;
-		var wrapped = wordWrap(fullText, {
-			width: 18,
-			trim: true,
-			indent: ''
-		});
-		return wrapped.toUpperCase().split('\n');
+		if(text.length > 0) {
+			var fullText = text;
+			if(legal)
+				fullText += legal;
+			var wrapped = wordWrap(fullText, {
+				width: 18,
+				trim: true,
+				indent: ''
+			});
+			return wrapped.toUpperCase().split('\n');
+		} else {
+			return [text + legal];
+		}
 	}
 
 	function _updateLink(slug, id) {
@@ -208,9 +212,14 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 
 	// class methods
 	function _getBlankCardByType(type) {
-		return {
-			type: type
-		};
+		var blank = Suggestion.createInstance({
+			type: type,
+			text: '',
+			spite: false,
+			legal: ''
+		});
+		blank.DSCompute();
+		return blank;
 	}
 
 	function _getTypeClassByType(type) {

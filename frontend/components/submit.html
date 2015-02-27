@@ -3,7 +3,7 @@
 	<div class="cardContainer"
 	     ng-hide="success">
 		<div class="submitForm">
-			<textarea ng-model="text"
+			<textarea ng-model="mockSuggestion.text"
 			          class="editable"
 			          placeholder="{{example}}"
 			          maxlength="75"
@@ -11,10 +11,10 @@
 			          textarea-noreturn>
 			</textarea>
 		</div>
-		<!-- <card suggestion="mockSuggestion"></card> -->
+		<card suggestion="mockSuggestion"></card>
 		<div class="alert"
 		     ng-class="characterCount()">
-			{{text.length}} / {{maxChars}} Characters
+			{{mockSuggestion.text.length}} / {{maxChars}} Characters
 		</div>
 		<button type="submit" 
 		        class="btn btn-success submit"
