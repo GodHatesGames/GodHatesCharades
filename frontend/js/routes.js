@@ -31,17 +31,7 @@ app.config(function($stateProvider,
 		title: 'Create',
 		description: 'We need your help coming up with funny new cards. Submit your favorite ideas here.',
 		templateUrl: 'views/submitView.html',
-		resolve: {
-			betaUser: ['User', '$q', function(User, $q) {
-				if(User.current.beta) {
-					return true;
-				} else {
-					return $q.reject({
-						message: 'You must be a Backer to access this page. Please login.'
-					});
-				}
-			}]
-		}
+		controller: 'submitView'
 	});
 	$stateProvider.state('vote', {
 		url: '/vote',

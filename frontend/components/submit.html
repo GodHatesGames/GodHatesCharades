@@ -2,19 +2,16 @@
 	<h4>{{typeDisplay}}</h4>
 	<div class="cardContainer"
 	     ng-hide="success">
-		<div class="card"
-		     ng-class="typeClass">
-			<span class="icon"></span>
-			<div class="submitForm cardContent">
-				<textarea ng-model="text"
-				          class="editable"
-				          placeholder="{{example}}"
-				          maxlength="75"
-				          required
-				          textarea-noreturn>
-				</textarea>
-			</div>
+		<div class="submitForm">
+			<textarea ng-model="text"
+			          class="editable"
+			          placeholder="{{example}}"
+			          maxlength="75"
+			          required
+			          textarea-noreturn>
+			</textarea>
 		</div>
+		<!-- <card suggestion="mockSuggestion"></card> -->
 		<div class="alert"
 		     ng-class="characterCount()">
 			{{text.length}} / {{maxChars}} Characters
