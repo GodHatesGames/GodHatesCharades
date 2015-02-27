@@ -68,23 +68,13 @@ app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider, 
 app.run(function($rootScope,
                  $state,
                  $stateParams,
-                 $window,
                  $location,
-                 $timeout,
-                 addthisService,
-                 SetItem,
-                 Set,
-                 User,
-                 Suggestion,
-                 analytics,
-                 $mixpanel
+                 analytics
 	) {
+		console.log('preping router')
 		// Default away value
 		$rootScope.firstLoad = true;
 		$rootScope.isAway = false;
-
-		$rootScope.$state = $state;
-		$rootScope.$stateParams = $stateParams;
 
 		// loading animation
 		$rootScope.setLoading = function() {
@@ -120,11 +110,25 @@ app.run(function($rootScope,
 
 		$rootScope.$on('$stateChangeError', function (ev, to, toParams, from, fromParams, error) {
 			$rootScope.unsetLoading();
-			console.log('Error transitioning to state', to.controller, error.message);
+			console.log('Error transitioning to state', to.name, error.message);
 			console.log(error.stack);
 			$state.go('error', {
 				message: error.message
 			})
 		});
+	}
+);
+
+app.run(function($rootScope,
+                 $state,
+                 $stateParams,
+                 $location,
+                 addthisService,
+                 SetItem,
+                 Set,
+                 User,
+                 Suggestion,
+                 analytics) {
+	console.log('everything is loaded');
 	}
 );
