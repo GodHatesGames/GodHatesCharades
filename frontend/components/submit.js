@@ -77,7 +77,7 @@ app.directive('submit', function(Suggestion, User) {
 			}
 
 			$scope.reset = function() {
-				$scope.text = '';
+				$scope.mockSuggestion = Suggestion.getBlankCardByType($scope.type);
 				$scope.success = false;
 			}
 		}
