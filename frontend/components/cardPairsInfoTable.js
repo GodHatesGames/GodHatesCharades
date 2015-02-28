@@ -30,18 +30,24 @@ app.directive('cardPairsInfoTable', function(Pair) {
 				}
 			}
 
-			function _displayMorePairs() {
-				$scope.list.limit += LOAD_LIMIT;
+			function _displayMorePairs(limitOverride) {
+				if(limitOverride) {
+					$scope.list.limit += limitOverride;
+				} else {
+					$scope.list.limit += LOAD_LIMIT;
+				}
 			}
 
 			function _loadPairs() {
 				if($scope.suggestion && $scope.showPairs) {
+					$scope.loading = true;
 					Pair.getPairsByCard($scope.suggestion)
 					.then(_onPairsLoaded);
 				}
 			}
 
 			function _onPairsLoaded(pairs) {
+				$scope.loading = false;
 				$scope.pairs = pairs;
 			}
 

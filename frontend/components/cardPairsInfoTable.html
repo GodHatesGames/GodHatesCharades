@@ -2,13 +2,14 @@
 	<button ng-click="showPairsAndLoad()"
 	        class="btn btn-success btn-xs"
 	        ng-hide="showPairs">Load Pairs</button>
-	<p ng-if="showPairs">{{pairs.length}} pairs loaded</p>
+	<h3 ng-if="loading">loading...</h3>
+	<p ng-if="pairs.length > 0">{{pairs.length}} pairs loaded</p>
 	<input ng-model="list.search"
-	       ng-if="showPairs"
+	       ng-if="!loading && showPairs"
 	       placeholder="search here"
 	       class="form-control">
 	<table class="pairInfoTable table table-striped"
-	       ng-if="showPairs"
+	       ng-if="!loading && showPairs"
 	       infinite-scroll="displayMorePairs()"
 	       infinite-scroll-disabled="list.limit >= pairs.length"
 	       infinite-scroll-distance="0.25">
@@ -42,4 +43,9 @@
 			<td>{{pair.skips}}</td>
 		</tr>
 	</table>
+	<button class="btn btn-success"
+	        ng-if="showPairs && list.limit < pairs.length"
+	        ng-click="displayMorePairs(10)">
+		Load More
+	</button>
 </div>
