@@ -36,8 +36,8 @@ app.directive('cardDetailsModal', function($modal) {
 
 				function _onEditSuccess(updatedSuggestion) {
 					console.log('modal success');
-					suggestion.text = updatedSuggestion.attributes.text;
-					suggestion.legal = updatedSuggestion.attributes.legal;
+					suggestion.text = updatedSuggestion.text;
+					suggestion.legal = updatedSuggestion.legal;
 				}
 
 				function _onEditError(err) {
