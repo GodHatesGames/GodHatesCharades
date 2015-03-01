@@ -48,11 +48,13 @@ app.factory('User', function (DS, $q, ParseData, $rootScope, $mixpanel) {
 
 	function _afterCreate(resourceName, parseObject, cb) {
 		// alias any existing newletter user with their new userid
-		$mixpanel.alias(parseObject.id, parseObject.email);
+		if($mixpanel.get_distinct_id() != $scope.email) {
+			$mixpanel.alias($scope.email, $mixpanel.get_distinct_id());
+		}
 		$mixpanel.people.set_once({
 			'$created': new Date(),
 		});
-		$mixpanel.identify(parseObject.id);
+		$mixpanel.identify(parseObject.email);
 
 		cb(null, parseObject);
 	}
@@ -87,7 +89,7 @@ app.factory('User', function (DS, $q, ParseData, $rootScope, $mixpanel) {
 			'ParseId': userData.id,
 			'Subscriber': userData.subscriber
 		});
-		$mixpanel.identify(userData.id);
+		$mixpanel.identify(userData.email);
 		console.log('Welcome', userData.username);
 		console.log(userData);
 	}

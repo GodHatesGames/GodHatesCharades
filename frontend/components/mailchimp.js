@@ -31,12 +31,11 @@ app.directive('mailchimp', function(User, $mixpanel) {
 				$mixpanel.people.set({
 					'$email': $scope.email
 				});
-				if(User.current) {
-					$mixpanel.identify(User.current.id);
-				} else {
+				if($mixpanel.get_distinct_id() != $scope.email) {
+					// alias their old id
 					$mixpanel.alias($scope.email, $mixpanel.get_distinct_id());
-					$mixpanel.identify($scope.email);
 				}
+				$mixpanel.identify($scope.email);
 			}
 
 			function onSubscribeError(err) {
