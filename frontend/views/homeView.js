@@ -32,9 +32,10 @@ app.controller('homeView', function($scope, $window, $timeout, analytics) {
 		player.setVolume(0);
 	}
 
-	function _onPreorderClicked(location) {
+	function _onPreorderClicked(location, button) {
 		analytics.mpEvent('Click', {
-			'Location': location
+			'Location': location,
+			'Button': button
 		});
 	}
 
