@@ -10,8 +10,8 @@
 	<!-- Playlist -->
 	<div ng-repeat="video in playlist | orderBy:'-snippet.publishedAt' track by video.id"
 	      class="list-video">
-		<h6 ng-if="video.snippet.channelTitle.length > 0">
-			{{video.snippet.channelTitle}}
+		<h6 ng-if="video.snippet.title.length > 0">
+			{{video.snippet.title}}
 			<small>{{video.snippet.publishedAt | date}}</small>
 		</h6>
 		<div class="embed-responsive embed-responsive-4by3">
