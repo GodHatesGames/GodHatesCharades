@@ -38,7 +38,8 @@
     "restangular": "~1.4.0",
     "word-wrap": "*",
     "angular-ui-sref-fastclick": "~0.0.1",
-    "angular-mixpanel": "~1.0.2"
+    "angular-mixpanel": "~1.0.2",
+    "chunk": "~0.0.2"
   },
   "devDependencies": {
     "ng-stats": "~2.0.4"

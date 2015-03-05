@@ -1,4 +1,6 @@
-app.controller('watchView', function(readyForUpload, ghcVids, $scope, $window) {
+app.controller('watchView', function(readyForUpload, ghcVids, $scope, $window, $filter) {
 	$window.scrollTo(0, 0);
-	$scope.ghcVids = ghcVids.items;
+	var orderedVids = $filter('orderBy')(ghcVids.items, '-snippet.publishedAt');
+	var chunkedVids = $filter('chunk')(orderedVids, 2);
+	$scope.ghcVids = chunkedVids;
 });
