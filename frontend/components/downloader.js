@@ -13,6 +13,7 @@ app.directive('downloader', function($filter) {
 			$scope.csvHeaders = [
 				'text',
 				'type',
+				'author',
 				'votes',
 				'skips',
 				'views',
@@ -42,6 +43,7 @@ app.directive('downloader', function($filter) {
 					item = {
 						'text': text,
 						'type': suggestion.typeDisplay,
+						'author': suggestion.owner.name,
 						'votes': suggestion.votes,
 						'skipped': suggestion.skips,
 						'views': suggestion.views,
