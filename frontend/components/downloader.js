@@ -12,8 +12,10 @@ app.directive('downloader', function($filter) {
 			// public vars
 			$scope.csvHeaders = [
 				'text',
-				'type',
 				'author',
+				'spite',
+				'scenario',
+				'actor',
 				'votes',
 				'skips',
 				'views',
@@ -42,8 +44,10 @@ app.directive('downloader', function($filter) {
 					text = text.replace(/(\r\n|\n|\r)/gm,' ');
 					item = {
 						'text': text,
-						'type': suggestion.typeDisplay,
 						'author': suggestion.owner.name,
+						'spite': suggestion.spite,
+						'scenario': suggestion.type === 1,
+						'actor': suggestion.type === 0,
 						'votes': suggestion.votes,
 						'skipped': suggestion.skips,
 						'views': suggestion.views,
