@@ -45,8 +45,8 @@ app.directive('downloader', function($filter) {
 					item = {
 						'text': text,
 						'author': suggestion.owner.name,
-						'spite': suggestion.spite,
-						'scenario': suggestion.type === 1,
+						'spite': suggestion.spite ? true : false,
+						'scenario': suggestion.type === 1 && !suggestion.spite,
 						'actor': suggestion.type === 0,
 						'votes': suggestion.votes,
 						'skipped': suggestion.skips,
