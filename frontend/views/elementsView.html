@@ -1,9 +1,16 @@
-<div id="components"
+<div id="elements"
      class="container">
   <h1>God Hates Charades Components</h1>
   <section ng-repeat="section in sections"
            class="row">
     <h4>{{section.title}}</h4>
+    <div ng-repeat="prop in section.props"
+         class="col-md-12 property">
+      <p>
+        <b>{{prop.title}}</b><br>
+        {{prop.description}}
+      </p>
+    </div>
     <div class="form-group col-md-12">
       <textarea class="form-control"
                 ng-model="section.code">
