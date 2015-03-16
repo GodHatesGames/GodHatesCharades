@@ -3,7 +3,9 @@ app.controller('homeView', function($scope, $window, $timeout, analytics) {
 	$window.scrollTo(0, 0);
 	$scope.hidePreorder = true;
 	$timeout(_onShowPreorder, 37000);
-	// $scope.$on('youtube.player.ready', _onPlayerReady);
+	$scope.$on('youtube.player.ready', _onPlayerReady);
+	$scope.$on('$destroy', _onPlayerDestroyed);
+	var originalVolume;
 	$scope.playerVars = {
 		autoplay: 1,
 		playsinline: 1,
@@ -13,7 +15,8 @@ app.controller('homeView', function($scope, $window, $timeout, analytics) {
 	};
 	$scope.preorderLink = 'http://godhatesgames.myshopify.com/cart/1051755037:1?source_app=shopify-widget?referer=https%3A%2F%2Fgodhatescharades.com';
 	$scope.onPreorderClicked = _onPreorderClicked;
-	$scope.$watch('homeVideo', _onHomeVideo);
+	// $scope.$watch('homeVideo.setVolume', _onHomeVideo);
+	// $scope.$on('youtube.player.ready', _onPlayerReady);
 
 	angular.element($window).bind('scroll', function() {
 		if (this.pageYOffset >= 100) {
@@ -28,10 +31,17 @@ app.controller('homeView', function($scope, $window, $timeout, analytics) {
 		}
 	}
 
-	function _onHomeVideo(homeVideo) {
+	function _onPlayerReady() {
 		// play it again
-		if(homeVideo)
-			homeVideo.setVolume(0);
+		if($scope.homeVideo && $scope.homeVideo.setVolume) {
+			console.log('volume updated on homepage');
+			originalVolume = $scope.homeVideo.getVolume();
+			$scope.homeVideo.mute();
+		}
+	}
+
+	function _onPlayerDestroyed() {
+		$scope.homeVideo.setVolume(originalVolume);
 	}
 
 	function _onPreorderClicked(location, button) {
