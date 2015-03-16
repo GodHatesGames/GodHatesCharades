@@ -6,6 +6,7 @@ app.controller('elementsView', function($scope, $compile, $timeout) {
       title: 'Signup Section',
       code: '<signup-section location="{{section.props.location.value}}" class="{{section.props.class.value}}"></signup-section>',
       formattedCode: '',
+      lastUpdated: new Date(),
       props: {
         location: {
           value: 'signup-section',
@@ -24,11 +25,7 @@ app.controller('elementsView', function($scope, $compile, $timeout) {
 
   function _formatCode(section) {
     // var scope = $scope.$new(true);
-    section.formattedCode = htmlEncode(section.code);
-    var parent = angular.element(document.getElementById(section.id));
-    $timeout(function() {
-      section.htmlCode = parent.contents().contents().text();
-    }, 100);
+    section.lastUpdated = new Date();
   }
 
 });
