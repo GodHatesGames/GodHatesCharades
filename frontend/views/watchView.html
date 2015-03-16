@@ -7,7 +7,7 @@
 	<div class="row"
 	     ng-repeat="row in ghcVids">
 		<div ng-repeat="video in row"
-		     class="col-xs-4"
+		     class="col-xs-4 clickable"
 		     youtube-modal="video"
 		     player-vars="playerVars">
 			<img ng-src="{{video.snippet.thumbnails.medium.url}}"
