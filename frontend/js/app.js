@@ -26,7 +26,8 @@ var app = angular.module('app', ['ng',
                                  'angularStats',
                                  'templates-app',
                                  'hj.uiSrefFastclick',
-                                 'analytics.mixpanel'
+                                 'analytics.mixpanel',
+                                 'ngClickSelect'
                                 ]);
 console.log('starting app!');
 

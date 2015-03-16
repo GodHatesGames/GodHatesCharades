@@ -10,11 +10,21 @@
              class="col-xs-6 property">
           <h6 ng-html-compile="prop.title"></h6>
           <p ng-html-compile="prop.description"></p>
+          <div class="form-group">
+            <input ng-model="prop.value"
+                   class="form-control"
+                   ng-change="formatCode(section)">
+          </div>
         </div>
+        <div class="clearfix"></div>
         <div class="form-group col-md-12">
-          <textarea class="form-control"
-                    ng-model="section.code">
-          </textarea>
+          <p class="hidden"
+             id="{{section.id}}"
+             ng-html-compile="section.formattedCode">
+          </p>
+          <input ng-model="section.htmlCode"
+                 class="form-control" 
+                 ng-click-select>
         </div>
       </div>
 

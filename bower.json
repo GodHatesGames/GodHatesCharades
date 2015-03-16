@@ -27,7 +27,7 @@
     "angular-slugify": "~1.0.0",
     "disqus-here": "~0.0.3",
     "angular-animate": "~1.3.8",
-    "angular": "~1.3.8",
+    "angular": "~1.3.14",
     "angular-data": "~1.5.3",
     "angular-cache": "~3.2.4",
     "fuse.js": "~1.2.2",
@@ -39,7 +39,9 @@
     "word-wrap": "*",
     "angular-ui-sref-fastclick": "~0.0.1",
     "angular-mixpanel": "~1.0.2",
-    "chunk": "~0.0.2"
+    "chunk": "~0.0.2",
+    "js-htmlencode": "~0.1.1",
+    "ng-click-select": "~0.1.4"
   },
   "devDependencies": {
     "ng-stats": "~2.0.4"

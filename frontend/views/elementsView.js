@@ -1,19 +1,34 @@
 'use strict';
-app.controller('elementsView', function($scope) {
+app.controller('elementsView', function($scope, $compile, $timeout) {
   $scope.sections = [
     {
+      id: 'signup-section',
       title: 'Signup Section',
-      code: '<signup-section location="signup_section" class="bg-dark"></signup-section>',
-      props: [
-        {
+      code: '<signup-section location="{{section.props.location.value}}" class="{{section.props.class.value}}"></signup-section>',
+      formattedCode: '',
+      props: {
+        location: {
+          value: 'signup-section',
           title: 'location',
           description: 'used in analytics to describe where in a given page the signup happened, unless there are multiple on the page use signup_section.'
         },
-        {
+        class: {
+          value: 'bg-dark',
           title: 'class',
           description: 'standard html attribute, for this component use to add a background color. backgrounds listed on the <a ui-sref="admin.components">Components</a> page.'
         }
-      ]
+      }
     }
   ];
+  $scope.formatCode = _formatCode;
+
+  function _formatCode(section) {
+    // var scope = $scope.$new(true);
+    section.formattedCode = htmlEncode(section.code);
+    var parent = angular.element(document.getElementById(section.id));
+    $timeout(function() {
+      section.htmlCode = parent.contents().contents().text();
+    }, 100);
+  }
+
 });
