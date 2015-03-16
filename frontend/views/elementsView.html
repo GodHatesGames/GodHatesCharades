@@ -1,0 +1,15 @@
+<div id="components"
+     class="container">
+  <h1>God Hates Charades Components</h1>
+  <section ng-repeat="section in sections"
+           class="row">
+    <h4>{{section.title}}</h4>
+    <div class="form-group col-md-12">
+      <textarea class="form-control"
+                ng-model="section.code">
+      </textarea>
+    </div>
+    <div ng-html-compile="section.code"
+         class=""></div>
+  </section>
+</div>

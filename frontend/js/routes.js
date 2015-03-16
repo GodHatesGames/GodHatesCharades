@@ -246,6 +246,13 @@ app.config(function($stateProvider,
 		templateUrl: 'views/componentsView.html'
 	});
 
+	$stateProvider.state('admin.elements', {
+		url: '/elements',
+		title: 'Elements',
+		templateUrl: 'views/elementsView.html',
+		controller: 'elementsView'
+	});
+
 	$stateProvider.state('admin.cards', {
 		url: '/cards',
 		title: 'Components',
