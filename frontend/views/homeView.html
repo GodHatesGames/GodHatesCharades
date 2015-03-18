@@ -60,24 +60,9 @@
 	<!--End Vote section-->
 
 	<!-- Preorder section -->
-	<section id="preorder"
-	         class="row row-horizontal-flush bg-light-bright">
-		<a ng-href="{{preorderLink}}"
-		   ng-mouseup="onPreorderClicked('homepage_preorder_section', 'Preorder Animation')"
-		   target="_blank">
-			<img src="img/pre_order_gif_02.gif"
-			     class="img-responsive"
-			     alt="Pre-Order Now!">
-		</a>
-		<div class="col-xs-offset-0 col-xs-12 col-sm-offset-4 col-sm-4">
-			<a ng-href="{{preorderLink}}"
-			   ng-mouseup="onPreorderClicked('homepage_preorder_section', 'Preorder Button')"
-			   class="btn btn-success btn-block" 
-			   target="_blank">
-				Preorder Now!
-			</a>
-		</div>
-	</section>
+	<preorder-section location="preorder_section"
+	                  class="bg-light-bright">
+	</preorder-section>
 
 	<!-- iOS Ad section -->
 	<section class="row ios"

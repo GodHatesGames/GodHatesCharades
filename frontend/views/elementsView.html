@@ -1,8 +1,7 @@
 <div id="elements"
      class="container">
   <h1>God Hates Charades Components</h1>
-  <section ng-repeat="section in sections"
-           class="row">
+  <div ng-repeat="section in sections">
     <h4>{{section.title}}</h4>
     <div class="col-sm-offset-1 col-sm-10">
       <div class="well row">
@@ -26,5 +25,5 @@
     </div>
     <div ng-html-compile="section.code"
          class=""></div>
-  </section>
+  </div>
 </div>

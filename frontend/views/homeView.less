@@ -11,8 +11,12 @@
 
 /* Section - Examples */
 #homeView section {
+	&.row-horizontal-flush {
+		margin-left: -60px;
+		margin-right: -60px;
+	}
 
-	:first-child {
+	& > :first-child {
 		padding-top: 0;
 	}
 
@@ -27,14 +31,6 @@
 			padding-left: 0;
 		}
 		
-		.preorder {
-			// padding-top: 15px;
-			// background-color: @color-scenario;
-
-			@media (max-width: @screen-sm-er-max) {
-				padding-bottom: 15px;
-			}
-		}
 	/* end &.intro */
 	}
 
@@ -82,13 +78,6 @@
 		padding: 15px;
 		.vs {
 			background-color: black;
-		}
-	}
-
-	&#preorder {
-		padding: 15px;
-		.btn {
-			margin-top: 15px;
 		}
 	}
 
