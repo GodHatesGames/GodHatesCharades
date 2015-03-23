@@ -3,8 +3,21 @@ app.controller('blogDetailView', function(post, $scope, $sce, $compile, $state, 
 	$window.scrollTo(0, 0);
 	$scope.post = post;
 
+	// TODO: Make this part of the prismic data handler
 	var structuredText = post.getStructuredText('blog.body');
-	$scope.bodyHtml = structuredText.asHtml();
+	var htmlString = structuredText.asHtml();
+	var bodyElement = angular.element(htmlString);
+	_.each(bodyElement, function(child, index, list) {
+		if(_.contains(child.classList, 'html')) {
+			var childElement = angular.element(child);
+			var htmlText = childElement.text();
+			var htmlElement = angular.element(htmlText);
+			// childElement.append(htmlElement);
+			list.splice(index, 1, htmlElement[0]);
+		}
+	});
+	var container = angular.element('<div>').append(bodyElement);
+	$scope.bodyHtml = container.html();
 	$scope.mainImage = post.getImageView('blog.image', 'main');
 	$scope.mainEmbed = post.getHtml('blog.embed');
 	$scope.mainYoutube = post.getText('blog.youtube');
