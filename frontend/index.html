@@ -56,22 +56,7 @@
 			     class="content bg-light">
 			</div>
 
-			<div class="footer">
-				<p>&copy; God Hates Games 2013-2014</p>
-				<iframe allowtransparency="true"
-				        frameborder="0"
-				        scrolling="no"
-				        src="//platform.twitter.com/widgets/follow_button.html?screen_name=GodHatesGames&show_count=false"
-				        style="width:300px; height:20px;">
-				</iframe>
-				<iframe src="//www.facebook.com/plugins/follow.php?href=https%3A%2F%2Fwww.facebook.com%2Fghcharades&amp;width&amp;height=21&amp;colorscheme=light&amp;layout=button_count&amp;show_faces=false&amp;appId=573021096087007"
-				        scrolling="no"
-				        frameborder="0"
-				        style="border:none; overflow:hidden; height:21px;"
-				        allowTransparency="true">
-				</iframe>
-				<yt-subscribe channel="godhatescharades"></yt-subscribe>
-			</div>
+			<footer></footer>
 
 		</div> <!-- /container -->
 		<!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");
@@ -201,6 +186,7 @@ mixpanel.init("42038226fe0a8f72e602ce2016c122e2");</script><!-- end Mixpanel -->
 		<script src="components/youtubeList.js"></script>
 		<script src="components/codeHolder.js"></script>
 		<script src="components/preorderSection.js"></script>
+		<script src="components/footer.js"></script>
 		<script src="js/routes.js"></script>
 		<script src="js/main.js"></script>
 		<!-- endbuild -->
@@ -281,5 +267,12 @@ mixpanel.init("42038226fe0a8f72e602ce2016c122e2");</script><!-- end Mixpanel -->
 		<!-- Youtube Embed Button -->
 		<script src="https://apis.google.com/js/platform.js"></script>
 		<!-- end Youtube Embed Button -->
+
+		<script>
+			UPLOADCARE_LOCALE = "en";
+			UPLOADCARE_TABS = "file url gdrive dropbox evernote";
+			UPLOADCARE_PUBLIC_KEY = "11ed73965851739b0000";
+		</script>
+		<script charset="utf-8" src="//ucarecdn.com/widget/2.0.5/uploadcare/uploadcare.full.min.js"></script>
 	</body>
 </html>
