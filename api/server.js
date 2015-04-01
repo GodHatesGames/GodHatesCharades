@@ -4,6 +4,7 @@ var express = require('express');
 var path = require('path');
 var prerender = require('prerender-node');
 var mailchimp = require('./mailchimp');
+var s3data = require('./s3data');
 var compression = require('compression');
 
 var port = process.env.PORT || 3000;
@@ -37,7 +38,9 @@ server.configure('development', function(){
 
 server.use(express.static(staticFilePath));
 
+// api routes
 server.post('/api/subscribe', mailchimp.subscribe);
+server.get('/api/files', s3data.getFiles);
 
 // pass the frontend routes
 server.get('/home', showIndex);

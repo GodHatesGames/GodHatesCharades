@@ -30,7 +30,7 @@ var app = angular.module('app', ['ng',
                                 ]);
 console.log('starting app!');
 
-app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider, $provide, uiSelectConfig, DSProvider, ParseDataSimplifierProvider) {
+app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider, $provide, uiSelectConfig, DSProvider, ParseDataSimplifierProvider, RestangularProvider) {
 	// customize Angular-Data
 	DSProvider.defaults.deserialize = function (resourceName, data) {
 		if(!data) {
@@ -62,6 +62,8 @@ app.config(function($locationProvider, PrismicProvider, DSCacheFactoryProvider, 
 	});
 
 	uiSelectConfig.theme = 'bootstrap';
+
+  RestangularProvider.setBaseUrl('/api');
 
 });
 

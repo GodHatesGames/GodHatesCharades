@@ -1,0 +1,12 @@
+<div id="uploadView"
+     class="container">
+  <ul>
+    <li ng-repeat="file in files | orderBy:'-LastModified' as file.ETag">
+      <a ng-href="{{file.url}}"
+         target="_blank">
+        {{file.Key}}
+      </a>&nbsp;
+      <div class="label label-success">{{file.LastModified | date:'short'}}</div>
+    </li>
+  </ul>
+</div>

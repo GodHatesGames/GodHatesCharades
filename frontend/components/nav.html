@@ -157,6 +157,10 @@
 				    ng-show="User.current.admin">
 					<a ui-sref="admin.elements">Elements</a>
 				</li>
+				<li ui-sref-active="active"
+				    ng-show="User.current.admin">
+					<a ui-sref="admin.upload">Uploaded Files</a>
+				</li>
 				<li role="presentation" 
 				    class="divider"
 				    ng-show="User.current.admin"></li>
