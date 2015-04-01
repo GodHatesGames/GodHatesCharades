@@ -1,7 +1,7 @@
 <div id="uploadView"
      class="container">
   <h1>God Hates Charades Components</h1>
-  <p>Email <a href="mailto:upload@godhatesgames.com">upload@godhatesgames.com</a> with a single attached file from your @godhatesgames email address.</p>
+  <p>Email <a href="mailto:upload@godhatesgames.com">upload@godhatesgames.com</a> with a single attached file from your @godhatesgames email address. The file will be renamed with the text of the subject line.</p>
   <ul>
     <li ng-repeat="file in files | orderBy:'-LastModified' as file.ETag">
       <a ng-href="{{file.url}}"
