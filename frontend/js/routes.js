@@ -84,13 +84,6 @@ app.config(function($stateProvider) {
 		controller: 'exportView'
 	});
 
-	$stateProvider.state('admin.sets.create', {
-		url: '/create',
-		title: 'allSets: Create a set',
-		templateUrl: 'views/setsCreateView.html',
-		controller: 'setsCreateView'
-	});
-
 	$stateProvider.state('admin.sets.detail', {
 		url: '/detail/:id',
 		title: 'Set Details',
