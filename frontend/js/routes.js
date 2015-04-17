@@ -170,20 +170,6 @@ app.config(function($stateProvider,
 		controller: 'exportView'
 	});
 
-	$stateProvider.state('admin.suggestions', {
-		url: '/suggestions',
-		title: 'Suggestions',
-		templateUrl: 'views/suggestionsView.html',
-		resolve: {
-			suggestions: ['Suggestion', function(Suggestion) {
-				return Suggestion.getAllApprovedSuggestions();
-			}],
-			sets: ['Set', function(Set) {
-				return Set.findAll();
-			}]
-		},
-		controller: 'suggestionsView'
-	});
 
 	$stateProvider.state('admin.sets', {
 		url: '/sets',
@@ -281,18 +267,5 @@ app.config(function($stateProvider,
 		description: 'This is for people who lost their way...',
 		templateUrl: 'views/resetPasswordView.html',
 		controller: 'resetPasswordView'
-	});
-
-	$stateProvider.state('timeline', {
-		url: '/timeline',
-		title: 'Timeline',
-		description: 'See our progress in shipping the game to our kickstarter backers!',
-		templateUrl: 'views/timelineView.html',
-		controller: 'timelineView',
-		resolve: {
-			timelineDoc: ['prismic', function(prismic) {
-				return prismic.getDocumentById(CONFIG.PRISMIC.DOCS.PAGE_TIMELINE);
-			}]
-		}
 	});
 });
