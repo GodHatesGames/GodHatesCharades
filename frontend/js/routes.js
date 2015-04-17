@@ -278,18 +278,6 @@ app.config(function($stateProvider,
 		},
 		controller: 'blogView'
 	});
-
-	$stateProvider.state('blog.detail', {
-		type: 'article',
-		url: '/:id/:slug',
-		templateUrl: 'views/blogDetailView.html',
-		resolve: {
-			post: ['$stateParams', 'prismic', function($stateParams, prismic) {
-				return prismic.getDocumentById($stateParams.id);
-			}]
-		},
-		controller: 'blogDetailView'
-	});
 	// Mail
 	$stateProvider.state('mail', {
 		url: '/mail',
