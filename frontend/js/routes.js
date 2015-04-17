@@ -66,18 +66,6 @@ app.config(function($stateProvider,
 			}]
 		}
 	});
-	$stateProvider.state('rules', {
-		url: '/rules',
-		title: 'Rules',
-		description: 'Learn the rules before your play the game.',
-		templateUrl: 'views/rulesView.html',
-		controller: 'rulesView',
-		resolve: {
-			rulesDoc: ['prismic', function(prismic) {
-				return prismic.getDocumentById(CONFIG.PRISMIC.DOCS.PAGE_RULES);
-			}]
-		}
-	});
 	$stateProvider.state('top.fame', {
 		url: '/fame',
 		title: 'Hall of Fame',
@@ -153,22 +141,6 @@ app.config(function($stateProvider,
 			}]
 		},
 		controller: 'exportView'
-	});
-
-
-	$stateProvider.state('admin.sets', {
-		url: '/sets',
-		title: 'Sets',
-		templateUrl: 'views/setsView.html',
-		resolve: {
-			sets: ['Set', function(Set) {
-				return Set.findAll();
-			}],
-			suggestions: ['Suggestion', function(Suggestion) {
-				return Suggestion.getAllApprovedSuggestions();
-			}]
-		},
-		controller: 'setsView'
 	});
 
 	$stateProvider.state('admin.sets.create', {
