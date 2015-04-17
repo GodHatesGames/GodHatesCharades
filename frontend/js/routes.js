@@ -1,9 +1,5 @@
 'use strict';
-app.config(function($stateProvider,
-			 $urlRouterProvider) {
-
-	// For any unmatched url, redirect to /state1
-	$urlRouterProvider.otherwise('/404');
+app.config(function($stateProvider) {
 
 	$stateProvider.state('404', {
 		url: '/404',
@@ -87,23 +83,6 @@ app.config(function($stateProvider,
 		template: '<ui-view></ui-view>'
 	});
 	
-	$stateProvider.state('admin.moderation', {
-		url: '/moderation',
-		title: 'Moderation',
-		templateUrl: 'views/moderationView.html',
-		resolve: {
-			unmoderated: ['Suggestion', function(Suggestion) {
-				return Suggestion.getUnmoderatedSuggestions();
-			}],
-			approved: ['Suggestion', function(Suggestion) {
-				return Suggestion.getAllApprovedSuggestions();
-			}],
-			sets: ['Set', function(Set) {
-				return Set.findAll();
-			}]
-		},
-		controller: 'moderationView'
-	});
 	$stateProvider.state('admin.export', {
 		url: '/export',
 		title: 'Export',
