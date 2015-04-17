@@ -146,12 +146,6 @@ app.config(function($stateProvider) {
 		abstract: true,
 		template: '<ui-view></ui-view>'
 	});
-	$stateProvider.state('mail.thanks', {
-		url: '/thanks',
-		title: 'Subscription Confirmation',
-		description: 'Thanks for subscribing to our mailing list.',
-		templateUrl: 'views/mail.thanksView.html'
-	});
 	$stateProvider.state('fixme', {
 		url: '/fixme',
 		title: 'Fix yoself',
