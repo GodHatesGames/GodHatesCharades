@@ -130,7 +130,8 @@ app.factory('User', function (DS, $q, ParseData, $rootScope, $mixpanel) {
 
 	function _logout() {
 		Parse.User.logOut();
-		$mixpanel.cookie.clear();
+		if($mixpanel.cookie)
+			$mixpanel.cookie.clear();
 		_disconnectUser();
 	}
 
