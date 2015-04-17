@@ -93,14 +93,6 @@ app.config(function($stateProvider,
 		templateUrl: 'views/shareView.html',
 		controller: 'shareView'
 	});
-	$stateProvider.state('top', {
-		url: '/top',
-		title: 'Top Pairs',
-		description: 'Want to see everyone\'s favorite cards? See the most popular and the most controversial.',
-		templateUrl: 'views/topView.html',
-		controller: 'topView',
-		abstract: true
-	});
 	$stateProvider.state('top.fame', {
 		url: '/fame',
 		title: 'Hall of Fame',
