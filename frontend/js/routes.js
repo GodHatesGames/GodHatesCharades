@@ -246,13 +246,6 @@ app.config(function($stateProvider,
 		controller: 'elementsView'
 	});
 
-	$stateProvider.state('admin.upload', {
-		url: '/upload',
-		title: 'Upload',
-		templateUrl: 'views/uploadView.html',
-		controller: 'uploadView'
-	});
-
 	$stateProvider.state('admin.cards', {
 		url: '/cards',
 		title: 'Components',
