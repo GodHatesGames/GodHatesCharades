@@ -33,13 +33,6 @@ app.config(function($stateProvider,
 		templateUrl: 'views/submitView.html',
 		controller: 'submitView'
 	});
-	$stateProvider.state('vote', {
-		url: '/vote',
-		title: 'Vote',
-		description: 'Vote on cards submitted by other players to help us choose the best ones.',
-		templateUrl: 'views/voteView.html',
-		controller: 'voteView'
-	});
 	$stateProvider.state('login', {
 		url: '/login',
 		title: 'Login',
