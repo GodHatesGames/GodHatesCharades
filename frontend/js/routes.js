@@ -25,14 +25,6 @@ app.config(function($stateProvider,
 		templateUrl: 'views/homeView.html',
 		controller: 'homeView'
 	});
-
-	$stateProvider.state('submit', {
-		url: '/submit',
-		title: 'Create',
-		description: 'We need your help coming up with funny new cards. Submit your favorite ideas here.',
-		templateUrl: 'views/submitView.html',
-		controller: 'submitView'
-	});
 	$stateProvider.state('login', {
 		url: '/login',
 		title: 'Login',
@@ -85,13 +77,6 @@ app.config(function($stateProvider,
 				return prismic.getDocumentById(CONFIG.PRISMIC.DOCS.PAGE_RULES);
 			}]
 		}
-	});
-	$stateProvider.state('share', {
-		url: '/share',
-		title: 'Share',
-		description: 'Spread the word about God Hates Charades.',
-		templateUrl: 'views/shareView.html',
-		controller: 'shareView'
 	});
 	$stateProvider.state('top.fame', {
 		url: '/fame',
