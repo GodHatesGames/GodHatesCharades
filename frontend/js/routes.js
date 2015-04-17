@@ -14,20 +14,6 @@ app.config(function($stateProvider) {
 		templateUrl: 'views/errorView.html',
 		controller: 'errorView'
 	});
-
-	$stateProvider.state('home', {
-		url: '/?vine&youtube',
-		description: 'A game where you act out the vile and despicable inside all of us. Talk, shout, and say awful things in the form of 30 second act outs.',
-		templateUrl: 'views/homeView.html',
-		controller: 'homeView'
-	});
-	$stateProvider.state('login', {
-		url: '/login',
-		title: 'Login',
-		description: 'Join our community site and help us improve the game.',
-		templateUrl: 'views/loginView.html',
-		controller: 'loginView'
-	});
 	$stateProvider.state('card', {
 		url: '/card/:cardid/:slug',
 		templateUrl: 'views/cardView.html',
