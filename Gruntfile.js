@@ -106,13 +106,13 @@ module.exports = function(grunt) {
 			},
 			components: {
 				files: [
-					'frontend/components/*.less'
+					'frontend/components/**/*.less'
 				],
 				tasks: ['less:components', 'autoprefixer']
 			},
 			views: {
 				files: [
-					'frontend/views/*.less'
+					'frontend/views/**/*.less'
 				],
 				tasks: ['less:views', 'autoprefixer']
 			}
@@ -351,7 +351,7 @@ module.exports = function(grunt) {
 			},
 			views: {
 				files: {
-					'frontend/css/views.css': 'frontend/views/*.less'
+					'frontend/css/views.css': 'frontend/views/**/*.less'
 				}
 			}
 		},

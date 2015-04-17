@@ -32,17 +32,6 @@ app.config(function($stateProvider,
 		templateUrl: 'views/loginView.html',
 		controller: 'loginView'
 	});
-	$stateProvider.state('user', {
-		type: 'profile',
-		url: '/user/:userid',
-		templateUrl: 'views/publicProfileView.html',
-		controller: 'publicProfileView',
-		resolve: {
-			publicProfile: ['Profile', '$stateParams', function(Profile, $stateParams) {
-				return Profile.find($stateParams.userid);
-			}]
-		}
-	});
 	$stateProvider.state('card', {
 		url: '/card/:cardid/:slug',
 		templateUrl: 'views/cardView.html',
@@ -50,19 +39,6 @@ app.config(function($stateProvider,
 		resolve: {
 			suggestion: ['Suggestion', '$stateParams', function(Suggestion, $stateParams) {
 				return Suggestion.find($stateParams.cardid);
-			}]
-		}
-	});
-	$stateProvider.state('pair', {
-		url: '/pair/:pairid/:slug',
-		templateUrl: 'views/pairView.html',
-		controller: 'pairView',
-		resolve: {
-			pair: ['$stateParams', 'Pair', function($stateParams, Pair) {
-				return Pair.find($stateParams.pairid);
-			}],
-			readyForUpload: ['ytUploadService', function(ytUploadService) {
-				return ytUploadService.waitForLoad();
 			}]
 		}
 	});
@@ -217,12 +193,5 @@ app.config(function($stateProvider,
 		description: 'If you\'re having account problems, you\'re in the right place',
 		templateUrl: 'views/fixmeView.html',
 		controller: 'fixmeView'
-	});
-	$stateProvider.state('reset', {
-		url: '/reset',
-		title: 'Lose something?',
-		description: 'This is for people who lost their way...',
-		templateUrl: 'views/resetPasswordView.html',
-		controller: 'resetPasswordView'
 	});
 });
