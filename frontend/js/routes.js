@@ -84,24 +84,6 @@ app.config(function($stateProvider) {
 		controller: 'exportView'
 	});
 
-	$stateProvider.state('admin.sets.detail', {
-		url: '/detail/:id',
-		title: 'Set Details',
-		templateUrl: 'views/setsDetailView.html',
-		resolve: {
-			set: ['Set', '$stateParams', function(Set, $stateParams) {
-				return Set.find($stateParams.id);
-			}],
-			setItems: ['set', '$stateParams', 'SetItem', function(set, $stateParams, SetItem) {
-				var params = {
-					setId: $stateParams.id
-				};
-				return SetItem.findAll(params);
-			}]
-		},
-		controller: 'setsDetailView'
-	});
-
 	$stateProvider.state('admin.components', {
 		url: '/components',
 		title: 'Components',
