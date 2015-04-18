@@ -32,21 +32,6 @@ app.config(function($stateProvider) {
 		title: 'Admin',
 		template: '<ui-view></ui-view>'
 	});
-	
-	$stateProvider.state('admin.export', {
-		url: '/export',
-		title: 'Export',
-		templateUrl: 'views/exportView.html',
-		resolve: {
-			suggestions: ['Suggestion', function(Suggestion) {
-				return Suggestion.getAllApprovedSuggestions();
-			}],
-			allSets: ['Set', 'suggestions', function(Set, suggestions) {
-				return Set.getAllSetsAndItems();
-			}]
-		},
-		controller: 'exportView'
-	});
 
 	$stateProvider.state('admin.components', {
 		url: '/components',
@@ -84,12 +69,5 @@ app.config(function($stateProvider) {
 		url: '/mail',
 		abstract: true,
 		template: '<ui-view></ui-view>'
-	});
-	$stateProvider.state('fixme', {
-		url: '/fixme',
-		title: 'Fix yoself',
-		description: 'If you\'re having account problems, you\'re in the right place',
-		templateUrl: 'views/fixmeView.html',
-		controller: 'fixmeView'
 	});
 });
