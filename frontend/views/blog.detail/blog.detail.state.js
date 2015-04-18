@@ -5,7 +5,7 @@ angular.module('app')
   $stateProvider.state('blog.detail', {
     type: 'article',
     url: '/:id/:slug',
-    templateUrl: 'views/blogDetail/blogDetail.html',
+    templateUrl: 'views/blog.detail/blog.detail.html',
     resolve: {
       post: ['$stateParams', 'prismic', function($stateParams, prismic) {
         return prismic.getDocumentById($stateParams.id);

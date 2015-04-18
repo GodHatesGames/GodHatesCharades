@@ -5,6 +5,6 @@ angular.module('app')
 	$stateProvider.state('admin.cards', {
 		url: '/cards',
 		title: 'Cards',
-		templateUrl: 'views/cards/cards.html'
+		templateUrl: 'views/admin.cards/admin.cards.html'
 	});
 });
