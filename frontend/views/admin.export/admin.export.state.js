@@ -5,7 +5,7 @@ angular.module('app')
   $stateProvider.state('admin.export', {
     url: '/export',
     title: 'Export',
-    templateUrl: 'views/export/export.html',
+    templateUrl: 'views/admin.export/admin.export.html',
     resolve: {
       suggestions: ['Suggestion', function(Suggestion) {
         return Suggestion.getAllApprovedSuggestions();

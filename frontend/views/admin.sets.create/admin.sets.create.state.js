@@ -5,7 +5,7 @@ angular.module('app')
 	$stateProvider.state('admin.sets.create', {
 		url: '/create',
 		title: 'allSets: Create a set',
-		templateUrl: 'views/sets.create/sets.create.html',
+		templateUrl: 'views/admin.sets.create/admin.sets.create.html',
 		controller: 'setsCreateView'
 	});
 });

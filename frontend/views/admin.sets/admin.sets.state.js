@@ -5,7 +5,7 @@ angular.module('app')
 	$stateProvider.state('admin.sets', {
 		url: '/sets',
 		title: 'Sets',
-		templateUrl: 'views/sets/sets.html',
+		templateUrl: 'views/admin.sets/admin.sets.html',
 		resolve: {
 			sets: ['Set', function(Set) {
 				return Set.findAll();

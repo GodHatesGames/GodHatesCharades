@@ -6,7 +6,7 @@ angular.module('app')
   $stateProvider.state('admin.upload', {
     url: '/upload',
     title: 'Upload',
-    templateUrl: 'views/upload/upload.html',
+    templateUrl: 'views/admin.upload/admin.upload.html',
     controller: 'uploadView'
   });
 });

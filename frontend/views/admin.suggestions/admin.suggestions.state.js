@@ -5,7 +5,7 @@ angular.module('app')
 	$stateProvider.state('admin.suggestions', {
 		url: '/suggestions',
 		title: 'Suggestions',
-		templateUrl: 'views/suggestions/suggestions.html',
+		templateUrl: 'views/admin.suggestions/admin.suggestions.html',
 		resolve: {
 			suggestions: ['Suggestion', function(Suggestion) {
 				return Suggestion.getAllApprovedSuggestions();

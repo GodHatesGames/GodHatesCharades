@@ -5,7 +5,7 @@ angular.module('app')
 	$stateProvider.state('admin.moderation', {
 		url: '/moderation',
 		title: 'Moderation',
-		templateUrl: 'views/moderation/moderation.html',
+		templateUrl: 'views/admin.moderation/admin.moderation.html',
 		resolve: {
 			unmoderated: ['Suggestion', function(Suggestion) {
 				return Suggestion.getUnmoderatedSuggestions();

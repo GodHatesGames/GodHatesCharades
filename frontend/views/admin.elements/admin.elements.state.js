@@ -5,7 +5,7 @@ angular.module('app')
   $stateProvider.state('admin.elements', {
     url: '/elements',
     title: 'Elements',
-    templateUrl: 'views/elements/elements.html',
+    templateUrl: 'views/admin.elements/admin.elements.html',
     controller: 'elementsView'
   });
 });
