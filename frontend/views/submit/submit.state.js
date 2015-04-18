@@ -6,7 +6,7 @@ angular.module('app')
     url: '/submit',
     title: 'Create',
     description: 'We need your help coming up with funny new cards. Submit your favorite ideas here.',
-    templateUrl: 'views/submitView.html',
+    templateUrl: 'views/submit/submit.html',
     controller: 'submitView'
   });
 });
