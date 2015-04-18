@@ -318,8 +318,8 @@ module.exports = function(grunt) {
 			},
 			app: {
 				src: [
-					'.tmp/stage/frontend/components/**.html',
-					'.tmp/stage/frontend/views/**.html',
+					'.tmp/stage/frontend/components/**/*.html',
+					'.tmp/stage/frontend/views/**/*.html',
 				],
 				dest: '.tmp/stage/frontend/js/templates.js'
 			}
