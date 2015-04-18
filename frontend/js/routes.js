@@ -24,42 +24,6 @@ app.config(function($stateProvider) {
 			}]
 		}
 	});
-	$stateProvider.state('top.fame', {
-		url: '/fame',
-		title: 'Hall of Fame',
-		description: 'Want to see everyone\'s favorite pairs?',
-		templateUrl: 'views/topView.detail.html',
-		controller: 'topView.fame',
-		resolve: {
-			pairs: ['leaderboard', function(leaderboard) {
-				return leaderboard.getTop();
-			}]
-		}
-	});
-	$stateProvider.state('top.shame', {
-		url: '/shame',
-		title: 'Hall of Shame',
-		description: 'Want to see everyone\'s most despised pairs?',
-		templateUrl: 'views/topView.detail.html',
-		controller: 'topView.shame',
-		resolve: {
-			pairs: ['leaderboard', function(leaderboard) {
-				return leaderboard.getTop();
-			}]
-		}
-	});
-	$stateProvider.state('top.controversial', {
-		url: '/controversial',
-		title: 'Controversial',
-		description: 'Want to see everyone\'s most loved and hated pairs?',
-		templateUrl: 'views/topView.detail.html',
-		controller: 'topView.controversial',
-		resolve: {
-			pairs: ['leaderboard', function(leaderboard) {
-				return leaderboard.getTop();
-			}]
-		}
-	});
 	
 	// Admin
 	$stateProvider.state('admin', {
