@@ -24,11 +24,40 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
 	grunt.loadNpmTasks('grunt-build-control');
 	grunt.loadNpmTasks('grunt-autoprefixer');
+	grunt.loadNpmTasks('grunt-open');
+	grunt.loadNpmTasks('grunt-express-server');
+	grunt.loadNpmTasks('grunt-env');
 
 	// Project configuration.
 	var pkg = grunt.file.readJSON('package.json');
 	grunt.initConfig({
 		pkg: pkg,
+    open: {
+      server: {
+        url: 'http://localhost:<%= express.options.port %>'
+      }
+    },
+    express: {
+      options: {
+        port: process.env.PORT || 9000
+      },
+      dev: {
+        options: {
+          script: 'api/server.js',
+          debug: true
+        }
+      }
+    },
+    env : {
+	    dev : {
+				PORT: process.env.PORT,
+				MANDRILL_KEY: process.env.MANDRILL_KEY,
+				MAILCHIMP_LIST_ID: process.env.MAILCHIMP_LIST_ID,
+				MAILCHIMP_API_KEY: process.env.MAILCHIMP_API_KEY,
+				S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
+				S3_ACCESS_SECRET: process.env.S3_ACCESS_SECRET
+	    }
+    },
 		nodemon: {
 			dist: {
 				script: 'dist/api/server.js',
@@ -50,43 +79,9 @@ module.exports = function(grunt) {
 						});
 					}
 				}
-			},
-			dev: {
-				script: 'api/server.js',
-				options: {
-					nodeArgs: ['--debug'],
-					env: {
-						PORT: process.env.PORT,
-						MANDRILL_KEY: process.env.MANDRILL_KEY,
-						MAILCHIMP_LIST_ID: process.env.MAILCHIMP_LIST_ID,
-						MAILCHIMP_API_KEY: process.env.MAILCHIMP_API_KEY,
-						S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
-						S3_ACCESS_SECRET: process.env.S3_ACCESS_SECRET
-					},
-					callback: function(nodemon) {
-						nodemon.on('config:update', function() {
-							setTimeout(function() {
-								open('http://localhost:3000');
-							}, 1000);
-						});
-					}
-				}
 			}
 		},
 		watch: {
-			distApi: {
-				files: ['api/**/*.js'],
-				tasks: ['distBuildApi']
-			},
-			distFrontend: {
-				files: [
-					'frontend/**/*.js',
-					'frontend/**/*.less',
-					'frontend/**/*.html',
-					'!frontend/bower_components/**'
-				],
-				tasks: ['distBuildFrontend']
-			},
 			main: {
 				files: [
 					'frontend/less/*.less'
@@ -96,8 +91,8 @@ module.exports = function(grunt) {
 			livereload: {
 				files: [
 					'frontend/**/*.js',
-					'frontend/**/*.less',
 					'frontend/**/*.html',
+					'frontend/css/*.css',
 					'!frontend/bower_components/**'
 				],
 				options: {
@@ -115,17 +110,27 @@ module.exports = function(grunt) {
 					'frontend/views/**/*.less'
 				],
 				tasks: ['less:views', 'autoprefixer']
-			}
+			},
+      express: {
+        files: [
+          'api/**/*.{js,json}'
+        ],
+        tasks: ['express:dev', 'wait'],
+        options: {
+          livereload: true,
+          nospawn: true //Without this option specified express won't be reloaded
+        }
+      }
 		},
 		concurrent: {
 			dist: {
-				tasks: ['nodemon:dist', 'watch:distApi', 'watch:distFrontend'],
+				tasks: ['nodemon:dist'],
 				options: {
 					logConcurrentOutput: true
 				}
 			},
 			dev: {
-				tasks: ['nodemon:dev', 'watch:main', 'watch:components', 'watch:views'],
+				tasks: ['watch'],
 				options: {
 					logConcurrentOutput: true
 				}
@@ -455,7 +460,10 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('dev', [
 		'buildCss',
-		'concurrent:dev'
+		'express:dev',
+		'wait',
+		'open',
+		'watch'
 	]);
 
 	grunt.registerTask('dist', [
@@ -545,5 +553,17 @@ module.exports = function(grunt) {
 	function robotsRename(dest) {
 		return dest + 'robots.txt';
 	}
+
+	// Used for delaying livereload until after server has restarted
+  grunt.registerTask('wait', function () {
+    grunt.log.ok('Waiting for server reload...');
+
+    var done = this.async();
+
+    setTimeout(function () {
+      grunt.log.writeln('Done waiting!');
+      done();
+    }, 1500);
+  });
 
 };

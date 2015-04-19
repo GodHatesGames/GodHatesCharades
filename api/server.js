@@ -33,7 +33,7 @@ server.use(compression());
 server.configure('development', function(){
 	// server.use(express.logger());
 	server.use(express.errorHandler());
-	// server.use(require('connect-livereload')());
+	server.use(require('connect-livereload')());
 });
 
 server.use(express.static(staticFilePath));
