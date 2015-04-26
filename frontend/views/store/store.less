@@ -1,0 +1,178 @@
+@import "../../less/colors";
+@import "../../less/bootstrap-variables";
+
+#homeView {
+	padding-left: 60px;
+	padding-right: 60px;
+	padding-bottom: 0;
+}
+
+/* Sections */
+
+/* Section - Examples */
+#homeView section {
+	&.row-horizontal-flush {
+		margin-left: -60px;
+		margin-right: -60px;
+	}
+
+	& > :first-child {
+		padding-top: 0;
+	}
+
+	/* Section - intro */
+	&.intro {
+		@media (min-width: @screen-sm-min) {
+			margin-left: -45px;
+			margin-right: -45px;
+		}
+
+		.intro-video {
+			padding-left: 0;
+		}
+		
+	/* end &.intro */
+	}
+
+	/* Section - iOS*/
+	&.ios {
+		h2 {
+			font-size: 55px;
+			line-height: 50px;
+			margin-bottom: 0;
+			text-align: center;
+		}
+
+		h3 {
+			font-size: 40px;
+			margin-top: 0;
+			margin-bottom: 40px;
+			line-height: 40px;
+			text-align: center;
+		}
+
+		h4 {
+			text-align: left;
+		}
+
+		ul {
+			list-style: none;
+			padding-left: 0;
+			li {
+				font-size: 20px;
+				&:before{
+					content: '★';
+					margin-right: 6px;
+				}
+			}
+		}
+
+		@media (max-width: @screen-sm-max) {
+			.screenshot{
+				padding-top: 25px;
+			}
+		}
+	}
+
+	&.voting {
+		padding: 15px;
+		.vs {
+			background-color: black;
+		}
+	}
+
+/* end #homeView section */
+}
+
+#kickstarter {
+	text-align: center;
+	background-color: black;
+	color: white;
+}
+
+#kickstarter h3 {
+	margin-top: 0;
+	margin-bottom: 20px;
+}
+
+#kickstarter .timerNumber {
+	font-family: 'GodHatesCharades';
+	font-size: 75px;
+	text-indent: 4px;
+	line-height: 80px;
+	font-weight: bold;
+}
+
+#kickstarter .timerText {
+	font-family: 'GodHatesCharades';
+	font-size: 19px;
+	text-transform: uppercase;
+}
+
+#kickstarter .btn {
+	width: 25%;
+	margin: 0 auto;
+}
+
+#kickstarter .btn:hover {
+	background-color: #73CE00;
+}
+
+#kickstarter .kickstarter {
+	color: #73CE00;
+}
+
+#homeView .cardTypeLeft, #homeView .cardTypeRight {
+	font-size: 24px;
+	font-family: 'Mimbie';
+	padding-top: 130px;
+}
+
+#homeView .cardTypeLeft {
+	text-align: right;
+	right: -50px;
+}
+
+#homeView .cardTypeRight {
+	text-align: left;
+	left: -45px;
+}
+
+#homeView .cardTypeLeft b, #homeView .cardTypeRight b {
+	font-size: 44px;
+	font-weight: normal;
+	vertical-align: -8px;
+}
+
+#homeView .examplesContainer {
+	padding-bottom: 40px;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+#homeView .rules {
+	color: black;
+}
+
+@media (max-width: @screen-sm-max) {
+
+	#homeView .rules > div:not(:first-child) {
+		padding-top: 30px;
+	}
+
+	#kickstarter .timerNumber {
+		font-size: 63px;
+		line-height: 65px;
+	}
+
+	#kickstarter .timerText {
+		font-size: 15px;
+	}
+}
+
+
+@media (max-width: @screen-sm-max) {
+	#homeView .examplesContainer {
+		height: 310px;
+	}
+}
