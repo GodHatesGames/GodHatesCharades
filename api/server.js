@@ -4,6 +4,7 @@ var express = require('express');
 var path = require('path');
 var prerender = require('prerender-node');
 var mailchimp = require('./mailchimp');
+var shopify = require('./shopify');
 var s3data = require('./s3data');
 var compression = require('compression');
 
@@ -41,6 +42,8 @@ server.use(express.static(staticFilePath));
 // api routes
 server.post('/api/subscribe', mailchimp.subscribe);
 server.get('/api/files', s3data.getFiles);
+server.get('/api/store/collection/:id', shopify.collectionById);
+server.get('/api/store/product/:id', shopify.productById);
 
 // pass the frontend routes
 server.get('/home', showIndex);

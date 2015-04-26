@@ -49,14 +49,7 @@ module.exports = function(grunt) {
       }
     },
     env : {
-	    dev : {
-				PORT: process.env.PORT,
-				MANDRILL_KEY: process.env.MANDRILL_KEY,
-				MAILCHIMP_LIST_ID: process.env.MAILCHIMP_LIST_ID,
-				MAILCHIMP_API_KEY: process.env.MAILCHIMP_API_KEY,
-				S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
-				S3_ACCESS_SECRET: process.env.S3_ACCESS_SECRET
-	    }
+	    dev : process.env
     },
 		nodemon: {
 			dist: {
@@ -460,6 +453,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('dev', [
 		'buildCss',
+		'env:dev',
 		'express:dev',
 		'wait',
 		'open',

@@ -1,5 +1,5 @@
 <div id="storeView" class="container flush">
-  <section ng-repeat="product in products">
-    {{product.name}}
+  <section ng-repeat="collect in collection | orderBy:'position'">
+    {{productsById[collect.product_id].title}}
   </section>
 </div>
