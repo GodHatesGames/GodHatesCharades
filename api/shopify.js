@@ -1,14 +1,15 @@
+var _ = require('lodash');
 var request = require('request');
 var util = require('util');
 var shopifyUrl = util.format('https://%s:%s@godhatesgames.myshopify.com/admin/', process.env.SHOPIFY_API_KEY, process.env.SHOPIFY_PASSWORD);
 console.log('shopifyUrl:', shopifyUrl);
-module.exports.productById = _getProductById;
+module.exports.productByCollectionId = _getProductByCollectionId;
 module.exports.collectionById = _getCollectionById;
 
-function _getProductById(req, res) {
+function _getProductByCollectionId(req, res) {
   console.log('get product:', req.params.id);
   var options = {
-    url: shopifyUrl + 'products.json?ids=' + req.params.id,
+    url: shopifyUrl + 'products.json?collection_id=' + req.params.id,
     'Content-Type': 'application/json'
   }
   request.get(options, _onProductRetrieved);
@@ -18,6 +19,9 @@ function _getProductById(req, res) {
       res.send(500, error);
     } else {
       var parsed = JSON.parse(body);
+      _.each(parsed.products, function(product) {
+        product.collection_id = req.params.id;
+      });
       res.send(200, parsed.products);
     }
   }
@@ -37,7 +41,10 @@ function _getCollectionById(req, res) {
     } else {
       console.log(body);
       var parsed = JSON.parse(body);
-      res.send(200, parsed.collects);
+      res.send(200, {
+        id: req.params.id,
+        items: parsed.collects
+      });
     }
   }
 }

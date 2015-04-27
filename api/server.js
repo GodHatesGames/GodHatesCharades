@@ -43,7 +43,7 @@ server.use(express.static(staticFilePath));
 server.post('/api/subscribe', mailchimp.subscribe);
 server.get('/api/files', s3data.getFiles);
 server.get('/api/store/collection/:id', shopify.collectionById);
-server.get('/api/store/product/:id', shopify.productById);
+server.get('/api/store/collection/:id/product', shopify.productByCollectionId);
 
 // pass the frontend routes
 server.get('/home', showIndex);

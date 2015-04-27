@@ -37,7 +37,7 @@ app.provider('ParseDataSimplifier', function() {
 					}
 				});
 			}
-			return obj;
+			return obj.data || obj;
 		}
 	}
 

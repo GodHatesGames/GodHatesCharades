@@ -1,5 +1,6 @@
 'use strict';
 
+var COLLECTION_ID = '31882561';
 angular.module('app')
 .config(function ($stateProvider) {
   $stateProvider.state('store', {
@@ -8,14 +9,13 @@ angular.module('app')
     templateUrl: 'views/store/store.html',
     controller: 'storeView',
     resolve: {
-      collection: ['Restangular', function(Restangular) {
-        return Restangular.all('store').one('collection', '31882561').getList();
+      collection: ['products', 'StoreItemCollection', function(products, StoreItemCollection) {
+        return StoreItemCollection.find(COLLECTION_ID);
       }],
-      products: ['collection', 'Restangular', function(collection, Restangular) {
-        var args = ['product'];
-        Array.prototype.push.apply(args, _.pluck(collection, 'product_id'));
-        var request = Restangular.all('store').several.apply(this, args);
-        return request.getList();
+      products: ['StoreProduct', function(StoreProduct) {
+        return StoreProduct.findAll({
+          collection_id: COLLECTION_ID
+        });
       }]
     }
   });
