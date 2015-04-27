@@ -1,5 +1,17 @@
 <div id="storeView" class="container flush">
-  <section ng-repeat="storeItem in collection.items | orderBy:'position'">
-    {{storeItem.product.title}}
+  <section ng-repeat="storeItem in collection.items | orderBy:'position'"
+           class="row"
+           ng-init="product = storeItem.product">
+    <div class="col-sm-8">
+      <img ng-src="{{product.image.src}}"
+           class="img-responsive">
+    </div>
+    <div class="col-sm-4">
+      <h3>{{product.title}}</h3>
+      <div ng-html-compile="product.body_html"></div>
+    </div>
+    <input type="number"
+           ng-model="cart[product.id]">
+    <button ng-click="buy()"></button>
   </section>
 </div>
