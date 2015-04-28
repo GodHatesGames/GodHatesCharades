@@ -20,19 +20,18 @@ app.directive('cardDetailsModal', function($modal) {
 							currentItems: function() {
 								return suggestion.getSetItems();
 							},
-							sets: ['Set', function(Set) {
+							sets: function(Set) {
 								return Set.findAll();
-							}]
+							}
 						},
-						controller: ['currentItems', 'sets', '$scope', _modalController]
+						controller: function (currentItems, sets, $scope) {
+							$scope.sets = sets;
+						}
 					});
 				} else {
 					console.error('cardDetailsModal: must provide suggestion to load');
 				}
 
-				function _modalController(currentItems, sets, $scope) {
-					$scope.sets = sets;
-				}
 
 				function _onEditSuccess(updatedSuggestion) {
 					console.log('modal success');

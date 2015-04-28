@@ -9,9 +9,9 @@ angular.module('app')
     templateUrl: 'views/rules/rules.html',
     controller: 'rulesView',
     resolve: {
-      rulesDoc: ['prismic', function(prismic) {
+      rulesDoc: function(prismic) {
         return prismic.getDocumentById(CONFIG.PRISMIC.DOCS.PAGE_RULES);
-      }]
+      }
     }
   });
 });

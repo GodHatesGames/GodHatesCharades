@@ -7,9 +7,9 @@ angular.module('app')
     url: '/:id/:slug',
     templateUrl: 'views/blog.detail/blog.detail.html',
     resolve: {
-      post: ['$stateParams', 'prismic', function($stateParams, prismic) {
+      post: function($stateParams, prismic) {
         return prismic.getDocumentById($stateParams.id);
-      }]
+      }
     },
     controller: 'blogDetailView'
   });

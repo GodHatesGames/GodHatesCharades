@@ -7,12 +7,12 @@ angular.module('app')
     title: 'Export',
     templateUrl: 'views/admin.export/admin.export.html',
     resolve: {
-      suggestions: ['Suggestion', function(Suggestion) {
+      suggestions: function(Suggestion) {
         return Suggestion.getAllApprovedSuggestions();
-      }],
-      allSets: ['Set', 'suggestions', function(Set, suggestions) {
+      },
+      allSets: function(Set, suggestions) {
         return Set.getAllSetsAndItems();
-      }]
+      }
     },
     controller: 'exportView'
   });

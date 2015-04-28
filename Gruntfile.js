@@ -18,7 +18,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-concurrent');
 	grunt.loadNpmTasks('grunt-filerev');
 	grunt.loadNpmTasks('grunt-html2js');
-	grunt.loadNpmTasks('grunt-ngmin');
+	grunt.loadNpmTasks('grunt-ng-annotate');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-svgmin');
 	grunt.loadNpmTasks('grunt-contrib-imagemin');
@@ -277,7 +277,7 @@ module.exports = function(grunt) {
 			options: {
 				mangle: true,
 				beautify: false,
-				compress: true
+				compress: {}
 			}
 		},
 		cssmin: {
@@ -322,10 +322,11 @@ module.exports = function(grunt) {
 				dest: '.tmp/stage/frontend/js/templates.js'
 			}
 		},
-		ngmin: {
+		ngAnnotate: {
 			app: {
-				src: '.tmp/concat/js/app.js',
-				dest: '.tmp/concat/js/app.js'
+				files: {
+					'.tmp/concat/js/app.js': ['.tmp/concat/js/app.js']
+				}
 			}
 		},
 		less: {
@@ -500,7 +501,7 @@ module.exports = function(grunt) {
 		'html2js',
 		'useminPrepare',
 		'concat',
-		'ngmin',
+		'ngAnnotate',
 		'uglify',
 		'cssmin',
 		'filerev',
@@ -515,7 +516,7 @@ module.exports = function(grunt) {
 		'html2js',
 		'useminPrepare',
 		'concat',
-		'ngmin',
+		'ngAnnotate',
 		'uglify',
 		'cssmin',
 		'filerev',
@@ -531,7 +532,7 @@ module.exports = function(grunt) {
 		'html2js',
 		'useminPrepare',
 		'concat',
-		'ngmin',
+		'ngAnnotate',
 		'uglify',
 		'cssmin',
 		'filerev',

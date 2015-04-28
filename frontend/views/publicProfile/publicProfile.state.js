@@ -8,9 +8,9 @@ angular.module('app')
     templateUrl: 'views/publicProfile/publicProfile.html',
     controller: 'publicProfileView',
     resolve: {
-      publicProfile: ['Profile', '$stateParams', function(Profile, $stateParams) {
+      publicProfile: function(Profile, $stateParams) {
         return Profile.find($stateParams.userid);
-      }]
+      }
     }
   });
 });

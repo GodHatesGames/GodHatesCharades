@@ -9,10 +9,10 @@ angular.module('app')
     templateUrl: 'views/watch/watch.html',
     controller: 'watchView',
     resolve: {
-      readyForUpload: ['ytUploadService', function(ytUploadService) {
+      readyForUpload: function(ytUploadService) {
         return ytUploadService.waitForLoad();
-      }],
-      ghcVids:['Restangular', function(Restangular) {
+      },
+      ghcVids: function(Restangular) {
         var params = {
           part: 'snippet',
           key: CONFIG.YOUTUBE.key,
@@ -21,7 +21,7 @@ angular.module('app')
           order: 'date'
         }
         return Restangular.oneUrl('ghcVids', 'https://www.googleapis.com/youtube/v3/').one('search').get(params);
-      }]
+      }
     }
   });
 });
