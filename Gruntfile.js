@@ -331,7 +331,9 @@ module.exports = function(grunt) {
 		},
 		ngAnnotate: {
 			app: {
-				'.tmp/concat/js/app.js': ['.tmp/concat/js/app.js']
+				files: {
+					'.tmp/concat/js/app.js': ['.tmp/concat/js/app.js']
+				}
 			}
 		},
 		less: {
