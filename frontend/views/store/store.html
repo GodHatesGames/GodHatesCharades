@@ -1,17 +1,30 @@
 <div id="storeView" class="container flush">
+  <a class="btn btn-success"
+     ng-href="{{buyUrl()}}">
+    Buy {{countItems()}} things
+  </a>
+  {{cart}}
   <section ng-repeat="storeItem in collection.items | orderBy:'position'"
            class="row"
            ng-init="product = storeItem.product">
-    <div class="col-sm-8">
+    <div class="col-sm-6">
       <img ng-src="{{product.image.src}}"
            class="img-responsive">
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-6">
       <h3>{{product.title}}</h3>
+      <form class="form-inline">
+        <div class="form-group">
+          <button ng-click="decrement(product)"
+                  class="btn btn-info">-</button>
+          <input type="number"
+                 class="form-control" 
+                 ng-model="cart[product.mainVariant]">
+          <button ng-click="increment(product)"
+                  class="btn btn-info">+</button>
+        </div>
+      </form>
       <div ng-html-compile="product.body_html"></div>
     </div>
-    <input type="number"
-           ng-model="cart[product.id]">
-    <button ng-click="buy()"></button>
   </section>
 </div>
