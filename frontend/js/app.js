@@ -99,7 +99,7 @@ app.run(function($rootScope,
 		});
 
 		$rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
-			console.log('page loaded:', $rootScope.currentUrl);
+			// console.log('page loaded:', $rootScope.currentUrl);
 
 			$rootScope.unsetLoading();
 			$rootScope.currentUrl = $location.absUrl();

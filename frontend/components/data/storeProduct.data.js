@@ -2,7 +2,6 @@ app.factory('StoreProduct', function (DS) {
   // vars
   var definition = {
     name: 'product',
-    afterInject: _afterInject,
     relations: {
       belongsTo: {
         collection: {
@@ -22,12 +21,7 @@ app.factory('StoreProduct', function (DS) {
   return StoreProduct;
 
   // definition methods
-  function _afterInject(resource, attrs) {
-    // DS.loadRelations('product', attrs);
-    console.log(resource);
-    console.log(attrs);
-  }
-
+  
   // class methods
 
   // instance methods
