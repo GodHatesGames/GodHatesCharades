@@ -7,9 +7,9 @@ angular.module('app')
 		templateUrl: 'views/card/card.html',
 		controller: 'cardView',
 		resolve: {
-			suggestion: ['Suggestion', '$stateParams', function(Suggestion, $stateParams) {
+			suggestion: function(Suggestion, $stateParams) {
 				return Suggestion.find($stateParams.cardid);
-			}]
+			}
 		}
 	});
 });

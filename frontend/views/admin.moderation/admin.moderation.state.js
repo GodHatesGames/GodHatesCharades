@@ -7,15 +7,15 @@ angular.module('app')
 		title: 'Moderation',
 		templateUrl: 'views/admin.moderation/admin.moderation.html',
 		resolve: {
-			unmoderated: ['Suggestion', function(Suggestion) {
+			unmoderated: function(Suggestion) {
 				return Suggestion.getUnmoderatedSuggestions();
-			}],
-			approved: ['Suggestion', function(Suggestion) {
+			},
+			approved: function(Suggestion) {
 				return Suggestion.getAllApprovedSuggestions();
-			}],
-			sets: ['Set', function(Set) {
+			},
+			sets: function(Set) {
 				return Set.findAll();
-			}]
+			}
 		},
 		controller: 'moderationView'
 	});

@@ -9,9 +9,9 @@ angular.module('app')
     templateUrl: 'views/timeline/timeline.html',
     controller: 'timelineView',
     resolve: {
-      timelineDoc: ['prismic', function(prismic) {
+      timelineDoc: function(prismic) {
         return prismic.getDocumentById(CONFIG.PRISMIC.DOCS.PAGE_TIMELINE);
-      }]
+      }
     }
   });
 });

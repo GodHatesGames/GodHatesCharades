@@ -8,9 +8,9 @@ angular.module('app')
 		description: 'All the latest news about our game and our ramblings about our favorite games made by others.',
 		templateUrl: 'views/blog/blog.html',
 		resolve: {
-			posts: ['prismic', function(prismic) {
+			posts: function(prismic) {
 				return prismic.getBlogPosts();
-			}]
+			}
 		},
 		controller: 'blogView'
 	});

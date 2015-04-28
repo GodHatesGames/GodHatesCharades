@@ -7,12 +7,12 @@ angular.module('app')
 		templateUrl: 'views/pair/pair.html',
 		controller: 'pairView',
 		resolve: {
-			pair: ['$stateParams', 'Pair', function($stateParams, Pair) {
+			pair: function($stateParams, Pair) {
 				return Pair.find($stateParams.pairid);
-			}],
-			readyForUpload: ['ytUploadService', function(ytUploadService) {
+			},
+			readyForUpload: function(ytUploadService) {
 				return ytUploadService.waitForLoad();
-			}]
+			}
 		}
 	});
 });

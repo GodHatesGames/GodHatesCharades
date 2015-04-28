@@ -9,9 +9,9 @@ angular.module('app')
     templateUrl: 'views/top.detail/top.detail.html',
     controller: 'topView.shame',
     resolve: {
-      pairs: ['leaderboard', function(leaderboard) {
+      pairs: function(leaderboard) {
         return leaderboard.getTop();
-      }]
+      }
     }
   });
 });

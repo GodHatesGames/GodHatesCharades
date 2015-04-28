@@ -7,12 +7,12 @@ angular.module('app')
 		title: 'Suggestions',
 		templateUrl: 'views/admin.suggestions/admin.suggestions.html',
 		resolve: {
-			suggestions: ['Suggestion', function(Suggestion) {
+			suggestions: function(Suggestion) {
 				return Suggestion.getAllApprovedSuggestions();
-			}],
-			sets: ['Set', function(Set) {
+			},
+			sets: function(Set) {
 				return Set.findAll();
-			}]
+			}
 		},
 		controller: 'suggestionsView'
 	});
