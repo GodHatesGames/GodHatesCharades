@@ -16,13 +16,13 @@ function subscribe(req, res){
 				email: req.body.email
 			}
 		}, function(data) {
-			res.send(200, 'subscription successful');
+			res.status(200).send('subscription successful');
 		},
 		function(error) {
 			if (error.error) {
-				res.send(400, 'Oops! ' + error.error);
+				res.status(400).send('Oops! ' + error.error);
 			} else {
-				res.send(400, 'Something went wrong, please try again.');
+				res.status(400).send('Something went wrong, please try again.');
 			}
 		});
 };

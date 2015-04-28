@@ -37,6 +37,6 @@ function _getFiles(req, res) {
 	})
 
 	lister.on('end', function() {
-		res.send(200, objects);
+		res.status(200).send(objects);
 	});
 }

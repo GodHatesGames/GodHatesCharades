@@ -7,7 +7,7 @@ var mailchimp = require('./mailchimp');
 var shopify = require('./shopify');
 var s3data = require('./s3data');
 var compression = require('compression');
-
+var bodyParser = require('body-parser');
 var port = process.env.PORT || 3000;
 var files = process.env.FILES || '../frontend';
 
@@ -28,14 +28,15 @@ server.use(prerender.set('prerenderToken', process.env.PRERENDER_TOKEN));
 server.engine('html', require('ejs').renderFile);
 server.set('views', staticFilePath);
 server.set('view engine', 'html');
-server.use(express.bodyParser());
+server.use(bodyParser.urlencoded({ extended: false }));
+server.use(bodyParser.json());
 server.use(compression());
 
-server.configure('development', function(){
+if(process.env.NODE_ENV === 'development') {
 	// server.use(express.logger());
-	server.use(express.errorHandler());
+	server.use(require('errorhandler')());
 	server.use(require('connect-livereload')());
-});
+}
 
 server.use(express.static(staticFilePath));
 
