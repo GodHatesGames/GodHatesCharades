@@ -10,6 +10,7 @@
     "npm": "1.3.x"
   },
   "dependencies": {
+    "cacheman-redis": "^0.2.0",
     "compression": "^1.0.9",
     "ejs": "^1.0.0",
     "express": "~3.4.8",
@@ -20,6 +21,7 @@
     "newrelic": "^1.5.4",
     "open": "0.0.5",
     "prerender-node": "^1.0.1",
+    "redis": "^0.12.1",
     "request": "^2.55.0",
     "s3": "^4.4.0",
     "shopify-node-api": "^1.4.8"

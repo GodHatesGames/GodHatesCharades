@@ -1,5 +1,16 @@
 var _ = require('lodash');
 var request = require('request');
+var redis = require('redis');
+var redisOptions = { 
+  port: process.env.REDIS_PORT,
+  host: process.env.REDIS_HOST,
+  password: process.env.REDIS_PASS,
+  database: process.env.REDIS_DB
+};
+var cacheTTL = process.env.REDIS_CACHE_TTL;
+var CachemanRedis = require('cacheman-redis');
+var cache = new CachemanRedis(redisOptions);
+
 var util = require('util');
 var shopifyUrl = util.format('https://%s:%s@godhatesgames.myshopify.com/admin/', process.env.SHOPIFY_API_KEY, process.env.SHOPIFY_PASSWORD);
 console.log('shopifyUrl:', shopifyUrl);
@@ -12,7 +23,15 @@ function _getProductByCollectionId(req, res) {
     url: shopifyUrl + 'products.json?collection_id=' + req.params.id,
     'Content-Type': 'application/json'
   }
-  request.get(options, _onProductRetrieved);
+  cache.get(options.url, _onCacheRetrieved);
+
+  function _onCacheRetrieved(error, value) {
+    if(value) {
+      res.send(200, value);
+    } else {
+      request.get(options, _onProductRetrieved);
+    }
+  }
 
   function _onProductRetrieved(error, response, body) {
     if(error) {
@@ -22,6 +41,7 @@ function _getProductByCollectionId(req, res) {
       _.each(parsed.products, function(product) {
         product.collection_id = req.params.id;
       });
+      cache.set(options.url, parsed.products, cacheTTL);
       res.send(200, parsed.products);
     }
   }
