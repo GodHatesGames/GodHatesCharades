@@ -6,6 +6,7 @@ var prerender = require('prerender-node');
 var mailchimp = require('./mailchimp');
 var shopify = require('./shopify');
 var s3data = require('./s3data');
+var redisCache = require('./redis-cache');
 var compression = require('compression');
 var bodyParser = require('body-parser');
 var port = process.env.PORT || 3000;
@@ -43,8 +44,8 @@ server.use(express.static(staticFilePath));
 // api routes
 server.post('/api/subscribe', mailchimp.subscribe);
 server.get('/api/files', s3data.getFiles);
-server.get('/api/store/collection/:id', shopify.collectionById);
-server.get('/api/store/collection/:id/product', shopify.productByCollectionId);
+server.get('/api/store/collection/:id', redisCache, shopify.collectionById);
+server.get('/api/store/collection/:id/product', redisCache, shopify.productByCollectionId);
 
 // pass the frontend routes
 server.get('/home', showIndex);

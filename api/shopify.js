@@ -8,7 +8,6 @@ module.exports.productByCollectionId = _getProductByCollectionId;
 module.exports.collectionById = _getCollectionById;
 
 function _getProductByCollectionId(req, res) {
-  console.log('get product:', req.params.id);
   var options = {
     url: shopifyUrl + 'products.json?collection_id=' + req.params.id,
     'Content-Type': 'application/json'
@@ -33,14 +32,12 @@ function _getCollectionById(req, res) {
     url: shopifyUrl + 'collects.json?collection_id=' + req.params.id,
     'Content-Type': 'application/json'
   }
-  console.log(options.url);
   request.get(options, _onCollectionRetrieved);
 
   function _onCollectionRetrieved(error, response, body) {
     if(error) {
       res.status(500).send(error);
     } else {
-      console.log(body);
       var parsed = JSON.parse(body);
       res.status(200).send({
         id: req.params.id,
