@@ -1,44 +1,69 @@
 @import "../less/colors";
 
+.darkend-link(@color) {
+  a:not(.btn) {
+    color: white;
+    &:hover {
+      color: darken(@color, 40%);
+    }
+  }
+}
+
+.saturated-bg(@color) {
+  background-color: @color;
+  color: white;
+  b {
+    color: black;
+  }
+
+  .darkend-link(@color-actor);
+}
+
 .bg-light {
-	b {
-		color: @color-actor;
-	}
-	background-color: @color-background;
-	color: black;
+  b {
+    color: @color-actor;
+  }
+  background-color: @color-background;
+  color: black;
+
+  a:not(.btn) {
+    color: @color-actor;
+    &:hover {
+      color: black;
+    }
+  }
 }
 
 .bg-dark {
-	b {
-		color: @color-actor;
-	}
-	background-color: black;
-	background-image: url(../img/chalk.jpg);
-	color: white;
+  background-color: black;
+  background-image: url(../img/chalk.jpg);
+  color: white;
+  b {
+    color: @color-actor;
+  }
+
+  a:not(.btn) {
+    color: white;
+    &:hover {
+      color: @color-actor;
+    }
+  }
+
 }
 
 .bg-light-bright {
-	background-color: @color-scenario;
-	color: white;
-	b {
-		color: @color-actor;
-	}
+  .saturated-bg(@color-scenario);
 }
 
 .bg-dark-bright {
-	background-color: @color-actor;
-	color: white;
-	b {
-		color: black;
-	}
+  .saturated-bg(@color-actor);
 }
 
 .bg-heavens {
-	background-color: @color-heavens;
-	color: white;
+  .saturated-bg(@color-heavens);
 }
 
 .bg-vice {
-	background-image: url(../img/vicepattern-light.png);
-	background-size: 500px 500px;
+  background-image: url(../img/vicepattern-light.png);
+  background-size: 500px 500px;
 }

@@ -8,6 +8,7 @@ app.directive('nav', function(User, $uiViewScroll, $state, $timeout) {
 		controller: function($scope, $element) {
 			$scope.User = User;
 			$scope.$state = $state;
+			$scope.cloudNavOpen = false;
 
 			$scope.launchAd = function() {
 				$scope.jumpToElementInView('email_signup', 'home');

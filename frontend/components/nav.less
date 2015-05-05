@@ -2,326 +2,76 @@
 @import "../less/bootstrap-variables";
 @nav-inactive: black;
 @nav-active: @color-actor;
-@dropdown-bg: @color-dropdown-bg;
-@dropdown-header-bg: @color-dropdown-header-bg;
-@dropdown-text-inactive: white;
-@dropdown-text-active: black;
-@dropdown-accent: white;
 
-@no-ad: 0px; //use if no ad is present
-@ad-size: @no-ad;
-@nav-height: 65px;
-@ad-height: @ad-size + 30;
+@nav-height: 55px;
+@nav-width: 300px;
+  
 
 #mainNav {
-	/* margin-bottom: 40px; */
-	margin-top: @nav-height;
-	min-height: 1px;
-	height: 45px;
-	position: relative;
+  /* margin-bottom: 40px; */
+  min-height: 1px;
+  height: @nav-height;
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  text-align: center;
 
-	&.has-ad {
-		margin-top: @ad-height;
-	}
-}
+  .nav-logo {
+    height: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: block;
+    width: 16%;
+    margin: 0 auto;
+  }
 
-.ad {
-	position: absolute;
-	right: 0;
-	top: -@ad-height;
-	background-color: black;
-	color: white;
-	font-family: 'GodHatesCharades';
-	font-size: 20px;
-	text-transform: uppercase;
-	padding: 15px 25px 15px 25px;
-	text-align: center;
-	cursor: pointer;
-	width: 300px;
-	transition: all 0.3s ease;
-}
+  .logo-img {
+    max-width: 100%;
+    max-height: 100%;
+  }
 
-.ad:hover {
-	color: white;
-	text-decoration: none;
-	padding-top: 20px;
-}
+  .cloud-nav-button {
+    font-family: 'GodHatesCharades';
+    font-size: 25px;
+    background-image: url(../img/nav-cloud.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 75px 65px 35px 65px;
+    text-align: center;
+    position: absolute;
+    top: -60px;
+    right: -50px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .cloud-nav-overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.5);
+    &.ng-hide {
+      background-color: rgba(0, 0, 0, 0);
+    }
+  }
+  .cloud-nav {
+    z-index: 1000;
+    position: fixed;
+    right: -@nav-width;
+    top: 0;
+    width: @nav-width;
+    height: 100vh;
+    background-color: white;
+    transition: right .25s ease;
 
-.ad b {
-	color: #FF6857;
-}
+    &.open {
+      right: 0;
+    }
 
-.nav > li > a {
-	color: #000;
-	font-size: 20px;
-	font-family: 'GodHatesCharades';
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	text-transform: uppercase;
-	padding-bottom: 4px;
-}
-#mainNav > li {
-	padding: 0 12px;
-	border-radius: 0;
-}
-.nav li {
-	cursor: pointer;
-}
-.nav > li > a {
-	border-radius: 0;
-	color: @nav-inactive;
-	text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1);
-}
-.nav-pills li + li {
-	margin: 0;
-	cursor: pointer;
-}
-
-.nav-pills > li.active > a,
-.nav-pills > li.active > a:hover,
-.nav-pills > li.active > a:focus,
-.nav-pills > li > a:hover,
-.nav-pills > li > a:focus {
-	color: @nav-active;
-	background-color: transparent;
-}
-
-.nav {
-	.dropdown {
-		.dropdown-toggle {
-			// default toggle colors
-			.dropup {
-				display: none;
-			}
-		}
-
-		&.open {
-			.dropdown-toggle {
-				// open toggle
-				background-color: @dropdown-header-bg;
-				color: @dropdown-text-active;
-				cursor: default;
-
-				.dropup {
-					.caret {
-						border-top-color: @dropdown-bg;
-						border-bottom-color: @dropdown-bg;
-					}
-					position: absolute;
-					left: 50%;
-					bottom: -11px;
-					margin-left: -5px;
-					display: inline;
-				}
-			}
-		}
-
-		.dropdown-menu {
-			font-size: 70%;
-			background-color: @dropdown-bg;
-			border: none;
-			min-width: inherit;
-			color: @dropdown-text-inactive;
-			border-radius: 15px;
-			width: 120%;
-			box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.1);
-			margin-top: 0;
-			margin-left: -10%;
-
-			a {
-				color: @dropdown-text-inactive;
-				text-align: center;
-				line-height: 25px;
-				&:hover {
-					color: @dropdown-text-active;
-					background-color: transparent;
-				}
-			}
-
-			.active {
-				a {
-					background-color: @dropdown-header-bg;
-					color: @dropdown-text-active;
-				}
-			}
-
-			.divider {
-				margin-top: 5px;
-				margin-bottom: 5px;
-			}
-
-			.dropdown-header {
-				color: @dropdown-text-inactive;
-				font-weight: bold;
-				cursor: default;
-				text-align: center;
-			}
-		}
-	}
-}
-
-@logo-width: 16%;
-.nav-left,
-.nav-right {
-	width: 50% - (@logo-width / 2);
-}
-.nav-left,
-.nav-right {
-	float: left;
-}
-.nav-logo {
-	width: @logo-width;
-	float: left;
-	height: 100%;
-	position: relative;
-	z-index: 2;
-}
-
-.logo-img {
-	position: relative;
-	top: -60px;
-}
-
-.dropdown a {
-	cursor: pointer;
-}
-
-@media (max-width: @screen-md-max) {
-	@ad-height: @ad-size + 25;
-
-	#mainNav {
-		&.has-ad {
-			margin-top: @ad-height;
-		}
-	}
-
-	.ad {
-		top: -@ad-height;
-	}
-
-	.logo-img {
-		top: -77px;
-	}
-
-	.nav > li > a {
-		font-size: 18px;
-	}
-}
-
-@media (max-width: @screen-sm-max) {
-	@ad-height: @ad-size + 45px;
-	#mainNav {
-		&.has-ad {
-			margin-top: @ad-height;
-		}
-	}
-
-	.ad {
-		width: 100%;
-		top: -@ad-height;
-	}
-
-	.logo-img {
-		top: -63px;
-	}
-}
-
-@media (max-width: @screen-sm-er-max) {
-	@nav-height: 35px;
-	@ad-height: @ad-size;
-	
-	#mainNav {
-		margin-top: @nav-height;
-		height: 150px;
-		&.has-ad {
-			margin-top: @ad-height;
-		}
-	}
-
-	.ad {
-		top: -@ad-height;
-		font-size: 17px;
-	}
-
-	@logo-width: 20%;
-	.nav-left,
-	.nav-right {
-		width: 50% - (@logo-width / 2);
-	}
-	.nav-logo {
-		width: @logo-width;
-	}
-
-	.logo-img {
-		top: -35px;
-	}
-}
-
-@media (max-width: @screen-xs-max) {
-	@nav-height: 25px;
-	@ad-height: @ad-size + 30;
-	#mainNav {
-		margin-top: @nav-height;
-		&.has-ad {
-			margin-top: @ad-height;
-		}
-		height: 150px;
-	}
-
-	@logo-width: 25%;
-	.nav-left,
-	.nav-right {
-		width: 50% - (@logo-width / 2);
-	}
-	.nav-logo {
-		width: @logo-width;
-	}
-
-	.logo-img {
-		top: -25px;
-	}
-
-	.ad {
-		top: -@ad-height;
-	}
-}
-
-@media (max-width: @screen-iphone-max) {
-	@ad-height: @ad-size;
-	#mainNav {
-		&.has-ad {
-			margin-top: @ad-height;
-		}
-		height: 150px;
-	}
-
-	.ad {
-		top: -@ad-height;
-	}
-	
-	.logo-img {
-		top: -15px;
-	}
-}
-
-@media (max-width: @screen-iphone) {
-	@ad-height: @ad-size;
-	#mainNav {
-		&.has-ad {
-			margin-top: @ad-height;
-		}
-		height: 130px;
-	}
-
-	.ad {
-		top: -@ad-height;
-	}
-	
-	.logo-img {
-		top: 10px;
-	}
+    li {
+      font-size: 15px;
+    }
+  }
 }

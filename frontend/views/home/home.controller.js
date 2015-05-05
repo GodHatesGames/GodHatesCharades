@@ -6,12 +6,16 @@ app.controller('homeView', function($scope, $window, $timeout, analytics) {
 	$scope.$on('youtube.player.ready', _onPlayerReady);
 	$scope.$on('$destroy', _onPlayerDestroyed);
 	var originalVolume;
+	$scope.homeVideoId = 'zc6W3j64BLE';
 	$scope.playerVars = {
 		autoplay: 1,
 		playsinline: 1,
 		showinfo: 0,
-		autohide: 1,
-		rel: 0
+		controls: 0,
+		loop: 1,
+		rel: 0,
+		listType: 'playlist',
+		list: 'PLYdZzrn9xK8lRBa1TRMZCznn-Ba7tAaoF'
 	};
 	$scope.buyLink = 'http://godhatesgames.myshopify.com/cart/1051755037:1?source_app=shopify-widget?referer=https%3A%2F%2Fgodhatescharades.com';
 	$scope.onBuyClicked = _onBuyClicked;
@@ -34,9 +38,7 @@ app.controller('homeView', function($scope, $window, $timeout, analytics) {
 	function _onPlayerReady() {
 		// play it again
 		if($scope.homeVideo && $scope.homeVideo.setVolume) {
-			console.log('volume updated on homepage');
-			originalVolume = $scope.homeVideo.getVolume();
-			$scope.homeVideo.mute();
+			$scope.homeVideo.setVolume(25);
 		}
 	}
 

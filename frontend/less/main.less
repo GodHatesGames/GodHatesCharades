@@ -88,15 +88,6 @@ hr {
 	}
 }
 
-a {
-	color: @color-actor;
-	font-weight: bold;
-}
-
-a:hover {
-	color: black;
-}
-
 a.list-group-special, a.list-group-special:visited {
 	background-color: black;
 	color: white;
@@ -142,13 +133,20 @@ input.form-control {
 	pointer-events: none;
 }
 
+.navbar-floater {
+	padding: 10px 15px 10px 15px;
+	font-size: 12px;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	text-align: center;
+}
+
 .viewLoader {
-	height: 0;
-	pointer-events: none;
+	min-height: 0;
 	text-align: center;
 	background-color: transparent;
 	border: none;
-	top: -100%;
+	bottom: -100%;
 	-webkit-transition: top .25s ease-out;
 	-moz-transition: top .25s ease-out;
 	-o-transition: top .25s ease-out;
@@ -157,20 +155,12 @@ input.form-control {
 }
 
 .viewLoader.loading {
-	top: 0;
+	bottom: 0;
 }
 
 .viewLoader span {
-	font-size: 14px;
 	font-family: 'GodHatesCharades';
 	text-transform: uppercase;
-	text-align: center;
-	padding-top: 35px;
-	padding-right: 15px;
-	padding-bottom: 5px;
-	padding-left: 15px;
-	border-radius: 15px;
-	top: -15px;
 }
 
 .content {
@@ -242,6 +232,8 @@ input.form-control {
 			color: grey;
 			text-shadow: none;
 			padding-bottom: 8px;
+		  padding-left: 15px;
+		  padding-right: 15px;
 		}
 
 		&.active > a {

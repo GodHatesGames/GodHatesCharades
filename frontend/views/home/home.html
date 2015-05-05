@@ -1,94 +1,74 @@
-<div id="homeView" class="container flush">
+<div id="homeView" class="flush">
 
 
+  <!-- Intro Section -->
+  <section class="row row-vertical-flush intro bg-dark">
+    <div class="intro-video col-sm-12 col-flush">
+      <div class="embed-responsive embed-responsive-16by9">
+        <youtube-video class="embed-responsive-item"
+                       player="homeVideo"
+                       player-vars="playerVars">
+        </youtube-video>
+      </div>
+    </div>
+  </section>
+  <!-- End Intro Section -->
 
-	<section class="row row-compact intro">
-		<div class="container-md-height">
-			<div class="row row-md-height">
-				<div class="intro-video col-md-height col-sm-9 col-middle">
-					<div class="embed-responsive embed-responsive-16by9">
-						<youtube-video class="embed-responsive-item"
-						               video-id="'mLwIEl59DKg'"
-						               player="homeVideo"
-						               player-vars="playerVars">
-						</youtube-video>
-					</div>
-				</div>
-				<div class="preorder col-md-height col-sm-3 bg-light-bright">
-					<div class="row">
-						<div class="col-xs-6 col-sm-12">
-							<img src="img/preorder1.svg"
-							     class="img-responsive" 
-							     alt="350+ cards"/>
-						</div>
-						<div class="col-xs-6 col-sm-12">
-							<img src="img/preorder2.svg"
-							     class="img-responsive" 
-							     alt="3-14 players"/>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-offset-3 col-xs-6 col-sm-offset-0 col-sm-12">
-							<a ng-href="{{buyLink}}"
-							   class="btn btn-success btn-block animated " 
-							   ng-class="preorderClass"
-							   ng-mouseup="onBuyClicked('homepage_main', 'Buy Button')"
-							   target="_blank">
-								Buy Now!
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-	</section>
+  <!-- Buy Section -->
+  <section id="buy"
+           class="row bg-heavens">
+    <h2 class="col-xs-offset-1 col-xs-10 col-sm-offset-2 col-sm-8">
+      A fast paced acting and guessing game overflowing with pop culture and crude humor.
+    </h2>
+    <div class="col-xs-offset-1 col-xs-10 col-sm-offset-4 col-sm-4">
+      <a ng-href="{{buyLink}}"
+         class="btn btn-success btn-block animated " 
+         ng-class="preorderClass"
+         ng-mouseup="onBuyClicked('homepage_buy', 'Buy Button')"
+         target="_blank">
+        Buy Now!
+      </a>
+    </div>
+  </section>
+  <!-- End Buy Section -->
 
-	<!-- Signup section -->
-	<signup-section location="homepage_signup_section"
-	                class="bg-dark">
-	</signup-section>
-	<!--End Signup section-->
-	
-	<!-- Vote section -->
-	<section id="voting"
-	         class="voting row row-horizontal-flush bg-dark-bright">
-		<h2>Vote on the funniest content for our first release.</h2>
-		<vote></vote>
+  <!-- Signup section -->
+  <signup-section location="homepage_signup_section"
+                  class="bg-dark">
+  </signup-section>
+  <!--End Signup section-->
+  
 
-	</section>
-	<!--End Vote section-->
+  <!-- Preorder section -->
+  <!-- <preorder-section location="preorder_section"
+                    class="bg-light-bright">
+  </preorder-section> -->
 
-	<!-- Preorder section -->
-	<!-- <preorder-section location="preorder_section"
-	                  class="bg-light-bright">
-	</preorder-section> -->
-
-	<!-- iOS Ad section -->
-	<section class="row ios"
-	         id="ipad_ad">
-		<h2>We like pixels too</h2>
-		<h3>Grab the game now on the iPad!</h3>
-		<div class="col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
-			<ul>
-				<li>Absurd content</li>
-				<li>Beautiful art by Damien Weighill</li>
-				<li>3-8 Players (Pass and Play)</li>
-				<li>Fast paced acting and guessing</li>
-				<li>Easy to learn, difficult to master</li>
-			</ul>
-			<p>(Signup for updates to be notified when we release on Android.)</p>
-			<a href="http://bit.ly/godhatesiPad"
-			   target="_blank"
-			   class="btn btn-success">
-			   Get the app!
-			</a>
-		</div>
-		<div class="col-md-5 col-lg-5">
-			<img src="img/ipadScreenshot.png"
-			     class="screenshot img-responsive" 
-			     alt="Screenshot of God Hates Charades for iPad"/>
-		</div>
-	</section>
-	<!-- end iOS Ad section -->
+  <!-- iOS Ad section -->
+  <section class="row ios"
+           id="ipad_ad">
+    <h2>We like pixels too</h2>
+    <h3>Grab the game now on the iPad!</h3>
+    <div class="col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
+      <ul>
+        <li>Absurd content</li>
+        <li>Beautiful art by Damien Weighill</li>
+        <li>3-8 Players (Pass and Play)</li>
+        <li>Fast paced acting and guessing</li>
+        <li>Easy to learn, difficult to master</li>
+      </ul>
+      <p>(Signup for updates to be notified when we release on Android.)</p>
+      <a href="http://bit.ly/godhatesiPad"
+         target="_blank"
+         class="btn btn-success">
+         Get the app!
+      </a>
+    </div>
+    <div class="col-md-5 col-lg-5">
+      <img src="img/ipadScreenshot.png"
+           class="screenshot img-responsive" 
+           alt="Screenshot of God Hates Charades for iPad"/>
+    </div>
+  </section>
+  <!-- end iOS Ad section -->
 </div>

@@ -1,194 +1,159 @@
-<div id="mainNav" 
+<div id="mainNav"
+     class="navbar navbar-default navbar-fixed-top" 
      ng-class="{beta: User.current.beta}">
-	<!-- <a class="ad"
-	   ui-sref="timeline">
-		See our Kickstarter timeline!
-	</a> -->
-	<ul class="nav nav-pills nav-justified nav-left">
+  <div class="cloud-nav-overlay passthrough"
+       ng-show="cloudNavOpen"></div>
+  <!-- <a class="ad"
+     ui-sref="timeline">
+    See our Kickstarter timeline!
+  </a> -->
+  
+  <a class="cloud-nav-button pull-right"
+     ng-mouseenter="cloudNavOpen = true"
+     ng-click="cloudNavOpen = true">
+    MENU
+  </a>
 
-		<!-- universal nav -->
-		<li ui-sref-active="active">
-			<a ui-sref="home">Home</a>
-		</li>
+  <a ui-sref="home"
+     class="nav-logo">
+    <img src="img/logo_bw_horizontal.svg"
+       alt="God Hates Charades"
+       class="logo-img">
 
-		<li dropdown
-		    class="dropdown" 
-		    is-open="gameOpen"
-		    ng-mouseover="gameOpen = true"
-		    ng-mouseout="gameOpen = false">
-			<a class="dropdown-toggle"
-			   ng-click="clickCapture($event)">
-				Game
-				<span class="dropup">
-					<span class="caret"></span>
-				</span>
-			</a>
-			<ul class="dropdown-menu"
-			    role="menu">
-				<li ui-sref-active="active">
-					<a ui-sref="rules">The Rules</a>
-				</li>
-				<li ui-sref-active="active">
-					<a ui-sref="watcher">Watch</a>
-				</li>
-				<li ui-sref-active="active">
-					<a ui-sref="timeline">The Timeline</a>
-				</li>
-			</ul>
-		</li>
+    <!-- <div class="logo-img"></div> -->
+  </a>
+  <div class="cloud-nav"
+       ng-class="{open: cloudNavOpen}"
+       ng-mouseleave="cloudNavOpen = false">
+    <ul class="nav nav-pills nav-stacked">
+      <!-- universal nav -->
+      <li ui-sref-active="active">
+        <a ui-sref="home">Home</a>
+      </li>
 
-		<li>
-			<a class="dropdown-toggle"
-			   href="https://godhatesgames.myshopify.com/products/god-hates-charades"
-			   target="_blank">
-				Store
-			</a>
-		</li>
+      <li role="presentation" >
+        THE GAME
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="rules">The Rules</a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="watcher">Watch</a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="timeline">The Timeline</a>
+      </li>
+      <li>
+        <a class="dropdown-toggle"
+           href="https://godhatesgames.myshopify.com/products/god-hates-charades"
+           target="_blank">
+          Store
+        </a>
+      </li>
 
-	</ul>
+      <li ui-sref-active="active">
+        <a ui-sref="blog">Blog</a>
+      </li>
 
-	<a ui-sref="home"
-	   class="nav-logo">
-		<img src="img/logo.svg"
-			 alt="God Hates Charades"
-			 class="logo-img img-responsive">
+      <!-- <li ui-sref-active="active">
+        <a ui-sref="top.fame">Top Pairs</a>
+      </li> -->
+      
+      <li role="presentation" >
+        COMMUNITY
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="vote">Pair vs Pair</a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="top.fame">Top Pairs</a>
+      </li>
 
-		<!-- <div class="logo-img"></div> -->
-	</a>
+      <!-- user stuff -->
+      <li role="presentation" 
+          ng-show="User.current">
+        {{User.current.name}}
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="user({userid: User.current.id})">
+          My Profile
+        </a>
+      </li>
 
-	<ul class="nav nav-pills nav-justified nav-right">
-		
-		<li ui-sref-active="active">
-			<a ui-sref="blog">Blog</a>
-		</li>
+      <!-- Admin section -->
+      <li role="presentation" 
+          class="divider"
+          ng-show="User.current.admin"></li>
+      <li role="presentation" 
+          ng-show="User.current.admin">
+        CONTENT
+      </li>
+      <li ng-show="User.current.admin">
+        <a href="https://godhatescharades.prismic.io/documents/-blog">Prismic: Blog</a>
+      </li>
+      <li ng-show="User.current.admin">
+        <a href="https://godhatescharades.prismic.io/documents/-pages">Prismic: Pages</a>
+      </li>
+      <li ui-sref-active="active"
+          ng-show="User.current.admin">
+        <a ui-sref="admin.elements">Elements</a>
+      </li>
+      <li ui-sref-active="active"
+          ng-show="User.current.admin">
+        <a ui-sref="admin.upload">Uploaded Files</a>
+      </li>
+      <li role="presentation" 
+          class="divider"
+          ng-show="User.current.admin"></li>
+      <li role="presentation" 
+          ng-show="User.current.admin">
+        ADMIN
+      </li>
+      <li ui-sref-active="active"
+          ng-show="User.current.admin">
+        <a ui-sref="admin.suggestions">Suggestions</a>
+      </li>
+      <li ui-sref-active="active"
+          ng-show="User.current.admin">
+        <a ui-sref="admin.moderation">Moderation</a>
+      </li>
+      <li ui-sref-active="active"
+          ng-show="User.current.admin">
+        <a ui-sref="admin.export">Export</a>
+      </li>
+      <li ui-sref-active="active"
+          ng-show="User.current.admin">
+        <a ui-sref="admin.sets">Set Builder</a>
+      </li>
+      <li role="presentation" 
+          class="divider"
+          ng-show="User.current.admin"></li>
+      <li role="presentation" 
+          ng-show="User.current.admin">
+        STYLING
+      </li>
+      <li ui-sref-active="active"
+          ng-show="User.current.admin">
+        <a ui-sref="admin.components">Components</a>
+      </li>
+      <li ui-sref-active="active"
+          ng-show="User.current.admin">
+        <a ui-sref="admin.cards">Cards</a>
+      </li>
 
-		<!-- <li ui-sref-active="active">
-			<a ui-sref="top.fame">Top Pairs</a>
-		</li> -->
-
-		<li dropdown
-		    class="dropdown" 
-		    is-open="voteOpen"
-		    ng-mouseover="voteOpen = true"
-		    ng-mouseout="voteOpen = false">
-			<a class="dropdown-toggle"
-			   ng-click="clickCapture($event)">
-				Vote
-				<span class="dropup">
-					<span class="caret"></span>
-				</span>
-			</a>
-			<ul class="dropdown-menu"
-			    role="menu">
-				<li ui-sref-active="active">
-					<a ui-sref="vote">Pair vs Pair</a>
-				</li>
-				<li ui-sref-active="active">
-					<a ui-sref="top.fame">Top Pairs</a>
-				</li>
-			</ul>
-		</li>
-
-		<!-- user stuff -->
-		<li dropdown
-		    class="dropdown" 
-		    ng-show="User.current"
-		    is-open="userOpen"
-		    ng-mouseover="userOpen = true"
-		    ng-mouseout="userOpen = false">
-			<a class="dropdown-toggle"
-			   ng-click="clickCapture($event)">
-				{{User.current.name}}
-				<span class="dropup">
-					<span class="caret"></span>
-				</span>
-			</a>
-			<ul class="dropdown-menu"
-			    role="menu">
-				<li ui-sref-active="active">
-					<a ui-sref="user({userid: User.current.id})">
-						My Profile
-					</a>
-				</li>
-
-				<!-- Admin section -->
-				<li role="presentation" 
-				    class="divider"
-				    ng-show="User.current.admin"></li>
-				<li role="presentation" 
-				    class="dropdown-header"
-				    ng-show="User.current.admin">
-					CONTENT
-				</li>
-				<li ng-show="User.current.admin">
-					<a href="https://godhatescharades.prismic.io/documents/-blog">Prismic: Blog</a>
-				</li>
-				<li ng-show="User.current.admin">
-					<a href="https://godhatescharades.prismic.io/documents/-pages">Prismic: Pages</a>
-				</li>
-				<li ui-sref-active="active"
-				    ng-show="User.current.admin">
-					<a ui-sref="admin.elements">Elements</a>
-				</li>
-				<li ui-sref-active="active"
-				    ng-show="User.current.admin">
-					<a ui-sref="admin.upload">Uploaded Files</a>
-				</li>
-				<li role="presentation" 
-				    class="divider"
-				    ng-show="User.current.admin"></li>
-				<li role="presentation" 
-				    class="dropdown-header"
-				    ng-show="User.current.admin">
-					ADMIN
-				</li>
-				<li ui-sref-active="active"
-				    ng-show="User.current.admin">
-					<a ui-sref="admin.suggestions">Suggestions</a>
-				</li>
-				<li ui-sref-active="active"
-				    ng-show="User.current.admin">
-					<a ui-sref="admin.moderation">Moderation</a>
-				</li>
-				<li ui-sref-active="active"
-				    ng-show="User.current.admin">
-					<a ui-sref="admin.export">Export</a>
-				</li>
-				<li ui-sref-active="active"
-				    ng-show="User.current.admin">
-					<a ui-sref="admin.sets">Set Builder</a>
-				</li>
-				<li role="presentation" 
-				    class="divider"
-				    ng-show="User.current.admin"></li>
-				<li role="presentation" 
-				    class="dropdown-header"
-				    ng-show="User.current.admin">
-					STYLING
-				</li>
-				<li ui-sref-active="active"
-				    ng-show="User.current.admin">
-					<a ui-sref="admin.components">Components</a>
-				</li>
-				<li ui-sref-active="active"
-				    ng-show="User.current.admin">
-					<a ui-sref="admin.cards">Cards</a>
-				</li>
-
-				<li role="presentation" class="divider"></li>
-				<!-- logout -->
-				<li>
-					<a ng-click="User.current.logout()">Logout</a>
-				</li>
-			</ul>
-		</li>
-		
-		<li class="login" 
-		    ui-sref-active="active"
-		    ng-hide="User.current">
-			<a ui-sref="login">
-				Login
-			</a>
-		</li>
-	</ul>
+      <li role="presentation" class="divider"></li>
+      <!-- logout -->
+      <li>
+        <a ng-click="User.current.logout()">Logout</a>
+      </li>
+      
+      <li class="login" 
+          ui-sref-active="active"
+          ng-hide="User.current">
+        <a ui-sref="login">
+          Login
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>
