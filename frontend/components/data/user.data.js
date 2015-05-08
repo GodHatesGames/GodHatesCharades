@@ -25,6 +25,7 @@ app.factory('User', function (DS, $q, ParseData, $rootScope, $mixpanel) {
 	var User = DS.defineResource(definition);
 	User.login = _login;
 	User.current;
+	User.resetPassword = _resetPassword;
 	var currentUser = Parse.User.current();
 	if(currentUser) {
 		_onUserConnected(currentUser);
@@ -124,6 +125,15 @@ app.factory('User', function (DS, $q, ParseData, $rootScope, $mixpanel) {
 		newUser.set('email', attrs.email);
 		newUser.set('name', attrs.name);
 		return newUser.signUp();
+	}
+
+	function _resetPassword(email) {
+		var deferred = $q.defer();
+		Parse.User.requestPasswordReset(email, {
+			success: deferred.resolve,
+			error: deferred.reject
+		});
+		return deferred.promise;
 	}
 
 	// instance methods
