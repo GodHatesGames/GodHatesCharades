@@ -65,6 +65,7 @@ server.get('/rules', showIndex);
 server.get('/share', showIndex);
 server.get('/timeline', showIndex);
 server.get('/watch', showIndex);
+server.get('/store', showIndex);
 
 // otherwise 404
 server.get('/*', show404);
