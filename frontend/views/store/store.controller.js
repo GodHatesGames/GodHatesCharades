@@ -1,5 +1,5 @@
 'use strict';
-app.controller('storeView', function(collection, products, $scope) {
+app.controller('storeView', function(collection, products, $scope, $timeout, $window) {
   // private
   var _cart = {};
 
@@ -10,6 +10,14 @@ app.controller('storeView', function(collection, products, $scope) {
   $scope.buyUrl = _buyUrl;
   $scope.decrement = _decrement;
   $scope.increment = _increment;
+
+  // Init
+
+  // default to true so we can hack/preload the cart image
+  $scope.isCartFull = true;
+  $timeout(function() {
+    $scope.isCartFull = false;
+  }, 50);
 
   // methods
   function _increment(product) {
@@ -24,9 +32,7 @@ app.controller('storeView', function(collection, products, $scope) {
 
   function _decrement(product) {
     if(product.mainVariant) {
-      if(_cart[product.mainVariant] === 1) {
-        delete _cart[product.mainVariant];
-      } else {
+      if(_cart[product.mainVariant] > 0) {
         _cart[product.mainVariant]--;
       }
     }
@@ -37,6 +43,11 @@ app.controller('storeView', function(collection, products, $scope) {
     _.each(_cart, function(quantity) {
       count += quantity;
     });
+    if(count > 0) {
+      $scope.isCartFull = true;
+    } else {
+      $scope.isCartFull = false;
+    }
     return count;
   }
 

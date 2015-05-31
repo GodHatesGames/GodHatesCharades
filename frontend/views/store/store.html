@@ -1,30 +1,41 @@
 <div id="storeView" class="container flush">
-  <a class="btn btn-success"
-     ng-href="{{buyUrl()}}">
-    Buy {{countItems()}} things
-  </a>
-  {{cart}}
-  <section ng-repeat="storeItem in collection.items | orderBy:'position'"
-           class="row"
-           ng-init="product = storeItem.product">
+  <section class="row">
     <div class="col-sm-6">
-      <img ng-src="{{product.image.src}}"
-           class="img-responsive">
+      <div class="product"
+           ng-repeat="storeItem in collection.items | orderBy:'position'"
+           ng-init="product = storeItem.product">
+        <img ng-src="{{product.image.src}}"
+             class="img-responsive">
+        <h3>{{product.title}}</h3>
+        <form class="form-inline">
+          <div class="form-group">
+            <button ng-click="decrement(product)"
+                    class="btn btn-info">-</button>
+            <input type="number"
+                   class="form-control" 
+                   ng-model="cart[product.mainVariant]">
+            <button ng-click="increment(product)"
+                    class="btn btn-info">+</button>
+          </div>
+        </form>
+        <div ng-html-compile="product.body_html"></div>
+      </div>
     </div>
     <div class="col-sm-6">
-      <h3>{{product.title}}</h3>
-      <form class="form-inline">
-        <div class="form-group">
-          <button ng-click="decrement(product)"
-                  class="btn btn-info">-</button>
-          <input type="number"
-                 class="form-control" 
-                 ng-model="cart[product.mainVariant]">
-          <button ng-click="increment(product)"
-                  class="btn btn-info">+</button>
+      <div class="cart"
+           angular-follow follow-point="100"
+           ng-class="{full: isCartFull}">
+        <div class="notification float-long"></div>
+        <div class="guy float-short">
+          <div class="guy-back"></div>
+          <div class="guy-front"></div>
         </div>
-      </form>
-      <div ng-html-compile="product.body_html"></div>
+        <a class="btn btn-block btn-success submit"
+           ng-href="{{buyUrl()}}">
+          Buy {{countItems()}} things
+        </a>
+      </div>
     </div>
   </section>
+
 </div>
