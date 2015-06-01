@@ -2,7 +2,7 @@
   <section class="row">
     <div class="col-sm-8">
       <div class="product"
-           ng-repeat="storeItem in collection.items | orderBy:'position'"
+           ng-repeat="storeItem in collection.items | orderBy:'position' track by storeItem.product.id"
            ng-init="product = storeItem.product">
         <img ng-src="{{product.image.src}}"
              class="img-responsive">
@@ -11,9 +11,7 @@
           <div class="form-group">
             <button ng-click="decrement(product)"
                     class="btn btn-info">-</button>
-            <input type="number"
-                   class="form-control" 
-                   ng-model="cart[product.mainVariant]">
+            {{getCountById(product.mainVariantId) | number}}
             <button ng-click="increment(product)"
                     class="btn btn-info">+</button>
           </div>
@@ -25,14 +23,23 @@
       <div class="cart"
            angular-follow follow-point="150"
            ng-class="{full: isCartFull}">
-        <div class="notification float-long"></div>
-        <div class="guy float-short">
+        <div class="notification float-short"></div>
+        <div class="products">
+          <div class="product"
+               ng-repeat="variantId in cart track by $index"
+               ng-class="collection.productsByMainVariant[variantId].product.cartClass"
+               ng-style="getProductLayer($index)">
+            <div class="product-image">
+            </div>
+          </div>
+        </div>
+        <div class="guy">
           <div class="guy-back"></div>
           <div class="guy-front"></div>
         </div>
         <a class="btn btn-block btn-success submit"
            ng-href="{{buyUrl()}}">
-          Buy {{countItems()}} things
+          Buy {{cart.length}} things
         </a>
       </div>
     </div>

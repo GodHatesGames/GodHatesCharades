@@ -3,7 +3,9 @@ app.factory('StoreProduct', function (DS) {
   var definition = {
     name: 'product',
     computed: {
-      mainVariant: ['variants', _updateMainVariant]
+      mainVariantId: ['variants', _updateMainVariantId],
+      mainVariant: ['variants', _updateMainVariant],
+      cartClass: ['mainVariant', _updateCartClass]
     },
     relations: {
       belongsTo: {
@@ -24,13 +26,29 @@ app.factory('StoreProduct', function (DS) {
   return StoreProduct;
 
   // definition methods
-  function _updateMainVariant(variants) {
+  function _updateMainVariantId(variants) {
     if(variants.length === 1) {
       return variants[0].id;
     }
   }
+
+  function _updateMainVariant(variants) {
+    if(variants.length === 1) {
+      return variants[0];
+    }
+  }
   
   // class methods
+  function _updateCartClass(mainVariant) {
+    switch(mainVariant.sku) {
+      case 'GAME-001' :
+        return 'product-main-game';
+      case 'EXP-001' :
+        return 'product-expansion';
+      default :
+        return;
+    }
+  }
 
   // instance methods
 

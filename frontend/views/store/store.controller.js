@@ -1,15 +1,17 @@
 'use strict';
 app.controller('storeView', function(collection, products, $scope, $timeout, $window) {
   // private
-  var _cart = {};
+  var _cart = [];
 
   // public
   $scope.collection = collection;
   $scope.cart = _cart;
-  $scope.countItems = _countItems;
+  // $scope.countItems = _countItems;
   $scope.buyUrl = _buyUrl;
   $scope.decrement = _decrement;
   $scope.increment = _increment;
+  $scope.getCountById = _getCountById;
+  $scope.getProductLayer = _getProductLayer;
 
   // Init
 
@@ -21,43 +23,44 @@ app.controller('storeView', function(collection, products, $scope, $timeout, $wi
 
   // methods
   function _increment(product) {
-    if(product.mainVariant) {
-      if(!_cart[product.mainVariant]) {
-        _cart[product.mainVariant] = 1;
-      } else {
-        _cart[product.mainVariant]++;
-      }
+    $scope.isCartFull = true;
+    if(product.mainVariantId) {
+      _cart.unshift(product.mainVariantId);
     }
   }
 
   function _decrement(product) {
-    if(product.mainVariant) {
-      if(_cart[product.mainVariant] > 0) {
-        _cart[product.mainVariant]--;
-      }
+    if(product.mainVariantId) {
+      var index = _.indexOf(_cart, product.mainVariantId);
+      _cart.splice(index, 1);
     }
-  }
-
-  function _countItems() {
-    var count = 0;
-    _.each(_cart, function(quantity) {
-      count += quantity;
-    });
-    if(count > 0) {
-      $scope.isCartFull = true;
-    } else {
+    if(_cart.length === 0) {
       $scope.isCartFull = false;
     }
-    return count;
   }
 
   function _buyUrl() {
     var url = 'https://godhatesgames.myshopify.com/cart/';
     var itemsToAdd = [];
-    _.each(_cart, function(quantity, key) {
-      itemsToAdd.push(key + ':' + quantity);
+    var counts = _.countBy(_cart);
+    _.each(counts, function(quantity, id) {
+      itemsToAdd.push(id + ':' + quantity);
     });
     var items = itemsToAdd.join(',');
     return url + items;
+  }
+
+  function _getCountById(id) {
+    var count = 0;
+    _.each(_cart, function(cartItem) {
+      if(id === cartItem)
+        count++;
+    });
+  }
+
+  function _getProductLayer(index) {
+    return {
+      'z-index': _cart.length - index
+    };
   }
 });

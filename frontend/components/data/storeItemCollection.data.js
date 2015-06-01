@@ -3,6 +3,9 @@ app.factory('StoreItemCollection', function (DS) {
   var definition = {
     name: 'collection',
     endpoint: 'api/store/collection',
+    computed: {
+      productsByMainVariant: ['items', _updateProducts]
+    },
     relations: {
       hasMany: {
         storeItem: {
@@ -25,6 +28,11 @@ app.factory('StoreItemCollection', function (DS) {
   // class methods
 
   // instance methods
+  function _updateProducts(items) {
+    return _.indexBy(items, function(item) {
+      return item.product.mainVariantId;
+    });
+  }
 
 
 

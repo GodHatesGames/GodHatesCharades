@@ -3,13 +3,44 @@
     padding-bottom: 15px;
     position: absolute;
     transition: transform .5s ease-out;
+    min-width: 200px;
 
     .notification {
       background-image: url(../img/empty_cart_text.svg);
       background-repeat: no-repeat;
       width: 182px;
       height: 134px;
-      margin: 0 auto 15px auto;
+      margin: 25px auto 15px auto;
+    }
+
+    .products {
+      display: none;
+      min-height: 174px;
+      padding-top: 94px;
+
+      .product {
+        position: relative;
+        .product-image {
+          width: 125px;
+          height: 125px;
+          margin: 0 auto;
+        }
+
+        &.product-main-game {
+          height: 55px;
+          .product-image {
+            background-image: url(../img/the_game.svg);
+          }
+        }
+
+        &.product-expansion {
+          height: 35px;
+
+          .product-image {
+            background-image: url(../img/expansion.svg);
+          }
+        }
+      }
     }
 
     .guy {
@@ -26,16 +57,26 @@
       }
 
       .guy-back {
+        z-index: -1;
         background-image: url(../img/cart_face_back.svg);
       }
 
       .guy-front {
+        z-index: 99;
         background-image: url(../img/empty_cart_face_front.svg);
       }
 
     }
 
     &.full {
+      .notification {
+        display: none;
+      }
+
+      .products {
+        display: block;
+      }
+
       .guy-front {
         background-image: url(../img/full_cart_face_front.svg);
       }
