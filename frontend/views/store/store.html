@@ -1,6 +1,6 @@
 <div id="storeView" class="container flush">
   <section class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-8">
       <div class="product"
            ng-repeat="storeItem in collection.items | orderBy:'position'"
            ng-init="product = storeItem.product">
@@ -21,9 +21,9 @@
         <div ng-html-compile="product.body_html"></div>
       </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <div class="cart"
-           angular-follow follow-point="100"
+           angular-follow follow-point="150"
            ng-class="{full: isCartFull}">
         <div class="notification float-long"></div>
         <div class="guy float-short">
