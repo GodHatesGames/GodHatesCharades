@@ -25,17 +25,29 @@ app.controller('storeView', function(collection, products, $scope, $timeout, $wi
   function _increment(product) {
     $scope.isCartFull = true;
     if(product.mainVariantId) {
-      _cart.unshift(product.mainVariantId);
+      var item = _tempItem(product.mainVariantId);
+      _cart.push(item);
     }
   }
 
   function _decrement(product) {
     if(product.mainVariantId) {
-      var index = _.indexOf(_cart, product.mainVariantId);
-      _cart.splice(index, 1);
+      var index = _.findLastIndex(_cart, function (item) {
+        return item.variant == product.mainVariantId;
+      });
+      if(index > -1) {
+        _cart.splice(index, 1);
+      }
     }
     if(_cart.length === 0) {
       $scope.isCartFull = false;
+    }
+  }
+
+  function _tempItem(variant) {
+    return {
+      variant: variant,
+      added: new Date().getTime()
     }
   }
 
@@ -43,8 +55,8 @@ app.controller('storeView', function(collection, products, $scope, $timeout, $wi
     var url = 'https://godhatesgames.myshopify.com/cart/';
     var itemsToAdd = [];
     var counts = _.countBy(_cart);
-    _.each(counts, function(quantity, id) {
-      itemsToAdd.push(id + ':' + quantity);
+    _.each(counts, function(quantity, item) {
+      itemsToAdd.push(item.variant + ':' + quantity);
     });
     var items = itemsToAdd.join(',');
     return url + items;
@@ -53,7 +65,7 @@ app.controller('storeView', function(collection, products, $scope, $timeout, $wi
   function _getCountById(id) {
     var count = 0;
     _.each(_cart, function(cartItem) {
-      if(id === cartItem)
+      if(id === cartItem.variant)
         count++;
     });
   }

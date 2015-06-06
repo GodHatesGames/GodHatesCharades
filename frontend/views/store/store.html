@@ -16,7 +16,7 @@
                     class="btn btn-info">+</button>
           </div>
         </form>
-        <div ng-html-compile="product.body_html"></div>
+        <!-- <div ng-html-compile="product.body_html"></div> -->
       </div>
     </div>
     <div class="col-sm-4">
@@ -25,9 +25,9 @@
            ng-class="{full: isCartFull}">
         <div class="notification float-short"></div>
         <div class="products">
-          <div class="product"
-               ng-repeat="variantId in cart track by $index"
-               ng-class="collection.productsByMainVariant[variantId].product.cartClass"
+          <div class="product fall-down"
+               ng-repeat="item in cart | orderBy:'-added' track by item.added"
+               ng-class="collection.productsByMainVariant[item.variant].product.cartClass"
                ng-style="getProductLayer($index)">
             <div class="product-image">
             </div>

@@ -42,7 +42,8 @@
     "chunk": "~0.0.2",
     "js-htmlencode": "~0.1.1",
     "ng-click-select": "~0.1.4",
-    "angular-follow": "*"
+    "angular-follow": "*",
+    "lodash": "~3.9.3"
   },
   "devDependencies": {
     "ng-stats": "~2.0.4"
