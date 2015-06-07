@@ -12,6 +12,7 @@ app.controller('storeView', function(collection, products, $scope, $timeout, $wi
   $scope.increment = _increment;
   $scope.getCountById = _getCountById;
   $scope.getProductLayer = _getProductLayer;
+  $scope.getSway = _getSway;
 
   // Init
 
@@ -41,6 +42,19 @@ app.controller('storeView', function(collection, products, $scope, $timeout, $wi
     }
     if(_cart.length === 0) {
       $scope.isCartFull = false;
+    }
+  }
+
+  function _getSway() {
+    if(_cart.length > 10) {
+      //sway big
+      return 'sway-a-lot';
+    } else if(_cart.length > 5) {
+      //sway little
+      return 'sway-a-little';
+    } else {
+      //no sway
+      return '';
     }
   }
 

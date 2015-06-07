@@ -24,7 +24,8 @@
            fix-bottom
            ng-class="{full: isCartFull}">
         <div class="notification float-short"></div>
-        <div class="products">
+        <div class="products"
+             ng-class="getSway()">
           <div class="product fall-down"
                ng-repeat="item in cart | orderBy:'-added' track by item.added"
                ng-class="collection.productsByMainVariant[item.variant].product.cartClass"
