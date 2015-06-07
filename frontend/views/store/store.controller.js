@@ -46,12 +46,9 @@ app.controller('storeView', function(collection, products, $scope, $timeout, $wi
   }
 
   function _getSway() {
-    if(_cart.length > 10) {
+    if(_cart.length > 5) {
       //sway big
       return 'sway-a-lot';
-    } else if(_cart.length > 5) {
-      //sway little
-      return 'sway-a-little';
     } else {
       //no sway
       return '';

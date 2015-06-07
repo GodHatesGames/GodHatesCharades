@@ -15,14 +15,6 @@
     .products {
       display: none;
       // padding-bottom: 31px;
-      
-      &.sway-a-little {
-        background-color: red;
-      }
-
-      &.sway-a-lot {
-        background-color: blue;
-      }
 
       .product {
         position: relative;
@@ -76,17 +68,21 @@
       .guy-front, .guy-back {
         position: absolute;
         background-repeat: no-repeat;
+        left: 0;
+        top: 0;
         height: 100%;
         width: 100%;
       }
 
       .guy-back {
         z-index: -1;
+        -webkit-transform: rotateZ(360deg);
         background-image: url(../img/cart_face_back.svg);
       }
 
       .guy-front {
         z-index: 99;
+        -webkit-transform: rotateZ(360deg);
         background-image: url(../img/empty_cart_face_front.svg);
       }
 
@@ -127,7 +123,7 @@
     animation-timing-function: ease-in-out;
   }
 
-  @-webkit-keyframes floating{
+  @keyframes floating{
       from {
         -webkit-transform: translate(0, 0);
       }
@@ -139,6 +135,30 @@
       }
   }
 
+  .sway-a-lot {
+    transform-origin: 0% 100% 0px;
+    backface-visibility: hidden;
+    animation-name: sway-a-lot;
+    animation-duration: 12s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0.5s;
+  }
+
+  @keyframes sway-a-lot {
+      from {
+        transform: skewX(0);
+      }
+      33% {
+        transform: skewX(-2deg);
+      }
+      66% {
+        transform: skewX(2deg);
+      }
+      to {
+        transform: skewX(0deg);
+      }
+  }
 
 /* Generated with Bounce.js. Edit at http://goo.gl/8cRLx1 */
 
