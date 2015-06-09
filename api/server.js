@@ -6,6 +6,7 @@ var prerender = require('prerender-node');
 var mailchimp = require('./mailchimp');
 var s3data = require('./s3data');
 var compression = require('compression');
+var aftership = require('./aftership');
 
 var port = process.env.PORT || 3000;
 var files = process.env.FILES || '../frontend';
@@ -41,6 +42,7 @@ server.use(express.static(staticFilePath));
 // api routes
 server.post('/api/subscribe', mailchimp.subscribe);
 server.get('/api/files', s3data.getFiles);
+server.get('/api/stats/shipments/:supersecret', aftership.shipmentStats);
 
 // pass the frontend routes
 server.get('/home', showIndex);

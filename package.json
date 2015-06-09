@@ -10,6 +10,7 @@
     "npm": "1.3.x"
   },
   "dependencies": {
+    "aftership": "^4.1.4",
     "compression": "^1.0.9",
     "ejs": "^1.0.0",
     "express": "~3.4.8",
