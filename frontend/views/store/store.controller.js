@@ -46,6 +46,9 @@ app.controller('storeView', function(collection, products, $scope, $timeout, $wi
   }
 
   function _getSway() {
+    // HACK: returning no sway until i can fix the skull-fuck situation
+    return '';
+
     if(_cart.length > 5) {
       //sway big
       return 'sway-a-lot';
@@ -79,6 +82,7 @@ app.controller('storeView', function(collection, products, $scope, $timeout, $wi
       if(id === cartItem.variant)
         count++;
     });
+    return count;
   }
 
   function _getProductLayer(index) {

@@ -1,37 +1,26 @@
 <div id="storeView" class="container flush">
   <section class="row">
-    <div class="col-sm-8">
-      <div class="product"
-           ng-repeat="storeItem in collection.items | orderBy:'position' track by storeItem.product.id"
-           ng-init="product = storeItem.product">
-        <h3>{{product.title}}</h3>
-        <form class="form-inline">
-          <div class="form-group">
-            <button ng-click="decrement(product)"
-                    class="btn btn-info">-</button>
-            {{getCountById(product.mainVariantId) | number}}
-            <button ng-click="increment(product)"
-                    class="btn btn-info">+</button>
-          </div>
-        </form>
-        <img ng-src="{{product.image.src}}"
-             class="img-responsive">
-        <!-- <div ng-html-compile="product.body_html"></div> -->
-      </div>
+    <div class="col-sm-9">
+      <store-product ng-repeat="storeItem in collection.items | orderBy:'position' track by storeItem.product.id"
+                     store-item="storeItem"
+                     increment="increment"
+                     decrement="decrement"
+                     setQuantity="setQuantity"
+                     quantity="{{getCountById(storeItem.product.mainVariantId)}}">
+      </store-product>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-3">
       <div class="cart"
            fix-bottom
            ng-class="{full: isCartFull}">
         <div class="notification float-short"></div>
-        <div class="products"
+        <div class="cart-items"
              ng-class="getSway()">
-          <div class="product fall-down"
+          <div class="cart-item fall-down"
                ng-repeat="item in cart | orderBy:'-added' track by item.added"
                ng-class="collection.productsByMainVariant[item.variant].product.cartClass"
                ng-style="getProductLayer($index)">
-            <div class="product-image">
-            </div>
+            <div class="product-image"></div>
           </div>
         </div>
         <div class="guy">

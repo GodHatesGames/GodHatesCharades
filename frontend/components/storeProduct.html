@@ -1,0 +1,32 @@
+<div class="product">
+  <h3>{{product.title}}</h3>
+  <div class="img-carousel row bg-dark">
+    <div class="col-xs-10">
+      <img ng-src="{{currentImage.src}}"
+           class="img-responsive">
+    </div>
+    <div class="col-xs-2 thumbnails">
+      <img ng-repeat="image in product.images track by image.id"
+           ng-click="selectImage(image)"
+           class="img-responsive" 
+           ng-src="{{image.src}}"
+           alt="{{product.title}}">
+    </div>
+  </div>
+  <div class="row bg-light description">
+    <div class="col-sm-8">
+      <div ng-html-compile="product.body_html"></div>
+    </div>
+    <div class="col-sm-4">
+      <form class="form-inline quantity">
+        <div class="form-group">
+          <button ng-click="decrement(product)"
+                  class="btn btn-info">-</button>
+          {{quantity | number}}
+          <button ng-click="increment(product)"
+                  class="btn btn-info">+</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
