@@ -1,6 +1,6 @@
-<div class="product">
+<div class="store-product">
   <h3>{{product.title}}</h3>
-  <div class="img-carousel row bg-dark">
+  <div class="img-carousel row bg-white">
     <div class="col-xs-10">
       <img ng-src="{{currentImage.src}}"
            class="img-responsive">
@@ -8,7 +8,8 @@
     <div class="col-xs-2 thumbnails">
       <img ng-repeat="image in product.images track by image.id"
            ng-click="selectImage(image)"
-           class="img-responsive" 
+           class="img-responsive"
+           ng-class="{active: (currentImage == image)}"
            ng-src="{{image.src}}"
            alt="{{product.title}}">
     </div>
@@ -18,15 +19,24 @@
       <div ng-html-compile="product.body_html"></div>
     </div>
     <div class="col-sm-4">
-      <form class="form-inline quantity">
-        <div class="form-group">
+      <div class="quantity row">
+        <div class="col-xs-4">
           <button ng-click="decrement(product)"
-                  class="btn btn-info">-</button>
-          {{quantity | number}}
-          <button ng-click="increment(product)"
-                  class="btn btn-info">+</button>
+                  class="btn btn-success">-</button>
         </div>
-      </form>
+        <div class="col-xs-4">
+          <div class="form-group">
+            <input type="text"
+                   class="form-control" 
+                   ng-model="productQuantity"
+                   ng-model-options="{ getterSetter: true }">
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <button ng-click="increment(product)"
+                  class="btn btn-success">+</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
