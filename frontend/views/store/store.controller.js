@@ -114,21 +114,15 @@ app.controller('storeView', function(collection, products, $scope, $timeout, $wi
   function _buyUrl() {
     var url = 'https://godhatesgames.myshopify.com/cart/';
     var itemsToAdd = [];
-    var counts = _.countBy(_cart);
-    _.each(counts, function(quantity, item) {
-      itemsToAdd.push(item.variant + ':' + quantity);
+    _.each(_collapsedCart, function(quantity, itemId) {
+      itemsToAdd.push(itemId + ':' + quantity);
     });
     var items = itemsToAdd.join(',');
     return url + items;
   }
 
   function _getCountById(id) {
-    var count = 0;
-    _.each(_cart, function(cartItem) {
-      if(id === cartItem.variant)
-        count++;
-    });
-    return count;
+    return _collapsedCart[id] || 0;
   }
 
   function _getProductLayer(index) {
