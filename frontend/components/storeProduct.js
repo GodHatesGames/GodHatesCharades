@@ -20,8 +20,9 @@ app.directive('storeProduct', function() {
       }
 
       function _productQuantityGetterSetter(newQuantity) {
-        if(angular.isDefined(newQuantity)) {
-          $scope.setQuantity(newQuantity);
+        if(angular.isDefined(newQuantity) && $scope.setQuantity) {
+          console.log('set quantity', newQuantity);
+          $scope.setQuantity(newQuantity, $scope.product);
         }
 
         return $scope.quantity;

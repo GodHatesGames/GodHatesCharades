@@ -2,17 +2,21 @@
 app.controller('storeView', function(collection, products, $scope, $timeout, $window) {
   // private
   var _cart = [];
+  var _collapsedCart = {};
+  var MAX_ITEMS = 9;
 
   // public
   $scope.collection = collection;
   $scope.cart = _cart;
-  // $scope.countItems = _countItems;
+  $scope.collapsedCart = _collapsedCart;
   $scope.buyUrl = _buyUrl;
   $scope.decrement = _decrement;
   $scope.increment = _increment;
   $scope.getCountById = _getCountById;
   $scope.getProductLayer = _getProductLayer;
   $scope.getSway = _getSway;
+  $scope.setQuantity = _setQuantity;
+  $scope.maxCartMode = false;
 
   // Init
 
@@ -23,11 +27,29 @@ app.controller('storeView', function(collection, products, $scope, $timeout, $wi
   }, 50);
 
   // methods
+  function _updateCartMode() {
+    if(_cart.length >= MAX_ITEMS && $scope.maxCartMode == false) {
+      $scope.maxCartMode = true;
+    } else if(_cart.length < MAX_ITEMS && $scope.maxCartMode == true) {
+      $scope.maxCartMode = false;
+    }
+  }
+
   function _increment(product) {
     $scope.isCartFull = true;
     if(product.mainVariantId) {
       var item = _tempItem(product.mainVariantId);
       _cart.push(item);
+      // update collapsed cart
+      if(!_collapsedCart[product.mainVariantId]) {
+        _collapsedCart[product.mainVariantId] = 1;
+      } else {
+        _collapsedCart[product.mainVariantId]++;
+      }
+    }
+    _updateCartMode();
+    if(!$scope.$$phase) {
+      $scope.$digest();
     }
   }
 
@@ -39,10 +61,34 @@ app.controller('storeView', function(collection, products, $scope, $timeout, $wi
       if(index > -1) {
         _cart.splice(index, 1);
       }
+
+      // update collapsed cart
+      if(_collapsedCart[product.mainVariantId] === 1) {
+        delete _collapsedCart[product.mainVariantId];
+      } else {
+        _collapsedCart[product.mainVariantId]--;
+      }
     }
+    _updateCartMode();
     if(_cart.length === 0) {
       $scope.isCartFull = false;
     }
+    if(!$scope.$$phase) {
+      $scope.$digest();
+    }
+  }
+
+  function _setQuantity (newQuantity, product) {
+    var currentQuantity = _getCountById(product.mainVariantId);
+    var diff = newQuantity - currentQuantity;
+    var changeFunc = diff > 0 ? _increment : _decrement;
+    var absDiff = Math.abs(diff);
+    console.log(absDiff);
+
+    _.times(absDiff, function(n) {
+      console.log('times', n);
+      _.delay(changeFunc, 10 * n, product);
+    });
   }
 
   function _getSway() {
