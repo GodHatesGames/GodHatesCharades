@@ -32,46 +32,19 @@
 
         .product-quantity {
           position: absolute;
+          left: -20px;
           top: 0;
           border-radius: 5px;
+          background-image: url(../img/quantityNub.svg);
+          background-repeat: no-repeat;
           width: 64px;
           height: 64px;
           color: white;
+          padding-right: 10px;
           font-family: 'GodHatesCharades';
           line-height: 54px;
           text-align: center;
           font-size: 30px;
-
-          &:before {
-            // using before to allow flipping
-            content: '';
-            width: 64px;
-            height: 64px;
-            background-image: url(../img/quantityNub.svg);
-            background-repeat: no-repeat;
-            z-index: -1;
-            position: absolute;
-            left: 0;
-            top: 0;
-          }
-        }
-
-        &.cart-item-even {
-          .product-quantity {
-            left: -10px;
-            padding-right: 10px;
-          }
-        }
-
-        &.cart-item-odd {
-          .product-quantity {
-            right: 0;
-            padding-left: 10px;
-
-            &:before {
-              transform: scaleX(-1);
-            }
-          }
         }
 
         .product-image {

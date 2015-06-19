@@ -29,8 +29,6 @@
                ng-if="maxCartMode"
                ng-repeat="(itemId, quantity) in collapsedCart track by itemId"
                ng-class="collection.productsByMainVariant[itemId].product.cartClass"
-               ng-class-even="'cart-item-even'"
-               ng-class-odd="'cart-item-odd'"
                ng-style="getProductLayer($index)">
             <div class="product-quantity">{{quantity}}</div>
             <div class="product-image"></div>
