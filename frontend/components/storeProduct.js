@@ -1,4 +1,4 @@
-app.directive('storeProduct', function() {
+app.directive('storeProduct', function($animate) {
   return {
     templateUrl: 'components/storeProduct.html',
     replace: true,
@@ -13,6 +13,8 @@ app.directive('storeProduct', function() {
       $scope.product = $scope.storeItem.product;
       $scope.currentImage = $scope.product.images[0];
       $scope.selectImage = _selectImage;
+      $scope.onIncrement = _onIncrement;
+      $scope.onDecrement = _onDecrement;
       $scope.productQuantity = _productQuantityGetterSetter;
 
       function _selectImage (newImage) {
@@ -26,6 +28,24 @@ app.directive('storeProduct', function() {
         }
 
         return $scope.quantity;
+      }
+
+      function _onIncrement(event, product) {
+        _animateButton(event.currentTarget);
+        $scope.increment(product);
+      }
+
+      function _onDecrement(event, product) {
+        _animateButton(event.currentTarget);
+        $scope.decrement(product);
+      }
+
+      function _animateButton (button) {
+        if(!button.classList.contains('click-satisfaction')) {
+          $animate.addClass(button, 'click-satisfaction', function () {
+              button.classList.remove('click-satisfaction');
+          });
+        }
       }
     }
   }

@@ -6,6 +6,9 @@
   h3 {
     text-transform: uppercase;
     font-family: 'GodHatesCharades';
+    background-color: white;
+    padding-top: 25px;
+    margin-bottom: 0;
   }
 
   .description {
@@ -51,6 +54,17 @@
       background: none;
       font-size: 30px;
       line-height: 30px;
+      color: white;
+      box-shadow: none;
+      &.click-satisfaction {
+        animation: click-satisfaction 110ms linear both;
+      }
+      &:active {
+        color: @color-actor;
+      }
+      &:focus {
+        outline: none;
+      }
     }
 
     input {
@@ -65,4 +79,18 @@
       font-family: 'GodHatesCharades';
     }
   }
+
+  /* Generated with Bounce.js. Edit at http://goo.gl/Up8oE2 */
+
+  @keyframes click-satisfaction {
+    0% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+    4.45% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+    4.55% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+    9.23% { transform: matrix3d(1.283, 0, 0, 0, 0, 1.283, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+    13.91% { transform: matrix3d(1.345, 0, 0, 0, 0, 1.345, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+    35.5% { transform: matrix3d(1.103, 0, 0, 0, 0, 1.103, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+    57% { transform: matrix3d(1.013, 0, 0, 0, 0, 1.013, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
+    100% { transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); } 
+  }
+
 }
