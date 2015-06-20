@@ -98,8 +98,8 @@ app.controller('storeView', function(collection, products, $scope, $timeout, $wi
       // useDelay = false;
     }
 
+    // execute the functions X times to allow animation to run for each
     _.times(absDiff, function(n) {
-      console.log('times', n);
       if(useDelay && incrementing) {
         _.delay(function() {
           $scope.$apply(function() {

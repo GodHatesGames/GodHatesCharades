@@ -29,6 +29,8 @@
                ng-if="maxCartMode"
                ng-repeat="cartItem in collapsedCart | orderBy:'-added' track by cartItem.variant"
                ng-class="collection.productsByMainVariant[cartItem.variant].product.cartClass"
+               ng-class-even="'cart-item-even'"
+               ng-class-odd="'cart-item-odd'"
                ng-style="getProductLayer(collapsedCart, $index)">
             <div class="product-quantity">{{cartItem.quantity}}</div>
             <div class="product-image"></div>
@@ -40,7 +42,7 @@
         </div>
         <a class="btn btn-block btn-success submit"
            ng-href="{{buyUrl()}}">
-          Buy {{cart.length}} things
+          Checkout
         </a>
       </div>
     </div>
