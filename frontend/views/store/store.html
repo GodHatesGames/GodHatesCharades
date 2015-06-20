@@ -21,16 +21,16 @@
                ng-if="!maxCartMode"
                ng-repeat="item in cart | orderBy:'-added' track by item.added"
                ng-class="collection.productsByMainVariant[item.variant].product.cartClass"
-               ng-style="getProductLayer($index)">
+               ng-style="getProductLayer(cart, $index)">
             <div class="product-image"></div>
           </div>
           <!-- maxCartMode cart items -->
           <div class="cart-item"
                ng-if="maxCartMode"
-               ng-repeat="(itemId, quantity) in collapsedCart track by itemId"
-               ng-class="collection.productsByMainVariant[itemId].product.cartClass"
-               ng-style="getProductLayer($index)">
-            <div class="product-quantity">{{quantity}}</div>
+               ng-repeat="cartItem in collapsedCart | orderBy:'-added' track by cartItem.variant"
+               ng-class="collection.productsByMainVariant[cartItem.variant].product.cartClass"
+               ng-style="getProductLayer(collapsedCart, $index)">
+            <div class="product-quantity">{{cartItem.quantity}}</div>
             <div class="product-image"></div>
           </div>
         </div>

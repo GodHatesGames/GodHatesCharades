@@ -2,7 +2,8 @@
 app.controller('storeView', function(collection, products, $scope, $timeout, $window) {
   // private
   var _cart = [];
-  var _collapsedCart = {};
+  var _collapsedCart = [];
+  var _collapsedCartById = {};
   var MAX_ITEMS = 9;
 
   // public
@@ -39,18 +40,23 @@ app.controller('storeView', function(collection, products, $scope, $timeout, $wi
     $scope.isCartFull = true;
     if(product.mainVariantId) {
       var item = _tempItem(product.mainVariantId);
+      // update normal cart
+
       _cart.push(item);
       // update collapsed cart
-      if(!_collapsedCart[product.mainVariantId]) {
-        _collapsedCart[product.mainVariantId] = 1;
+      if(!_collapsedCartById[product.mainVariantId]) {
+        var newCollapsedCartItem = {
+          variant: product.mainVariantId,
+          quantity: 1,
+          added: new Date().getTime()
+        };
+        _collapsedCartById[product.mainVariantId] = newCollapsedCartItem;
+        _collapsedCart.push(newCollapsedCartItem);
       } else {
-        _collapsedCart[product.mainVariantId]++;
+        _collapsedCartById[product.mainVariantId].quantity++;
       }
     }
     _updateCartMode();
-    if(!$scope.$$phase) {
-      $scope.$digest();
-    }
   }
 
   function _decrement(product) {
@@ -60,34 +66,49 @@ app.controller('storeView', function(collection, products, $scope, $timeout, $wi
       });
       if(index > -1) {
         _cart.splice(index, 1);
-      }
 
-      // update collapsed cart
-      if(_collapsedCart[product.mainVariantId] === 1) {
-        delete _collapsedCart[product.mainVariantId];
-      } else {
-        _collapsedCart[product.mainVariantId]--;
+        // update collapsed cart
+        if(_collapsedCartById[product.mainVariantId].quantity === 1) {
+          //update array
+          var cartItemIndex = _collapsedCart.indexOf(_collapsedCartById[product.mainVariantId]);
+          _collapsedCart.splice(cartItemIndex, 1);
+          // update map
+          delete _collapsedCartById[product.mainVariantId];
+        } else {
+          _collapsedCartById[product.mainVariantId].quantity--;
+        }
+
       }
     }
     _updateCartMode();
     if(_cart.length === 0) {
       $scope.isCartFull = false;
     }
-    if(!$scope.$$phase) {
-      $scope.$digest();
-    }
   }
 
   function _setQuantity (newQuantity, product) {
     var currentQuantity = _getCountById(product.mainVariantId);
     var diff = newQuantity - currentQuantity;
-    var changeFunc = diff > 0 ? _increment : _decrement;
+    var incrementing = diff > 0;
+    var changeFunc = incrementing ? _increment : _decrement;
     var absDiff = Math.abs(diff);
     console.log(absDiff);
+    var useDelay = true;
+    if(absDiff < 20 || $scope.maxCartMode) {
+      // useDelay = false;
+    }
 
     _.times(absDiff, function(n) {
       console.log('times', n);
-      _.delay(changeFunc, 10 * n, product);
+      if(useDelay && incrementing) {
+        _.delay(function() {
+          $scope.$apply(function() {
+            changeFunc(product);
+          });
+        }, 10 * n);
+      } else {
+        changeFunc(product);
+      }
     });
   }
 
@@ -114,20 +135,23 @@ app.controller('storeView', function(collection, products, $scope, $timeout, $wi
   function _buyUrl() {
     var url = 'https://godhatesgames.myshopify.com/cart/';
     var itemsToAdd = [];
-    _.each(_collapsedCart, function(quantity, itemId) {
-      itemsToAdd.push(itemId + ':' + quantity);
+    _.each(_collapsedCartById, function(cartItem, itemId) {
+      itemsToAdd.push(itemId + ':' + cartItem.quantity);
     });
     var items = itemsToAdd.join(',');
     return url + items;
   }
 
   function _getCountById(id) {
-    return _collapsedCart[id] || 0;
+    if(_collapsedCartById[id])
+      return _collapsedCartById[id].quantity;
+    else
+      return 0;
   }
 
-  function _getProductLayer(index) {
+  function _getProductLayer(store, index) {
     return {
-      'z-index': _cart.length - index
+      'z-index': _.size(store) - index
     };
   }
 });
