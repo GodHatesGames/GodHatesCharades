@@ -9,7 +9,7 @@
                      quantity="{{getCountById(storeItem.product.mainVariantId)}}">
       </store-product>
     </div>
-    <div class="col-sm-3">
+    
       <div class="cart"
            fix-bottom
            ng-class="{full: isCartFull}">
@@ -41,11 +41,11 @@
           <div class="guy-front"></div>
         </div>
         <a class="btn btn-block btn-success submit"
+           ng-disabled="!isCartFull"
            ng-href="{{buyUrl()}}">
           Checkout
         </a>
       </div>
-    </div>
   </section>
 
 </div>

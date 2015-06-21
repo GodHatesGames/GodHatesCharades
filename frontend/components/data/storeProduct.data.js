@@ -3,6 +3,7 @@ app.factory('StoreProduct', function (DS) {
   var definition = {
     name: 'product',
     computed: {
+      mainVariantPrice: ['mainVariant', _updateMainVariantPrice],
       mainVariantId: ['variants', _updateMainVariantId],
       mainVariant: ['variants', _updateMainVariant],
       cartClass: ['mainVariant', _updateCartClass]
@@ -35,6 +36,12 @@ app.factory('StoreProduct', function (DS) {
   function _updateMainVariant(variants) {
     if(variants.length === 1) {
       return variants[0];
+    }
+  }
+
+  function _updateMainVariantPrice(mainVariant) {
+    if(mainVariant) {
+      return Number(mainVariant.price);
     }
   }
   

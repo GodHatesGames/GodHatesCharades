@@ -1,3 +1,6 @@
+@import "../../less/bootstrap-variables";
+@import "../../less/colors";
+
 #storeView {
   padding-top: 35px;
 
@@ -6,17 +9,54 @@
     transition: transform .5s ease-out;
     min-width: 200px;
 
+    @media (max-width: @screen-sm-er-max) {
+      & {
+        background-color: black;
+        width: 100%;
+        left: 0;
+        height: 65px;
+        z-index: 1;
+        padding-top: 10px;
+        height: 125px;
+      }
+    }
+
+    @media (min-width: @screen-sm-min) {
+      & {
+        left: 75%;
+      }
+    }
+
+    @media (min-width: @screen-md-min) {
+      & {
+        left: 70%;
+      }
+    }
+
     .notification {
       background-image: url(../img/empty_cart_text.svg);
       background-repeat: no-repeat;
       width: 182px;
       height: 134px;
       margin: 25px auto 15px auto;
+
+
+      @media (max-width: @screen-sm-er-max) {
+        & {
+          display: none;
+        }
+      }
     }
 
     .cart-items {
       display: none;
       // padding-bottom: 31px;
+
+      @media (max-width: @screen-sm-er-max) {
+        & {
+          padding-left: 40px;
+        }
+      }
 
       .cart-item {
         position: relative;
@@ -27,6 +67,14 @@
 
           &.ng-enter-active {
             animation: hardbounce 1000ms linear both;
+          }
+        }
+
+        @media (max-width: @screen-sm-er-max) {
+          & {
+              float: left;
+              width: 180px;
+              margin-left: 15px;
           }
         }
 
@@ -42,33 +90,51 @@
           line-height: 54px;
           text-align: center;
           font-size: 30px;
+          left: -40px;
+          padding-right: 10px;
+
+          @media (max-width: @screen-sm-er-max) {
+            & {
+              color: black;
+            }
+          }
 
           &:before {
             // using before to allow flipping
             content: '';
             width: 64px;
             height: 64px;
-            background-image: url(../img/quantityNub.svg);
-            background-repeat: no-repeat;
+            -webkit-mask-image: url(../img/quantityNub.svg);
+            -webkit-mask-position: 50% 0;
+            -webkit-mask-size: 64px;
+            -webkit-mask-repeat: no-repeat;
+            background-color: black;
             z-index: -1;
             position: absolute;
             left: 0;
             top: 0;
-          }
-        }
-        &.cart-item-odd {
-          .product-quantity {
-            left: -20px;
-            padding-right: 10px;
-          }
-        }
-        &.cart-item-even {
-          .product-quantity {
-            right: 0;
-            padding-left: 10px;
-            &:before {
-              transform: scaleX(-1);
+
+            @media (max-width: @screen-sm-er-max) {
+              & {
+                background-color: white;
+              }
             }
+          }
+        }
+
+        @media (min-width: @screen-sm-min) {
+          & {
+              &.cart-item-even {
+                .product-quantity {
+                  left: inherit;
+                  padding-right: 0;
+                  right: 0;
+                  padding-left: 10px;
+                  &:before {
+                    transform: scaleX(-1);
+                  }
+                }
+              }
           }
         }
  
@@ -87,6 +153,7 @@
 
         &.product-main-game {
           height: 45px;
+
           .product-image {
             background-image: url(../img/the_game.svg);
           }
@@ -129,6 +196,12 @@
         background-image: url(../img/empty_cart_face_front.svg);
       }
 
+      @media (max-width: @screen-sm-er-max) {
+        & {
+          display: none;
+        }
+      }
+
     }
 
     &.full {
@@ -155,6 +228,20 @@
       -webkit-mask-size: 180px 45px;
       -webkit-mask-repeat: no-repeat;
       line-height: 30px;
+      font-size: 20px;
+
+      &[disabled] {
+        opacity: 1;
+        background-color: @color-btn-success-disabled;
+      }
+
+      @media (max-width: @screen-sm-er-max) {
+        & {
+          float: right;
+          width: 180px;
+          position: relative;
+        }
+      }
     }
   }
 
