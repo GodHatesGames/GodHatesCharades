@@ -9,43 +9,42 @@
                      quantity="{{getCountById(storeItem.product.mainVariantId)}}">
       </store-product>
     </div>
-    
-      <div class="cart"
-           fix-bottom
-           ng-class="{full: isCartFull}">
-        <div class="notification float-short"></div>
-        <div class="cart-items"
-             ng-class="getSway()">
-          <!-- normal cart items -->
-          <div class="cart-item fall-down"
-               ng-if="!maxCartMode"
-               ng-repeat="item in cart | orderBy:'-added' track by item.added"
-               ng-class="collection.productsByMainVariant[item.variant].product.cartClass"
-               ng-style="getProductLayer(cart, $index)">
-            <div class="product-image"></div>
-          </div>
-          <!-- maxCartMode cart items -->
-          <div class="cart-item"
-               ng-if="maxCartMode"
-               ng-repeat="cartItem in collapsedCart | orderBy:'-added' track by cartItem.variant"
-               ng-class="collection.productsByMainVariant[cartItem.variant].product.cartClass"
-               ng-class-even="'cart-item-even'"
-               ng-class-odd="'cart-item-odd'"
-               ng-style="getProductLayer(collapsedCart, $index)">
-            <div class="product-quantity">{{cartItem.quantity}}</div>
-            <div class="product-image"></div>
-          </div>
+    <div class="cart"
+         fix-bottom
+         ng-class="{full: isCartFull}">
+      <div class="notification float-short"></div>
+      <div class="cart-items"
+           ng-class="getSway()">
+        <!-- normal cart items -->
+        <div class="cart-item fall-down"
+             ng-if="!maxCartMode"
+             ng-repeat="item in cart | orderBy:'-added' track by item.added"
+             ng-class="collection.productsByMainVariant[item.variant].product.cartClass"
+             ng-style="getProductLayer(cart, $index)">
+          <div class="product-image"></div>
         </div>
-        <div class="guy">
-          <div class="guy-back"></div>
-          <div class="guy-front"></div>
+        <!-- maxCartMode cart items -->
+        <div class="cart-item"
+             ng-if="maxCartMode"
+             ng-repeat="cartItem in collapsedCart | orderBy:'-added' track by cartItem.variant"
+             ng-class="collection.productsByMainVariant[cartItem.variant].product.cartClass"
+             ng-class-even="'cart-item-even'"
+             ng-class-odd="'cart-item-odd'"
+             ng-style="getProductLayer(collapsedCart, $index)">
+          <div class="product-quantity">{{cartItem.quantity}}</div>
+          <div class="product-image"></div>
         </div>
-        <a class="btn btn-block btn-success submit"
-           ng-disabled="!isCartFull"
-           ng-href="{{buyUrl()}}">
-          Checkout
-        </a>
       </div>
+      <div class="guy">
+        <div class="guy-back"></div>
+        <div class="guy-front"></div>
+      </div>
+      <a class="btn btn-block btn-success submit"
+         ng-disabled="!isCartFull"
+         ng-href="{{buyUrl()}}">
+        Checkout
+      </a>
+    </div>
   </section>
 
 </div>

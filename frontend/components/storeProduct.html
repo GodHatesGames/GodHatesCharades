@@ -20,12 +20,14 @@
     <div class="col-sm-8">
       <div ng-html-compile="product.body_html"></div>
     </div>
-    <div class="col-sm-4">
-      <div class="row pricing">
-        <div class="col-xs-12">
+    <div class="col-xs-6 col-sm-4">
+      <div class="row">
+        <div class="col-xs-12 pricing">
           <span class="dollar-sign">$</span>{{product.mainVariantPrice | currency:'':0}}
         </div>
       </div>
+    </div>
+    <div class="col-xs-6 col-sm-4">
       <div class="quantity row">
         <div class="col-xs-4">
           <button ng-click="onDecrement($event, product)"
