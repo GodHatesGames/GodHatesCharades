@@ -10,9 +10,9 @@ app.controller('storeView', function(collection, products, $scope, $timeout, $wi
   // Init
 
   // default to true so we can hack/preload the cart image
-  cart.empty = false;
+  cart.empty = !cart.empty;
   $timeout(function() {
-    cart.empty = true;
+    cart.empty = !cart.empty;
   }, 50);
 
   function _getSway() {

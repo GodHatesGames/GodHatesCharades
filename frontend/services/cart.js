@@ -1,8 +1,21 @@
 app.service('cart', function($q, DSCacheFactory, ParseData, Pair, $interval) {
    // private
-  var _items = [];
-  var _variants = [];
-  var _variantsById = {};
+  var _items,_variants, _variantsById;
+
+  // expires in 1 day
+  var cartCache = DSCacheFactory('cart', {
+    maxAge: 86400000
+  });
+  var existingCart = cartCache.get('cart');
+  if(existingCart) {
+    _items = existingCart.items;
+    _variants = existingCart.variants;
+    _variantsById = _.indexBy(_variants, 'id');
+  } else {
+    _items = [];
+    _variants = [];
+    _variantsById = {};
+  }
   var MAX_ITEMS = 9;
   
   var Cart = {
@@ -14,14 +27,15 @@ app.service('cart', function($q, DSCacheFactory, ParseData, Pair, $interval) {
     variants: _variants,
     variantsById: _variantsById,
     maxCartMode: false,
-    empty: true,
+    empty: _items.length === 0,
     max: MAX_ITEMS
   };
+  _updateCartMode();
 
-  // expires in 1 day
-  var cartCache = DSCacheFactory('cart', {
-    maxAge: 86400000
-  });
+  var _updateCartCache = _.throttle(function() {
+    var cart = _.pick(Cart, ['items', 'variants']);
+    cartCache.put('cart', cart);
+  }, 500);
 
   // methods
   function _updateCartMode() {
@@ -53,6 +67,7 @@ app.service('cart', function($q, DSCacheFactory, ParseData, Pair, $interval) {
       }
     }
     _updateCartMode();
+    _updateCartCache();
   }
 
   function _decrement(product) {
@@ -77,6 +92,7 @@ app.service('cart', function($q, DSCacheFactory, ParseData, Pair, $interval) {
       }
     }
     _updateCartMode();
+    _updateCartCache();
     if(_items.length === 0) {
       Cart.empty = true;
     }
