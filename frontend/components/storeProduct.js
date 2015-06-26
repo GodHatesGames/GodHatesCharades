@@ -1,13 +1,9 @@
-app.directive('storeProduct', function($animate) {
+app.directive('storeProduct', function($animate, cart) {
   return {
     templateUrl: 'components/storeProduct.html',
     replace: true,
     scope: {
-      storeItem: '=',
-      increment: '=',
-      decrement: '=',
-      setQuantity: '=',
-      quantity: '@'
+      storeItem: '='
     },
     controller: function($scope, $element) {
       $scope.product = $scope.storeItem.product;
@@ -22,22 +18,22 @@ app.directive('storeProduct', function($animate) {
       }
 
       function _productQuantityGetterSetter(newQuantity) {
-        if(angular.isDefined(newQuantity) && $scope.setQuantity) {
+        if(angular.isDefined(newQuantity)) {
           console.log('set quantity', newQuantity);
-          $scope.setQuantity(newQuantity, $scope.product);
+          cart.setQuantity(newQuantity, $scope.product);
         }
 
-        return $scope.quantity;
+        return cart.getCountById($scope.product.mainVariantId);
       }
 
       function _onIncrement(event, product) {
         _animateButton(event.currentTarget);
-        $scope.increment(product);
+        cart.increment(product);
       }
 
       function _onDecrement(event, product) {
         _animateButton(event.currentTarget);
-        $scope.decrement(product);
+        cart.decrement(product);
       }
 
       function _animateButton (button) {

@@ -2,36 +2,32 @@
   <section class="row">
     <div class="col-sm-9">
       <store-product ng-repeat="storeItem in collection.items | orderBy:'position' track by storeItem.product.id"
-                     store-item="storeItem"
-                     increment="increment"
-                     decrement="decrement"
-                     set-quantity="setQuantity"
-                     quantity="{{getCountById(storeItem.product.mainVariantId)}}">
+                     store-item="storeItem">
       </store-product>
     </div>
     <div class="cart"
          fix-bottom
-         ng-class="{full: isCartFull}">
+         ng-class="{full: !cart.empty}">
       <div class="notification float-short"></div>
       <div class="cart-items"
            ng-class="getSway()">
         <!-- normal cart items -->
         <div class="cart-item fall-down"
-             ng-if="!maxCartMode"
-             ng-repeat="item in cart | orderBy:'-added' track by item.added"
+             ng-if="!cart.maxCartMode"
+             ng-repeat="item in cart.items | orderBy:'-added' | limit:cart.max track by item.added"
              ng-class="collection.productsByMainVariant[item.variant].product.cartClass"
-             ng-style="getProductLayer(cart, $index)">
+             ng-style="getProductLayer(cart.items, $index)">
           <div class="product-image"></div>
         </div>
         <!-- maxCartMode cart items -->
         <div class="cart-item"
-             ng-if="maxCartMode"
-             ng-repeat="cartItem in collapsedCart | orderBy:'-added' track by cartItem.variant"
-             ng-class="collection.productsByMainVariant[cartItem.variant].product.cartClass"
+             ng-if="cart.maxCartMode"
+             ng-repeat="variant in cart.variants | orderBy:'-added' track by variant.id"
+             ng-class="collection.productsByMainVariant[variant.id].product.cartClass"
              ng-class-even="'cart-item-even'"
              ng-class-odd="'cart-item-odd'"
-             ng-style="getProductLayer(collapsedCart, $index)">
-          <div class="product-quantity">{{cartItem.quantity}}</div>
+             ng-style="getProductLayer(cart.variants, $index)">
+          <div class="product-quantity">{{variant.quantity}}</div>
           <div class="product-image"></div>
         </div>
       </div>
@@ -40,7 +36,7 @@
         <div class="guy-front"></div>
       </div>
       <a class="btn btn-block btn-success submit"
-         ng-disabled="!isCartFull"
+         ng-disabled="cart.empty"
          ng-href="{{buyUrl()}}">
         Checkout
       </a>
