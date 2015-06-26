@@ -9,6 +9,8 @@ var s3data = require('./s3data');
 var redisCache = require('./redis-cache');
 var compression = require('compression');
 var bodyParser = require('body-parser');
+var aftership = require('./aftership');
+
 var port = process.env.PORT || 3000;
 var files = process.env.FILES || '../frontend';
 
@@ -46,6 +48,7 @@ server.post('/api/subscribe', mailchimp.subscribe);
 server.get('/api/files', s3data.getFiles);
 server.get('/api/store/collection/:id', redisCache, shopify.collectionById);
 server.get('/api/store/collection/:id/product', redisCache, shopify.productByCollectionId);
+server.get('/api/stats/shipments/:supersecret', aftership.shipmentStats);
 
 // pass the frontend routes
 server.get('/home', showIndex);
