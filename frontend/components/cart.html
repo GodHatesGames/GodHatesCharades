@@ -1,0 +1,38 @@
+<span>
+  <div class="cart"
+       ng-class="{full: !cartService.empty}"
+       fix-bottom>
+    <div class="notification float-short"></div>
+    <div class="cart-items"
+         ng-class="getSway()">
+      <!-- normal cart items -->
+      <div class="cart-item fall-down"
+           ng-if="!cartService.maxCartMode"
+           ng-repeat="item in cartService.items | orderBy:'-added' | limit:cartService.max track by item.added"
+           ng-class="collection.productsByMainVariant[item.variant].product.cartClass"
+           ng-style="getProductLayer(cartService.items, $index)">
+        <div class="product-image"></div>
+      </div>
+      <!-- maxCartMode cart items -->
+      <div class="cart-item"
+           ng-if="cartService.maxCartMode"
+           ng-repeat="variant in cartService.variants | orderBy:'-added' track by variant.id"
+           ng-class="collection.productsByMainVariant[variant.id].product.cartClass"
+           ng-class-even="'cart-item-even'"
+           ng-class-odd="'cart-item-odd'"
+           ng-style="getProductLayer(cartService.variants, $index)">
+        <div class="product-quantity">{{variant.quantity}}</div>
+        <div class="product-image"></div>
+      </div>
+    </div>
+    <div class="guy">
+      <div class="guy-back"></div>
+      <div class="guy-front"></div>
+    </div>
+    <a class="btn btn-block btn-success submit"
+       ng-disabled="cartService.empty"
+       ng-href="{{buyUrl()}}">
+      Checkout
+    </a>
+  </div>
+</span>

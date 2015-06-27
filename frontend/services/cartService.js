@@ -1,4 +1,4 @@
-app.service('cart', function($q, DSCacheFactory, ParseData, Pair, $interval) {
+app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interval) {
    // private
   var _items,_variants, _variantsById;
 

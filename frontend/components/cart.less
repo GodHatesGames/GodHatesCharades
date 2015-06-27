@@ -1,0 +1,243 @@
+@import "../less/bootstrap-variables";
+@import "../less/colors";
+
+.cart {
+  padding-bottom: 15px;
+  transition: transform .5s ease-out;
+  min-width: 200px;
+
+  @media (max-width: @screen-sm-er-max) {
+    & {
+      background-color: black;
+      width: 100%;
+      left: 0;
+      height: 65px;
+      z-index: 1;
+      padding-top: 10px;
+      height: 95px;
+    }
+  }
+
+  @media (min-width: @screen-sm-min) {
+    & {
+      left: 75%;
+    }
+  }
+
+  @media (min-width: @screen-md-min) {
+    & {
+      left: 70%;
+    }
+  }
+
+  .notification {
+    background-image: url(../img/empty_cart_text.svg);
+    background-repeat: no-repeat;
+    width: 182px;
+    height: 134px;
+    margin: 25px auto 15px auto;
+
+
+    @media (max-width: @screen-sm-er-max) {
+      & {
+        display: none;
+      }
+    }
+  }
+
+  .cart-items {
+    display: none;
+    // padding-bottom: 31px;
+
+    @media (max-width: @screen-sm-er-max) {
+      & {
+        padding-left: 40px;
+      }
+    }
+
+    .cart-item {
+      position: relative;
+      bottom: 0;
+      
+      &.ng-enter {
+        transition: bottom 1s cubic-bezier(0.64, 0.57, 0.67, 1.53);
+
+        &.ng-enter-active {
+          animation: hardbounce 1000ms linear both;
+        }
+      }
+
+      @media (max-width: @screen-sm-er-max) {
+        & {
+            float: left;
+            width: 180px;
+            margin-left: 15px;
+        }
+      }
+
+      .product-quantity {
+        position: absolute;
+        top: 0;
+        border-radius: 5px;
+        width: 64px;
+        height: 64px;
+        color: white;
+        padding-right: 10px;
+        font-family: 'GodHatesCharades';
+        line-height: 54px;
+        text-align: center;
+        font-size: 30px;
+        left: -30px;
+        padding-right: 10px;
+
+        @media (max-width: @screen-sm-er-max) {
+          & {
+            color: black;
+          }
+        }
+
+        &:before {
+          // using before to allow flipping
+          content: '';
+          width: 64px;
+          height: 64px;
+          -webkit-mask-image: url(../img/quantityNub.svg);
+          -webkit-mask-position: 50% 0;
+          -webkit-mask-size: 64px;
+          -webkit-mask-repeat: no-repeat;
+          background-color: black;
+          z-index: -1;
+          position: absolute;
+          left: 0;
+          top: 0;
+
+          @media (max-width: @screen-sm-er-max) {
+            & {
+              background-color: white;
+            }
+          }
+        }
+      }
+
+      @media (min-width: @screen-sm-min) {
+        & {
+            &.cart-item-even {
+              .product-quantity {
+                left: inherit;
+                padding-right: 0;
+                right: 0;
+                padding-left: 10px;
+                &:before {
+                  transform: scaleX(-1);
+                }
+              }
+            }
+        }
+      }
+
+      .product-image {
+        width: 100%;
+        height: 125px;
+        position: absolute;
+        bottom: 0;
+        background-position: center bottom;
+        background-repeat: no-repeat;
+
+        &:last-child {
+          margin-bottom: -36px;
+        }
+      }
+
+      &.product-main-game {
+        height: 45px;
+
+        .product-image {
+          background-image: url(../img/the_game.svg);
+        }
+      }
+
+      &.product-expansion {
+        height: 23px;
+
+        .product-image {
+          background-image: url(../img/expansion.svg);
+        }
+      }
+    }
+  }
+
+  .guy {
+    margin: 0 auto;
+    width: 155px;
+    height: 220px;
+    position: relative;
+    
+    .guy-front, .guy-back {
+      position: absolute;
+      background-repeat: no-repeat;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    .guy-back {
+      z-index: -1;
+      -webkit-transform: rotateZ(360deg);
+      background-image: url(../img/cart_face_back.svg);
+    }
+
+    .guy-front {
+      z-index: 99;
+      -webkit-transform: rotateZ(360deg);
+      background-image: url(../img/empty_cart_face_front.svg);
+    }
+
+    @media (max-width: @screen-sm-er-max) {
+      & {
+        display: none;
+      }
+    }
+
+  }
+
+  &.full {
+    .notification {
+      display: none;
+    }
+
+    .cart-items {
+      display: block;
+    }
+
+    .guy-front {
+      background-image: url(../img/full_cart_face_front.svg);
+    }
+  }
+
+  .submit {
+    position: absolute;
+    bottom: 0;
+    z-index: 100;
+    height: 45px;
+    -webkit-mask-image: url(../img/quantityBar.svg);
+    -webkit-mask-position: 50% 50%;
+    -webkit-mask-size: 180px 45px;
+    -webkit-mask-repeat: no-repeat;
+    line-height: 30px;
+    font-size: 20px;
+
+    &[disabled] {
+      opacity: 1;
+      background-color: @color-btn-success-disabled;
+    }
+
+    @media (max-width: @screen-sm-er-max) {
+      & {
+        float: right;
+        width: 180px;
+        position: relative;
+      }
+    }
+  }
+}
