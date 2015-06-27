@@ -1,4 +1,4 @@
-app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interval) {
+app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interval, StoreProduct) {
    // private
   var _items,_variants, _variantsById;
 
@@ -17,12 +17,15 @@ app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interv
     _variantsById = {};
   }
   var MAX_ITEMS = 9;
+
+  // Define Cart public
   
   var Cart = {
     increment: _increment,
     decrement: _decrement,
     setQuantity: _setQuantity,
     getCountById: _getCountById,
+    getTotal: _getTotal,
     items: _items,
     variants: _variants,
     variantsById: _variantsById,
@@ -30,6 +33,7 @@ app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interv
     empty: _items.length === 0,
     max: MAX_ITEMS
   };
+
   _updateCartMode();
 
   var _updateCartCache = _.throttle(function() {
@@ -55,13 +59,14 @@ app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interv
       _items.push(item);
       // update collapsed cart
       if(!_variantsById[product.mainVariantId]) {
-        var newCollapsedCartItem = {
+        var newVariantItem = {
           id: product.mainVariantId,
           quantity: 1,
-          added: new Date().getTime()
+          added: new Date().getTime(),
+          price: product.mainVariantPrice
         };
-        _variantsById[product.mainVariantId] = newCollapsedCartItem;
-        _variants.push(newCollapsedCartItem);
+        _variantsById[product.mainVariantId] = newVariantItem;
+        _variants.push(newVariantItem);
       } else {
         _variantsById[product.mainVariantId].quantity++;
       }
@@ -131,6 +136,14 @@ app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interv
       return _variantsById[id].quantity;
     else
       return 0;
+  }
+
+  function _getTotal() {
+    var total = 0;
+    _.each(_variants, function(variant) {
+      total += variant.quantity * variant.price;
+    });
+    return total;
   }
 
   return Cart;
