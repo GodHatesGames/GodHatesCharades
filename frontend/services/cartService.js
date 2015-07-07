@@ -21,6 +21,7 @@ app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interv
   // Define Cart public
   
   var Cart = {
+    buyUrl: '',
     increment: _increment,
     decrement: _decrement,
     setQuantity: _setQuantity,
@@ -35,6 +36,7 @@ app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interv
   };
 
   _updateCartMode();
+  _updateBuyUrl();
 
   var _updateCartCache = _.throttle(function() {
     var cart = _.pick(Cart, ['items', 'variants']);
@@ -72,6 +74,7 @@ app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interv
       }
     }
     _updateCartMode();
+    _updateBuyUrl();
     _updateCartCache();
   }
 
@@ -97,6 +100,7 @@ app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interv
       }
     }
     _updateCartMode();
+    _updateBuyUrl();
     _updateCartCache();
     if(_items.length === 0) {
       Cart.empty = true;
@@ -144,6 +148,16 @@ app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interv
       total += variant.quantity * variant.price;
     });
     return total;
+  }
+
+  function _updateBuyUrl() {
+    var url = 'https://godhatesgames.myshopify.com/cart/';
+    var itemsToAdd = [];
+    _.each(_variantsById, function(variant, itemId) {
+      itemsToAdd.push(itemId + ':' + variant.quantity);
+    });
+    var items = itemsToAdd.join(',');
+    Cart.buyUrl = url + items;
   }
 
   return Cart;

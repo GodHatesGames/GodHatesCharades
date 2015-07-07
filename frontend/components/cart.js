@@ -7,7 +7,6 @@ app.directive('cart', function(cartService, $timeout) {
     },
     controller: function($scope, $element) {
       $scope.cartService = cartService;
-      $scope.buyUrl = _buyUrl;
       $scope.getProductLayer = _getProductLayer;
       $scope.getSway = _getSway;
 
@@ -29,16 +28,6 @@ app.directive('cart', function(cartService, $timeout) {
           //no sway
           return '';
         }
-      }
-
-      function _buyUrl() {
-        var url = 'https://godhatesgames.myshopify.com/cart/';
-        var itemsToAdd = [];
-        _.each(cartService.variantsById, function(variant, itemId) {
-          itemsToAdd.push(itemId + ':' + variant.quantity);
-        });
-        var items = itemsToAdd.join(',');
-        return url + items;
       }
 
       function _getProductLayer(store, index) {

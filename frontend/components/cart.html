@@ -33,7 +33,7 @@
 	    <span class="total-nub">{{cartService.items.length}}</span>
 	    <a class="btn btn-block btn-success submit"
 	       ng-disabled="cartService.empty"
-	       ng-href="{{buyUrl()}}">
+	       ng-href="{{cartService.buyUrl}}">
 	      Checkout <span class="dollar-sign">$</span>{{cartService.getTotal() | currency:'':0}}
 	    </a>
     </div>
