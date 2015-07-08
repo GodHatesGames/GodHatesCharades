@@ -434,6 +434,7 @@ module.exports = function(grunt) {
 		'buildApi',
 		'prodBuildFrontend',
 		'copy:app',
+		'clean:distGit',
 		'buildcontrol:prod'
 	]);
 
@@ -451,7 +452,6 @@ module.exports = function(grunt) {
 		'buildApi',
 		'stageBuildFrontend',
 		'copy:app',
-		'clean:distGit',
 		'buildcontrol:dev'
 	]);
 
