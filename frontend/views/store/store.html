@@ -1,4 +1,5 @@
 <div id="storeView" class="container flush">
+  <ui-view></ui-view>
   <section class="row">
     <div class="col-sm-9">
       <store-product ng-repeat="storeItem in collection.items | orderBy:'position' track by storeItem.product.id"
