@@ -132,6 +132,7 @@ module.exports = function(grunt) {
 		clean: {
 			distApi: 'dist/api',
 			distFrontend: 'dist/frontend',
+			distGit: 'dist/.git',
 			stage: '.tmp'
 		},
 		useminPrepare: {
@@ -441,6 +442,7 @@ module.exports = function(grunt) {
 		'buildApi',
 		'stageBuildFrontend',
 		'copy:app',
+		'clean:distGit',
 		'buildcontrol:stage'
 	]);
 
@@ -449,6 +451,7 @@ module.exports = function(grunt) {
 		'buildApi',
 		'stageBuildFrontend',
 		'copy:app',
+		'clean:distGit',
 		'buildcontrol:dev'
 	]);
 
