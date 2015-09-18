@@ -71,6 +71,9 @@ server.get('/watch', showIndex);
 server.get('/store', showIndex);
 server.get('/store/thanks', showIndex);
 
+// prismic preview
+server.get('/preview', showPreview);
+
 // otherwise 404
 server.get('/*', show404);
 
@@ -81,6 +84,14 @@ function showIndex(req, res) {
 function show404(req, res) {
 	res.status(404);
 	showIndex(req, res);
+}
+
+function showPreview(req, res, ctx) {
+	var previewToken = req.query['token'];
+	ctx.api.previewSession(previewToken, ctx.linkResolver, '/', function(err, redirectUrl) {
+		res.cookie(Prismic.previewCookie, previewToken, { maxAge: 60 * 30, path: '/', httpOnly: false });
+		res.redirect(redirectUrl);
+	});
 }
 
 
