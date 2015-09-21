@@ -14,7 +14,7 @@ var client = s3.createClient({
     // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property
   },
 });
-console.log(process.env.S3_ACCESS_KEY_ID, process.env.S3_ACCESS_SECRET);
+// console.log(process.env.S3_ACCESS_KEY_ID, process.env.S3_ACCESS_SECRET);
 
 module.exports.getFiles = _getFiles;
 
