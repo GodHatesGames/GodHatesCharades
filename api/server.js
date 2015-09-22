@@ -65,6 +65,7 @@ server.get('/blog', showIndex);
 server.get('/blog/*/*', showIndex);
 server.get('/mail/*', showIndex);
 server.get('/rules', showIndex);
+server.get('/press', showIndex);
 server.get('/share', showIndex);
 server.get('/timeline', showIndex);
 server.get('/watch', showIndex);
