@@ -1,9 +1,9 @@
-app.service('analytics', function($mixpanel, $location, $state) {
+app.service('analytics', function($location, $state) {
 	var analyticsService = {
 		getPageTitle: _getPageTitle,
 		getPageUrl: _getPageUrl,
-		mpEvent: _mpEvent,
-		mpFirstLoad: _mpFirstLoad
+		trackEvent: _trackEvent,
+		trackFirstLoad: _trackFirstLoad
 	};
 
 	function _getPageTitle() {
@@ -20,20 +20,17 @@ app.service('analytics', function($mixpanel, $location, $state) {
 		return $location.host() + $location.path()
 	}
 
-	function _mpEvent(eventTitle, eventOptions) {
-		var defaultOptions = {
-			'Page Title': _getPageTitle(),
-			'Page Url': _getPageUrl()
-		};
-		var options = _.extend(defaultOptions, eventOptions);
-		$mixpanel.track(eventTitle, options);
+	function _trackEvent(eventTitle, eventOptions) {
+		// var defaultOptions = {
+		// 	'Page Title': _getPageTitle(),
+		// 	'Page Url': _getPageUrl()
+		// };
+		// var options = _.extend(defaultOptions, eventOptions);
+		// add tracking here
 	}
 
-	function _mpFirstLoad() {
-		$mixpanel.register({
-			'Landing Page Title': _getPageTitle(),
-			'Landing Page Url': _getPageUrl()
-		});
+	function _trackFirstLoad() {
+		// add tracking here
 	}
 
 	return analyticsService;

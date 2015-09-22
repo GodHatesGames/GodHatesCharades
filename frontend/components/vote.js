@@ -108,7 +108,7 @@ app.directive('vote', function(cloudUtils, Suggestion, $q, analytics) {
 
 				// Track
 				ga('send', 'event', 'vote', 'pair');
-				analytics.mpEvent('Vote', {
+				analytics.trackEvent('Vote', {
 					'Value': 'Vote'
 				});
 			};
@@ -141,7 +141,7 @@ app.directive('vote', function(cloudUtils, Suggestion, $q, analytics) {
 
 				// Track
 				ga('send', 'event', 'skip', 'pair');
-				analytics.mpEvent('Vote', {
+				analytics.trackEvent('Vote', {
 					'Value': 'Skip'
 				});
 			};

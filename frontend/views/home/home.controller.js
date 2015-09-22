@@ -46,7 +46,7 @@ app.controller('homeView', function($scope, $window, $timeout, analytics) {
 	}
 
 	function _onBuyClicked(location, button) {
-		analytics.mpEvent('Click', {
+		analytics.trackEvent('Click', {
 			'Location': location,
 			'Button': button
 		});

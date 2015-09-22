@@ -35,7 +35,7 @@ app.service('addthisService', function($rootScope, $q, analytics) {
 		console.log('shared', response);
 		var service = response.data.service;
 		ga('send', 'event', 'social_share', 'addthis', service);
-		analytics.mpEvent('Social', {
+		analytics.trackEvent('Social', {
 			'Service': service
 		});
 	}

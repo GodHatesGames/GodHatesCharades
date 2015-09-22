@@ -1,4 +1,4 @@
-app.factory('User', function (DS, $q, ParseData, $rootScope, $mixpanel) {
+app.factory('User', function (DS, $q, ParseData, $rootScope) {
 	// vars
 	var definition = {
 		name: 'user',
@@ -48,15 +48,6 @@ app.factory('User', function (DS, $q, ParseData, $rootScope, $mixpanel) {
 	}
 
 	function _afterCreate(resourceName, parseObject, cb) {
-		// alias any existing newletter user with their new userid
-		if($mixpanel.get_distinct_id() != $scope.email) {
-			$mixpanel.alias($scope.email, $mixpanel.get_distinct_id());
-		}
-		$mixpanel.people.set_once({
-			'$created': new Date(),
-		});
-		$mixpanel.identify(parseObject.email);
-
 		cb(null, parseObject);
 	}
 
@@ -83,14 +74,6 @@ app.factory('User', function (DS, $q, ParseData, $rootScope, $mixpanel) {
 
 	function _updateCurrentUser(userData) {
 		User.current = userData;
-		$mixpanel.people.set({
-			'$email': userData.email,
-			'$name': userData.name,
-			'Beta': userData.beta,
-			'ParseId': userData.id,
-			'Subscriber': userData.subscriber
-		});
-		$mixpanel.identify(userData.email);
 		console.log('Welcome', userData.username);
 		console.log(userData);
 	}
@@ -140,8 +123,6 @@ app.factory('User', function (DS, $q, ParseData, $rootScope, $mixpanel) {
 
 	function _logout() {
 		Parse.User.logOut();
-		if($mixpanel.cookie)
-			$mixpanel.cookie.clear();
 		_disconnectUser();
 	}
 

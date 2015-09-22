@@ -25,8 +25,7 @@ var app = angular.module('app', ['ng',
                                  'infinite-scroll',
                                  'angularStats',
                                  'templates-app',
-                                 'hj.uiSrefFastclick',
-                                 'analytics.mixpanel'
+                                 'hj.uiSrefFastclick'
                                 ]);
 console.log('starting app!');
 
@@ -106,10 +105,10 @@ app.run(function($rootScope,
 			
 			if($rootScope.firstLoad) {
 				$rootScope.firstLoad = false;
-				analytics.mpFirstLoad();
+				analytics.trackFirstLoad();
 			}
 
-			analytics.mpEvent('View');
+			analytics.trackEvent('View');
 		});
 
 		$rootScope.$on('$stateChangeError', function (ev, to, toParams, from, fromParams, error) {

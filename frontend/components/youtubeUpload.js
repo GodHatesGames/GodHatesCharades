@@ -38,7 +38,7 @@ app.directive('youtubeUpload', function(ytUploadService, analytics) {
 						if(!$scope.recording) {
 							console.log('recording');
 							ga('send', 'event', 'youtube', 'recording', 'started');
-							analytics.mpEvent('YouTube', {
+							analytics.trackEvent('YouTube', {
 								'State': 'Recording'
 							});
 						}
@@ -60,7 +60,7 @@ app.directive('youtubeUpload', function(ytUploadService, analytics) {
 			function _onUploadSuccess(event) {
 				console.log('youtube upload complete');
 				ga('send', 'event', 'youtube', 'upload', 'complete');
-				analytics.mpEvent('YouTube', {
+				analytics.trackEvent('YouTube', {
 					'State': 'Uploaded'
 				});
 				$scope.status = 'YouTube is processing...';
@@ -69,7 +69,7 @@ app.directive('youtubeUpload', function(ytUploadService, analytics) {
 			function _onProcessingComplete(event) {
 				console.log('youtube processing complete');
 				$scope.status = 'Your video is complete, thanks for the submission!';
-				analytics.mpEvent('YouTube', {
+				analytics.trackEvent('YouTube', {
 					'State': 'Processed',
 					'VideoId': event.data.videoId
 				});
