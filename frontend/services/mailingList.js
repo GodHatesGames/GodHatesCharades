@@ -1,4 +1,4 @@
-app.service('mailchimp', function($http) {
+app.service('mailingList', function($http) {
 	function subscribe(email) {
 		return $http.post('api/subscribe', {
 			email: email

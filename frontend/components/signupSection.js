@@ -9,10 +9,11 @@ app.directive('signupSection', function(analytics) {
 		controller: function($scope, $element) {
 			$scope.onEmailSubmitted = function(fromLabel) {
 				$scope.emailSubmitted = true;
-				ga('send', 'event', 'signup', 'newsletter', fromLabel);
 				analytics.trackEvent('Newsletter Signup', {
 					'Location': fromLabel
 				});
+				if(!CONFIG.DEV)
+					ga('send', 'event', 'signup', 'newsletter', fromLabel);
 				if(this._pa)
 					_pa.track('signup_newletter');
 			};

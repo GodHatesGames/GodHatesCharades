@@ -3,7 +3,7 @@ require('newrelic');
 var express = require('express');
 var path = require('path');
 var prerender = require('prerender-node');
-var mailchimp = require('./mailchimp');
+var mailingList = require('./mailing-list');
 var shopify = require('./shopify');
 var s3data = require('./s3data');
 var redisCache = require('./redis-cache');
@@ -44,7 +44,7 @@ if(process.env.NODE_ENV === 'development') {
 server.use(express.static(staticFilePath));
 
 // api routes
-server.post('/api/subscribe', mailchimp.subscribe);
+server.post('/api/subscribe', mailingList.subscribe);
 server.get('/api/files', s3data.getFiles);
 server.get('/api/store/collection/:id', redisCache, shopify.collectionById);
 server.get('/api/store/collection/:id/product', redisCache, shopify.productByCollectionId);

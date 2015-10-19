@@ -1,21 +1,21 @@
 'use strict';
-app.directive('mailchimp', function(User) {
+app.directive('mailingList', function(User) {
 	return {
 		restrict: 'E',
-		templateUrl: 'components/mailchimp.html',
+		templateUrl: 'components/mailingList.html',
 		replace: true,
 		scope: {
 			onSuccess: '=onSuccess',
 			location: '@location'
 		},
-		controller: function($scope, $element, mailchimp) {
+		controller: function($scope, $element, mailingList) {
 			$scope.submitted = false;
 			$scope.sending = false;
 			$scope.subscribe = function() {
 				$scope.sending = true;
 				$scope.errorMessage = null;
 				if(!$scope.spamValue && $scope.email && $scope.email.length > 0) {
-					mailchimp.subscribe($scope.email)
+					mailingList.subscribe($scope.email)
 					.then(onSubscribeComplete, onSubscribeError);
 				}
 			}
