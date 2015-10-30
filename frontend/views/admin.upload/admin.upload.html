@@ -2,13 +2,14 @@
      class="container">
   <h1>God Hates Charades Components</h1>
   <p>Email <a href="mailto:upload@godhatesgames.com">upload@godhatesgames.com</a> with a single attached file from your @godhatesgames email address. The file will be renamed with the text of the subject line.</p>
-  <ul>
-    <li ng-repeat="file in files | orderBy:'-LastModified' track by file.ETag">
+  <ul class="list-group">
+    <li ng-repeat="file in files | orderBy:'-LastModified' track by file.ETag"
+        class="list-group-item">
       <a ng-href="{{file.url}}"
          target="_blank">
         {{file.Key}}
-      </a>&nbsp;
-      <div class="label label-success">{{file.LastModified | date:'short'}}</div>
+      </a> ({{file.Size * 0.000001 | number: 2}} Mb)
+      <div class="label label-success pull-right">{{file.LastModified | date:'short'}}</div>
     </li>
   </ul>
 </div>
