@@ -2,7 +2,7 @@
 app.directive('printer', function(Suggestion, $compile, $window, prismic, Set, $timeout, SetItem) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
-		templateUrl: 'components/printer.html',
+		templateUrl: 'components/admin.printer.html',
 		replace: true,
 		scope: {
 			sets: '='

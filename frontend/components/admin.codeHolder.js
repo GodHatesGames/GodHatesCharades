@@ -1,7 +1,7 @@
 app.directive('codeHolder', function($timeout) {
   return {
     restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
-    templateUrl: 'components/codeHolder.html',
+    templateUrl: 'components/admin.codeHolder.html',
     replace: true,
     scope: {
       section: '='

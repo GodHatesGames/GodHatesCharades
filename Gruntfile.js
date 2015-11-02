@@ -96,13 +96,13 @@ module.exports = function(grunt) {
 				files: [
 					'frontend/components/**/*.less'
 				],
-				tasks: ['less:components', 'autoprefixer']
+				tasks: ['less:components', 'less:admincomponents', 'autoprefixer']
 			},
 			views: {
 				files: [
 					'frontend/views/**/*.less'
 				],
-				tasks: ['less:views', 'autoprefixer']
+				tasks: ['less:views', 'less:adminviews', 'autoprefixer']
 			},
       express: {
         files: [
@@ -136,7 +136,12 @@ module.exports = function(grunt) {
 			stage: '.tmp'
 		},
 		useminPrepare: {
-			html: '.tmp/stage/frontend/index.html',
+			app: {
+				src: '.tmp/stage/frontend/index.html'
+			},
+			admin: {
+				src: '.tmp/stage/frontend/admin.html'
+			},
 			options: {
 				dest: '.tmp/stage/frontend'
 			}
@@ -271,7 +276,8 @@ module.exports = function(grunt) {
 		},
 		usemin: {
 			html: [
-				'.tmp/stage/frontend/index.html'
+				'.tmp/stage/frontend/index.html',
+				'.tmp/stage/frontend/admin.html'
 			]
 		},
 		uglify: {
@@ -297,7 +303,8 @@ module.exports = function(grunt) {
 			},
 			js: {
 				src: [
-					'.tmp/stage/frontend/js/app.js'
+					'.tmp/stage/frontend/js/app.js',
+					'.tmp/stage/frontend/js/app.admin.js'
 				]
 			}
 		},
@@ -319,14 +326,28 @@ module.exports = function(grunt) {
 				src: [
 					'.tmp/stage/frontend/components/**/*.html',
 					'.tmp/stage/frontend/views/**/*.html',
+					'!.tmp/stage/frontend/components/**/admin.*.html',
+					'!.tmp/stage/frontend/views/**/admin.*.html'
 				],
 				dest: '.tmp/stage/frontend/js/templates.js'
+			},
+			admin: {
+				src: [
+					'.tmp/stage/frontend/components/**/admin.*.html',
+					'.tmp/stage/frontend/views/**/admin.*.html',
+				],
+				dest: '.tmp/stage/frontend/js/templates.admin.js'
 			}
 		},
 		ngAnnotate: {
 			app: {
 				files: {
 					'.tmp/concat/js/app.js': ['.tmp/concat/js/app.js']
+				}
+			},
+			admin: {
+				files: {
+					'.tmp/concat/js/app.admin.js': ['.tmp/concat/js/app.admin.js']
 				}
 			}
 		},
@@ -346,12 +367,28 @@ module.exports = function(grunt) {
 			},
 			components: {
 				files: {
-					'frontend/css/components.css': 'frontend/components/*.less'
+					'frontend/css/components.css': [
+						'frontend/components/*.less',
+						'!frontend/components/admin.*.less'
+					]
+				}
+			},
+			admincomponents: {
+				files: {
+					'frontend/css/components.admin.css': 'frontend/components/admin.*.less'
 				}
 			},
 			views: {
 				files: {
-					'frontend/css/views.css': 'frontend/views/**/*.less'
+					'frontend/css/views.css': [
+						'frontend/views/**/*.less',
+						'!frontend/views/admin**/*.less'
+					]
+				}
+			},
+			adminviews: {
+				files: {
+					'frontend/css/views.admin.css': 'frontend/views/admin**/*.less'
 				}
 			}
 		},
@@ -480,7 +517,9 @@ module.exports = function(grunt) {
 	grunt.registerTask('buildCss', [
 		'less:main',
 		'less:components',
+		'less:admincomponents',
 		'less:views',
+		'less:adminviews',
 		'autoprefixer'
 	]);
 
@@ -516,10 +555,16 @@ module.exports = function(grunt) {
 	grunt.registerTask('distBuildFrontend', [
 		'prepareFrontend',
 		'copy:distConfigFrontend',
-		'html2js',
-		'useminPrepare',
+
+		'html2js:app',
+		'html2js:admin',
+
+		'useminPrepare:app',
+		'useminPrepare:admin',
 		'concat',
-		'ngAnnotate',
+
+		'ngAnnotate:app',
+		'ngAnnotate:admin',
 		'uglify',
 		'cssmin',
 		'filerev',

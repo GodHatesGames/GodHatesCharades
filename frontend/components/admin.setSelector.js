@@ -1,7 +1,7 @@
 app.directive('setSelector', function(Set, SetItem) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
-		templateUrl: 'components/setSelector.html',
+		templateUrl: 'components/admin.setSelector.html',
 		replace: true,
 		scope: {
 			suggestion: '=suggestion',

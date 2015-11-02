@@ -4,8 +4,10 @@ angular.module('app')
 .config(function ($stateProvider) {
   $stateProvider.state('admin', {
     url: '/admin',
-    abstract: true,
     title: 'Admin',
-    template: '<ui-view></ui-view>'
+    templateUrl: 'views/admin/admin.html',
+    controller: function($scope, User) {
+      $scope.User = User;
+    }
   });
 });

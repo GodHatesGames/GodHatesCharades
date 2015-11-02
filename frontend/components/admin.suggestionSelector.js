@@ -2,7 +2,7 @@
 app.directive('suggestionSelector', function(Suggestion, $filter, $state, $modal) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
-		templateUrl: 'components/suggestionSelector.html',
+		templateUrl: 'components/admin.suggestionSelector.html',
 		replace: true,
 		scope: {
 			suggestions: '=',

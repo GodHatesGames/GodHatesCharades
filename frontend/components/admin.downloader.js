@@ -2,7 +2,7 @@
 app.directive('downloader', function($filter) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
-		templateUrl: 'components/downloader.html',
+		templateUrl: 'components/admin.downloader.html',
 		replace: true,
 		scope: {
 			items: '=',

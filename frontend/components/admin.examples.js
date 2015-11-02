@@ -2,7 +2,7 @@
 app.directive('examples', function(Suggestion, $timeout) {
 	return {
 		restrict: 'E', /* E: Element, C: Class, A: Attribute M: Comment */
-		templateUrl: 'components/examples.html',
+		templateUrl: 'components/admin.examples.html',
 		replace: true,
 		link: function($scope, $element) {
 			// init

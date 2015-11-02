@@ -60,7 +60,8 @@ server.get('/fixme', showIndex);
 server.get('/card/*/*', showIndex);
 server.get('/pair/*/*', showIndex);
 server.get('/top/*', showIndex);
-server.get('/admin/*', showIndex);
+server.get('/admin', showAdmin);
+server.get('/admin/*', showAdmin);
 server.get('/blog', showIndex);
 server.get('/blog/*/*', showIndex);
 server.get('/mail/*', showIndex);
@@ -80,6 +81,10 @@ server.get('/*', show404);
 
 function showIndex(req, res) {
 	res.render('index');
+}
+
+function showAdmin(req, res) {
+	res.render('admin');
 }
 
 function show404(req, res) {

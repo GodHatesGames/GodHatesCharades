@@ -17,10 +17,14 @@ app.directive('login', function(User) {
 				.then(_onUserLoginSuccess, _onUserLoginError);
 			}
 
-			function _onUserLoginSuccess(user) {
-				$state.go('user', {
-					userid: user.id
-				});
+			function _onUserLoginSuccess() {
+				if(User.current.admin) {
+					$state.go('admin.upload');
+				} else {
+					$state.go('user', {
+						userid: User.current.id
+					});
+				}
 			}
 
 			function _onUserLoginError(error) {
