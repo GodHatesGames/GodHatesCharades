@@ -1,0 +1,16 @@
+<div id="discounts">
+  <h1>Discounts</h1>
+  <!-- Headers -->
+  <table class="table">
+    <tr>
+      <th>Code</th>
+      <th>Param</th>
+      <th>Featured</th>
+    </tr>
+    <tr ng-repeat="discount in discounts | orderBy:'-code' track by discount.id">
+      <td>{{discount.code}}</td>
+      <td>{{discount.paramKey}}={{discount.paramValue}}</td>
+      <td>{{discount.feature}}</td>
+    </tr>
+  </table>
+</div>

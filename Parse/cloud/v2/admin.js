@@ -9,6 +9,7 @@ exports.removeSetItem = removeSetItem;
 exports.createSet = createSet;
 exports.destroySet = destroySet;
 exports.updateSuggestionText = updateSuggestionText;
+exports.getAllDiscounts = getAllDiscounts;
 
 function getAllSuggestions(request, response) {
 	//to allow fetching owners
@@ -329,4 +330,41 @@ function updateSuggestionText(request, response) {
 		response.error(error);
 	}
 
+}
+
+function getAllDiscounts(request, response) {
+	Parse.Cloud.useMasterKey();
+	if(request.user) {
+		userUtils.isUserAdmin(request.user.id)
+			.then(fetchData, onError);
+	} else {
+		onError();
+	}
+
+	function fetchData(isAdmin) {
+		// console.log('fetchData, isAdmin:');
+		// console.log(isAdmin);
+		if(isAdmin) {
+			// console.log('user is admin');
+			var SetObject = Parse.Object.extend('Discount');
+			var query = new Parse.Query(SetObject);
+			query.find({
+				success: onSuccess,
+				error: onError
+			});
+		} else {
+			console.log('user is not admin');
+			onError('You need to be an admin to get discounts.');
+		}
+	}
+
+	function onSuccess(discounts) {
+		console.log('findall discounts success');
+		response.success(discounts);
+	}
+
+	function onError(error) {
+		console.log('updateSuggestionText saveData Error');
+		response.error(error);
+	}
 }
