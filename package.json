@@ -24,7 +24,6 @@
     "mailchimp-api": "^2.0.6",
     "newrelic": "^1.5.4",
     "open": "0.0.5",
-    "prerender-node": "^1.0.1",
     "redis": "^0.12.1",
     "request": "^2.55.0",
     "s3": "^4.4.0",

@@ -2,7 +2,6 @@
 require('newrelic');
 var express = require('express');
 var path = require('path');
-var prerender = require('prerender-node');
 var mailingList = require('./mailing-list');
 var shopify = require('./shopify');
 var s3data = require('./s3data');
@@ -26,8 +25,6 @@ server.use(function(req, res, next) {
 	else
 		next();
 });
-// use prerender.io
-server.use(prerender.set('prerenderToken', process.env.PRERENDER_TOKEN));
 server.engine('html', require('ejs').renderFile);
 server.set('views', staticFilePath);
 server.set('view engine', 'html');
