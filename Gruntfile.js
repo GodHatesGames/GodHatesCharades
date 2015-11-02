@@ -388,7 +388,7 @@ module.exports = function(grunt) {
 			},
 			adminviews: {
 				files: {
-					'frontend/css/views.admin.css': 'frontend/views/admin**/*.less'
+					'frontend/css/views.admin.css': 'frontend/views/**/admin.*.less'
 				}
 			}
 		},
