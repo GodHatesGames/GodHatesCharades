@@ -14,7 +14,8 @@ app.factory('Discount', function (DS, $q) {
   DS.adapters.discountAdapter = {
     findAll: _findAll,
     update: _update,
-    create: _create
+    create: _create,
+    destroy: _destroy
   };
 
   // init
@@ -48,6 +49,14 @@ app.factory('Discount', function (DS, $q) {
   function _create(resource, discount) {
     return Parse.Cloud.run(
       CONFIG.PARSE_VERSION + 'createDiscount',
+      discount
+    );
+  }
+
+  function _destroy(resource, id) {
+    var discount = Discount.get(id);
+    return Parse.Cloud.run(
+      CONFIG.PARSE_VERSION + 'destroyDiscount',
       discount
     );
   }

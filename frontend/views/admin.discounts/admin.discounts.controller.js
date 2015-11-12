@@ -4,6 +4,7 @@ app.controller('discountsView', function(discounts, $scope, Discount) {
   $scope.discounts.unshift({});
   $scope.saving = false;
   $scope.saveDiscount = _saveDiscount;
+  $scope.destroyDiscount = _destroyDiscount;
 
   function _saveDiscount(discount) {
     if(discount.id) {
@@ -34,5 +35,13 @@ app.controller('discountsView', function(discounts, $scope, Discount) {
         $scope.discounts[0] = {};
       });
     }
+  }
+
+  function _destroyDiscount(discount) {
+    Discount.destroy(discount.id)
+    .then(function() {
+      var index = $scope.discounts.indexOf(discount);
+      $scope.discounts.splice(index, 1);
+    });
   }
 });

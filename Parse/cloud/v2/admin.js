@@ -17,6 +17,7 @@ exports.updateSuggestionText = updateSuggestionText;
 exports.getAllDiscounts = getAllDiscounts;
 exports.updateDiscount = updateDiscount;
 exports.createDiscount = createDiscount;
+exports.destroyDiscount = destroyDiscount;
 
 function getAllSuggestions(request, response) {
 	//to allow fetching owners
@@ -28,9 +29,9 @@ function getAllSuggestions(request, response) {
 	// console.log('request.user.id:' + request.user.id);
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
-			.then(fetchData, onError);
+			.then(fetchData, response.error);
 	} else {
-		onError();
+		response.error('you must be logged in');
 	}
 
 	function fetchData(isAdmin) {
@@ -46,11 +47,11 @@ function getAllSuggestions(request, response) {
 			query.ascending('type');
 			query.find({
 				success: onSuccess,
-				error: onError
+				error: response.error
 			});
 		} else {
 			console.log('user is not admin');
-			onError('You need to be an admin to access this page.');
+			response.error('You need to be an admin to access this page.');
 		}
 	}
 
@@ -71,12 +72,6 @@ function getAllSuggestions(request, response) {
 			fetchData(true, allSuggestions.length);
 		}
 	}
-
-	function onError(error) {
-		console.log('getAllSuggestions Error');
-		response.error(error);
-	}
-
 }
 
 function getAllSets(request, response) {
@@ -84,9 +79,9 @@ function getAllSets(request, response) {
 	// console.log('request.user.id:' + request.user.id);
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
-			.then(fetchData, onError);
+			.then(fetchData, response.error);
 	} else {
-		onError();
+		response.error('you must be logged in');
 	}
 
 	function fetchData(isAdmin) {
@@ -97,11 +92,11 @@ function getAllSets(request, response) {
 			var query = new Parse.Query(SetObject);
 			query.find({
 				success: onSuccess,
-				error: onError
+				error: response.error
 			});
 		} else {
 			console.log('user is not admin');
-			onError('You need to be an admin to access this page.');
+			response.error('You need to be an admin to access this page.');
 		}
 	}
 
@@ -110,12 +105,6 @@ function getAllSets(request, response) {
 			allSets = allSets.concat(sets);
 		response.success(allSets);
 	}
-
-	function onError(error) {
-		console.log('getAllSets Error');
-		response.error(error);
-	}
-
 }
 
 function addCardToSet(request, response) {
@@ -126,9 +115,9 @@ function addCardToSet(request, response) {
 	// console.log('request.user.id:' + request.user.id);
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
-			.then(saveData, onError);
+			.then(saveData, response.error);
 	} else {
-		onError();
+		response.error('you must be logged in');
 	}
 
 	function saveData(isAdmin) {
@@ -148,25 +137,14 @@ function addCardToSet(request, response) {
 			newSetItem.set('card', suggestion);
 			newSetItem.set('owner', set);
 			newSetItem.save({
-				success: onSuccess,
-				error: onError
+				success: response.success,
+				error: response.error
 			});
 		} else {
 			console.log('user is not admin');
-			onError('You need to be an admin to access this page.');
+			response.error('You need to be an admin to access this page.');
 		}
 	}
-
-	function onSuccess(setItem) {
-		// console.log('addCardToSet saveData success');
-		response.success(setItem);
-	}
-
-	function onError(error) {
-		console.log('addCardToSet saveData Error');
-		response.error(error);
-	}
-
 }
 
 function removeSetItem(request, response) {
@@ -175,9 +153,9 @@ function removeSetItem(request, response) {
 	// console.log('request.user.id:' + request.user.id);
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
-			.then(destroyItem, onError);
+			.then(destroyItem, response.error);
 	} else {
-		onError();
+		response.error('you must be logged in');
 	}
 
 	function destroyItem(isAdmin) {
@@ -188,25 +166,14 @@ function removeSetItem(request, response) {
 			var itemToDelete = new SetItemObject();
 			itemToDelete.id = request.params.id;
 			itemToDelete.destroy({
-				success: onSuccess,
-				error: onError
+				success: response.success,
+				error: response.error
 			});
 		} else {
 			console.log('user is not admin');
-			onError('You need to be an admin to access this page.');
+			response.error('You need to be an admin to access this page.');
 		}
 	}
-
-	function onSuccess(setItem) {
-		// console.log('removeSetItem destroyItem success');
-		response.success(setItem);
-	}
-
-	function onError(error) {
-		console.log('removeSetItem destroyItem Error');
-		response.error(error);
-	}
-
 }
 
 function createSet(request, response) {
@@ -215,9 +182,9 @@ function createSet(request, response) {
 	// console.log('request.user.id:' + request.user.id);
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
-			.then(createNewSet, onError);
+			.then(createNewSet, response.error);
 	} else {
-		onError();
+		response.error('you must be logged in');
 	}
 
 	function createNewSet(isAdmin) {
@@ -228,25 +195,14 @@ function createSet(request, response) {
 			newSet.save({
 				name: request.params.name
 			}, {
-				success: onSuccess,
-				error: onError
+				success: response.success,
+				error: response.error
 			});
 		} else {
 			console.log('user is not admin');
-			onError('You need to be an admin to access this page.');
+			response.error('You need to be an admin to access this page.');
 		}
 	}
-
-	function onSuccess(newSet) {
-		// console.log('createSet createNewSet success');
-		response.success(newSet);
-	}
-
-	function onError(error) {
-		console.log('createSet createNewSet Error');
-		response.error(error);
-	}
-
 }
 
 function destroySet(request, response) {
@@ -255,9 +211,9 @@ function destroySet(request, response) {
 	console.log('request.user.id:' + request.user.id);
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
-			.then(destroyItem, onError);
+			.then(destroyItem, response.error);
 	} else {
-		onError();
+		response.error('you must be logged in');
 	}
 
 	function destroyItem(isAdmin) {
@@ -268,23 +224,13 @@ function destroySet(request, response) {
 			var setToDelete = new SetObject();
 			setToDelete.id = request.params.id;
 			setToDelete.destroy({
-				success: onSuccess,
-				error: onError
+				success: response.success,
+				error: response.error
 			});
 		} else {
 			console.log('user is not admin');
-			onError('You need to be an admin to access this page.');
+			response.error('You need to be an admin to access this page.');
 		}
-	}
-
-	function onSuccess(setItem) {
-		// console.log('destroySet destroyItem success');
-		response.success(setItem);
-	}
-
-	function onError(error) {
-		console.log('destroySet destroyItem Error');
-		response.error(error);
 	}
 
 }
@@ -294,9 +240,9 @@ function updateSuggestionText(request, response) {
 	Parse.Cloud.useMasterKey();
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
-			.then(saveData, onError);
+			.then(saveData, response.error);
 	} else {
-		onError();
+		response.error('you must be logged in');
 	}
 
 	function saveData(isAdmin) {
@@ -311,34 +257,23 @@ function updateSuggestionText(request, response) {
 			suggestion.set('legal', request.params.legal);
 			suggestion.set('spite', request.params.spite);
 			suggestion.save({
-				success: onSuccess,
-				error: onError
+				success: response.success,
+				error: response.error
 			});
 		} else {
 			console.log('user is not admin');
-			onError('You need to be an admin to access this page.');
+			response.error('You need to be an admin to access this page.');
 		}
 	}
-
-	function onSuccess(suggestion) {
-		// console.log('updateSuggestionText saveData success');
-		response.success(suggestion);
-	}
-
-	function onError(error) {
-		console.log('updateSuggestionText saveData Error');
-		response.error(error);
-	}
-
 }
 
 function getAllDiscounts(request, response) {
 	Parse.Cloud.useMasterKey();
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
-			.then(fetchData, onError);
+			.then(fetchData, response.error);
 	} else {
-		onError();
+		response.error('you must be logged in');
 	}
 
 	function fetchData(isAdmin) {
@@ -348,23 +283,13 @@ function getAllDiscounts(request, response) {
 			// console.log('user is admin');
 			var query = new Parse.Query(DiscountObject);
 			query.find({
-				success: onSuccess,
-				error: onError
+				success: response.success,
+				error: response.error
 			});
 		} else {
 			console.log('user is not admin');
-			onError('You need to be an admin to get discounts.');
+			response.error('You need to be an admin to get discounts.');
 		}
-	}
-
-	function onSuccess(discounts) {
-		console.log('findall discounts success');
-		response.success(discounts);
-	}
-
-	function onError(error) {
-		console.log('getAllDiscounts saveData Error');
-		response.error(error);
 	}
 }
 
@@ -372,9 +297,9 @@ function updateDiscount(request, response) {
 	Parse.Cloud.useMasterKey();
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
-			.then(saveData, onError);
+			.then(saveData, response.error);
 	} else {
-		onError();
+		response.error('you must be logged in');
 	}
 
 	function saveData(isAdmin) {
@@ -387,24 +312,14 @@ function updateDiscount(request, response) {
 			discount.set('paramValue', request.params.paramValue);
 			discount.set('feature', request.params.feature);
 			discount.save({
-				success: onSuccess,
-				error: onError
+				success: response.success,
+				error: response.error
 			});
 		} else {
 			console.log('user is not admin');
-			onError('You need to be an admin to access this page.');
+			response.error('You need to be an admin to access this page.');
 		}
 	}
-
-	function onSuccess(discount) {
-		response.success(discount);
-	}
-
-	function onError(error) {
-		console.log('updateDiscount saveData Error');
-		response.error(error);
-	}
-
 }
 
 function createDiscount(request, response) {
@@ -413,9 +328,9 @@ function createDiscount(request, response) {
 	// console.log('request.user.id:' + request.user.id);
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
-			.then(createNewDiscount, onError);
+			.then(createNewDiscount, response.error);
 	} else {
-		onError();
+		response.error('you must be logged in');
 	}
 
 	function createNewDiscount(isAdmin) {
@@ -429,23 +344,43 @@ function createDiscount(request, response) {
 				paramValue: request.params.paramValue,
 				feature: request.params.feature
 			}, {
-				success: onSuccess,
-				error: onError
+				success: response.success,
+				error: response.error
 			});
 		} else {
 			console.log('user is not admin');
-			onError('You need to be an admin to access this page.');
+			response.error('You need to be an admin to access this page.');
 		}
 	}
 
-	function onSuccess(newDiscount) {
-		// console.log('createSet createnewDiscount success');
-		response.success(newDiscount);
+}
+
+function destroyDiscount(request, response) {
+	console.log('destroyDiscount');
+	Parse.Cloud.useMasterKey();
+	if(request.user) {
+		userUtils.isUserAdmin(request.user.id)
+			.then(destroyItem, function(err) {
+				console.log('err');
+				console.log(err);
+				response.error(err);
+			});
+	} else {
+		response.error('you must be logged in');
 	}
 
-	function onError(error) {
-		console.log('createSet createNewDiscount Error');
-		response.error(error);
+	function destroyItem(isAdmin) {
+		if(isAdmin) {
+			// create new setitem and add setitem to set
+			var discountToDelete = new DiscountObject();
+			discountToDelete.id = request.params.id;
+			discountToDelete.destroy({
+				success: response.success,
+				error: response.error
+			});
+		} else {
+			console.log('user is not admin');
+			response.error('You need to be an admin to access this page.');
+		}
 	}
-
 }
