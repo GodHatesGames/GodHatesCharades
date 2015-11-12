@@ -12,7 +12,9 @@ app.factory('Discount', function (DS, $q) {
 
   // Adapter
   DS.adapters.discountAdapter = {
-    findAll: _findAll
+    findAll: _findAll,
+    update: _update,
+    create: _create
   };
 
   // init
@@ -25,6 +27,29 @@ app.factory('Discount', function (DS, $q) {
   // adapter methods
   function _findAll(resource, id) {
     return Parse.Cloud.run(CONFIG.PARSE_VERSION + 'getAllDiscounts');
+  }
+
+  function _update(resource, id, attrs) {
+    return Parse.Cloud.run(
+      CONFIG.PARSE_VERSION + 'updateDiscount',
+      attrs,
+      {
+        success: onSaved
+      }
+    );
+
+    function onSaved (updatedDiscount) {
+      var discount = Discount.get(id);
+      _.extend(discount, updatedDiscount.attributes);
+      return discount;
+    }
+  }
+
+  function _create(resource, discount) {
+    return Parse.Cloud.run(
+      CONFIG.PARSE_VERSION + 'createDiscount',
+      discount
+    );
   }
 
   // class methods

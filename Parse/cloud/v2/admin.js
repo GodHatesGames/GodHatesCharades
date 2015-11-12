@@ -2,6 +2,11 @@
 var userUtils = require('cloud/v2/userUtils.js');
 var _ = require('underscore');
 
+var DiscountObject = Parse.Object.extend('Discount');
+var SuggestionObject = Parse.Object.extend('Suggestion');
+var SetObject = Parse.Object.extend('Set');
+var SetItemObject = Parse.Object.extend('SetItem');
+
 exports.getAllSuggestions = getAllSuggestions;
 exports.getAllSets = getAllSets;
 exports.addCardToSet = addCardToSet;
@@ -10,6 +15,8 @@ exports.createSet = createSet;
 exports.destroySet = destroySet;
 exports.updateSuggestionText = updateSuggestionText;
 exports.getAllDiscounts = getAllDiscounts;
+exports.updateDiscount = updateDiscount;
+exports.createDiscount = createDiscount;
 
 function getAllSuggestions(request, response) {
 	//to allow fetching owners
@@ -31,7 +38,6 @@ function getAllSuggestions(request, response) {
 		// console.log(isAdmin);
 		if(isAdmin) {
 			console.log('user is admin');
-			var SuggestionObject = Parse.Object.extend('Suggestion');
 			var query = new Parse.Query(SuggestionObject);
 			query.limit(queryLimit);
 			query.equalTo('rejected', false);
@@ -88,7 +94,6 @@ function getAllSets(request, response) {
 		// console.log(isAdmin);
 		if(isAdmin) {
 			// console.log('user is admin');
-			var SetObject = Parse.Object.extend('Set');
 			var query = new Parse.Query(SetObject);
 			query.find({
 				success: onSuccess,
@@ -131,7 +136,6 @@ function addCardToSet(request, response) {
 		if(isAdmin) {
 			// console.log('user is admin');
 			// mock suggestion
-			var SuggestionObject = Parse.Object.extend('Suggestion');
 			var suggestion = new SuggestionObject();
 			suggestion.id = cardId;
 			// mock set
@@ -181,7 +185,6 @@ function removeSetItem(request, response) {
 		if(isAdmin) {
 			// console.log('user is admin');
 			// create new setitem and add setitem to set
-			var SetItemObject = Parse.Object.extend('SetItem');
 			var itemToDelete = new SetItemObject();
 			itemToDelete.id = request.params.id;
 			itemToDelete.destroy({
@@ -221,8 +224,7 @@ function createSet(request, response) {
 		// console.log('createSet createNewSet');
 		if(isAdmin) {
 			// console.log('user is admin');
-			var Set = Parse.Object.extend('Set');
-			var newSet = new Set();
+			var newSet = new SetObject();
 			newSet.save({
 				name: request.params.name
 			}, {
@@ -263,7 +265,6 @@ function destroySet(request, response) {
 		if(isAdmin) {
 			console.log('user is admin');
 			// create new setitem and add setitem to set
-			var SetObject = Parse.Object.extend('Set');
 			var setToDelete = new SetObject();
 			setToDelete.id = request.params.id;
 			setToDelete.destroy({
@@ -304,7 +305,6 @@ function updateSuggestionText(request, response) {
 			// console.log('user is admin');
 			var suggestionId = request.params.suggestionId;
 			// mock suggestion
-			var SuggestionObject = Parse.Object.extend('Suggestion');
 			var suggestion = new SuggestionObject();
 			suggestion.id = suggestionId;
 			suggestion.set('text', request.params.text);
@@ -346,8 +346,7 @@ function getAllDiscounts(request, response) {
 		// console.log(isAdmin);
 		if(isAdmin) {
 			// console.log('user is admin');
-			var SetObject = Parse.Object.extend('Discount');
-			var query = new Parse.Query(SetObject);
+			var query = new Parse.Query(DiscountObject);
 			query.find({
 				success: onSuccess,
 				error: onError
@@ -364,7 +363,89 @@ function getAllDiscounts(request, response) {
 	}
 
 	function onError(error) {
-		console.log('updateSuggestionText saveData Error');
+		console.log('getAllDiscounts saveData Error');
 		response.error(error);
 	}
+}
+
+function updateDiscount(request, response) {
+	Parse.Cloud.useMasterKey();
+	if(request.user) {
+		userUtils.isUserAdmin(request.user.id)
+			.then(saveData, onError);
+	} else {
+		onError();
+	}
+
+	function saveData(isAdmin) {
+		if(isAdmin) {
+			// mock discount
+			var discount = new DiscountObject();
+			discount.id = request.params.id;
+			discount.set('code', request.params.code);
+			discount.set('paramKey', request.params.paramKey);
+			discount.set('paramValue', request.params.paramValue);
+			discount.set('feature', request.params.feature);
+			discount.save({
+				success: onSuccess,
+				error: onError
+			});
+		} else {
+			console.log('user is not admin');
+			onError('You need to be an admin to access this page.');
+		}
+	}
+
+	function onSuccess(discount) {
+		response.success(discount);
+	}
+
+	function onError(error) {
+		console.log('updateDiscount saveData Error');
+		response.error(error);
+	}
+
+}
+
+function createDiscount(request, response) {
+	// console.log('createSet');
+	Parse.Cloud.useMasterKey();
+	// console.log('request.user.id:' + request.user.id);
+	if(request.user) {
+		userUtils.isUserAdmin(request.user.id)
+			.then(createNewDiscount, onError);
+	} else {
+		onError();
+	}
+
+	function createNewDiscount(isAdmin) {
+		// console.log('createSet createNewDiscount');
+		if(isAdmin) {
+			// console.log('user is admin');
+			var newDiscount = new DiscountObject();
+			newDiscount.save({
+				code: request.params.code,
+				paramKey: request.params.paramKey,
+				paramValue: request.params.paramValue,
+				feature: request.params.feature
+			}, {
+				success: onSuccess,
+				error: onError
+			});
+		} else {
+			console.log('user is not admin');
+			onError('You need to be an admin to access this page.');
+		}
+	}
+
+	function onSuccess(newDiscount) {
+		// console.log('createSet createnewDiscount success');
+		response.success(newDiscount);
+	}
+
+	function onError(error) {
+		console.log('createSet createNewDiscount Error');
+		response.error(error);
+	}
+
 }

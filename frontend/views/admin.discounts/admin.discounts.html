@@ -1,16 +1,45 @@
 <div id="discounts">
   <h1>Discounts</h1>
   <!-- Headers -->
-  <table class="table">
-    <tr>
-      <th>Code</th>
-      <th>Param</th>
-      <th>Featured</th>
-    </tr>
-    <tr ng-repeat="discount in discounts | orderBy:'-code' track by discount.id">
-      <td>{{discount.code}}</td>
-      <td>{{discount.paramKey}}={{discount.paramValue}}</td>
-      <td>{{discount.feature}}</td>
-    </tr>
-  </table>
+  <div class="row">
+    <div class="col-sm-2">Code</div>
+    <div class="col-sm-2">Param Key</div>
+    <div class="col-sm-2">Param Value</div>
+    <div class="col-sm-4">Featured</div>
+  </div>
+  <form class="row"
+       ng-repeat="discount in discounts | orderBy:'-updatedAt' track by discount.id">
+    <div class="col-sm-2">
+      <div class="input-group">
+        <input type="text"
+               class="form-control"
+               ng-model="discount.code">
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="input-group">
+        <input type="text"
+               class="form-control"
+               ng-model="discount.paramKey">
+      </div>
+    </div>
+    <div class="col-sm-2">
+      <div class="input-group">
+        <input type="text"
+               class="form-control"
+               ng-model="discount.paramValue">
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <input type="checkbox"
+             class="form-checkbox"
+             ng-model="discount.feature">
+    </div>
+    <div class="col-sm-1">
+      <button class="btn btn-success"
+              ng-click="saveDiscount(discount)">
+        <feedback-icon saving="discount.saving" />
+      </button>
+    </div>
+  </form>
 </div>
