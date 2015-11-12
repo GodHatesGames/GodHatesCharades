@@ -8,7 +8,7 @@
     <div class="col-sm-4">Featured</div>
   </div>
   <form class="row"
-       ng-repeat="discount in discounts | orderBy:'-updatedAt' track by discount.id">
+        ng-repeat="discount in discounts | orderBy:'-updatedAt' track by discount.id">
     <div class="col-sm-2">
       <div class="input-group">
         <input type="text"
@@ -36,7 +36,8 @@
              ng-model="discount.feature">
     </div>
     <div class="col-sm-1">
-      <button class="btn btn-success"
+      <button class="btn btn-success btn-sm"
+              ng-if="discount.DSHasChanges()" 
               ng-click="saveDiscount(discount)">
         <feedback-icon saving="discount.saving" />
       </button>
