@@ -1,0 +1,15 @@
+{
+  "applications": {
+    "GHC Stage": {
+      "parseAppId": "GvWVZYlfePPR74oSKdDgftmBKzj3lsprcNlgiy4Z",
+      "herokuAppId": "45459309-4e9c-4c64-ba9e-bfd19c22891a"
+    },
+    "God Hates Charades": {
+      "parseAppId": "GvWVZYlfePPR74oSKdDgftmBKzj3lsprcNlgiy4Z",
+      "herokuAppId": "45459309-4e9c-4c64-ba9e-bfd19c22891a"
+    },
+    "_default": {
+      "link": "GHC Stage"
+    }
+  }
+}
