@@ -62,6 +62,7 @@ Parse.Cloud.define('v2_approveSuggestion', v2.moderation.approveSuggestion);
 Parse.Cloud.define('v2_disapproveSuggestion', v2.moderation.disapproveSuggestion);
 
 // Admin
+Parse.Cloud.define('v2_setupRoles', v2.admin.setupRoles);
 Parse.Cloud.define('v2_getAllSuggestions', v2.admin.getAllSuggestions);
 Parse.Cloud.define('v2_getAllSets', v2.admin.getAllSets);
 Parse.Cloud.define('v2_addCardToSet', v2.admin.addCardToSet);
@@ -126,9 +127,9 @@ Parse.Cloud.beforeSave('_User', function(request, response) {
 	if(request.object.isNew()) {
 		console.log('creating user with email', request.object.get('email'));
 		v2.backer.getBackerByEmail(request.object.get('email'))
-		.then(onBackerChecked, response.success)
-		.then(checkSubscription)
-		.then(response.success, response.success);
+		.then(onBackerChecked, response.success);
+		// .then(checkSubscription)
+		// .then(response.success, response.success);
 	} else {
 		response.success();
 	}
@@ -139,35 +140,35 @@ Parse.Cloud.beforeSave('_User', function(request, response) {
 		}
 	}
 
-	function checkSubscription() {
-		console.log('config.MAILCHIMP_API_KEY:' + config.MAILCHIMP_API_KEY);
-		var emails = [
-			{
-				email: request.object.get('email')
-			}
-		];
-		return Parse.Cloud.httpRequest({
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json;charset=utf-8'
-			},
-			url: config.MAILCHIMP_API_URL + 'lists/member-info',
-			body: {
-				apikey: config.MAILCHIMP_API_KEY,
-				id: config.MAILCHIMP_LIST_ID,
-				emails: emails
-			}
-		})
-		.then(function(httpResponse) {
-			// console.log('checkSubscription success');
-			// console.log('subscribers with this email ' + JSON.stringify(httpResponse.data.data));
-			if(httpResponse.data.data.length > 0)
-				request.object.set('subscriber', true);
-		},
-		function(httpResponse) {
-			console.log('checkSubscription fail');
-			// console.error('Request failed with response code ' + httpResponse.status);
-			console.error(httpResponse.data.error);
-		});
-	}
+	// function checkSubscription() {
+	// 	console.log('config.MAILCHIMP_API_KEY:' + config.MAILCHIMP_API_KEY);
+	// 	var emails = [
+	// 		{
+	// 			email: request.object.get('email')
+	// 		}
+	// 	];
+	// 	return Parse.Cloud.httpRequest({
+	// 		method: 'POST',
+	// 		headers: {
+	// 			'Content-Type': 'application/json;charset=utf-8'
+	// 		},
+	// 		url: config.MAILCHIMP_API_URL + 'lists/member-info',
+	// 		body: {
+	// 			apikey: config.MAILCHIMP_API_KEY,
+	// 			id: config.MAILCHIMP_LIST_ID,
+	// 			emails: emails
+	// 		}
+	// 	})
+	// 	.then(function(httpResponse) {
+	// 		// console.log('checkSubscription success');
+	// 		// console.log('subscribers with this email ' + JSON.stringify(httpResponse.data.data));
+	// 		if(httpResponse.data.data.length > 0)
+	// 			request.object.set('subscriber', true);
+	// 	},
+	// 	function(httpResponse) {
+	// 		console.log('checkSubscription fail');
+	// 		// console.error('Request failed with response code ' + httpResponse.status);
+	// 		console.error(httpResponse.data.error);
+	// 	});
+	// }
 });

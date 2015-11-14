@@ -1,5 +1,5 @@
 'use strict';
-app.controller('discountsView', function(discounts, $scope, Discount) {
+app.controller('discountsView', function(discounts, $scope, $state, Discount) {
   $scope.discounts = discounts;
   $scope.discounts.unshift({});
   $scope.saving = false;
@@ -19,6 +19,7 @@ app.controller('discountsView', function(discounts, $scope, Discount) {
       Discount.update(update.id, update)
       .then(function() {
         discount.saving = false;
+        $state.go('admin.discounts');
       });
     } else {
       discount.saving = true;

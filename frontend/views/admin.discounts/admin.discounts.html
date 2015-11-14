@@ -36,16 +36,18 @@
              ng-model="discount.feature">
     </div>
     <div class="col-sm-1">
-      <button class="btn btn-success btn-sm"
-              ng-if="discount.DSHasChanges() || !discount.id"
-              ng-click="saveDiscount(discount)">
-        <feedback-icon saving="discount.saving" />
-      </button>
-      <button class="btn btn-danger btn-sm pull-right"
-              ng-if="discount.id"
-              ng-click="destroyDiscount(discount)">
-        <span class="glyphicon glyphicon-trash"></span>
-      </button>
+      <div class="btn-group">
+        <button class="btn btn-success btn-sm"
+                ng-if="discount.DSHasChanges() || !discount.id"
+                ng-click="saveDiscount(discount)">
+          <feedback-icon saving="discount.saving" />
+        </button>
+        <button class="btn btn-danger btn-sm"
+                ng-if="discount.id"
+                ng-click="destroyDiscount(discount)">
+          <span class="glyphicon glyphicon-trash"></span>
+        </button>
+      </div>
     </div>
   </form>
 </div>
