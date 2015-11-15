@@ -16,3 +16,4 @@ frontend/css/
 frontend/components/*.css
 .env
 Parse/cloud/config.js
+frontend/fonts/glyphicons*

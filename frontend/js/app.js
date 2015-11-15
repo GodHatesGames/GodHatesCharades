@@ -77,7 +77,6 @@ app.run(function($rootScope,
 		console.log('preping router')
 		// Default away value
 		$rootScope.firstLoad = true;
-		$rootScope.isAway = false;
 
 		// loading animation
 		$rootScope.setLoading = function() {
@@ -91,10 +90,6 @@ app.run(function($rootScope,
 
 		$rootScope.$on('$stateChangeStart', function(ev, to, toParams, from, fromParams) {
 			$rootScope.setLoading();
-			if(to.name === 'home')
-				$rootScope.isAway = false;
-			else
-				$rootScope.isAway = true;
 		});
 
 		$rootScope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {

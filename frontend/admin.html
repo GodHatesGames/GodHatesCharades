@@ -17,6 +17,7 @@
 		<!-- build:css css/style.admin.css -->
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/admin.css">
 		<link rel="stylesheet" href="css/components.css">
 		<link rel="stylesheet" href="css/components.admin.css">
 		<link rel="stylesheet" href="css/views.admin.css">
@@ -25,7 +26,7 @@
 	</head>
 	<body>
 		<div class="">
-			<!-- <debug></debug> -->
+			<debug></debug>
 			<div class="viewLoader navbar navbar-default navbar-fixed-top"
 				 ng-class="{loading: isViewLoading}">
 				 <span class="bg-dark-bright">Loading...</span>
@@ -36,6 +37,8 @@
 			<div ui-view
 			     class="content bg-light">
 			</div>
+
+			<footer></footer>
 		</div> <!-- /container -->
 		
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>

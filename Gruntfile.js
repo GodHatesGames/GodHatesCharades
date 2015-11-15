@@ -79,7 +79,7 @@ module.exports = function(grunt) {
 				files: [
 					'frontend/less/*.less'
 				],
-				tasks: ['less:main', 'autoprefixer']
+				tasks: ['less:main', 'less:admin', 'autoprefixer']
 			},
 			livereload: {
 				files: [
@@ -365,6 +365,11 @@ module.exports = function(grunt) {
 					'frontend/css/bootstrap.css': 'frontend/less/bootstrap.less'
 				}
 			},
+			admin: {
+				files: {
+					'frontend/css/admin.css': 'frontend/less/admin.less'
+				}
+			},
 			components: {
 				files: {
 					'frontend/css/components.css': [
@@ -516,6 +521,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('buildCss', [
 		'less:main',
+		'less:admin',
 		'less:components',
 		'less:admincomponents',
 		'less:views',

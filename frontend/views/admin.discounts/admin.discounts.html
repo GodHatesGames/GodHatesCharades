@@ -35,10 +35,10 @@
              class="form-checkbox"
              ng-model="discount.feature">
     </div>
-    <div class="col-sm-1">
+    <div class="col-sm-2">
       <div class="btn-group">
         <button class="btn btn-success btn-sm"
-                ng-if="discount.DSHasChanges() || !discount.id"
+                ng-disabled="discount.id && !discount.DSHasChanges()"
                 ng-click="saveDiscount(discount)">
           <feedback-icon saving="discount.saving" />
         </button>
