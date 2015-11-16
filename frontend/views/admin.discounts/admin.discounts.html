@@ -2,14 +2,14 @@
   <h1>Discounts</h1>
   <!-- Headers -->
   <div class="row">
-    <div class="col-sm-3">Message</div>
+    <div class="col-sm-5">Message</div>
     <div class="col-sm-2">Param Key</div>
     <div class="col-sm-2">Param Value</div>
-    <div class="col-sm-3">Featured</div>
+    <div class="col-sm-1">Featured</div>
   </div>
   <form class="row"
         ng-repeat="discount in discounts | orderBy:'-updatedAt' track by discount.id">
-    <div class="col-sm-3 form-group">
+    <div class="col-sm-5 form-group">
       <input type="text"
              class="form-control"
              ng-model="discount.code">
@@ -24,7 +24,7 @@
              class="form-control"
              ng-model="discount.paramValue">
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-1">
       <input type="checkbox"
              class="form-checkbox"
              ng-model="discount.feature">
