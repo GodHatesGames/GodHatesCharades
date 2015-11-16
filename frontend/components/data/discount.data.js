@@ -1,4 +1,4 @@
-app.factory('Discount', function (DS, $q) {
+app.factory('Discount', function (DS, $q, ParseData) {
   // vars
   var definition = {
     name: 'discount',
@@ -18,8 +18,13 @@ app.factory('Discount', function (DS, $q) {
     destroy: _destroy
   };
 
+
   // init
   var Discount = DS.defineResource(definition);
+
+  // static methods
+  Discount.getFeaturedDiscount = _getFeaturedDiscount;
+  Discount.getDiscountByParams = _getDiscountByParams;
 
   return Discount;
 
@@ -62,6 +67,44 @@ app.factory('Discount', function (DS, $q) {
   }
 
   // class methods
+
+  function _getFeaturedDiscount() {
+    var deferred = $q.defer();
+    Parse.Cloud.run(
+      CONFIG.PARSE_VERSION + 'getFeaturedDiscount',
+      {}, 
+      {
+        success: _onFetchedFeatureDiscount.bind(deferred),
+        error: deferred.reject
+      }
+    );
+
+    return deferred.promise;
+  }
+
+  function _onFetchedFeatureDiscount(discount) {
+    discount = ParseData.inject('discount', discount);
+    this.resolve(discount);
+  }
+
+  function _getDiscountByParams(params) {
+    var deferred = $q.defer();
+    Parse.Cloud.run(
+      CONFIG.PARSE_VERSION + 'getDiscountByParams',
+      params, 
+      {
+        success: _onFetchedDiscount.bind(deferred),
+        error: deferred.reject
+      }
+    );
+
+    return deferred.promise;
+  }
+
+  function _onFetchedDiscount(discount) {
+    discount = ParseData.inject('discount', discount);
+    this.resolve(discount);
+  }
 
   // instance methods
 

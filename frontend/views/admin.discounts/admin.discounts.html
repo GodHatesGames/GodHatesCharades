@@ -2,33 +2,27 @@
   <h1>Discounts</h1>
   <!-- Headers -->
   <div class="row">
-    <div class="col-sm-2">Code</div>
+    <div class="col-sm-3">Code</div>
     <div class="col-sm-2">Param Key</div>
     <div class="col-sm-2">Param Value</div>
-    <div class="col-sm-4">Featured</div>
+    <div class="col-sm-3">Featured</div>
   </div>
   <form class="row"
         ng-repeat="discount in discounts | orderBy:'-updatedAt' track by discount.id">
-    <div class="col-sm-2">
-      <div class="input-group">
-        <input type="text"
-               class="form-control"
-               ng-model="discount.code">
-      </div>
+    <div class="col-sm-3 form-group">
+      <input type="text"
+             class="form-control"
+             ng-model="discount.code">
     </div>
-    <div class="col-sm-2">
-      <div class="input-group">
-        <input type="text"
-               class="form-control"
-               ng-model="discount.paramKey">
-      </div>
+    <div class="col-sm-2 form-group">
+      <input type="text"
+             class="form-control"
+             ng-model="discount.paramKey">
     </div>
-    <div class="col-sm-2">
-      <div class="input-group">
-        <input type="text"
-               class="form-control"
-               ng-model="discount.paramValue">
-      </div>
+    <div class="col-sm-2 form-group">
+      <input type="text"
+             class="form-control"
+             ng-model="discount.paramValue">
     </div>
     <div class="col-sm-3">
       <input type="checkbox"

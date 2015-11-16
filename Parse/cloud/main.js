@@ -55,6 +55,7 @@ v2.user = require('cloud/v2/user.js');
 v2.pair = require('cloud/v2/pair.js');
 v2.backer = require('cloud/v2/backer.js');
 v2.moderation = require('cloud/v2/moderation.js');
+v2.discount = require('cloud/v2/discount.js');
 
 // Moderation
 Parse.Cloud.define('v2_getUnmoderatedSuggestions', v2.moderation.getUnmoderatedSuggestions);
@@ -97,6 +98,11 @@ Parse.Cloud.define('v2_examples', v2.cardUtils.examples);
 Parse.Cloud.define('v2_getCardsForSet', v2.cardUtils.getCardsForSet);
 Parse.Cloud.define('v2_getCardById', v2.cardUtils.getCardById);
 Parse.Cloud.define('v2_getCardsForSuggestion', v2.cardUtils.getCardsForSuggestion);
+
+// Discount
+Parse.Cloud.define('v2_getFeaturedDiscount', v2.discount.getFeaturedDiscount);
+Parse.Cloud.define('v2_getDiscountByParams', v2.discount.getDiscountByParams);
+
 
 // Background Jobs
 Parse.Cloud.job('v2_calculateStats', v2.leaderboard.calculateStats);
