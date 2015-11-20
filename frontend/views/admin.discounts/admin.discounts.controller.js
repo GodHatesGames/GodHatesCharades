@@ -2,35 +2,20 @@
 app.controller('discountsView', function(discounts, $scope, $state, Discount) {
   $scope.discounts = discounts;
   $scope.discounts.unshift({});
-  $scope.saving = false;
+  $scope.saves = {};
   $scope.saveDiscount = _saveDiscount;
   $scope.destroyDiscount = _destroyDiscount;
 
   function _saveDiscount(discount) {
     if(discount.id) {
-      discount.saving = true;
-      var update = {
-        id: discount.id,
-        code: discount.code,
-        paramKey: discount.paramKey,
-        paramValue: discount.paramValue,
-        feature: discount.feature
-      };
-      Discount.update(update.id, update)
+      $scope.saves[discount.id] = true;
+      Discount.update(discount.id, discount)
       .then(function() {
-        discount.saving = false;
-        $state.go('admin.discounts');
+        delete $scope.saves[discount.id];
       });
     } else {
       discount.saving = true;
-      var newDiscount = {
-        id: discount.id,
-        code: discount.code,
-        paramKey: discount.paramKey,
-        paramValue: discount.paramValue,
-        feature: discount.feature
-      };
-      Discount.create(newDiscount)
+      Discount.create(discount)
       .then(function(newDiscount) {
         $scope.discounts.push(newDiscount);
         $scope.discounts[0] = {};

@@ -1,4 +1,11 @@
 var _ = require('underscore');
+exports.props = [
+  'code',
+  'url',
+  'paramKey',
+  'paramValue',
+  'feature'
+];
 exports.getFeaturedDiscount = _getFeaturedDiscount;
 exports.getDiscountByParams = _getDiscountByParams;
 var Discount = Parse.Object.extend('Discount');

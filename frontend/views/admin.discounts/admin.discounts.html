@@ -3,26 +3,31 @@
   <!-- Headers -->
   <div class="row">
     <div class="col-sm-5">Message</div>
-    <div class="col-sm-2">Param Key</div>
-    <div class="col-sm-2">Param Value</div>
+    <div class="col-sm-2">Url</div>
+    <div class="col-sm-2">Params</div>
     <div class="col-sm-1">Featured</div>
   </div>
   <form class="row"
         ng-repeat="discount in discounts | orderBy:'-updatedAt' track by discount.id">
     <div class="col-sm-5 form-group">
-      <input type="text"
-             class="form-control"
-             ng-model="discount.code">
+      <textarea class="form-control"
+                rows="2"
+                ng-model="discount.code"></textarea>
+    </div>
+    <div class="col-sm-2 form-group">
+      <textarea class="form-control"
+                rows="2"
+                ng-model="discount.url"></textarea>
     </div>
     <div class="col-sm-2 form-group">
       <input type="text"
              class="form-control"
-             ng-model="discount.paramKey">
-    </div>
-    <div class="col-sm-2 form-group">
+             ng-model="discount.paramKey"
+             placeholder="key">
       <input type="text"
              class="form-control"
-             ng-model="discount.paramValue">
+             ng-model="discount.paramValue"
+             placeholder="value">
     </div>
     <div class="col-sm-1">
       <input type="checkbox"
@@ -34,7 +39,7 @@
         <button class="btn btn-success btn-sm"
                 ng-disabled="discount.id && !discount.DSHasChanges()"
                 ng-click="saveDiscount(discount)">
-          <feedback-icon saving="discount.saving" />
+          <feedback-icon saving="saves[discount.id]" />
         </button>
         <button class="btn btn-danger btn-sm"
                 ng-if="discount.id"

@@ -21,6 +21,14 @@ app.factory('Discount', function (DS, $q, ParseData) {
 
   // init
   var Discount = DS.defineResource(definition);
+  var props = [
+    'id',
+    'code',
+    'url',
+    'paramKey',
+    'paramValue',
+    'feature'
+  ];
 
   // static methods
   Discount.getFeaturedDiscount = _getFeaturedDiscount;
@@ -36,22 +44,15 @@ app.factory('Discount', function (DS, $q, ParseData) {
   }
 
   function _update(resource, id, attrs) {
+    var discount = _.pick(attrs, props);
     return Parse.Cloud.run(
       CONFIG.PARSE_VERSION + 'updateDiscount',
-      attrs,
-      {
-        success: onSaved
-      }
+      discount
     );
-
-    function onSaved (updatedDiscount) {
-      var discount = Discount.get(id);
-      _.extend(discount, updatedDiscount.attributes);
-      return discount;
-    }
   }
 
-  function _create(resource, discount) {
+  function _create(resource, attrs) {
+    var discount = _.pick(attrs, props);
     return Parse.Cloud.run(
       CONFIG.PARSE_VERSION + 'createDiscount',
       discount

@@ -8,7 +8,7 @@ app.directive('feedbackIcon', function() {
     },
     controller: function($scope, $element) {
       $scope.feedbackClass = function() {
-        return $scope.saving ? 'glyphicon-refresh custom-spin' : 'glyphicon-ok-circle';
+        return $scope.saving ? 'glyphicon-refresh custom-spin' : 'glyphicon-floppy-disk';
       };
 
     }

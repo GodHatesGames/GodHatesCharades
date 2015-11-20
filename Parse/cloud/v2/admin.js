@@ -2,6 +2,7 @@
 var userUtils = require('cloud/v2/userUtils.js');
 var _ = require('underscore');
 var config = require('cloud/config.js');
+var Discount = require('discount.js');
 
 var DiscountObject = Parse.Object.extend('Discount');
 var SuggestionObject = Parse.Object.extend('Suggestion');
@@ -200,10 +201,9 @@ function _updateDiscount(request, response) {
 	// mock discount
 	var discount = new DiscountObject();
 	discount.id = request.params.id;
-	discount.set('code', request.params.code);
-	discount.set('paramKey', request.params.paramKey);
-	discount.set('paramValue', request.params.paramValue);
-	discount.set('feature', request.params.feature);
+	_.each(Discount.props, function(prop) {
+		discount.set(prop, request.params[prop]);
+	});
 	discount.save({
 		success: response.success,
 		error: response.error
@@ -214,12 +214,8 @@ function _createDiscount(request, response) {
 	// console.log('createSet');
 	Parse.Cloud.useMasterKey();
 	var newDiscount = new DiscountObject();
-	newDiscount.save({
-		code: request.params.code,
-		paramKey: request.params.paramKey,
-		paramValue: request.params.paramValue,
-		feature: request.params.feature
-	}, {
+	var newDiscountData = _.pick(request.params, Discount.props);
+	newDiscount.save(newDiscountData, {
 		success: response.success,
 		error: response.error
 	});
