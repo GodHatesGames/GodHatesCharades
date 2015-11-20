@@ -2,7 +2,7 @@
 var userUtils = require('cloud/v2/userUtils.js');
 var _ = require('underscore');
 var config = require('cloud/config.js');
-var Discount = require('discount.js');
+var Discount = require('cloud/v2/discount.js');
 
 var DiscountObject = Parse.Object.extend('Discount');
 var SuggestionObject = Parse.Object.extend('Suggestion');
