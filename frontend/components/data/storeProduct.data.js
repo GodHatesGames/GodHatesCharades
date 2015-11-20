@@ -52,6 +52,8 @@ app.factory('StoreProduct', function (DS) {
         return 'product-main-game';
       case 'EXP-001' :
         return 'product-expansion';
+      case 'BUN-003' :
+        return 'product-BUN-003';
       default :
         return;
     }

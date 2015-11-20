@@ -2,7 +2,13 @@
   <div class="row">
     <h3>{{product.title}}</h3>
   </div>
-  <div class="img-carousel row bg-white">
+  <div class="row bg-white"
+       ng-if="product.images.length === 1">
+    <img ng-src="{{currentImage.src}}"
+         class="img-responsive">
+  </div>
+  <div ng-if="product.images.length > 1"
+       class="img-carousel row bg-white">
     <div class="col-xs-10">
       <img ng-src="{{currentImage.src}}"
            class="img-responsive">

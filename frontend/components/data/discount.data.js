@@ -74,17 +74,12 @@ app.factory('Discount', function (DS, $q, ParseData) {
       CONFIG.PARSE_VERSION + 'getFeaturedDiscount',
       {}, 
       {
-        success: _onFetchedFeatureDiscount.bind(deferred),
+        success: _onFetchedDiscount.bind(deferred),
         error: deferred.reject
       }
     );
 
     return deferred.promise;
-  }
-
-  function _onFetchedFeatureDiscount(discount) {
-    discount = ParseData.inject('discount', discount);
-    this.resolve(discount);
   }
 
   function _getDiscountByParams(params) {
@@ -102,8 +97,12 @@ app.factory('Discount', function (DS, $q, ParseData) {
   }
 
   function _onFetchedDiscount(discount) {
-    discount = ParseData.inject('discount', discount);
-    this.resolve(discount);
+    if(discount) {
+      discount = ParseData.inject('discount', discount);
+      this.resolve(discount);
+    } else {
+      this.reject();
+    }
   }
 
   // instance methods
