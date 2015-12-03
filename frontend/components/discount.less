@@ -1,6 +1,6 @@
 @import "../less/bootstrap-variables";
 
-@height: 45px;
+@height: 33px;
 .discount {
   display: none;
 
@@ -12,18 +12,17 @@
 .discounted {
   .discount {
     display: block;
-    height: @height;
     line-height: @height;
     text-align: center;
     font-size: 25px;
+    padding-top: 5px;
+    padding-bottom: 7px;
   }
 }
 
 @media (max-width: @screen-xs-max) {
-  @height: 55px;
   .discounted {
     .discount {
-      height: @height;
       line-height: 20px;
       font-size: 15px;
       padding-top: 7px;
