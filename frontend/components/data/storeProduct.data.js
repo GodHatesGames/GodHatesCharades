@@ -4,6 +4,7 @@ app.factory('StoreProduct', function (DS) {
     name: 'product',
     computed: {
       mainVariantPrice: ['mainVariant', _updateMainVariantPrice],
+      mainVariantOriginalPrice: ['mainVariant', _updateMainVariantOriginalPrice],
       mainVariantId: ['variants', _updateMainVariantId],
       mainVariant: ['variants', _updateMainVariant],
       cartClass: ['mainVariant', _updateCartClass]
@@ -42,6 +43,13 @@ app.factory('StoreProduct', function (DS) {
   function _updateMainVariantPrice(mainVariant) {
     if(mainVariant) {
       return Number(mainVariant.price);
+    }
+  }
+
+  function _updateMainVariantOriginalPrice(mainVariant) {
+    if(mainVariant) {
+      var originalPrice = Number(mainVariant.compare_at_price);
+      return originalPrice > 0 ? originalPrice : null;
     }
   }
   
