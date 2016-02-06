@@ -4,7 +4,7 @@ var COLLECTION_ID = '31882561';
 angular.module('app')
 .config(function ($stateProvider) {
   $stateProvider.state('product', {
-    url: '/product/:handle',
+    url: '/products/:handle',
     templateUrl: 'views/product/product.html',
     controller: 'productView',
     resolve: {
