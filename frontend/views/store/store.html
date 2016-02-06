@@ -3,7 +3,7 @@
   <section class="row">
     <div class="col-sm-9">
       <store-product ng-repeat="storeItem in collection.items | orderBy:'position' track by storeItem.product.id"
-                     store-item="storeItem">
+                     product="storeItem.product">
       </store-product>
     </div>
     <cart collection="collection"></cart>

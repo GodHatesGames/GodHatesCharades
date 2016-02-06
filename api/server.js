@@ -69,6 +69,7 @@ server.get('/timeline', showIndex);
 server.get('/watch', showIndex);
 server.get('/store', showIndex);
 server.get('/store/thanks', showIndex);
+server.get('/product/*', showIndex);
 
 // prismic preview
 server.get('/preview', showPreview);

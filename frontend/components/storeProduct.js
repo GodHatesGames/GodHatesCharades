@@ -3,10 +3,9 @@ app.directive('storeProduct', function($animate, cartService) {
     templateUrl: 'components/storeProduct.html',
     replace: true,
     scope: {
-      storeItem: '='
+      product: '='
     },
     controller: function($scope, $element) {
-      $scope.product = $scope.storeItem.product;
       $scope.currentImage = $scope.product.images[0];
       $scope.selectImage = _selectImage;
       $scope.onIncrement = _onIncrement;
