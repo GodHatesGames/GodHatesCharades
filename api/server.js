@@ -67,6 +67,7 @@ server.get('/press', showIndex);
 server.get('/share', showIndex);
 server.get('/timeline', showIndex);
 server.get('/watch', showIndex);
+server.get('/wholesale', showIndex);
 server.get('/store', showIndex);
 server.get('/store/thanks', showIndex);
 server.get('/products/*', showIndex);

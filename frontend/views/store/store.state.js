@@ -1,6 +1,5 @@
 'use strict';
 
-var COLLECTION_ID = '31882561';
 angular.module('app')
 .config(function ($stateProvider) {
   $stateProvider.state('store', {
@@ -10,11 +9,11 @@ angular.module('app')
     controller: 'storeView',
     resolve: {
       collection: ['products', 'StoreItemCollection', function(products, StoreItemCollection) {
-        return StoreItemCollection.find(COLLECTION_ID);
+        return StoreItemCollection.find('31882561');
       }],
       products: ['StoreProduct', function(StoreProduct) {
         return StoreProduct.findAll({
-          collection_id: COLLECTION_ID
+          collection_id: '31882561'
         });
       }]
     }

@@ -1,0 +1,19 @@
+<div id="wholesaleView" class="container flush">
+  <ui-view></ui-view>
+  <section class="row">
+    <div ng-html-compile="wholesaleHtml"
+           class="prismic-content col-sm-9"></div>
+    <div class="col-sm-9">
+      <store-product ng-repeat="storeItem in collection.items | orderBy:'position' track by storeItem.product.id"
+                     product="storeItem.product">
+      </store-product>
+      <div class="row">
+        <div class="col-sm-12">
+          
+        </div>
+      </div>
+    </div>
+    <cart collection="collection"></cart>
+  </section>
+
+</div>
