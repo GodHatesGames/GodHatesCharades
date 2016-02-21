@@ -3,10 +3,12 @@
   <section class="row">
     <div class="col-sm-9">
       <store-product ng-repeat="storeItem in collection.items | orderBy:'position' track by storeItem.product.id"
-                     product="storeItem.product">
+                     product="storeItem.product"
+                     cart-key="store">
       </store-product>
     </div>
-    <cart collection="collection"></cart>
+    <cart collection="collection"
+          key="store"></cart>
   </section>
 
 </div>

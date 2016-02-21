@@ -3,7 +3,8 @@ app.directive('storeProduct', function($animate, cartService) {
     templateUrl: 'components/storeProduct.html',
     replace: true,
     scope: {
-      product: '='
+      product: '=',
+      cartKey: '@'
     },
     controller: function($scope, $element) {
       $scope.currentImage = $scope.product.images[0];
@@ -11,6 +12,7 @@ app.directive('storeProduct', function($animate, cartService) {
       $scope.onIncrement = _onIncrement;
       $scope.onDecrement = _onDecrement;
       $scope.productQuantity = _productQuantityGetterSetter;
+      $scope.cart = cartService.getCart($scope.cartKey);
 
       function _selectImage (newImage) {
         $scope.currentImage = newImage;
@@ -19,20 +21,20 @@ app.directive('storeProduct', function($animate, cartService) {
       function _productQuantityGetterSetter(newQuantity) {
         if(angular.isDefined(newQuantity)) {
           console.log('set quantity', newQuantity);
-          cartService.setQuantity(newQuantity, $scope.product);
+          $scope.cart.setQuantity(newQuantity, $scope.product);
         }
 
-        return cartService.getCountById($scope.product.mainVariantId);
+        return $scope.cart.getCountById($scope.product.mainVariantId);
       }
 
       function _onIncrement(event, product) {
         _animateButton(event.currentTarget);
-        cartService.increment(product);
+        $scope.cart.increment(product);
       }
 
       function _onDecrement(event, product) {
         _animateButton(event.currentTarget);
-        cartService.decrement(product);
+        $scope.cart.decrement(product);
       }
 
       function _animateButton (button) {

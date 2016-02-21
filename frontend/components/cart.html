@@ -1,26 +1,29 @@
 <span>
   <div class="cart"
-       ng-class="{full: !cartService.empty}"
+       ng-class="{full: !cart.empty}"
        fix-bottom>
     <div class="notification float-short"></div>
     <div class="cart-items"
+         ng-if="!collapsed && !cart.maxCartMode"
          ng-class="getSway()">
       <!-- normal cart items -->
       <div class="cart-item fall-down"
-           ng-if="!cartService.maxCartMode"
-           ng-repeat="item in cartService.items | orderBy:'-added' | limit:cartService.max track by item.added"
+           ng-repeat="item in cart.items | orderBy:'-added' | limit:cart.maxItems track by item.added"
            ng-class="collection.productsByMainVariant[item.variant].product.cartClass"
-           ng-style="getProductLayer(cartService.items, $index)">
+           ng-style="getProductLayer(cart.items, $index)">
         <div class="product-image"></div>
       </div>
+    </div>
+    <div class="cart-items"
+         ng-if="collapsed || cart.maxCartMode"
+         ng-class="getSway()">
       <!-- maxCartMode cart items -->
       <div class="cart-item"
-           ng-if="cartService.maxCartMode"
-           ng-repeat="variant in cartService.variants | orderBy:'-added' track by variant.id"
+           ng-repeat="variant in cart.variants | orderBy:'-added' track by variant.id"
            ng-class="collection.productsByMainVariant[variant.id].product.cartClass"
            ng-class-even="'cart-item-even'"
            ng-class-odd="'cart-item-odd'"
-           ng-style="getProductLayer(cartService.variants, $index)">
+           ng-style="getProductLayer(cart.variants, $index)">
         <div class="product-quantity">{{variant.quantity}}</div>
         <div class="product-image"></div>
       </div>
@@ -30,12 +33,12 @@
       <div class="guy-front"></div>
     </div>
     <div class="checkout">
-	    <span class="total-nub">{{cartService.items.length}}</span>
-	    <a class="btn btn-block btn-success submit"
-	       ng-disabled="cartService.empty"
-	       ng-href="{{cartService.buyUrl}}">
-	      Checkout <span class="dollar-sign">$</span>{{cartService.getTotal() | currency:'':0}}
-	    </a>
+      <span class="total-nub">{{cart.items.length}}</span>
+      <a class="btn btn-block btn-success submit"
+         ng-disabled="cart.empty"
+         ng-href="{{cart.buyUrl}}">
+        Checkout <span class="dollar-sign">$</span>{{cart.getTotal() | currency:'':0}}
+      </a>
     </div>
   </div>
 </span>

@@ -1,28 +1,29 @@
-app.directive('cart', function(cartService, $timeout) {
+app.directive('cart', function($timeout, cartService) {
   return {
     templateUrl: 'components/cart.html',
     replace: true,
     scope: {
-      collection: '='
+      collection: '=',
+      key: '@',
+      collapsed: '='
     },
     controller: function($scope, $element) {
-      $scope.cartService = cartService;
+      $scope.cart = cartService.getCart($scope.key);
       $scope.getProductLayer = _getProductLayer;
       $scope.getSway = _getSway;
 
       // default to true so we can hack/preload the cart image
-      cartService.empty = !cartService.empty;
+      $scope.cart.empty = !$scope.cart.empty;
       $timeout(function() {
-        cartService.empty = !cartService.empty;
+        $scope.cart.empty = !$scope.cart.empty;
       }, 50);
 
       function _getSway() {
         // HACK: returning no sway until i can fix the skull-fuck situation
         return '';
 
-        if(cartService.items.length > 5) {
+        if($scope.cart.items.length > 5) {
           //sway big
-          collection: '='
           return 'sway-a-lot';
         } else {
           //no sway

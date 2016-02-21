@@ -1,120 +1,143 @@
 app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interval, StoreProduct) {
-   // private
-  var _items,_variants, _variantsById;
-
+  var _carts = {};
+  var DEFAULT_MAX_ITEMS = 9;
+  
   // expires in 1 day
-  var cartCache = DSCacheFactory('cart', {
+  var cartCache = DSCacheFactory('carts', {
     maxAge: 86400000
   });
-  var existingCart = cartCache.get('cart');
-  if(existingCart) {
-    _items = existingCart.items;
-    _variants = existingCart.variants;
-    _variantsById = _.indexBy(_variants, 'id');
-  } else {
-    _items = [];
-    _variants = [];
-    _variantsById = {};
+
+  var _updateCartCache = _.throttle(function() {
+    var cart = _.pick(this, ['items', 'variants']);
+    cartCache.put(this.name, cart);
+  }, 500);
+
+  var existingCarts = cartCache.keys();
+  if(existingCarts) {
+    _.each(existingCarts, function(cartKey) {
+      var existingCart = cartCache.get(cartKey);
+      _buildCart(cartKey, existingCart);
+    });
   }
-  var MAX_ITEMS = 9;
 
   // Define Cart public
   
   var Cart = {
-    buyUrl: '',
-    increment: _increment,
-    decrement: _decrement,
-    setQuantity: _setQuantity,
-    getCountById: _getCountById,
-    getTotal: _getTotal,
-    items: _items,
-    variants: _variants,
-    variantsById: _variantsById,
-    maxCartMode: false,
-    empty: _items.length === 0,
-    max: MAX_ITEMS
+    getCart: _getCart
   };
 
-  _updateCartMode();
-  _updateBuyUrl();
-
-  var _updateCartCache = _.throttle(function() {
-    var cart = _.pick(Cart, ['items', 'variants']);
-    cartCache.put('cart', cart);
-  }, 500);
-
   // methods
-  function _updateCartMode() {
-    if(_items.length >= MAX_ITEMS && Cart.maxCartMode == false) {
-      Cart.maxCartMode = true;
-    } else if(_items.length < MAX_ITEMS && Cart.maxCartMode == true) {
-      Cart.maxCartMode = false;
+
+  function _buildCart(key, defaults) {
+    // assign defaults if needed
+    var cart = _.assign({
+      maxItems: DEFAULT_MAX_ITEMS,
+      items: [],
+      variants: []
+    }, defaults);
+
+    // assign internal props and values
+    cart.name = key;
+    cart.maxCartMode = false;
+    cart.variantsById = _.indexBy(cart.variants, 'id');
+    cart.buyUrl = '';
+    cart.empty = cart.items.length === 0 ? true : false;
+    cart.increment = _increment;
+    cart.decrement = _decrement;
+    cart.setQuantity = _setQuantity;
+    cart.getCountById = _getCountById;
+    cart.getTotal = _getTotal;
+    cart._updateCartMode = _updateCartMode;
+    cart._updateBuyUrl = _updateBuyUrl;
+    cart._updateCartCache = _updateCartCache;
+
+    cart._updateCartMode();
+    cart._updateBuyUrl();
+
+    _carts[key] = cart;
+    return cart;
+  }
+
+  function _getCart(key) {
+    var cart = _carts[key];
+    if(cart) {
+      return cart;
+    } else {
+      return _buildCart(key);
+    }
+  }
+
+  function _updateCartMode(key) {
+    if(this.items.length >= this.maxItems) {
+      this.maxCartMode = true;
+    } else if(this.items.length < this.maxItems) {
+      this.maxCartMode = false;
     }
   }
 
   function _increment(product) {
-    Cart.empty = false;
+    this.empty = false;
     if(product.mainVariantId) {
       var item = _tempItem(product.mainVariantId);
       // update normal cart
 
-      _items.push(item);
+      this.items.push(item);
       // update collapsed cart
-      if(!_variantsById[product.mainVariantId]) {
+      if(!this.variantsById[product.mainVariantId]) {
         var newVariantItem = {
           id: product.mainVariantId,
           quantity: 1,
           added: new Date().getTime(),
           price: product.mainVariantPrice
         };
-        _variantsById[product.mainVariantId] = newVariantItem;
-        _variants.push(newVariantItem);
+        this.variantsById[product.mainVariantId] = newVariantItem;
+        this.variants.push(newVariantItem);
       } else {
-        _variantsById[product.mainVariantId].quantity++;
+        this.variantsById[product.mainVariantId].quantity++;
       }
     }
-    _updateCartMode();
-    _updateBuyUrl();
-    _updateCartCache();
+    this._updateCartMode();
+    this._updateBuyUrl();
+    this._updateCartCache();
   }
 
   function _decrement(product) {
     if(product.mainVariantId) {
-      var index = _.findLastIndex(_items, function (item) {
+      var index = _.findLastIndex(this.items, function (item) {
         return item.variant == product.mainVariantId;
       });
       if(index > -1) {
-        _items.splice(index, 1);
+        this.items.splice(index, 1);
 
         // update collapsed cart
-        if(_variantsById[product.mainVariantId].quantity === 1) {
+        if(this.variantsById[product.mainVariantId].quantity === 1) {
           //update array
-          var cartItemIndex = _variants.indexOf(_variantsById[product.mainVariantId]);
-          _variants.splice(cartItemIndex, 1);
+          var cartItemIndex = this.variants.indexOf(this.variantsById[product.mainVariantId]);
+          this.variants.splice(cartItemIndex, 1);
           // update map
-          delete _variantsById[product.mainVariantId];
+          delete this.variantsById[product.mainVariantId];
         } else {
-          _variantsById[product.mainVariantId].quantity--;
+          this.variantsById[product.mainVariantId].quantity--;
         }
 
       }
     }
-    _updateCartMode();
-    _updateBuyUrl();
-    _updateCartCache();
-    if(_items.length === 0) {
-      Cart.empty = true;
+    this._updateCartMode();
+    this._updateBuyUrl();
+    this._updateCartCache();
+    if(this.items.length === 0) {
+      this.empty = true;
     }
   }
 
   function _setQuantity (newQuantity, product) {
-    var currentQuantity = _getCountById(product.mainVariantId);
+    var currentQuantity = this.getCountById(product.mainVariantId);
     var diff = newQuantity - currentQuantity;
     var incrementing = diff > 0;
-    var changeFunc = incrementing ? _increment : _decrement;
+    var changeFunc = incrementing ? this.increment : this.decrement;
     var absDiff = Math.abs(diff);
     var delay = 10;
-    if(absDiff < 20 || Cart.maxCartMode) {
+    if(absDiff < 20 || this.maxCartMode) {
       delay = 1;
     }
 
@@ -136,15 +159,15 @@ app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interv
   }
 
   function _getCountById(id) {
-    if(_variantsById[id])
-      return _variantsById[id].quantity;
+    if(this.variantsById[id])
+      return this.variantsById[id].quantity;
     else
       return 0;
   }
 
   function _getTotal() {
     var total = 0;
-    _.each(_variants, function(variant) {
+    _.each(this.variants, function(variant) {
       total += variant.quantity * variant.price;
     });
     return total;
@@ -153,11 +176,11 @@ app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interv
   function _updateBuyUrl() {
     var url = 'https://godhatesgames.myshopify.com/cart/';
     var itemsToAdd = [];
-    _.each(_variantsById, function(variant, itemId) {
+    _.each(this.variantsById, function(variant, itemId) {
       itemsToAdd.push(itemId + ':' + variant.quantity);
     });
     var items = itemsToAdd.join(',');
-    Cart.buyUrl = url + items;
+    this.buyUrl = url + items;
   }
 
   return Cart;

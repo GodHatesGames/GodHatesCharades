@@ -56,10 +56,14 @@ app.factory('StoreProduct', function (DS) {
   // class methods
   function _updateCartClass(mainVariant) {
     switch(mainVariant.sku) {
-      case 'GAME-001' :
+      case '685450493604' :
         return 'product-main-game';
-      case 'EXP-001' :
+      case 'GAME-001-MC' :
+        return 'product-main-game-wholesale';
+      case '685450493611' :
         return 'product-expansion';
+      case 'EXP-001-MC' :
+        return 'product-expansion-wholesale';
       case 'BUN-003' :
         return 'product-BUN-003';
       default :

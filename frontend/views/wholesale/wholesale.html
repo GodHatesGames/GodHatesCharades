@@ -5,7 +5,8 @@
            class="prismic-content col-sm-9"></div>
     <div class="col-sm-9">
       <store-product ng-repeat="storeItem in collection.items | orderBy:'position' track by storeItem.product.id"
-                     product="storeItem.product">
+                     product="storeItem.product"
+                     cart-key="wholesale">
       </store-product>
       <div class="row">
         <div class="col-sm-12">
@@ -13,7 +14,9 @@
         </div>
       </div>
     </div>
-    <cart collection="collection"></cart>
+    <cart collection="collection"
+          key="wholesale"
+          collapsed="true"></cart>
   </section>
 
 </div>
