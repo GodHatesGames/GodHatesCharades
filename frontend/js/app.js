@@ -103,7 +103,8 @@ app.run(function($rootScope,
 				analytics.trackFirstLoad();
 			}
 
-			analytics.trackEvent('View');
+      analytics.trackEvent('View');
+			analytics.trackPage();
 		});
 
 		$rootScope.$on('$stateChangeError', function (ev, to, toParams, from, fromParams, error) {

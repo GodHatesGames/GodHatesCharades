@@ -1,8 +1,9 @@
-app.service('analytics', function($location, $state) {
+app.service('analytics', function($location, $state, $http) {
 	var analyticsService = {
 		getPageTitle: _getPageTitle,
 		getPageUrl: _getPageUrl,
 		trackEvent: _trackEvent,
+		trackPage: _trackPage,
 		trackFirstLoad: _trackFirstLoad
 	};
 
@@ -21,16 +22,33 @@ app.service('analytics', function($location, $state) {
 	}
 
 	function _trackEvent(eventTitle, eventOptions) {
-		// var defaultOptions = {
-		// 	'Page Title': _getPageTitle(),
-		// 	'Page Url': _getPageUrl()
-		// };
-		// var options = _.extend(defaultOptions, eventOptions);
+		var defaultOptions = {
+			'Page Title': _getPageTitle(),
+			'Page Url': _getPageUrl()
+		};
+		var options = _.extend(defaultOptions, eventOptions);
 		// add tracking here
+		// ActiveCampaign
+
 	}
 
 	function _trackFirstLoad() {
 		// add tracking here
+	}
+
+	function _trackPage() {
+		_acTrackPage();
+	}
+
+	function _acTrackPage() {
+		$http.get('//trackcmp.net/visit', {
+			params: {
+				actid: 475050087,
+				e: '',
+				r: document.referrer,
+				u: _getPageUrl()
+			}
+		})
 	}
 
 	return analyticsService;
