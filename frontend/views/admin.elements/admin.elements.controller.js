@@ -12,7 +12,7 @@ app.controller('elementsView', function($scope, $compile, $timeout) {
     {
       id: 'signup-section',
       title: 'Signup Section',
-      code: '<signup-section location="{{section.props.location.value}}" class="{{section.props.class.value}}"></signup-section>',
+      code: '<signup-section title="{{section.props.title.value}}" message="{{section.props.message.value}}" location="{{section.props.location.value}}" class="{{section.props.class.value}}"></signup-section>',
       formattedCode: '',
       lastUpdated: new Date(),
       props: {
@@ -28,6 +28,18 @@ app.controller('elementsView', function($scope, $compile, $timeout) {
           type: 'select',
           options: $scope.backgroundColors,
           description: 'standard html attribute, for this component use to add a background color. backgrounds listed on the <a ui-sref="admin.components">Components</a> page.'
+        },
+        title: {
+          value: 'Too cheap to buy the game?',
+          title: 'title',
+          type: 'text',
+          description: 'A title'
+        },
+        message: {
+          value: 'Get our print ‘n play & updates on the game!',
+          title: 'message',
+          type: 'text',
+          description: 'A secondary message'
         }
       }
     },

@@ -3,11 +3,15 @@ app.factory('StoreProduct', function (DS) {
   var definition = {
     name: 'product',
     computed: {
+      mainVariantBarcode: ['mainVariant', _updateMainVariantBarcode],
       mainVariantPrice: ['mainVariant', _updateMainVariantPrice],
       mainVariantOriginalPrice: ['mainVariant', _updateMainVariantOriginalPrice],
       mainVariantId: ['variants', _updateMainVariantId],
       mainVariant: ['variants', _updateMainVariant],
-      cartClass: ['mainVariant', _updateCartClass]
+      cartClass: ['mainVariant', _updateCartClass],
+      soldOut: ['mainVariant', _updateSoldOut],
+      bundle: ['mainVariant', _updateBundle],
+      name: ['mainVariant', _updateName]
     },
     relations: {
       belongsTo: {
@@ -40,6 +44,12 @@ app.factory('StoreProduct', function (DS) {
     }
   }
 
+  function _updateMainVariantBarcode(mainVariant) {
+    if(mainVariant) {
+      return mainVariant.barcode;
+    }
+  }
+
   function _updateMainVariantPrice(mainVariant) {
     if(mainVariant) {
       return Number(mainVariant.price);
@@ -68,6 +78,32 @@ app.factory('StoreProduct', function (DS) {
         return 'product-BUN-003';
       default :
         return;
+    }
+  }
+
+  function _updateSoldOut(mainVariant) {
+    if(mainVariant.inventory_management === null) {
+      return false;
+    } else if(mainVariant.inventory_quantity > 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  function _updateBundle(mainVariant) {
+    if(mainVariant.option2) {
+      return mainVariant.option2.split(',');
+    } else {
+      return null;
+    }
+  }
+
+  function _updateName(mainVariant) {
+    if(mainVariant.option1) {
+      return mainVariant.option1;
+    } else {
+      return '';
     }
   }
 

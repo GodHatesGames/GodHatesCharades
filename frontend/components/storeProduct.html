@@ -1,60 +1,73 @@
 <div class="store-product">
-  <div class="row">
-    <h3>{{product.title}}</h3>
-  </div>
-  <div class="row bg-white"
-       ng-if="product.images.length === 1">
-    <img ng-src="{{currentImage.src}}"
-         class="img-responsive">
-  </div>
-  <div ng-if="product.images.length > 1"
-       class="img-carousel row bg-white">
-    <div class="col-xs-10">
+  <div ng-if="!(product.bundle && soldOut())">
+    <div class="row">
+      <h3>{{product.title}}</h3>
+    </div>
+    <div class="row bg-white"
+         ng-if="product.images.length === 1">
       <img ng-src="{{currentImage.src}}"
            class="img-responsive">
     </div>
-    <div class="col-xs-2 thumbnails">
-      <img ng-repeat="image in product.images track by image.id"
-           ng-click="selectImage(image)"
-           class="img-responsive"
-           ng-class="{active: (currentImage == image)}"
-           ng-src="{{image.src}}"
-           alt="{{product.title}}">
-    </div>
-  </div>
-  <div class="row bg-light description">
-    <div class="col-sm-8">
-      <div ng-html-compile="product.body_html"></div>
-    </div>
-    <div class="col-xs-6 col-sm-4">
-      <div class="row">
-        <div class="col-xs-12 pricing">
-          <span class="old-pricing"
-                ng-if="product.mainVariantOriginalPrice">
-            <span class="dollar-sign">$</span>{{(product.mainVariantOriginalPrice || product.mainVariantPrice) | currency:'':0}}
-          </span>
-          <span class="dollar-sign">$</span>{{product.mainVariantPrice | currency:'':0}}
-        </div>
+    <div ng-if="product.images.length > 1"
+         class="img-carousel row bg-white">
+      <div class="col-xs-10">
+        <img ng-src="{{currentImage.src}}"
+             class="img-responsive">
+      </div>
+      <div class="col-xs-2 thumbnails">
+        <img ng-repeat="image in product.images track by image.id"
+             ng-click="selectImage(image)"
+             class="img-responsive"
+             ng-class="{active: (currentImage == image)}"
+             ng-src="{{image.src}}"
+             alt="{{product.title}}">
       </div>
     </div>
-    <div class="col-xs-6 col-sm-4">
-      <div class="quantity row">
-        <div class="col-xs-4">
-          <button ng-click="onDecrement($event, product)"
-                  class="btn">-</button>
-        </div>
-        <div class="col-xs-4">
-          <div class="form-group">
-            <input type="text"
-                   class="form-control" 
-                   ng-model="productQuantity"
-                   ng-model-options="{ getterSetter: true }">
+    <div class="row bg-light description">
+      <div class="col-sm-8">
+        <div ng-html-compile="product.body_html"></div>
+      </div>
+      <div class="col-xs-6 col-sm-4">
+        <div class="row">
+          <div class="col-xs-12 pricing">
+            <span class="old-pricing"
+                  ng-if="product.mainVariantOriginalPrice">
+              <span class="dollar-sign">$</span>{{(product.mainVariantOriginalPrice || product.mainVariantPrice) | currency:'':0}}
+            </span>
+            <span class="dollar-sign">$</span>{{product.mainVariantPrice | currency:'':0}}
           </div>
         </div>
-        <div class="col-xs-4">
-          <button ng-click="onIncrement($event, product)"
-                  class="btn">+</button>
+      </div>
+      <div class="col-xs-6 col-sm-4"
+           ng-if="!soldOut()">
+        <div class="quantity row">
+          <div class="col-xs-4">
+            <button ng-click="onDecrement($event, product)"
+                    class="btn">-</button>
+          </div>
+          <div class="col-xs-4">
+            <div class="form-group">
+              <input type="text"
+                     class="form-control" 
+                     ng-model="productQuantity"
+                     ng-model-options="{ getterSetter: true }">
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <button ng-click="onIncrement($event, product)"
+                    class="btn">+</button>
+          </div>
         </div>
+      </div>
+      <h2 ng-if="soldOut()">Sold Out!</h2>
+    </div>
+    <div class="row">
+      <div class="col-xs-12"
+           ng-if="soldOut()">
+        <signup-section location="store_sold_out_section"
+                    title="We fucked up!"
+                    message="{{product.name}} is sold out but more games are on the way! Want to be notified when we're back in stock?"
+                    class="bg-dark" />
       </div>
     </div>
   </div>

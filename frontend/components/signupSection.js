@@ -4,7 +4,9 @@ app.directive('signupSection', function(analytics) {
 		templateUrl: 'components/signupSection.html',
 		replace: true,
 		scope: {
-			location: '@location'
+			location: '@',
+			title: '@',
+			message: '@',
 		},
 		controller: function($scope, $element) {
 			$scope.onEmailSubmitted = function(fromLabel) {

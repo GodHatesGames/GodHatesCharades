@@ -1,4 +1,4 @@
-app.directive('storeProduct', function($animate, cartService) {
+app.directive('storeProduct', function($animate, cartService, StoreProduct) {
   return {
     templateUrl: 'components/storeProduct.html',
     replace: true,
@@ -11,8 +11,31 @@ app.directive('storeProduct', function($animate, cartService) {
       $scope.selectImage = _selectImage;
       $scope.onIncrement = _onIncrement;
       $scope.onDecrement = _onDecrement;
+      $scope.soldOut = _soldOut;
       $scope.productQuantity = _productQuantityGetterSetter;
       $scope.cart = cartService.getCart($scope.cartKey);
+
+      function _soldOut() {
+        if($scope.product.bundle) {
+          var soldOutProducts = StoreProduct.filter({
+            where: {
+              'mainVariantBarcode': {
+                in: $scope.product.bundle
+              },
+              soldOut: true
+            }
+          })
+          if(soldOutProducts.length > 0) {
+            return true;
+          } else {
+            return false;
+          }
+        } else if($scope.product.soldOut) {
+          return true;
+        } else {
+          return false;
+        }
+      }
 
       function _selectImage (newImage) {
         $scope.currentImage = newImage;
