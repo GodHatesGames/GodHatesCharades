@@ -38,7 +38,7 @@ app.controller('moderationView', function(unmoderated, approved, sets, $scope, S
 			},
 			email: {
 				subject: 'Thanks for submitting a card to God Hates Charades.',
-				message: 'Your card was approved, it will now show up in voting! If everyone really likes it we\'ll put it in the game with your username on it.'
+				message: 'Your card was approved, it will now show up in voting! If everyone really likes it we might put it in the game with your username on it.'
 			},
 			recipient: {
 				address: owner.email,

@@ -13,7 +13,7 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 			kdr: ['votes', 'skips', _updateKdr],
 			styleClass: ['type', 'spite', _updateStyleClass],
 			typeDisplay: ['type', _updateTypeDisplay],
-			url: ['url', _updateUrl],
+			url: ['link', _updateUrl],
 			imageUrl: ['type', 'spite', _updateImageUrl],
 			textLines: ['text', 'legal', _updateTextLines]
 		},
@@ -166,13 +166,17 @@ app.factory('Suggestion', function (DS, $q, Slug, $urlMatcherFactory, $state, $f
 	}
 
 	function _updateUrl(link) {
-		var cardState = $state.get('card').url;
-		var matcher = $urlMatcherFactory.compile(cardState);
-		var path = matcher.format(link);
-		return [
-			'http://godhatescharades.com',
-			path
-		].join('');
+		if(link) {
+			var cardState = $state.get('card').url;
+			var matcher = $urlMatcherFactory.compile(cardState);
+			var path = matcher.format(link);
+			return [
+				'http://godhatescharades.com',
+				path
+			].join('');
+		} else {
+			return null;
+		}
 	}
 
 	function _updateKdr(votes, skips) {
