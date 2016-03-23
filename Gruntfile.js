@@ -58,7 +58,6 @@ module.exports = function(grunt) {
 					nodeArgs: ['--debug'],
 					env: {
 						PORT: process.env.PORT,
-						MANDRILL_KEY: process.env.MANDRILL_KEY,
 						MAILCHIMP_LIST_ID: process.env.MAILCHIMP_LIST_ID,
 						MAILCHIMP_API_KEY: process.env.MAILCHIMP_API_KEY,
 						S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,

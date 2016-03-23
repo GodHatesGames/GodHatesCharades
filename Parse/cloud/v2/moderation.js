@@ -3,7 +3,7 @@ var _ = require('underscore');
 var userUtils = require('cloud/v2/userUtils.js');
 var config = require('cloud/config.js');
 var sendgrid = require('sendgrid');
-var sendgrid_client = sendgrid(config.SENDGRID_USERNAME, config.SENDGRID_PASSWORD);
+var sendgrid_client = sendgrid.initialize(config.SENDGRID_USERNAME, config.SENDGRID_PASSWORD);
 
 exports.getUnmoderatedSuggestions = _getUnmoderatedSuggestions;
 exports.approveSuggestion = _approveSuggestion;
@@ -13,7 +13,7 @@ function _getUnmoderatedSuggestions(request, response) {
   //to allow fetching owners
   Parse.Cloud.useMasterKey();
   
-  // console.log('request.user.id:' + request.user.id);
+  console.log('request.user.id:' + request.user.id);
   if(request.user) {
     userUtils.isUserAdmin(request.user.id)
       .then(fetchData, onError);
@@ -58,12 +58,12 @@ function _getUnmoderatedSuggestions(request, response) {
 }
 
 function _approveSuggestion(request, response) {
-  // console.log('approveSuggestion');
+  console.log('approveSuggestion');
   Parse.Cloud.useMasterKey();
   if(request.user) {
     userUtils.isUserAdmin(request.user.id)
       .then(saveData, onError);
-  } else {
+  } else { 
     onError();
   }
 
@@ -120,7 +120,7 @@ function _approveSuggestion(request, response) {
 }
 
 function _disapproveSuggestion(request, response) {
-  // console.log('disapproveSuggestion');
+  console.log('disapproveSuggestion');
   Parse.Cloud.useMasterKey();
   if(request.user) {
     userUtils.isUserAdmin(request.user.id)
