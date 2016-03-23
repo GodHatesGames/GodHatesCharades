@@ -3,7 +3,7 @@ var _ = require('underscore');
 var userUtils = require('cloud/v2/userUtils.js');
 var config = require('cloud/config.js');
 var sendgrid = require('sendgrid');
-var sendgrid_client = sendgrid(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD);
+var sendgrid_client = sendgrid(config.SENDGRID_USERNAME, config.SENDGRID_PASSWORD);
 
 exports.getUnmoderatedSuggestions = _getUnmoderatedSuggestions;
 exports.approveSuggestion = _approveSuggestion;
@@ -96,7 +96,7 @@ function _approveSuggestion(request, response) {
     var email = _getMessage(request.params.recipient, request.params.email, request.params.card);
     email.addFilter('templates', 'enable', 1);
     email.addFilter('templates', 'template_id', 'e38a52db-8da7-4db9-9ee9-5da87f18b451');
-    
+
     sendgrid.send(email, function(err, json) {
       if (err) {
         onError(err);
@@ -190,8 +190,8 @@ function _getMessage(recipient, email, card) {
   var email = new sendgrid.Email({
     to: recipient.address,
     toname: recipient.name,
-    from: process.env.LIST_EMAIL,
-    fromname: process.env.LIST_COMPANY,
+    from: config.LIST_EMAIL,
+    fromname: config.LIST_COMPANY,
     subject: email.subject,
     text: email.message,
   });
