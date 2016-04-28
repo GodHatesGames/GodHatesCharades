@@ -1,7 +1,7 @@
 <div id="storeView" class="container flush">
   <ui-view></ui-view>
-  <section class="row">
-    <div class="col-sm-9">
+  <section class="row row-horizontal-flush">
+    <div class="col-xs-12 col-sm-9">
       <store-product ng-repeat="storeItem in collection.items | orderBy:'position' track by storeItem.product.id"
                      product="storeItem.product"
                      cart-key="store">

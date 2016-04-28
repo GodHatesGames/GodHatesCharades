@@ -10,11 +10,11 @@
     </div>
     <div ng-if="product.images.length > 1"
          class="img-carousel row bg-white">
-      <div class="col-xs-10">
+      <div class="col-xs-9 col-sm-10">
         <img ng-src="{{currentImage.src}}"
              class="img-responsive">
       </div>
-      <div class="col-xs-2 thumbnails">
+      <div class="col-xs-3 col-sm-2 thumbnails">
         <img ng-repeat="image in product.images track by image.id"
              ng-click="selectImage(image)"
              class="img-responsive"

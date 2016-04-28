@@ -2,36 +2,50 @@
 
 
 
-	<section class="row row-compact row-horizontal-flush row-vertical-flush intro">
-		<div class="container-md-height">
-			<div class="row row-md-height">
-				<div class="intro-video col-md-height col-xs-12 col-middle">
-					<div class="embed-responsive embed-responsive-16by9">
-						<youtube-video class="embed-responsive-item"
-						               video-id="'mLwIEl59DKg'"
-						               player="homeVideo"
-						               player-vars="playerVars">
-						</youtube-video>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-	</section>
-	<section class="row row-compact row-horizontal-flush row-vertical-flush buy">
-		<a ng-href="{{buyLink}}"
-		   ng-mouseup="onBuyClicked('homepage_main', 'Buy Button')">
-			<img src="img/ghc_buy_now.gif"
-			     class="img-responsive"
-			     alt="Buy God Hates Charades now!"/>
-		</a>
-	</section>
+  <section class="row row-compact row-horizontal-flush row-vertical-flush intro">
+    <div class="container-md-height">
+      <div class="row row-md-height">
+        <div class="intro-video col-md-height col-xs-12 col-middle">
+          <div class="embed-responsive embed-responsive-16by9">
+            <youtube-video class="embed-responsive-item"
+                           video-id="'mLwIEl59DKg'"
+                           player="homeVideo"
+                           player-vars="playerVars">
+            </youtube-video>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+  <section class="row row-compact row-horizontal-flush row-vertical-flush buy"
+           ng-if="!showStore">
+    <a ng-href="{{buyLink}}"
+       ng-mouseup="onBuyClicked('homepage_main', 'Buy Button')">
+      <img src="img/ghc_buy_now.gif"
+           class="img-responsive"
+           alt="Buy God Hates Charades now!"/>
+    </a>
+  </section>
+  
+  <section class="row row-horizontal-flush"
+           id="homeStore"
+           ng-if="showStore">
+    <div class="col-xs-12 col-sm-9">
+      <store-product ng-repeat="storeItem in collection.items | orderBy:'position' track by storeItem.product.id"
+                     product="storeItem.product"
+                     cart-key="store">
+      </store-product>
+    </div>
+    <cart collection="collection"
+          key="store"></cart>
+  </section>
 
-	<!-- Signup section -->
-	<signup-section location="homepage_signup_section"
-	                title="Too cheap to buy the game?"
-	                message="Get our print ‘n play & updates on the game!"
-	                class="bg-dark">
-	</signup-section>
-	<!--End Signup section-->
+  <!-- Signup section -->
+  <signup-section location="homepage_signup_section"
+                  title="Too cheap to buy the game?"
+                  message="Get our print ‘n play & updates on the game!"
+                  class="bg-dark">
+  </signup-section>
+  <!--End Signup section-->
 </div>
