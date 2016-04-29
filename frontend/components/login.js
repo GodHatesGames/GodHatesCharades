@@ -4,7 +4,7 @@ app.directive('login', function(User) {
 		templateUrl: 'components/login.html',
 		replace: true,
 		scope: true,
-		controller: function($scope, $element, $state) {
+		controller: function($scope, $element, $state, $location) {
 			$scope.email = '';
 			$scope.password = '';
 
@@ -19,7 +19,7 @@ app.directive('login', function(User) {
 
 			function _onUserLoginSuccess() {
 				if(User.current.admin) {
-					$state.go('admin.upload');
+					$location = "http://godhatescharades.com/admin";
 				} else {
 					$state.go('user', {
 						userid: User.current.id
