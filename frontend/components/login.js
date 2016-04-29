@@ -19,7 +19,7 @@ app.directive('login', function(User) {
 
 			function _onUserLoginSuccess() {
 				if(User.current.admin) {
-					$location = "http://godhatescharades.com/admin";
+					$location.url("/admin");
 				} else {
 					$state.go('user', {
 						userid: User.current.id
