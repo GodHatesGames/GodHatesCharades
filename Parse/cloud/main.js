@@ -53,7 +53,6 @@ v2.userUtils = require('cloud/v2/userUtils.js');
 v2.leaderboard = require('cloud/v2/leaderboard.js');
 v2.user = require('cloud/v2/user.js');
 v2.pair = require('cloud/v2/pair.js');
-v2.backer = require('cloud/v2/backer.js');
 v2.moderation = require('cloud/v2/moderation.js');
 v2.discount = require('cloud/v2/discount.js');
 
@@ -127,54 +126,4 @@ Parse.Cloud.beforeSave('Suggestion', function(request, response) {
 	}
 
 	response.success();
-});
-
-Parse.Cloud.beforeSave('_User', function(request, response) {
-	if(request.object.isNew()) {
-		console.log('creating user with email', request.object.get('email'));
-		v2.backer.getBackerByEmail(request.object.get('email'))
-		.then(onBackerChecked, response.success);
-		// .then(checkSubscription)
-		// .then(response.success, response.success);
-	} else {
-		response.success();
-	}
-
-	function onBackerChecked(isBacker) {
-		if(isBacker) {
-			request.object.set('beta', true);
-		}
-	}
-
-	// function checkSubscription() {
-	// 	console.log('config.MAILCHIMP_API_KEY:' + config.MAILCHIMP_API_KEY);
-	// 	var emails = [
-	// 		{
-	// 			email: request.object.get('email')
-	// 		}
-	// 	];
-	// 	return Parse.Cloud.httpRequest({
-	// 		method: 'POST',
-	// 		headers: {
-	// 			'Content-Type': 'application/json;charset=utf-8'
-	// 		},
-	// 		url: config.MAILCHIMP_API_URL + 'lists/member-info',
-	// 		body: {
-	// 			apikey: config.MAILCHIMP_API_KEY,
-	// 			id: config.MAILCHIMP_LIST_ID,
-	// 			emails: emails
-	// 		}
-	// 	})
-	// 	.then(function(httpResponse) {
-	// 		// console.log('checkSubscription success');
-	// 		// console.log('subscribers with this email ' + JSON.stringify(httpResponse.data.data));
-	// 		if(httpResponse.data.data.length > 0)
-	// 			request.object.set('subscriber', true);
-	// 	},
-	// 	function(httpResponse) {
-	// 		console.log('checkSubscription fail');
-	// 		// console.error('Request failed with response code ' + httpResponse.status);
-	// 		console.error(httpResponse.data.error);
-	// 	});
-	// }
 });
