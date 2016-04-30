@@ -14,13 +14,18 @@ app.controller('homeView', function(collection, $scope, $window, $timeout, analy
     rel: 0
   };
   $scope.buyLink = '/store';
+  $scope.buyImg = 'img/ghc_buy_now.gif';
   $scope.onBuyClicked = _onBuyClicked;
   // $scope.$watch('homeVideo.setVolume', _onHomeVideo);
   // $scope.$on('youtube.player.ready', _onPlayerReady);
 
-  if($location.search) {
-    if($location.$$search.store) {
+  var search = $location.$$search;
+  if(search) {
+    if(search.store) {
       $scope.showStore = true;
+    } else if(search.fd) {
+      $scope.buyLink = 'https://godhatesgames.myshopify.com/cart/8187188801:1';
+      $scope.buyImg = 'img/Homepage_FullDeal.jpg';
     }
   }
 

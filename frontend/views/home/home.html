@@ -22,7 +22,7 @@
            ng-if="!showStore">
     <a ng-href="{{buyLink}}"
        ng-mouseup="onBuyClicked('homepage_main', 'Buy Button')">
-      <img src="img/ghc_buy_now.gif"
+      <img ng-src="{{buyImg}}"
            class="img-responsive"
            alt="Buy God Hates Charades now!"/>
     </a>
