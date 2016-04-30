@@ -24,7 +24,7 @@ app.controller('homeView', function(collection, $scope, $window, $timeout, analy
     if(search.store) {
       $scope.showStore = true;
     } else if(search.fd) {
-      $scope.buyLink = 'https://godhatesgames.myshopify.com/cart/8187188801:1';
+      $scope.buyLink = 'https://godhatesgames.myshopify.com/cart/8187188801:1?discount=TENBUCKS';
       $scope.buyImg = 'img/Homepage_FullDeal.jpg';
     }
   }
