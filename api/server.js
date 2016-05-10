@@ -1,5 +1,4 @@
 'use strict';
-require('newrelic');
 var express = require('express');
 var path = require('path');
 var mailingList = require('./mailing-list');
