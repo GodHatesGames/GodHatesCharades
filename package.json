@@ -1,6 +1,6 @@
 {
   "name": "GodHatesCharades",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "build": 0,
   "scripts": {
     "start": "node api/server.js"
