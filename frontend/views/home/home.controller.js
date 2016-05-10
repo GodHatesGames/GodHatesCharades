@@ -13,8 +13,8 @@ app.controller('homeView', function(collection, $scope, $window, $timeout, analy
     loop: 1,
     rel: 0
   };
-  $scope.buyLink = '/store';
-  $scope.buyImg = 'img/ghc_buy_now.gif';
+  $scope.buyLink = 'https://godhatesgames.myshopify.com/cart/8187188801:1?discount=TENBUCKS';
+  $scope.buyImg = 'img/Homepage_FullDeal.jpg';
   $scope.onBuyClicked = _onBuyClicked;
   // $scope.$watch('homeVideo.setVolume', _onHomeVideo);
   // $scope.$on('youtube.player.ready', _onPlayerReady);
@@ -23,9 +23,9 @@ app.controller('homeView', function(collection, $scope, $window, $timeout, analy
   if(search) {
     if(search.store) {
       $scope.showStore = true;
-    } else if(search.fd) {
-      $scope.buyLink = 'https://godhatesgames.myshopify.com/cart/8187188801:1?discount=TENBUCKS';
-      $scope.buyImg = 'img/Homepage_FullDeal.jpg';
+    } else if(search.classic) {
+      $scope.buyLink = '/store';
+      $scope.buyImg = 'img/ghc_buy_now.gif';
     }
   }
 
