@@ -27,8 +27,8 @@ app.controller('homeView', function(collection, $scope, $window, $timeout, analy
   if(search) {
     if(search.store) {
       $scope.promo = 'store';
-    } else if(search.classic) {
-      $scope.promo = 'classic';
+    } else if(search.vibrator) {
+      $scope.promo = 'vibrator';
       $scope.searchLink = '/store';
       $scope.searchImg = 'img/ghc_buy_now.gif';
     }
