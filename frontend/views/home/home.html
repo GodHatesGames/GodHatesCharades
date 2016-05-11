@@ -19,10 +19,27 @@
     
   </section>
   <section class="row row-compact row-horizontal-flush row-vertical-flush buy"
-           ng-if="!showStore">
+           ng-if="promo == 'buy'">
     <a ng-href="{{buyLink}}"
+       ng-mousedown="buyImg2 = buyImgBottomHover"
        ng-mouseup="onBuyClicked('homepage_main', 'Buy Button')">
       <img ng-src="{{buyImg}}"
+           class="img-responsive"
+           alt="God Hates Charades + God Hates Charades: 8-Bit Expansion"/>
+      <div ng-mouseover="buyImg2 = buyImgBottomHover"
+           ng-mouseleave="buyImg2 = buyImgBottomBlur">
+        <img ng-src="{{buyImg2}}"
+             class="img-responsive"
+             alt="Buy God Hates Charades now!"/>
+       </div>
+    </a>
+  </section>
+
+  <section class="row row-compact row-horizontal-flush row-vertical-flush buy"
+           ng-if="promo == 'vibrator'">
+    <a ng-href="{{searchLink}}"
+       ng-mouseup="onBuyClicked('homepage_main', 'Buy Button')">
+      <img ng-src="{{searchImg}}"
            class="img-responsive"
            alt="Buy God Hates Charades now!"/>
     </a>
@@ -30,7 +47,7 @@
   
   <section class="row row-horizontal-flush"
            id="homeStore"
-           ng-if="showStore">
+           ng-if="promo == 'store'">
     <div class="col-xs-12 col-sm-9">
       <store-product ng-repeat="storeItem in collection.items | orderBy:'position' track by storeItem.product.id"
                      product="storeItem.product"

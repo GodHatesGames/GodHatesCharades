@@ -14,7 +14,11 @@ app.controller('homeView', function(collection, $scope, $window, $timeout, analy
     rel: 0
   };
   $scope.buyLink = 'https://godhatesgames.myshopify.com/cart/8187188801:1?discount=TENBUCKS';
-  $scope.buyImg = 'img/Homepage_FullDeal.jpg';
+  $scope.buyImg = 'img/Homepage_FullDeal_01.gif';
+  $scope.buyImgBottomBlur = 'img/Homepage_FullDeal_02.gif';
+  $scope.buyImgBottomHover = 'img/Homepage_FullDeal_02_Hover.gif';
+  $scope.buyImg2 = $scope.buyImgBottomBlur;
+  $scope.promo = 'buy';
   $scope.onBuyClicked = _onBuyClicked;
   // $scope.$watch('homeVideo.setVolume', _onHomeVideo);
   // $scope.$on('youtube.player.ready', _onPlayerReady);
@@ -22,10 +26,11 @@ app.controller('homeView', function(collection, $scope, $window, $timeout, analy
   var search = $location.$$search;
   if(search) {
     if(search.store) {
-      $scope.showStore = true;
+      $scope.promo = 'store';
     } else if(search.classic) {
-      $scope.buyLink = '/store';
-      $scope.buyImg = 'img/ghc_buy_now.gif';
+      $scope.promo = 'classic';
+      $scope.searchLink = '/store';
+      $scope.searchImg = 'img/ghc_buy_now.gif';
     }
   }
 
