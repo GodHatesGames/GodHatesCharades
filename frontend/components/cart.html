@@ -5,19 +5,19 @@
        fix-bottom>
     <div class="notification float-short"></div>
     <div class="cart-items"
-         ng-if="!collapsed && !cart.maxCartMode"
-         ng-class="getSway()">
-      <!-- normal cart items -->
-      <div class="cart-item fall-down"
-           ng-repeat="item in cart.items | orderBy:'-added' | limit:cart.maxItems track by item.added"
-           ng-class="collection.productsByMainVariant[item.variant].product.cartClass"
-           ng-style="getProductLayer(cart.items, $index)">
-        <div class="product-image"></div>
+         ng-if="!collapsed && !cart.maxCartMode">
+      <div ng-class="getSway()">
+        <!-- normal cart items -->
+        <div class="cart-item"
+             ng-repeat="item in cart.items | orderBy:'-added' | limit:cart.maxItems track by item.added"
+             ng-class="collection.productsByMainVariant[item.variant].product.cartClass"
+             ng-style="getProductLayer(cart.items, $index)">
+          <div class="product-image"></div>
+        </div>
       </div>
     </div>
     <div class="cart-items"
-         ng-if="collapsed || cart.maxCartMode"
-         ng-class="getSway()">
+         ng-if="collapsed || cart.maxCartMode">
       <!-- maxCartMode cart items -->
       <div class="cart-item"
            ng-repeat="variant in cart.variants | orderBy:'-added' track by variant.id"

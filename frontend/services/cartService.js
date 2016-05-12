@@ -1,6 +1,6 @@
 app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interval, StoreProduct) {
   var _carts = {};
-  var DEFAULT_MAX_ITEMS = 9;
+  var DEFAULT_MAX_ITEMS = 12;
   
   // expires in 1 day
   var cartCache = DSCacheFactory('carts', {

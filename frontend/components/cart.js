@@ -23,9 +23,6 @@ app.directive('cart', function($rootScope, $timeout, $window, cartService) {
       // angular.element($window).bind('scroll', _checkCartVisibility);
 
       function _getSway() {
-        // HACK: returning no sway until i can fix the skull-fuck situation
-        return '';
-
         if($scope.cart.items.length > 5) {
           //sway big
           return 'sway-a-lot';
