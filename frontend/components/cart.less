@@ -74,10 +74,32 @@
       bottom: 0;
       
       &.ng-enter {
+        opacity: 0;
         transition: bottom 1s cubic-bezier(0.64, 0.57, 0.67, 1.53);
 
         &.ng-enter-active {
           animation: hardbounce 1000ms linear both;
+          opacity: 1;
+          .product-image {
+            transform: scale(1);
+          }
+        }
+      }
+      
+      &.ng-leave {
+        transition: all 250ms linear;
+        .product-image {
+          transition: all 250ms linear;
+        }
+        &.ng-leave-active {
+          .product-image {
+            transform: scale(0.25, 0.25);
+          }
+
+          .product-burst {
+            background-size: 50px 50px;
+            animation: pop 250ms linear;
+          }
         }
       }
 
@@ -143,10 +165,18 @@
         bottom: 0;
         background-position: center bottom;
         background-repeat: no-repeat;
+        margin-bottom: -36px;
+        transform: scale(1);
+        opacity: 1;
+      }
 
-        &:last-child {
-          margin-bottom: -36px;
-        }
+      .product-burst {
+        width: 100%;
+        height: 50px;
+        position: absolute;
+        bottom: 0;
+        background-position: 60px bottom;
+        background-repeat: no-repeat;
       }
 
       &.product-main-game {

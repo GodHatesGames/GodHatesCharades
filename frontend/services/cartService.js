@@ -1,4 +1,4 @@
-app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interval, StoreProduct) {
+app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interval, StoreProduct, $timeout, $rootScope) {
   var _carts = {};
   var DEFAULT_MAX_ITEMS = 12;
   
@@ -126,7 +126,9 @@ app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interv
     this._updateBuyUrl();
     this._updateCartCache();
     if(this.items.length === 0) {
-      this.empty = true;
+      $timeout(function() {
+        this.empty = true;
+      }.bind(this), 250);
     }
   }
 
@@ -134,7 +136,7 @@ app.service('cartService', function($q, DSCacheFactory, ParseData, Pair, $interv
     var currentQuantity = this.getCountById(product.mainVariantId);
     var diff = newQuantity - currentQuantity;
     var incrementing = diff > 0;
-    var changeFunc = incrementing ? this.increment : this.decrement;
+    var changeFunc = incrementing ? this.increment.bind(this) : this.decrement.bind(this);
     var absDiff = Math.abs(diff);
     var delay = 10;
     if(absDiff < 20 || this.maxCartMode) {

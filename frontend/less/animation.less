@@ -43,6 +43,27 @@
     }
 }
 
+@keyframes pop {
+  from {
+    background-image: url(../img/shopping_cart_diappear-01.svg);
+  }
+  30% {
+    background-image: url(../img/shopping_cart_diappear-01.svg), url(../img/shopping_cart_diappear-02.svg);
+  }
+  60% {
+    background-image: url(../img/shopping_cart_diappear-01.svg), url(../img/shopping_cart_diappear-02.svg), url(../img/shopping_cart_diappear-03.svg);
+  }
+  70% {
+    background-image: url(../img/shopping_cart_diappear-02.svg), url(../img/shopping_cart_diappear-03.svg);
+  }
+  85% {
+    background-image: url(../img/shopping_cart_diappear-03.svg);
+  }
+  to {
+    background-image: none;
+  }
+}
+
 /* Generated with Bounce.js. Edit at http://goo.gl/8cRLx1 */
 
 @keyframes hardbounce { 
