@@ -7,7 +7,17 @@ var s3data = require('./s3data');
 var redisCache = require('./redis-cache');
 var compression = require('compression');
 var bodyParser = require('body-parser');
+var ParseServer = require('parse-server').ParseServer;
 // var aftership = require('./aftership');
+
+var parseApi = new ParseServer({
+  databaseURI: process.env.PARSE_DB, // Connection string for your MongoDB database
+  cloud: './Parse/cloud/main.js', // Absolute path to your Cloud Code
+  appId: process.env.PARSE_APP_ID,
+  masterKey: process.env.PARSE_MASTER_KEY, // Keep this key secret!
+  fileKey: 'optionalFileKey',
+  serverURL: process.env.PARSE_SERVER_URL // Don't forget to change to https if needed
+});
 
 var port = process.env.PORT || 3000;
 var files = process.env.FILES || '../frontend';
@@ -30,6 +40,9 @@ server.set('view engine', 'html');
 server.use(bodyParser.urlencoded({ extended: false }));
 server.use(bodyParser.json());
 server.use(compression());
+
+// Serve the Parse API on the /parse URL prefix
+server.use('/parse', parseApi);
 
 if(process.env.NODE_ENV === 'development') {
 	// server.use(express.logger());

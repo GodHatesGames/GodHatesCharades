@@ -1,12 +1,12 @@
 'use strict';
-// var _ = require('underscore');
-var admin = require('cloud/admin.js');
-var vote = require('cloud/vote.js');
-var cardUtils = require('cloud/cardUtils.js');
-var leaderboard = require('cloud/leaderboard.js');
-var user = require('cloud/user.js');
-var pair = require('cloud/pair.js');
-var config = require('cloud/config.js');
+// var _ = require('lodash');
+var admin = require('./v1/admin.js');
+var vote = require('./v1/vote.js');
+var cardUtils = require('./v1/cardUtils.js');
+var leaderboard = require('./v1/leaderboard.js');
+var user = require('./v1/user.js');
+var pair = require('./v1/pair.js');
+var config = require('./config.js');
 
 // Admin
 Parse.Cloud.define('getUnmoderatedSuggestions', admin.getUnmoderatedSuggestions);
@@ -39,22 +39,22 @@ Parse.Cloud.define('getCardsForSet', cardUtils.getCardsForSet);
 Parse.Cloud.define('getCardById', cardUtils.getCardById);
 
 // Background Jobs
-Parse.Cloud.job('calculateStats', leaderboard.calculateStats);
-Parse.Cloud.job('testStats', leaderboard.testStats);
+// Parse.Cloud.job('calculateStats', leaderboard.calculateStats);
+// Parse.Cloud.job('testStats', leaderboard.testStats);
 
 
 // V2 Code
 
 var v2 = {};
-v2.admin = require('cloud/v2/admin.js');
-v2.vote = require('cloud/v2/vote.js');
-v2.cardUtils = require('cloud/v2/cardUtils.js');
-v2.userUtils = require('cloud/v2/userUtils.js');
-v2.leaderboard = require('cloud/v2/leaderboard.js');
-v2.user = require('cloud/v2/user.js');
-v2.pair = require('cloud/v2/pair.js');
-v2.moderation = require('cloud/v2/moderation.js');
-v2.discount = require('cloud/v2/discount.js');
+v2.admin = require('./v2/admin.js');
+v2.vote = require('./v2/vote.js');
+v2.cardUtils = require('./v2/cardUtils.js');
+v2.userUtils = require('./v2/userUtils.js');
+v2.leaderboard = require('./v2/leaderboard.js');
+v2.user = require('./v2/user.js');
+v2.pair = require('./v2/pair.js');
+v2.moderation = require('./v2/moderation.js');
+v2.discount = require('./v2/discount.js');
 
 // Moderation
 Parse.Cloud.define('v2_getUnmoderatedSuggestions', v2.moderation.getUnmoderatedSuggestions);
@@ -104,7 +104,7 @@ Parse.Cloud.define('v2_getDiscountByParams', v2.discount.getDiscountByParams);
 
 
 // Background Jobs
-Parse.Cloud.job('v2_calculateStats', v2.leaderboard.calculateStats);
+// Parse.Cloud.job('v2_calculateStats', v2.leaderboard.calculateStats);
 
 // Before Saves
 Parse.Cloud.beforeSave('Suggestion', function(request, response) {

@@ -1,5 +1,5 @@
 'use strict';
-var userUtils = require('cloud/userUtils.js');
+var userUtils = require('./userUtils.js');
 
 exports.getUnmoderatedSuggestions = getUnmoderatedSuggestions;
 exports.getAllSuggestions = getAllSuggestions;
@@ -148,7 +148,7 @@ function getAllSets(request, response) {
 
 function addCardToSet(request, response) {
 	console.log('addCardToSet');
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 	var cardId = request.params.card;
 	var setId = request.params.set;
 	// console.log('request.user.id:' + request.user.id);
@@ -200,7 +200,7 @@ function addCardToSet(request, response) {
 
 function removeSetItem(request, response) {
 	// console.log('removeSetItem');
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 	// console.log('request.user.id:' + request.user.id);
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
@@ -241,7 +241,7 @@ function removeSetItem(request, response) {
 
 function createSet(request, response) {
 	// console.log('createSet');
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 	// console.log('request.user.id:' + request.user.id);
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
@@ -282,7 +282,7 @@ function createSet(request, response) {
 
 function updateSuggestionText(request, response) {
 	// console.log('updateSuggestionText');
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)
 			.then(saveData, onError);
@@ -324,7 +324,7 @@ function updateSuggestionText(request, response) {
 }
 
 function getCard(request, response) {
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 	var setId = request.params.id;
 	if(request.user) {
 		userUtils.isUserAdmin(request.user.id)

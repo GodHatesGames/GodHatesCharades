@@ -15,7 +15,7 @@ function stripPrivateData(parseUser) {
 // method should not be exposed to raw requests
 function isUserAdmin(userId) {
 	// to allow fetching users
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 
 	var query = new Parse.Query(Parse.User);
 	var promise = query.get(userId)

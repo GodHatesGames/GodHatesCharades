@@ -1,8 +1,8 @@
 'use strict';
-var userUtils = require('cloud/v2/userUtils.js');
-var _ = require('underscore');
-var config = require('cloud/config.js');
-var Discount = require('cloud/v2/discount.js');
+var userUtils = require('./userUtils.js');
+var _ = require('lodash');
+var config = require('../config.js');
+var Discount = require('./discount.js');
 
 var DiscountObject = Parse.Object.extend('Discount');
 var SuggestionObject = Parse.Object.extend('Suggestion');
@@ -23,7 +23,7 @@ exports.createDiscount = userUtils.isAdminRole.bind(this, _createDiscount);
 exports.destroyDiscount = userUtils.isAdminRole.bind(this, _destroyDiscount);
 
 function _setupRoles(request, response) {
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 
 	Parse.Config.get()
 	.then(function(config) {
@@ -53,7 +53,7 @@ function _setupRoles(request, response) {
 
 function _getAllSuggestions(request, response) {
 	//to allow fetching owners
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 
 	// console.log('getAllSuggestions');
 	var queryLimit = 1000;
@@ -108,7 +108,7 @@ function _getAllSets(request, response) {
 
 function _addCardToSet(request, response) {
 	console.log('addCardToSet');
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 	var cardId = request.params.card;
 	var setId = request.params.set;
 	// console.log('request.user.id:' + request.user.id);
@@ -132,7 +132,7 @@ function _addCardToSet(request, response) {
 
 function _removeSetItem(request, response) {
 	// console.log('removeSetItem');
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 	// console.log('request.user.id:' + request.user.id);
 	// create new setitem and add setitem to set
 	var itemToDelete = new SetItemObject();
@@ -145,7 +145,7 @@ function _removeSetItem(request, response) {
 
 function _createSet(request, response) {
 	// console.log('createSet');
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 	// console.log('request.user.id:' + request.user.id);
 	// console.log('user is admin');
 	var newSet = new SetObject();
@@ -159,7 +159,7 @@ function _createSet(request, response) {
 
 function _destroySet(request, response) {
 	console.log('destroySet');
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 	console.log('request.user.id:' + request.user.id);
 	// create new setitem and add setitem to set
 	var setToDelete = new SetObject();
@@ -172,7 +172,7 @@ function _destroySet(request, response) {
 
 function _updateSuggestionText(request, response) {
 	// console.log('updateSuggestionText');
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 	var suggestionId = request.params.suggestionId;
 	// mock suggestion
 	var suggestion = new SuggestionObject();
@@ -197,7 +197,7 @@ function _getAllDiscounts(request, response) {
 }
 
 function _updateDiscount(request, response) {
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 	// mock discount
 	var discount = new DiscountObject();
 	discount.id = request.params.id;
@@ -212,7 +212,7 @@ function _updateDiscount(request, response) {
 
 function _createDiscount(request, response) {
 	// console.log('createSet');
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 	var newDiscount = new DiscountObject();
 	var newDiscountData = _.pick(request.params, Discount.props);
 	newDiscount.save(newDiscountData, {
@@ -223,7 +223,7 @@ function _createDiscount(request, response) {
 
 function _destroyDiscount(request, response) {
 	console.log('destroyDiscount');
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 	// create new setitem and add setitem to set
 	var discountToDelete = new DiscountObject();
 	discountToDelete.id = request.params.id;

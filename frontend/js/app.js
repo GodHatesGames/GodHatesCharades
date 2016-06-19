@@ -1,7 +1,10 @@
 'use strict';
 
 // Parse Init
+// Parse.initialize(CONFIG.PARSE_APP_ID, CONFIG.PARSE_JS_KEY);
+console.log(CONFIG.PARSE_APP_ID);
 Parse.initialize(CONFIG.PARSE_APP_ID, CONFIG.PARSE_JS_KEY);
+Parse.serverURL = '/parse'
 
 // Angular Init
 var app = angular.module('app', ['ng',

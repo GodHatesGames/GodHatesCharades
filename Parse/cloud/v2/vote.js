@@ -1,12 +1,12 @@
-var _ = require('underscore');
-var userUtils = require('cloud/v2/userUtils.js');
+var _ = require('lodash');
+var userUtils = require('./userUtils.js');
 
 exports.getRandomSuggestionPairs = getRandomSuggestionPairs;
 exports.skipSuggestions = skipSuggestions;
 
 // Use Parse.Cloud.define to define as many cloud functions as you want.
 function getRandomSuggestionPairs(request, response) {
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 	var SuggestionObject = Parse.Object.extend('Suggestion');
 	var SUGGESTION_COUNT = 25;
 	var zeroSuggestions = [];
@@ -69,7 +69,7 @@ function getRandomSuggestionPairs(request, response) {
 }
 
 function skipSuggestions(request, response) {
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 	var SuggestionObject = Parse.Object.extend('Suggestion');
 	var saveCount = 0;
 

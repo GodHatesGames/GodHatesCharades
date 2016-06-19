@@ -42,7 +42,8 @@
     "js-htmlencode": "~0.1.1",
     "ng-click-select": "~0.1.4",
     "angular-follow": "*",
-    "lodash": "~3.9.3"
+    "lodash": "~3.9.3",
+    "parse": "^1.8.5"
   },
   "devDependencies": {
     "ng-stats": "~2.0.4"

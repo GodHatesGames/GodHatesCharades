@@ -20,7 +20,7 @@ function _stripPrivateData(parseUser) {
 }
 
 function isThisSomeoneElsesAccount(parseUser) {
-  var current = Parse.User.current();
+  var current = request.user;
   if(current && current.id === parseUser.id)
     return false; //this is my account
   else
@@ -30,7 +30,7 @@ function isThisSomeoneElsesAccount(parseUser) {
 // method should not be exposed to raw requests
 function isUserAdmin(userId) {
   // to allow fetching users
-  Parse.Cloud.useMasterKey();
+  //Parse.Cloud.useMasterKey();
 
   var query = new Parse.Query(Parse.User);
   var promise = query.get(userId)
@@ -45,8 +45,8 @@ function isUserAdmin(userId) {
 }
 
 function _isAdminRole(callback, request, response) {
-  Parse.Cloud.useMasterKey();
-  var currentUser = Parse.User.current();
+  //Parse.Cloud.useMasterKey();
+  var currentUser = request.user;
   if(currentUser) {
     var query = (new Parse.Query(Parse.Role));
     query.equalTo('name', 'Administrator');
@@ -76,7 +76,7 @@ function _isAdminRole(callback, request, response) {
 // method should not be exposed to raw requests
 function _isUserBeta(userId) {
   // to allow fetching users
-  Parse.Cloud.useMasterKey();
+  //Parse.Cloud.useMasterKey();
 
   var query = new Parse.Query(Parse.User);
   var promise = query.get(userId)

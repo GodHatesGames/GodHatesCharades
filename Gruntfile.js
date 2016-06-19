@@ -105,7 +105,8 @@ module.exports = function(grunt) {
 			},
       express: {
         files: [
-          'api/**/*.{js,json}'
+          'api/**/*.{js,json}',
+          'Parse/**/*.{js,json}'
         ],
         tasks: ['express:dev', 'wait'],
         options: {

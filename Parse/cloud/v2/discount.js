@@ -1,4 +1,4 @@
-var _ = require('underscore');
+var _ = require('lodash');
 exports.props = [
   'code',
   'url',
@@ -12,7 +12,7 @@ var Discount = Parse.Object.extend('Discount');
 
 function _getFeaturedDiscount(request, response) {
   // to allow fetching owners
-  Parse.Cloud.useMasterKey();
+  //Parse.Cloud.useMasterKey();
 
   var query = new Parse.Query(Discount);
   query.equalTo('feature', true);
@@ -25,7 +25,7 @@ function _getFeaturedDiscount(request, response) {
 
 function _getDiscountByParams(request, response) {
   // to allow fetching owners
-  Parse.Cloud.useMasterKey();
+  //Parse.Cloud.useMasterKey();
 
   console.log(request.params.search);
 

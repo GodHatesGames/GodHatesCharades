@@ -1,11 +1,11 @@
-var _ = require('underscore');
-var userUtils = require('cloud/v2/userUtils.js');
+var _ = require('lodash');
+var userUtils = require('./userUtils.js');
 
 exports.getProfile = getProfile;
 
 function getProfile(request, response) {
 	// to allow fetching owners
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 
 	var Suggestion = Parse.Object.extend('Suggestion');
 	var owner = new Parse.User();

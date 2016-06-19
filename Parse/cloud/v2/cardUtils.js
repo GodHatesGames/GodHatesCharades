@@ -1,6 +1,6 @@
 'use strict';
-var _ = require('underscore');
-var userUtils = require('cloud/v2/userUtils.js');
+var _ = require('lodash');
+var userUtils = require('./userUtils.js');
 
 exports.examples = _examples;
 exports.getCardsForSet = _getCardsForSet;
@@ -9,7 +9,7 @@ exports.getCardsForSuggestion = _getCardsForSuggestion;
 
 // Use Parse.Cloud.define to define as many cloud functions as you want.
 function _examples(request, response) {
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 	var setId = request.params.id;
 	_loadSetItems();
 
@@ -56,7 +56,7 @@ function _examples(request, response) {
 
 function _getCardsForSet(request, response) {
 	// console.log('getCardsForSet');
-		Parse.Cloud.useMasterKey();
+		//Parse.Cloud.useMasterKey();
 	var setId = request.params.id;
 	var includeOwner = request.params.includeOwner;
 
@@ -98,7 +98,7 @@ function _getCardsForSet(request, response) {
 }
 
 function _getCardById(request, response) {
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 	var cardId = request.params.id;
 	if(cardId !== undefined) {
 		// console.log('getCardsForSet fetchData');
@@ -127,7 +127,7 @@ function _getCardById(request, response) {
 
 function _getCardsForSuggestion(request, response) {
 	// console.log('getCardsForSet');
-		Parse.Cloud.useMasterKey();
+		//Parse.Cloud.useMasterKey();
 	var suggestionId = request.params.id;
 	var includeOwner = request.params.includeOwner;
 

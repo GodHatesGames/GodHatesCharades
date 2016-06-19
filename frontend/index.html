@@ -77,6 +77,7 @@
 		<script src="bower_components/chunk/src/chunk.js"></script>
 		<script src="bower_components/js-htmlencode/src/htmlencode.js"></script>
 		<script src="bower_components/ng-click-select/ng-click-select.js"></script>
+		<script src="bower_components/parse/parse.min.js"></script>
 		<script src="js/config.js"></script>
 		<script src="js/app.js"></script>
 		<script src="js/templates.js"></script>
@@ -284,6 +285,8 @@
 				ga('require', 'linkid', 'linkid.js');
 				ga('require', 'displayfeatures');
 				ga('send', 'pageview');
+			} else {
+				ga = function() {};
 			}
 		</script>
 

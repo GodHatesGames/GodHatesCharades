@@ -1,5 +1,5 @@
-var _ = require('underscore');
-var userUtils = require('cloud/v2/userUtils.js');
+var _ = require('lodash');
+var userUtils = require('./userUtils.js');
 var MAX_FETCH = 300;
 
 exports.topPairs = topPairs;
@@ -7,7 +7,7 @@ exports.calculateStats = calculateStats;
 
 function topPairs(request, response) {
 	// to allow fetching owners
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 
 	var PairObject = Parse.Object.extend('Pair');
 	var query = new Parse.Query(PairObject);
@@ -52,7 +52,7 @@ function topPairs(request, response) {
 
 function calculateStats(request, status) {
 	// to allow fetching owners
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 
 	console.log('calculateStats started');
 	var promises = [];

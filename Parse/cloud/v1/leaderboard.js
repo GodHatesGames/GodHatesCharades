@@ -1,5 +1,5 @@
-var _ = require('underscore');
-var userUtils = require('cloud/userUtils.js');
+var _ = require('lodash');
+var userUtils = require('./userUtils.js');
 var MAX_FETCH = 100;
 
 exports.topSubmissions = topSubmissions;
@@ -8,7 +8,7 @@ exports.testStats = testStats;
 
 function topSubmissions(request, response) {
 	// to allow fetching owners
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 
 	var SuggestionObject = Parse.Object.extend('Suggestion');
 	var query = new Parse.Query(SuggestionObject);
@@ -72,7 +72,7 @@ function topSubmissions(request, response) {
 
 function killDeathRatio(status) {
 	// to allow fetching owners
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 
 	console.log('kdr started');
 	var counter = 0;
@@ -121,7 +121,7 @@ function killDeathRatio(status) {
 
 function controversyValue(status) {
 	// to allow fetching owners
-	Parse.Cloud.useMasterKey();
+	//Parse.Cloud.useMasterKey();
 
 	console.log('controversy started');
 
