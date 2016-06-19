@@ -81,10 +81,16 @@ app.factory('ParseData', function (DS, $q, $timeout, ParseDataSimplifier) {
 				parseObject[property] = DS.inject(className, parseObject[property]);
 			} else {
 				// check cache for object
-				var cachedObj = DS.get(className, parseObject[property].id);
+				var cachedObj = DS.get(className, parseObject[property].objectId || parseObject[property].id);
 				if(cachedObj) {
 					parseObject[property] = cachedObj;
 				} else {
+					var uncachedObject = parseObject[property];
+					if(!uncachedObject.id && uncachedObject.objectId) {
+						uncachedObject.id = uncachedObject.objectId;
+					} else if(!uncachedObject.objectId) {
+						console.error('objectId is missing')
+					}
 					parseObject[property] = DS.inject(className, parseObject[property]);
 				}
 			}

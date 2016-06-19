@@ -29,7 +29,7 @@ function getProfile(request, response) {
 			// console.log(suggestions);
 			// console.log('owner');
 			// console.log(owner);
-			userUtils.stripPrivateData(owner);
+			userUtils.stripPrivateData(request, owner);
 			for(var i = 0; i < suggestions.length; i++) {
 				suggestion = suggestions[i];
 				suggestion.attributes.owner = owner;

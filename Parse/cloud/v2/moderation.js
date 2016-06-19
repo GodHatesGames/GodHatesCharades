@@ -45,7 +45,7 @@ function _getUnmoderatedSuggestions(request, response) {
   function onSuccess(suggestions) {
     // console.log('getUnmoderatedSuggestions Success');
     _.each(suggestions, function(suggestion) {
-        userUtils.stripPrivateData(suggestion.attributes.owner);
+        userUtils.stripPrivateData(request, suggestion.attributes.owner);
     });
     response.success(suggestions);
   }

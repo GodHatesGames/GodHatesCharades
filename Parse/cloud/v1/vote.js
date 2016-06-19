@@ -52,8 +52,8 @@ function getRandomSuggestionPairs(request, response) {
 			var oneSuggestion = oneSuggestions[i];
 
 			// remove private data
-			userUtils.stripPrivateData(zeroSuggestion.attributes.owner);
-			userUtils.stripPrivateData(oneSuggestion.attributes.owner);
+			userUtils.stripPrivateData(request, zeroSuggestion.attributes.owner);
+			userUtils.stripPrivateData(request, oneSuggestion.attributes.owner);
 
 			//save pair
 			var pair = {

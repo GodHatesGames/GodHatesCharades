@@ -80,7 +80,7 @@ function _getAllSuggestions(request, response) {
 			// console.log('found suggetions: ' + allSuggestions.length);
 
 			_.each(allSuggestions, function(suggestion) {
-			    userUtils.stripPrivateData(suggestion.attributes.owner);
+			    userUtils.stripPrivateData(request, suggestion.attributes.owner);
 			});
 			response.success(allSuggestions);
 		} else {

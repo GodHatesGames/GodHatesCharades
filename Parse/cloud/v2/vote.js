@@ -6,7 +6,6 @@ exports.skipSuggestions = skipSuggestions;
 
 // Use Parse.Cloud.define to define as many cloud functions as you want.
 function getRandomSuggestionPairs(request, response) {
-	//Parse.Cloud.useMasterKey();
 	var SuggestionObject = Parse.Object.extend('Suggestion');
 	var SUGGESTION_COUNT = 25;
 	var zeroSuggestions = [];
@@ -17,6 +16,7 @@ function getRandomSuggestionPairs(request, response) {
 	loadSuggestionSet(1);
 
 	function loadSuggestionSet(type) {
+		console.log('loadSuggestionSet', type);
 		var query = new Parse.Query(SuggestionObject);
 		query.limit(SUGGESTION_COUNT);
 		query.equalTo('type', type);
@@ -28,20 +28,25 @@ function getRandomSuggestionPairs(request, response) {
 		if(request.params.skip)
 			query.skip(request.params.skip);
 		query.find({
-			success: function onSuggestionSetLoaded(suggestionSet) {
-				switch(type) {
-					case 0 :
-						zeroSuggestions = suggestionSet;
-						zeroLoaded = true;
-						break;
-					case 1 :
-						oneSuggestions = suggestionSet;
-						oneLoaded = true;
-						break;
-				}
-				if(zeroLoaded && oneLoaded)
-					onSuggestionsLoaded();
+			useMasterKey: true
+		})
+		.then(function onSuggestionSetLoaded(suggestionSet) {
+			switch(type) {
+				case 0 :
+					zeroSuggestions = suggestionSet;
+					zeroLoaded = true;
+					break;
+				case 1 :
+					oneSuggestions = suggestionSet;
+					oneLoaded = true;
+					break;
 			}
+			if(zeroLoaded && oneLoaded)
+				onSuggestionsLoaded();
+		})
+		.catch(function (error) {
+			console.dir(error);
+			response.error(error);
 		});
 	}
 
@@ -52,8 +57,8 @@ function getRandomSuggestionPairs(request, response) {
 			var oneSuggestion = oneSuggestions[i];
 
 			// remove private data
-			userUtils.stripPrivateData(zeroSuggestion.attributes.owner);
-			userUtils.stripPrivateData(oneSuggestion.attributes.owner);
+			userUtils.stripPrivateData(request, zeroSuggestion.attributes.owner);
+			userUtils.stripPrivateData(request, oneSuggestion.attributes.owner);
 
 			//save pair
 			var pair = {

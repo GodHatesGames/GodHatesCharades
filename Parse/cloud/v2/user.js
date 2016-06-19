@@ -16,7 +16,7 @@ function getProfile(request, response) {
 	});
 
 	function onUserLoaded(user) {
-		userUtils.stripPrivateData(user);
+		userUtils.stripPrivateData(request, user);
 		owner = user;
 
 		var query = new Parse.Query(Suggestion);

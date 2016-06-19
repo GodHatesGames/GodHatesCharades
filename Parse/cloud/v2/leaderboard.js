@@ -38,8 +38,8 @@ function topPairs(request, response) {
 		var pair;
 		for(var i = 0; i < pairs.length; i++) {
 			pair = pairs[i];
-			userUtils.stripPrivateData(pair.attributes.actor.attributes.owner);
-			userUtils.stripPrivateData(pair.attributes.scenario.attributes.owner);
+			userUtils.stripPrivateData(request, pair.attributes.actor.attributes.owner);
+			userUtils.stripPrivateData(request, pair.attributes.scenario.attributes.owner);
 		}
 
 		response.success(pairs);

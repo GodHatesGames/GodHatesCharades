@@ -169,8 +169,8 @@ function getPairById(request, response) {
 	}
 
 	function onSuccess(pair) {
-		userUtils.stripPrivateData(pair.attributes.actor.attributes.owner);
-		userUtils.stripPrivateData(pair.attributes.scenario.attributes.owner);
+		userUtils.stripPrivateData(request, pair.attributes.actor.attributes.owner);
+		userUtils.stripPrivateData(request, pair.attributes.scenario.attributes.owner);
 		response.success(pair);
 	}
 
@@ -214,8 +214,8 @@ function getPairsByCard(request, response) {
 		// console.log('onSuccess');
 		// console.log(pairs)
 		_.each(pairs, function(pair) {
-			userUtils.stripPrivateData(pair.attributes.actor.attributes.owner);
-			userUtils.stripPrivateData(pair.attributes.scenario.attributes.owner);
+			userUtils.stripPrivateData(request, pair.attributes.actor.attributes.owner);
+			userUtils.stripPrivateData(request, pair.attributes.scenario.attributes.owner);
 		});
 		response.success(pairs);
 	}

@@ -59,7 +59,7 @@ function topSubmissions(request, response) {
 		var suggestion;
 		for(var i = 0; i < suggestions.length; i++) {
 			suggestion = suggestions[i];
-			userUtils.stripPrivateData(suggestion.attributes.owner);
+			userUtils.stripPrivateData(request, suggestion.attributes.owner);
 		}
 
 		response.success(suggestions);

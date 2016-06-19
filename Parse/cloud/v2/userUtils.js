@@ -4,8 +4,8 @@ exports.isUserBeta = _isUserBeta;
 exports.isAdminRole = _isAdminRole;
 
 // Removes private data from original object
-function _stripPrivateData(parseUser) {
-  var shouldStrip = isThisSomeoneElsesAccount(parseUser);
+function _stripPrivateData(request, parseUser) {
+  var shouldStrip = isThisSomeoneElsesAccount(request.user, parseUser);
   if(shouldStrip) {
     delete parseUser.attributes.email;
     delete parseUser.attributes.username;
@@ -19,9 +19,8 @@ function _stripPrivateData(parseUser) {
   }
 }
 
-function isThisSomeoneElsesAccount(parseUser) {
-  var current = request.user;
-  if(current && current.id === parseUser.id)
+function isThisSomeoneElsesAccount(requestUser, parseUser) {
+  if(requestUser && requestUser.id === parseUser.id)
     return false; //this is my account
   else
     return true; //yes, this is someone elses account

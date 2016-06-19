@@ -33,7 +33,7 @@ function _examples(request, response) {
 
 		_.each(setItems, function stripData(item) {
 			card = item.attributes.card;
-			userUtils.stripPrivateData(card.attributes.owner);
+			userUtils.stripPrivateData(request, card.attributes.owner);
 			if (card.attributes.type === 0) {
 				zeroSuggestions.push(card);
 			} else {
@@ -85,7 +85,7 @@ function _getCardsForSet(request, response) {
 		var card;
 		_.each(setItems, function(item) {
 			card = item.attributes.card;
-			userUtils.stripPrivateData(card.attributes.owner);
+			userUtils.stripPrivateData(request, card.attributes.owner);
 		});
 		response.success(setItems);
 	}
@@ -114,7 +114,7 @@ function _getCardById(request, response) {
 	}
 
 	function _onSuccess(card) {
-		userUtils.stripPrivateData(card.attributes.owner);
+		userUtils.stripPrivateData(request, card.attributes.owner);
 		response.success(card);
 	}
 
@@ -155,7 +155,7 @@ function _getCardsForSuggestion(request, response) {
 		var card;
 		_.each(setItems, function(item) {
 			card = item.attributes.card;
-			userUtils.stripPrivateData(card.attributes.owner);
+			userUtils.stripPrivateData(request, card.attributes.owner);
 		});
 		response.success(setItems);
 	}
