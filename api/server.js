@@ -9,7 +9,8 @@ var compression = require('compression');
 var bodyParser = require('body-parser');
 var ParseServer = require('parse-server').ParseServer;
 // var aftership = require('./aftership');
-
+console.log('process.env.PARSE_MASTER_KEY');
+console.log(process.env.PARSE_MASTER_KEY);
 var parseApi = new ParseServer({
   databaseURI: process.env.PARSE_DB, // Connection string for your MongoDB database
   cloud: './Parse/cloud/main.js', // Absolute path to your Cloud Code

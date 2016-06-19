@@ -25,7 +25,7 @@ function recordGuessed (request, response) {
 			pair = getNewPairObj(guessedActor, guessedScenario, appVersion, appPlatform);
 
 		pair.increment('guessed');
-		return pair.save();
+		return pair.save({useMasterKey: true});
 	}, onErr)
 	.then(function success() {
 		response.success();
@@ -79,13 +79,13 @@ function recordChosenAndSkipped (request, response) {
 
 	// save stats, but dont wait around for em
 	chosenActor.increment('totalVotes');
-	chosenActor.save();
+	chosenActor.save({useMasterKey: true});
 	chosenScenario.increment('totalVotes');
-	chosenScenario.save();
+	chosenScenario.save({useMasterKey: true});
 	skippedActor.increment('skipped');
-	skippedActor.save();
+	skippedActor.save({useMasterKey: true});
 	skippedScenario.increment('skipped');
-	skippedScenario.save();
+	skippedScenario.save({useMasterKey: true});
 
 	//find chosen pair
 	getPair(chosenActor, chosenScenario, appVersion, appPlatform)
@@ -97,7 +97,7 @@ function recordChosenAndSkipped (request, response) {
 
 		chosenPair.increment('displayed');
 		chosenPair.increment('chosen');
-		return chosenPair.save();
+		return chosenPair.save({useMasterKey: true});
 	}, onErr)
 	.then(function success() {
 		// get skipped pair
@@ -113,7 +113,7 @@ function recordChosenAndSkipped (request, response) {
 		skippedPair.increment('displayed');
 		skippedPair.increment('skipped');
 
-		return skippedPair.save();
+		return skippedPair.save({useMasterKey: true});
 	}, onErr)
 	.then(function success() {
 		response.success();
@@ -139,7 +139,7 @@ function getPair(actor, scenario, appVersion, appPlatform) {
 	query.equalTo('scenario', scenario);
 	query.equalTo('version', appVersion);
 	query.equalTo('platform', appPlatform);
-	return query.first();
+	return query.first({useMasterKey: true});
 }
 
 function getNewPairObj(actor, scenario, appVersion, appPlatform) {
@@ -161,6 +161,7 @@ function getPairById(request, response) {
 		query.include('actor.owner');
 		query.include('scenario.owner');
 		query.get(pairId, {
+			useMasterKey: true,
 			success: onSuccess,
 			error: onError
 		});
@@ -203,6 +204,7 @@ function getPairsByCard(request, response) {
 		query.limit(1000);
 		query.equalTo(cardType, mockCard);
 		query.find({
+			useMasterKey: true,
 			success: onSuccess,
 			error: onError
 		});
