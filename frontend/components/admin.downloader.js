@@ -11,6 +11,7 @@ app.directive('downloader', function($filter) {
 		controller: function($scope) {
 			// public vars
 			$scope.csvHeaders = [
+				'id',
 				'text',
 				'author',
 				'spite',
@@ -43,6 +44,7 @@ app.directive('downloader', function($filter) {
 					// remove line breaks and replace them with a space
 					text = text.replace(/(\r\n|\n|\r)/gm,' ');
 					item = {
+						'id': suggestion.id,
 						'text': text,
 						'author': suggestion.owner.name,
 						'spite': suggestion.spite ? true : false,
