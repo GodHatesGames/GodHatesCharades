@@ -13,10 +13,10 @@ app.controller('homeView', function(collection, $scope, $window, $timeout, analy
     loop: 1,
     rel: 0
   };
-  $scope.buyLink = 'https://godhatesgames.myshopify.com/cart/8187188801:1?discount=TENBUCKS';
-  $scope.buyImg = 'img/Homepage_FullDeal_01.gif';
-  $scope.buyImgBottomBlur = 'img/Homepage_FullDeal_02.gif';
-  $scope.buyImgBottomHover = 'img/Homepage_FullDeal_02_Hover.gif';
+  $scope.buyLink = 'https://godhatesgames.myshopify.com/cart/1051755037:1';
+  $scope.buyImg = 'img/Homepage_Game_01.gif';
+  $scope.buyImgBottomBlur = 'img/Homepage_Game_02.gif';
+  $scope.buyImgBottomHover = 'img/Homepage_Game_02_Hover.gif';
   $scope.buyImg2 = $scope.buyImgBottomBlur;
   $scope.promo = 'buy';
   $scope.onBuyClicked = _onBuyClicked;
